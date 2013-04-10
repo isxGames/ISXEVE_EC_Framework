@@ -6,14 +6,7 @@ using EveCom;
 
 namespace EveComFramework.Security
 {
-    public class AlertArg : EventArgs
-    {
-        public FleeTrigger trigger { get; set; }
-        public AlertArg(FleeTrigger trigger)
-        {
-            this.trigger = trigger;
-        }
-    }
+    #region Enums
 
     public enum FleeTrigger
     {
@@ -32,6 +25,10 @@ namespace EveComFramework.Security
         SecureBookmark,
         SafeBookmarks
     }
+
+    #endregion
+
+    #region Settings
 
     internal class SecuritySettings : EveComFramework.Core.Settings
     {
@@ -67,16 +64,20 @@ namespace EveComFramework.Security
         internal string SecureBookmark = "";
     }
 
+    #endregion
+
+
+    public class AlertArg : EventArgs
+    {
+        public FleeTrigger trigger { get; set; }
+        public AlertArg(FleeTrigger trigger)
+        {
+            this.trigger = trigger;
+        }
+    }
 
     public class Security : EveComFramework.Core.State
     {
-
-        #region Instantiation
-
-     
-        
-        #endregion
-
         #region Variables
 
         List<Bookmark> SafeSpots;
@@ -286,6 +287,5 @@ namespace EveComFramework.Security
         }
 
         #endregion
-
     }
 }
