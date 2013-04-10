@@ -23,7 +23,10 @@ namespace EveComFramework.Core
         /// <param name="Params">Paramters to insert into the message format string</param>
         public void Log(string Message, params object[] Params)
         {
-            Event(string.Format(Message, Params));
+            if (Event != null)
+            {
+                Event(string.Format(Message, Params));
+            }
         }
     }
 }

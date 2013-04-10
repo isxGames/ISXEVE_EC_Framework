@@ -7,12 +7,57 @@ using System.Xml.Linq;
 using System.Reflection;
 using System.ComponentModel;
 using System.Xml.Serialization;
+using System.IO;
+using EveCom;
 
 namespace EveComFramework.Core
 {
-    class Settings
+    public class Settings
     {
         public static string CharName { get; set; }
+        public bool CharBased { get; private set; }
+        private FileSystemWatcher watcher;
+        
+        static Settings()
+        {
+            while (CharName == null)
+            {
+                using (new EVEFrameLock())
+                {
+                    if (Session.Safe && Session.NextSessionChange < Session.Now)
+                    {
+                        CharName = Me.Name;
+                    }
+                }
+            }
+        }
+
+        public Settings(bool CharBased = true)
+        {
+            this.CharBased = CharBased;
+            this.Load();
+            if(!Directory.Exists(GetConfigFilePath()))
+            {
+                Directory.CreateDirectory(GetConfigFilePath());
+            }
+            watcher = new FileSystemWatcher(GetConfigFilePath(), GetConfigFileName());
+            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
+        }
+
+        void watcher_Changed(object sender, FileSystemEventArgs e)
+        {
+ 	        this.Load();
+        }
+
+        private static string GetConfigFilePath()
+        {
+            return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs";
+        }
+
+        private string GetConfigFileName()
+        {
+            return (CharBased ? CharName + "." : "") + this.GetType().Name + ".xml";
+        }
 
         public void Save()
         {
@@ -38,34 +83,36 @@ namespace EveComFramework.Core
                 }
                 settingRoot.Add(fieldElement);
             }
-            settingsDoc.Save(CharName + "." + this.GetType().Name + ".xml");
+            settingsDoc.Save(GetConfigFilePath() + "\\" + GetConfigFileName());
         }
 
         public void Load()
         {
-            XDocument settingsDoc = XDocument.Load(CharName + "." + this.GetType().Name + ".xml");
-            XElement settingRoot = settingsDoc.Root;
-            TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
-            foreach (FieldInfo field in this.GetType().GetFields())
+            if (File.Exists(GetConfigFilePath() + "\\" + GetConfigFileName()))
             {
-                if (settingRoot.Element(field.Name) != null)
+                XDocument settingsDoc = XDocument.Load(GetConfigFilePath() + "\\" + CharName + "." + this.GetType().Name + ".xml");
+                XElement settingRoot = settingsDoc.Root;
+                TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
+                foreach (FieldInfo field in this.GetType().GetFields())
                 {
-                    TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
-                    if (typeConverter.CanConvertFrom(typeof(string)))
+                    if (settingRoot.Element(field.Name) != null)
                     {
-                        field.SetValue(this, typeConverter.ConvertFrom(settingRoot.Element(field.Name).Value));
-                    }
-                    else if (stringConverter.CanConvertTo(field.FieldType))
-                    {
-                        field.SetValue(this, typeConverter.ConvertTo(settingRoot.Element(field.Name).Value, field.FieldType));
-                    }
-                    else
-                    {
-                        field.SetValue(this, Deserialize(settingRoot.Element(field.Name).Elements().First(), field.FieldType));
+                        TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
+                        if (typeConverter.CanConvertFrom(typeof(string)))
+                        {
+                            field.SetValue(this, typeConverter.ConvertFrom(settingRoot.Element(field.Name).Value));
+                        }
+                        else if (stringConverter.CanConvertTo(field.FieldType))
+                        {
+                            field.SetValue(this, typeConverter.ConvertTo(settingRoot.Element(field.Name).Value, field.FieldType));
+                        }
+                        else
+                        {
+                            field.SetValue(this, Deserialize(settingRoot.Element(field.Name).Elements().First(), field.FieldType));
+                        }
                     }
                 }
             }
-
         }
 
         static XElement Serialize(object source)

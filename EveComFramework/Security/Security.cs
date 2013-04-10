@@ -82,7 +82,7 @@ namespace EveComFramework.Security
 
         List<Bookmark> SafeSpots;
         internal SecuritySettings Config = new SecuritySettings();
-        Move.Move Move = new Move.Move();
+        Move.Move Move = EveComFramework.Move.Move.Instance;
 
         #endregion
 

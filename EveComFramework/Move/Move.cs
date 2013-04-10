@@ -36,11 +36,27 @@ namespace EveComFramework.Move
 
     }
 
-    class Move : EveComFramework.Core.State
+    public class Move : EveComFramework.Core.State
     {
 
         #region Instantiation
+        static Move _Instance;
+        public static Move Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new Move();
+                }
+                return _Instance;
+            }
+        }
 
+        private Move() : base()
+        {
+
+        }
 
         #endregion
 
@@ -228,7 +244,7 @@ namespace EveComFramework.Move
             return true;
         }
 
-        static bool ObjectWarp(object[] Params)
+        bool ObjectWarp(object[] Params)
         {
             int Distance = 0;
             if (Params.Count() > 1) { Distance = (int)Params[1]; }
