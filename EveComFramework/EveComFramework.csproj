@@ -33,8 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EveCom">
-      <HintPath>..\..\WarpToAnom-master\WarpToAnom\EveCom.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\EveCom.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

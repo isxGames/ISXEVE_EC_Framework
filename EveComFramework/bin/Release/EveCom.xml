@@ -1,0 +1,1947 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EveCom</name>
+    </assembly>
+    <members>
+        <member name="T:EveCom.ItemType">
+            <summary>
+            Class providing information about a type of item
+            </summary>
+        </member>
+        <member name="M:EveCom.ItemType.#ctor(System.Int32)">
+            <summary>
+            Retrieves a type of item by ID
+            </summary>
+            <param name="typeID">The type ID</param>
+        </member>
+        <member name="P:EveCom.ItemType.TypeID">
+            <summary>
+            The type ID
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.GroupID">
+            <summary>
+            The Group ID of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.CategoryID">
+            <summary>
+            The Category ID of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.DataID">
+            <summary>
+            The DataID of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.BasePrice">
+            <summary>
+            The base price of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.Capacity">
+            <summary>
+            The capacity of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.ChanceOfDuplicating">
+            <summary>
+            The chance of duplicating of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.Description">
+            <summary>
+            The description of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.Type">
+            <summary>
+            The type name of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.Volume">
+            <summary>
+            The volume of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.Radius">
+            <summary>
+            The radius of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.Mass">
+            <summary>
+            The mass of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.PortionSize">
+            <summary>
+            The portion size of the type of item
+            </summary>
+        </member>
+        <member name="P:EveCom.ItemType.IsContraband">
+            <summary>
+            Is the type of item contraband?
+            </summary>
+        </member>
+        <member name="T:EveCom.Session">
+            <summary>
+            Class providing access to the current Eve session
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.CharID">
+            <summary>
+            Your pilot's Character ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.ShipID">
+            <summary>
+            Your ship ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.SolarSystemID">
+            <summary>
+            Your current Solar System ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.StationID">
+            <summary>
+            Your current Station ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.StationName">
+            <summary>
+            The name of your current station
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.SystemSecurity">
+            <summary>
+            Your current solar system's Security value
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.Safe">
+            <summary>
+            Is the session safe (Safe to do anything)?
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.InSpace">
+            <summary>
+            Are you in space?
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.InStation">
+            <summary>
+            Are you in station?
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.NextSessionChange">
+            <summary>
+            returns when the next sessionchange ends, 
+            can be in the past if it already ended
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.Now">
+            <summary>
+            The current EVE time
+            </summary>
+        </member>
+        <member name="P:EveCom.Session.InFleet">
+            <summary>
+            Are you currently in a fleet?
+            </summary>
+        </member>
+        <member name="T:EveCom.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EveCom.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EveCom.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:EveCom.Properties.Resources.PublicKey">
+            <summary>
+              Looks up a localized string similar to ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEArvu0ztfvhwR/L9a9tzPJil2qWtNaYnxO4z2GsRbvK+2w410A9kwcwClGvgp7Ofst6uov9WgwN03C9bN4/VjuN1f85i05GcT4io0K/tXSmQtiTWOwARop4Y/BhdyYJyUMbP5zmdubcPGhUn2Mbklhw+RWsun+16Sjp9vq7J3Vo+MmjcfggiGdPhRTbvetCvF1xs6lWqZaxKhBFVYG42N5tefsFccCKD2H8jDtbz/9Lwva3a2AodT1mpo6To3Ac6JTWdCt6NYRV2LLXgovEHSZ1Dw+XfCHQLygG3aZY/3nvIzJC3NJDK4uB+QWbxBsIlvTcSQ/Zsu/aiEYc/WCtmP2GAVa5PNUp3yby+wBEDvZa/gGe6/6ZPpT6HfWRlYjy8ey4ofTG3JZBYD9YyPLEjKnqeV8N/6gBdT6+y+uQtdNP63cQPuEqVI8D95i2xDSwnICcnBKKa/610O95327PgHNeJrz2UEb [rest of string was truncated]&quot;;.
+            </summary>
+        </member>
+        <member name="T:EveCom.Me">
+            <summary>
+            Class providing access to your character
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.Name">
+            <summary>
+            Your character name
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.CharID">
+            <summary>
+            Your character ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.CorpID">
+            <summary>
+            Your character's Corporation ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.AllianceID">
+            <summary>
+            Your character's Alliance ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.TrueMaxTargetLocks">
+            <summary>
+            Your character's Maximum target locks (Does not relate to your ship's maximum!)
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.MaxTargetLocks">
+            <summary>
+            Your maximum target locks (Compares your character and your ship's slots and returns the smaller)
+            </summary>
+        </member>
+        <member name="P:EveCom.Me.MaxActiveDrones">
+            <summary>
+            Total number of drones you can control in space at once
+            </summary>
+        </member>
+        <member name="T:EveCom.InventoryWindow">
+            <summary>
+            Class specific to an inventory window
+            </summary>
+        </member>
+        <member name="T:EveCom.Window">
+            <summary>
+            Class providing access to Windows
+            </summary>
+        </member>
+        <member name="M:EveCom.Window.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="M:EveCom.Window.ClickButton(EveCom.Window.Button)">
+            <summary>
+            Click a button
+            </summary>
+            <param name="btn">The button to click</param>
+        </member>
+        <member name="M:EveCom.Window.HasButton(EveCom.Window.Button)">
+            <summary>
+            Is there a specific button in the window?
+            </summary>
+            <param name="btn">The button to look for</param>
+            <returns>True or false</returns>
+        </member>
+        <member name="M:EveCom.Window.Close">
+            <summary>
+            Close the window
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.All">
+            <summary>
+            List of all windows
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.PrimaryInvWindow">
+            <summary>
+            Provides access to your primary inventory window (Unified inventory)
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.Scanner">
+            <summary>
+            Provides access to the scanner window
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.Ready">
+            <summary>
+            Is the window ready?
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.Name">
+            <summary>
+            The window's name
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.HasButtons">
+            <summary>
+            Does the window have buttons?
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.Caption">
+            <summary>
+            The window's Caption
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.WindowCaption">
+            <summary>
+            Another window caption
+            </summary>
+        </member>
+        <member name="P:EveCom.Window.Type">
+            <summary>
+            The window's type
+            </summary>
+        </member>
+        <member name="T:EveCom.Window.WindowType">
+            <summary>
+            Enum of all known window types
+            </summary>
+        </member>
+        <member name="T:EveCom.Window.Button">
+            <summary>
+            Enum of all known button types
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryWindow.OpenPrimary">
+            <summary>
+            Open the primary inventory window (Unified inventory)
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryWindow.MakeActive(EveCom.InventoryContainer)">
+            <summary>
+            Open a specific inventory container active in this window (i.e. Ore Bay)
+            </summary>
+            <param name="InvCont"></param>
+        </member>
+        <member name="P:EveCom.InventoryWindow.IsPrimaryInvWindow">
+            <summary>
+            Is this window the primary inventory window?
+            </summary>
+        </member>
+        <member name="T:EveCom.Entity">
+            <summary>
+            Class for entities, items that are visible in the overview
+            </summary>
+        </member>
+        <member name="T:EveCom.Item">
+            <summary>
+            Class providing information about items
+            </summary>
+        </member>
+        <member name="M:EveCom.Item.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.ID">
+            <summary>
+            The item's ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.TypeID">
+            <summary>
+            The item's Type ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.LocationId">
+            <summary>
+            The item's Location ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.isUnpacked">
+            <summary>
+            Is the item unpacked?
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.Quantity">
+            <summary>
+            The item's quantity
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.Stacksize">
+            <summary>
+            The item's stack size
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.OwnerID">
+            <summary>
+            The item's Owner ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Item.CharID">
+            <summary>
+            The item's character ID
+            </summary>
+        </member>
+        <member name="T:EveCom.IBookmarkable">
+            <summary>
+            Interface for all bookmarkable items
+            </summary>
+        </member>
+        <member name="M:EveCom.IBookmarkable.Bookmark(System.String,System.String,System.Boolean)">
+            <summary>
+            Create a bookmark
+            </summary>
+            <param name="Name">Name of the bookmark</param>
+            <param name="Description">Description of the bookmark</param>
+            <param name="Corp">Put in corp bookmarks or personal</param>
+        </member>
+        <member name="T:EveCom.IDockable">
+            <summary>
+            Interface exposed by all items that can be docked at
+            </summary>
+        </member>
+        <member name="T:EveCom.IWarpable">
+            <summary>
+            Interface exposed by all items that can be warped to
+            </summary>
+        </member>
+        <member name="M:EveCom.Entity.Get(System.Int64)">
+            <summary>
+            Resolves an entity from it's ID
+            </summary>
+            <param name="ID">ID of the Entity</param>
+            <returns>Entity object</returns>
+        </member>
+        <member name="M:EveCom.Entity.Finalize">
+            <summary>
+            Deconstructor
+            </summary>
+        </member>
+        <member name="M:EveCom.Entity.LockTarget">
+            <summary>
+            Lock the target
+            </summary>
+        </member>
+        <member name="M:EveCom.Entity.UnlockTarget">
+            <summary>
+            Unlock the target
+            </summary>
+        </member>
+        <member name="M:EveCom.Entity.Approach(System.Int32)">
+            <summary>
+            Approach the target
+            </summary>
+            <param name="range">Distance, in meters, to approach to</param>
+        </member>
+        <member name="M:EveCom.Entity.Orbit(System.Int32)">
+            <summary>
+            Orbit the target
+            </summary>
+            <param name="range">Distance, in meters, to orbit</param>
+        </member>
+        <member name="M:EveCom.Entity.OpenCargo">
+            <summary>
+            Open the cargo of the entity
+            </summary>
+        </member>
+        <member name="M:EveCom.Entity.WarpTo(System.Double)">
+            <summary>
+            Warp to the entity
+            </summary>
+            <param name="distance">distance from the entity to warp to</param>
+        </member>
+        <member name="M:EveCom.Entity.Jump">
+            <summary>
+            Jumps through an entity
+            </summary>
+            <remarks>Only valid if GroupID == Group.Stargate</remarks>
+        </member>
+        <member name="M:EveCom.Entity.Dock">
+            <summary>
+            Docks at a station
+            </summary>
+            <remarks>Only valid if GroupID == Group.Station</remarks>
+        </member>
+        <member name="M:EveCom.Entity.MakeActive">
+            <summary>
+            Sets the entity as the currently active target
+            </summary>
+        </member>
+        <member name="M:EveCom.Entity.JumpThroughPortal">
+            <summary>
+            Jumps through a jump portal array
+            </summary>
+            <remarks>Only valid if GroupID == Group.JumpPortalArray</remarks>
+        </member>
+        <member name="M:EveCom.Entity.GetBay(EveCom.CargoHold)">
+            <summary>
+            Get a specific cargo bay on a ship
+            </summary>
+            <param name="Bay">Cargohold to search for</param>
+            <returns>InventoryContainer object</returns>
+        </member>
+        <member name="M:EveCom.Entity.Bookmark(System.String,System.String,System.Boolean)">
+            <summary>
+            Bookmark the entity with a given name and description
+            </summary>
+            <param name="Name">Name of the bookmark</param>
+            <param name="Description">Description of the bookmark</param>
+            <param name="Corp">Put in corp bookmarks or personal</param>
+        </member>
+        <member name="P:EveCom.Entity.All">
+            <summary>
+            List of all entities
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Targets">
+            <summary>
+            List of entities that are locked targets
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Targeting">
+            <summary>
+            List of entities that are being targeted
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.TargetedBy">
+            <summary>
+            List of entities that are targeting you
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.ActiveTarget">
+            <summary>
+            Returns the currently active target
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Exists">
+            <summary>
+            Does the entity exist
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.TypeID">
+            <summary>
+            TypeID of the Entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Exploded">
+            <summary>
+            Has the entity exploded?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Name">
+            <summary>
+            Name of the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Distance">
+            <summary>
+            Distance to the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.JumpDest">
+            <summary>
+            The jump destination of the entity.
+            </summary>
+            <remarks>Only valid if GroupID == Group.Stargate</remarks>
+        </member>
+        <member name="P:EveCom.Entity.LockedTarget">
+            <summary>
+            Is the entity a locked target?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.LockingTarget">
+            <summary>
+            Is the entity being locked?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsTargetingMe">
+            <summary>
+            Is the entity targeting me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsActiveTarget">
+            <summary>
+            Is the entity the active target?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Mode">
+            <summary>
+            Current mode of the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.HullPct">
+            <summary>
+            Hull health percentage of the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.ArmorPct">
+            <summary>
+            Armor health percentage of the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.ShieldPct">
+            <summary>
+            Shield health percentage of the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsNPC">
+            <summary>
+            Is the entity a NPC?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsPC">
+            <summary>
+            Is the entity a PC(Player Character)?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsFleetMember">
+            <summary>
+            Is the entity a member of your fleet?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.Cloaked">
+            <summary>
+            Is the entity cloaked?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsJamming">
+            <summary>
+            Is the entity jamming me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsWebifing">
+            <summary>
+            Is the entity webifying me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsTargetPainting">
+            <summary>
+            Is the entity target painting me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsWarpScrambling">
+            <summary>
+            Is the entity warp scrambling me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsEnergyNeuting">
+            <summary>
+            Is the entity neuting me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsEnergyStealing">
+            <summary>
+            Is the entity nossing me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsRemoteSensorDampening">
+            <summary>
+            Is the entity sensor dampening me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsTrackingDisrupting">
+            <summary>
+            Is the entity tracking distrupting me?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.ActiveModules">
+            <summary>
+            List of modules that are active on the entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsWreckEmpty">
+            <summary>
+            Is the wreck empty?
+            </summary>
+            <remarks>Only valid if GroupID == Group.Wreck</remarks>
+        </member>
+        <member name="P:EveCom.Entity.IsWreckViewed">
+            <summary>
+            Has the wreck been viewed?
+            </summary>
+            <remarks>Only valid if GroupID == Group.Wreck</remarks>
+        </member>
+        <member name="P:EveCom.Entity.Following">
+            <summary>
+            The entity that the current entity is following
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.HaveLootRights">
+            <summary>
+            Do I have loot rights on this entity
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.IsInTargetingRange">
+            <summary>
+            Is the entity in targeting range?
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.CanCargo">
+            <summary>
+            Inventory container for floating cargo or wrecks
+            </summary>
+        </member>
+        <member name="P:EveCom.Entity.FleetHangar">
+            <summary>
+            Inventory container for the fleet hangar on a ship
+            </summary>
+        </member>
+        <member name="T:EveCom.EntityMode">
+            <summary>
+            Modes for an entity
+            </summary>
+        </member>
+        <member name="F:EveCom.EntityMode.Aligned">
+            <summary>
+            Aligning for warp
+            </summary>
+        </member>
+        <member name="F:EveCom.EntityMode.Approaching">
+            <summary>
+            Approaching target
+            </summary>
+        </member>
+        <member name="F:EveCom.EntityMode.Stopped">
+            <summary>
+            Idle
+            </summary>
+        </member>
+        <member name="F:EveCom.EntityMode.Warping">
+            <summary>
+            Warping
+            </summary>
+        </member>
+        <member name="F:EveCom.EntityMode.Orbiting">
+            <summary>
+            Orbiting a target
+            </summary>
+        </member>
+        <member name="T:EveCom.EntityState">
+            <summary>
+            States for an entity
+            </summary>
+        </member>
+        <member name="T:EveCom.Bookmark">
+            <summary>
+            Bookmarks
+            </summary>
+        </member>
+        <member name="M:EveCom.Bookmark.Get(System.Int64)">
+            <summary>
+            Allows direct resolution of bookmark ID to bookmark
+            </summary>
+            <param name="ID">ID of a specific bookmark</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveCom.Bookmark.Finalize">
+            <summary>
+            Deconstructor to remove bookmarks from the singletoner
+            </summary>
+        </member>
+        <member name="M:EveCom.Bookmark.Refresh">
+            <summary>
+            Refreshes corp bookmarks from the server
+            </summary>
+            <remarks>Please note, this does take time to accomplish</remarks>
+        </member>
+        <member name="M:EveCom.Bookmark.SetDestination">
+            <summary>
+            Sets the AutoPilot destination to the bookmark
+            </summary>
+        </member>
+        <member name="M:EveCom.Bookmark.WarpTo(System.Double)">
+            <summary>
+            Warp to the bookmark
+            </summary>
+            <param name="range"></param>
+        </member>
+        <member name="M:EveCom.Bookmark.Delete">
+            <summary>
+            Delete the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.ID">
+            <summary>
+            The bookmark's ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.All">
+            <summary>
+            List of all bookmarks
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.Exists">
+            <summary>
+            Does the bookmark still exist in EVE
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.ItemID">
+            <summary>
+            The specific itemID that the bookmark is attached to
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.LocationID">
+            <summary>
+            The location that contains the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.OwnerID">
+            <summary>
+            The owner of the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.CreatorID">
+            <summary>
+            The creator of the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.Created">
+            <summary>
+            The creation time of the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.Title">
+            <summary>
+            The title of the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.Memo">
+            <summary>
+            the memo, or description, of the bookmark
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.TypeID">
+            <summary>
+            The type of object the bookmark is on
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.Distance">
+            <summary>
+            The bookmark's distance
+            </summary>
+        </member>
+        <member name="P:EveCom.Bookmark.CanWarpTo">
+            <summary>
+            Can the bookmark be warped to
+            </summary>
+        </member>
+        <member name="T:EveCom.BookmarkExtensions">
+            <summary>
+            Extension class to allow operations on lists of bookmarks
+            </summary>
+        </member>
+        <member name="M:EveCom.BookmarkExtensions.Delete(System.Collections.Generic.IEnumerable{EveCom.Bookmark})">
+            <summary>
+            Delete a list of bookmarks
+            </summary>
+            <param name="Bookmarks">List of bookmarks</param>
+        </member>
+        <member name="T:EveCom.Standing">
+            <summary>
+            Class providing access to standings information
+            </summary>
+        </member>
+        <member name="M:EveCom.Standing.LoadStandings">
+            <summary>
+            Force a refresh of standing information.  This should be done at least once after logging in if you need to use standing information.
+            </summary>
+        </member>
+        <member name="M:EveCom.Standing.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="M:EveCom.Standing.Clear">
+            <summary>
+            Cleares cached standing values
+            </summary>
+        </member>
+        <member name="P:EveCom.Standing.Ready">
+            <summary>
+            Is standings information ready?  (All properties automatically check this, so it's not technically required to do so)
+            </summary>
+        </member>
+        <member name="P:EveCom.Standing.FromChar">
+            <summary>
+            Your character's standing to the object
+            </summary>
+        </member>
+        <member name="P:EveCom.Standing.FromCorp">
+            <summary>
+            Your corporation's standing to the object
+            </summary>
+        </member>
+        <member name="P:EveCom.Standing.FromAlliance">
+            <summary>
+            Your alliance's standing to the object
+            </summary>
+        </member>
+        <member name="T:EveCom.Module">
+            <summary>
+            Class providing access to modules
+            </summary>
+        </member>
+        <member name="M:EveCom.Module.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="M:EveCom.Module.LoadAmmo(EveCom.ItemType)">
+            <summary>
+            Load a new ammo into the module
+            </summary>
+            <param name="Ammo">The type of Ammo to load</param>
+        </member>
+        <member name="M:EveCom.Module.Activate">
+            <summary>
+            Activate the module
+            </summary>
+        </member>
+        <member name="M:EveCom.Module.Activate(EveCom.Entity)">
+            <summary>
+            Activate the module on a target
+            </summary>
+            <param name="target">The entity to activate the module on</param>
+        </member>
+        <member name="M:EveCom.Module.Deactivate">
+            <summary>
+            Deactivate the module
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.IsOnline">
+            <summary>
+            Is the module online?
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.IsGoingOnline">
+            <summary>
+            Is the module going online?
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.IsReloading">
+            <summary>
+            Is the module reloading?
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.ChangingAmmo">
+            <summary>
+            Is the module changing ammo?
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.IsActive">
+            <summary>
+            Is the module active?
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.IsDeactivating">
+            <summary>
+            Is the module deactivating?  (Red)
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.MiningYield">
+            <summary>
+            What is the module's MiningYield (the same value as when you hover on the module)
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.TotalCompletion">
+            <summary>
+            Total number of cycles the module has completed since last activated, including the current fractional cycle.  (1.75 = one cycle and 3/4 of another cycle)
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.Completion">
+            <summary>
+            Percentage of current cycle completed
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.Charge">
+            <summary>
+            The item currently loaded in the module as a charge
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.OptimalRange">
+            <summary>
+            The module's optimal range
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.FalloffRange">
+            <summary>
+            The module's Falloff range
+            </summary>
+        </member>
+        <member name="P:EveCom.Module.MaxRange">
+            <summary>
+            The module's maximum range
+            </summary>
+        </member>
+        <member name="T:EveCom.LPStore">
+            <summary>
+            Class providing access to the LP Store
+            </summary>
+        </member>
+        <member name="P:EveCom.LPStore.Offers">
+            <summary>
+            A string containing everything in the LP store (Not finished)
+            </summary>
+        </member>
+        <member name="T:EveCom.Drone">
+            <summary>
+            Class for Drones, both in space and in the drone bay
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.Get(System.Int64)">
+            <summary>
+            Get a drone directly from a drone ItemID
+            </summary>
+            <param name="ID">Drone's ID</param>
+            <returns>Drone object</returns>
+        </member>
+        <member name="M:EveCom.Drone.Finalize">
+            <summary>
+            Deconstructor
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.Attack">
+            <summary>
+            Orders the drone to attack the current active target
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.Repair">
+            <summary>
+            Orders the drone to repair the current active target
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.Salvage">
+            <summary>
+            Orders the drone to repair the current active target
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.DelegateFighter(System.Int64)">
+            <summary>
+            Delegates the fighter to a specific character
+            </summary>
+            <param name="CharID">Character to delegate the fighter to</param>
+        </member>
+        <member name="M:EveCom.Drone.ReturnFighter">
+            <summary>
+            Returns the fighter to it's owner
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.Assist(System.Int64)">
+            <summary>
+            Orders the drone to assist a character
+            </summary>
+            <param name="CharID">Character to assist</param>
+        </member>
+        <member name="M:EveCom.Drone.Guard(System.Int64)">
+            <summary>
+            Orders the drone to guard a character
+            </summary>
+            <param name="CharID">Character to guard</param>
+        </member>
+        <member name="M:EveCom.Drone.Mine">
+            <summary>
+            Orders the drone to mine the active target
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.MineRepeatedly">
+            <summary>
+            Orders the drone to repeatedly mine the active target
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.ReturnAndOrbit">
+            <summary>
+            Orders the drone to return and orbit
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.ReturnToDroneBay">
+            <summary>
+            Orders the drone to return to the drone bay
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.ScoopToDroneBay">
+            <summary>
+            Scoops the drone to the drone bay
+            </summary>
+        </member>
+        <member name="M:EveCom.Drone.Launch">
+            <summary>
+            Launches the drone from the drone bay
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.AllInBay">
+            <summary>
+            List of all drones in the drone bay
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.AllInSpace">
+            <summary>
+            List of all drones in space
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.InSpace">
+            <summary>
+            Is the drone in space?
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.InBay">
+            <summary>
+            Is the drone in the drone bay?
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.Exists">
+            <summary>
+            Does the drone still exist?
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.ControllerID">
+            <summary>
+            Current drone controller ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.State">
+            <summary>
+            Activity state of the drone
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.Target">
+            <summary>
+            Entity that the drone's activity state is active on
+            </summary>
+        </member>
+        <member name="P:EveCom.Drone.ToEntity">
+            <summary>
+            Returns the Entity object for the drone
+            </summary>
+        </member>
+        <member name="T:EveCom.DroneExtensions">
+            <summary>
+            Extension class to allow operations on lists of drones
+            </summary>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Attack(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to attack the active target
+            </summary>
+            <param name="Drones">List drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Repair(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to repair the active target
+            </summary>
+            <param name="Drones">List drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Salvage(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to salvage the active target
+            </summary>
+            <param name="Drones">List drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.DelegateFighters(System.Collections.Generic.IEnumerable{EveCom.Drone},System.Int64)">
+            <summary>
+            Delegates a list of fighters to a specific character
+            </summary>
+            <param name="Fighters">List of fighters to delegate</param>
+            <param name="CharID">Character to delegate the fighters to</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.ReturnFighters(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Returns a list of fighters to their owners
+            </summary>
+            <param name="Fighters">List of fighters to return</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Assist(System.Collections.Generic.IEnumerable{EveCom.Drone},System.Int64)">
+            <summary>
+            Orders a list of drones to assist a character
+            </summary>
+            <param name="Drones">List of drones to order</param>
+            <param name="CharID">Character to assist</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Guard(System.Collections.Generic.IEnumerable{EveCom.Drone},System.Int64)">
+            <summary>
+            Orders a list of drones to guard a character
+            </summary>
+            <param name="Drones">List of drones to order</param>
+            <param name="CharID">Character to guard</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Mine(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to mine the active target
+            </summary>
+            <param name="Drones">List of drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.MineRepeatedly(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to repeatedly mine the active target
+            </summary>
+            <param name="Drones">List of drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.ReturnAndOrbit(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to return and orbit
+            </summary>
+            <param name="Drones">List of drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.ReturnToDroneBay(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Orders a list of drones to return to the drone bay
+            </summary>
+            <param name="Drones">List of drones to order</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.ScoopToDroneBay(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Scoops a list of drones to the drone bay
+            </summary>
+            <param name="Drones">List of drones to scoop</param>
+        </member>
+        <member name="M:EveCom.DroneExtensions.Launch(System.Collections.Generic.IEnumerable{EveCom.Drone})">
+            <summary>
+            Launch a list of drones from the drone bay
+            </summary>
+            <param name="Drones">List of drones to launch</param>
+        </member>
+        <member name="T:EveCom.CharSel">
+            <summary>
+            This class provides access to the character select screen
+            </summary>
+        </member>
+        <member name="P:EveCom.CharSel.Loading">
+            <summary>
+            Is the character select screen still loading?
+            </summary>
+        </member>
+        <member name="P:EveCom.CharSel.AtCharSel">
+            <summary>
+            Are you on the character select screen?
+            </summary>
+        </member>
+        <member name="P:EveCom.CharSel.Ready">
+            <summary>
+            Is the character select screen ready?
+            </summary>
+        </member>
+        <member name="P:EveCom.CharSel.Slots">
+            <summary>
+            List of each character slot
+            </summary>
+        </member>
+        <member name="T:EveCom.CharSel.CharSlot">
+            <summary>
+            This provides access to a character slot on the character select screen
+            </summary>
+        </member>
+        <member name="M:EveCom.CharSel.CharSlot.Activate">
+            <summary>
+            Log in using the slot
+            </summary>
+        </member>
+        <member name="P:EveCom.CharSel.CharSlot.CharID">
+            <summary>
+            The Character ID of the slot
+            </summary>
+        </member>
+        <member name="T:EveCom.ScannerWindow">
+            <summary>
+            Class specific to the scanner window
+            </summary>
+        </member>
+        <member name="M:EveCom.ScannerWindow.Open">
+            <summary>
+            Open the scanner window (Only works in space!)
+            </summary>
+        </member>
+        <member name="M:EveCom.ScannerWindow.Analyze">
+            <summary>
+            Start a scan (Only works if a scan is not currently in progress)
+            </summary>
+        </member>
+        <member name="P:EveCom.ScannerWindow.Mode">
+            <summary>
+            The current scanner mode
+            </summary>
+        </member>
+        <member name="P:EveCom.ScannerWindow.ScanResults">
+            <summary>
+            A list of the current scan results displayed in the scanner
+            </summary>
+        </member>
+        <member name="T:EveCom.ScannerWindow.ScannerMode">
+            <summary>
+            Enumeration for different scanner modes
+            </summary>
+        </member>
+        <member name="T:EveCom.MyShip">
+            <summary>
+            Class providing access to your ship
+            </summary>
+        </member>
+        <member name="M:EveCom.MyShip.GetBay(EveCom.CargoHold)">
+            <summary>
+            Provides access to ANY cargobay on your ship (For non-standard bays)
+            </summary>
+            <param name="Bay">Enum including all available bays</param>
+            <returns></returns>
+        </member>
+        <member name="P:EveCom.MyShip.ToItem">
+            <summary>
+            Your ship as an item
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.ToEntity">
+            <summary>
+            Your ship as an Entity (Only works in space!)
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.MaxCapacitor">
+            <summary>
+            Your ship's maximum capacitor value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.Capacitor">
+            <summary>
+            Your ship's current capacitor value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.MaxHull">
+            <summary>
+            Your ship's maximum hull value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.Hull">
+            <summary>
+            Your ship's current hull value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.MaxArmor">
+            <summary>
+            Your ship's maximum armor value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.Armor">
+            <summary>
+            Your ship's current armor value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.MaxShield">
+            <summary>
+            Your ship's maximum shield value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.Shield">
+            <summary>
+            Your ship's current shield value
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.MaxTargetLocks">
+            <summary>
+            Your ship's maximum target locks (Does not relate to your character's maximum!)
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.Modules">
+            <summary>
+            Provides a list of all modules on your ship
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.MaxTargetRange">
+            <summary>
+            Your ship's maximum target range (reflects modifiers caused by modules which modify target range)
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.CargoBay">
+            <summary>
+            Provides access to your ship's cargobay
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.DroneBay">
+            <summary>
+            Provides access to your ship's dronebay
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.OreHold">
+            <summary>
+            Provides access to your ship's orehold
+            </summary>
+        </member>
+        <member name="P:EveCom.MyShip.FleetHangar">
+            <summary>
+            Provides access to your ship's fleethangar
+            </summary>
+        </member>
+        <member name="T:EveCom.Pilot">
+            <summary>
+            Class providing access to pilot information
+            </summary>
+        </member>
+        <member name="M:EveCom.Pilot.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="F:EveCom.Pilot.ToChar">
+            <summary>
+            The pilot's personal standings
+            </summary>
+        </member>
+        <member name="F:EveCom.Pilot.ToCorp">
+            <summary>
+            The pilot's corporation standings
+            </summary>
+        </member>
+        <member name="F:EveCom.Pilot.ToAlliance">
+            <summary>
+            The pilot's alliance standings
+            </summary>
+        </member>
+        <member name="P:EveCom.Pilot.ID">
+            <summary>
+            The pilot's Character ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Pilot.CorpID">
+            <summary>
+            The pilot's Corporation ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Pilot.AllianceID">
+            <summary>
+            The pilot's Alliance ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Pilot.Name">
+            <summary>
+            The pilot's Name
+            </summary>
+        </member>
+        <member name="P:EveCom.Pilot.IsFleetMember">
+            <summary>
+            Is the pilot a member of your fleet?
+            </summary>
+        </member>
+        <member name="T:EveCom.Local">
+            <summary>
+            Class providing access to the local channel
+            </summary>
+        </member>
+        <member name="P:EveCom.Local.Pilots">
+            <summary>
+            List of the pilots in local
+            </summary>
+        </member>
+        <member name="T:EveCom.InventoryContainer">
+            <summary>
+            Root class for all containers
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryContainer.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryContainer.MakeActive">
+            <summary>
+            Make the inventory container active
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryContainer.StackAll">
+            <summary>
+            Stack all in the inventory container
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryContainer.LootAll">
+            <summary>
+            Loot everything form the inventory container
+            </summary>
+        </member>
+        <member name="M:EveCom.InventoryContainer.Add(EveCom.Item)">
+            <summary>
+            Move an item to the inventory container
+            </summary>
+            <param name="ItemToAdd">The item to add</param>
+        </member>
+        <member name="M:EveCom.InventoryContainer.Add(EveCom.Item,System.Int32)">
+            <summary>
+            Move an item to the inventory container
+            </summary>
+            <param name="ItemToAdd">The item to add</param>
+            <param name="Quantity">How much of the item to add</param>
+        </member>
+        <member name="P:EveCom.InventoryContainer.TreeRoot">
+            <summary>
+            Provides access to the Unified Inventory tree (In most cases you shouldn't need to use this!)
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.Items">
+            <summary>
+            List of items in the inventory container
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.Children">
+            <summary>
+            List of children of the inventory container
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.Name">
+            <summary>
+            The inventory container's name
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.IsPrimed">
+            <summary>
+            Is the inventory container loaded and ready to use?(item lists and capacity values)
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.HasCapacity">
+            <summary>
+            Does the container have capacity?
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.MaxCapacity">
+            <summary>
+            The inventory container's maximum capacity
+            </summary>
+        </member>
+        <member name="P:EveCom.InventoryContainer.UsedCapacity">
+            <summary>
+            The inventory container's current used capacity
+            </summary>
+        </member>
+        <member name="T:EveCom.InvListExtender">
+            <summary>
+            Extention functions for manipulating lists of inventory items
+            </summary>
+        </member>
+        <member name="M:EveCom.InvListExtender.MoveTo(System.Collections.Generic.IEnumerable{EveCom.Item},EveCom.InventoryContainer)">
+            <summary>
+            Move items to an inventory container
+            </summary>
+            <param name="Items">IEnumerable of the items to move</param>
+            <param name="To">The inventory container to which to move the items</param>
+            <returns>The ammount moved</returns>
+        </member>
+        <member name="M:EveCom.InvListExtender.Jettison(System.Collections.Generic.IEnumerable{EveCom.Item})">
+            <summary>
+            Jettison a items
+            </summary>
+            <param name="Items">IEnumerable of the items to jettison</param>
+        </member>
+        <member name="T:EveCom.Login">
+            <summary>
+            Class providing access to the login screen
+            </summary>
+        </member>
+        <member name="M:EveCom.Login.Connect(System.String,System.String)">
+            <summary>
+            Connect to EVE
+            </summary>
+            <param name="username">Account Username</param>
+            <param name="password">Account Password</param>
+        </member>
+        <member name="P:EveCom.Login.Loading">
+            <summary>
+            Is the login screen loading?
+            </summary>
+        </member>
+        <member name="P:EveCom.Login.AtLogin">
+            <summary>
+            Is the login screen open?
+            </summary>
+        </member>
+        <member name="P:EveCom.Login.Connecting">
+            <summary>
+            Is the login screen connecting to an account?
+            </summary>
+        </member>
+        <member name="T:EveCom.SurveyScan">
+            <summary>
+            Provides access to scan results
+            </summary>
+        </member>
+        <member name="P:EveCom.SurveyScan.Scan">
+            <summary>
+            Provides information about a scan result as a dictionary where the key is the Entity and the value is the quantity (i.e. Ore)
+            </summary>
+        </member>
+        <member name="T:EveCom.Station">
+            <summary>
+            Class for stations
+            </summary>
+        </member>
+        <member name="M:EveCom.Station.CorpHangar(System.Int32)">
+            <summary>
+            Station Corporation Hangars
+            </summary>
+            <param name="Division">Division number</param>
+            <returns>Corporate hangar Division</returns>
+        </member>
+        <member name="P:EveCom.Station.ItemHangar">
+            <summary>
+            Station ItemHangar
+            </summary>
+        </member>
+        <member name="P:EveCom.Station.ShipHangar">
+            <summary>
+            Station ShipHangar
+            </summary>
+        </member>
+        <member name="T:EveCom.Category">
+            <summary>
+            Enumeration for Category ID's
+            </summary>
+        </member>
+        <member name="T:EveCom.EVEFrame">
+            <summary>
+            Static class to handle attaching to the frame pulses of an EVE client
+            </summary>
+        </member>
+        <member name="F:EveCom.EVEFrame.CurrentVersion">
+            <summary>
+            Version the API is valid for
+            </summary>
+        </member>
+        <member name="M:EveCom.EVEFrame.Log(System.String)">
+            <summary>
+            Log an error to the IS console
+            </summary>
+            <param name="message">Message to log</param>
+        </member>
+        <member name="E:EveCom.EVEFrame.OnFrame">
+            <summary>
+            Event handler for EVE client pulses
+            </summary>
+        </member>
+        <member name="P:EveCom.EVEFrame.Enable3DRendering">
+            <summary>
+            Enables and disables 3D rendering in the client
+            </summary>
+        </member>
+        <member name="T:EveCom.EVEFrameLock">
+            <summary>
+            Class to handle locking EVE client frames outside of normal frame pulses
+            </summary>
+        </member>
+        <member name="M:EveCom.EVEFrameLock.#ctor">
+            <summary>
+            Handles locking and unlocking the EVE client frame
+            </summary>
+            <remarks>Must be disposed after using</remarks>
+            <example>
+            <code>
+            using(new EVEFrameLock())
+            {
+                EVEFrame.Log(Me.Name);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:EveCom.EVEFrameLock.Dispose">
+            <summary>
+            Dispose of the EVE frame lock
+            </summary>
+        </member>
+        <member name="T:EveCom.CargoHold">
+            <summary>
+            Enumeration for different cargo holds
+            </summary>
+        </member>
+        <member name="T:EveCom.SystemScanResult">
+            <summary>
+            Class providing access to system scan results
+            </summary>
+        </member>
+        <member name="M:EveCom.SystemScanResult.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="M:EveCom.SystemScanResult.Bookmark(System.String,System.String,System.Boolean)">
+            <summary>
+            Bookmarks the scan result
+            </summary>
+            <param name="Name">Bookmark name, if empty uses DungeonName</param>
+            <param name="Description">Bookmark Description</param>
+            <param name="Corp">Put in corp bookmarks or personal</param>
+        </member>
+        <member name="M:EveCom.SystemScanResult.WarpTo(System.Double)">
+            <summary>
+            Begins a warp to the scan result
+            </summary>
+            <param name="distance">The distance to warp to the result</param>
+        </member>
+        <member name="M:EveCom.SystemScanResult.WarpFleetTo(System.Double)">
+            <summary>
+            Begins a fleet warp to the scan result (Will fail if you are not in a fleet and in a leadership position)
+            </summary>
+            <param name="distance">The distance to fleet warp to the result</param>
+        </member>
+        <member name="P:EveCom.SystemScanResult.ID">
+            <summary>
+            The ID of the system scan result (Usually unique, but NOT guaranteed to be)
+            </summary>
+        </member>
+        <member name="P:EveCom.SystemScanResult.Certainty">
+            <summary>
+            The certainty of the scan result
+            </summary>
+        </member>
+        <member name="P:EveCom.SystemScanResult.ScanGroupID">
+            <summary>
+            The ID of the scan group of the scan result
+            </summary>
+        </member>
+        <member name="P:EveCom.SystemScanResult.TypeID">
+            <summary>
+            The Type ID of the scan result
+            </summary>
+        </member>
+        <member name="P:EveCom.SystemScanResult.GroupID">
+            <summary>
+            The Group ID of the scan result
+            </summary>
+        </member>
+        <member name="P:EveCom.SystemScanResult.DungeonName">
+            <summary>
+            The dungeon name of a scan result (only valid for anomalies which have 100% certainty)
+            </summary>
+        </member>
+        <member name="T:EveCom.Stealth">
+            <summary>
+            Handles stealthing evecom and any additional modules that are requested
+            </summary>
+        </member>
+        <member name="T:EveCom.Fleet">
+            <summary>
+            Class providing access to fleet information
+            </summary>
+        </member>
+        <member name="M:EveCom.Fleet.Invite(EveCom.Pilot,EveCom.Wing,EveCom.Squad,EveCom.FleetRole)">
+            <summary>
+            Invite a pilot to your fleet
+            </summary>
+            <param name="pilot">The pilot to invite</param>
+            <param name="wing">Which wing to invite into (Default first available)</param>
+            <param name="squad">Which squad to invite into (Default first available</param>
+            <param name="role">Assign a special role (Defaults to Squad Member</param>
+        </member>
+        <member name="M:EveCom.Fleet.CreateFleet">
+            <summary>
+            Create a fleet
+            </summary>
+        </member>
+        <member name="M:EveCom.Fleet.LeaveFleet">
+            <summary>
+            Leave the fleet
+            </summary>
+        </member>
+        <member name="P:EveCom.Fleet.Wings">
+            <summary>
+            List of wings in the fleet
+            </summary>
+        </member>
+        <member name="P:EveCom.Fleet.Members">
+            <summary>
+            List of members in the fleet
+            </summary>
+        </member>
+        <member name="P:EveCom.Fleet.Commander">
+            <summary>
+            The fleet commander
+            </summary>
+        </member>
+        <member name="T:EveCom.Wing">
+            <summary>
+            Class containing information about a fleet wing
+            </summary>
+        </member>
+        <member name="M:EveCom.Wing.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="P:EveCom.Wing.ID">
+            <summary>
+            The wing ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Wing.Squads">
+            <summary>
+            List of Squads in the wing
+            </summary>
+        </member>
+        <member name="P:EveCom.Wing.Members">
+            <summary>
+            Members in the fleet
+            </summary>
+        </member>
+        <member name="P:EveCom.Wing.Commander">
+            <summary>
+            Wing commander
+            </summary>
+        </member>
+        <member name="T:EveCom.Squad">
+            <summary>
+            Class containing information about a squad
+            </summary>
+        </member>
+        <member name="F:EveCom.Squad.Parent">
+            <summary>
+            The wing this squad is a member of
+            </summary>
+        </member>
+        <member name="M:EveCom.Squad.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="P:EveCom.Squad.ID">
+            <summary>
+            The squad's ID
+            </summary>
+        </member>
+        <member name="P:EveCom.Squad.Members">
+            <summary>
+            Members in the squad
+            </summary>
+        </member>
+        <member name="P:EveCom.Squad.Commander">
+            <summary>
+            The squad commander
+            </summary>
+        </member>
+        <member name="T:EveCom.FleetMember">
+            <summary>
+            Class containing information about a fleet member
+            </summary>
+        </member>
+        <member name="M:EveCom.FleetMember.Finalize">
+            <summary>
+            Handles the cleanup of this class
+            </summary>
+        </member>
+        <member name="M:EveCom.FleetMember.Move(EveCom.Wing,EveCom.Squad,EveCom.FleetRole)">
+            <summary>
+            Move a fleet member to another place in the fleet
+            </summary>
+            <param name="wing">The wing to which to move</param>
+            <param name="squad">The squad to which to move</param>
+            <param name="role">The role to assign the fleet member</param>
+        </member>
+        <member name="M:EveCom.FleetMember.SetBooster(EveCom.BoosterRole)">
+            <summary>
+            Set the member as a booster
+            </summary>
+            <param name="role">The boosting role to assign the fleet member</param>
+        </member>
+        <member name="M:EveCom.FleetMember.Kick">
+            <summary>
+            Kick a fleet member from the fleet
+            </summary>
+        </member>
+        <member name="M:EveCom.FleetMember.WarpTo(System.Double)">
+            <summary>
+            Warp to the fleet member
+            </summary>
+            <param name="Distance">The distance to warp with</param>
+        </member>
+        <member name="M:EveCom.FleetMember.WarpFleetTo(System.Double)">
+            <summary>
+            Warp the fleet to the fleet member
+            </summary>
+            <param name="Distance">The distance to warp with</param>
+        </member>
+        <member name="P:EveCom.FleetMember.ID">
+            <summary>
+            The fleet member's ID
+            </summary>
+        </member>
+        <member name="P:EveCom.FleetMember.Role">
+            <summary>
+            Role of the fleet member
+            </summary>
+        </member>
+        <member name="P:EveCom.FleetMember.RoleBooster">
+            <summary>
+            Booster role of the fleet member
+            </summary>
+        </member>
+        <member name="P:EveCom.FleetMember.Name">
+            <summary>
+            The fleet member's Name
+            </summary>
+        </member>
+        <member name="P:EveCom.FleetMember.SolarSystemID">
+            <summary>
+            The fleet member's current SolarSystem
+            </summary>
+        </member>
+        <member name="T:EveCom.FleetRole">
+            <summary>
+            Enumeration of different Fleet roles
+            </summary>
+        </member>
+        <member name="T:EveCom.BoosterRole">
+            <summary>
+            Enumeration of possible Booster Roles
+            </summary>
+        </member>
+        <member name="T:EveCom.Corp">
+            <summary>
+            Static class referencing the character's corporation
+            </summary>
+        </member>
+        <member name="P:EveCom.Corp.CurOfficeID">
+            <summary>
+            The corporation's office's ID in the current station
+            </summary>
+        </member>
+        <member name="T:EveCom.CommandExtenders">
+            <summary>
+            Class to hold extension methods for EVE Commands
+            </summary>
+        </member>
+        <member name="M:EveCom.CommandExtenders.Execute(EveCom.Command)">
+            <summary>
+            Execute an EVE Command
+            </summary>
+            <param name="cmd">Command to execute</param>
+        </member>
+        <member name="T:EveCom.Command">
+            <summary>
+            Enumeration of all possible EVE Commands
+            These are, for the most part, simple key binds in the client
+            </summary>
+        </member>
+        <member name="T:EveCom.Route">
+            <summary>
+            This class provides access to the autopilot route
+            </summary>
+        </member>
+        <member name="P:EveCom.Route.Path">
+            <summary>
+            This contains the SolarSystemIDs of each solar system in your autopilot route
+            </summary>
+        </member>
+        <member name="P:EveCom.Route.NextWaypoint">
+            <summary>
+            Your next waypoint
+            </summary>
+        </member>
+        <member name="T:EveCom.ChatChannel">
+            <summary>
+            Class for chat channels
+            </summary>
+        </member>
+        <member name="M:EveCom.ChatChannel.Finalize">
+            <summary>
+            Deconstrutor for ChatChannel
+            </summary>
+        </member>
+        <member name="P:EveCom.ChatChannel.All">
+            <summary>
+            List of all chat channels
+            </summary>
+        </member>
+        <member name="P:EveCom.ChatChannel.ID">
+            <summary>
+            Chat Channel ID
+            </summary>
+        </member>
+        <member name="P:EveCom.ChatChannel.Members">
+            <summary>
+            List of all members of the chat channel
+            </summary>
+        </member>
+        <member name="T:EveCom.Group">
+            <summary>
+            Enumeration for group ID's
+            </summary>
+        </member>
+    </members>
+</doc>

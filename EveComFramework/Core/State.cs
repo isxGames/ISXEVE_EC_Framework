@@ -8,7 +8,7 @@ namespace EveComFramework.Core
 {
     public class State
     {
-        internal class StateQueue
+        public class StateQueue
         {
             internal Func<object[], bool> State { get; set; }
             internal object[] Params { get; set; }
@@ -19,12 +19,16 @@ namespace EveComFramework.Core
                 this.Params = Params;
                 this.Frequency = Frequency;
             }
+            public override string ToString()
+            {
+                return State.Method.Name;
+            }
         }
 
         public int DefaultFrequency { get; set; }
         public DateTime NextPulse { get; set; }
         internal LinkedList<StateQueue> States = new LinkedList<StateQueue>();
-        internal StateQueue CurState;
+        public StateQueue CurState;
         public bool Idle { get { return CurState == null; } }
 
         public State()
