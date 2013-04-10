@@ -4,41 +4,84 @@ using System.Linq;
 using System.Text;
 using EveCom;
 
-namespace EveComFramework
+namespace EveComFramework.Security
 {
-    // Define a class to hold custom event info 
     internal class AlertArg : EventArgs
     {
-        public enum EventType
-        {
-            Pod,
-            NegativeStanding,
-            NeutralStanding,
-            Targeted,
-            CapacitorLow,
-            ShieldLow,
-            ArmorLow
-        }
-
-        public EventType trigger { get; set; }
-        public AlertArg(EventType trigger)
+        public FleeTrigger trigger { get; set; }
+        public AlertArg(FleeTrigger trigger)
         {
             this.trigger = trigger;
         }
+    }
 
+    internal enum FleeTrigger
+    {
+        Pod,
+        NegativeStanding,
+        NeutralStanding,
+        Targeted,
+        CapacitorLow,
+        ShieldLow,
+        ArmorLow
+    }
+
+    internal enum FleeType
+    {
+        NearestStation,
+        SecureBookmark,
+        SafeBookmarks
+    }
+
+    public class SecuritySettings : EveComFramework.Core.Settings
+    {
+        internal List<FleeTrigger> Triggers = new List<FleeTrigger>
+        {
+            FleeTrigger.Pod,
+            FleeTrigger.NegativeStanding,
+            FleeTrigger.NeutralStanding,
+            FleeTrigger.Targeted,
+            FleeTrigger.CapacitorLow,
+            FleeTrigger.ShieldLow,
+            FleeTrigger.ArmorLow
+        };
+        internal List<FleeType> Types = new List<FleeType>
+        {
+            FleeType.NearestStation,
+            FleeType.SecureBookmark,
+            FleeType.SafeBookmarks
+        };
+        internal bool NegativeAlliance = false;
+        internal bool NegativeCorp = false;
+        internal bool NegativeFleet = false;
+        internal bool NeutralAlliance = false;
+        internal bool NeutralCorp = false;
+        internal bool NeutralFleet = false;
+        internal bool TargetAlliance = false;
+        internal bool TargetCorp = false;
+        internal bool TargetFleet = false;
+        internal int CapThreshold = 30;
+        internal int ShieldThreshold = 30;
+        internal int ArmorThreshold = 99;
+        internal string SafeSubstring = "Safe:";
+        internal string SecureBookmark = "";
     }
 
 
-    class Security : State
+    public class Security : State
     {
 
         #region Instantiation
 
+     
+        
         #endregion
 
         #region Variables
 
         List<Bookmark> SafeSpots;
+        internal SecuritySettings Config = new SecuritySettings();
+        Move.Move Move = new Move.Move();
 
         #endregion
 
@@ -76,6 +119,12 @@ namespace EveComFramework
             Clear();
         }
 
+        public void Configure()
+        {
+            UI.Security Configuration = new UI.Security();
+            Configuration.Show();
+        }
+
         #endregion
 
         #region States
@@ -88,18 +137,18 @@ namespace EveComFramework
                 return false;
             }
 
-            foreach (string FleeTrigger in Config.FleeTriggers)
+            foreach (FleeTrigger Trigger in Config.Triggers)
             {
-                switch (FleeTrigger)
+                switch (Trigger)
                 {
-                    case "In Pod":
+                    case FleeTrigger.Pod:
                         if (MyShip.ToItem.GroupID == Group.Capsule)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.Pod));
+                            TriggerAlert(new AlertArg(FleeTrigger.Pod));
                             return true;
                         }
                         break;
-                    case "Negative Standing in Local":
+                    case FleeTrigger.NegativeStanding:
                         List<Pilot> NegativePilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance < 0 ||
                                                                                 a.ToAlliance.FromCorp < 0 ||
                                                                                 a.ToAlliance.FromChar < 0 ||
@@ -116,11 +165,11 @@ namespace EveComFramework
                         if (!Config.NegativeFleet) { NegativePilots.RemoveAll(a => a.IsFleetMember); }
                         if (NegativePilots.Count > 0)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.NegativeStanding));
+                            TriggerAlert(new AlertArg(FleeTrigger.NegativeStanding));
                             return true;
                         }
                         break;
-                    case "Neutral in Local":
+                    case FleeTrigger.NeutralStanding:
                         List<Pilot> NeutralPilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance <= 0 &&
                                                                                 a.ToAlliance.FromCorp <= 0 &&
                                                                                 a.ToAlliance.FromChar <= 0 &&
@@ -137,11 +186,11 @@ namespace EveComFramework
                         if (!Config.NeutralFleet) { NeutralPilots.RemoveAll(a => a.IsFleetMember); }
                         if (NeutralPilots.Count > 0)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.NeutralStanding));
+                            TriggerAlert(new AlertArg(FleeTrigger.NeutralStanding));
                             return true;
                         }
                         break;
-                    case "Targeted by another player":
+                    case FleeTrigger.Targeted:
                         if (!Session.InSpace)
                         {
                             break;
@@ -152,40 +201,40 @@ namespace EveComFramework
                         if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
                         if (TargetingPilots.Count > 0)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.Targeted));
+                            TriggerAlert(new AlertArg(FleeTrigger.Targeted));
                             return true;
                         }
                         break;
-                    case "Capacitor Low":
+                    case FleeTrigger.CapacitorLow:
                         if (!Session.InSpace)
                         {
                             break;
                         }
                         if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapThreshold)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.CapacitorLow));
+                            TriggerAlert(new AlertArg(FleeTrigger.CapacitorLow));
                             return true;
                         }
                         break;
-                    case "Shield Low":
+                    case FleeTrigger.ShieldLow:
                         if (!Session.InSpace)
                         {
                             break;
                         }
                         if (MyShip.ToEntity.ShieldPct < Config.ShieldThreshold)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.ShieldLow));
+                            TriggerAlert(new AlertArg(FleeTrigger.ShieldLow));
                             return true;
                         }
                         break;
-                    case "Armor Low":
+                    case FleeTrigger.ArmorLow:
                         if (!Session.InSpace)
                         {
                             break;
                         }
                         if (MyShip.ToEntity.ArmorPct < Config.ArmorThreshold)
                         {
-                            TriggerAlert(new AlertArg(AlertArg.EventType.ArmorLow));
+                            TriggerAlert(new AlertArg(FleeTrigger.ArmorLow));
                             return true;
                         }
                         break;
@@ -202,25 +251,25 @@ namespace EveComFramework
                 return;
             }
 
-            foreach (string FleeType in Config.FleeTypes)
+            foreach (FleeType FleeType in Config.Types)
             {
                 switch (FleeType)
                 {
-                    case "Flee to closest station in system":
+                    case FleeType.NearestStation:
                         if (Entity.All.FirstOrDefault(a => a.GroupID == Group.Station) != null)
                         {
                             Move.Object(Entity.All.FirstOrDefault(a => a.GroupID == Group.Station));
-                            return true;
+                            return;
                         }
                         break;
-                    case "Flee to secure bookmark":
+                    case FleeType.SecureBookmark:
                         if (Bookmark.All.Count(a => a.Title == Config.SecureBookmark) > 0)
                         {
                             Move.Bookmark(Bookmark.All.FirstOrDefault(a => a.Title == Config.SecureBookmark));
-                            return true;
+                            return;
                         }
                         break;
-                    case "Cycle safe bookmarks":
+                    case FleeType.SafeBookmarks:
                         if (SafeSpots.Count == 0)
                         {
                             SafeSpots = Bookmark.All.Where(a => a.Title.Contains(Config.SafeSubstring) && a.LocationID == Session.SolarSystemID).ToList();
@@ -229,10 +278,8 @@ namespace EveComFramework
                         {
                             Move.Bookmark(SafeSpots.FirstOrDefault());
                             SafeSpots.Remove(SafeSpots.FirstOrDefault());
-                            return true;
+                            return;
                         }
-                        break;
-                    case "Flee to closest station outside system":
                         break;
                 }
             }

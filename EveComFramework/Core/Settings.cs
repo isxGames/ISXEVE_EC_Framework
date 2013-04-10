@@ -8,7 +8,7 @@ using System.Reflection;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace EveComFramework
+namespace EveComFramework.Core
 {
     class Settings
     {
