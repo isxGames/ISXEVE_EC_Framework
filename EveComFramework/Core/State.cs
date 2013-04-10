@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using EveCom;
 
-namespace EveComFramework
+namespace EveComFramework.Core
 {
-    internal class State
+    public class State
     {
         internal class StateQueue
         {

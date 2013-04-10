@@ -36,7 +36,7 @@ namespace EveComFramework.Move
 
     }
 
-    class Move : State
+    class Move : EveComFramework.Core.State
     {
 
         #region Instantiation

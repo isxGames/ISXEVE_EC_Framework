@@ -6,7 +6,7 @@ using EveCom;
 
 namespace EveComFramework.Security
 {
-    internal class AlertArg : EventArgs
+    public class AlertArg : EventArgs
     {
         public FleeTrigger trigger { get; set; }
         public AlertArg(FleeTrigger trigger)
@@ -15,7 +15,7 @@ namespace EveComFramework.Security
         }
     }
 
-    internal enum FleeTrigger
+    public enum FleeTrigger
     {
         Pod,
         NegativeStanding,
@@ -33,7 +33,7 @@ namespace EveComFramework.Security
         SafeBookmarks
     }
 
-    public class SecuritySettings : EveComFramework.Core.Settings
+    internal class SecuritySettings : EveComFramework.Core.Settings
     {
         internal List<FleeTrigger> Triggers = new List<FleeTrigger>
         {
@@ -68,7 +68,7 @@ namespace EveComFramework.Security
     }
 
 
-    public class Security : State
+    public class Security : EveComFramework.Core.State
     {
 
         #region Instantiation
@@ -105,7 +105,7 @@ namespace EveComFramework.Security
 
         #region Actions
 
-        public override void Start()
+        public void Start()
         {
             if (Idle)
             {
@@ -114,7 +114,7 @@ namespace EveComFramework.Security
 
         }
 
-        public override void Stop()
+        public void Stop()
         {
             Clear();
         }
