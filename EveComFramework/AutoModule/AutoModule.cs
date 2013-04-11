@@ -44,7 +44,7 @@ namespace EveComFramework.AutoModule
     #endregion
 
 
-    class AutoModule : EveComFramework.Core.State
+    public class AutoModule : EveComFramework.Core.State
     {
         #region Instantiation
 
