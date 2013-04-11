@@ -60,7 +60,6 @@ namespace EveComFramework.Move
 
         #endregion
 
-
         #region Actions
 
         public void ToggleAutopilot(bool Activate = true)
