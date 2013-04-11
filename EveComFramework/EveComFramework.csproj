@@ -63,6 +63,7 @@
     <Compile Include="Security\UI\Security.designer.cs">
       <DependentUpon>Security.cs</DependentUpon>
     </Compile>
+    <Compile Include="Targets\Targets.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Security\UI\Security.resx">
