@@ -29,7 +29,7 @@ namespace EveComFramework.Data
             {
                 if (_All == null)
                 {
-                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("ComBot.Data.SolarSystems.xml"))
+                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.SolarSystems.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from System in dataDoc.Descendants("System")

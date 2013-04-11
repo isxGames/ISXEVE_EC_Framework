@@ -21,7 +21,7 @@ namespace EveComFramework.Data
             {
                 if (_All == null)
                 {
-                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("ComBot.Data.PriorityTargets.xml"))
+                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.PriorityTargets.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from System in dataDoc.Descendants("Target")

@@ -29,7 +29,7 @@ namespace EveComFramework.Data
             {
                 if (_All == null)
                 {
-                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("ComBot.Data.DroneTypes.xml"))
+                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.DroneTypes.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from a in dataDoc.Descendants("Drone")

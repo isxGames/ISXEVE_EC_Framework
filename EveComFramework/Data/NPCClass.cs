@@ -19,7 +19,7 @@ namespace EveComFramework.Data
             {
                 if (_All == null)
                 {
-                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("ComBot.Data.NPCClasses.xml"))
+                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.NPCClasses.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from a in dataDoc.Descendants("Group")

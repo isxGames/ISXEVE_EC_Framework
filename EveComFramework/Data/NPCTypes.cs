@@ -21,7 +21,7 @@ namespace EveComFramework.Data
             {
                 if (_All == null)
                 {
-                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("ComBot.Data.NPCTypes.xml"))
+                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.NPCTypes.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from a in dataDoc.Descendants("Type")
