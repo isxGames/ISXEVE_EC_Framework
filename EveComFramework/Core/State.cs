@@ -12,7 +12,7 @@ namespace EveComFramework.Core
         {
             internal Func<object[], bool> State { get; set; }
             internal object[] Params { get; set; }
-            internal int Frequency { get; set; }
+            public int Frequency { get; set; }
             internal StateQueue(Func<object[], bool> State, int Frequency, object[] Params)
             {
                 this.State = State;

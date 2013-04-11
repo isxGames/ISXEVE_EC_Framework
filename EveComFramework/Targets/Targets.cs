@@ -7,7 +7,7 @@ using EveCom;
 
 namespace EveComFramework.Targets
 {
-    class Targets : EveComFramework.Core.State
+    public class Targets : EveComFramework.Core.State
     {
 
         #region Variables

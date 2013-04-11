@@ -66,41 +66,50 @@ namespace EveComFramework.Security
 
     #endregion
 
-
-    public class AlertArg : EventArgs
-    {
-        public FleeTrigger trigger { get; set; }
-        public AlertArg(FleeTrigger trigger)
-        {
-            this.trigger = trigger;
-        }
-    }
-
     public class Security : EveComFramework.Core.State
     {
+        #region Instantiation
+
+        static Security _Instance;
+        public static Security Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new Security();
+                }
+                return _Instance;
+            }
+        }
+
+        private Security() : base()
+        {
+
+        }
+
+        #endregion
+
         #region Variables
 
         List<Bookmark> SafeSpots;
         internal SecuritySettings Config = new SecuritySettings();
         Move.Move Move = EveComFramework.Move.Move.Instance;
+        public Core.Logger Log = new Core.Logger();
 
         #endregion
 
         #region Events
 
-        public event EventHandler<AlertArg> Alert;
-
-
-        protected virtual void TriggerAlert(AlertArg e)
+        public delegate void NewAlert(FleeTrigger Trigger);
+        public event NewAlert Alert;
+        public void TriggerAlert(FleeTrigger Trigger)
         {
-            EventHandler<AlertArg> handler = Alert;
-
-            if (handler != null)
+            if (Alert != null)
             {
-                handler(this, e);
+                Alert(Trigger);
             }
         }
-
 
         #endregion
 
@@ -145,7 +154,8 @@ namespace EveComFramework.Security
                     case FleeTrigger.Pod:
                         if (MyShip.ToItem.GroupID == Group.Capsule)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.Pod));
+                            TriggerAlert(FleeTrigger.Pod);
+                            Log.Log("In a pod!");
                             return true;
                         }
                         break;
@@ -166,7 +176,8 @@ namespace EveComFramework.Security
                         if (!Config.NegativeFleet) { NegativePilots.RemoveAll(a => a.IsFleetMember); }
                         if (NegativePilots.Count > 0)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.NegativeStanding));
+                            TriggerAlert(FleeTrigger.NegativeStanding);
+                            Log.Log("{0} is negative standing", NegativePilots.FirstOrDefault().Name);
                             return true;
                         }
                         break;
@@ -187,7 +198,8 @@ namespace EveComFramework.Security
                         if (!Config.NeutralFleet) { NeutralPilots.RemoveAll(a => a.IsFleetMember); }
                         if (NeutralPilots.Count > 0)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.NeutralStanding));
+                            TriggerAlert(FleeTrigger.NeutralStanding);
+                            Log.Log("{0} is neutral standing", NeutralPilots.FirstOrDefault().Name);
                             return true;
                         }
                         break;
@@ -202,7 +214,8 @@ namespace EveComFramework.Security
                         if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
                         if (TargetingPilots.Count > 0)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.Targeted));
+                            TriggerAlert(FleeTrigger.Targeted);
+                            Log.Log("{0} is targeting me", TargetingPilots.FirstOrDefault().Name);
                             return true;
                         }
                         break;
@@ -213,7 +226,8 @@ namespace EveComFramework.Security
                         }
                         if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapThreshold)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.CapacitorLow));
+                            TriggerAlert(FleeTrigger.CapacitorLow);
+                            Log.Log("Capacitor is below threshold ({0}%)", Config.CapThreshold);
                             return true;
                         }
                         break;
@@ -224,7 +238,8 @@ namespace EveComFramework.Security
                         }
                         if (MyShip.ToEntity.ShieldPct < Config.ShieldThreshold)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.ShieldLow));
+                            TriggerAlert(FleeTrigger.ShieldLow);
+                            Log.Log("Shield is below threshold ({0}%)", Config.ShieldThreshold);
                             return true;
                         }
                         break;
@@ -235,7 +250,8 @@ namespace EveComFramework.Security
                         }
                         if (MyShip.ToEntity.ArmorPct < Config.ArmorThreshold)
                         {
-                            TriggerAlert(new AlertArg(FleeTrigger.ArmorLow));
+                            TriggerAlert(FleeTrigger.ArmorLow);
+                            Log.Log("Armor is below threshold ({0}%)", Config.ArmorThreshold);
                             return true;
                         }
                         break;

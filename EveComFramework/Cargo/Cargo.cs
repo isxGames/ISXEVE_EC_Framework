@@ -7,35 +7,35 @@ using EveCom;
 
 namespace EveComFramework.Cargo
 {
-    private class CargoAction
+
+    public class Cargo : EveComFramework.Core.State
     {
-        internal Func<object[], bool> Action { get; set; }
-        internal Bookmark Bookmark { get; set; }
-        internal string ContainerName { get; set; }
-        internal Func<Item, bool> QueryString { get; set; }
-        internal int Quantity { get; set; }
-        internal Func<InventoryContainer> Source { get; set; }
-        internal Func<InventoryContainer> Target { get; set; }
-
-        internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, string ContainerName, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
+        private class CargoAction
         {
-            this.Action = Action;
-            this.Bookmark = Bookmark;
-            this.Source = Source;
-            this.ContainerName = ContainerName;
-            this.QueryString = QueryString;
-            this.Quantity = Quantity;
-            this.Target = Target;
-        }
+            internal Func<object[], bool> Action { get; set; }
+            internal Bookmark Bookmark { get; set; }
+            internal string ContainerName { get; set; }
+            internal Func<Item, bool> QueryString { get; set; }
+            internal int Quantity { get; set; }
+            internal Func<InventoryContainer> Source { get; set; }
+            internal Func<InventoryContainer> Target { get; set; }
 
-        public CargoAction Clone()
-        {
-            return new CargoAction(Action, Bookmark, Source, ContainerName, QueryString, Quantity, Target);
-        }
-    }
+            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, string ContainerName, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
+            {
+                this.Action = Action;
+                this.Bookmark = Bookmark;
+                this.Source = Source;
+                this.ContainerName = ContainerName;
+                this.QueryString = QueryString;
+                this.Quantity = Quantity;
+                this.Target = Target;
+            }
 
-    class Cargo : EveComFramework.Core.State
-    {
+            public CargoAction Clone()
+            {
+                return new CargoAction(Action, Bookmark, Source, ContainerName, QueryString, Quantity, Target);
+            }
+        }
 
         #region Variables
 
