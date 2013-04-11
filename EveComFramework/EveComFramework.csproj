@@ -47,6 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Logger.cs" />
+    <Compile Include="Data\DroneType.cs" />
+    <Compile Include="Data\NPCClass.cs" />
+    <Compile Include="Data\NPCTypes.cs" />
+    <Compile Include="Data\PriorityTargets.cs" />
+    <Compile Include="Data\SolarSystem.cs" />
     <Compile Include="Move\Move.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Security.cs" />
@@ -63,6 +68,13 @@
     <EmbeddedResource Include="Security\UI\Security.resx">
       <DependentUpon>Security.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\DroneTypes.xml" />
+    <Content Include="Data\NPCClasses.xml" />
+    <Content Include="Data\NPCTypes.xml" />
+    <Content Include="Data\PriorityTargets.xml" />
+    <Content Include="Data\SolarSystems.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

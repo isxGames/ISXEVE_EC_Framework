@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<NPCClasses>
+  <Group ID="99" Class="Sentry" Group="Sentry Gun" />
+  <Group ID="180" Class="Sentry" Group="Protective Sentry Gun" />
+  <Group ID="383" Class="Sentry" Group="Destructible Sentry Gun" />
+  <Group ID="495" Class="Sentry" Group="Deadspace Overseer's Sentry" />
+  <Group ID="520" Class="Frigate" Group="Storyline Frigate" />
+  <Group ID="522" Class="Cruiser" Group="Storyline Cruiser" />
+  <Group ID="527" Class="Frigate" Group="Storyline Mission Frigate" />
+  <Group ID="533" Class="Cruiser" Group="Storyline Mission Cruiser" />
+  <Group ID="550" Class="Frigate" Group="Asteroid Angel Cartel Frigate" />
+  <Group ID="551" Class="Cruiser" Group="Asteroid Angel Cartel Cruiser" />
+  <Group ID="553" Class="Officer" Group="Asteroid Angel Cartel Officer" />
+  <Group ID="554" Class="Hauler" Group="Asteroid Angel Cartel Hauler" />
+  <Group ID="555" Class="Cruiser" Group="Asteroid Blood Raiders Cruiser" />
+  <Group ID="557" Class="Frigate" Group="Asteroid Blood Raiders Frigate" />
+  <Group ID="558" Class="Hauler" Group="Asteroid Blood Raiders Hauler" />
+  <Group ID="559" Class="Officer" Group="Asteroid Blood Raiders Officer" />
+  <Group ID="561" Class="Cruiser" Group="Asteroid Guristas Cruiser" />
+  <Group ID="562" Class="Frigate" Group="Asteroid Guristas Frigate" />
+  <Group ID="563" Class="Hauler" Group="Asteroid Guristas Hauler" />
+  <Group ID="564" Class="Officer" Group="Asteroid Guristas Officer" />
+  <Group ID="566" Class="Cruiser" Group="Asteroid Sansha's Nation Cruiser" />
+  <Group ID="567" Class="Frigate" Group="Asteroid Sansha's Nation Frigate" />
+  <Group ID="568" Class="Hauler" Group="Asteroid Sansha's Nation Hauler" />
+  <Group ID="569" Class="Officer" Group="Asteroid Sansha's Nation Officer" />
+  <Group ID="571" Class="Cruiser" Group="Asteroid Serpentis Cruiser" />
+  <Group ID="572" Class="Frigate" Group="Asteroid Serpentis Frigate" />
+  <Group ID="573" Class="Hauler" Group="Asteroid Serpentis Hauler" />
+  <Group ID="574" Class="Officer" Group="Asteroid Serpentis Officer" />
+  <Group ID="575" Class="Destroyer" Group="Asteroid Angel Cartel Destroyer" />
+  <Group ID="576" Class="BattleCruiser" Group="Asteroid Angel Cartel BattleCruiser" />
+  <Group ID="577" Class="Destroyer" Group="Asteroid Blood Raiders Destroyer" />
+  <Group ID="578" Class="BattleCruiser" Group="Asteroid Blood Raiders BattleCruiser" />
+  <Group ID="579" Class="Destroyer" Group="Asteroid Guristas Destroyer" />
+  <Group ID="580" Class="BattleCruiser" Group="Asteroid Guristas BattleCruiser" />
+  <Group ID="581" Class="Destroyer" Group="Asteroid Sansha's Nation Destroyer" />
+  <Group ID="582" Class="BattleCruiser" Group="Asteroid Sansha's Nation BattleCruiser" />
+  <Group ID="583" Class="Destroyer" Group="Asteroid Serpentis Destroyer" />
+  <Group ID="584" Class="BattleCruiser" Group="Asteroid Serpentis BattleCruiser" />
+  <Group ID="593" Class="BattleCruiser" Group="Deadspace Angel Cartel BattleCruiser" />
+  <Group ID="595" Class="Cruiser" Group="Deadspace Angel Cartel Cruiser" />
+  <Group ID="596" Class="Destroyer" Group="Deadspace Angel Cartel Destroyer" />
+  <Group ID="597" Class="Frigate" Group="Deadspace Angel Cartel Frigate" />
+  <Group ID="602" Class="BattleCruiser" Group="Deadspace Blood Raiders BattleCruiser" />
+  <Group ID="604" Class="Cruiser" Group="Deadspace Blood Raiders Cruiser" />
+  <Group ID="605" Class="Destroyer" Group="Deadspace Blood Raiders Destroyer" />
+  <Group ID="606" Class="Frigate" Group="Deadspace Blood Raiders Frigate" />
+  <Group ID="611" Class="BattleCruiser" Group="Deadspace Guristas BattleCruiser" />
+  <Group ID="612" Class="BattleShip" Group="Deadspace Guristas Battleship" />
+  <Group ID="613" Class="Cruiser" Group="Deadspace Guristas Cruiser" />
+  <Group ID="614" Class="Destroyer" Group="Deadspace Guristas Destroyer" />
+  <Group ID="615" Class="Frigate" Group="Deadspace Guristas Frigate" />
+  <Group ID="620" Class="BattleCruiser" Group="Deadspace Sansha's Nation BattleCruiser" />
+  <Group ID="622" Class="Cruiser" Group="Deadspace Sansha's Nation Cruiser" />
+  <Group ID="623" Class="Destroyer" Group="Deadspace Sansha's Nation Destroyer" />
+  <Group ID="624" Class="Frigate" Group="Deadspace Sansha's Nation Frigate" />
+  <Group ID="629" Class="BattleCruiser" Group="Deadspace Serpentis BattleCruiser" />
+  <Group ID="631" Class="Cruiser" Group="Deadspace Serpentis Cruiser" />
+  <Group ID="632" Class="Destroyer" Group="Deadspace Serpentis Destroyer" />
+  <Group ID="633" Class="Frigate" Group="Deadspace Serpentis Frigate" />
+  <Group ID="665" Class="Frigate" Group="Mission Amarr Empire Frigate" />
+  <Group ID="668" Class="Cruiser" Group="Mission Amarr Empire Cruiser" />
+  <Group ID="669" Class="Destroyer" Group="Mission Amarr Empire Destroyer" />
+  <Group ID="670" Class="Other" Group="Mission Amarr Empire Other" />
+  <Group ID="671" Class="Frigate" Group="Mission Caldari State Frigate" />
+  <Group ID="673" Class="Cruiser" Group="Mission Caldari State Cruiser" />
+  <Group ID="675" Class="Other" Group="Mission Caldari State Other" />
+  <Group ID="676" Class="Destroyer" Group="Mission Caldari State Destroyer" />
+  <Group ID="677" Class="Frigate" Group="Mission Gallente Federation Frigate" />
+  <Group ID="678" Class="Cruiser" Group="Mission Gallente Federation Cruiser" />
+  <Group ID="679" Class="Destroyer" Group="Mission Gallente Federation Destroyer" />
+  <Group ID="682" Class="Other" Group="Mission Gallente Federation Other" />
+  <Group ID="683" Class="Frigate" Group="Mission Minmatar Republic Frigate" />
+  <Group ID="684" Class="Destroyer" Group="Mission Minmatar Republic Destroyer" />
+  <Group ID="686" Class="Other" Group="Mission Minmatar Republic Other" />
+  <Group ID="687" Class="Frigate" Group="Mission Khanid Frigate" />
+  <Group ID="688" Class="Destroyer" Group="Mission Khanid Destroyer" />
+  <Group ID="689" Class="Cruiser" Group="Mission Khanid Cruiser" />
+  <Group ID="692" Class="Other" Group="Mission Khanid Other" />
+  <Group ID="693" Class="Frigate" Group="Mission CONCORD Frigate" />
+  <Group ID="694" Class="Destroyer" Group="Mission CONCORD Destroyer" />
+  <Group ID="695" Class="Cruiser" Group="Mission CONCORD Cruiser" />
+  <Group ID="698" Class="Other" Group="Mission CONCORD Other" />
+  <Group ID="699" Class="Frigate" Group="Mission Mordu Frigate" />
+  <Group ID="700" Class="Destroyer" Group="Mission Mordu Destroyer" />
+  <Group ID="701" Class="Cruiser" Group="Mission Mordu Cruiser" />
+  <Group ID="704" Class="Other" Group="Mission Mordu Other" />
+  <Group ID="705" Class="Cruiser" Group="Mission Minmatar Republic Cruiser" />
+  <Group ID="755" Class="BattleCruiser" Group="Asteroid Rogue Group BattleCruiser" />
+  <Group ID="757" Class="Cruiser" Group="Asteroid Rogue Group Cruiser" />
+  <Group ID="758" Class="Destroyer" Group="Asteroid Rogue Group Destroyer" />
+  <Group ID="759" Class="Frigate" Group="Asteroid Rogue Group Frigate" />
+  <Group ID="760" Class="Hauler" Group="Asteroid Rogue Group Hauler" />
+  <Group ID="761" Class="Swarm" Group="Asteroid Rogue Group Swarm" />
+  <Group ID="789" Class="Frigate" Group="Asteroid Angel Cartel Commander Frigate" />
+  <Group ID="790" Class="Cruiser" Group="Asteroid Angel Cartel Commander Cruiser" />
+  <Group ID="791" Class="Cruiser" Group="Asteroid Blood Raiders Commander Cruiser" />
+  <Group ID="792" Class="Frigate" Group="Asteroid Blood Raiders Commander Frigate" />
+  <Group ID="793" Class="BattleCruiser" Group="Asteroid Angel Cartel Commander BattleCruiser" />
+  <Group ID="794" Class="Destroyer" Group="Asteroid Angel Cartel Commander Destroyer" />
+  <Group ID="795" Class="BattleCruiser" Group="Asteroid Blood Raiders Commander BattleCruiser" />
+  <Group ID="796" Class="Destroyer" Group="Asteroid Blood Raiders Commander Destroyer" />
+  <Group ID="797" Class="BattleCruiser" Group="Asteroid Guristas Commander BattleCruiser" />
+  <Group ID="798" Class="Cruiser" Group="Asteroid Guristas Commander Cruiser" />
+  <Group ID="799" Class="Destroyer" Group="Asteroid Guristas Commander Destroyer" />
+  <Group ID="800" Class="Frigate" Group="Asteroid Guristas Commander Frigate" />
+  <Group ID="801" Class="BattleCruiser" Group="Deadspace Rogue Group BattleCruiser" />
+  <Group ID="803" Class="Cruiser" Group="Deadspace Rogue Group Cruiser" />
+  <Group ID="804" Class="Destroyer" Group="Deadspace Rogue Group Destroyer" />
+  <Group ID="805" Class="Frigate" Group="Deadspace Rogue Group Frigate" />
+  <Group ID="806" Class="Swarm" Group="Deadspace Rogue Group Swarm" />
+  <Group ID="807" Class="BattleCruiser" Group="Asteroid Sansha's Nation Commander BattleCruiser" />
+  <Group ID="808" Class="Cruiser" Group="Asteroid Sansha's Nation Commander Cruiser" />
+  <Group ID="809" Class="Destroyer" Group="Asteroid Sansha's Nation Commander Destroyer" />
+  <Group ID="810" Class="Frigate" Group="Asteroid Sansha's Nation Commander Frigate" />
+  <Group ID="811" Class="BattleCruiser" Group="Asteroid Serpentis Commander BattleCruiser" />
+  <Group ID="812" Class="Cruiser" Group="Asteroid Serpentis Commander Cruiser" />
+  <Group ID="813" Class="Destroyer" Group="Asteroid Serpentis Commander Destroyer" />
+  <Group ID="814" Class="Frigate" Group="Asteroid Serpentis Commander Frigate" />
+  <Group ID="817" Class="Cruiser" Group="Mission Generic Cruisers" />
+  <Group ID="818" Class="Frigate" Group="Mission Generic Frigates" />
+  <Group ID="819" Class="Frigate" Group="Deadspace Overseer Frigate" />
+  <Group ID="820" Class="Cruiser" Group="Deadspace Overseer Cruiser" />
+  <Group ID="824" Class="Cruiser" Group="Mission Thukker Cruiser" />
+  <Group ID="825" Class="Destroyer" Group="Mission Thukker Destroyer" />
+  <Group ID="826" Class="Frigate" Group="Mission Thukker Frigate" />
+  <Group ID="827" Class="Other" Group="Mission Thukker Other" />
+  <Group ID="828" Class="Cruiser" Group="Mission Generic Battle Cruisers" />
+  <Group ID="829" Class="Destroyer" Group="Mission Generic Destroyers" />
+  <Group ID="843" Class="BattleCruiser" Group="Asteroid Rogue Group Commander BattleCruiser" />
+  <Group ID="845" Class="Cruiser" Group="Asteroid Rogue Group Commander Cruiser" />
+  <Group ID="846" Class="Destroyer" Group="Asteroid Rogue Group Commander Destroyer" />
+  <Group ID="847" Class="Frigate" Group="Asteroid Rogue Group Commander Frigate" />
+  <Group ID="1006" Class="Cruiser" Group="Mission Faction Cruiser" />
+  <Group ID="1007" Class="Frigate" Group="Mission Faction Frigate" />
+  <Group ID="1053" Class="Frigate" Group="Incursion Sansha's Nation Frigate" />
+  <Group ID="1054" Class="Cruiser" Group="Incursion Sansha's Nation Cruiser" />
+</NPCClasses>

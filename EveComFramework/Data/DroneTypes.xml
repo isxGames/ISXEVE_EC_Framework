@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<Drones>
+  <Drone Name="Wasp I" ID="1201" Race="1" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Infiltrator I" ID="2173" Race="4" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Infiltrator II" ID="2175" Race="4" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Hammerhead I" ID="2183" Race="8" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Hammerhead II" ID="2185" Race="8" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Praetor I" ID="2193" Race="4" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Praetor II" ID="2195" Race="4" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Acolyte I" ID="2203" Race="4" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Acolyte II" ID="2205" Race="4" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Wasp II" ID="2436" Race="1" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Ogre I" ID="2444" Race="8" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Ogre II" ID="2446" Race="8" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Hobgoblin I" ID="2454" Race="8" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Hobgoblin II" ID="2456" Race="8" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Hornet I" ID="2464" Race="1" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Hornet II" ID="2466" Race="1" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Berserker I" ID="2476" Race="2" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Berserker II" ID="2478" Race="2" Volume="25" Group="Heavy Attack Drones" />
+  <Drone Name="Warrior I" ID="2486" Race="2" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Warrior II" ID="2488" Race="2" Volume="5" Group="Light Scout Drones" />
+  <Drone Name="Tutorial Attack Drone" ID="3549" Race="" Volume="5" Group="Combat Drone" />
+  <Drone Name="Vespa I" ID="15508" Race="1" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Valkyrie I" ID="15510" Race="2" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Hellhound I" ID="16206" Race="8" Volume="25" Group="Combat Drone" />
+  <Drone Name="Vespa II" ID="21638" Race="1" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Valkyrie II" ID="21640" Race="2" Volume="10" Group="Medium Scout Drones" />
+  <Drone Name="Curator I" ID="23525" Race="4" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Warden I" ID="23559" Race="1" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Garde I" ID="23561" Race="8" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Bouncer I" ID="23563" Race="2" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Warden II" ID="28209" Race="1" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Garde II" ID="28211" Race="8" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Curator II" ID="28213" Race="4" Volume="25" Group="Sentry Drones" />
+  <Drone Name="Bouncer II" ID="28215" Race="2" Volume="25" Group="Sentry Drones" />
+  <Drone Name="'Integrated' Acolyte" ID="28262" Race="4" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Augmented' Acolyte" ID="28264" Race="4" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Integrated' Berserker" ID="28266" Race="2" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Augmented' Berserker" ID="28268" Race="2" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Integrated' Hammerhead" ID="28270" Race="8" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Augmented' Hammerhead" ID="28272" Race="8" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Integrated' Hobgoblin" ID="28274" Race="8" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Augmented' Hobgoblin" ID="28276" Race="8" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Integrated' Hornet" ID="28278" Race="1" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Augmented' Hornet" ID="28280" Race="1" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Integrated' Infiltrator" ID="28282" Race="4" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Augmented' Infiltrator" ID="28284" Race="4" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Integrated' Ogre" ID="28286" Race="8" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Augmented' Ogre" ID="28288" Race="8" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Integrated' Praetor" ID="28290" Race="4" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Augmented' Praetor" ID="28292" Race="4" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Integrated' Valkyrie" ID="28294" Race="2" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Augmented' Valkyrie" ID="28296" Race="2" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Integrated' Vespa" ID="28298" Race="1" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Augmented' Vespa" ID="28300" Race="1" Volume="10" Group="Combat Drone" />
+  <Drone Name="'Integrated' Warrior" ID="28302" Race="2" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Augmented' Warrior" ID="28304" Race="2" Volume="5" Group="Combat Drone" />
+  <Drone Name="'Integrated' Wasp" ID="28306" Race="1" Volume="25" Group="Combat Drone" />
+  <Drone Name="'Augmented' Wasp" ID="28308" Race="1" Volume="25" Group="Combat Drone" />
+  <Drone Name="Imperial Navy Acolyte" ID="31864" Race="4" Volume="5" Group="Combat Drone" />
+  <Drone Name="Imperial Navy Infiltrator" ID="31866" Race="4" Volume="10" Group="Combat Drone" />
+  <Drone Name="Imperial Navy Curator" ID="31868" Race="4" Volume="25" Group="Combat Drone" />
+  <Drone Name="Imperial Navy Praetor" ID="31870" Race="4" Volume="25" Group="Combat Drone" />
+  <Drone Name="Caldari Navy Hornet" ID="31872" Race="1" Volume="5" Group="Combat Drone" />
+  <Drone Name="Caldari Navy Vespa" ID="31874" Race="1" Volume="10" Group="Combat Drone" />
+  <Drone Name="Caldari Navy Wasp" ID="31876" Race="1" Volume="25" Group="Combat Drone" />
+  <Drone Name="Caldari Navy Warden" ID="31878" Race="1" Volume="25" Group="Combat Drone" />
+  <Drone Name="Federation Navy Hobgoblin" ID="31880" Race="8" Volume="5" Group="Combat Drone" />
+  <Drone Name="Federation Navy Hammerhead" ID="31882" Race="8" Volume="10" Group="Combat Drone" />
+  <Drone Name="Federation Navy Ogre" ID="31884" Race="8" Volume="25" Group="Combat Drone" />
+  <Drone Name="Federation Navy Garde" ID="31886" Race="8" Volume="25" Group="Combat Drone" />
+  <Drone Name="Republic Fleet Warrior" ID="31888" Race="2" Volume="5" Group="Combat Drone" />
+  <Drone Name="Republic Fleet Valkyrie" ID="31890" Race="2" Volume="10" Group="Combat Drone" />
+  <Drone Name="Republic Fleet Berserker" ID="31892" Race="2" Volume="25" Group="Combat Drone" />
+  <Drone Name="Republic Fleet Bouncer" ID="31894" Race="2" Volume="25" Group="Combat Drone" />
+  <Drone Name="Civilian Hobgoblin" ID="32465" Race="8" Volume="5" Group="Combat Drone" />
+  <Drone Name="Civilian Mining Drone" ID="1202" Race="" Volume="5" Group="Mining Drones" />
+  <Drone Name="Harvester Mining Drone" ID="3218" Race="" Volume="10" Group="Mining Drones" />
+  <Drone Name="Mining Drone I" ID="10246" Race="" Volume="5" Group="Mining Drones" />
+  <Drone Name="Mining Drone - Improved" ID="10248" Race="" Volume="5" Group="Mining Drone" />
+  <Drone Name="Mining Drone II" ID="10250" Race="" Volume="5" Group="Mining Drones" />
+  <Drone Name="Mining Drone - Elite" ID="10252" Race="" Volume="5" Group="Mining Drone" />
+  <Drone Name="Repair Drone" ID="9871" Race="" Volume="50" Group="Repair Drone" />
+  <Drone Name="Unanchoring Drone" ID="17565" Race="" Volume="500" Group="Unanchoring Drone" />
+  <Drone Name="Praetor EV-900" ID="22572" Race="4" Volume="25" Group="Combat Utility Drones" />
+  <Drone Name="Acolyte EV-300" ID="23659" Race="4" Volume="5" Group="Combat Utility Drones" />
+  <Drone Name="Infiltrator EV-600" ID="23702" Race="4" Volume="10" Group="Combat Utility Drones" />
+  <Drone Name="Warp Scrambling Drone" ID="22574" Race="" Volume="5" Group="Warp Scrambling Drone" />
+  <Drone Name="10mn webscramblifying Drone" ID="22713" Race="" Volume="5" Group="Warp Scrambling Drone" />
+  <Drone Name="Fighter Uno" ID="22780" Race="" Volume="5000" Group="Fighter Drone" />
+  <Drone Name="Templar" ID="23055" Race="4" Volume="5000" Group="Fighters" />
+  <Drone Name="Dragonfly" ID="23057" Race="1" Volume="5000" Group="Fighters" />
+  <Drone Name="Firbolg" ID="23059" Race="8" Volume="5000" Group="Fighters" />
+  <Drone Name="Einherji" ID="23061" Race="2" Volume="5000" Group="Fighters" />
+  <Drone Name="FA-14 Templar" ID="23759" Race="4" Volume="5000" Group="Fighter Drone" />
+  <Drone Name="Wasp EC-900" ID="23473" Race="1" Volume="25" Group="Electronic Warfare Drones" />
+  <Drone Name="Ogre SD-900" ID="23506" Race="8" Volume="25" Group="Electronic Warfare Drones" />
+  <Drone Name="Praetor TD-900" ID="23510" Race="4" Volume="25" Group="Electronic Warfare Drones" />
+  <Drone Name="Berserker TP-900" ID="23512" Race="2" Volume="25" Group="Electronic Warfare Drones" />
+  <Drone Name="Vespa EC-600" ID="23705" Race="1" Volume="10" Group="Electronic Warfare Drones" />
+  <Drone Name="Hornet EC-300" ID="23707" Race="1" Volume="5" Group="Electronic Warfare Drones" />
+  <Drone Name="Hammerhead SD-600" ID="23713" Race="8" Volume="10" Group="Electronic Warfare Drones" />
+  <Drone Name="Hobgoblin SD-300" ID="23715" Race="8" Volume="5" Group="Electronic Warfare Drones" />
+  <Drone Name="Valkyrie TP-600" ID="23721" Race="2" Volume="10" Group="Electronic Warfare Drones" />
+  <Drone Name="Warrior TP-300" ID="23723" Race="2" Volume="5" Group="Electronic Warfare Drones" />
+  <Drone Name="Infiltrator TD-600" ID="23725" Race="4" Volume="10" Group="Electronic Warfare Drones" />
+  <Drone Name="Acolyte TD-300" ID="23727" Race="4" Volume="5" Group="Electronic Warfare Drones" />
+  <Drone Name="Heavy Shield Maintenance Bot I" ID="22765" Race="" Volume="25" Group="Logistic Drones" />
+  <Drone Name="Heavy Armor Maintenance Bot I" ID="23523" Race="" Volume="25" Group="Logistic Drones" />
+  <Drone Name="Medium Armor Maintenance Bot I" ID="23709" Race="" Volume="10" Group="Logistic Drones" />
+  <Drone Name="Light Armor Maintenance Bot I" ID="23711" Race="" Volume="5" Group="Logistic Drones" />
+  <Drone Name="Medium Shield Maintenance Bot I" ID="23717" Race="" Volume="10" Group="Logistic Drones" />
+  <Drone Name="Light Shield Maintenance Bot I" ID="23719" Race="" Volume="5" Group="Logistic Drones" />
+  <Drone Name="Heavy Armor Maintenance Bot II" ID="28197" Race="" Volume="25" Group="Logistic Drones" />
+  <Drone Name="Heavy Shield Maintenance Bot II" ID="28199" Race="" Volume="25" Group="Logistic Drones" />
+  <Drone Name="Light Armor Maintenance Bot II" ID="28201" Race="" Volume="5" Group="Logistic Drones" />
+  <Drone Name="Light Shield Maintenance Bot II" ID="28203" Race="" Volume="5" Group="Logistic Drones" />
+  <Drone Name="Medium Armor Maintenance Bot II" ID="28205" Race="" Volume="10" Group="Logistic Drones" />
+  <Drone Name="Medium Shield Maintenance Bot II" ID="28207" Race="" Volume="10" Group="Logistic Drones" />
+  <Drone Name="Berserker SW-900" ID="23536" Race="2" Volume="25" Group="Combat Utility Drones" />
+  <Drone Name="Valkyrie SW-600" ID="23729" Race="2" Volume="10" Group="Combat Utility Drones" />
+  <Drone Name="Warrior SW-300" ID="23731" Race="2" Volume="5" Group="Combat Utility Drones" />
+  <Drone Name="Shadow" ID="2948" Race="1" Volume="5000" Group="Fighter Bomber" />
+  <Drone Name="Cyclops" ID="32325" Race="8" Volume="5000" Group="Fighter Bombers" />
+  <Drone Name="Malleus" ID="32340" Race="4" Volume="5000" Group="Fighter Bombers" />
+  <Drone Name="Tyrfing" ID="32342" Race="2" Volume="5000" Group="Fighter Bombers" />
+  <Drone Name="Mantis" ID="32344" Race="1" Volume="5000" Group="Fighter Bombers" />
+  <Drone Name="Salvage Drone I" ID="32787" Race="" Volume="10" Group="Salvage Drone" />
+</Drones>
