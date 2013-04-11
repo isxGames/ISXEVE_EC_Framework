@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoModule\AutoModule.cs" />
+    <Compile Include="AutoModule\UI\AutoModule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoModule\UI\AutoModule.designer.cs">
+      <DependentUpon>AutoModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cargo\Cargo.cs" />
     <Compile Include="Core\Logger.cs" />
     <Compile Include="Data\DroneType.cs" />
@@ -67,6 +74,9 @@
     <Compile Include="Targets\Targets.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AutoModule\UI\AutoModule.resx">
+      <DependentUpon>AutoModule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Security\UI\Security.resx">
       <DependentUpon>Security.cs</DependentUpon>
     </EmbeddedResource>
