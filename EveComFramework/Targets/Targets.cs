@@ -207,5 +207,51 @@ namespace EveComFramework.Targets
             return first.Compose(second, Expression.Or);
         }
     }
+    public class RatComparer : Comparer<Entity>
+    {
+        public override int Compare(Entity x, Entity y)
+        {
+            if (x == null && y == null)
+                return 0;
+            if (x == null)
+                return -1;
+            if (y == null)
+                return 1;
+            if (x == y)
+                return 0;
+            int orderx = 0;
+            if (Data.PriorityTarget.All.Contains(x.Name))
+            {
+                orderx = (Data.PriorityTarget.All.Count + Data.NPCTypes.All.Count + 10) - Data.PriorityTarget.All.IndexOf(x.Name);
+            }
+            else if (Data.NPCTypes.All.Contains((long)x.GroupID))
+            {
+                orderx = (Data.NPCTypes.All.Count + 5) - Data.NPCTypes.All.IndexOf((long)x.GroupID);
+            }
+            else if (x.IsTargetingMe)
+            {
+                orderx = 1;
+            }
+            int ordery = 0;
+            if (Data.PriorityTarget.All.Contains(y.Name))
+            {
+                ordery = (Data.PriorityTarget.All.Count + Data.NPCTypes.All.Count + 10) - Data.PriorityTarget.All.IndexOf(y.Name);
+            }
+            else if (Data.NPCTypes.All.Contains((long)y.GroupID))
+            {
+                ordery = (Data.NPCTypes.All.Count + 5) - Data.NPCTypes.All.IndexOf((long)y.GroupID);
+            }
+            else if (y.IsTargetingMe)
+            {
+                ordery = 1;
+            }
+
+            if (orderx > ordery)
+                return 1;
+            if (orderx < ordery)
+                return -1;
+            return 0;
+        }
+    }
 
 }
