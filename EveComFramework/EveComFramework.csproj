@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="EveCom">
       <HintPath>..\EveCom.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
