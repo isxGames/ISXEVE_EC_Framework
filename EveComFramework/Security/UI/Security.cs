@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using EveCom;
+using InnerSpaceAPI;
 
 namespace EveComFramework.Security.UI
 {
@@ -55,12 +56,6 @@ namespace EveComFramework.Security.UI
 
         private void Security_Load(object sender, EventArgs e)
         {
-            
-            
-            using (new EVEFrameLock())
-            {
-                Bookmarks = Bookmark.All.Select(a => a.Title).ToList();
-            }
 
             for (int i = 0; i <= (FleeTypes.Items.Count - 1); i++)
             {
@@ -87,8 +82,6 @@ namespace EveComFramework.Security.UI
                 }
             }
 
-            SecureBookmark.DataSource = Bookmarks.Where(a => a == Config.SecureBookmark).ToList(); ;
-            SecureBookmark.SelectedItem = Config.SecureBookmark;
             SafeSubstring.Text = Config.SafeSubstring;
             ActiveTriggers.Items.AddRange(Config.Triggers.Select(a => a.ToString()).ToArray());
             Config.Triggers.ForEach(a => InactiveTriggers.Items.Remove(a.ToString()));
@@ -142,44 +135,44 @@ namespace EveComFramework.Security.UI
             InactiveTriggers.ClearSelected();
             switch (ActiveTriggers.SelectedItem.ToString())
             {
-                case "In Pod" :
+                case "Pod" :
                     StandingGroup.Hide();
                     ThresholdGroup.Hide();
                     break;
-                case "Negative Standing in Local" :
+                case "NegativeStanding" :
                     ThresholdGroup.Hide();
                     StandingGroup.Show();                   
                     IncludeCorpMembers.Checked = Config.NegativeCorp;
                     IncludeAllianceMembers.Checked = Config.NegativeAlliance;
                     IncludeFleetMembers.Checked = Config.NegativeFleet;
                     break;
-                case "Neutral in Local" :
+                case "NeutralStanding" :
                     ThresholdGroup.Hide();
                     StandingGroup.Show();
                     IncludeCorpMembers.Checked = Config.NeutralCorp;
                     IncludeAllianceMembers.Checked = Config.NeutralAlliance;
                     IncludeFleetMembers.Checked = Config.NeutralFleet;
                     break;
-                case "Targeted by another player":
+                case "Targeted":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();                   
                     IncludeCorpMembers.Checked = Config.TargetCorp;
                     IncludeAllianceMembers.Checked = Config.TargetAlliance;
                     IncludeFleetMembers.Checked = Config.TargetFleet;
                     break;
-                case "Capacitor Low" :
+                case "CapacitorLow" :
                     Threshold.Value = Config.CapThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
-                case "Shield Low":
+                case "ShieldLow":
                     Threshold.Value = Config.ShieldThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
-                case "Armor Low":
+                case "ArmorLow":
                     Threshold.Value = Config.ArmorThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
                     StandingGroup.Hide();                   
@@ -200,44 +193,44 @@ namespace EveComFramework.Security.UI
             ActiveTriggers.ClearSelected();
             switch (InactiveTriggers.SelectedItem.ToString())
             {
-                case "In Pod":
+                case "Pod":
                     StandingGroup.Hide();
                     ThresholdGroup.Hide();
                     break;
-                case "Negative Standing in Local":
+                case "NegativeStanding":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();
                     IncludeCorpMembers.Checked = Config.NegativeCorp;
                     IncludeAllianceMembers.Checked = Config.NegativeAlliance;
                     IncludeFleetMembers.Checked = Config.NegativeFleet;
                     break;
-                case "Neutral in Local":
+                case "NeutralStanding":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();
                     IncludeCorpMembers.Checked = Config.NeutralCorp;
                     IncludeAllianceMembers.Checked = Config.NeutralAlliance;
                     IncludeFleetMembers.Checked = Config.NeutralFleet;
                     break;
-                case "Targeted by another player":
+                case "Targeted":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();
                     IncludeCorpMembers.Checked = Config.TargetCorp;
                     IncludeAllianceMembers.Checked = Config.TargetAlliance;
                     IncludeFleetMembers.Checked = Config.TargetFleet;
                     break;
-                case "Capacitor Low":
+                case "CapacitorLow":
                     Threshold.Value = Config.CapThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
-                case "Shield Low":
+                case "ShieldLow":
                     Threshold.Value = Config.ShieldThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
-                case "Armor Low":
+                case "ArmorLow":
                     Threshold.Value = Config.ArmorThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
                     StandingGroup.Hide();
@@ -251,15 +244,25 @@ namespace EveComFramework.Security.UI
         {
             ActiveTriggers.Items.Add(InactiveTriggers.SelectedItem);
             InactiveTriggers.Items.Remove(InactiveTriggers.SelectedItem);
-            Config.Triggers = ActiveTriggers.Items.Cast<FleeTrigger>().ToList();
+            List<FleeTrigger> NewTriggerlist = new List<FleeTrigger>();
+            foreach (string s in ActiveTriggers.Items)
+            {
+                NewTriggerlist.Add((FleeTrigger)Enum.Parse(typeof(FleeTrigger), s));
+            }
+            Config.Triggers = NewTriggerlist;
             Config.Save();
         }
 
         private void ActiveTriggers_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            InactiveTriggers.Items.Add(InactiveTriggers.SelectedItem);
-            ActiveTriggers.Items.Remove(InactiveTriggers.SelectedItem);
-            Config.Triggers = ActiveTriggers.Items.Cast<FleeTrigger>().ToList();
+            InactiveTriggers.Items.Add(ActiveTriggers.SelectedItem);
+            ActiveTriggers.Items.Remove(ActiveTriggers.SelectedItem);
+            List<FleeTrigger> NewTriggerlist = new List<FleeTrigger>();
+            foreach (string s in ActiveTriggers.Items)
+            {
+                NewTriggerlist.Add((FleeTrigger)Enum.Parse(typeof(FleeTrigger), s));
+            }
+            Config.Triggers = NewTriggerlist;
             Config.Save();
         }
 
@@ -269,15 +272,15 @@ namespace EveComFramework.Security.UI
             {
                 switch (ActiveTrigger)
                 {
-                    case "Capacitor Low":
+                    case "CapacitorLow":
                         Config.CapThreshold = Threshold.Value;
                         ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
                         break;
-                    case "Shield Low":
+                    case "ShieldLow":
                         Config.ShieldThreshold = Threshold.Value;
                         ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
                         break;
-                    case "Armor Low":
+                    case "ArmorLow":
                         Config.ArmorThreshold = Threshold.Value;
                         ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
                         break;
@@ -290,13 +293,13 @@ namespace EveComFramework.Security.UI
         {
             switch (ActiveTrigger)
             {
-                case "Negative Standing in Local":
+                case "NegativeStanding":
                     Config.NegativeCorp = IncludeCorpMembers.Checked;
                     break;
-                case "Neutral in Local":
+                case "NeutralStanding":
                     Config.NeutralCorp = IncludeCorpMembers.Checked;
                     break;
-                case "Targeted by another player":
+                case "Targeted":
                     Config.TargetCorp = IncludeCorpMembers.Checked;
                     break;
             }
@@ -307,13 +310,13 @@ namespace EveComFramework.Security.UI
         {
             switch (ActiveTrigger)
             {
-                case "Negative Standing in Local":
+                case "NegativeStanding":
                     Config.NegativeAlliance = IncludeAllianceMembers.Checked;
                     break;
-                case "Neutral in Local":
+                case "NeutralStanding":
                     Config.NeutralAlliance = IncludeAllianceMembers.Checked;
                     break;
-                case "Targeted by another player":
+                case "Targeted":
                     Config.TargetAlliance = IncludeAllianceMembers.Checked;
                     break;
             }
@@ -324,13 +327,13 @@ namespace EveComFramework.Security.UI
         {
             switch (ActiveTrigger)
             {
-                case "Negative Standing in Local":
+                case "NegativeStanding":
                     Config.NegativeFleet = IncludeFleetMembers.Checked;
                     break;
-                case "Neutral in Local":
+                case "NeutralStanding":
                     Config.NeutralFleet = IncludeFleetMembers.Checked;
                     break;
-                case "Targeted by another player":
+                case "Targeted":
                     Config.TargetFleet = IncludeFleetMembers.Checked;
                     break;
             }
@@ -339,7 +342,23 @@ namespace EveComFramework.Security.UI
 
         private void FleeTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Config.Types = FleeTypes.CheckedItems.Cast<FleeType>().ToList();
+            List<FleeType> build = new List<FleeType>();
+            foreach (string i in FleeTypes.CheckedItems)
+            {
+                switch (i)
+                {
+                    case "Flee to closest station in system":
+                        build.Add(FleeType.NearestStation);
+                        break;
+                    case "Flee to secure bookmark":
+                        build.Add(FleeType.SecureBookmark);
+                        break;
+                    case "Cycle safe bookmarks":
+                        build.Add(FleeType.SafeBookmarks);
+                        break;
+                }
+            }
+            Config.Types = build;
             Config.Save();
         }
 

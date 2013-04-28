@@ -60,6 +60,12 @@ namespace EveComFramework.Move
 
         #endregion
 
+        #region Variables
+
+        public Core.Logger Log = new Core.Logger();
+
+        #endregion
+
         #region Actions
 
         public void ToggleAutopilot(bool Activate = true)
@@ -315,8 +321,7 @@ namespace EveComFramework.Move
                 // Start approaching our approach target if we're not currently approaching anything
                 if (!Approaching || MyShip.ToEntity.Mode == EntityMode.Stopped)
                 {
-                    //LSUI.Update("Move", "Approaching", "o");
-                    //LSUI.Update("Move", " " + Target.Name + " (" + Distance / 1000 + " km)", "-g");
+                    Log.Log("Approaching {0}({1} km)", Target.Name, Distance / 1000);
                     Target.Approach();
                     InsertState(ApproachState, -1, Target, Distance, true);
                     WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Approaching);
@@ -326,8 +331,7 @@ namespace EveComFramework.Move
                         && Collision == null)
                 {
                     Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 5000);
-                    //LSUI.Update("Move", "Orbiting", "o");
-                    //LSUI.Update("Move", " " + Collision.Name + " (10 km)", "-g");
+                    Log.Log("Orbiting {0}(10 km)", Collision.Name);
                     Collision.Orbit(10000);
                     InsertState(ApproachState, -1, Target, Distance, true, Collision);
                 }
@@ -336,8 +340,7 @@ namespace EveComFramework.Move
                         && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000))
                 {
                     Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000);
-                    //LSUI.Update("Move", "Orbiting", "o");
-                    //LSUI.Update("Move", " " + Collision.Name + "(10 km)", "-g");
+                    Log.Log("Orbiting {0}(10 km)", Collision.Name);
                     Collision.Orbit(10000);
                     InsertState(ApproachState, -1, Target, Distance, true, Collision);
                 }
@@ -345,8 +348,7 @@ namespace EveComFramework.Move
                 else if (Entity.All.Where(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 8000).FirstOrDefault() == null
                         && Collision != null)
                 {
-                    //LSUI.Update("Move", "Approaching", "o");
-                    //LSUI.Update("Move", " " + Target.Name + " (" + Distance / 1000 + " km)", "-g");
+                    Log.Log("Approaching {0}({1} km)", Target.Name, Distance / 1000);
                     Target.Approach();
                     InsertState(ApproachState, -1, Target, Distance, true);
                 }
@@ -378,8 +380,7 @@ namespace EveComFramework.Move
             // Start orbiting our orbit target if we're not currently orbiting anything
             if (!Orbiting || MyShip.ToEntity.Mode == EntityMode.Stopped)
             {
-                //LSUI.Update("Move", "Orbiting", "o");
-                //LSUI.Update("Move", " " + Target.Name + " (" + Distance / 1000 + " km)", "-g");
+                Log.Log("Orbiting {0}({1} km)", Target.Name, Distance / 1000);
                 Target.Orbit(Distance);
                 InsertState(OrbitState, -1, Target, Distance, true);
                 WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Orbiting);
@@ -389,8 +390,7 @@ namespace EveComFramework.Move
                     && Collision == null)
             {
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 5000);
-                //LSUI.Update("Move", "Orbiting", "o");
-                //LSUI.Update("Move", " " + Collision.Name + "(10 km)", "-g");
+                Log.Log("Orbiting {0}(10 km)", Collision.Name);
                 Collision.Orbit(10000);
                 InsertState(OrbitState, -1, Target, Distance, true, Collision);
             }
@@ -399,8 +399,7 @@ namespace EveComFramework.Move
                     && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000))
             {
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000);
-                //LSUI.Update("Move", "Orbiting", "o");
-                //LSUI.Update("Move", " " + Collision.Name + "(10 km)", "-g");
+                Log.Log("Orbiting {0}(10 km)", Collision.Name);
                 Collision.Orbit(10000);
                 InsertState(OrbitState, -1, Target, Distance, true, Collision);
             }
@@ -408,8 +407,7 @@ namespace EveComFramework.Move
             else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 8000) == null
                     && Collision != null)
             {
-                //LSUI.Update("Move", "Orbiting", "o");
-                //LSUI.Update("Move", " " + Target.Name + " (" + Distance / 1000 + " km)", "-g");
+                Log.Log("Orbiting {0}({1} km)", Target.Name, Distance / 1000);
                 Target.Orbit(Distance);
                 InsertState(OrbitState, -1, Target, Distance, true);
             }
@@ -454,17 +452,16 @@ namespace EveComFramework.Move
         {
             if (Params.Length == 0)
             {
-                //LSUI.Update("Move", "Dock call incomplete", "r");
+                Log.Log("Dock call incomplete");
                 return true;
             }
             if (Session.InStation)
             {
-                //LSUI.Update("Move", "Dock complete", "o");
+                Log.Log("Dock complete");
                 return true;
             }
 
-            //LSUI.Update("Move", "Docking", "o");
-            //LSUI.Update("Move", " " + ((Entity)Params[0]).Name, "-g");
+            Log.Log("Docking at {0}", ((Entity)Params[0]).Name);
             ((Entity)Params[0]).Dock();
             InsertState(Dock, -1, Params[0]);
             WaitFor(10, () => Session.InStation, () => MyShip.ToEntity.Mode != EntityMode.Stopped);

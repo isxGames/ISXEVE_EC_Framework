@@ -24,11 +24,12 @@ namespace EveComFramework.Core
             {
                 using (new EVEFrameLock())
                 {
-                    if (Session.Safe && Session.NextSessionChange < Session.Now)
-                    {
-                        CharName = Me.Name;
-                    }
+                    //if (Session.Safe && Session.NextSessionChange < Session.Now)
+                    //{
+                    //    CharName = Me.Name;
+                    //}
                 }
+                CharName = "Default";
             }
         }
 
