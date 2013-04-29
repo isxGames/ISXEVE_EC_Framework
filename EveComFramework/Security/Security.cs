@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EveCom;
+using EveComFramework.Core;
 
 namespace EveComFramework.Security
 {
@@ -30,7 +31,7 @@ namespace EveComFramework.Security
 
     #region Settings
 
-    internal class SecuritySettings : EveComFramework.Core.Settings
+    internal class SecuritySettings : Settings
     {
         public List<FleeTrigger> Triggers = new List<FleeTrigger>
         {
@@ -67,7 +68,7 @@ namespace EveComFramework.Security
 
     #endregion
 
-    public class Security : EveComFramework.Core.State
+    public class Security : State
     {
         #region Instantiation
 
