@@ -132,14 +132,12 @@ namespace EveComFramework.Security
 
         public void Flee()
         {
-            Clear();
             QueueState(Flee);
         }
 
         public void Reset(int? Delay = null)
         {
             int iDelay = Delay ?? Config.FleeWait * 1000;
-            Clear();
             QueueState(CheckSafe, iDelay);
         }
 
