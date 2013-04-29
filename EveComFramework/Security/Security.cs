@@ -62,6 +62,7 @@ namespace EveComFramework.Security
         public int ArmorThreshold = 99;
         public string SafeSubstring = "Safe:";
         public string SecureBookmark = "";
+        public int FleeWait = 5;
     }
 
     #endregion
@@ -127,6 +128,19 @@ namespace EveComFramework.Security
         public void Stop()
         {
             Clear();
+        }
+
+        public void Flee()
+        {
+            Clear();
+            QueueState(Flee);
+        }
+
+        public void Reset(int? Delay = null)
+        {
+            int iDelay = Delay ?? Config.FleeWait * 1000;
+            Clear();
+            QueueState(CheckSafe, iDelay);
         }
 
         public void Configure()
@@ -261,11 +275,11 @@ namespace EveComFramework.Security
             return false;
         }
 
-        public void Flee()
+        bool Flee(object[] Params)
         {
             if (Session.InStation)
             {
-                return;
+                return true;
             }
 
             foreach (FleeType FleeType in Config.Types)
@@ -276,14 +290,14 @@ namespace EveComFramework.Security
                         if (Entity.All.FirstOrDefault(a => a.GroupID == Group.Station) != null)
                         {
                             Move.Object(Entity.All.FirstOrDefault(a => a.GroupID == Group.Station));
-                            return;
+                            return true;
                         }
                         break;
                     case FleeType.SecureBookmark:
                         if (Bookmark.All.Count(a => a.Title == Config.SecureBookmark) > 0)
                         {
                             Move.Bookmark(Bookmark.All.FirstOrDefault(a => a.Title == Config.SecureBookmark));
-                            return;
+                            return true;
                         }
                         break;
                     case FleeType.SafeBookmarks:
@@ -295,11 +309,12 @@ namespace EveComFramework.Security
                         {
                             Move.Bookmark(SafeSpots.FirstOrDefault());
                             SafeSpots.Remove(SafeSpots.FirstOrDefault());
-                            return;
+                            return true;
                         }
                         break;
                 }
             }
+            return true;
         }
 
         #endregion

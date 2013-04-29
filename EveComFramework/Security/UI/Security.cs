@@ -82,19 +82,65 @@ namespace EveComFramework.Security.UI
                 }
             }
 
+            for (int i = 0; i <= (Triggers.Items.Count - 1); i++)
+            {
+                switch (Triggers.Items[i].ToString())
+                {
+                    case "In a pod":
+                        if (Config.Triggers.Contains(FleeTrigger.Pod))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                    case "Negative standing pilot in local":
+                        if (Config.Triggers.Contains(FleeTrigger.NegativeStanding))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                    case "Neutral standing pilot in local":
+                        if (Config.Triggers.Contains(FleeTrigger.NeutralStanding))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                    case "Targeted by another player":
+                        if (Config.Triggers.Contains(FleeTrigger.Targeted))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                    case "Capacitor low":
+                        if (Config.Triggers.Contains(FleeTrigger.CapacitorLow))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                    case "Shield low":
+                        if (Config.Triggers.Contains(FleeTrigger.ShieldLow))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                    case "Armor low":
+                        if (Config.Triggers.Contains(FleeTrigger.ArmorLow))
+                        {
+                            Triggers.SetItemChecked(i, true);
+                        }
+                        break;
+                }
+            }
+
             SafeSubstring.Text = Config.SafeSubstring;
-            ActiveTriggers.Items.AddRange(Config.Triggers.Select(a => a.ToString()).ToArray());
-            Config.Triggers.ForEach(a => InactiveTriggers.Items.Remove(a.ToString()));
+            SecureBookmark.Text = Config.SecureBookmark;
+            FleeWait.Value = Config.FleeWait;
+            lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
         }
 
-        private void SecureBookmark_SelectedIndexChanged(object sender, EventArgs e)
+        private void SecureBookmark_TextChanged(object sender, EventArgs e)
         {
-            Config.SecureBookmark = SecureBookmark.SelectedItem.ToString();
+            Config.SecureBookmark = SecureBookmark.Text;
             Config.Save();
-        }
-        private void SecureBookmarkFilter_TextChanged(object sender, EventArgs e)
-        {
-            SecureBookmark.DataSource = Bookmarks.Where(a => a.Contains(SecureBookmarkFilter.Text)).ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -124,147 +170,98 @@ namespace EveComFramework.Security.UI
             Config.Save();
         }
 
-        private void ActiveTriggers_SelectedIndexChanged(object sender, EventArgs e)
+        private void Triggers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ActiveTriggers.SelectedItem == null)
+            if (Triggers.SelectedItem == null)
             {
                 StandingGroup.Hide();
                 ThresholdGroup.Hide();
                 return;
             }
-            InactiveTriggers.ClearSelected();
-            switch (ActiveTriggers.SelectedItem.ToString())
+            switch (Triggers.SelectedItem.ToString())
             {
-                case "Pod" :
+                case "In a pod":
                     StandingGroup.Hide();
                     ThresholdGroup.Hide();
                     break;
-                case "NegativeStanding" :
+                case "Negative standing pilot in local":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();                   
                     IncludeCorpMembers.Checked = Config.NegativeCorp;
                     IncludeAllianceMembers.Checked = Config.NegativeAlliance;
                     IncludeFleetMembers.Checked = Config.NegativeFleet;
                     break;
-                case "NeutralStanding" :
+                case "Neutral standing pilot in local":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();
                     IncludeCorpMembers.Checked = Config.NeutralCorp;
                     IncludeAllianceMembers.Checked = Config.NeutralAlliance;
                     IncludeFleetMembers.Checked = Config.NeutralFleet;
                     break;
-                case "Targeted":
+                case "Targeted by another player":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();                   
                     IncludeCorpMembers.Checked = Config.TargetCorp;
                     IncludeAllianceMembers.Checked = Config.TargetAlliance;
                     IncludeFleetMembers.Checked = Config.TargetFleet;
                     break;
-                case "CapacitorLow" :
+                case "Capacitor low":
                     Threshold.Value = Config.CapThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
-                case "ShieldLow":
+                case "Shield low":
                     Threshold.Value = Config.ShieldThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
-                case "ArmorLow":
+                case "Armor low":
                     Threshold.Value = Config.ArmorThreshold;
                     ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
                     StandingGroup.Hide();                   
                     ThresholdGroup.Show();
                     break;
             }
-            ActiveTrigger = ActiveTriggers.SelectedItem.ToString();
+            ActiveTrigger = Triggers.SelectedItem.ToString();
         }
 
-        private void InactiveTriggers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (InactiveTriggers.SelectedItem == null)
-            {
-                StandingGroup.Hide();
-                ThresholdGroup.Hide();
-                return;
-            }
-            ActiveTriggers.ClearSelected();
-            switch (InactiveTriggers.SelectedItem.ToString())
-            {
-                case "Pod":
-                    StandingGroup.Hide();
-                    ThresholdGroup.Hide();
-                    break;
-                case "NegativeStanding":
-                    ThresholdGroup.Hide();
-                    StandingGroup.Show();
-                    IncludeCorpMembers.Checked = Config.NegativeCorp;
-                    IncludeAllianceMembers.Checked = Config.NegativeAlliance;
-                    IncludeFleetMembers.Checked = Config.NegativeFleet;
-                    break;
-                case "NeutralStanding":
-                    ThresholdGroup.Hide();
-                    StandingGroup.Show();
-                    IncludeCorpMembers.Checked = Config.NeutralCorp;
-                    IncludeAllianceMembers.Checked = Config.NeutralAlliance;
-                    IncludeFleetMembers.Checked = Config.NeutralFleet;
-                    break;
-                case "Targeted":
-                    ThresholdGroup.Hide();
-                    StandingGroup.Show();
-                    IncludeCorpMembers.Checked = Config.TargetCorp;
-                    IncludeAllianceMembers.Checked = Config.TargetAlliance;
-                    IncludeFleetMembers.Checked = Config.TargetFleet;
-                    break;
-                case "CapacitorLow":
-                    Threshold.Value = Config.CapThreshold;
-                    ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
-                    StandingGroup.Hide();
-                    ThresholdGroup.Show();
-                    break;
-                case "ShieldLow":
-                    Threshold.Value = Config.ShieldThreshold;
-                    ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
-                    StandingGroup.Hide();
-                    ThresholdGroup.Show();
-                    break;
-                case "ArmorLow":
-                    Threshold.Value = Config.ArmorThreshold;
-                    ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
-                    StandingGroup.Hide();
-                    ThresholdGroup.Show();
-                    break;
-            }
-            ActiveTrigger = InactiveTriggers.SelectedItem.ToString();
-        }
 
-        private void InactiveTriggers_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Triggers_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            ActiveTriggers.Items.Add(InactiveTriggers.SelectedItem);
-            InactiveTriggers.Items.Remove(InactiveTriggers.SelectedItem);
-            List<FleeTrigger> NewTriggerlist = new List<FleeTrigger>();
-            foreach (string s in ActiveTriggers.Items)
+            List<FleeTrigger> build = new List<FleeTrigger>();
+            foreach (string i in Triggers.CheckedItems)
             {
-                NewTriggerlist.Add((FleeTrigger)Enum.Parse(typeof(FleeTrigger), s));
+                switch (i)
+                {
+                    case "In a pod":
+                        build.Add(FleeTrigger.Pod);
+                        break;
+                    case "Negative standing pilot in local":
+                        build.Add(FleeTrigger.NegativeStanding);
+                        break;
+                    case "Neutral standing pilot in local":
+                        build.Add(FleeTrigger.NeutralStanding);
+                        break;
+                    case "Targeted by another player":
+                        build.Add(FleeTrigger.Targeted);
+                        break;
+                    case "Capacitor low":
+                        build.Add(FleeTrigger.CapacitorLow);
+                        break;
+                    case "Shield low":
+                        build.Add(FleeTrigger.ShieldLow);
+                        break;
+                    case "Armor low":
+                        build.Add(FleeTrigger.ArmorLow);
+                        break;
+                }
             }
-            Config.Triggers = NewTriggerlist;
+            Config.Triggers = build;
             Config.Save();
         }
 
-        private void ActiveTriggers_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            InactiveTriggers.Items.Add(ActiveTriggers.SelectedItem);
-            ActiveTriggers.Items.Remove(ActiveTriggers.SelectedItem);
-            List<FleeTrigger> NewTriggerlist = new List<FleeTrigger>();
-            foreach (string s in ActiveTriggers.Items)
-            {
-                NewTriggerlist.Add((FleeTrigger)Enum.Parse(typeof(FleeTrigger), s));
-            }
-            Config.Triggers = NewTriggerlist;
-            Config.Save();
-        }
 
         private void Threshold_ValueChanged(object sender, EventArgs e)
         {
@@ -361,6 +358,15 @@ namespace EveComFramework.Security.UI
             Config.Types = build;
             Config.Save();
         }
+
+        private void FleeWait_Scroll(object sender, EventArgs e)
+        {
+            Config.FleeWait = FleeWait.Value;
+            lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
+            Config.Save();
+        }
+
+
 
     }
 }
