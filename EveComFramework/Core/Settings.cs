@@ -20,17 +20,7 @@ namespace EveComFramework.Core
         
         static Settings()
         {
-            while (CharName == null)
-            {
-                using (new EVEFrameLock())
-                {
-                    //if (Session.Safe && Session.NextSessionChange < Session.Now)
-                    //{
-                    //    CharName = Me.Name;
-                    //}
-                }
-                CharName = "Default";
-            }
+            CharName = "Default";
         }
 
         public Settings(bool CharBased = true)

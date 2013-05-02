@@ -30,6 +30,9 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lblFleeWait = new System.Windows.Forms.Label();
+            this.FleeWait = new System.Windows.Forms.TrackBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.SafeSubstring = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -39,31 +42,27 @@
             this.button2 = new System.Windows.Forms.Button();
             this.FleeTypes = new System.Windows.Forms.CheckedListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.ThresholdGroup = new System.Windows.Forms.GroupBox();
+            this.ThresholdLabel = new System.Windows.Forms.Label();
+            this.Threshold = new System.Windows.Forms.TrackBar();
             this.StandingGroup = new System.Windows.Forms.GroupBox();
             this.IncludeFleetMembers = new System.Windows.Forms.CheckBox();
             this.IncludeAllianceMembers = new System.Windows.Forms.CheckBox();
             this.IncludeCorpMembers = new System.Windows.Forms.CheckBox();
-            this.ThresholdGroup = new System.Windows.Forms.GroupBox();
-            this.ThresholdLabel = new System.Windows.Forms.Label();
-            this.Threshold = new System.Windows.Forms.TrackBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.Triggers = new System.Windows.Forms.CheckedListBox();
-            this.lblHelpText = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lblFleeWait = new System.Windows.Forms.Label();
-            this.FleeWait = new System.Windows.Forms.TrackBar();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FleeWait)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.StandingGroup.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Threshold)).BeginInit();
+            this.StandingGroup.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FleeWait)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -75,6 +74,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(320, 330);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -89,6 +89,39 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Flee Responses";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.lblFleeWait);
+            this.groupBox4.Controls.Add(this.FleeWait);
+            this.groupBox4.Location = new System.Drawing.Point(6, 220);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(296, 69);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Cooldown";
+            // 
+            // lblFleeWait
+            // 
+            this.lblFleeWait.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFleeWait.Location = new System.Drawing.Point(7, 46);
+            this.lblFleeWait.Name = "lblFleeWait";
+            this.lblFleeWait.Size = new System.Drawing.Size(283, 19);
+            this.lblFleeWait.TabIndex = 7;
+            this.lblFleeWait.Text = "Wait 5 minutes after flee";
+            this.lblFleeWait.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // FleeWait
+            // 
+            this.FleeWait.BackColor = System.Drawing.SystemColors.Control;
+            this.FleeWait.Location = new System.Drawing.Point(7, 20);
+            this.FleeWait.Maximum = 100;
+            this.FleeWait.Name = "FleeWait";
+            this.FleeWait.Size = new System.Drawing.Size(283, 45);
+            this.FleeWait.TabIndex = 6;
+            this.FleeWait.Tag = "Use this slider to set the threshold for the corresponding Flee Trigger.";
+            this.FleeWait.Value = 5;
+            this.FleeWait.Scroll += new System.EventHandler(this.FleeWait_Scroll);
             // 
             // groupBox3
             // 
@@ -122,10 +155,13 @@
             // 
             // SecureBookmark
             // 
+            this.SecureBookmark.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.SecureBookmark.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.SecureBookmark.Location = new System.Drawing.Point(7, 20);
             this.SecureBookmark.Name = "SecureBookmark";
             this.SecureBookmark.Size = new System.Drawing.Size(283, 21);
             this.SecureBookmark.TabIndex = 1;
+            this.SecureBookmark.TextChanged += new System.EventHandler(this.SecureBookmark_TextChanged);
             // 
             // groupBox1
             // 
@@ -192,55 +228,6 @@
             this.tabPage2.Text = "Flee Triggers";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // StandingGroup
-            // 
-            this.StandingGroup.Controls.Add(this.IncludeFleetMembers);
-            this.StandingGroup.Controls.Add(this.IncludeAllianceMembers);
-            this.StandingGroup.Controls.Add(this.IncludeCorpMembers);
-            this.StandingGroup.Location = new System.Drawing.Point(6, 159);
-            this.StandingGroup.Name = "StandingGroup";
-            this.StandingGroup.Size = new System.Drawing.Size(300, 88);
-            this.StandingGroup.TabIndex = 2;
-            this.StandingGroup.TabStop = false;
-            this.StandingGroup.Text = "Trigger Properties";
-            this.StandingGroup.Visible = false;
-            // 
-            // IncludeFleetMembers
-            // 
-            this.IncludeFleetMembers.AutoSize = true;
-            this.IncludeFleetMembers.Location = new System.Drawing.Point(6, 66);
-            this.IncludeFleetMembers.Name = "IncludeFleetMembers";
-            this.IncludeFleetMembers.Size = new System.Drawing.Size(134, 17);
-            this.IncludeFleetMembers.TabIndex = 2;
-            this.IncludeFleetMembers.Tag = "If this is checked, fleet members will be included in the trigger.";
-            this.IncludeFleetMembers.Text = "Include Fleet Members";
-            this.IncludeFleetMembers.UseVisualStyleBackColor = true;
-            this.IncludeFleetMembers.Click += new System.EventHandler(this.IncludeFleetMembers_CheckedChanged);
-            // 
-            // IncludeAllianceMembers
-            // 
-            this.IncludeAllianceMembers.AutoSize = true;
-            this.IncludeAllianceMembers.Location = new System.Drawing.Point(6, 43);
-            this.IncludeAllianceMembers.Name = "IncludeAllianceMembers";
-            this.IncludeAllianceMembers.Size = new System.Drawing.Size(148, 17);
-            this.IncludeAllianceMembers.TabIndex = 1;
-            this.IncludeAllianceMembers.Tag = "If this is checked, alliance members will be included in the trigger.";
-            this.IncludeAllianceMembers.Text = "Include Alliance Members";
-            this.IncludeAllianceMembers.UseVisualStyleBackColor = true;
-            this.IncludeAllianceMembers.Click += new System.EventHandler(this.IncludeAllianceMembers_CheckedChanged);
-            // 
-            // IncludeCorpMembers
-            // 
-            this.IncludeCorpMembers.AutoSize = true;
-            this.IncludeCorpMembers.Location = new System.Drawing.Point(6, 20);
-            this.IncludeCorpMembers.Name = "IncludeCorpMembers";
-            this.IncludeCorpMembers.Size = new System.Drawing.Size(166, 17);
-            this.IncludeCorpMembers.TabIndex = 0;
-            this.IncludeCorpMembers.Tag = "If this is checked, corporate members will be included in the trigger.";
-            this.IncludeCorpMembers.Text = "Include Corporation Members";
-            this.IncludeCorpMembers.UseVisualStyleBackColor = true;
-            this.IncludeCorpMembers.Click += new System.EventHandler(this.IncludeCorpMembers_CheckedChanged);
-            // 
             // ThresholdGroup
             // 
             this.ThresholdGroup.Controls.Add(this.ThresholdLabel);
@@ -274,6 +261,55 @@
             this.Threshold.Tag = "Use this slider to set the threshold for the corresponding Flee Trigger.";
             this.Threshold.Scroll += new System.EventHandler(this.Threshold_ValueChanged);
             // 
+            // StandingGroup
+            // 
+            this.StandingGroup.Controls.Add(this.IncludeFleetMembers);
+            this.StandingGroup.Controls.Add(this.IncludeAllianceMembers);
+            this.StandingGroup.Controls.Add(this.IncludeCorpMembers);
+            this.StandingGroup.Location = new System.Drawing.Point(6, 159);
+            this.StandingGroup.Name = "StandingGroup";
+            this.StandingGroup.Size = new System.Drawing.Size(300, 88);
+            this.StandingGroup.TabIndex = 2;
+            this.StandingGroup.TabStop = false;
+            this.StandingGroup.Text = "Trigger Properties";
+            this.StandingGroup.Visible = false;
+            // 
+            // IncludeFleetMembers
+            // 
+            this.IncludeFleetMembers.AutoSize = true;
+            this.IncludeFleetMembers.Location = new System.Drawing.Point(6, 66);
+            this.IncludeFleetMembers.Name = "IncludeFleetMembers";
+            this.IncludeFleetMembers.Size = new System.Drawing.Size(133, 17);
+            this.IncludeFleetMembers.TabIndex = 2;
+            this.IncludeFleetMembers.Tag = "If this is checked, fleet members will be included in the trigger.";
+            this.IncludeFleetMembers.Text = "Include Fleet Members";
+            this.IncludeFleetMembers.UseVisualStyleBackColor = true;
+            this.IncludeFleetMembers.Click += new System.EventHandler(this.IncludeFleetMembers_CheckedChanged);
+            // 
+            // IncludeAllianceMembers
+            // 
+            this.IncludeAllianceMembers.AutoSize = true;
+            this.IncludeAllianceMembers.Location = new System.Drawing.Point(6, 43);
+            this.IncludeAllianceMembers.Name = "IncludeAllianceMembers";
+            this.IncludeAllianceMembers.Size = new System.Drawing.Size(147, 17);
+            this.IncludeAllianceMembers.TabIndex = 1;
+            this.IncludeAllianceMembers.Tag = "If this is checked, alliance members will be included in the trigger.";
+            this.IncludeAllianceMembers.Text = "Include Alliance Members";
+            this.IncludeAllianceMembers.UseVisualStyleBackColor = true;
+            this.IncludeAllianceMembers.Click += new System.EventHandler(this.IncludeAllianceMembers_CheckedChanged);
+            // 
+            // IncludeCorpMembers
+            // 
+            this.IncludeCorpMembers.AutoSize = true;
+            this.IncludeCorpMembers.Location = new System.Drawing.Point(6, 20);
+            this.IncludeCorpMembers.Name = "IncludeCorpMembers";
+            this.IncludeCorpMembers.Size = new System.Drawing.Size(164, 17);
+            this.IncludeCorpMembers.TabIndex = 0;
+            this.IncludeCorpMembers.Tag = "If this is checked, corporate members will be included in the trigger.";
+            this.IncludeCorpMembers.Text = "Include Corporation Members";
+            this.IncludeCorpMembers.UseVisualStyleBackColor = true;
+            this.IncludeCorpMembers.Click += new System.EventHandler(this.IncludeCorpMembers_CheckedChanged);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.Triggers);
@@ -302,54 +338,11 @@
             this.Triggers.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Triggers_ItemCheck);
             this.Triggers.SelectedIndexChanged += new System.EventHandler(this.Triggers_SelectedIndexChanged);
             // 
-            // lblHelpText
-            // 
-            this.lblHelpText.Location = new System.Drawing.Point(9, 345);
-            this.lblHelpText.Name = "lblHelpText";
-            this.lblHelpText.Size = new System.Drawing.Size(323, 52);
-            this.lblHelpText.TabIndex = 3;
-            this.lblHelpText.Text = "Mouseover an element for help";
-            this.lblHelpText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.lblFleeWait);
-            this.groupBox4.Controls.Add(this.FleeWait);
-            this.groupBox4.Location = new System.Drawing.Point(6, 220);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(296, 69);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Cooldown";
-            // 
-            // lblFleeWait
-            // 
-            this.lblFleeWait.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFleeWait.Location = new System.Drawing.Point(7, 46);
-            this.lblFleeWait.Name = "lblFleeWait";
-            this.lblFleeWait.Size = new System.Drawing.Size(283, 19);
-            this.lblFleeWait.TabIndex = 7;
-            this.lblFleeWait.Text = "Wait 5 minutes after flee";
-            this.lblFleeWait.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // FleeWait
-            // 
-            this.FleeWait.BackColor = System.Drawing.SystemColors.Control;
-            this.FleeWait.Location = new System.Drawing.Point(7, 20);
-            this.FleeWait.Maximum = 100;
-            this.FleeWait.Name = "FleeWait";
-            this.FleeWait.Size = new System.Drawing.Size(283, 45);
-            this.FleeWait.TabIndex = 6;
-            this.FleeWait.Tag = "Use this slider to set the threshold for the corresponding Flee Trigger.";
-            this.FleeWait.Value = 5;
-            this.FleeWait.Scroll += new System.EventHandler(this.FleeWait_Scroll);
-            // 
             // Security
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 406);
-            this.Controls.Add(this.lblHelpText);
+            this.ClientSize = new System.Drawing.Size(344, 353);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -358,21 +351,21 @@
             this.Load += new System.EventHandler(this.Security_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FleeWait)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.StandingGroup.ResumeLayout(false);
-            this.StandingGroup.PerformLayout();
             this.ThresholdGroup.ResumeLayout(false);
             this.ThresholdGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Threshold)).EndInit();
+            this.StandingGroup.ResumeLayout(false);
+            this.StandingGroup.PerformLayout();
             this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FleeWait)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -388,7 +381,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label lblHelpText;
         private System.Windows.Forms.TextBox SafeSubstring;
         private System.Windows.Forms.GroupBox StandingGroup;
         private System.Windows.Forms.GroupBox groupBox5;

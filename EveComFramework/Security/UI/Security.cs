@@ -20,39 +20,7 @@ namespace EveComFramework.Security.UI
         public Security()
         {
             InitializeComponent();
-            HookupMouseEnterEvents(this);
         }
-
-        #region Mouseover Controller
-
-        private void HookupMouseEnterEvents(Control control)
-        {
-            foreach (Control childControl in control.Controls)
-            {
-                childControl.MouseEnter += new EventHandler(Help_MouseEnter);
-
-                // Recurse on this child to get all of its descendents.
-                HookupMouseEnterEvents(childControl);
-            }
-        }
-
-        private void Help_MouseEnter(object sender, EventArgs e)
-        {
-            if (sender is Control)
-            {
-                Control senderCtl = sender as Control;
-                if (!string.IsNullOrEmpty((string)senderCtl.Tag))
-                {
-                    lblHelpText.Text = (string)senderCtl.Tag;
-                }
-                else
-                {
-                    lblHelpText.Text = "Mouseover an element for help";
-                }
-            }
-        }
-        
-        #endregion
 
         private void Security_Load(object sender, EventArgs e)
         {
@@ -366,7 +334,18 @@ namespace EveComFramework.Security.UI
             Config.Save();
         }
 
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SecureBookmark.AutoCompleteCustomSource = new MyAutoCompleteStringCollection(UIData.Instance.Bookmarks.Select(a => a.Title).ToList());
+        }
 
+    }
 
+    public class MyAutoCompleteStringCollection : AutoCompleteStringCollection
+    {
+        public MyAutoCompleteStringCollection(List<String> items)
+        {
+            this.AddRange(items.ToArray());
+        }
     }
 }

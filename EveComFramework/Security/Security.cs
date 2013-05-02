@@ -68,6 +68,48 @@ namespace EveComFramework.Security
 
     #endregion
 
+    public class UIData : State
+    {
+        #region Instantiation
+
+        static UIData _Instance;
+        public static UIData Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new UIData();
+                }
+                return _Instance;
+            }
+        }
+
+        private UIData() : base()
+        {
+
+        }
+
+        #endregion
+
+        #region Variables
+
+        public List<Bookmark> Bookmarks { get; set; }
+
+        #endregion
+
+        #region States
+
+        bool Update(object[] Params)
+        {
+            if (!Session.Safe || (!Session.InStation && !Session.InSpace)) return false;
+            Bookmarks = Bookmark.All.ToList();
+            return false;
+        }
+
+        #endregion
+    }
+
     public class Security : State
     {
         #region Instantiation
@@ -157,6 +199,11 @@ namespace EveComFramework.Security
             if (!Standing.Ready)
             {
                 Standing.LoadStandings();
+                return false;
+            }
+
+            if (Entity.All.FirstOrDefault(a => a.IsWarpScrambling && a.IsTargetingMe) != null)
+            {
                 return false;
             }
 
@@ -281,6 +328,7 @@ namespace EveComFramework.Security
                 return true;
             }
 
+            QueueState(Traveling);
             foreach (FleeType FleeType in Config.Types)
             {
                 switch (FleeType)
@@ -316,6 +364,14 @@ namespace EveComFramework.Security
             return true;
         }
 
+        bool Traveling(object[] Params)
+        {
+            if (!Move.Idle || (Session.InSpace && MyShip.ToEntity.Mode == EntityMode.Warping))
+            {
+                return false;
+            }
+            return true;
+        }
         #endregion
     }
 }

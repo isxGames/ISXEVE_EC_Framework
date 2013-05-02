@@ -73,91 +73,20 @@ namespace EveComFramework.Move
             Clear();
             if (Activate)
             {
-                using (new EVEFrameLock())
-                {
-                    if (Route.Path == null || Route.Path[0] == -1)
-                    {
-                        return;
-                    }
-                    if (Session.InStation)
-                    {
-                        QueueState(Undock);
-                    }
-                    QueueState(AutoPilot);
-                }
+                QueueState(AutoPilotPrep);
             }
         }
 
         public void Bookmark(Bookmark Bookmark, int Distance = 0)
         {
             Clear();
-            using (new EVEFrameLock())
-            {
-                if (Bookmark == null)
-                {
-                    //LSUI.Update("Move", "Invalid bookmark specified", "r");
-                    return;
-                }
-                if (Session.InStation)
-                {
-                    if (Session.StationID == Bookmark.ItemID)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        QueueState(Undock);
-                    }
-                }
-                if (Bookmark.LocationID != Session.SolarSystemID)
-                {
-                    //LSUI.Update("Move", "Setting course", "o");
-                    //LSUI.Update("Move", " " + Bookmark.Title, "-g");
-                    Bookmark.SetDestination();
-                    QueueState(AutoPilot, 2000);
-                }
-                if (Bookmark.GroupID == Group.Station && Bookmark.LocationID == Session.SolarSystemID)
-                {
-                    QueueState(Dock, -1, Entity.All.FirstOrDefault(a => a.ID == Bookmark.ItemID));
-                }
-                else
-                {
-                    QueueState(BookmarkWarp, -1, Bookmark, Distance);
-                }
-            }
+            QueueState(BookmarkPrep, -1, Bookmark, Distance);
         }
 
         public void Object(Entity Entity, int Distance = 0)
         {
             Clear();
-            using (new EVEFrameLock())
-            {
-                if (Entity == null)
-                {
-                    //LSUI.Update("Move", "Invalid entity specified", "r");
-                    return;
-                }
-                if (Session.InStation)
-                {
-                    if (Session.StationID == Entity.ID)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        QueueState(Undock);
-                    }
-                }
-                if (Entity.GroupID == Group.Station)
-                {
-                    QueueState(Dock, -1, Entity);
-                }
-                else
-                {
-                    QueueState(ObjectWarp, -1, Entity, Distance);
-                }
-            }
-
+            QueueState(ObjectPrep, -1, Entity, Distance);
         }
 
         public void Jump()
@@ -207,11 +136,43 @@ namespace EveComFramework.Move
 
         #region States
 
+        bool BookmarkPrep(object[] Params)
+        {
+            Bookmark Bookmark = (Bookmark)Params[0];
+            int Distance = (int)Params[1];
+
+            if (Session.InStation)
+            {
+                if (Session.StationID == Bookmark.ItemID)
+                {
+                    return true;
+                }
+                else
+                {
+                    QueueState(Undock);
+                }
+            }
+            if (Bookmark.LocationID != Session.SolarSystemID)
+            {
+                Log.Log("Setting course: {0}", Bookmark.Title);
+                Bookmark.SetDestination();
+                QueueState(AutoPilot, 2000);
+            }
+            if (Bookmark.GroupID == Group.Station && Bookmark.LocationID == Session.SolarSystemID)
+            {
+                QueueState(Dock, -1, Entity.All.FirstOrDefault(a => a.ID == Bookmark.ItemID));
+            }
+            else
+            {
+                QueueState(BookmarkWarp, -1, Bookmark, Distance);
+            }
+            return true;
+        }
+
         bool BookmarkWarp(object[] Params)
         {
-            Bookmark Destination = (EveCom.Bookmark)Params[0];
-            int Distance = 0;
-            if (Params.Count() > 1) { Distance = (int)Params[1]; }
+            Bookmark Destination = (Bookmark)Params[0];
+            int Distance = (int)Params[1];
 
             if (Session.InStation)
             {
@@ -222,42 +183,61 @@ namespace EveComFramework.Move
                 }
                 return true;
             }
-
             if (!Session.InSpace)
             {
                 return false;
             }
-
             if (MyShip.ToEntity.Mode == EntityMode.Warping)
             {
                 return false;
             }
-
             if (Destination.Distance < 150000 && Destination.Distance > 0)
             {
-                //LSUI.Update("Debug", "Destination is " + Destination.Distance.ToString() + " m away.");
                 return true;
             }
-
             if (Destination.Exists && Destination.CanWarpTo)
             {
-                //LSUI.Update("Move", "Warping", "o");
-                //LSUI.Update("Move", " " + Destination.Title + " (" + Distance + " km)", "-g");
+                Log.Log("Warping: {0} ({1} km)", Destination.Title, Distance);
                 Destination.WarpTo(Distance);
             }
+            return true;
+        }
 
+        bool ObjectPrep(object[] Params)
+        {
+            Entity Entity = (Entity)Params[0];
+            int Distance = (int)Params[1];
+
+            if (Session.InStation)
+            {
+                if (Session.StationID == Entity.ID)
+                {
+                    return true;
+                }
+                else
+                {
+                    QueueState(Undock);
+                }
+            }
+            if (Entity.GroupID == Group.Station)
+            {
+                QueueState(Dock, -1, Entity);
+            }
+            else
+            {
+                QueueState(ObjectWarp, -1, Entity, Distance);
+            }
             return true;
         }
 
         bool ObjectWarp(object[] Params)
         {
-            int Distance = 0;
-            if (Params.Count() > 1) { Distance = (int)Params[1]; }
-            if (((EveCom.Entity)Params[0]).Exists && ((EveCom.Entity)Params[0]).Distance > 150000)
+            Entity Entity = (Entity)Params[0];
+            int Distance = (int)Params[1];
+            if (Entity.Exists && Entity.Distance > 150000)
             {
-                //LSUI.Update("Move", "Warping", "o");
-                //LSUI.Update("Move", " " + ((EveCom.Entity)Params[0]).Name + " (" + Distance + " km)", "-g");
-                ((EveCom.Entity)Params[0]).WarpTo(Distance);
+                Log.Log("Warping: {0} ({1} km)", Entity.Name, Distance);
+                Entity.WarpTo(Distance);
             }
             return true;
         }
@@ -419,19 +399,32 @@ namespace EveComFramework.Move
 
         }
 
+        bool AutoPilotPrep(object[] Params)
+        {
+            if (Route.Path == null || Route.Path[0] == -1)
+            {
+                return true;
+            }
+            if (Session.InStation)
+            {
+                QueueState(Undock);
+            }
+            QueueState(AutoPilot);
+            return true;
+        }
+
         bool AutoPilot(object[] Params)
         {
             if (Route.Path == null || Route.Path[0] == -1)
             {
-                //LSUI.Update("Move", "Route empty, autopilot deactivated", "o");
+                Log.Log("Autopilot deactivated");
                 return true;
             }
             if (Session.InSpace)
             {
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
-                    //LSUI.Update("Move", "Jumping through", "o");
-                    //LSUI.Update("Move", " " + Route.NextWaypoint.Name, "-g");
+                    Log.Log("Jumping through to {0}", Route.NextWaypoint.Name);
                     Route.NextWaypoint.Jump();
                     int CurSystem = Session.SolarSystemID;
                     InsertState(AutoPilot);
