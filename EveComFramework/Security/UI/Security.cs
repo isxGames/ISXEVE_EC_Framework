@@ -16,6 +16,7 @@ namespace EveComFramework.Security.UI
         internal SecuritySettings Config = new SecuritySettings();
         string ActiveTrigger;
         List<string> Bookmarks;
+        UIData UI = UIData.Instance;
 
         public Security()
         {
@@ -336,7 +337,7 @@ namespace EveComFramework.Security.UI
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SecureBookmark.AutoCompleteCustomSource = new MyAutoCompleteStringCollection(UIData.Instance.Bookmarks.Select(a => a.Title).ToList());
+            if (UI.Bookmarks.Any()) SecureBookmark.AutoCompleteCustomSource = new MyAutoCompleteStringCollection(UI.Bookmarks);
         }
 
     }

@@ -87,14 +87,14 @@ namespace EveComFramework.Security
 
         private UIData() : base()
         {
-
+            QueueState(Update);
         }
 
         #endregion
 
         #region Variables
 
-        public List<Bookmark> Bookmarks { get; set; }
+        public List<string> Bookmarks { get; set; }
 
         #endregion
 
@@ -103,7 +103,7 @@ namespace EveComFramework.Security
         bool Update(object[] Params)
         {
             if (!Session.Safe || (!Session.InStation && !Session.InSpace)) return false;
-            Bookmarks = Bookmark.All.ToList();
+            Bookmarks = Bookmark.All.Select(a => a.Title).ToList();
             return false;
         }
 
