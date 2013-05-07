@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using EveCom;
+using LavishScriptAPI;
 
 namespace EveComFramework.Targets
 {
@@ -219,31 +220,25 @@ namespace EveComFramework.Targets
                 return 1;
             if (x == y)
                 return 0;
+
             int orderx = 0;
             if (Data.PriorityTarget.All.Contains(x.Name))
             {
-                orderx = (Data.PriorityTarget.All.Count + Data.NPCTypes.All.Count + 10) - Data.PriorityTarget.All.IndexOf(x.Name);
+                orderx = Data.PriorityTarget.All.IndexOf(x.Name);
             }
             else if (Data.NPCTypes.All.Contains((long)x.GroupID))
             {
-                orderx = (Data.NPCTypes.All.Count + 5) - Data.NPCTypes.All.IndexOf((long)x.GroupID);
+                orderx = Data.NPCTypes.All.IndexOf((long)x.GroupID) + Data.PriorityTarget.All.Count;
             }
-            else if (x.IsTargetingMe)
-            {
-                orderx = 1;
-            }
+
             int ordery = 0;
             if (Data.PriorityTarget.All.Contains(y.Name))
             {
-                ordery = (Data.PriorityTarget.All.Count + Data.NPCTypes.All.Count + 10) - Data.PriorityTarget.All.IndexOf(y.Name);
+                ordery = Data.PriorityTarget.All.IndexOf(y.Name);
             }
             else if (Data.NPCTypes.All.Contains((long)y.GroupID))
             {
-                ordery = (Data.NPCTypes.All.Count + 5) - Data.NPCTypes.All.IndexOf((long)y.GroupID);
-            }
-            else if (y.IsTargetingMe)
-            {
-                ordery = 1;
+                ordery = Data.NPCTypes.All.IndexOf((long)y.GroupID) + Data.PriorityTarget.All.Count;
             }
 
             if (orderx > ordery)

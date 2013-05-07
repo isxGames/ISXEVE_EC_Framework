@@ -28,44 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Modules = new System.Windows.Forms.CheckedListBox();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Shield Boosters");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Armor Repairers");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Active Hardeners");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Cloaks");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Gang Links");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Sensor Boosters");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Tracking Computers");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("ECCMs");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Drone Control Units");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Propulsion Modules");
             this.CapacitorThresholdLabel = new System.Windows.Forms.Label();
             this.CapacitorThreshold = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.AlwaysActive = new System.Windows.Forms.CheckBox();
+            this.ActivateOrbiting = new System.Windows.Forms.CheckBox();
+            this.ActivateApproaching = new System.Windows.Forms.CheckBox();
             this.MaxThresholdLabel = new System.Windows.Forms.Label();
             this.MaxThreshold = new System.Windows.Forms.TrackBar();
             this.MinThresholdLabel = new System.Windows.Forms.Label();
             this.MinThreshold = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.ActivateApproaching = new System.Windows.Forms.CheckBox();
-            this.ActivateOrbiting = new System.Windows.Forms.CheckBox();
-            this.AlwaysActive = new System.Windows.Forms.CheckBox();
+            this.Modules = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.CapacitorThreshold)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MaxThreshold)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MinThreshold)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Modules
-            // 
-            this.Modules.FormattingEnabled = true;
-            this.Modules.Items.AddRange(new object[] {
-            "Shield Boosters",
-            "Armor Repairers",
-            "Active Hardeners",
-            "Cloaks",
-            "Gang Links",
-            "Sensor Boosters",
-            "Tracking Computers",
-            "ECCMs",
-            "Drone Control Units",
-            "Propulsion Modules"});
-            this.Modules.Location = new System.Drawing.Point(9, 20);
-            this.Modules.Name = "Modules";
-            this.Modules.Size = new System.Drawing.Size(306, 260);
-            this.Modules.TabIndex = 0;
-            this.Modules.SelectedIndexChanged += new System.EventHandler(this.Modules_SelectedIndexChanged);
             // 
             // CapacitorThresholdLabel
             // 
@@ -105,6 +96,42 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thresholds";
+            // 
+            // AlwaysActive
+            // 
+            this.AlwaysActive.AutoSize = true;
+            this.AlwaysActive.Location = new System.Drawing.Point(9, 141);
+            this.AlwaysActive.Name = "AlwaysActive";
+            this.AlwaysActive.Size = new System.Drawing.Size(91, 17);
+            this.AlwaysActive.TabIndex = 10;
+            this.AlwaysActive.Text = "Always active";
+            this.AlwaysActive.UseVisualStyleBackColor = true;
+            this.AlwaysActive.Visible = false;
+            this.AlwaysActive.CheckedChanged += new System.EventHandler(this.AlwaysActive_CheckedChanged);
+            // 
+            // ActivateOrbiting
+            // 
+            this.ActivateOrbiting.AutoSize = true;
+            this.ActivateOrbiting.Location = new System.Drawing.Point(9, 91);
+            this.ActivateOrbiting.Name = "ActivateOrbiting";
+            this.ActivateOrbiting.Size = new System.Drawing.Size(131, 17);
+            this.ActivateOrbiting.TabIndex = 9;
+            this.ActivateOrbiting.Text = "Activate when orbiting";
+            this.ActivateOrbiting.UseVisualStyleBackColor = true;
+            this.ActivateOrbiting.Visible = false;
+            this.ActivateOrbiting.CheckedChanged += new System.EventHandler(this.ActivateOrbiting_CheckedChanged);
+            // 
+            // ActivateApproaching
+            // 
+            this.ActivateApproaching.AutoSize = true;
+            this.ActivateApproaching.Location = new System.Drawing.Point(9, 68);
+            this.ActivateApproaching.Name = "ActivateApproaching";
+            this.ActivateApproaching.Size = new System.Drawing.Size(156, 17);
+            this.ActivateApproaching.TabIndex = 8;
+            this.ActivateApproaching.Text = "Activate when approaching";
+            this.ActivateApproaching.UseVisualStyleBackColor = true;
+            this.ActivateApproaching.Visible = false;
+            this.ActivateApproaching.CheckedChanged += new System.EventHandler(this.ActivateApproaching_CheckedChanged);
             // 
             // MaxThresholdLabel
             // 
@@ -158,41 +185,46 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Modules";
             // 
-            // ActivateApproaching
+            // Modules
             // 
-            this.ActivateApproaching.AutoSize = true;
-            this.ActivateApproaching.Location = new System.Drawing.Point(9, 68);
-            this.ActivateApproaching.Name = "ActivateApproaching";
-            this.ActivateApproaching.Size = new System.Drawing.Size(153, 17);
-            this.ActivateApproaching.TabIndex = 8;
-            this.ActivateApproaching.Text = "Activate when approaching";
-            this.ActivateApproaching.UseVisualStyleBackColor = true;
-            this.ActivateApproaching.Visible = false;
-            this.ActivateApproaching.CheckedChanged += new System.EventHandler(this.ActivateApproaching_CheckedChanged);
+            this.Modules.CheckBoxes = true;
+            this.Modules.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.Modules.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
+            this.Modules.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
+            this.Modules.Location = new System.Drawing.Point(9, 20);
+            this.Modules.MultiSelect = false;
+            this.Modules.Name = "Modules";
+            this.Modules.Size = new System.Drawing.Size(306, 252);
+            this.Modules.TabIndex = 1;
+            this.Modules.UseCompatibleStateImageBehavior = false;
+            this.Modules.View = System.Windows.Forms.View.Details;
+            this.Modules.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.Modules_ItemChecked);
+            this.Modules.SelectedIndexChanged += new System.EventHandler(this.Modules_SelectedIndexChanged);
             // 
-            // ActivateOrbiting
+            // columnHeader1
             // 
-            this.ActivateOrbiting.AutoSize = true;
-            this.ActivateOrbiting.Location = new System.Drawing.Point(9, 91);
-            this.ActivateOrbiting.Name = "ActivateOrbiting";
-            this.ActivateOrbiting.Size = new System.Drawing.Size(130, 17);
-            this.ActivateOrbiting.TabIndex = 9;
-            this.ActivateOrbiting.Text = "Activate when orbiting";
-            this.ActivateOrbiting.UseVisualStyleBackColor = true;
-            this.ActivateOrbiting.Visible = false;
-            this.ActivateOrbiting.CheckedChanged += new System.EventHandler(this.ActivateOrbiting_CheckedChanged);
-            // 
-            // AlwaysActive
-            // 
-            this.AlwaysActive.AutoSize = true;
-            this.AlwaysActive.Location = new System.Drawing.Point(9, 141);
-            this.AlwaysActive.Name = "AlwaysActive";
-            this.AlwaysActive.Size = new System.Drawing.Size(89, 17);
-            this.AlwaysActive.TabIndex = 10;
-            this.AlwaysActive.Text = "Always active";
-            this.AlwaysActive.UseVisualStyleBackColor = true;
-            this.AlwaysActive.Visible = false;
-            this.AlwaysActive.CheckedChanged += new System.EventHandler(this.AlwaysActive_CheckedChanged);
+            this.columnHeader1.Width = 200;
             // 
             // AutoModule
             // 
@@ -218,7 +250,6 @@
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox Modules;
         private System.Windows.Forms.Label CapacitorThresholdLabel;
         private System.Windows.Forms.TrackBar CapacitorThreshold;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -230,5 +261,7 @@
         private System.Windows.Forms.CheckBox AlwaysActive;
         private System.Windows.Forms.CheckBox ActivateOrbiting;
         private System.Windows.Forms.CheckBox ActivateApproaching;
+        private System.Windows.Forms.ListView Modules;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

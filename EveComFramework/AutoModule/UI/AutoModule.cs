@@ -25,45 +25,54 @@ namespace EveComFramework.AutoModule.UI
             MaxThreshold.Hide();
             MaxThresholdLabel.Hide();
 
-            for (int i = 0; i <= (Modules.Items.Count - 1); i++ )
+            foreach (ListViewItem i in Modules.Items)
             {
-                switch (Modules.Items[i].ToString())
+                switch (i.Text)
                 {
                     case "Shield Boosters":
-                        Modules.SetItemChecked(i, Config.ShieldBoosters);
+                        i.Checked = true;
                         break;
                     case "Armor Repairers":
-                        Modules.SetItemChecked(i, Config.ArmorRepairs);
+                        i.Checked = true;
                         break;
                     case "Active Hardeners":
-                        Modules.SetItemChecked(i, Config.ActiveHardeners);
+                        i.Checked = true;
                         break;
                     case "Cloaks":
-                        Modules.SetItemChecked(i, Config.Cloaks);
+                        i.Checked = true;
                         break;
                     case "Gang Links":
-                        Modules.SetItemChecked(i, Config.GangLinks);
+                        i.Checked = true;
                         break;
                     case "Sensor Boosters":
-                        Modules.SetItemChecked(i, Config.SensorBoosters);
+                        i.Checked = true;
                         break;
                     case "Tracking Computers":
-                        Modules.SetItemChecked(i, Config.TrackingComputers);
+                        i.Checked = true;
                         break;
                     case "ECCMs":
-                        Modules.SetItemChecked(i, Config.ECCMs);
+                        i.Checked = true;
                         break;
                     case "Drone Control Units":
-                        Modules.SetItemChecked(i, Config.DroneControlUnits);
+                        i.Checked = true;
+                        break;
+                    case "Propulsion Modules":
+                        i.Checked = true;
                         break;
                 }
-
             }
+
         }
 
         private void Modules_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (Modules.SelectedItem.ToString())
+            if (Modules.SelectedItems.Count == 0)
+            {
+                groupBox1.Hide();
+                return;
+            }
+            groupBox1.Show();
+            switch (Modules.SelectedItems[0].Text)
             {
                 case "Shield Boosters" :
                     CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapShieldBoosters + "% capacitor";
@@ -188,59 +197,18 @@ namespace EveComFramework.AutoModule.UI
                     break;
             }
 
-            Config.ActiveHardeners = false;
-            Config.ShieldBoosters = false;
-            Config.ArmorRepairs = false;
-            Config.Cloaks = false;
-            Config.GangLinks = false;
-            Config.SensorBoosters = false;
-            Config.TrackingComputers = false;
-            Config.ECCMs = false;
-            Config.DroneControlUnits = false;
-            Config.PropulsionModules = false;
 
-            foreach (object checkbox in Modules.CheckedItems)
-            {
-                switch (checkbox.ToString())
-                {
-                    case "Shield Boosters":
-                        Config.ShieldBoosters = true;
-                        break;
-                    case "Armor Repairers":
-                        Config.ArmorRepairs = true;
-                        break;
-                    case "Active Hardeners":
-                        Config.ActiveHardeners = true;
-                        break;
-                    case "Cloaks":
-                        Config.Cloaks = true;
-                        break;
-                    case "Gang Links":
-                        Config.GangLinks = true;
-                        break;
-                    case "Sensor Boosters":
-                        Config.SensorBoosters = true;
-                        break;
-                    case "Tracking Computers":
-                        Config.TrackingComputers = true;
-                        break;
-                    case "ECCMs":
-                        Config.ECCMs = true;
-                        break;
-                    case "Drone Control Units":
-                        Config.DroneControlUnits = true;
-                        break;
-                    case "Propulsion Modules":
-                        Config.PropulsionModules = true;
-                        break;
-                }
-            }
-            Config.Save();
         }
 
         private void CapacitorThreshold_Scroll(object sender, EventArgs e)
         {
-            switch (Modules.SelectedItem.ToString())
+            if (Modules.SelectedItems.Count == 0)
+            {
+                groupBox1.Hide();
+                return;
+            }
+            groupBox1.Show();
+            switch (Modules.SelectedItems[0].Text)
             {
                 case "Shield Boosters":
                     Config.CapShieldBoosters = CapacitorThreshold.Value;
@@ -297,7 +265,13 @@ namespace EveComFramework.AutoModule.UI
 
         private void MinThreshold_Scroll(object sender, EventArgs e)
         {
-            switch (Modules.SelectedItem.ToString())
+            if (Modules.SelectedItems.Count == 0)
+            {
+                groupBox1.Hide();
+                return;
+            }
+            groupBox1.Show();
+            switch (Modules.SelectedItems[0].Text)
             {
                 case "Shield Boosters":
                     Config.MinShieldBoosters = MinThreshold.Value;
@@ -314,7 +288,13 @@ namespace EveComFramework.AutoModule.UI
 
         private void MaxThreshold_Scroll(object sender, EventArgs e)
         {
-            switch (Modules.SelectedItem.ToString())
+            if (Modules.SelectedItems.Count == 0)
+            {
+                groupBox1.Hide();
+                return;
+            }
+            groupBox1.Show();
+            switch (Modules.SelectedItems[0].Text)
             {
                 case "Shield Boosters":
                     Config.MaxShieldBoosters = MaxThreshold.Value;
@@ -344,6 +324,47 @@ namespace EveComFramework.AutoModule.UI
         private void ActivateOrbiting_CheckedChanged(object sender, EventArgs e)
         {
             Config.PropulsionModulesOrbiting = ActivateOrbiting.Checked;
+            Config.Save();
+        }
+
+        private void Modules_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            foreach (ListViewItem checkbox in Modules.CheckedItems)
+            {
+                switch (checkbox.Text)
+                {
+                    case "Shield Boosters":
+                        Config.ShieldBoosters = true;
+                        break;
+                    case "Armor Repairers":
+                        Config.ArmorRepairs = true;
+                        break;
+                    case "Active Hardeners":
+                        Config.ActiveHardeners = true;
+                        break;
+                    case "Cloaks":
+                        Config.Cloaks = true;
+                        break;
+                    case "Gang Links":
+                        Config.GangLinks = true;
+                        break;
+                    case "Sensor Boosters":
+                        Config.SensorBoosters = true;
+                        break;
+                    case "Tracking Computers":
+                        Config.TrackingComputers = true;
+                        break;
+                    case "ECCMs":
+                        Config.ECCMs = true;
+                        break;
+                    case "Drone Control Units":
+                        Config.DroneControlUnits = true;
+                        break;
+                    case "Propulsion Modules":
+                        Config.PropulsionModules = true;
+                        break;
+                }
+            }
             Config.Save();
         }
 

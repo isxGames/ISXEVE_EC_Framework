@@ -273,7 +273,6 @@ namespace EveComFramework.DroneControl
 
             if(ReturnedDrones.Count > 0)
             {
-                InnerSpaceAPI.InnerSpace.Echo("Recalling drones due to health");
                 ReturnedDrones.ReturnToDroneBay();
                 ReturnedDrones.ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
                 return false;
@@ -284,15 +283,13 @@ namespace EveComFramework.DroneControl
                 return false;
             }
 
-            DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded || (!DroneData[drone].Target.LockedTarget && !DroneData[drone].Target.LockingTarget)).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; InnerSpaceAPI.InnerSpace.Echo("Freeing Drone"); });
+            DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded || (!DroneData[drone].Target.LockedTarget && !DroneData[drone].Target.LockingTarget)).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
 
-            InnerSpaceAPI.InnerSpace.Echo("Rat Count: " + Rats.LockedTargetList.Count);
 
             foreach (Entity rat in Rats.LockedAndLockingTargetList)
             {
                 string ratClass = Data.NPCClasses.All.ContainsKey(rat.GroupID) ? Data.NPCClasses.All[rat.GroupID] : "";
 
-                InnerSpaceAPI.InnerSpace.Echo("Processing: " + rat.Name + " : " + rat.GroupID + " : " + ratClass);
 
                 int DroneCount = Me.MaxActiveDrones;
 
@@ -402,14 +399,12 @@ namespace EveComFramework.DroneControl
         {
             if (Rats.TargetList.Count > 0)
             {
-                Log.Log("Returning to combat");
                 QueueState(Combat);
             }
             else
             {
                 Drone.AllInSpace.Where(drone => drone.GroupID == Group.CombatDrone || drone.GroupID == Group.FighterDrone || drone.GroupID == Group.ElectronicWarfareDrone).ReturnToDroneBay();
                 Drone.AllInSpace.Where(drone => drone.GroupID == Group.CombatDrone || drone.GroupID == Group.FighterDrone || drone.GroupID == Group.ElectronicWarfareDrone).ForEach(drone => { BayQueues[DroneData[drone].Group].AddLast(drone); DroneData[drone].Target = null; DroneData[drone].Assigned = false; });
-                Log.Log("Switching to logistics");
                 QueueState(myargs => true, 5000);
                 QueueState(LogisticsOnDrones);
             }
@@ -420,7 +415,6 @@ namespace EveComFramework.DroneControl
         {
             if (!Config.LogisticsDrones)
             {
-                Log.Log("Switching to salvage");
                 QueueState(Salvage);
                 return true;
             }
@@ -456,7 +450,6 @@ namespace EveComFramework.DroneControl
             if (Rats.TargetList.Count > 0)
             {
                 Drone.AllInSpace.Where(drone => drone.GroupID == Group.RepairDrone).ReturnToDroneBay();
-                Log.Log("Switching to combat");
                 QueueState(Combat);
                 return true;
             }
@@ -470,7 +463,6 @@ namespace EveComFramework.DroneControl
             if (DroneData.Count(data => data.Value.Armor < 100) == 0 || DroneData.Count(data => data.Key.Type.Contains("Armor")) == 0)
             {
                 Drone.AllInSpace.ReturnToDroneBay();
-                Log.Log("Switching to salvage");
                 QueueState(Salvage);
                 return true;
             }
@@ -481,7 +473,6 @@ namespace EveComFramework.DroneControl
 
             if (Reppers.Count < Config.LogiDroneCount && Drone.AllInBay.Count(drone => drone.Type.Contains("Armor")) > 0)
             {
-                InnerSpaceAPI.InnerSpace.Echo("Need to launch " + (Config.LogiDroneCount - Reppers.Count) + " reppers");
                 Drone.AllInBay.Where(drone => drone.Type.Contains("Armor")).Take(Config.LogiDroneCount - Reppers.Count).LimitCommand().Launch();
                 Busy.SetBusy("DroneControl", Pause);
                 return false;
@@ -537,7 +528,6 @@ namespace EveComFramework.DroneControl
         {
             if (!Config.SalvageDrones)
             {
-                Log.Log("Switching to mining");
                 QueueState(Mining);
                 return true;
             }
@@ -573,7 +563,6 @@ namespace EveComFramework.DroneControl
             if (Rats.TargetList.Count > 0)
             {
                 Drone.AllInSpace.Where(drone => drone.GroupID == Group.MiningDrone || drone.GroupID == Group.SalvageDrone || drone.GroupID == Group.RepairDrone).ReturnToDroneBay();
-                Log.Log("Switching to combat");
                 QueueState(Combat);
                 return true;
             }
@@ -586,7 +575,6 @@ namespace EveComFramework.DroneControl
             if (Wrecks.TargetList.Count == 0 || DroneData.Count(data => data.Key.GroupID == Group.SalvageDrone) == 0)
             {
                 Drone.AllInSpace.Where(drone => drone.GroupID == Group.SalvageDrone).ReturnToDroneBay();
-                Log.Log("Switching to mining");
                 QueueState(Mining);
                 return true;
             }
@@ -617,9 +605,8 @@ namespace EveComFramework.DroneControl
             int SpreadCount = 0;
             int CurSpread = (int)Math.Ceiling(Spread);
 
-            InnerSpaceAPI.InnerSpace.Echo("Spread:" + Spread);
 
-            DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; InnerSpaceAPI.InnerSpace.Echo("Freeing Drone"); });
+            DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
 
             foreach (Entity wreck in Wrecks.LockedTargetList)
             {
@@ -628,7 +615,6 @@ namespace EveComFramework.DroneControl
                 {
                     CurSpread = (int)Math.Floor(Spread);
                 }
-                InnerSpaceAPI.InnerSpace.Echo("Spread:" + Spread + " CurSpread:" + CurSpread);
                 if (DroneData.Count(data => data.Value.Target == wreck) < CurSpread)
                 {
                     List<Drone> free = Drone.AllInSpace.Where(drone => !DroneData[drone].Assigned && drone.State != EntityState.Departing && drone.State != EntityState.Departing_2).Take(CurSpread - DroneData.Count(data => data.Value.Target == wreck)).ToList();
@@ -668,7 +654,6 @@ namespace EveComFramework.DroneControl
         {
             if (!Config.MiningDrones)
             {
-                Log.Log("Checking for rats");
                 QueueState(CombatCheck);
                 return true;
             }
@@ -703,7 +688,6 @@ namespace EveComFramework.DroneControl
             if (Rats.TargetList.Count > 0)
             {
                 Drone.AllInSpace.Where(drone => drone.GroupID == Group.MiningDrone || drone.GroupID == Group.SalvageDrone || drone.GroupID == Group.RepairDrone).ReturnToDroneBay();
-                Log.Log("Switching to combat");
                 QueueState(Combat);
                 return true;
             }
@@ -724,9 +708,8 @@ namespace EveComFramework.DroneControl
             int SpreadCount = 0;
             int CurSpread = (int)Math.Ceiling(Spread);
 
-            InnerSpaceAPI.InnerSpace.Echo("Spread:" + Spread);
 
-            DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; InnerSpaceAPI.InnerSpace.Echo("Freeing Drone"); });
+            DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
 
             if (Drone.AllInSpace.Count(drone => drone.GroupID == Group.MiningDrone) < Me.MaxActiveDrones && Me.MaxActiveDrones > Drone.AllInSpace.Count() && Drone.AllInBay.Count(drone => drone.GroupID == Group.MiningDrone) > 0)
             {
@@ -742,7 +725,6 @@ namespace EveComFramework.DroneControl
                 {
                     CurSpread = (int)Math.Floor(Spread);
                 }
-                InnerSpaceAPI.InnerSpace.Echo("Spread:" + Spread + " CurSpread:" + CurSpread);
                 if (DroneData.Count(data => data.Value.Target == roid) < CurSpread)
                 {
                     List<Drone> free = Drone.AllInSpace.Where(drone => !DroneData[drone].Assigned && drone.State != EntityState.Departing && drone.State != EntityState.Departing_2).Take(CurSpread - DroneData.Count(data => data.Value.Target == roid)).ToList();

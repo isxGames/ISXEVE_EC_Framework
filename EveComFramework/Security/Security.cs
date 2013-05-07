@@ -129,7 +129,6 @@ namespace EveComFramework.Security
 
         private Security() : base()
         {
-
         }
 
         #endregion
@@ -180,8 +179,9 @@ namespace EveComFramework.Security
 
         public void Reset(int? Delay = null)
         {
-            int iDelay = Delay ?? Config.FleeWait * 1000;
-            QueueState(CheckSafe, iDelay);
+            int iDelay = Delay ?? Config.FleeWait * 60000;
+            QueueState(Blank, iDelay);
+            QueueState(CheckSafe);
         }
 
         public void Configure()
@@ -193,6 +193,12 @@ namespace EveComFramework.Security
         #endregion
 
         #region States
+
+        bool Blank(object[] Params)
+        {
+            Log.Log("Finished");
+            return true;
+        }
 
         bool CheckSafe(object[] Params)
         {

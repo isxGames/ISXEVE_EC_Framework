@@ -49,6 +49,7 @@ namespace EveComFramework.Core
             if (CurState == null)
             {
                 CurState = States.Last();
+                NextPulse = DateTime.Now.AddMilliseconds(CurState.Frequency);
                 States.RemoveLast();
             }
         }
@@ -59,6 +60,7 @@ namespace EveComFramework.Core
             if (CurState == null)
             {
                 CurState = States.Last();
+                NextPulse = DateTime.Now.AddMilliseconds(CurState.Frequency);
                 States.RemoveLast();
             }
         }
@@ -142,8 +144,7 @@ namespace EveComFramework.Core
 
         void OnFrame(object sender, EventArgs e)
         {
-            Random Delta = new Random();
-            if (DateTime.Now > NextPulse.AddMilliseconds(Delta.Next(100)))
+            if (DateTime.Now > NextPulse)
             {
                 if (CurState != null && Session.Safe && Session.NextSessionChange < Session.Now)
                 {

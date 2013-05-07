@@ -28,6 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Armor low");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -38,9 +48,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.SecureBookmark = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.FleeTypes = new System.Windows.Forms.CheckedListBox();
+            this.FleeTypes = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ThresholdGroup = new System.Windows.Forms.GroupBox();
             this.ThresholdLabel = new System.Windows.Forms.Label();
@@ -50,7 +59,8 @@
             this.IncludeAllianceMembers = new System.Windows.Forms.CheckBox();
             this.IncludeCorpMembers = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.Triggers = new System.Windows.Forms.CheckedListBox();
+            this.Triggers = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -165,61 +175,45 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.FleeTypes);
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(265, 98);
+            this.groupBox1.Size = new System.Drawing.Size(296, 98);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Flee Response";
             // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(218, 52);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 35);
-            this.button3.TabIndex = 5;
-            this.button3.Tag = "Move the selected Anomaly down in the priority list";
-            this.button3.Text = "↓";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(218, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 33);
-            this.button2.TabIndex = 4;
-            this.button2.Tag = "Move the selected Anomaly up in the priority list";
-            this.button2.Text = "↑";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // FleeTypes
             // 
-            this.FleeTypes.FormattingEnabled = true;
-            this.FleeTypes.Items.AddRange(new object[] {
-            "Flee to closest station in system",
-            "Flee to secure bookmark",
-            "Cycle safe bookmarks",
-            "Flee to closest station outside system"});
-            this.FleeTypes.Location = new System.Drawing.Point(6, 19);
+            this.FleeTypes.AutoArrange = false;
+            this.FleeTypes.CheckBoxes = true;
+            this.FleeTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2});
+            this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3});
+            this.FleeTypes.Location = new System.Drawing.Point(10, 20);
             this.FleeTypes.Name = "FleeTypes";
-            this.FleeTypes.Size = new System.Drawing.Size(206, 68);
-            this.FleeTypes.TabIndex = 1;
-            this.FleeTypes.Tag = "Use this list to determine how ComBot should react when a Flee Trigger is activat" +
-                "ed.";
-            this.FleeTypes.SelectedIndexChanged += new System.EventHandler(this.FleeTypes_SelectedIndexChanged);
+            this.FleeTypes.Scrollable = false;
+            this.FleeTypes.Size = new System.Drawing.Size(280, 66);
+            this.FleeTypes.TabIndex = 2;
+            this.FleeTypes.UseCompatibleStateImageBehavior = false;
+            this.FleeTypes.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 141;
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.ThresholdGroup);
-            this.tabPage2.Controls.Add(this.StandingGroup);
             this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Controls.Add(this.StandingGroup);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -232,9 +226,9 @@
             // 
             this.ThresholdGroup.Controls.Add(this.ThresholdLabel);
             this.ThresholdGroup.Controls.Add(this.Threshold);
-            this.ThresholdGroup.Location = new System.Drawing.Point(6, 159);
+            this.ThresholdGroup.Location = new System.Drawing.Point(6, 164);
             this.ThresholdGroup.Name = "ThresholdGroup";
-            this.ThresholdGroup.Size = new System.Drawing.Size(300, 88);
+            this.ThresholdGroup.Size = new System.Drawing.Size(300, 60);
             this.ThresholdGroup.TabIndex = 3;
             this.ThresholdGroup.TabStop = false;
             this.ThresholdGroup.Text = "Trigger Properties";
@@ -266,7 +260,7 @@
             this.StandingGroup.Controls.Add(this.IncludeFleetMembers);
             this.StandingGroup.Controls.Add(this.IncludeAllianceMembers);
             this.StandingGroup.Controls.Add(this.IncludeCorpMembers);
-            this.StandingGroup.Location = new System.Drawing.Point(6, 159);
+            this.StandingGroup.Location = new System.Drawing.Point(6, 164);
             this.StandingGroup.Name = "StandingGroup";
             this.StandingGroup.Size = new System.Drawing.Size(300, 88);
             this.StandingGroup.TabIndex = 2;
@@ -315,28 +309,46 @@
             this.groupBox5.Controls.Add(this.Triggers);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(300, 147);
+            this.groupBox5.Size = new System.Drawing.Size(300, 152);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Inactive Triggers";
+            this.groupBox5.Text = "Triggers";
             // 
             // Triggers
             // 
-            this.Triggers.FormattingEnabled = true;
-            this.Triggers.Items.AddRange(new object[] {
-            "In a pod",
-            "Negative standing pilot in local",
-            "Neutral standing pilot in local",
-            "Targeted by another player",
-            "Capacitor low",
-            "Shield low",
-            "Armor low"});
-            this.Triggers.Location = new System.Drawing.Point(6, 20);
+            this.Triggers.AutoArrange = false;
+            this.Triggers.CheckBoxes = true;
+            this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            listViewItem4.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
+            this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
+            this.Triggers.Location = new System.Drawing.Point(9, 20);
+            this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
-            this.Triggers.Size = new System.Drawing.Size(288, 116);
-            this.Triggers.TabIndex = 2;
-            this.Triggers.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Triggers_ItemCheck);
+            this.Triggers.Scrollable = false;
+            this.Triggers.Size = new System.Drawing.Size(285, 126);
+            this.Triggers.TabIndex = 3;
+            this.Triggers.UseCompatibleStateImageBehavior = false;
+            this.Triggers.View = System.Windows.Forms.View.Details;
             this.Triggers.SelectedIndexChanged += new System.EventHandler(this.Triggers_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 171;
             // 
             // Security
             // 
@@ -376,10 +388,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckedListBox FleeTypes;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox SafeSubstring;
         private System.Windows.Forms.GroupBox StandingGroup;
@@ -387,13 +396,16 @@
         private System.Windows.Forms.CheckBox IncludeFleetMembers;
         private System.Windows.Forms.CheckBox IncludeAllianceMembers;
         private System.Windows.Forms.CheckBox IncludeCorpMembers;
-        private System.Windows.Forms.GroupBox ThresholdGroup;
-        private System.Windows.Forms.Label ThresholdLabel;
-        private System.Windows.Forms.TrackBar Threshold;
         private System.Windows.Forms.TextBox SecureBookmark;
-        private System.Windows.Forms.CheckedListBox Triggers;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lblFleeWait;
         private System.Windows.Forms.TrackBar FleeWait;
+        private System.Windows.Forms.ListView Triggers;
+        private System.Windows.Forms.GroupBox ThresholdGroup;
+        private System.Windows.Forms.Label ThresholdLabel;
+        private System.Windows.Forms.TrackBar Threshold;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ListView FleeTypes;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

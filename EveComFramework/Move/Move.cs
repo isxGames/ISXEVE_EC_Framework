@@ -102,15 +102,23 @@ namespace EveComFramework.Move
             // If we're not doing anything, just start ApproachState
             if (Idle)
             {
-                QueueState(ApproachState, -1, Target, Distance);
+                QueueState(ApproachState, -1, Target, Distance, false);
             }
             // If we're approaching something else or orbiting something, change to approaching the new target - retain collision information!
             if ((CurState.State == ApproachState && (Entity)CurState.Params[0] != Target) || CurState.State == OrbitState)
             {
-                Entity Collision = ((Entity)CurState.Params[3]);
-
-                Clear();
-                QueueState(ApproachState, -1, Target, Distance, true, Collision);
+                if (CurState.Params.Count() > 3)
+                {
+                    Clear();
+                    Entity Collision = ((Entity)CurState.Params[3]);
+                    QueueState(ApproachState, -1, Target, Distance, false, Collision);
+                }
+                else
+                {
+                    Clear();
+                    Entity Collision = ((Entity)CurState.Params[3]);
+                    QueueState(ApproachState, -1, Target, Distance, false);
+                }
             }
         }
 
@@ -119,15 +127,23 @@ namespace EveComFramework.Move
             // If we're not doing anything, just start OrbitState
             if (Idle)
             {
-                QueueState(OrbitState, -1, Target, Distance);
+                QueueState(OrbitState, -1, Target, Distance, false);
             }
             // If we're orbiting something else or approaching something, change to orbiting the new target - retain collision information!
             if ((CurState.State == OrbitState && (Entity)CurState.Params[0] != Target) || CurState.State == ApproachState)
             {
-                Entity Collision = ((Entity)CurState.Params[3]);
+                if (CurState.Params.Count() > 3)
+                {
+                    Clear();
+                    Entity Collision = ((Entity)CurState.Params[3]);
+                    QueueState(OrbitState, -1, Target, Distance, false, Collision);
+                }
+                else
+                {
+                    Clear();
+                    QueueState(OrbitState, -1, Target, Distance, false);
+                }
 
-                Clear();
-                QueueState(OrbitState, -1, Target, Distance, true, Collision);
             }
         }
 
@@ -285,10 +301,9 @@ namespace EveComFramework.Move
         {
             Entity Target = ((Entity)Params[0]);
             int Distance = (int)Params[1];
-            bool Approaching = false;
-            if (Params.Count() > 2) { Approaching = (bool)Params[2]; }
+            bool Approaching = (bool)Params[2];
             Entity Collision = null;
-            if (Params.Count() > 3) { Collision = ((Entity)Params[3]); }
+            if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
 
 
             if (Target == null || !Target.Exists)
@@ -299,7 +314,7 @@ namespace EveComFramework.Move
             if (Target.Distance > Distance)
             {
                 // Start approaching our approach target if we're not currently approaching anything
-                if (!Approaching || MyShip.ToEntity.Mode == EntityMode.Stopped)
+                if (!Approaching || (MyShip.ToEntity.Mode != EntityMode.Orbiting && MyShip.ToEntity.Mode != EntityMode.Approaching))
                 {
                     Log.Log("Approaching {0}({1} km)", Target.Name, Distance / 1000);
                     Target.Approach();
@@ -347,8 +362,7 @@ namespace EveComFramework.Move
         {
             Entity Target = ((Entity)Params[0]);
             int Distance = (int)Params[1];
-            bool Orbiting = false;
-            if (Params.Count() > 2) { Orbiting = (bool)Params[2]; }
+            bool Orbiting = (bool)Params[2]; 
             Entity Collision = null;
             if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
 
@@ -358,7 +372,7 @@ namespace EveComFramework.Move
             }
 
             // Start orbiting our orbit target if we're not currently orbiting anything
-            if (!Orbiting || MyShip.ToEntity.Mode == EntityMode.Stopped)
+            if (!Orbiting || MyShip.ToEntity.Mode != EntityMode.Orbiting)
             {
                 Log.Log("Orbiting {0}({1} km)", Target.Name, Distance / 1000);
                 Target.Orbit(Distance);
