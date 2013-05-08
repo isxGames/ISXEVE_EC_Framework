@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Flee to closest station");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("In a pod");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Targeted by another player");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Capacitor low");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Shield low");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Armor low");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -54,13 +54,13 @@
             this.ThresholdGroup = new System.Windows.Forms.GroupBox();
             this.ThresholdLabel = new System.Windows.Forms.Label();
             this.Threshold = new System.Windows.Forms.TrackBar();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.Triggers = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StandingGroup = new System.Windows.Forms.GroupBox();
             this.IncludeFleetMembers = new System.Windows.Forms.CheckBox();
             this.IncludeAllianceMembers = new System.Windows.Forms.CheckBox();
             this.IncludeCorpMembers = new System.Windows.Forms.CheckBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.Triggers = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -71,14 +71,14 @@
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Threshold)).BeginInit();
-            this.StandingGroup.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.StandingGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -190,13 +190,13 @@
             this.FleeTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
             this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            listViewItem8,
+            listViewItem9,
+            listViewItem10});
             this.FleeTypes.Location = new System.Drawing.Point(10, 20);
             this.FleeTypes.Name = "FleeTypes";
             this.FleeTypes.Scrollable = false;
@@ -255,6 +255,52 @@
             this.Threshold.Tag = "Use this slider to set the threshold for the corresponding Flee Trigger.";
             this.Threshold.Scroll += new System.EventHandler(this.Threshold_ValueChanged);
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.Triggers);
+            this.groupBox5.Location = new System.Drawing.Point(6, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(300, 152);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Triggers";
+            // 
+            // Triggers
+            // 
+            this.Triggers.AutoArrange = false;
+            this.Triggers.CheckBoxes = true;
+            this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7});
+            this.Triggers.Location = new System.Drawing.Point(9, 20);
+            this.Triggers.MultiSelect = false;
+            this.Triggers.Name = "Triggers";
+            this.Triggers.Scrollable = false;
+            this.Triggers.Size = new System.Drawing.Size(285, 126);
+            this.Triggers.TabIndex = 3;
+            this.Triggers.UseCompatibleStateImageBehavior = false;
+            this.Triggers.View = System.Windows.Forms.View.Details;
+            this.Triggers.SelectedIndexChanged += new System.EventHandler(this.Triggers_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 171;
+            // 
             // StandingGroup
             // 
             this.StandingGroup.Controls.Add(this.IncludeFleetMembers);
@@ -273,7 +319,7 @@
             this.IncludeFleetMembers.AutoSize = true;
             this.IncludeFleetMembers.Location = new System.Drawing.Point(6, 66);
             this.IncludeFleetMembers.Name = "IncludeFleetMembers";
-            this.IncludeFleetMembers.Size = new System.Drawing.Size(133, 17);
+            this.IncludeFleetMembers.Size = new System.Drawing.Size(134, 17);
             this.IncludeFleetMembers.TabIndex = 2;
             this.IncludeFleetMembers.Tag = "If this is checked, fleet members will be included in the trigger.";
             this.IncludeFleetMembers.Text = "Include Fleet Members";
@@ -285,7 +331,7 @@
             this.IncludeAllianceMembers.AutoSize = true;
             this.IncludeAllianceMembers.Location = new System.Drawing.Point(6, 43);
             this.IncludeAllianceMembers.Name = "IncludeAllianceMembers";
-            this.IncludeAllianceMembers.Size = new System.Drawing.Size(147, 17);
+            this.IncludeAllianceMembers.Size = new System.Drawing.Size(148, 17);
             this.IncludeAllianceMembers.TabIndex = 1;
             this.IncludeAllianceMembers.Tag = "If this is checked, alliance members will be included in the trigger.";
             this.IncludeAllianceMembers.Text = "Include Alliance Members";
@@ -297,58 +343,12 @@
             this.IncludeCorpMembers.AutoSize = true;
             this.IncludeCorpMembers.Location = new System.Drawing.Point(6, 20);
             this.IncludeCorpMembers.Name = "IncludeCorpMembers";
-            this.IncludeCorpMembers.Size = new System.Drawing.Size(164, 17);
+            this.IncludeCorpMembers.Size = new System.Drawing.Size(166, 17);
             this.IncludeCorpMembers.TabIndex = 0;
             this.IncludeCorpMembers.Tag = "If this is checked, corporate members will be included in the trigger.";
             this.IncludeCorpMembers.Text = "Include Corporation Members";
             this.IncludeCorpMembers.UseVisualStyleBackColor = true;
             this.IncludeCorpMembers.Click += new System.EventHandler(this.IncludeCorpMembers_CheckedChanged);
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.Triggers);
-            this.groupBox5.Location = new System.Drawing.Point(6, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(300, 152);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Triggers";
-            // 
-            // Triggers
-            // 
-            this.Triggers.AutoArrange = false;
-            this.Triggers.CheckBoxes = true;
-            this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem4.StateImageIndex = 0;
-            listViewItem5.StateImageIndex = 0;
-            listViewItem6.StateImageIndex = 0;
-            listViewItem7.StateImageIndex = 0;
-            listViewItem8.StateImageIndex = 0;
-            listViewItem9.StateImageIndex = 0;
-            listViewItem10.StateImageIndex = 0;
-            this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem7,
-            listViewItem8,
-            listViewItem9,
-            listViewItem10});
-            this.Triggers.Location = new System.Drawing.Point(9, 20);
-            this.Triggers.MultiSelect = false;
-            this.Triggers.Name = "Triggers";
-            this.Triggers.Scrollable = false;
-            this.Triggers.Size = new System.Drawing.Size(285, 126);
-            this.Triggers.TabIndex = 3;
-            this.Triggers.UseCompatibleStateImageBehavior = false;
-            this.Triggers.View = System.Windows.Forms.View.Details;
-            this.Triggers.SelectedIndexChanged += new System.EventHandler(this.Triggers_SelectedIndexChanged);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 171;
             // 
             // Security
             // 
@@ -375,9 +375,9 @@
             this.ThresholdGroup.ResumeLayout(false);
             this.ThresholdGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Threshold)).EndInit();
+            this.groupBox5.ResumeLayout(false);
             this.StandingGroup.ResumeLayout(false);
             this.StandingGroup.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -131,14 +131,15 @@ namespace EveComFramework.Security
         {
         }
 
+
         #endregion
 
         #region Variables
 
         List<Bookmark> SafeSpots;
-        internal SecuritySettings Config = new SecuritySettings();
+        public SecuritySettings Config = new SecuritySettings();
         Move.Move Move = EveComFramework.Move.Move.Instance;
-        public Core.Logger Log = new Core.Logger();
+        public Logger Log = new Logger();
 
         #endregion
 

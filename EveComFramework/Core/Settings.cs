@@ -14,46 +14,58 @@ namespace EveComFramework.Core
 {
     public class Settings
     {
-        public static string CharName { get; set; }
-        public bool CharBased { get; private set; }
         private FileSystemWatcher watcher;
+        public string ProfilePath { get { return ProfilePath; } set { ProfilePath = value; watcher.Path = value; } }
         
         static Settings()
         {
-            CharName = "Default";
         }
 
-        public Settings(bool CharBased = true)
+        #region Events
+
+        public delegate void NewAlert();
+        public event NewAlert Updated;
+        public void TriggerUpdate()
         {
-            this.CharBased = CharBased;
-            this.Load();
-            if(!Directory.Exists(GetConfigFilePath()))
+            if (Updated != null)
             {
-                Directory.CreateDirectory(GetConfigFilePath());
+                Updated();
             }
-            watcher = new FileSystemWatcher(GetConfigFilePath(), GetConfigFileName());
+        }
+
+        #endregion
+
+        public Settings()
+        {
+            ProfilePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\" + Config.Instance.DefaultProfile;
+            this.Load();
+            if(!Directory.Exists(Path.GetDirectoryName(ProfilePath)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(ProfilePath));
+            }
+            watcher = new FileSystemWatcher(ProfilePath);
             watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
         void watcher_Changed(object sender, FileSystemEventArgs e)
         {
+            TriggerUpdate();
  	        this.Load();
-        }
-
-        private static string GetConfigFilePath()
-        {
-            return Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs";
-        }
-
-        private string GetConfigFileName()
-        {
-            return (CharBased ? CharName + "." : "") + this.GetType().Name + ".xml";
         }
 
         public void Save()
         {
-            XDocument settingsDoc = new XDocument();
-            XElement settingRoot = new XElement("Settings");
+            XDocument settingsDoc;
+            if (File.Exists(ProfilePath))
+            {
+                settingsDoc = XDocument.Load(ProfilePath);
+            }
+            else
+            {
+                settingsDoc = new XDocument();
+            }
+
+            XElement settingRoot = new XElement(this.GetType().Name);
             TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
             settingsDoc.Add(settingRoot);
             foreach (FieldInfo field in this.GetType().GetFields())
@@ -74,14 +86,15 @@ namespace EveComFramework.Core
                 }
                 settingRoot.Add(fieldElement);
             }
-            settingsDoc.Save(GetConfigFilePath() + "\\" + GetConfigFileName());
+            settingsDoc.Save(ProfilePath);
+
         }
 
         public void Load()
         {
-            if (File.Exists(GetConfigFilePath() + "\\" + GetConfigFileName()))
+            if (File.Exists(ProfilePath))
             {
-                XDocument settingsDoc = XDocument.Load(GetConfigFilePath() + "\\" + CharName + "." + this.GetType().Name + ".xml");
+                XDocument settingsDoc = XDocument.Load(ProfilePath);
                 XElement settingRoot = settingsDoc.Root;
                 TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
                 foreach (FieldInfo field in this.GetType().GetFields())

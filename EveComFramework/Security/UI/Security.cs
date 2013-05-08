@@ -13,10 +13,11 @@ namespace EveComFramework.Security.UI
 {
     internal partial class Security : Form
     {
-        internal SecuritySettings Config = new SecuritySettings();
+        
         string ActiveTrigger;
         List<string> Bookmarks;
         UIData UI = UIData.Instance;
+        SecuritySettings Config = EveComFramework.Security.Security.Instance.Config;
 
         public Security()
         {
