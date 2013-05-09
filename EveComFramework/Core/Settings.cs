@@ -9,16 +9,35 @@ using System.ComponentModel;
 using System.Xml.Serialization;
 using System.IO;
 using EveCom;
+using LavishScriptAPI;
 
 namespace EveComFramework.Core
 {
     public class Settings
     {
         private FileSystemWatcher watcher;
-        public string ProfilePath { get { return ProfilePath; } set { ProfilePath = value; watcher.Path = value; } }
+        private string _ProfilePath;
+        public string ProfilePath { get { return _ProfilePath; } set { _ProfilePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\" + value + ".xml"; watcher.Filter = value + ".xml"; } }
+        public string ConfigDirectory { get; set; }
+        
         
         static Settings()
         {
+        }
+
+        public Settings()
+        {
+            ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
+            _ProfilePath = ConfigDirectory + Config.Instance.DefaultProfile + ".xml";
+            this.Load();
+
+            if (!Directory.Exists(ConfigDirectory))
+            {
+                Directory.CreateDirectory(ConfigDirectory);
+            }
+
+            watcher = new FileSystemWatcher(ConfigDirectory, Config.Instance.DefaultProfile + ".xml");
+            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
         #region Events
@@ -35,86 +54,115 @@ namespace EveComFramework.Core
 
         #endregion
 
-        public Settings()
-        {
-            ProfilePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\" + Config.Instance.DefaultProfile;
-            this.Load();
-            if(!Directory.Exists(Path.GetDirectoryName(ProfilePath)))
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(ProfilePath));
-            }
-            watcher = new FileSystemWatcher(ProfilePath);
-            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
-        }
-
         void watcher_Changed(object sender, FileSystemEventArgs e)
         {
-            TriggerUpdate();
  	        this.Load();
+            TriggerUpdate();
         }
 
         public void Save()
         {
-            XDocument settingsDoc;
-            if (File.Exists(ProfilePath))
+            Config.Instance.InUse = true;
+            try
             {
-                settingsDoc = XDocument.Load(ProfilePath);
-            }
-            else
-            {
-                settingsDoc = new XDocument();
-            }
-
-            XElement settingRoot = new XElement(this.GetType().Name);
-            TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
-            settingsDoc.Add(settingRoot);
-            foreach (FieldInfo field in this.GetType().GetFields())
-            {
-                XElement fieldElement = null;
-                TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
-                if (typeConverter.CanConvertFrom(typeof(string)))
+                XDocument settingsDoc;
+                XElement trueRoot;
+                XElement settingRoot;
+                if (File.Exists(ProfilePath))
                 {
-                    fieldElement = new XElement(field.Name, field.GetValue(this).ToString());
-                }
-                else if (stringConverter.CanConvertTo(field.FieldType))
-                {
-                    fieldElement = new XElement(field.Name, field.GetValue(this).ToString());
+                    settingsDoc = XDocument.Load(ProfilePath);
+                    trueRoot = settingsDoc.Element("Settings");
+                    if (trueRoot.Element(this.GetType().Name) != null)
+                    {
+                        settingRoot = trueRoot.Element(this.GetType().Name);
+                    }
+                    else
+                    {
+                        settingRoot = new XElement(this.GetType().Name);
+                        trueRoot.Add(settingRoot);
+                    }
                 }
                 else
                 {
-                    fieldElement = new XElement(field.Name, Serialize(field.GetValue(this)));
+                    settingsDoc = new XDocument();
+                    trueRoot = new XElement("Settings");
+                    settingRoot = new XElement(this.GetType().Name);
+                    trueRoot.Add(settingRoot);
+                    settingsDoc.Add(trueRoot);
                 }
-                settingRoot.Add(fieldElement);
-            }
-            settingsDoc.Save(ProfilePath);
 
+                TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
+                foreach (FieldInfo field in this.GetType().GetFields())
+                {
+                    XElement fieldElement = null;
+                    TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
+                    if (typeConverter.CanConvertFrom(typeof(string)))
+                    {
+                        fieldElement = new XElement(field.Name, field.GetValue(this).ToString());
+                    }
+                    else if (stringConverter.CanConvertTo(field.FieldType))
+                    {
+                        fieldElement = new XElement(field.Name, field.GetValue(this).ToString());
+                    }
+                    else
+                    {
+                        fieldElement = new XElement(field.Name, Serialize(field.GetValue(this)));
+                    }
+                    if (settingRoot.Element(fieldElement.Name) != null)
+                    {
+                        settingRoot.Element(fieldElement.Name).ReplaceWith(fieldElement);
+                    }
+                    else
+                    {
+                        settingRoot.Add(fieldElement);
+                    }
+                }
+                settingsDoc.Save(ProfilePath);
+            }
+            catch (Exception ex)
+            {
+                InnerSpaceAPI.InnerSpace.Echo(ex.Message);
+            }
+            Config.Instance.InUse = false;
         }
 
         public void Load()
         {
+            if (Config.Instance.InUse) return;
             if (File.Exists(ProfilePath))
             {
-                XDocument settingsDoc = XDocument.Load(ProfilePath);
-                XElement settingRoot = settingsDoc.Root;
-                TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
-                foreach (FieldInfo field in this.GetType().GetFields())
+                try
                 {
-                    if (settingRoot.Element(field.Name) != null)
+                    using (StreamReader reader = new StreamReader(new FileStream(ProfilePath, FileMode.Open, FileAccess.Read, FileShare.Read)))
                     {
-                        TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
-                        if (typeConverter.CanConvertFrom(typeof(string)))
+                        XDocument settingsDoc = XDocument.Load(reader);
+                        XElement trueRoot = settingsDoc.Root;
+                        XElement settingRoot = trueRoot.Element(this.GetType().Name);
+                        TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
+                        foreach (FieldInfo field in this.GetType().GetFields())
                         {
-                            field.SetValue(this, typeConverter.ConvertFrom(settingRoot.Element(field.Name).Value));
-                        }
-                        else if (stringConverter.CanConvertTo(field.FieldType))
-                        {
-                            field.SetValue(this, typeConverter.ConvertTo(settingRoot.Element(field.Name).Value, field.FieldType));
-                        }
-                        else
-                        {
-                            field.SetValue(this, Deserialize(settingRoot.Element(field.Name).Elements().First(), field.FieldType));
+                            if (settingRoot.Element(field.Name) != null)
+                            {
+                                TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
+                                if (typeConverter.CanConvertFrom(typeof(string)))
+                                {
+                                    field.SetValue(this, typeConverter.ConvertFrom(settingRoot.Element(field.Name).Value));
+                                }
+                                else if (stringConverter.CanConvertTo(field.FieldType))
+                                {
+                                    field.SetValue(this, typeConverter.ConvertTo(settingRoot.Element(field.Name).Value, field.FieldType));
+                                }
+                                else
+                                {
+                                    field.SetValue(this, Deserialize(settingRoot.Element(field.Name).Elements().First(), field.FieldType));
+                                }
+                            }
                         }
                     }
+                }
+                catch 
+                {
+                    Save();
                 }
             }
         }

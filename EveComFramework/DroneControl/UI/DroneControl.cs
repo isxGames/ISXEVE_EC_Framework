@@ -12,11 +12,12 @@ namespace EveComFramework.DroneControl.UI
 {
     public partial class DroneControl : Form
     {
-        internal DroneControlConfig Config = new DroneControlConfig();
+        internal DroneControlSettings Config = EveComFramework.DroneControl.DroneControl.Instance.Config;
         
         public DroneControl()
         {
             InitializeComponent();
+            Config.Updated += LoadSettings;
         }
 
         #region Mouseover Controller
@@ -50,8 +51,7 @@ namespace EveComFramework.DroneControl.UI
 
         #endregion
 
-
-        private void DroneControl_Load(object sender, EventArgs e)
+        private void LoadSettings()
         {
             CombatDrones.Checked = Config.CombatDrones;
             CombatTargetsReserved.Value = Config.CombatTargetsReserved;
@@ -76,7 +76,11 @@ namespace EveComFramework.DroneControl.UI
             lblLogiDroneCount.Text = String.Format("Use {0} drone slots for logistics drones", LogiDroneCount.Value);
             LogiDroneTargets.Value = Config.LogiDroneTargets;
             lblLogiDroneTargets.Text = String.Format("Use {0} target slots for logistics drones", LogiDroneTargets.Value);
-            
+        }
+
+        private void DroneControl_Load(object sender, EventArgs e)
+        {
+            LoadSettings();
         }
 
         private void UseCombatDrones_CheckedChanged(object sender, EventArgs e)

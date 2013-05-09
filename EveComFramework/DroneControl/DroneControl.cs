@@ -9,7 +9,7 @@ namespace EveComFramework.DroneControl
 {
     #region Settings
 
-    class DroneControlConfig : EveComFramework.Core.Settings
+    public class DroneControlSettings : EveComFramework.Core.Settings
     {
         public bool CombatDrones = false;
         public bool Sentries = false;
@@ -31,7 +31,6 @@ namespace EveComFramework.DroneControl
     }
 
     #endregion
-
 
     public class DroneControl : EveComFramework.Core.State
     {
@@ -77,7 +76,7 @@ namespace EveComFramework.DroneControl
         #region Variables
 
         public Core.Logger Log = new Core.Logger();
-        internal DroneControlConfig Config = new DroneControlConfig();
+        public DroneControlSettings Config = new DroneControlSettings();
         public Targets.Targets Rats = new Targets.Targets();
         public Targets.Targets Roids = new Targets.Targets();
         public Targets.Targets Wrecks = new Targets.Targets();

@@ -31,7 +31,7 @@ namespace EveComFramework.Security
 
     #region Settings
 
-    internal class SecuritySettings : Settings
+    public class SecuritySettings : Settings
     {
         public List<FleeTrigger> Triggers = new List<FleeTrigger>
         {

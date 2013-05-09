@@ -11,14 +11,15 @@ namespace EveComFramework.AutoModule.UI
 {
     public partial class AutoModule : Form
     {
-        internal AutoModuleSettings Config = new AutoModuleSettings();
+        internal AutoModuleSettings Config = EveComFramework.AutoModule.AutoModule.Instance.Config;
         
         public AutoModule()
         {
             InitializeComponent();
+            Config.Updated += LoadSettings;
         }
 
-        private void AutoModule_Load(object sender, EventArgs e)
+        private void LoadSettings()
         {
             MinThreshold.Hide();
             MinThresholdLabel.Hide();
@@ -61,7 +62,11 @@ namespace EveComFramework.AutoModule.UI
                         break;
                 }
             }
+        }
 
+        private void AutoModule_Load(object sender, EventArgs e)
+        {
+            LoadSettings();
         }
 
         private void Modules_SelectedIndexChanged(object sender, EventArgs e)

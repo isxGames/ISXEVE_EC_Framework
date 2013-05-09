@@ -22,9 +22,10 @@ namespace EveComFramework.Security.UI
         public Security()
         {
             InitializeComponent();
+            Config.Updated += LoadSettings;
         }
 
-        private void Security_Load(object sender, EventArgs e)
+        private void LoadSettings()
         {
             foreach (ListViewItem i in FleeTypes.Items)
             {
@@ -53,7 +54,7 @@ namespace EveComFramework.Security.UI
 
             foreach (ListViewItem i in Triggers.Items)
             {
-                switch(i.Text)
+                switch (i.Text)
                 {
                     case "In a pod":
                         if (Config.Triggers.Contains(FleeTrigger.NegativeStanding))
@@ -104,9 +105,14 @@ namespace EveComFramework.Security.UI
             SecureBookmark.Text = Config.SecureBookmark;
             FleeWait.Value = Config.FleeWait;
             lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
+        }
 
+        private void Security_Load(object sender, EventArgs e)
+        {
+            LoadSettings();
             FleeTypes.ItemChecked += FleeTypes_ItemChecked;
             Triggers.ItemChecked += Triggers_ItemChecked;
+            timer1.Start();
         }
 
         private void SecureBookmark_TextChanged(object sender, EventArgs e)
@@ -260,11 +266,6 @@ namespace EveComFramework.Security.UI
             Config.Save();
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (UI.Bookmarks.Any()) SecureBookmark.AutoCompleteCustomSource = new MyAutoCompleteStringCollection(UI.Bookmarks);
-        }
-
 
 
         private void Triggers_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -321,6 +322,11 @@ namespace EveComFramework.Security.UI
             }
             Config.Types = build;
             Config.Save();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (UI.Bookmarks != null) SecureBookmark.AutoCompleteCustomSource = new MyAutoCompleteStringCollection(UI.Bookmarks);
         }
 
 

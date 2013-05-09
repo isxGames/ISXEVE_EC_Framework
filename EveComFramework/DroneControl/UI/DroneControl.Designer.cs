@@ -87,7 +87,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(760, 419);
+            this.tabControl1.Size = new System.Drawing.Size(398, 419);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -97,7 +97,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(752, 393);
+            this.tabPage1.Size = new System.Drawing.Size(390, 393);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Combat Drones";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -261,7 +261,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(752, 393);
+            this.tabPage2.Size = new System.Drawing.Size(390, 393);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Utility Drones";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -359,9 +359,9 @@
             this.groupBox3.Controls.Add(this.lblLogiDroneTargets);
             this.groupBox3.Controls.Add(this.LogiDroneTargets);
             this.groupBox3.Controls.Add(this.LogisticsDrones);
-            this.groupBox3.Location = new System.Drawing.Point(385, 6);
+            this.groupBox3.Location = new System.Drawing.Point(8, 198);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(381, 147);
+            this.groupBox3.Size = new System.Drawing.Size(371, 147);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Logistics Drones";
@@ -370,7 +370,7 @@
             // 
             this.lblLogiDroneCount.Location = new System.Drawing.Point(3, 70);
             this.lblLogiDroneCount.Name = "lblLogiDroneCount";
-            this.lblLogiDroneCount.Size = new System.Drawing.Size(372, 18);
+            this.lblLogiDroneCount.Size = new System.Drawing.Size(362, 18);
             this.lblLogiDroneCount.TabIndex = 5;
             this.lblLogiDroneCount.Text = "Use 2 drone slots for logistics drones";
             this.lblLogiDroneCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -379,7 +379,7 @@
             // 
             this.LogiDroneCount.Location = new System.Drawing.Point(6, 43);
             this.LogiDroneCount.Name = "LogiDroneCount";
-            this.LogiDroneCount.Size = new System.Drawing.Size(369, 45);
+            this.LogiDroneCount.Size = new System.Drawing.Size(359, 45);
             this.LogiDroneCount.TabIndex = 8;
             this.LogiDroneCount.TickStyle = System.Windows.Forms.TickStyle.None;
             this.LogiDroneCount.Value = 2;
@@ -399,7 +399,7 @@
             this.LogiDroneTargets.Location = new System.Drawing.Point(6, 94);
             this.LogiDroneTargets.Maximum = 12;
             this.LogiDroneTargets.Name = "LogiDroneTargets";
-            this.LogiDroneTargets.Size = new System.Drawing.Size(369, 45);
+            this.LogiDroneTargets.Size = new System.Drawing.Size(359, 45);
             this.LogiDroneTargets.TabIndex = 6;
             this.LogiDroneTargets.TickStyle = System.Windows.Forms.TickStyle.None;
             this.LogiDroneTargets.Value = 2;
@@ -420,7 +420,7 @@
             // 
             this.lblHelpText.Location = new System.Drawing.Point(12, 434);
             this.lblHelpText.Name = "lblHelpText";
-            this.lblHelpText.Size = new System.Drawing.Size(760, 52);
+            this.lblHelpText.Size = new System.Drawing.Size(398, 52);
             this.lblHelpText.TabIndex = 8;
             this.lblHelpText.Text = "Mouseover an element for help";
             this.lblHelpText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -429,7 +429,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 493);
+            this.ClientSize = new System.Drawing.Size(416, 493);
             this.Controls.Add(this.lblHelpText);
             this.Controls.Add(this.tabControl1);
             this.Name = "DroneControl";

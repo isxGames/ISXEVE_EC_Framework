@@ -8,7 +8,7 @@ namespace EveComFramework.AutoModule
 {
     #region Settings
 
-    internal class AutoModuleSettings : EveComFramework.Core.Settings
+    public class AutoModuleSettings : EveComFramework.Core.Settings
     {
         public bool ActiveHardeners = true;
         public bool ShieldBoosters = true;
@@ -43,7 +43,6 @@ namespace EveComFramework.AutoModule
 
     #endregion
 
-
     public class AutoModule : EveComFramework.Core.State
     {
         #region Instantiation
@@ -70,7 +69,7 @@ namespace EveComFramework.AutoModule
 
         #region Variables
 
-        internal AutoModuleSettings Config = new AutoModuleSettings();
+        public AutoModuleSettings Config = new AutoModuleSettings();
 
         public bool Overide = false;
         public bool Decloak = false;

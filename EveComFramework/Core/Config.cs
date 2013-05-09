@@ -24,10 +24,12 @@ namespace EveComFramework.Core
 
         private Config() : base()
         {
+            InUse = false;
         }
 
         #endregion
 
         public string DefaultProfile { get; set; }
+        public bool InUse { get; set; }
     }
 }
