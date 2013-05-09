@@ -43,6 +43,7 @@ namespace EveComFramework.Cargo
         CargoAction CurrentCargoAction;
         CargoAction BuildCargoAction;
         Move.Move Move = EveComFramework.Move.Move.Instance;
+        public Core.Logger Log = new Core.Logger();
 
         #endregion
 
@@ -126,6 +127,7 @@ namespace EveComFramework.Cargo
                 return true;
             }
 
+            Log.Log("|oCargo |wtraveling to |y{0}", CurrentCargoAction.Bookmark.Title);
 
             Move.Bookmark(CurrentCargoAction.Bookmark);
 
