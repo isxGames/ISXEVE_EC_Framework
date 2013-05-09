@@ -97,28 +97,20 @@ namespace EveComFramework.Move
             }
         }
 
-        public void Approach(Entity Target, int Distance = 0)
+        public void Approach(Entity Target, int Distance = 1000)
         {
             // If we're not doing anything, just start ApproachState
+            InnerSpaceAPI.InnerSpace.Echo(Idle.ToString());
             if (Idle)
             {
                 QueueState(ApproachState, -1, Target, Distance, false);
+                return;
             }
             // If we're approaching something else or orbiting something, change to approaching the new target - retain collision information!
             if ((CurState.State == ApproachState && (Entity)CurState.Params[0] != Target) || CurState.State == OrbitState)
             {
-                if (CurState.Params.Count() > 3)
-                {
-                    Clear();
-                    Entity Collision = ((Entity)CurState.Params[3]);
-                    QueueState(ApproachState, -1, Target, Distance, false, Collision);
-                }
-                else
-                {
-                    Clear();
-                    Entity Collision = ((Entity)CurState.Params[3]);
-                    QueueState(ApproachState, -1, Target, Distance, false);
-                }
+                Clear();
+                QueueState(ApproachState, -1, Target, Distance, false);
             }
         }
 
@@ -128,22 +120,13 @@ namespace EveComFramework.Move
             if (Idle)
             {
                 QueueState(OrbitState, -1, Target, Distance, false);
+                return;
             }
             // If we're orbiting something else or approaching something, change to orbiting the new target - retain collision information!
             if ((CurState.State == OrbitState && (Entity)CurState.Params[0] != Target) || CurState.State == ApproachState)
             {
-                if (CurState.Params.Count() > 3 && CurState.Params[3] != null)
-                {
-                    Clear();
-                    Entity Collision = ((Entity)CurState.Params[3]);
-                    QueueState(OrbitState, -1, Target, Distance, false, Collision);
-                }
-                else
-                {
-                    Clear();
-                    QueueState(OrbitState, -1, Target, Distance, false);
-                }
-
+                Clear();
+                QueueState(OrbitState, -1, Target, Distance, false);
             }
         }
 
@@ -304,7 +287,6 @@ namespace EveComFramework.Move
             bool Approaching = (bool)Params[2];
             Entity Collision = null;
             if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
-
 
             if (Target == null || !Target.Exists)
             {
