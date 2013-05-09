@@ -132,7 +132,7 @@ namespace EveComFramework.Move
             // If we're orbiting something else or approaching something, change to orbiting the new target - retain collision information!
             if ((CurState.State == OrbitState && (Entity)CurState.Params[0] != Target) || CurState.State == ApproachState)
             {
-                if (CurState.Params.Count() > 3)
+                if (CurState.Params.Count() > 3 && CurState.Params[3] != null)
                 {
                     Clear();
                     Entity Collision = ((Entity)CurState.Params[3]);
