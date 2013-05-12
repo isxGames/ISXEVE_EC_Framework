@@ -84,7 +84,7 @@ namespace EveComFramework.Cargo
             BuildCargoAction.Quantity = Quantity;
             BuildCargoAction.Target = Target ?? (() => MyShip.CargoBay);
             CargoQueue.AddFirst(BuildCargoAction.Clone());
-            QueueState(Process);
+            if (Idle) QueueState(Process);
             return new CargoProxy();
         }
 
@@ -95,7 +95,7 @@ namespace EveComFramework.Cargo
             BuildCargoAction.Quantity = Quantity;
             BuildCargoAction.Target = Target ?? (() => MyShip.CargoBay);
             CargoQueue.AddFirst(BuildCargoAction.Clone());
-            QueueState(Process);
+            if (Idle) QueueState(Process);
             return new CargoProxy();
         }
 
@@ -106,7 +106,7 @@ namespace EveComFramework.Cargo
             BuildCargoAction.Quantity = 0;
             BuildCargoAction.Target = null;
             CargoQueue.AddFirst(BuildCargoAction.Clone());
-            QueueState(Process);
+            if (Idle) QueueState(Process);
             return new CargoProxy();
         }
 
@@ -175,19 +175,66 @@ namespace EveComFramework.Cargo
 
         bool Load(object[] Params)
         {
+            Log.Log("Loading");
             try
             {
-                CurrentCargoAction.Source().Items.Where(CurrentCargoAction.QueryString).MoveTo(CurrentCargoAction.Target());
+                if (CurrentCargoAction.Quantity != 0)
+                {
+                    int DesiredQuantity = CurrentCargoAction.Quantity;
+                    InventoryContainer Target = CurrentCargoAction.Target();
+                    foreach (Item item in CurrentCargoAction.Source().Items.Where(CurrentCargoAction.QueryString))
+                    {
+                        if (item.Quantity < DesiredQuantity)
+                        {
+                            DesiredQuantity -= item.Quantity;
+                            Target.Add(item);
+                        }
+                        else
+                        {
+                            Target.Add(item, DesiredQuantity);
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    CurrentCargoAction.Source().Items.Where(CurrentCargoAction.QueryString).MoveTo(CurrentCargoAction.Target());
+                }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Log.Log(ex.Message);
+            }
             return true;
         }
 
         bool Unload(object[] Params)
         {
+            Log.Log("Unloading");
             try
             {
-                CurrentCargoAction.Target().Items.Where(CurrentCargoAction.QueryString).MoveTo(CurrentCargoAction.Source());
+                if (CurrentCargoAction.Quantity != 0)
+                {
+                    int DesiredQuantity = CurrentCargoAction.Quantity;
+                    InventoryContainer Target = CurrentCargoAction.Source();
+                    foreach (Item item in CurrentCargoAction.Target().Items.Where(CurrentCargoAction.QueryString))
+                    {
+                        if (item.Quantity < DesiredQuantity)
+                        {
+                            DesiredQuantity -= item.Quantity;
+                            Target.Add(item);
+                        }
+                        else
+                        {
+                            Target.Add(item, DesiredQuantity);
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    CurrentCargoAction.Target().Items.Where(CurrentCargoAction.QueryString).MoveTo(CurrentCargoAction.Source());
+                }
             }
             catch { }
             return true;
