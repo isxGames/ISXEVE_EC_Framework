@@ -284,7 +284,6 @@ namespace EveComFramework.DroneControl
 
             DroneData.Keys.Where(drone => DroneData[drone].Assigned).Where(drone => DroneData[drone].Target == null || !DroneData[drone].Target.Exists || DroneData[drone].Target.Exploded || (!DroneData[drone].Target.LockedTarget && !DroneData[drone].Target.LockingTarget)).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
 
-
             foreach (Entity rat in Rats.LockedAndLockingTargetList)
             {
                 string ratClass = Data.NPCClasses.All.ContainsKey(rat.GroupID) ? Data.NPCClasses.All[rat.GroupID] : "";

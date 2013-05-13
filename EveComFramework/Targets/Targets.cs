@@ -117,7 +117,7 @@ namespace EveComFramework.Targets
             if (Delays.Keys.Union(LockedAndLockingTargetList).Count() < Count)
             {
                 Entity TryLock = UnlockedTargetList.FirstOrDefault(ent => !Delays.ContainsKey(ent));
-                if (TryLock != null)
+                if (TryLock != null && TryLock.Distance < MyShip.MaxTargetRange && Entity.Targets.Count + Entity.Targeting.Count < MyShip.MaxTargetLocks)
                 {
                     Delays.Add(TryLock, DateTime.Now.AddSeconds(2));
                     TryLock.LockTarget();
