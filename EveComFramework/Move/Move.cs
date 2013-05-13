@@ -153,7 +153,8 @@ namespace EveComFramework.Move
             }
             if (Bookmark.LocationID != Session.SolarSystemID)
             {
-                Log.Log("Setting course: {0}", Bookmark.Title);
+                Log.Log("|oSetting course");
+                Log.Log(" |-g{0}", Bookmark.Title);
                 Bookmark.SetDestination();
                 QueueState(AutoPilot, 2000);
             }
@@ -196,7 +197,8 @@ namespace EveComFramework.Move
             }
             if (Destination.Exists && Destination.CanWarpTo)
             {
-                Log.Log("Warping: {0} ({1} km)", Destination.Title, Distance);
+                Log.Log("|oWarping");
+                Log.Log(" |-g{0} (|w{1} km|-g)", Destination.Title, Distance);
                 Destination.WarpTo(Distance);
             }
             return true;
@@ -235,7 +237,8 @@ namespace EveComFramework.Move
             int Distance = (int)Params[1];
             if (Entity.Exists && Entity.Distance > 150000)
             {
-                Log.Log("Warping: {0} ({1} km)", Entity.Name, Distance);
+                Log.Log("|oWarping");
+                Log.Log(" |-g{0} (|w{1} km|-g)", Entity.Name, Distance);
                 Entity.WarpTo(Distance);
             }
             return true;
@@ -245,12 +248,12 @@ namespace EveComFramework.Move
         {
             if (Session.InSpace)
             {
-                //LSUI.Update("Move", "Undock complete", "o");
+                Log.Log("|oUndock complete");
                 return true;
             }
 
-            //LSUI.Update("Move", "Undocking", "o");
-            //LSUI.Update("Move", " " + Session.StationName, "-g");
+            Log.Log("|oUndocking");
+            Log.Log(" |-g{0}", Session.StationName);
             Command.CmdExitStation.Execute();
             InsertState(Undock);
             WaitFor(20, () => Session.InSpace);
@@ -262,7 +265,7 @@ namespace EveComFramework.Move
             Entity JumpPortalArray = Entity.All.Where(a => a.GroupID == Group.JumpPortalArray).FirstOrDefault();
             if (JumpPortalArray == null)
             {
-                //LSUI.Update("Move", "No Jump Portal Array on grid", "r");
+                Log.Log("|yNo Jump Portal Array on grid");
                 return true;
             }
             if (JumpPortalArray.Distance > 2500)
@@ -271,8 +274,8 @@ namespace EveComFramework.Move
                 InsertState(ApproachState, -1, JumpPortalArray, 2500);
                 return true;
             }
-            //LSUI.Update("Move", "Jumping through", "o");
-            //LSUI.Update("Move", " " + JumpPortalArray.Name, "-g");
+            Log.Log("|oJumping through");
+            Log.Log(" |-g{0}", JumpPortalArray.Name);
             JumpPortalArray.JumpThroughPortal();
             InsertState(JumpThroughArray);
             int CurSystem = Session.SolarSystemID;
@@ -298,7 +301,8 @@ namespace EveComFramework.Move
                 // Start approaching our approach target if we're not currently approaching anything
                 if (!Approaching || (MyShip.ToEntity.Mode != EntityMode.Orbiting && MyShip.ToEntity.Mode != EntityMode.Approaching))
                 {
-                    Log.Log("Approaching {0}({1} km)", Target.Name, Distance / 1000);
+                    Log.Log("|oApproaching");
+                    Log.Log(" |-g{0}(|w{1} km|-g)", Target.Name, Distance / 1000);
                     Target.Approach();
                     InsertState(ApproachState, -1, Target, Distance, true);
                     WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Approaching);
@@ -308,7 +312,8 @@ namespace EveComFramework.Move
                         && Collision == null)
                 {
                     Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 5000);
-                    Log.Log("Orbiting {0}(10 km)", Collision.Name);
+                    Log.Log("|oOrbiting");
+                    Log.Log(" |-g{0}(|w10 km|-g)", Collision.Name);
                     Collision.Orbit(10000);
                     InsertState(ApproachState, -1, Target, Distance, true, Collision);
                 }
@@ -317,7 +322,8 @@ namespace EveComFramework.Move
                         && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000))
                 {
                     Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000);
-                    Log.Log("Orbiting {0}(10 km)", Collision.Name);
+                    Log.Log("|oOrbiting");
+                    Log.Log(" |-g{0}(|w10 km|-g)", Collision.Name);
                     Collision.Orbit(10000);
                     InsertState(ApproachState, -1, Target, Distance, true, Collision);
                 }
@@ -325,7 +331,8 @@ namespace EveComFramework.Move
                 else if (Entity.All.Where(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 8000).FirstOrDefault() == null
                         && Collision != null)
                 {
-                    Log.Log("Approaching {0}({1} km)", Target.Name, Distance / 1000);
+                    Log.Log("|oApproaching");
+                    Log.Log(" |-g{0}(|w{1} km|-g)", Target.Name, Distance / 1000);
                     Target.Approach();
                     InsertState(ApproachState, -1, Target, Distance, true);
                 }
@@ -356,7 +363,8 @@ namespace EveComFramework.Move
             // Start orbiting our orbit target if we're not currently orbiting anything
             if (!Orbiting || MyShip.ToEntity.Mode != EntityMode.Orbiting)
             {
-                Log.Log("Orbiting {0}({1} km)", Target.Name, Distance / 1000);
+                Log.Log("|oOrbiting");
+                Log.Log(" |-g{0}(|w{1} km|-g)", Target.Name, Distance / 1000);
                 Target.Orbit(Distance);
                 InsertState(OrbitState, -1, Target, Distance, true);
                 WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Orbiting);
@@ -366,7 +374,8 @@ namespace EveComFramework.Move
                     && Collision == null)
             {
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 5000);
-                Log.Log("Orbiting {0}(10 km)", Collision.Name);
+                Log.Log("|oOrbiting");
+                Log.Log(" |-g{0}(|w10 km|-g)", Collision.Name);
                 Collision.Orbit(10000);
                 InsertState(OrbitState, -1, Target, Distance, true, Collision);
             }
@@ -375,7 +384,8 @@ namespace EveComFramework.Move
                     && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000))
             {
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 2000);
-                Log.Log("Orbiting {0}(10 km)", Collision.Name);
+                Log.Log("|oOrbiting");
+                Log.Log(" |-g{0}(|w10 km|-g)", Collision.Name);
                 Collision.Orbit(10000);
                 InsertState(OrbitState, -1, Target, Distance, true, Collision);
             }
@@ -383,7 +393,8 @@ namespace EveComFramework.Move
             else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Distance <= 8000) == null
                     && Collision != null)
             {
-                Log.Log("Orbiting {0}({1} km)", Target.Name, Distance / 1000);
+                Log.Log("|oOrbiting");
+                Log.Log(" |-g{0}(|w{1} km|-g)", Target.Name, Distance / 1000);
                 Target.Orbit(Distance);
                 InsertState(OrbitState, -1, Target, Distance, true);
             }
@@ -413,14 +424,14 @@ namespace EveComFramework.Move
         {
             if (Route.Path == null || Route.Path[0] == -1)
             {
-                Log.Log("Autopilot deactivated");
+                Log.Log("|oAutopilot deactivated");
                 return true;
             }
             if (Session.InSpace)
             {
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
-                    Log.Log("Jumping through to {0}", Route.NextWaypoint.Name);
+                    Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);
                     Route.NextWaypoint.Jump();
                     int CurSystem = Session.SolarSystemID;
                     InsertState(AutoPilot);
@@ -441,16 +452,17 @@ namespace EveComFramework.Move
         {
             if (Params.Length == 0)
             {
-                Log.Log("Dock call incomplete");
+                Log.Log("|yDock call incomplete");
                 return true;
             }
             if (Session.InStation)
             {
-                Log.Log("Dock complete");
+                Log.Log("|oDock complete");
                 return true;
             }
 
-            Log.Log("Docking at {0}", ((Entity)Params[0]).Name);
+            Log.Log("|oDocking");
+            Log.Log(" |-g{0}", ((Entity)Params[0]).Name);
             ((Entity)Params[0]).Dock();
             InsertState(Dock, -1, Params[0]);
             WaitFor(10, () => Session.InStation, () => MyShip.ToEntity.Mode != EntityMode.Stopped);

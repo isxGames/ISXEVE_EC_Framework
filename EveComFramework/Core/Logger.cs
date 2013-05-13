@@ -58,28 +58,55 @@ namespace EveComFramework.Core
                 char a = StringReader.Dequeue();
                 if (a == '|')
                 {
+                    if (StringReader.Peek() == '-')
+                    {
+                        char darkcolor = StringReader.Dequeue();
+                        switch (darkcolor)
+                        {
+                            case 'w':
+                                Console.SelectionColor = Color.Gray;
+                                break;
+                            case 'r':
+                                Console.SelectionColor = Color.DarkRed;
+                                break;
+                            case 'b':
+                                Console.SelectionColor = Color.DarkBlue;
+                                break;
+                            case 'o':
+                                Console.SelectionColor = Color.DarkOrange;
+                                break;
+                            case 'y':
+                                Console.SelectionColor = Color.Goldenrod;
+                                break;
+                            case 'g':
+                                Console.SelectionColor = Color.DarkGreen;
+                                break;
+                        }
+                        continue;
+                    }
                     char color = StringReader.Dequeue();
                     switch (color)
                     {
                         case 'w':
                             Console.SelectionColor = Color.White;
-                            continue;
+                            break;
                         case 'r':
                             Console.SelectionColor = Color.Red;
-                            continue;
+                            break;
                         case 'b':
                             Console.SelectionColor = Color.Blue;
-                            continue;
+                            break;
                         case 'o':
                             Console.SelectionColor = Color.Orange;
-                            continue;
+                            break;
                         case 'y':
                             Console.SelectionColor = Color.Yellow;
-                            continue;
+                            break;
                         case 'g':
                             Console.SelectionColor = Color.Green;
-                            continue;
+                            break;
                     }
+                    continue;
                 }
                 Console.AppendText(a.ToString());
             }
