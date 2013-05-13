@@ -127,8 +127,6 @@ namespace EveComFramework.Cargo
                 return true;
             }
 
-            Log.Log("|oCargo |wtraveling to |y{0}", CurrentCargoAction.Bookmark.Title);
-
             Move.Bookmark(CurrentCargoAction.Bookmark);
 
             QueueState(Traveling, 5000);
@@ -175,7 +173,7 @@ namespace EveComFramework.Cargo
 
         bool Load(object[] Params)
         {
-            Log.Log("Loading");
+            Log.Log("|oLoading");
             try
             {
                 if (CurrentCargoAction.Quantity != 0)
@@ -210,7 +208,7 @@ namespace EveComFramework.Cargo
 
         bool Unload(object[] Params)
         {
-            Log.Log("Unloading");
+            Log.Log("|oUnloading");
             try
             {
                 if (CurrentCargoAction.Quantity != 0)
