@@ -43,7 +43,7 @@ namespace EveComFramework.Cargo
         CargoAction CurrentCargoAction;
         CargoAction BuildCargoAction;
         Move.Move Move = EveComFramework.Move.Move.Instance;
-        public Core.Logger Log = new Core.Logger();
+        public Core.Logger Log = new Core.Logger("Cargo");
 
         #endregion
 

@@ -139,7 +139,7 @@ namespace EveComFramework.Security
         List<Bookmark> SafeSpots;
         public SecuritySettings Config = new SecuritySettings();
         Move.Move Move = EveComFramework.Move.Move.Instance;
-        public Logger Log = new Logger();
+        public Logger Log = new Logger("Security");
 
         #endregion
 

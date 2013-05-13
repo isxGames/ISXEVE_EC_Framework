@@ -75,7 +75,7 @@ namespace EveComFramework.DroneControl
 
         #region Variables
 
-        public Core.Logger Log = new Core.Logger();
+        public Core.Logger Log = new Core.Logger("DroneControl");
         public DroneControlSettings Config = new DroneControlSettings();
         public Targets.Targets Rats = new Targets.Targets();
         public Targets.Targets Roids = new Targets.Targets();

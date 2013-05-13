@@ -62,7 +62,7 @@ namespace EveComFramework.Move
 
         #region Variables
 
-        public Core.Logger Log = new Core.Logger();
+        public Core.Logger Log = new Core.Logger("Move");
 
         #endregion
 

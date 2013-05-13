@@ -30,7 +30,7 @@ namespace EveComFramework.Core
         internal LinkedList<StateQueue> States = new LinkedList<StateQueue>();
         public StateQueue CurState;
         public bool Idle { get { return CurState == null; } }
-        public Logger StateLog = new Logger();
+        public Logger StateLog = new Logger("State");
 
         public State()
         {
