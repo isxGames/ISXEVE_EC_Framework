@@ -118,6 +118,7 @@ namespace EveComFramework.Core
                 Console.SelectedText = string.Empty;
             }
             Console.SelectionStart = Console.TextLength;
+            Console.ScrollToCaret();
         }
     }
 
