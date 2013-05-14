@@ -127,12 +127,11 @@ namespace EveComFramework.Cargo
                 return true;
             }
 
-            Log.Log("Moving to {0}", CurrentCargoAction.Bookmark.ItemID);
             Move.Bookmark(CurrentCargoAction.Bookmark);
 
-            QueueState(Traveling, 5000);
+            QueueState(Traveling);
             QueueState(WarpFleetMember);
-            QueueState(Traveling, 3000);
+            QueueState(Traveling);
             QueueState(CurrentCargoAction.Action);
             QueueState(Stack);
             QueueState(Process);
