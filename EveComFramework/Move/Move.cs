@@ -342,6 +342,9 @@ namespace EveComFramework.Move
                 }
 
             }
+            else
+            {
+            }
 
 
             return true;

@@ -173,6 +173,11 @@ namespace EveComFramework.Cargo
 
         bool Load(object[] Params)
         {
+            if (CurrentCargoAction.Source().IsPrimed)
+            {
+                CurrentCargoAction.Source().MakeActive();
+                return false;
+            }
             Log.Log("|oLoading");
             try
             {
@@ -208,6 +213,11 @@ namespace EveComFramework.Cargo
 
         bool Unload(object[] Params)
         {
+            if (CurrentCargoAction.Target().IsPrimed)
+            {
+                CurrentCargoAction.Target().MakeActive();
+                return false;
+            }
             Log.Log("|oUnloading");
             try
             {
