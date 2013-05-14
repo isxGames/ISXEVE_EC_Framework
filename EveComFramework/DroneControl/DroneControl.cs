@@ -172,7 +172,10 @@ namespace EveComFramework.DroneControl
             {
                 QueueState(CombatCheck);
             }
-
+            if (!Idle && CurState.State == Paused)
+            {
+                ClearCurState();
+            }
         }
 
         public void Stop()
@@ -189,7 +192,6 @@ namespace EveComFramework.DroneControl
                 InsertState(ResetBusy);
                 WaitFor(30, () => Drone.AllInSpace.Count() == 0);
                 Drone.AllInSpace.ReturnToDroneBay();
-                Busy.SetDone("DroneControl");
             }
         }
 

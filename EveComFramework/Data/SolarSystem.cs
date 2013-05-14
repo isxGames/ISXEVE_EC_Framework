@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace EveComFramework.Data
 {
-    class SolarSystem
+    public class SolarSystem
     {
         public long ID { get; set; }
         public string Name { get; set; }
