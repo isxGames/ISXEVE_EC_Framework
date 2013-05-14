@@ -27,7 +27,7 @@ namespace EveComFramework.Core
 
         private LoggerHelper() : base()
         {
-
+            CurrentBackColor = BackColor1;
         }
 
         #endregion
