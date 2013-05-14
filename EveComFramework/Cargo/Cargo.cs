@@ -127,6 +127,7 @@ namespace EveComFramework.Cargo
                 return true;
             }
 
+            Log.Log("Moving to {0}", CurrentCargoAction.Bookmark.ItemID);
             Move.Bookmark(CurrentCargoAction.Bookmark);
 
             QueueState(Traveling, 5000);

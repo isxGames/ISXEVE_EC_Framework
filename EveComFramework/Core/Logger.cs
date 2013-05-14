@@ -60,6 +60,7 @@ namespace EveComFramework.Core
                 {
                     if (StringReader.Peek() == '-')
                     {
+                        StringReader.Dequeue();
                         char darkcolor = StringReader.Dequeue();
                         switch (darkcolor)
                         {
@@ -79,7 +80,7 @@ namespace EveComFramework.Core
                                 Console.SelectionColor = Color.Goldenrod;
                                 break;
                             case 'g':
-                                Console.SelectionColor = Color.DarkGreen;
+                                Console.SelectionColor = Color.ForestGreen;
                                 break;
                         }
                         continue;
