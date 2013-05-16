@@ -4,15 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using InnerSpaceAPI;
+using EveCom;
 namespace EveComFramework.LoginControl
 {
+    /// <summary>
+    /// Used to document periods a bot is running
+    /// </summary>  
     [Serializable]
     public class PlaySession
     {
+        /// <summary>
+        /// The time the session started
+        /// </summary>
         public DateTime Login;
+        /// <summary>
+        /// The time the session ended, could be up to 1 minute out
+        /// </summary>
         public DateTime Logout;
     }
 
+    /// <summary>
+    /// Userprofile for an eve account including play sessions, can be serialized
+    /// </summary>
     [Serializable]
     public class Profile
     {
@@ -25,9 +38,10 @@ namespace EveComFramework.LoginControl
     public class LoginGlobalSettings : EveComFramework.Core.Settings
     {
         public LoginGlobalSettings() : base("global") { }
+        /// <summary>
+        /// Available userprofiles, keyed by the character name
+        /// </summary>
         public SerializableDictionary<string, Profile> Profiles = new SerializableDictionary<string,Profile>();
-        public int DownTimeHour = 11;
-        public int DownTimeMinute = 30;
     }
     
     public class UIData : State
@@ -86,6 +100,9 @@ namespace EveComFramework.LoginControl
 
     }
 
+    /// <summary>
+    /// Logincontrol provides interface for logging in and out of Eve and awareness of downtime
+    /// </summary>
     public class LoginControl : State
     {
         #region Instantiation
@@ -113,7 +130,6 @@ namespace EveComFramework.LoginControl
 
         #region Variables
 
-        public TimeSpan DownTimeLength = new TimeSpan(0,30,0);
         public LoginGlobalSettings Config = new LoginGlobalSettings();
         public Logger Log = new Logger("LoginControl");
         public DTControl DTControl = DTControl.Instance;
@@ -121,13 +137,18 @@ namespace EveComFramework.LoginControl
         private Profile _curProfile;
         private bool _dtCallback;
         private int _minutesBeforeDT;
-        private bool _login;
         private bool _logged_in = false;
         #endregion
 
         #region Events
 
+        /// <summary>
+        /// Fired when LoginControl thinks it is time to get ready to log out, call DoLogOut afterwards to finish it
+        /// </summary>
         public event Action LogOut;
+        /// <summary>
+        /// Fired when LoginControl has finished logging in to the specified character
+        /// </summary>
         public event Action LoggedIn;
 
         #endregion
@@ -143,8 +164,8 @@ namespace EveComFramework.LoginControl
             }
         }
 
-        private void DTStarting(int minutes)
-        {
+        private void DTStarting(double minutes)
+        {            
             if (minutes <= _minutesBeforeDT)
             {
                 DTControl.DTStarting -= DTStarting;
@@ -166,52 +187,70 @@ namespace EveComFramework.LoginControl
 
         #region Actions
 
-        public void DoLogin(string characterName , bool force = false)
+        /// <summary>
+        /// Attempts to log in, if it's DT it will wait for DT end then try, LoggedIn event is fired when this finishes
+        /// </summary>
+        /// <param name="characterName"></param>
+        /// <param name="force"></param>
+        public void DoLogin(string characterName)
         {
-            _curProfile = Config.Profiles[characterName];
-            if ( _curProfile != null)
+            if (!Idle)
             {
-                if (DTControl.IsDT)
+                _curProfile = Config.Profiles[characterName];
+                if (_curProfile != null)
                 {
-                    Log.Log("Currently DT , waiting for end before trying to log in");
-                    DTControl.DTEnded += DTEnded;
-                }
-                else
-                {
-                    Log.Log("Started logging in");
-                    QueueState(LoginScreen);
-                    QueueState(CharScreen);
-                }                
-            }
-        }
-
-        public void DoLogout()
-        {
-            DislodgeCurState(Logout);
-        }
-
-        public void WatchForDT(int minutesbefore = 10 , bool callback = true)
-        {
-            if (Idle)
-            {
-                _minutesBeforeDT = minutesbefore;
-                if (callback)
-                {
-                    _dtCallback = true;
-                    DTControl.DTStarting += DTStarting;
-                }
-                else
-                {
-                    _dtCallback = false;
-                    DTControl.DTStarting += DTStarting;
+                    if (DTControl.IsDT)
+                    {
+                        Log.Log("Currently DT , waiting for end before trying to log in");
+                        DTControl.DTEnded += DTEnded;
+                    }
+                    else
+                    {
+                        Log.Log("Started logging in");
+                        QueueState(LoginScreen);
+                        QueueState(CharScreen);
+                    }
                 }
             }
             else
             {
-                Log.Log("Logincontrol busy , can't watch for DT now");
+                Log.Log("Busy, can't log in now");
             }
         }
-
+        /// <summary>
+        /// Will close the process! Don't do this unless you are ready!
+        /// </summary>
+        public void DoLogout()
+        {
+            Clear();
+            QueueState(Logout);
+        }
+        /// <summary>
+        /// Fires LogOut event x minutes before DT, can be set to just automatically quit
+        /// </summary>
+        /// <param name="minutesbefore">Changes how long before DT it will log you out</param>
+        /// <param name="callback">If true it will fire the LogOut event instead of just logging out</param>
+        public void LogoutOnDT(int minutesbefore = 10 , bool callback = true)
+        {
+            _minutesBeforeDT = minutesbefore;
+            if (callback)
+            {
+                _dtCallback = true;
+                //small trick to make sure we only subscribe once
+                DTControl.DTStarting -= DTStarting;
+                DTControl.DTStarting += DTStarting;
+            }
+            else
+            {
+                _dtCallback = false;
+                //small trick to make sure we only subscribe once
+                DTControl.DTStarting -= DTStarting;
+                DTControl.DTStarting += DTStarting;
+            }            
+        }
+        /// <summary>
+        /// Opens up the configuration dialog, this is a MODAL dialog and will block the thread!
+        /// </summary>
         public void Configure()
         {
             UI.LoginControl Configuration = new UI.LoginControl();
@@ -321,20 +360,14 @@ namespace EveComFramework.LoginControl
             return true;
         }
 
-        #endregion
-
-        #region Downtime
-
-        bool MonitorDT(object[] Params)
-        {
-            return true;
-        }
-
-        #endregion
+        #endregion        
 
         #endregion
     }
 
+    /// <summary>
+    /// Provides access to information about downtime, fires events related to downtime
+    /// </summary>
     public class DTControl : State
     {
         #region Instantiation
@@ -354,7 +387,7 @@ namespace EveComFramework.LoginControl
 
         private DTControl()
             : base()
-        {
+        {            
             QueueState(MonitorDT, 5000);
         }
 
@@ -363,18 +396,69 @@ namespace EveComFramework.LoginControl
 
         #region Variables
 
-        public TimeSpan DownTimeLength = new TimeSpan(0, 30, 0);
+        public int DowntimeHour = 11;
+        public int DowntimeMinute = 00;
+        public int DowntimeLength = 30;
+        public DateTime NextDownTimeStart;
+        public DateTime NextDownTimeEnd;
         public Logger Log = new Logger("DTControl");
+        /// <summary>
+        /// True if it's currently scheduled downtime
+        /// </summary>
         public bool IsDT = false;
 
         #endregion
 
         #region Events
 
+        /// <summary>
+        /// Fires when DT ends
+        /// </summary>
         public event Action DTEnded;
-        public event Action<int> DTStarting;
+        /// <summary>
+        /// Fires every cycle, the parameter is when the number of minutes till DT starts, stops firing during DT
+        /// </summary>
+        public event Action<double> DTStarting;
+        /// <summary>
+        /// Fires once, when DT starts
+        /// </summary>
+        public event Action DTStarted;
 
         #endregion
+
+        private void SetNextDT()
+        {
+            DateTime now = EveCom.Session.Now;
+            DateTime todaysDTStart = new DateTime(now.Year, now.Month, now.Day, DowntimeHour, DowntimeMinute, 0);
+
+            if (todaysDTStart.Subtract(now).TotalMinutes > 0)
+            {
+                //havent had DTend yet , set it to today
+                NextDownTimeStart = new DateTime(now.Year, now.Month, now.Day, DowntimeHour, DowntimeMinute, 00);
+            }
+            else
+            {
+                NextDownTimeStart = new DateTime(now.Year, now.Month, now.Day, DowntimeHour, DowntimeMinute, 00).AddDays(1);
+            }
+            Log.Log("Next downtime will be {0}", NextDownTimeStart.ToString("MM/dd/yyyy h:mm tt"));
+        }
+
+        private void SetNextDTEnd()
+        {
+            DateTime now = EveCom.Session.Now;
+            DateTime todaysDTEnd = new DateTime(now.Year, now.Month, now.Day, DowntimeHour, DowntimeMinute, 0).AddMinutes(DowntimeLength);
+            Log.Log("{0}", todaysDTEnd.Subtract(now).TotalMinutes);
+            if (todaysDTEnd.Subtract(now).TotalMinutes > 0)
+            {
+                //havent had DTend yet , set it to today
+                NextDownTimeEnd = new DateTime(now.Year, now.Month, now.Day, DowntimeHour, DowntimeMinute, 00).AddMinutes(DowntimeLength);
+            }
+            else
+            {
+                NextDownTimeEnd = new DateTime(now.Year, now.Month, now.Day, DowntimeHour, DowntimeMinute, 00).AddDays(1).AddMinutes(DowntimeLength);               
+            }
+            Log.Log("Next downtime will end {0}", NextDownTimeEnd.ToString("MM/dd/yyyy h:mm tt"));
+        }
 
         #region States
 
@@ -390,6 +474,55 @@ namespace EveComFramework.LoginControl
 
         bool MonitorDT(object[] Params)
         {
+            //will only happen on initialization
+            if (NextDownTimeStart.Ticks == 0)
+            {
+                SetNextDT();
+                SetNextDTEnd();
+            }
+            //has dt ended
+            if (NextDownTimeEnd < EveCom.Session.Now)
+            {
+                Log.Log("Downtime has ended");
+                if (DTEnded != null)
+                {
+                    DTEnded();
+                }
+                SetNextDTEnd();
+                IsDT = false;  
+            }
+            //time to work out next DT start?
+            if (NextDownTimeStart < EveCom.Session.Now)
+            {
+                Log.Log("Downtime has begun!");
+                SetNextDT();
+                if (DTStarted != null)
+                {
+                    DTStarted();
+                }
+            }
+            //is it downtime right now?
+            if (NextDownTimeEnd.Subtract(EveCom.Session.Now).TotalMinutes < DowntimeLength)
+            {  
+                IsDT = true;
+                return false;
+            }
+            //check for a window, override default DT if there is one
+            Window dtWindow = Window.All.FirstOrDefault(a => a.Caption.ToLower().Contains("downtime"));
+            if (dtWindow != null)
+            {
+                //for now just say DT is happening right this second, later parse for the time
+                if (DTStarting != null)
+                {
+                    DTStarting(0);
+                    return false;
+                }
+            }
+            //otherwise assume as scheduled
+            if (DTStarting != null)
+            {
+                DTStarting(NextDownTimeStart.Subtract(EveCom.Session.Now).TotalMinutes);
+            }
             return false;
         }
 
