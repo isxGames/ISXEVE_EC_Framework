@@ -7,23 +7,84 @@ using System.Text;
 namespace EveComFramework.LoginControl
 {
     [Serializable]
+    public class PlaySession
+    {
+        public DateTime Login;
+        public DateTime Logout;
+    }
+
+    [Serializable]
     public class Profile
     {
-        public string ProfileName;
+        public List<PlaySession> Sessions;
         public string Username;
         public string Password;
         public long CharacterID;
-        public string Bot;
     }
 
-    public class LoginSettings : EveComFramework.Core.Settings
+    public class LoginGlobalSettings : EveComFramework.Core.Settings
     {
-        public List<Profile> Profiles = new List<Profile>();
+        public LoginGlobalSettings() : base("global") { }
+        public SerializableDictionary<string, Profile> Profiles = new SerializableDictionary<string,Profile>();
         public int DownTimeHour = 11;
         public int DownTimeMinute = 30;
     }
     
-   
+    public class UIData : State
+    {
+        #region Variables
+
+        public long CharID;
+        public string CharName;
+
+        #endregion
+        #region Instantiation
+
+        static UIData _Instance;
+        public static UIData Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new UIData();
+                }
+                return _Instance;
+            }
+        }
+
+        private UIData()
+            : base()
+        {
+            QueueState(GetUIData);
+        }
+
+
+        #endregion
+
+        public event Action GotData;
+        #region States
+
+        bool GetUIData(object[] Params)
+        {
+            if (EveCom.Me.Name != null && EveCom.Me.CharID != null)
+            {
+                CharID = EveCom.Me.CharID;
+                CharName = EveCom.Me.Name;
+                if (GotData != null)
+                {
+                    GotData();                    
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion
+
+    }
 
     public class LoginControl : State
     {
@@ -53,7 +114,7 @@ namespace EveComFramework.LoginControl
         #region Variables
 
         public TimeSpan DownTimeLength = new TimeSpan(0,30,0);
-        public LoginSettings Config = new LoginSettings();
+        public LoginGlobalSettings Config = new LoginGlobalSettings();
         public Logger Log = new Logger("LoginControl");
         public DTControl DTControl = DTControl.Instance;
 
@@ -104,9 +165,9 @@ namespace EveComFramework.LoginControl
 
         #region Actions
 
-        public void DoLogin(string profileName , bool force = false)
+        public void DoLogin(string characterName , bool force = false)
         {
-            _curProfile = Config.Profiles.FirstOrDefault(a => a.ProfileName == profileName);
+            _curProfile = Config.Profiles[characterName];
             if ( _curProfile != null)
             {
                 if (DTControl.IsDT)
@@ -118,6 +179,7 @@ namespace EveComFramework.LoginControl
                 {
                     Log.Log("Started logging in");
                     QueueState(LoginScreen);
+                    QueueState(CharScreen);
                 }                
             }
         }
@@ -173,10 +235,22 @@ namespace EveComFramework.LoginControl
 
         bool LoginScreen(object[] Params)
         {
-            if (EveCom.Login.AtLogin)
+            if (EveCom.Session.InSpace || EveCom.Session.InStation)
+            {
+                Log.Log("Already logged in!");
+                if (LoggedIn != null)
+                {
+                    LoggedIn();
+                }
+                Clear();
+                return true;
+            }
+            if (!EveCom.Login.AtLogin || EveCom.Login.Connecting)
             {
                 EveCom.Login.Connect(_curProfile.Username, _curProfile.Password);
-                QueueState(WaitConnect,1000);
+                InsertState(LoginScreen);
+                WaitFor(5, () => EveCom.Login.Connecting);
+                return true;
             }
             return true;
         }
@@ -201,6 +275,9 @@ namespace EveComFramework.LoginControl
             if (EveCom.Session.InSpace || EveCom.Session.InStation)
             {
                 Log.Log("Loaded and in space");
+                PlaySession newSession = new PlaySession();
+                newSession.Login = EveCom.Session.Now;
+                newSession.Logout = EveCom.Session.Now.AddMinutes(1);
                 QueueState(WaitLoad);
                 return true;
             }

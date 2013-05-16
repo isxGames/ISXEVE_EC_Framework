@@ -11,7 +11,7 @@ namespace EveComFramework.LoginControl.UI
 {
     public partial class LoginControl : Form
     {
-        internal LoginSettings Config = EveComFramework.LoginControl.LoginControl.Instance.Config;
+        internal LoginGlobalSettings Config = EveComFramework.LoginControl.LoginControl.Instance.Config;
 
         public LoginControl()
         {
@@ -20,39 +20,50 @@ namespace EveComFramework.LoginControl.UI
 
         private void LoginControl_Load(object sender, EventArgs e)
         {
-            foreach (Profile profile in Config.Profiles)
+            EveComFramework.LoginControl.UIData.Instance.GotData += UIData_Loaded;
+            foreach (string characterName in Config.Profiles.Keys)
             {
-                AddProfile(profile);
+                AddProfile(characterName);
             }
             Config.Save();
         }
-        private void AddProfile(Profile p)
+
+        void UIData_Loaded()
         {
-            ListViewItem profileLVI = new ListViewItem(p.ProfileName);
-            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, p.Username));
-            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, p.Password));
-            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, p.CharacterID.ToString()));
-            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, p.Bot));
-            profileLVI.Tag = p;
+            if (charnameBox.InvokeRequired)
+            {
+                charnameBox.Text = EveComFramework.LoginControl.UIData.Instance.CharName;
+                pCharIDBox.Text = EveComFramework.LoginControl.UIData.Instance.CharID.ToString();
+                addProfileButton.Enabled = true;
+            }
+            else
+            {
+                charnameBox.BeginInvoke(new Action(UIData_Loaded));
+            }
+        }
+        private void AddProfile(string characterName)
+        {
+            ListViewItem profileLVI = new ListViewItem(characterName);
+            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, Config.Profiles[characterName].Username));
+            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, Config.Profiles[characterName].Password));
+            profileLVI.SubItems.Add(new ListViewItem.ListViewSubItem(profileLVI, Config.Profiles[characterName].CharacterID.ToString()));
             profileListView.Items.Add(profileLVI);
         }
 
         private void addProfileButton_Click(object sender, EventArgs e)
         {
             Profile p = new Profile();
-            p.ProfileName = pNameBox.Text;
             p.Username = pUNameBox.Text;
             p.Password = pPasswordBox.Text;
             p.CharacterID = Convert.ToInt64(pCharIDBox.Text);
-            p.Bot = botComboBox.Text;
-            Config.Profiles.Add(p);
-            AddProfile(p);
+            Config.Profiles.Add(charnameBox.Text,p);
+            AddProfile(charnameBox.Text);
             Config.Save();
         }
 
         private void removeProfile_Click(object sender, EventArgs e)
         {   
-            Config.Profiles.Remove((Profile)profileListView.SelectedItems[0].Tag);
+            Config.Profiles.Remove((string)profileListView.SelectedItems[0].Text);
             profileListView.Items.Remove(profileListView.SelectedItems[0]);
             Config.Save();
         }
