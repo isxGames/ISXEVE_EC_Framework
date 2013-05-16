@@ -301,6 +301,8 @@ namespace EveComFramework.AutoModule
 
             #endregion
 
+            if (MyShip.ToEntity.Mode == EntityMode.Warping) return false;
+
             #region Propulsion Modules
 
             if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsOnline) > 0 &&
