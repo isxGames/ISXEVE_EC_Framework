@@ -40,6 +40,21 @@ namespace EveComFramework.Core
             watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
+        public Settings(string profilename)
+        {
+            ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
+            _ProfilePath = ConfigDirectory + profilename + ".xml";
+            this.Load();
+
+            if (!Directory.Exists(ConfigDirectory))
+            {
+                Directory.CreateDirectory(ConfigDirectory);
+            }
+
+            watcher = new FileSystemWatcher(ConfigDirectory, Config.Instance.DefaultProfile + ".xml");
+            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
+        }
+
         #region Events
 
         public delegate void NewAlert();
