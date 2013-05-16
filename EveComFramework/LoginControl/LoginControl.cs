@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using InnerSpaceAPI;
 namespace EveComFramework.LoginControl
 {
     [Serializable]
@@ -122,6 +122,7 @@ namespace EveComFramework.LoginControl
         private bool _dtCallback;
         private int _minutesBeforeDT;
         private bool _login;
+        private bool _logged_in = false;
         #endregion
 
         #region Events
@@ -242,6 +243,7 @@ namespace EveComFramework.LoginControl
                 {
                     LoggedIn();
                 }
+                _logged_in = true;
                 Clear();
                 return true;
             }
@@ -278,7 +280,11 @@ namespace EveComFramework.LoginControl
                 PlaySession newSession = new PlaySession();
                 newSession.Login = EveCom.Session.Now;
                 newSession.Logout = EveCom.Session.Now.AddMinutes(1);
-                QueueState(WaitLoad);
+                if (LoggedIn != null)
+                {
+                    LoggedIn();
+                }
+                _logged_in = true;
                 return true;
             }
             if (EveCom.CharSel.Loading)
@@ -297,19 +303,21 @@ namespace EveComFramework.LoginControl
                     }
                 }
             }
-            return false;
+            return false;        
         }
 
-        bool WaitLoad(object[] Params)
-        {
-            return true;
-        }
         #endregion
 
         #region LoggingOut
 
         bool Logout(object[] Params)
         {
+            if (_logged_in)
+            {
+                _curProfile.Sessions.Last().Logout = EveCom.Session.Now;
+            }
+            Config.Save();
+            LavishScriptAPI.LavishScript.ExecuteCommand("Exit");            
             return true;
         }
 
