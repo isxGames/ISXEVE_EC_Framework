@@ -104,7 +104,7 @@ namespace EveComFramework.AutoModule
 
         bool Control(object[] Params)
         {
-            if (!Session.InSpace || Overide)
+            if (!Session.InSpace || !Session.Safe || Overide)
             {
                 return false;
             }

@@ -408,6 +408,10 @@ namespace EveComFramework.DroneControl
                 QueueState(myargs => true, 5000);
                 QueueState(LogisticsOnDrones);
             }
+            if (!Drone.AllInSpace.Any())
+            {
+                Busy.SetDone("DroneControl");
+            }
             return true;
         }
 
