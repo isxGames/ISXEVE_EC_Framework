@@ -144,11 +144,14 @@ namespace EveComFramework.Move
             {
                 if (Session.StationID == Bookmark.ItemID)
                 {
+                    EVEFrame.Log(Session.StationID.ToString() + " == " + Bookmark.ItemID.ToString());
                     return true;
                 }
                 else
                 {
                     QueueState(Undock);
+                    QueueState(BookmarkPrep, -1, Bookmark, Distance);
+                    return true;
                 }
             }
             if (Bookmark.LocationID != Session.SolarSystemID)
@@ -489,6 +492,8 @@ namespace EveComFramework.Move
 
         bool Dock(object[] Params)
         {
+            if (!Session.InSpace) return true;
+
             Entity Target = (Entity)Params[0];
             Entity Collision = null;
             if (Params.Count() > 1) Collision = (Entity)Params[1];
