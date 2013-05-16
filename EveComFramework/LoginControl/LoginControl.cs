@@ -9,9 +9,11 @@ namespace EveComFramework.LoginControl
     [Serializable]
     public class Profile
     {
+        public string ProfileName;
         public string Username;
         public string Password;
         public long CharacterID;
+        public string Bot;
     }
 
     public class LoginSettings : EveComFramework.Core.Settings
@@ -102,9 +104,9 @@ namespace EveComFramework.LoginControl
 
         #region Actions
 
-        public void DoLogin(string profileUName , bool force = false)
+        public void DoLogin(string profileName , bool force = false)
         {
-            _curProfile = Config.Profiles.FirstOrDefault(a => a.Username == profileUName);
+            _curProfile = Config.Profiles.FirstOrDefault(a => a.ProfileName == profileName);
             if ( _curProfile != null)
             {
                 if (DTControl.IsDT)
@@ -150,7 +152,7 @@ namespace EveComFramework.LoginControl
         public void Configure()
         {
             UI.LoginControl Configuration = new UI.LoginControl();
-            Configuration.Show();
+            Configuration.ShowDialog();
         }
 
         #endregion
@@ -171,20 +173,54 @@ namespace EveComFramework.LoginControl
 
         bool LoginScreen(object[] Params)
         {
-            QueueState(WaitConnect);
+            if (EveCom.Login.AtLogin)
+            {
+                EveCom.Login.Connect(_curProfile.Username, _curProfile.Password);
+                QueueState(WaitConnect,1000);
+            }
             return true;
         }
 
         bool WaitConnect(object[] Params)
         {
-            QueueState(CharScreen);
-            return true;
+            if (EveCom.Login.Connecting || EveCom.Login.Loading)
+            {
+                return false;
+            }
+            else if (EveCom.CharSel.AtCharSel && EveCom.CharSel.Ready)
+            {
+                Log.Log("At char selection screen");
+                QueueState(CharScreen);
+                return true;
+            }
+            return false;
         }
 
         bool CharScreen(object[] Params)
         {
-            QueueState(WaitLoad);
-            return true;
+            if (EveCom.Session.InSpace || EveCom.Session.InStation)
+            {
+                Log.Log("Loaded and in space");
+                QueueState(WaitLoad);
+                return true;
+            }
+            if (EveCom.CharSel.Loading)
+            {
+                return false;
+            }
+            if (EveCom.CharSel.AtCharSel && EveCom.CharSel.Ready && !EveCom.CharSel.Loading)
+            {
+                foreach (EveCom.CharSel.CharSlot character in EveCom.CharSel.Slots)
+                {
+                    if (character.CharID == _curProfile.CharacterID)
+                    {
+                        Log.Log("Activating character {0}", _curProfile.CharacterID.ToString());
+                        character.Activate();
+                        return false;
+                    }
+                }
+            }
+            return false;
         }
 
         bool WaitLoad(object[] Params)
