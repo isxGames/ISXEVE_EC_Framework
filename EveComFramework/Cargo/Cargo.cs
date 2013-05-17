@@ -14,18 +14,16 @@ namespace EveComFramework.Cargo
         {
             internal Func<object[], bool> Action { get; set; }
             internal Bookmark Bookmark { get; set; }
-            internal string ContainerName { get; set; }
             internal Func<Item, bool> QueryString { get; set; }
             internal int Quantity { get; set; }
             internal Func<InventoryContainer> Source { get; set; }
             internal Func<InventoryContainer> Target { get; set; }
 
-            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, string ContainerName, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
+            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
             {
                 this.Action = Action;
                 this.Bookmark = Bookmark;
                 this.Source = Source;
-                this.ContainerName = ContainerName;
                 this.QueryString = QueryString;
                 this.Quantity = Quantity;
                 this.Target = Target;
@@ -33,7 +31,7 @@ namespace EveComFramework.Cargo
 
             public CargoAction Clone()
             {
-                return new CargoAction(Action, Bookmark, Source, ContainerName, QueryString, Quantity, Target);
+                return new CargoAction(Action, Bookmark, Source, QueryString, Quantity, Target);
             }
         }
 
@@ -73,7 +71,7 @@ namespace EveComFramework.Cargo
 
         public CargoProxy At(Bookmark Bookmark, Func<InventoryContainer> Source = null, string ContainerName = "")
         {
-            BuildCargoAction = new CargoAction(null, Bookmark, Source ?? (() => Station.ItemHangar), ContainerName, null, 0, null);
+            BuildCargoAction = new CargoAction(null, Bookmark, Source ?? (() => Station.ItemHangar), null, 0, null);
             return new CargoProxy();
         }
 
