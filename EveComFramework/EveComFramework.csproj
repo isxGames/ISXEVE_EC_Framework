@@ -12,6 +12,7 @@
     <AssemblyName>EveComFramework</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,6 +75,13 @@
     <Compile Include="DroneControl\UI\DroneControl.designer.cs">
       <DependentUpon>DroneControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoginControl\LoginControl.cs" />
+    <Compile Include="LoginControl\UI\LoginControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginControl\UI\LoginControl.Designer.cs">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Move\Move.cs" />
     <Compile Include="Optimizer\Optimizer.cs" />
     <Compile Include="Optimizer\UI\Optimizer.cs">
@@ -100,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DroneControl\UI\DroneControl.resx">
       <DependentUpon>DroneControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginControl\UI\LoginControl.resx">
+      <DependentUpon>LoginControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Optimizer\UI\Optimizer.resx">
       <DependentUpon>Optimizer.cs</DependentUpon>
