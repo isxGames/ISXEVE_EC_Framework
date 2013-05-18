@@ -51,7 +51,7 @@ namespace EveComFramework.Core
                 Directory.CreateDirectory(ConfigDirectory);
             }
 
-            watcher = new FileSystemWatcher(ConfigDirectory, Config.Instance.DefaultProfile + ".xml");
+            watcher = new FileSystemWatcher(ConfigDirectory, profilename + ".xml");
             watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
@@ -136,7 +136,6 @@ namespace EveComFramework.Core
             }
             catch (Exception ex)
             {
-                InnerSpaceAPI.InnerSpace.Echo(ex.Message);
             }
             Config.Instance.InUse = false;
         }
@@ -175,7 +174,7 @@ namespace EveComFramework.Core
                         }
                     }
                 }
-                catch 
+                catch
                 {
                     Save();
                 }
