@@ -451,6 +451,7 @@ namespace EveComFramework.Security
                 Log.Log("|rYou do not have an event handler subscribed to Security.ClearAlert!");
                 Log.Log("|rThis is bad!  Tell your developer they're not using Security right!");
             }
+            else
             {
                 ClearAlert();
             }
