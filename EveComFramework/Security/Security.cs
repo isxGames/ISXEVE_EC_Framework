@@ -333,10 +333,6 @@ namespace EveComFramework.Security
 
         bool Flee(object[] Params)
         {
-            if (Session.InStation)
-            {
-                return true;
-            }
             FleeTrigger Trigger = (FleeTrigger)Params[0];
             int FleeWait = Config.FleeWait * 60000;
             if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
@@ -345,8 +341,15 @@ namespace EveComFramework.Security
             Move.Clear();
 
             QueueState(Traveling);
+            QueueState(LogMessage, 1, string.Format("|oReached flee target"));
+            QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
             QueueState(Resume, FleeWait);
             QueueState(CheckSafe);
+
+            if (Session.InStation)
+            {
+                return true;
+            }
             foreach (FleeType FleeType in Config.Types)
             {
                 switch (FleeType)
@@ -391,8 +394,15 @@ namespace EveComFramework.Security
             return true;
         }
 
+        bool LogMessage(object[] Params)
+        {
+            Log.Log((string)Params[0]);
+            return true;
+        }
+
         bool Resume(object[] Params)
         {
+            EVEFrame.Log("Resumed!");
             ClearAlert();
             return true;
         }
