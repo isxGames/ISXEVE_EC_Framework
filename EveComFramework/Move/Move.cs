@@ -537,7 +537,7 @@ namespace EveComFramework.Move
                 Log.Log(" |-g{0}", Target.Name);
                 Target.Dock();
                 InsertState(Dock, -1, Target);
-                WaitFor(10, () => Session.InStation);
+                WaitFor(10, () => Session.InStation, () => MyShip.ToEntity.Mode == EntityMode.Warping);
             }
             else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000) != null
                 && Collision != null
