@@ -90,12 +90,8 @@ namespace EveComFramework.SessionControl
 
         bool Update(object[] Params)
         {
-            if (Me.Name != null)
-            {
-                CharID = Me.CharID;
-                CharName = Me.Name;
-                return true;
-            }
+            CharID = Me.CharID;
+            CharName = Me.Name;
             return false;
         }
         #endregion

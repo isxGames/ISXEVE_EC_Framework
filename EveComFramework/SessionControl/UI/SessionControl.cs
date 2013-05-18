@@ -14,6 +14,7 @@ namespace EveComFramework.SessionControl.UI
     {
         internal LoginGlobalSettings GlobalConfig = EveComFramework.SessionControl.SessionControl.Instance.GlobalConfig;
         internal LoginLocalSettings Config = EveComFramework.SessionControl.SessionControl.Instance.Config;
+        UIData UIData = UIData.Instance;
 
         public SessionControl()
         {
@@ -50,20 +51,21 @@ namespace EveComFramework.SessionControl.UI
 
         private void addProfileButton_Click(object sender, EventArgs e)
         {
-            if (UIData.Instance.CharName == null) return;
+            if (UIData.CharName == null) return;
             Profile p = new Profile();
             p.Username = pUNameBox.Text;
             p.Password = pPasswordBox.Text;
-            p.CharacterID = UIData.Instance.CharID;
+            p.CharacterID = UIData.CharID;
             if (GlobalConfig.Profiles.ContainsKey(UIData.Instance.CharName))
             {
-                GlobalConfig.Profiles[UIData.Instance.CharName] = p;
+                GlobalConfig.Profiles[UIData.CharName] = p;
             }
             else
             {
-                GlobalConfig.Profiles.Add(UIData.Instance.CharName, p);
+                GlobalConfig.Profiles.Add(UIData.CharName, p);
             }
             GlobalConfig.Save();
+            AddProfile(UIData.CharName);
         }
 
         private void removeProfile_Click(object sender, EventArgs e)

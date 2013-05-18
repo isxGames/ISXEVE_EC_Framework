@@ -98,7 +98,6 @@
             // 
             // addProfileButton
             // 
-            this.addProfileButton.Enabled = false;
             this.addProfileButton.Location = new System.Drawing.Point(491, 14);
             this.addProfileButton.Name = "addProfileButton";
             this.addProfileButton.Size = new System.Drawing.Size(92, 21);
