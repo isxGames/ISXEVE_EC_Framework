@@ -41,6 +41,7 @@ namespace EveComFramework.Core
         public void RichTextboxUpdater(RichTextBox Console, string Module, string Message)
         {
             if (Console.WordWrap) Console.WordWrap = false;
+            Console.SelectionStart = Console.TextLength;
             Console.SelectionColor = DefaultForegroundColor;
             Console.SelectionBackColor = CurrentBackColor;
             if (CurrentBackColor == BackColor1)
