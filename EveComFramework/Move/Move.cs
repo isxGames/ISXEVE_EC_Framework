@@ -382,6 +382,7 @@ namespace EveComFramework.Move
             }
             else
             {
+                Command.CmdStopShip.Execute();
             }
 
 
@@ -421,7 +422,8 @@ namespace EveComFramework.Move
                 InsertState(OrbitState, -1, Target, Distance, true, Collision);
             }
             // Else, if we're in .2km of a structure that isn't our current collision target, change orbit and collision target to it
-            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 2000) != null
+            else if (Entity.All.Any(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 200)
+                    && Collision != null
                     && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 200))
             {
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 200);
