@@ -452,6 +452,7 @@ namespace EveComFramework.Security
             }
             else
             {
+                Log.Log("|oSending ClearAlert command - resume operations");
                 ClearAlert();
             }
             return true;
