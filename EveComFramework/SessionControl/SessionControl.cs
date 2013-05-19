@@ -287,7 +287,7 @@ namespace EveComFramework.SessionControl
         bool Monitor(object[] Params)
         {
             //close downtime warning windows
-            Window dtWindow = Window.All.FirstOrDefault(a => a.Caption.ToLower().Contains("downtime"));
+            Window dtWindow = Window.All.FirstOrDefault(a => a.Caption != null && a.Caption.ToLower().Contains("downtime"));
             if (dtWindow != null)
             {
                 dtWindow.Close();
