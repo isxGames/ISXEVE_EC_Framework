@@ -324,40 +324,40 @@ namespace EveComFramework.Security
                         QueueState(Flee, -1, FleeTrigger.Pod);
                         Log.Log("|rIn a pod!");
                         return true;
-                        break;
                     case FleeTrigger.NegativeStanding:
                         TriggerAlert();
                         QueueState(Flee, -1, FleeTrigger.NegativeStanding);
+                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                         Log.Log("|r{0} is negative standing", Hostile.Name);
                         return true;
-                        break;
                     case FleeTrigger.NeutralStanding:
                         TriggerAlert();
                         QueueState(Flee, -1, FleeTrigger.NeutralStanding);
+                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                         Log.Log("|r{0} is neutral standing", Hostile.Name);
                         return true;
-                        break;
                     case FleeTrigger.Targeted:
                         TriggerAlert();
                         QueueState(Flee, -1, FleeTrigger.Targeted);
                         Log.Log("|r{0} is targeting me", Hostile.Name);
+                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                         return true;
-                        break;
                     case FleeTrigger.CapacitorLow:
                         TriggerAlert();
                         QueueState(Flee, -1, FleeTrigger.CapacitorLow);
+                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                         Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
                         return true;
-                        break;
                     case FleeTrigger.ShieldLow:
                         TriggerAlert();
                         QueueState(Flee, -1, FleeTrigger.ShieldLow);
+                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                         Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
                         return true;
-                        break;
                     case FleeTrigger.ArmorLow:
                         TriggerAlert();
                         QueueState(Flee, -1, FleeTrigger.ArmorLow);
+                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                         Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
                         return true;
                 }
@@ -445,7 +445,6 @@ namespace EveComFramework.Security
 
         bool Resume(object[] Params)
         {
-            EVEFrame.Log("Resumed!");
             if (ClearAlert == null)
             {
                 Log.Log("|rYou do not have an event handler subscribed to Security.ClearAlert!");
