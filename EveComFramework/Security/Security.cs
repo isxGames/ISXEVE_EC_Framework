@@ -204,6 +204,8 @@ namespace EveComFramework.Security
 
         FleeTrigger SafeTrigger()
         {
+            if (!Standing.Ready) Standing.LoadStandings();
+
             foreach (FleeTrigger Trigger in Config.Triggers)
             {
                 switch (Trigger)
