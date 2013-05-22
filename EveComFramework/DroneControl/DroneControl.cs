@@ -188,11 +188,11 @@ namespace EveComFramework.DroneControl
             if (!Idle)
             {
                 DislodgeCurState(args => true);
-                InsertState(Paused);
-                InsertState(ResetBusy);
-                WaitFor(30, () => Drone.AllInSpace.Count() == 0);
-                Drone.AllInSpace.ReturnToDroneBay();
             }
+            InsertState(Paused);
+            InsertState(ResetBusy);
+            WaitFor(30, () => Drone.AllInSpace.Count() == 0);
+            Drone.AllInSpace.ReturnToDroneBay();
         }
 
         public void Resume()
