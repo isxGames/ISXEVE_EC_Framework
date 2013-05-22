@@ -247,17 +247,6 @@ namespace EveComFramework.Move
             Entity Entity = (Entity)Params[0];
             int Distance = (int)Params[1];
 
-            if (Session.InStation)
-            {
-                if (Session.StationID == Entity.ID)
-                {
-                    return true;
-                }
-                else
-                {
-                    QueueState(Undock);
-                }
-            }
             if (Entity.GroupID == Group.Station)
             {
                 QueueState(Dock, -1, Entity);
@@ -273,12 +262,60 @@ namespace EveComFramework.Move
         {
             Entity Entity = (Entity)Params[0];
             int Distance = (int)Params[1];
-            if (Entity.Exists && Entity.Distance > 150000)
+            Entity Collision = null;
+            if (Params.Count() > 2) Collision = (Entity)Params[2];
+
+            if (!Session.InSpace)
             {
-                Log.Log("|oWarping");
-                Log.Log(" |-g{0} (|w{1} km|-g)", Entity.Name, Distance);
-                Entity.WarpTo(Distance);
+                return true;
             }
+            if (MyShip.ToEntity.Mode == EntityMode.Warping)
+            {
+                return false;
+            }
+            if (Entity.Distance < 150000 && Entity.Distance > 0)
+            {
+                return true;
+            }
+            if (Entity.All.Any(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000)
+                    && Collision == null)
+            {
+                Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000);
+                Log.Log("|oToo close for warp, orbiting");
+                Log.Log(" |-g{0}(|w2 km|-g)", Collision.Name);
+                Collision.Orbit(2000);
+                InsertState(ObjectWarp, -1, Entity, Distance, Collision);
+            }
+            // Else, if we're in .2km of a structure that isn't our current collision target, change orbit and collision target to it
+            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 200) != null
+                    && Collision != null
+                    && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 200))
+            {
+                Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 200);
+                Log.Log("|oOrbiting");
+                Log.Log(" |-g{0}(|w2 km|-g)", Collision.Name);
+                Collision.Orbit(2000);
+                InsertState(ObjectWarp, -1, Entity, Distance, Collision);
+            }
+            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000) == null)
+            {
+                if (Entity.Exists && Entity.Distance > 150000)
+                {
+                    Log.Log("|oWarping");
+                    Log.Log(" |-g{0} (|w{1} km|-g)", Entity.Name, Distance);
+                    Entity.WarpTo(Distance);
+                    InsertState(ObjectWarp, -1, Entity, Distance);
+                    WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
+                }
+                return true;
+            }
+            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000) != null
+                && Collision != null
+                && Collision == Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000))
+            {
+                InsertState(ObjectWarp, -1, Entity, Distance, Collision);
+            }
+
             return true;
         }
 

@@ -52,7 +52,7 @@ namespace EveComFramework.Core
             {
                 CurrentBackColor = BackColor1;
             }
-            Console.AppendText(String.Format("{0} {1}", DateTime.Now.ToString("hh:mm"), Module.PadRight(10)));
+            Console.AppendText(String.Format("{0} {1}", DateTime.Now.ToString("hh:mm"), Module.PadRight(12)));
             Queue<char> StringReader = new Queue<char>(Message);
             while (StringReader.Any())
             {
