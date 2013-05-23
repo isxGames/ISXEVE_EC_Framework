@@ -139,6 +139,7 @@ namespace EveComFramework.SessionControl
         Random random = new Random();
         int DowntimeDelta = 0;
         int LoginDelta = 0;
+        int LogoutDelta = 0;
 
         private Profile _curProfile;
 
@@ -255,6 +256,7 @@ namespace EveComFramework.SessionControl
                 if (_curProfile != null) _curProfile.Sessions.Add(newSession);
                 SessionStart = DateTime.Now.AddMinutes(random.Next(Config.LogoutDelta));
                 DowntimeDelta = random.Next(Config.DowntimeDelta);
+                LogoutDelta = random.Next(Config.LogoutDelta);
                 return true;
             }
             if (CharSel.Loading) return false;
@@ -294,8 +296,8 @@ namespace EveComFramework.SessionControl
                 return false;
             }
 
-            if (DateTime.Now > SessionStart.AddHours(Config.LogoutDelta) ||
-                DateTime.Now.AddMinutes(Config.DowntimeDelta + DowntimeDelta) > Session.NextDowntime)
+            if (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
+                DateTime.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
             {
                 LogOut();
                 return true;
