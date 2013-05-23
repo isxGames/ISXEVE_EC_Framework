@@ -123,6 +123,7 @@ namespace EveComFramework.SessionControl
             QueueState(LoginScreen);
             QueueState(CharScreen);
             QueueState(Monitor);
+            QueueState(Logout);
         }
 
 
@@ -299,7 +300,6 @@ namespace EveComFramework.SessionControl
             if (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
                 DateTime.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
             {
-                LogOut();
                 return true;
             }
 
