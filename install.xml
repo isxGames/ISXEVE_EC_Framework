@@ -1,0 +1,21 @@
+<?xml version="1.0" ?> 
+<Install>
+	<Files>
+		<File>
+			<Get>EveComFramework/bin/Release/EveComFramework.dll</Get>
+			<Put>EveComFramework.dll</Put>
+			<Dependencies>
+				<Dependency>
+					<Repo>EveCom</Repo>
+					<Branch>master</Branch>
+				</Dependency>
+			</Dependencies>
+		</File>
+		<File>
+			<Get>EveComFramework/bin/Release/EveComFramework.pdb</Get>
+			<Put>EveComFramework.pdb</Put>
+		</File>
+	</Files>
+	<Global>false</Global>
+	<Type>DLL</Type>
+</Install>
