@@ -6,7 +6,7 @@
 			<Put>EveComFramework.dll</Put>
 			<Dependencies>
 				<Dependency>
-					<Repo>EveCom</Repo>
+					<Repo>EveCom.git</Repo>
 					<Branch>master</Branch>
 				</Dependency>
 			</Dependencies>
