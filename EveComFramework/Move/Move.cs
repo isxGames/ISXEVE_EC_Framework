@@ -466,7 +466,7 @@ namespace EveComFramework.Move
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 2000);
                 Log.Log("|oOrbiting");
                 Log.Log(" |-g{0}(|w10 km|-g)", Collision.Name);
-                Collision.Orbit(1000);
+                Collision.Orbit(10000);
                 InsertState(OrbitState, -1, Target, Distance, true, Collision);
             }
             // Else, if we're not within 1km of a structure and we have a collision target (orbiting a structure) change orbit back to our orbit target
