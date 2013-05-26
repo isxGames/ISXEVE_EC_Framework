@@ -63,6 +63,15 @@ namespace EveComFramework.Move
         #region Variables
 
         public Core.Logger Log = new Core.Logger("Move");
+        public bool Traveling {
+        get
+            {
+                if (Idle) return false;
+                if (CurState.ToString() == "OrbitState") return false;
+                if (CurState.ToString() == "ApproachState") return false;
+                return true;
+            }
+        }
 
         #endregion
 
