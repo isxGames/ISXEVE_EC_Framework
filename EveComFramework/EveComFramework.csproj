@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EveCom">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\InnerSpace\.NET Programs\EveCom.dll</HintPath>
+      <HintPath>..\EveCom.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Lavish.InnerSpace">

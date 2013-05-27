@@ -119,43 +119,43 @@ namespace EveComFramework.FleetControl
             }
 
 
-            if (!Session.InFleet)
-            {
-                if (Window.All.OfType<PopupWindow>().Any(a => a.Message.Contains(Config.Fleets[Config.CurrentFleet].Boss)))
-                {
-                    Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains(Config.Fleets[Config.CurrentFleet].Boss)).ClickButton(Window.Button.Yes);
-                    return false;
-                }
+            //if (!Session.InFleet)
+            //{
+            //    if (Window.All.OfType<PopupWindow>().Any(a => a.Message.Contains(Config.Fleets[Config.CurrentFleet].Boss)))
+            //    {
+            //        Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains(Config.Fleets[Config.CurrentFleet].Boss)).ClickButton(Window.Button.Yes);
+            //        return false;
+            //    }
 
-                if (Config.Fleets[Config.CurrentFleet].Boss == Me.Name)
-                {
-                    _Fleet.CreateFleet();
-                    return false;
-                }
-                return false;
-            }
+            //    if (Config.Fleets[Config.CurrentFleet].Boss == Me.Name)
+            //    {
+            //        _Fleet.CreateFleet();
+            //        return false;
+            //    }
+            //    return false;
+            //}
 
-            if (Config.Fleets[Config.CurrentFleet].Boss != Me.Name) return false;
+            //if (Config.Fleets[Config.CurrentFleet].Boss != Me.Name) return false;
 
-            if (Config.Fleets[Config.CurrentFleet].Commander != _Fleet.Commander.ID && Config.Fleets[Config.CurrentFleet].Commander != -1)
-            {
-                if (Config.Fleets[Config.CurrentFleet].Commander == Me.CharID)
-                {
-                    _Fleet.Members.FirstOrDefault(a => a.ID == Me.CharID).Move(role: FleetRole.FleetCommander);
-                    return false;
-                }
-                else if (_Fleet.Members.Any(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander))
-                {
-                    _Fleet.Members.FirstOrDefault(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander).Move(role: FleetRole.FleetCommander);
-                    return false;
-                }
-                else if (Local.Pilots.Any(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander))
-                {
-                    _Fleet.Invite(Local.Pilots.FirstOrDefault(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander), role: FleetRole.FleetCommander);
-                    return false;
-                }
+            //if (Config.Fleets[Config.CurrentFleet].Commander != _Fleet.Commander.ID && Config.Fleets[Config.CurrentFleet].Commander != -1)
+            //{
+            //    if (Config.Fleets[Config.CurrentFleet].Commander == Me.CharID)
+            //    {
+            //        _Fleet.Members.FirstOrDefault(a => a.ID == Me.CharID).Move(role: FleetRole.FleetCommander);
+            //        return false;
+            //    }
+            //    else if (_Fleet.Members.Any(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander))
+            //    {
+            //        _Fleet.Members.FirstOrDefault(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander).Move(role: FleetRole.FleetCommander);
+            //        return false;
+            //    }
+            //    else if (Local.Pilots.Any(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander))
+            //    {
+            //        _Fleet.Invite(Local.Pilots.FirstOrDefault(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander), role: FleetRole.FleetCommander);
+            //        return false;
+            //    }
                 
-            }
+            //}
 
 
             return false;
