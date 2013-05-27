@@ -74,6 +74,12 @@ namespace EveComFramework.Security.UI
                             i.Checked = true;
                         }
                         break;
+                    case "Neutral to me only":
+                        if (Config.Triggers.Contains(FleeTrigger.Paranoid))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
                     case "Targeted by another player":
                         if (Config.Triggers.Contains(FleeTrigger.Targeted))
                         {
@@ -155,6 +161,13 @@ namespace EveComFramework.Security.UI
                     IncludeAllianceMembers.Checked = Config.NeutralAlliance;
                     IncludeFleetMembers.Checked = Config.NeutralFleet;
                     break;
+                case "Neutral to me only":
+                    ThresholdGroup.Hide();
+                    StandingGroup.Show();
+                    IncludeCorpMembers.Checked = Config.ParanoidCorp;
+                    IncludeAllianceMembers.Checked = Config.ParanoidAlliance;
+                    IncludeFleetMembers.Checked = Config.ParanoidFleet;
+                    break;
                 case "Targeted by another player":
                     ThresholdGroup.Hide();
                     StandingGroup.Show();
@@ -211,6 +224,9 @@ namespace EveComFramework.Security.UI
         {
             switch (ActiveTrigger)
             {
+                case "Neutral to me only":
+                    Config.ParanoidCorp = IncludeCorpMembers.Checked;
+                    break;
                 case "Negative standing pilot in local":
                     Config.NegativeCorp = IncludeCorpMembers.Checked;
                     break;
@@ -228,6 +244,9 @@ namespace EveComFramework.Security.UI
         {
             switch (ActiveTrigger)
             {
+                case "Neutral to me only":
+                    Config.ParanoidAlliance = IncludeCorpMembers.Checked;
+                    break;
                 case "Negative standing pilot in local":
                     Config.NegativeAlliance = IncludeAllianceMembers.Checked;
                     break;
@@ -245,6 +264,9 @@ namespace EveComFramework.Security.UI
         {
             switch (ActiveTrigger)
             {
+                case "Neutral to me only":
+                    Config.ParanoidFleet = IncludeCorpMembers.Checked;
+                    break;
                 case "Negative standing pilot in local":
                     Config.NegativeFleet = IncludeFleetMembers.Checked;
                     break;
@@ -283,6 +305,9 @@ namespace EveComFramework.Security.UI
                         break;
                     case "Neutral standing pilot in local":
                         build.Add(FleeTrigger.NeutralStanding);
+                        break;
+                    case "Neutral to me only":
+                        build.Add(FleeTrigger.Paranoid);
                         break;
                     case "Targeted by another player":
                         build.Add(FleeTrigger.Targeted);

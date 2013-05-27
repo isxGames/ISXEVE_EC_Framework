@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("In a pod");
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Targeted by another player");
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Capacitor low");
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Shield low");
-            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Armor low");
-            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Flee to closest station");
-            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
-            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Neutral to me only");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ThresholdGroup = new System.Windows.Forms.GroupBox();
@@ -104,7 +105,7 @@
             // 
             this.ThresholdGroup.Controls.Add(this.ThresholdLabel);
             this.ThresholdGroup.Controls.Add(this.Threshold);
-            this.ThresholdGroup.Location = new System.Drawing.Point(6, 164);
+            this.ThresholdGroup.Location = new System.Drawing.Point(6, 196);
             this.ThresholdGroup.Name = "ThresholdGroup";
             this.ThresholdGroup.Size = new System.Drawing.Size(300, 60);
             this.ThresholdGroup.TabIndex = 3;
@@ -138,7 +139,7 @@
             this.groupBox5.Controls.Add(this.Triggers);
             this.groupBox5.Location = new System.Drawing.Point(6, 6);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(300, 152);
+            this.groupBox5.Size = new System.Drawing.Size(300, 184);
             this.groupBox5.TabIndex = 1;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Triggers";
@@ -150,26 +151,28 @@
             this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem11.StateImageIndex = 0;
-            listViewItem12.StateImageIndex = 0;
-            listViewItem13.StateImageIndex = 0;
-            listViewItem14.StateImageIndex = 0;
-            listViewItem15.StateImageIndex = 0;
-            listViewItem16.StateImageIndex = 0;
-            listViewItem17.StateImageIndex = 0;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem11,
-            listViewItem12,
-            listViewItem13,
-            listViewItem14,
-            listViewItem15,
-            listViewItem16,
-            listViewItem17});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8});
             this.Triggers.Location = new System.Drawing.Point(9, 20);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
             this.Triggers.Scrollable = false;
-            this.Triggers.Size = new System.Drawing.Size(285, 126);
+            this.Triggers.Size = new System.Drawing.Size(285, 158);
             this.Triggers.TabIndex = 3;
             this.Triggers.UseCompatibleStateImageBehavior = false;
             this.Triggers.View = System.Windows.Forms.View.Details;
@@ -184,7 +187,7 @@
             this.StandingGroup.Controls.Add(this.IncludeFleetMembers);
             this.StandingGroup.Controls.Add(this.IncludeAllianceMembers);
             this.StandingGroup.Controls.Add(this.IncludeCorpMembers);
-            this.StandingGroup.Location = new System.Drawing.Point(6, 164);
+            this.StandingGroup.Location = new System.Drawing.Point(6, 196);
             this.StandingGroup.Name = "StandingGroup";
             this.StandingGroup.Size = new System.Drawing.Size(300, 88);
             this.StandingGroup.TabIndex = 2;
@@ -332,13 +335,13 @@
             this.FleeTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem18.StateImageIndex = 0;
-            listViewItem19.StateImageIndex = 0;
-            listViewItem20.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
+            listViewItem11.StateImageIndex = 0;
             this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem18,
-            listViewItem19,
-            listViewItem20});
+            listViewItem9,
+            listViewItem10,
+            listViewItem11});
             this.FleeTypes.Location = new System.Drawing.Point(10, 20);
             this.FleeTypes.Name = "FleeTypes";
             this.FleeTypes.Scrollable = false;

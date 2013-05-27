@@ -14,6 +14,7 @@ namespace EveComFramework.Security
         Pod,
         NegativeStanding,
         NeutralStanding,
+        Paranoid,
         Targeted,
         CapacitorLow,
         ShieldLow,
@@ -40,6 +41,7 @@ namespace EveComFramework.Security
             FleeTrigger.Pod,
             FleeTrigger.NegativeStanding,
             FleeTrigger.NeutralStanding,
+            FleeTrigger.Paranoid,
             FleeTrigger.Targeted,
             FleeTrigger.CapacitorLow,
             FleeTrigger.ShieldLow,
@@ -57,6 +59,9 @@ namespace EveComFramework.Security
         public bool NeutralAlliance = false;
         public bool NeutralCorp = false;
         public bool NeutralFleet = false;
+        public bool ParanoidAlliance = false;
+        public bool ParanoidCorp = false;
+        public bool ParanoidFleet = false;
         public bool TargetAlliance = false;
         public bool TargetCorp = false;
         public bool TargetFleet = false;
@@ -253,6 +258,21 @@ namespace EveComFramework.Security
                         {
                             Hostile = NeutralPilots.FirstOrDefault();
                             return FleeTrigger.NeutralStanding;
+                        }
+                        break;
+                    case FleeTrigger.Paranoid:
+                        List<Pilot> Paranoid = Local.Pilots.Where(a => (        a.ToAlliance.FromChar <= 0 &&
+                                                                                a.ToCorp.FromChar <= 0 &&
+                                                                                a.ToChar.FromChar <= 0
+                                                                             ) &&
+                                                                             a.ID != Me.CharID).ToList();
+                        if (!Config.ParanoidAlliance) { Paranoid.RemoveAll(a => a.AllianceID == Me.AllianceID); }
+                        if (!Config.ParanoidCorp) { Paranoid.RemoveAll(a => a.CorpID == Me.CorpID); }
+                        if (!Config.ParanoidFleet) { Paranoid.RemoveAll(a => a.IsFleetMember); }
+                        if (Paranoid.Any())
+                        {
+                            Hostile = Paranoid.FirstOrDefault();
+                            return FleeTrigger.Paranoid;
                         }
                         break;
                     case FleeTrigger.Targeted:
