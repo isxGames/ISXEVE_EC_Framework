@@ -171,9 +171,12 @@ namespace EveComFramework.Move
             }
             if (Bookmark.LocationID != Session.SolarSystemID)
             {
-                Log.Log("|oSetting course");
-                Log.Log(" |-g{0}", Bookmark.Title);
-                Bookmark.SetDestination();
+                if (Route.Path.Last() != Bookmark.LocationID)
+                {
+                    Log.Log("|oSetting course");
+                    Log.Log(" |-g{0}", Bookmark.Title);
+                    Bookmark.SetDestination();
+                }
                 QueueState(AutoPilot, 2000);
             }
             if (Bookmark.GroupID == Group.Station && Bookmark.LocationID == Session.SolarSystemID)
