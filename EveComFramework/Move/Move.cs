@@ -98,6 +98,12 @@ namespace EveComFramework.Move
             QueueState(ObjectPrep, -1, Entity, Distance);
         }
 
+        public void Activate(Entity Entity)
+        {
+            Clear();
+            QueueState(ActivateEntity, -1, Entity);
+        }
+
         public void Jump()
         {
             if (Idle)
@@ -364,6 +370,23 @@ namespace EveComFramework.Move
             InsertState(JumpThroughArray);
             int CurSystem = Session.SolarSystemID;
             WaitFor(10, () => Session.SolarSystemID != CurSystem, () => MyShip.ToEntity.Mode == EntityMode.Approaching);
+            return true;
+        }
+
+        bool ActivateEntity(object[] Params)
+        {
+            Entity Target = (Entity)Params[0];
+            if (Target == null || !Target.Exists) return true;
+            if (Target.Distance > 2500)
+            {
+                InsertState(JumpThroughArray);
+                InsertState(ApproachState, -1, Target, 2500);
+                return true;
+            }
+            Log.Log("|oActivating");
+            Log.Log(" |-g{0}", Target.Name);
+
+            WaitFor(30, () => MyShip.ToEntity.Mode == EntityMode.Warping);
             return true;
         }
 
