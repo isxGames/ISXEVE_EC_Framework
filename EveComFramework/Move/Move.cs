@@ -383,7 +383,7 @@ namespace EveComFramework.Move
             if (Target.Distance > 2500)
             {
                 InsertState(ActivateEntity, -1, Target);
-                InsertState(ApproachState, -1, Target, 2500);
+                InsertState(ApproachState, -1, Target, 2500, false);
                 return true;
             }
             Log.Log("|oActivating");
