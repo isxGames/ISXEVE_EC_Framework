@@ -387,8 +387,11 @@ namespace EveComFramework.Security
             return false;
         }
 
+        bool Decloak;
+
         bool CheckClear(object[] Params)
         {
+            AutoModule.AutoModule.Instance.Decloak = false;
             if (SafeTrigger() != FleeTrigger.None) return false;
             return true;
         }
@@ -401,6 +404,8 @@ namespace EveComFramework.Security
 
             Cargo.Clear();
             Move.Clear();
+
+            Decloak = AutoModule.AutoModule.Instance.Decloak;
 
             QueueState(Traveling);
             QueueState(LogMessage, 1, string.Format("|oReached flee target"));
@@ -467,6 +472,7 @@ namespace EveComFramework.Security
 
         bool Resume(object[] Params)
         {
+            AutoModule.AutoModule.Instance.Decloak = Decloak;
             if (ClearAlert == null)
             {
                 Log.Log("|rYou do not have an event handler subscribed to Security.ClearAlert!");
