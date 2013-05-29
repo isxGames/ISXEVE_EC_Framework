@@ -382,9 +382,10 @@ namespace EveComFramework.Move
             if (Target == null || !Target.Exists) return true;
             if (Target.Distance > 2500)
             {
-                InsertState(ActivateEntity, -1, Target);
-                InsertState(ApproachState, -1, Target, 2500, false);
-                return true;
+                Clear();
+                QueueState(ApproachState, -1, Target, 2500, false);
+                QueueState(ActivateEntity, -1, Target);
+                return false;
             }
             Log.Log("|oActivating");
             Log.Log(" |-g{0}", Target.Name);
