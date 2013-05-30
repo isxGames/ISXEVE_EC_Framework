@@ -17,13 +17,15 @@ namespace EveComFramework.Cargo
             internal Func<Item, bool> QueryString { get; set; }
             internal int Quantity { get; set; }
             internal Func<InventoryContainer> Source { get; set; }
+            internal string Container { get; set; }
             internal Func<InventoryContainer> Target { get; set; }
 
-            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
+            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, string Container, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
             {
                 this.Action = Action;
                 this.Bookmark = Bookmark;
                 this.Source = Source;
+                this.Container = Container;
                 this.QueryString = QueryString;
                 this.Quantity = Quantity;
                 this.Target = Target;
@@ -31,7 +33,7 @@ namespace EveComFramework.Cargo
 
             public CargoAction Clone()
             {
-                return new CargoAction(Action, Bookmark, Source, QueryString, Quantity, Target);
+                return new CargoAction(Action, Bookmark, Source, Container, QueryString, Quantity, Target);
             }
         }
 
@@ -71,7 +73,7 @@ namespace EveComFramework.Cargo
 
         public CargoProxy At(Bookmark Bookmark, Func<InventoryContainer> Source = null, string ContainerName = "")
         {
-            BuildCargoAction = new CargoAction(null, Bookmark, Source ?? (() => Station.ItemHangar), null, 0, null);
+            BuildCargoAction = new CargoAction(null, Bookmark, Source ?? (() => Station.ItemHangar), ContainerName, null, 0, null);
             return new CargoProxy();
         }
 
@@ -171,8 +173,19 @@ namespace EveComFramework.Cargo
 
         bool Load(object[] Params)
         {
+
             if (CurrentCargoAction.Source() == null)
             {
+                if (Session.InSpace && Entity.All.Any(a => a.Name == CurrentCargoAction.Container))
+                {
+                    if (Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).Distance > 2500)
+                    {
+                        Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
+                        return false;
+                    }
+                    Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).OpenCargo();
+                    return false;
+                }
                 Command.OpenInventory.Execute();
                 return false;
             }
@@ -218,6 +231,16 @@ namespace EveComFramework.Cargo
         {
             if (CurrentCargoAction.Target() == null)
             {
+                if (Session.InSpace && Entity.All.Any(a => a.Name == CurrentCargoAction.Container))
+                {
+                    if (Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).Distance > 2500)
+                    {
+                        Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
+                        return false;
+                    }
+                    Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).OpenCargo();
+                    return false;
+                }
                 Command.OpenInventory.Execute();
                 return false;
             }
