@@ -474,13 +474,13 @@ namespace EveComFramework.Security
         {
             if (SafeTrigger() != FleeTrigger.None)
             {
-                int FleeWait = Config.FleeWait * 60000; 
-                QueueState(LogMessage, 1, string.Format("|oNew flee condition"));
-                QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
-                QueueState(CheckClear);
-                QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
-                QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
-                QueueState(Resume, FleeWait);
+                int FleeWait = Config.FleeWait * 60000;
+                InsertState(Resume, FleeWait);
+                InsertState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
+                InsertState(LogMessage, 1, string.Format("|oArea is now safe"));
+                InsertState(CheckClear);
+                InsertState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
+                InsertState(LogMessage, 1, string.Format("|oNew flee condition"));
                 return true;
             }
 
