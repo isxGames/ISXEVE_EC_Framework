@@ -390,6 +390,8 @@ namespace EveComFramework.Move
             Log.Log("|oActivating");
             Log.Log(" |-g{0}", Target.Name);
 
+            Target.Activate();
+
             WaitFor(30, () => MyShip.ToEntity.Mode == EntityMode.Warping);
             return true;
         }

@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EveCom">
-      <HintPath>..\EveCom.dll</HintPath>
+      <HintPath>..\..\..\EveCom\EveCom.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Lavish.InnerSpace">
