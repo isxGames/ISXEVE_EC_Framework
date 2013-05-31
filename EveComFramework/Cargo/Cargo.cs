@@ -183,6 +183,7 @@ namespace EveComFramework.Cargo
                         Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
                         return false;
                     }
+                    Log.Log("|oOpening |w{0}", CurrentCargoAction.Container);
                     Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).OpenCargo();
                     return false;
                 }
@@ -238,6 +239,7 @@ namespace EveComFramework.Cargo
                         Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
                         return false;
                     }
+                    Log.Log("|oOpening |w{0}", CurrentCargoAction.Container);
                     Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).OpenCargo();
                     return false;
                 }
