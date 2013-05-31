@@ -190,6 +190,11 @@ namespace EveComFramework.Cargo
                 Command.OpenInventory.Execute();
                 return false;
             }
+            if (!CurrentCargoAction.Target().IsPrimed)
+            {
+                CurrentCargoAction.Target().MakeActive();
+                return false;
+            }
             if (!CurrentCargoAction.Source().IsPrimed)
             {
                 CurrentCargoAction.Source().MakeActive();
@@ -249,6 +254,11 @@ namespace EveComFramework.Cargo
             if (!CurrentCargoAction.Target().IsPrimed)
             {
                 CurrentCargoAction.Target().MakeActive();
+                return false;
+            }
+            if (!CurrentCargoAction.Source().IsPrimed)
+            {
+                CurrentCargoAction.Source().MakeActive();
                 return false;
             }
             Log.Log("|oUnloading");
