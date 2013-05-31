@@ -229,7 +229,7 @@ namespace EveComFramework.Cargo
 
         bool Unload(object[] Params)
         {
-            if (CurrentCargoAction.Target() == null)
+            if (CurrentCargoAction.Source() == null)
             {
                 if (Session.InSpace && Entity.All.Any(a => a.Name == CurrentCargoAction.Container))
                 {

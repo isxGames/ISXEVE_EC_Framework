@@ -328,11 +328,7 @@ namespace EveComFramework.Security
 
         bool CheckSafe(object[] Params)
         {
-            if (!Standing.Ready)
-            {
-                Standing.LoadStandings();
-                return false;
-            }
+
 
             if (Entity.All.FirstOrDefault(a => a.IsWarpScrambling && a.IsTargetingMe) != null)
             {
