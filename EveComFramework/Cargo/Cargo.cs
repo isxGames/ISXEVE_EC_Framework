@@ -116,6 +116,7 @@ namespace EveComFramework.Cargo
 
         bool Process(object[] Params)
         {
+            EVEFrame.Log("Process");
             if (CargoQueue.Count > 0)
             {
                 CurrentCargoAction = CargoQueue.Last();
@@ -141,6 +142,7 @@ namespace EveComFramework.Cargo
 
         bool Traveling(object[] Params)
         {
+            EVEFrame.Log("Travel");
             if (!Move.Idle)
             {
                 return false;
@@ -173,20 +175,26 @@ namespace EveComFramework.Cargo
 
         bool Load(object[] Params)
         {
-
-            if (CurrentCargoAction.Source() == null)
+            if (MyShip.CargoBay == null)
             {
-                if (Session.InSpace && Entity.All.Any(a => a.Name == CurrentCargoAction.Container))
+                EVEFrame.Log("Open Inventory");
+                Command.OpenInventory.Execute();
+                return false;
+            }
+
+            if (Session.InSpace)
+            {
+                Entity Container = Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container);
+                if (Container.Distance > 2500)
                 {
-                    if (Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).Distance > 2500)
-                    {
-                        Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
-                        return false;
-                    }
-                    Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).OpenCargo();
+                    Move.Approach(Container);
                     return false;
                 }
-                Command.OpenInventory.Execute();
+            }
+
+            if (!CurrentCargoAction.Target().IsPrimed)
+            {
+                CurrentCargoAction.Target().MakeActive();
                 return false;
             }
             if (!CurrentCargoAction.Source().IsPrimed)
@@ -229,24 +237,31 @@ namespace EveComFramework.Cargo
 
         bool Unload(object[] Params)
         {
-            if (CurrentCargoAction.Source() == null)
+            if (MyShip.CargoBay == null)
             {
-                if (Session.InSpace && Entity.All.Any(a => a.Name == CurrentCargoAction.Container))
-                {
-                    if (Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).Distance > 2500)
-                    {
-                        Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
-                        return false;
-                    }
-                    Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container).OpenCargo();
-                    return false;
-                }
+                EVEFrame.Log("Open Inventory");
                 Command.OpenInventory.Execute();
                 return false;
             }
+
+            if (Session.InSpace)
+            {
+                Entity Container = Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container);
+                if (Container.Distance > 2500)
+                {
+                    Move.Approach(Container);
+                    return false;
+                }
+            }
+
             if (!CurrentCargoAction.Target().IsPrimed)
             {
                 CurrentCargoAction.Target().MakeActive();
+                return false;
+            }
+            if (!CurrentCargoAction.Source().IsPrimed)
+            {
+                CurrentCargoAction.Source().MakeActive();
                 return false;
             }
             Log.Log("|oUnloading");
