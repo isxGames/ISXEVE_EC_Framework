@@ -34,8 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EveCom">
-      <HintPath>..\..\..\EveCom\EveCom.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\InnerSpace\.NET Programs\EveCom.dll</HintPath>
     </Reference>
     <Reference Include="Lavish.InnerSpace">
       <HintPath>..\..\..\..\..\IS DLLs\Lavish.InnerSpace.dll</HintPath>
@@ -106,6 +105,13 @@
     </Compile>
     <Compile Include="Security\UI\Security.designer.cs">
       <DependentUpon>Security.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SkillTraining\SkillTraining.cs" />
+    <Compile Include="SkillTraining\UI\SkillTraining.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkillTraining\UI\SkillTraining.Designer.cs">
+      <DependentUpon>SkillTraining.cs</DependentUpon>
     </Compile>
     <Compile Include="Targets\Targets.cs" />
   </ItemGroup>
