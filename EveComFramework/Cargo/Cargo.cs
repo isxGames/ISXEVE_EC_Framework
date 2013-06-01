@@ -187,7 +187,7 @@ namespace EveComFramework.Cargo
                 Entity Container = Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container);
                 if (Container.Distance > 2500)
                 {
-                    Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
+                    Move.Approach(Container);
                     return false;
                 }
             }
@@ -249,7 +249,7 @@ namespace EveComFramework.Cargo
                 Entity Container = Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container);
                 if (Container.Distance > 2500)
                 {
-                    Move.Approach(Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container));
+                    Move.Approach(Container);
                     return false;
                 }
             }
