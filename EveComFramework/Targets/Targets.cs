@@ -92,7 +92,7 @@ namespace EveComFramework.Targets
 
         public void AddNPCs()
         {
-            AddQuery(a => EveComFramework.Data.NPCTypes.All.Contains((long)a.GroupID));
+            AddQuery(a => EveComFramework.Data.NPCTypes.All.Contains((long)a.GroupID) && a.HullPct > 0);
             //Queries = Queries.Or(a => a.IsNPC);
         }
 
