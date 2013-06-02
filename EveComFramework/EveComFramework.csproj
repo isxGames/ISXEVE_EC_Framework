@@ -107,13 +107,6 @@
     <Compile Include="Security\UI\Security.designer.cs">
       <DependentUpon>Security.cs</DependentUpon>
     </Compile>
-    <Compile Include="SkillTraining\SkillTraining.cs" />
-    <Compile Include="SkillTraining\UI\SkillTraining.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SkillTraining\UI\SkillTraining.Designer.cs">
-      <DependentUpon>SkillTraining.cs</DependentUpon>
-    </Compile>
     <Compile Include="Targets\Targets.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +127,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Security\UI\Security.resx">
       <DependentUpon>Security.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SkillTraining\UI\SkillTraining.resx">
-      <DependentUpon>SkillTraining.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
