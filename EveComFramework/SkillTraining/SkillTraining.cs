@@ -6,18 +6,14 @@ using System.Text;
 using InnerSpaceAPI;
 using EveCom;
 using EveComFramework.SessionControl;
+using System.Windows.Forms;
 
 namespace EveComFramework.SkillTraining
 {
     [Serializable]
     public class SkillToTrain
-    {
-        public SkillToTrain(int id,int level)
-        {
-            ID = id;
-            Level = level;
-        }
-        public int ID;
+    {       
+        public string Type;
         public int Level;
     }
 
@@ -33,7 +29,8 @@ namespace EveComFramework.SkillTraining
 
 
     /// <summary>
-    /// Sessioncontrol provides interface for logging in and out of Eve and awareness of downtime
+    /// SkillTraining will manage a skill queue for the active character, can act event based or full auto
+    ///
     /// </summary>
     public class SkillTraining : State
     {
@@ -55,9 +52,6 @@ namespace EveComFramework.SkillTraining
         private SkillTraining()
             : base()
         {
-            Config.SkillQueues.Add("REDACTED", new List<SkillToTrain>());
-            Config.SkillQueues["REDACTED"].Add(new SkillToTrain(25863,5));
-            QueueState(Monitor);
         }
 
 
@@ -67,17 +61,81 @@ namespace EveComFramework.SkillTraining
 
         public Logger Log = new Logger("SkillTraining");
         public SkillTrainingGlobalSettings Config = new SkillTrainingGlobalSettings();
+        public string CharName;
+        #endregion
+
+        #region Events
+        /// <summary>
+        /// Fires when there is space in the skill queue
+        /// </summary>
+        public event Action SpaceInQueue;
+
+        public event Action SkillQueued;
+
         #endregion
 
         #region Actions
-        
+
         /// <summary>
-        /// Opens up the configuration dialog, this is a MODAL dialog and will block the thread!
+        /// State in passive event based mode, will fire an event when it thinks you should queue a skill
+        /// </summary>
+        public void StartWatch()
+        {
+            if (Idle)
+            {
+                QueueState(EventMonitor);
+            }
+        }
+        /// <summary>
+        /// Handles everything and queues skills as it can.
+        /// </summary>
+        public void StartAuto()
+        {
+            if (Idle)
+            {
+                QueueState(Monitor);
+            }
+        }
+
+        public void Stop()
+        {
+            Clear();
+        }
+
+        /// <summary>
+        /// Add stuff to the skill queue
+        /// </summary>
+        public void DoSkillQueue()
+        {
+            InsertState(BeginSkillTransaction);
+            InsertState(AddSkillToQueue);
+        }
+
+        /// <summary>
+        /// Opens up the configuration dialog, this is a MODAL dialog and will block the thread! Won't work when not logged in
         /// </summary>
         public void Configure()
         {
-            UI.SkillTraining Configuration = new UI.SkillTraining();
-            Configuration.ShowDialog();
+            if (CharName != null)
+            {
+                UI.SkillTraining Configuration;
+                if (Config.SkillQueues.ContainsKey(CharName))
+                {
+                    Configuration = new UI.SkillTraining(Config.SkillQueues[CharName]);
+                }
+                else
+                {
+                    Config.SkillQueues.Add(CharName, new List<SkillToTrain>());
+                    Configuration = new UI.SkillTraining(Config.SkillQueues[CharName]);
+                }
+                Configuration.ShowDialog();
+                Config.SkillQueues[CharName] = Configuration.SkillPlan;
+                Config.Save();
+            }
+            else
+            {
+                MessageBox.Show("Can't configure right now , you must be logged in");
+            }
         }
 
         #endregion
@@ -94,15 +152,42 @@ namespace EveComFramework.SkillTraining
 
         #endregion
 
+        bool EventMonitor(object[] Params)
+        {
+            if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
+            if (CharName == null)
+            {
+                CharName = Me.Name;
+            }
+            if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
+            {
+                if (Config.SkillQueues.ContainsKey(Me.Name))
+                {
+                    if (SpaceInQueue != null)
+                    {
+                        SpaceInQueue();
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
         bool Monitor(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
-            Log.Log("EndOfQueue {0}", SkillQueue.EndOfQueue.ToString("hh:mm:ss.ff"));
+            if (CharName == null)
+            {
+                CharName = Me.Name;
+            }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
             {
-                QueueState(BeginSkillTransaction);
-                QueueState(AddSkillToQueue);
-                return true;
+                if (Config.SkillQueues.ContainsKey(Me.Name))
+                {
+                    QueueState(BeginSkillTransaction);
+                    QueueState(AddSkillToQueue);
+                    QueueState(Monitor);
+                    return true;
+                }
             }
             return false;
         }
@@ -116,22 +201,25 @@ namespace EveComFramework.SkillTraining
 
         bool AddSkillToQueue(object[] Params)
         {
-            if (!SkillQueue.InTransaction)
-            {
+            if (SkillQueue.InTransaction)
+            {               
                 foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
                 {
                     //check if the skill is injected
-                    Skill injectedSkill = Skill.Get(stt.ID);
-                    Log.Log(injectedSkill.SkillLevel.ToString());
+                    Skill injectedSkill = Skill.All.FirstOrDefault(a => a.Type == stt.Type);
                     if (injectedSkill != null)
                     {
                         //check if we should be training it
                         if (injectedSkill.SkillLevel < stt.Level)
                         {
-                            Log.Log("peep");
+                            Log.Log("Queueing new skill up , Skill {0] , Level {1}",injectedSkill.Type,injectedSkill.SkillLevel+1);
                             injectedSkill.AddToQueue();
                             SkillQueue.CommitTransaction();
-                            QueueState(Monitor);
+                            InsertState(Blank, 1000);
+                            if (SkillQueued != null)
+                            {
+                                SkillQueued();
+                            }
                             return true;
                         }
                     }
@@ -141,8 +229,9 @@ namespace EveComFramework.SkillTraining
             }
             else
             {
-                QueueState(BeginSkillTransaction);
-                QueueState(AddSkillToQueue);
+                Log.Log("Not in skill transaction , retrying");
+                InsertState(BeginSkillTransaction);
+                InsertState(AddSkillToQueue);
                 return true;
             }
         }

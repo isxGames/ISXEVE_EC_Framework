@@ -134,6 +134,9 @@
     <EmbeddedResource Include="Security\UI\Security.resx">
       <DependentUpon>Security.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SkillTraining\UI\SkillTraining.resx">
+      <DependentUpon>SkillTraining.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\DroneTypes.xml" />
