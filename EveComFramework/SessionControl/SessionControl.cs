@@ -218,6 +218,7 @@ namespace EveComFramework.SessionControl
                                                             a.Caption.Contains("The update has been downloaded.") ||
                                                             a.Caption.Contains("The daily downtime will begin in") ||
                                                             a.Caption.Contains("The connection to the server was closed") ||
+                                                            a.Caption.Contains("Unable to connect to the selected server.") ||
                                                             a.Caption.Contains("At any time you can log in to the account management page"));
                 if (Message != null)
                 {
