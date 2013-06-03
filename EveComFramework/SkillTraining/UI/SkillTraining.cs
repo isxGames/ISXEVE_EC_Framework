@@ -61,5 +61,11 @@ namespace EveComFramework.SkillTraining.UI
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            plan_displaybox.Items.Clear();
+            SkillPlan = new List<SkillToTrain>();
+        }
     }
 }
