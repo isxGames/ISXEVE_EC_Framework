@@ -42,11 +42,7 @@ namespace EveComFramework.Optimizer
 
         ~Optimizer()
         {
-            using (new EVEFrameLock())
-            {
-                if (!EVEFrame.Enable3DRendering) EVEFrame.Enable3DRendering = true;
-            }
-            
+            EVEFrameUtil.Do(() => { EVEFrame.Enable3DRendering = true; });
         }
 
         private Optimizer() : base()
