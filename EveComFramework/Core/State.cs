@@ -30,10 +30,11 @@ namespace EveComFramework.Core
         internal LinkedList<StateQueue> States = new LinkedList<StateQueue>();
         public StateQueue CurState;
         public bool Idle { get { return CurState == null; } }
-        public Logger StateLog = new Logger("State");
+        public Logger StateLog;
 
         public State()
         {
+            StateLog = new Logger("State: " + this.GetType().Name);
             DefaultFrequency = 1000;
             EVEFrame.OnFrame += OnFrame;
         }
