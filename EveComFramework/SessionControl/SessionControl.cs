@@ -218,26 +218,26 @@ namespace EveComFramework.SessionControl
             if (Login.AtLogin)
             {
                 if (Login.Loading || Login.Connecting) return false;
-                Window Message = Window.All.FirstOrDefault(a => a.Caption.Contains("There is a new build available"));
+                PopupWindow Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("There is a new build available"));
                 if (Message != null)
                 {
                     Message.ClickButton(Window.Button.Yes);
                     return false;
                 }
-                Message = Window.All.FirstOrDefault(a =>    a.Caption.Contains("A client update is available") ||
-                                                            a.Caption.Contains("The client update has been installed.") ||
-                                                            a.Caption.Contains("The update has been downloaded.") ||
-                                                            a.Caption.Contains("The daily downtime will begin in") ||
-                                                            a.Caption.Contains("The connection to the server was closed") ||
-                                                            a.Caption.Contains("Unable to connect to the selected server.") ||
-                                                            a.Caption.Contains("At any time you can log in to the account management page"));
+                Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("A client update is available") ||
+                                                            a.Message.Contains("The client update has been installed.") ||
+                                                            a.Message.Contains("The update has been downloaded.") ||
+                                                            a.Message.Contains("The daily downtime will begin in") ||
+                                                            a.Message.Contains("The connection to the server was closed") ||
+                                                            a.Message.Contains("Unable to connect to the selected server.") ||
+                                                            a.Message.Contains("At any time you can log in to the account management page"));
                 if (Message != null)
                 {
                     Message.ClickButton(Window.Button.OK);
                     return false;
-                }                
-                if (Window.All.Any(a => a.Caption.Contains("Account subscription expired") ||
-                                        a.Caption.Contains("has been disabled")))
+                }
+                if (Window.All.OfType<PopupWindow>().Any(a => a.Message.Contains("Account subscription expired") ||
+                                        a.Message.Contains("has been disabled")))
                 {
                     Log.Log("|rLogin failed, stopping script");
                     Clear();
