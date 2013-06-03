@@ -254,7 +254,11 @@ namespace EveComFramework.SessionControl
                 PlaySession newSession = new PlaySession();
                 newSession.Login = Session.Now;
                 newSession.Logout = Session.Now.AddMinutes(1);
-                if (_curProfile != null) _curProfile.Sessions.Add(newSession);
+                if (_curProfile != null)
+                {
+                    _curProfile.Sessions.Add(newSession);
+                    GlobalConfig.Save();
+                }
                 SessionStart = DateTime.Now.AddMinutes(random.Next(Config.LogoutDelta));
                 DowntimeDelta = random.Next(Config.DowntimeDelta);
                 LogoutDelta = random.Next(Config.LogoutDelta);
@@ -317,7 +321,7 @@ namespace EveComFramework.SessionControl
             if (_curProfile != null)
             {
                 _curProfile.Sessions.Last().Logout = EveCom.Session.Now;
-                Config.Save();
+                GlobalConfig.Save();
             }
             LavishScriptAPI.LavishScript.ExecuteCommand("Exit");            
             return true;
