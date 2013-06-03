@@ -125,6 +125,17 @@ namespace EveComFramework.SessionControl
             QueueState(Monitor);
         }
 
+        ~SessionControl()
+        {
+            if (_curProfile != null)
+            {
+                using (new EVEFrameLock())
+                {
+                    _curProfile.Sessions.Last().Logout = EveCom.Session.Now;
+                }
+                GlobalConfig.Save();
+            }
+        }
 
         #endregion
 
