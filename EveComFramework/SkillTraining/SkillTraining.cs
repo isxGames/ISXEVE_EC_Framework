@@ -201,10 +201,15 @@ namespace EveComFramework.SkillTraining
 
         bool AddSkillToQueue(object[] Params)
         {
+            DefaultFrequency = 1000;
             if (SkillQueue.InTransaction)
             {               
+                Log.Log(Config.SkillQueues[Me.Name].Count.ToString());
+                int x = 0;
                 foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
                 {
+                    x++;
+                    Log.Log(x.ToString());
                     //check if the skill is injected
                     Skill injectedSkill = Skill.All.FirstOrDefault(a => a.Type == stt.Type);
                     if (injectedSkill != null)
@@ -212,15 +217,28 @@ namespace EveComFramework.SkillTraining
                         //check if we should be training it
                         if (injectedSkill.SkillLevel < stt.Level)
                         {
-                            Log.Log("Queueing new skill up , Skill {0] , Level {1}",injectedSkill.Type,injectedSkill.SkillLevel+1);
-                            injectedSkill.AddToQueue();
-                            SkillQueue.CommitTransaction();
-                            InsertState(Blank, 1000);
-                            if (SkillQueued != null)
+                            //check if this entry is not already in the queue
+                            foreach (SkillQueue.Entry a in SkillQueue.Skills)
                             {
-                                SkillQueued();
+                                Log.Log(a.Skill.Type + a.ToLevel.ToString());
+                                Log.Log(stt.Type + stt.Level.ToString());
                             }
-                            return true;
+                            if (!SkillQueue.Skills.Any(a => a.ToLevel == stt.Level && a.Skill.Type == stt.Type))
+                            {
+                                //Log.Log("Queueing new skill up , Skill {0] , Level {1}", injectedSkill.Type, injectedSkill.SkillLevel);
+                                injectedSkill.AddToQueue();
+                                SkillQueue.CommitTransaction();
+                                InsertState(Blank, 1000);
+                                if (SkillQueued != null)
+                                {
+                                    SkillQueued();
+                                }
+                                return true;
+                            }
+                            else
+                            {
+                                Log.Log("Skill already in queue {0} @ level {1}", stt.Type, stt.Level);
+                            }
                         }
                     }
                 }
@@ -230,8 +248,8 @@ namespace EveComFramework.SkillTraining
             else
             {
                 Log.Log("Not in skill transaction , retrying");
-                InsertState(BeginSkillTransaction);
                 InsertState(AddSkillToQueue);
+                InsertState(BeginSkillTransaction);
                 return true;
             }
         }
