@@ -129,8 +129,8 @@ namespace EveComFramework.SessionControl
         {
             if (_curProfile != null)
             {
-                //_curProfile.Sessions.Last().Logout = EVEFrameUtil.Get(() => Session.Now);
-                //GlobalConfig.Save();
+                _curProfile.Sessions.Last().Logout = EVEFrameUtil.Get(() => Session.Now);
+                GlobalConfig.Save();
             }
         }
 
