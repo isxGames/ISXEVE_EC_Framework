@@ -106,8 +106,7 @@ namespace EveComFramework.Security.UI
             }
 
             SafeSubstring.Text = Config.SafeSubstring;
-            List<string> BookmarkNames = EVEFrameUtil.Get(() => Bookmark.All.Select(b => b.Title).ToList());
-            SecureBookmark.Items.AddRange(BookmarkNames.ToArray());
+            if (UIData.Instance.Bookmarks != null) SecureBookmark.Items.AddRange(UIData.Instance.Bookmarks);
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
 
@@ -361,6 +360,17 @@ namespace EveComFramework.Security.UI
             }
             Config.Types = build;
             Config.Save();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (UIData.Instance.Bookmarks != null)
+            {
+                SecureBookmark.Items.Clear();
+                SecureBookmark.Items.AddRange(UIData.Instance.Bookmarks);
+            }
+            SecureBookmark.Text = Config.SecureBookmark;
+            CheckBookmark();
         }
 
 
