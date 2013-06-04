@@ -105,13 +105,12 @@ namespace EveComFramework.Security.UI
                 }
             }
 
-            
             SafeSubstring.Text = Config.SafeSubstring;
             List<string> BookmarkNames = EVEFrameUtil.Get(() => Bookmark.All.Select(b => b.Title).ToList());
             SecureBookmark.Items.AddRange(BookmarkNames.ToArray());
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
-            
+
             FleeWait.Value = Config.FleeWait;
             lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
         }
@@ -133,6 +132,13 @@ namespace EveComFramework.Security.UI
             LoadSettings();
             FleeTypes.ItemChecked += FleeTypes_ItemChecked;
             Triggers.ItemChecked += Triggers_ItemChecked;
+        }
+
+        private void SecureBookmark_TextChanged(object sender, EventArgs e)
+        {
+            Config.SecureBookmark = SecureBookmark.Text;
+            CheckBookmark();
+            Config.Save();
         }
 
         private void SafeSubstring_TextChanged(object sender, EventArgs e)
@@ -358,23 +364,6 @@ namespace EveComFramework.Security.UI
         }
 
 
-
-        private void SecureBookmark_TextChanged(object sender, EventArgs e)
-        {
-            Config.SecureBookmark = SecureBookmark.Text;
-            CheckBookmark();
-            Config.Save();
-        }
-
-
-
     }
 
-    public class MyAutoCompleteStringCollection : AutoCompleteStringCollection
-    {
-        public MyAutoCompleteStringCollection(List<String> items)
-        {
-            this.AddRange(items.ToArray());
-        }
-    }
 }

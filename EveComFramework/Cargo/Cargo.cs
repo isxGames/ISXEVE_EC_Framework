@@ -182,16 +182,6 @@ namespace EveComFramework.Cargo
                 return false;
             }
 
-            if (Session.InSpace)
-            {
-                Entity Container = Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container);
-                if (Container.Distance > 2500)
-                {
-                    Move.Approach(Container);
-                    return false;
-                }
-            }
-
             if (!CurrentCargoAction.Target().IsPrimed)
             {
                 CurrentCargoAction.Target().MakeActive();
@@ -242,16 +232,6 @@ namespace EveComFramework.Cargo
                 EVEFrame.Log("Open Inventory");
                 Command.OpenInventory.Execute();
                 return false;
-            }
-
-            if (Session.InSpace)
-            {
-                Entity Container = Entity.All.FirstOrDefault(a => a.Name == CurrentCargoAction.Container);
-                if (Container.Distance > 2500)
-                {
-                    Move.Approach(Container);
-                    return false;
-                }
             }
 
             if (!CurrentCargoAction.Target().IsPrimed)
