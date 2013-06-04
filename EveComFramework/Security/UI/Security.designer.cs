@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
@@ -59,11 +58,11 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.SafeSubstring = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.SecureBookmark = new System.Windows.Forms.TextBox();
+            this.SecureBookmarkVerify = new System.Windows.Forms.PictureBox();
+            this.SecureBookmark = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.FleeTypes = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
@@ -75,6 +74,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.FleeWait)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SecureBookmarkVerify)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -300,6 +300,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.SecureBookmarkVerify);
             this.groupBox2.Controls.Add(this.SecureBookmark);
             this.groupBox2.Location = new System.Drawing.Point(6, 110);
             this.groupBox2.Name = "groupBox2";
@@ -308,14 +309,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Secure Bookmark";
             // 
+            // SecureBookmarkVerify
+            // 
+            this.SecureBookmarkVerify.Image = global::EveComFramework.Properties.Resources.action_delete;
+            this.SecureBookmarkVerify.Location = new System.Drawing.Point(270, 20);
+            this.SecureBookmarkVerify.Name = "SecureBookmarkVerify";
+            this.SecureBookmarkVerify.Size = new System.Drawing.Size(20, 20);
+            this.SecureBookmarkVerify.TabIndex = 3;
+            this.SecureBookmarkVerify.TabStop = false;
+            // 
             // SecureBookmark
             // 
             this.SecureBookmark.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.SecureBookmark.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.SecureBookmark.Location = new System.Drawing.Point(7, 20);
+            this.SecureBookmark.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.SecureBookmark.FormattingEnabled = true;
+            this.SecureBookmark.Location = new System.Drawing.Point(6, 20);
             this.SecureBookmark.Name = "SecureBookmark";
-            this.SecureBookmark.Size = new System.Drawing.Size(283, 21);
-            this.SecureBookmark.TabIndex = 1;
+            this.SecureBookmark.Size = new System.Drawing.Size(258, 21);
+            this.SecureBookmark.TabIndex = 2;
             this.SecureBookmark.TextChanged += new System.EventHandler(this.SecureBookmark_TextChanged);
             // 
             // groupBox1
@@ -354,11 +365,6 @@
             // 
             this.columnHeader2.Width = 141;
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Security
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,7 +391,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SecureBookmarkVerify)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -405,7 +411,6 @@
         private System.Windows.Forms.CheckBox IncludeFleetMembers;
         private System.Windows.Forms.CheckBox IncludeAllianceMembers;
         private System.Windows.Forms.CheckBox IncludeCorpMembers;
-        private System.Windows.Forms.TextBox SecureBookmark;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lblFleeWait;
         private System.Windows.Forms.TrackBar FleeWait;
@@ -416,6 +421,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ListView FleeTypes;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.PictureBox SecureBookmarkVerify;
+        private System.Windows.Forms.ComboBox SecureBookmark;
     }
 }

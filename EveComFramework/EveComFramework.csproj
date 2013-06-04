@@ -82,6 +82,11 @@
     <Compile Include="FleetControl\UI\FleetControl.Designer.cs">
       <DependentUpon>FleetControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SessionControl\SessionControl.cs" />
     <Compile Include="SessionControl\UI\SessionControl.cs">
       <SubType>Form</SubType>
@@ -126,6 +131,10 @@
     <EmbeddedResource Include="FleetControl\UI\FleetControl.resx">
       <DependentUpon>FleetControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SessionControl\UI\SessionControl.resx">
       <DependentUpon>SessionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,6 +154,12 @@
     <EmbeddedResource Include="Data\NPCTypes.xml" />
     <EmbeddedResource Include="Data\PriorityTargets.xml" />
     <EmbeddedResource Include="Data\SolarSystems.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\action_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\action_check.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

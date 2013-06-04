@@ -15,8 +15,6 @@ namespace EveComFramework.Security.UI
     {
         
         string ActiveTrigger;
-        List<string> Bookmarks;
-        UIData UI = UIData.Instance;
         SecuritySettings Config = EveComFramework.Security.Security.Instance.Config;
 
         public Security()
@@ -107,10 +105,27 @@ namespace EveComFramework.Security.UI
                 }
             }
 
+            
             SafeSubstring.Text = Config.SafeSubstring;
+            List<string> BookmarkNames = EVEFrameUtil.Get(() => Bookmark.All.Select(b => b.Title).ToList());
+            SecureBookmark.Items.AddRange(BookmarkNames.ToArray());
             SecureBookmark.Text = Config.SecureBookmark;
+            CheckBookmark();
+            
             FleeWait.Value = Config.FleeWait;
             lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
+        }
+
+        void CheckBookmark()
+        {
+            if (SecureBookmark.Items.Contains(SecureBookmark.Text))
+            {
+                SecureBookmarkVerify.Image = Properties.Resources.action_check;
+            }
+            else
+            {
+                SecureBookmarkVerify.Image = Properties.Resources.action_delete;
+            }
         }
 
         private void Security_Load(object sender, EventArgs e)
@@ -118,13 +133,6 @@ namespace EveComFramework.Security.UI
             LoadSettings();
             FleeTypes.ItemChecked += FleeTypes_ItemChecked;
             Triggers.ItemChecked += Triggers_ItemChecked;
-            timer1.Start();
-        }
-
-        private void SecureBookmark_TextChanged(object sender, EventArgs e)
-        {
-            Config.SecureBookmark = SecureBookmark.Text;
-            Config.Save();
         }
 
         private void SafeSubstring_TextChanged(object sender, EventArgs e)
@@ -349,10 +357,15 @@ namespace EveComFramework.Security.UI
             Config.Save();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+
+
+        private void SecureBookmark_TextChanged(object sender, EventArgs e)
         {
-            if (UI.Bookmarks != null) SecureBookmark.AutoCompleteCustomSource = new MyAutoCompleteStringCollection(UI.Bookmarks);
+            Config.SecureBookmark = SecureBookmark.Text;
+            CheckBookmark();
+            Config.Save();
         }
+
 
 
     }

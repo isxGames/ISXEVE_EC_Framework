@@ -75,48 +75,6 @@ namespace EveComFramework.Security
 
     #endregion
 
-    public class UIData : State
-    {
-        #region Instantiation
-
-        static UIData _Instance;
-        public static UIData Instance
-        {
-            get
-            {
-                if (_Instance == null)
-                {
-                    _Instance = new UIData();
-                }
-                return _Instance;
-            }
-        }
-
-        private UIData() : base()
-        {
-            QueueState(Update);
-        }
-
-        #endregion
-
-        #region Variables
-
-        public List<string> Bookmarks { get; set; }
-
-        #endregion
-
-        #region States
-
-        bool Update(object[] Params)
-        {
-            if (!Session.Safe || (!Session.InStation && !Session.InSpace)) return false;
-            Bookmarks = Bookmark.All.Select(a => a.Title).ToList();
-            return false;
-        }
-
-        #endregion
-    }
-
     public class Security : State
     {
         #region Instantiation
