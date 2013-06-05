@@ -96,7 +96,7 @@ namespace EveComFramework.SessionControl.UI
 
         private void numDowntime_ValueChanged(object sender, EventArgs e)
         {
-            Config.Downtime = (int)Math.Floor(numDowntimeDelta.Value);
+            Config.Downtime = (int)Math.Floor(numDowntime.Value);
             Config.Save();
         }
 
