@@ -224,7 +224,7 @@ namespace EveComFramework.Move
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= 1000);
                 Log.Log("|oToo close for warp, orbiting");
                 Log.Log(" |-g{0}(|w2 km|-g)", Collision.Name);
-                Collision.Orbit(2000);
+                Collision.Orbit(5000);
                 InsertState(BookmarkWarp, -1, Destination, Distance, Collision);
             }
             // Else, if we're in .2km of a structure that isn't our current collision target, change orbit and collision target to it
