@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Cargo\Cargo.cs" />
     <Compile Include="Core\Busy.cs" />
+    <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\Config.cs" />
     <Compile Include="Core\Logger.cs" />
     <Compile Include="Data\DroneType.cs" />

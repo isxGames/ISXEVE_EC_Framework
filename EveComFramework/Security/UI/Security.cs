@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using EveCom;
+using EveComFramework.Core;
 using InnerSpaceAPI;
 
 namespace EveComFramework.Security.UI
@@ -16,6 +17,7 @@ namespace EveComFramework.Security.UI
         
         string ActiveTrigger;
         SecuritySettings Config = EveComFramework.Security.Security.Instance.Config;
+        Cache Cache = Cache.Instance;
 
         public Security()
         {
@@ -106,7 +108,7 @@ namespace EveComFramework.Security.UI
             }
 
             SafeSubstring.Text = Config.SafeSubstring;
-            if (UIData.Instance.Bookmarks != null) SecureBookmark.Items.AddRange(UIData.Instance.Bookmarks);
+            if (Cache.Bookmarks != null) SecureBookmark.Items.AddRange(Cache.Bookmarks);
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
 
@@ -364,10 +366,10 @@ namespace EveComFramework.Security.UI
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (UIData.Instance.Bookmarks != null)
+            if (Cache.Bookmarks != null)
             {
                 SecureBookmark.Items.Clear();
-                SecureBookmark.Items.AddRange(UIData.Instance.Bookmarks);
+                SecureBookmark.Items.AddRange(Cache.Bookmarks);
             }
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
