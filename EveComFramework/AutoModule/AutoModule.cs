@@ -331,4 +331,92 @@ namespace EveComFramework.AutoModule
 
         #endregion
     }
+
+    public class InstaWarp : EveComFramework.Core.State
+    {
+        #region Instantiation
+
+        static InstaWarp _Instance;
+        public static InstaWarp Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new InstaWarp();
+                }
+                return _Instance;
+            }
+        }
+
+        private InstaWarp() : base()
+        {
+        }
+
+        #endregion
+
+        #region Actions
+
+        public void Enabled(bool Val)
+        {
+            if (Val)
+            {
+                if (Idle)
+                {
+                    QueueState(Control);
+                }
+            }
+            else
+            {
+                Clear();
+            }
+        }
+
+        #endregion
+
+        #region Variables
+
+        int CurrentSystem = 0;
+        bool Reset = true;
+
+        #endregion
+
+        #region States
+
+        bool Control(object[] Params)
+        {
+            if (!Session.InSpace || !Session.Safe)
+            {
+                return false;
+            }
+            if (CurrentSystem != Session.SolarSystemID)
+            {
+                Reset = true;
+                CurrentSystem = Session.SolarSystemID;
+            }
+
+            #region Propulsion Modules
+
+            if (MyShip.Modules.Any(a => a.GroupID == Group.PropulsionModule && a.IsOnline))
+            {
+                if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 &&
+                    Reset)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    return false;
+                }
+                if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    Reset = false;
+                }
+            }
+
+            #endregion
+
+            return false;
+        }
+        #endregion
+    }
 }
