@@ -211,10 +211,10 @@ namespace EveComFramework.SessionControl
         {
             UpdateCurrentProfile();
             if (Session.InSpace || Session.InStation || CharSel.AtCharSel) return true;
-            
+
             if (Login.AtLogin)
             {
-                if (Login.Loading || Login.Connecting) return false;
+                if (Login.Loading) return false;
                 PopupWindow Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("There is a new build available"));
                 if (Message != null)
                 {
@@ -230,6 +230,7 @@ namespace EveComFramework.SessionControl
                                                             a.Message.Contains("At any time you can log in to the account management page"));
                 if (Message != null)
                 {
+                    EVEFrame.Log("Click");
                     Message.ClickButton(Window.Button.OK);
                     return false;
                 }
@@ -240,6 +241,8 @@ namespace EveComFramework.SessionControl
                     Clear();
                     return true;
                 }
+
+                if (Login.Connecting) return false;
 
                 if (_curProfile != null && DateTime.Now > Instanced.AddMinutes(LoginDelta))
                 {
