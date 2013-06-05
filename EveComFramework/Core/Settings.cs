@@ -16,8 +16,7 @@ namespace EveComFramework.Core
     public class Settings
     {
         private FileSystemWatcher watcher;
-        private string _ProfilePath;
-        public string ProfilePath { get { return _ProfilePath; } set { _ProfilePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\" + value + ".xml"; watcher.Filter = value + ".xml"; } }
+        public string ProfilePath { get; set; }
         public string ConfigDirectory { get; set; }
         
         
@@ -28,7 +27,7 @@ namespace EveComFramework.Core
         public Settings()
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
-            _ProfilePath = ConfigDirectory + Config.Instance.DefaultProfile + ".xml";
+            ProfilePath = ConfigDirectory + Config.Instance.DefaultProfile + ".xml";
             this.Load();
 
             if (!Directory.Exists(ConfigDirectory))
@@ -42,8 +41,8 @@ namespace EveComFramework.Core
 
         public Settings(string profilename)
         {
-            ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
-            _ProfilePath = ConfigDirectory + profilename + ".xml";
+            ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\global\\";
+            ProfilePath = ConfigDirectory + profilename + ".xml";
             this.Load();
 
             if (!Directory.Exists(ConfigDirectory))
@@ -53,6 +52,12 @@ namespace EveComFramework.Core
 
             watcher = new FileSystemWatcher(ConfigDirectory, profilename + ".xml");
             watcher.Changed += new FileSystemEventHandler(watcher_Changed);
+        }
+
+        public string[] Profiles()
+        {
+            string dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
+            return Directory.GetFiles(dir).Select(Path.GetFileNameWithoutExtension).ToArray();
         }
 
         #region Events
