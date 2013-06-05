@@ -546,7 +546,7 @@ namespace EveComFramework.Move
                 Log.Log("|oAutopilot deactivated");
                 return true;
             }
-            if (Session.InSpace)
+            if (Session.InSpace && (EveComFramework.Move.UndockWarp.Instance.Idle || EveComFramework.Move.UndockWarp.Instance.CurState.ToString() == "WaitStation"))
             {
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
@@ -626,6 +626,100 @@ namespace EveComFramework.Move
 
         #endregion
 
+    }
+
+    public class UndockWarpSettings : EveComFramework.Core.Settings
+    {
+        public string Substring = "Undock";
+    }
+    public class UndockWarp : EveComFramework.Core.State
+    {
+        #region Instantiation
+        static UndockWarp _Instance;
+        public static UndockWarp Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new UndockWarp();
+                }
+                return _Instance;
+            }
+        }
+
+        private UndockWarp() : base()
+        {
+
+        }
+
+        #endregion
+
+        #region Actions
+
+        public void Enabled(bool val)
+        {
+            if (val)
+            {
+                if (Idle)
+                {
+                    QueueState(WaitStation);
+                }
+            }
+            else
+            {
+                Clear();
+            }            
+        }
+
+        #endregion
+
+        #region Variables
+
+        public UndockWarpSettings Config = new UndockWarpSettings();
+
+        #endregion
+
+        #region States
+
+        bool Space(object[] Params)
+        {
+            if (Session.InStation)
+            {
+                QueueState(Station);
+                return true;
+            }
+            if (Session.InSpace)
+            {
+                Bookmark undock = Bookmark.All.FirstOrDefault(a => a.Title.Contains(Config.Substring) && a.LocationID == Session.SolarSystemID && a.Distance < 2000000);
+                if (undock != null) Move.Instance.Bookmark(undock);
+                QueueState(WaitStation);
+                return true;
+            }
+            return false;
+        }       
+
+        bool WaitStation(object[] Params)
+        {
+            if (Session.InStation)
+            {
+                QueueState(Station);
+                return true;
+            }
+            return false;
+        }
+
+        bool Station(object[] Params)
+        {
+            if (Session.InSpace)
+            {
+                QueueState(Space);
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
     }
 
 }
