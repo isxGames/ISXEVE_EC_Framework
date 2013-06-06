@@ -71,13 +71,13 @@ namespace EveComFramework.Cargo
 
         #region Actions
 
-        public CargoProxy At(Bookmark Bookmark, Func<InventoryContainer> Source = null, string ContainerName = "")
+        public Cargo At(Bookmark Bookmark, Func<InventoryContainer> Source = null, string ContainerName = "")
         {
             BuildCargoAction = new CargoAction(null, Bookmark, Source ?? (() => Station.ItemHangar), ContainerName, null, 0, null);
-            return new CargoProxy();
+            return this;
         }
 
-        public CargoProxy Load(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
+        public Cargo Load(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
         {
             BuildCargoAction.Action = Load;
             BuildCargoAction.QueryString = QueryString ?? (item => true);
@@ -85,10 +85,10 @@ namespace EveComFramework.Cargo
             BuildCargoAction.Target = Target ?? (() => MyShip.CargoBay);
             CargoQueue.AddFirst(BuildCargoAction.Clone());
             if (Idle) QueueState(Process);
-            return new CargoProxy();
+            return this;
         }
 
-        public CargoProxy Unload(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
+        public Cargo Unload(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
         {
             BuildCargoAction.Action = Unload;
             BuildCargoAction.QueryString = QueryString ?? (item => true);
@@ -96,10 +96,10 @@ namespace EveComFramework.Cargo
             BuildCargoAction.Target = Target ?? (() => MyShip.CargoBay);
             CargoQueue.AddFirst(BuildCargoAction.Clone());
             if (Idle) QueueState(Process);
-            return new CargoProxy();
+            return this;
         }
 
-        public CargoProxy NoOp()
+        public Cargo NoOp()
         {
             BuildCargoAction.Action = NoOp;
             BuildCargoAction.QueryString = null;
@@ -107,7 +107,7 @@ namespace EveComFramework.Cargo
             BuildCargoAction.Target = null;
             CargoQueue.AddFirst(BuildCargoAction.Clone());
             if (Idle) QueueState(Process);
-            return new CargoProxy();
+            return this;
         }
 
         #endregion
@@ -181,6 +181,17 @@ namespace EveComFramework.Cargo
                 Command.OpenInventory.Execute();
                 return false;
             }
+            if (Session.InStation)
+            {
+                if (Station.CorpHangars != null)
+                {
+                    if (!Station.CorpHangars.Expanded)
+                    {
+                        Station.CorpHangars.Expand();
+                        return false;
+                    }
+                }
+            }
 
             if (!CurrentCargoAction.Target().IsPrimed)
             {
@@ -233,6 +244,17 @@ namespace EveComFramework.Cargo
                 Command.OpenInventory.Execute();
                 return false;
             }
+            if (Session.InStation)
+            {
+                if (Station.CorpHangars != null)
+                {
+                    if (!Station.CorpHangars.Expanded)
+                    {
+                        Station.CorpHangars.Expand();
+                        return false;
+                    }
+                }
+            }
 
             if (!CurrentCargoAction.Target().IsPrimed)
             {
@@ -280,39 +302,6 @@ namespace EveComFramework.Cargo
         }
 
         #endregion
-
-        #region Cargo move methods
-
-        public class CargoProxy
-        {
-
-            public CargoProxy At(Bookmark Bookmark, Func<InventoryContainer> Source = null, string ContainerName = "")
-            {
-                Cargo.Instance.At(Bookmark, Source, ContainerName);
-                return this;
-            }
-
-            public CargoProxy Load(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
-            {
-                Cargo.Instance.Load(QueryString, Quantity, Target);
-                return this;
-            }
-
-            public CargoProxy Unload(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
-            {
-                Cargo.Instance.Unload(QueryString, Quantity, Target);
-                return this;
-            }
-
-            public CargoProxy NoOp()
-            {
-                Cargo.Instance.NoOp();
-                return this;
-            }
-        }
-
-        #endregion
-
 
     }
 
