@@ -83,6 +83,13 @@
     <Compile Include="FleetControl\UI\FleetControl.Designer.cs">
       <DependentUpon>FleetControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="GroupControl\GroupControl.cs" />
+    <Compile Include="GroupControl\UI\GroupControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupControl\UI\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
