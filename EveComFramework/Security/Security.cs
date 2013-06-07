@@ -345,16 +345,22 @@ namespace EveComFramework.Security
 
         bool CheckClear(object[] Params)
         {
+            FleeTrigger Trigger = (FleeTrigger)Params[0];
+            int FleeWait = Config.FleeWait * 60000;
+            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
+
             AutoModule.AutoModule.Instance.Decloak = false;
             if (SafeTrigger() != FleeTrigger.None) return false;
+            QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
+            QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
+            QueueState(Resume, FleeWait);
+            QueueState(CheckSafe);
             return true;
         }
 
         bool Flee(object[] Params)
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
-            int FleeWait = Config.FleeWait * 60000;
-            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
 
             Cargo.Clear();
             Move.Clear();
@@ -364,11 +370,7 @@ namespace EveComFramework.Security
             QueueState(Traveling);
             QueueState(LogMessage, 1, string.Format("|oReached flee target"));
             QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
-            QueueState(CheckClear);
-            QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
-            QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
-            QueueState(Resume, FleeWait);
-            QueueState(CheckSafe);
+            QueueState(CheckClear, -1, Trigger);
 
             if (Session.InStation)
             {
@@ -426,13 +428,10 @@ namespace EveComFramework.Security
 
         bool Resume(object[] Params)
         {
-            if (SafeTrigger() != FleeTrigger.None)
+            FleeTrigger Trigger = SafeTrigger();
+            if (Trigger != FleeTrigger.None)
             {
-                int FleeWait = Config.FleeWait * 60000;
-                InsertState(Resume, FleeWait);
-                InsertState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
-                InsertState(LogMessage, 1, string.Format("|oArea is now safe"));
-                InsertState(CheckClear);
+                InsertState(CheckClear, -1, Trigger);
                 InsertState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
                 InsertState(LogMessage, 1, string.Format("|oNew flee condition"));
                 return true;
