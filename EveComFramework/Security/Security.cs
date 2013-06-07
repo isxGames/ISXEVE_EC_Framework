@@ -94,6 +94,7 @@ namespace EveComFramework.Security
 
         private Security() : base()
         {
+            RegisterCommands();
         }
 
 
@@ -167,12 +168,12 @@ namespace EveComFramework.Security
             }
         }
 
-        public void RegisterCommands()
+        void RegisterCommands()
         {
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
         }
 
-        public int ScramblingEntitiesUpdate(string[] args)
+        int ScramblingEntitiesUpdate(string[] args)
         {
             try
             {
