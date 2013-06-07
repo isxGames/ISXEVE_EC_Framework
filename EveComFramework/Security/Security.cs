@@ -108,6 +108,8 @@ namespace EveComFramework.Security
         public Logger Log = new Logger("Security");
         Pilot Hostile = null;
 
+        Dictionary<long, List<long>> ScramblingEntities = new Dictionary<long, List<long>>();
+
         #endregion
 
         #region Events
@@ -163,6 +165,34 @@ namespace EveComFramework.Security
             {
                 Alert();
             }
+        }
+
+        public void RegisterCommands()
+        {
+            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
+        }
+
+        public int ScramblingEntitiesUpdate(string[] args)
+        {
+            try
+            {
+                if (!ScramblingEntities.ContainsKey(long.Parse(args[1])))
+                {
+                    List<long> add = new List<long>();
+                    add.Add(long.Parse(args[2]));
+                    ScramblingEntities.Add(long.Parse(args[1]), add);
+                }
+                else
+                {
+                    if (ScramblingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
+                    {
+                        ScramblingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
+                    }
+                }
+            }
+            catch { }
+            
+            return 0;
         }
 
         FleeTrigger SafeTrigger()
@@ -284,59 +314,75 @@ namespace EveComFramework.Security
             return true;
         }
 
+        public Entity ValidScramble
+        {
+            get
+            {
+                if (Session.InFleet)
+                {
+                    List<long> ValidScrambles = ScramblingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
+                    return Entity.All.FirstOrDefault(a => ValidScrambles.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
+                }
+                return Entity.All.FirstOrDefault(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
+            }
+        }
+
         bool CheckSafe(object[] Params)
         {
 
-
-            if (Entity.All.FirstOrDefault(a => a.IsWarpScrambling && a.IsTargetingMe) != null)
+            Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
+            if (WarpScrambling != null)
             {
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
 
-                switch (SafeTrigger())
-                {
-                    case FleeTrigger.Pod:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.Pod);
-                        Log.Log("|rIn a pod!");
-                        return true;
-                    case FleeTrigger.NegativeStanding:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.NegativeStanding);
-                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                        Log.Log("|r{0} is negative standing", Hostile.Name);
-                        return true;
-                    case FleeTrigger.NeutralStanding:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.NeutralStanding);
-                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                        Log.Log("|r{0} is neutral standing", Hostile.Name);
-                        return true;
-                    case FleeTrigger.Targeted:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.Targeted);
-                        Log.Log("|r{0} is targeting me", Hostile.Name);
-                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                        return true;
-                    case FleeTrigger.CapacitorLow:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.CapacitorLow);
-                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                        Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
-                        return true;
-                    case FleeTrigger.ShieldLow:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.ShieldLow);
-                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                        Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
-                        return true;
-                    case FleeTrigger.ArmorLow:
-                        TriggerAlert();
-                        QueueState(Flee, -1, FleeTrigger.ArmorLow);
-                        if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                        Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
-                        return true;
-                }
+            if (ValidScramble != null) return false;
+
+            switch (SafeTrigger())
+            {
+                case FleeTrigger.Pod:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.Pod);
+                    Log.Log("|rIn a pod!");
+                    return true;
+                case FleeTrigger.NegativeStanding:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.NegativeStanding);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    Log.Log("|r{0} is negative standing", Hostile.Name);
+                    return true;
+                case FleeTrigger.NeutralStanding:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.NeutralStanding);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    Log.Log("|r{0} is neutral standing", Hostile.Name);
+                    return true;
+                case FleeTrigger.Targeted:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.Targeted);
+                    Log.Log("|r{0} is targeting me", Hostile.Name);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    return true;
+                case FleeTrigger.CapacitorLow:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.CapacitorLow);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
+                    return true;
+                case FleeTrigger.ShieldLow:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.ShieldLow);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
+                    return true;
+                case FleeTrigger.ArmorLow:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.ArmorLow);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
+                    return true;
+            }
 
             return false;
         }
