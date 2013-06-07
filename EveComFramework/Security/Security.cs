@@ -350,6 +350,7 @@ namespace EveComFramework.Security
             if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
 
             AutoModule.AutoModule.Instance.Decloak = false;
+            EVEFrame.Log(SafeTrigger().ToString());
             if (SafeTrigger() != FleeTrigger.None) return false;
             QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
             QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
