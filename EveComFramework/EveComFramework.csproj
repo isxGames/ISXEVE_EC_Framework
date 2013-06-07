@@ -139,6 +139,9 @@
     <EmbeddedResource Include="FleetControl\UI\FleetControl.resx">
       <DependentUpon>FleetControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GroupControl\UI\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

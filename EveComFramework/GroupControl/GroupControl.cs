@@ -13,38 +13,36 @@ namespace EveComFramework.GroupControl
     public enum GroupType { Mining, AnomalyCombat };
 
     #region Persistence Classes
-    [Serializable]
-    public class MemberSetting
-    {
-        public Role Role;
-        public string Profile;
-    }
 
     [Serializable]
     public class GroupSettings
     {
         public Guid ID;
         public GroupType GroupType;
-        public List<MemberSetting> Members;
+        public List<string> MemberProfiles = new List<string>();
     }
 
     public class GroupControlGlobalSettings : EveComFramework.Core.Settings
     {
         public GroupControlGlobalSettings() : base("GroupControl") {}
-        public List<GroupSettings> Groups;
+        public List<GroupSettings> Groups = new List<GroupSettings>();
     }
 
     public class GroupControlSettings : EveComFramework.Core.Settings
     {
-        public Guid CurrentGroup;
+        public Guid CurrentGroup = new Guid();
     }
     #endregion
 
     public class ActiveMember
     {
         public bool Active = false;
-        public MemberSetting MemberSettings;
+        public bool Available = false;
+        public string ProfileName;
+        public string CharacterName;
         public int LeadershipValue = 0;
+        public bool InFleet = false;
+        public Role Role;
     }
 
     public class ActiveGroup
@@ -55,6 +53,20 @@ namespace EveComFramework.GroupControl
 
     public class GroupControl : State
     {
+        #region Variables
+
+        public GroupControlGlobalSettings GlobalConfig = new GroupControlGlobalSettings();
+        public GroupControlSettings Config = new GroupControlSettings();
+        public Logger Log = new Logger("GroupControl");
+        public ActiveMember Self = new ActiveMember();
+        public ActiveGroup CurrentGroup;
+        public ActiveMember Leader;
+        string[] GenericLSkills = new string[] { "Leadership", "Wing Command", "Fleet Command", "Warfare Link Specialist" };
+        string[] CombatLSkills = new string[] { "Information Warfare", "Armored Warfare", "Siege Warfare", "Skirmish Warfare" };
+        string[] MiningLSkills = new string[] { "Mining Director", "Mining Foreman" };
+
+        #endregion  
+    
         #region Instantiation
 
         static GroupControl _Instance;
@@ -73,7 +85,49 @@ namespace EveComFramework.GroupControl
         private GroupControl()
             : base()
         {
-            LavishScript.Commands.AddCommand("UpdateGroupControl", UpdateGroupControl);   
+            DefaultFrequency = 5000;
+            Self.LeadershipValue = 0;
+            Self.Active = true;
+            Self.Available = true;
+            Self.Role = Role.Miner;
+            Self.ProfileName = Core.Config.Instance.DefaultProfile;
+            LavishScript.Commands.AddCommand("UpdateGroupControl", UpdateGroupControl);
+            if (Core.Config.Instance.DefaultProfile == "test1")
+            {
+                GlobalConfig.Groups.Clear();
+                GlobalConfig.Groups.Add(new GroupSettings());
+                GlobalConfig.Groups[0].ID = new Guid();
+                GlobalConfig.Groups[0].GroupType = GroupType.Mining;
+                GlobalConfig.Groups[0].MemberProfiles.Clear();
+                GlobalConfig.Groups[0].MemberProfiles.Add("test1");
+                GlobalConfig.Groups[0].MemberProfiles.Add("test2");
+                Config.CurrentGroup = GlobalConfig.Groups[0].ID;
+                CurrentGroup = new ActiveGroup();
+                CurrentGroup.ActiveMembers = new List<ActiveMember>();
+                CurrentGroup.GroupSettings = GlobalConfig.Groups[0];
+                GlobalConfig.Save();
+                Config.Save();
+            }
+            else
+            {
+                Config.CurrentGroup = GlobalConfig.Groups[0].ID;
+                CurrentGroup = new ActiveGroup();
+                CurrentGroup.ActiveMembers = new List<ActiveMember>();
+                CurrentGroup.GroupSettings = GlobalConfig.Groups[0];
+            }
+            foreach (string member in GlobalConfig.Groups[0].MemberProfiles)
+            {
+                if (member == Self.ProfileName)
+                {
+                    
+                    CurrentGroup.ActiveMembers.Add(Self);
+                }
+                else
+                {
+                    CurrentGroup.ActiveMembers.Add(new ActiveMember());
+                    CurrentGroup.ActiveMembers.Last().ProfileName = member;
+                }
+            }
         }
         
         #endregion
@@ -82,43 +136,102 @@ namespace EveComFramework.GroupControl
 
         public int UpdateGroupControl(string[] args)
         {
-            switch (args[0])
+            foreach (string st in args)
             {
+                Log.Log("UpdategroupControl {0}", st);
+            }
+            switch (args[1])
+            {
+                case "active":
+                    ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.ProfileName == args[2]);
+                    if (activeMember != null)
+                    {
+                        activeMember.Active = true;
+                        activeMember.LeadershipValue = Convert.ToInt32(args[3]);
+                        activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
+                        activeMember.CharacterName = args[5];
+                        Log.Log("new active fleet member {0}", activeMember.CharacterName);
+                    }
+                    break;
                 case "available":
-                    string profile = args[1];
-                    int value = Convert.ToInt32(args[2]);
-                    Log.Log(args[3]);
+                    ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.ProfileName == args[2]);
+                    if (availableMember != null)
+                    {
+                        availableMember.Available = Convert.ToBoolean(args[3]);
+                        Log.Log("Fleet member availabilty changed, {0} , {1}", availableMember.CharacterName,availableMember.Available);
+                    }
                     break;
-                case "nothing":
-                    //do other stuff
+                case "joinedfleet":
+                    ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.ProfileName == args[2]);
+                    if (joinedFleet != null)
+                    {
+                        joinedFleet.InFleet = true;
+                        Log.Log("Fleet member joined a fleet, {0}", joinedFleet.CharacterName);
+                    }
                     break;
+                case "forceupdate":
+                    if (Self.CharacterName != null)
+                    {
+                        Log.Log("Doing forced update");
+                        RelayAll("active", Self.ProfileName, Self.LeadershipValue.ToString(), Self.Role.ToString(), Self.CharacterName);
+                        RelayAll("available", Self.Available.ToString());
+                        if (Self.InFleet)
+                        {
+                            RelayAll("joinedfleet", Self.ProfileName);
+                        }
+                    }
+                    break;
+
             }
             return 0;
         }
-
         #endregion
+
+        #region Actions
+
+        public void Start()
+        {
+            if (Idle)
+            {
+                QueueState(InitializeSelf);
+            }
+        }
+
+        public void Configure()
+        {
+            UI.GroupControl Configuration = new UI.GroupControl();
+            Configuration.ShowDialog();
+        }
+
+        public void SetUnavailable()
+        {
+            Self.Available = false;
+            RelayAll("available", "false");
+        }
+
+        public void SetAvailable()
+        {
+            Self.Available = true;
+            RelayAll("available", "true");
+        }
+
+        #endregion 
+
+        #region Helper Functions
 
         public void RelayAll(string Command , params string[] Args)
         {
             string msg = "relay \"all other\" -noredirect UpdateGroupControl \"" + Command + "\" ";
             foreach (string arg in Args)
             {
-                msg = msg + "\"" + arg + "\"";
+                msg = msg + " \"" + arg + "\"";
             }
             LavishScriptAPI.LavishScript.ExecuteCommand(msg);
         }
 
-        #region Variables
+        #endregion
 
-        public GroupControlGlobalSettings GlobalConfig = new GroupControlGlobalSettings();
-        public GroupControlSettings Config = new GroupControlSettings();
-        public Logger Log = new Logger("GroupControl");
-        public ActiveMember Self;
-        public ActiveGroup CurrentGroup;
-        string[] GenericLSkills = new string[] { "Leadership", "Wing Command", "Fleet Command", "Warfare Link Specialist" };
-        string[] CombatLSkills = new string[] { "Information Warfare", "Armored Warfare", "Siege Warfare", "Skirmish Warfare" };
-        string[] MiningLSkills = new string[] { "Mining Director", "Mining Foreman" };
-        #endregion      
+        
 
         #region States
 
@@ -134,10 +247,8 @@ namespace EveComFramework.GroupControl
 
         public bool InitializeSelf(object[] Params)
         {
-            Self = new ActiveMember();
-            Self.LeadershipValue = 0;
-            Self.Active = true;
-            Self.MemberSettings = GlobalConfig.Groups.First(a => a.ID == Config.CurrentGroup).Members.First(b => b.Profile == Core.Config.Instance.DefaultProfile);
+            Self.CharacterName = Me.Name;
+            
             foreach (string skill in GenericLSkills)
             {
                 Skill s = Skill.All.FirstOrDefault(a => a.Type == skill);
@@ -146,7 +257,8 @@ namespace EveComFramework.GroupControl
                     Self.LeadershipValue += s.SkillLevel;
                 }
             }
-            if (Self.MemberSettings.Role == Role.Combat && CurrentGroup.GroupSettings.GroupType == GroupType.AnomalyCombat)
+
+            if (Self.Role == Role.Combat && CurrentGroup.GroupSettings.GroupType == GroupType.AnomalyCombat)
             {
                 foreach (string skill in CombatLSkills)
                 {
@@ -157,7 +269,7 @@ namespace EveComFramework.GroupControl
                     }
                 }
             }
-            if (Self.MemberSettings.Role == Role.Miner && CurrentGroup.GroupSettings.GroupType == GroupType.Mining)
+            if (Self.Role == Role.Miner && CurrentGroup.GroupSettings.GroupType == GroupType.Mining)
             {
                 foreach (string skill in MiningLSkills)
                 {
@@ -168,21 +280,139 @@ namespace EveComFramework.GroupControl
                     }
                 }
             }
-            if (Self.MemberSettings.Role == Role.Booster)
+            if (Self.Role == Role.Booster)
             {
                 Self.LeadershipValue += 10000;
             }
+            QueueState(Organize);
+            RelayAll("forceupdate", "");
             return true;
         }
-        public bool WaitForMembers(object[] Params)
+
+        public bool Organize(object[] Params)
         {
             //check for group members who haven't checked it, keep waiting if there are
-            if (CurrentGroup.ActiveMembers.Any(a => !a.Active))
+
+            RelayAll("active", Core.Config.Instance.DefaultProfile , Self.LeadershipValue.ToString() , Self.Role.ToString(), Me.Name);
+            RelayAll("available",Self.ProfileName,Self.Available.ToString());
+            
+            if (!Session.InFleet)
             {
-                RelayAll("available", Core.Config.Instance.DefaultProfile , Self.LeadershipValue.ToString() , Self.MemberSettings.Role.ToString());
+                //i'm not in a fleet, should i wait for an invite or create a fleet?
+                if (CurrentGroup.ActiveMembers.Count(a => a.InFleet) < 1)
+                {
+                    //nobody else is in a fleet, i can make one
+                    Log.Log("No fleet active , creating fleet");
+                    Fleet.CreateFleet();
+                    RelayAll("joinedfleet",Self.ProfileName);
+                    Self.InFleet = true;
+                    return false;
+                }
+                else
+                {
+                    //someone else is in a fleet , wait for an invite from another group member
+                    if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
+                    {
+                        Log.Log("Fleet invite found, accepting");
+                        Window.All.OfType<PopupWindow>().FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => a.Message.Contains(b.CharacterName))).ClickButton(Window.Button.Yes);
+                        RelayAll("joinedfleet", Self.ProfileName);
+                        Self.InFleet = true;
+                        return false;
+                    }
+                    else
+                    {
+                        Log.Log("Waiting for fleet invite");
+                        return false;
+                    }
+                }
+            }
+            else if (!Self.InFleet)
+            {
+                Self.InFleet = true;
+            }
+            //am i the only person in the fleet?
+            if (Fleet.Members.Count == 1)
+            {
+                //hand out invites!
+                Log.Log("Inviting first other person into fleet");
+                Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet));
+                if (ToInvite != null)
+                {
+                    Fleet.Invite(Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet)),Fleet.Wings[0],Fleet.Wings[0].Squads[0],FleetRole.SquadMember);
+                }
                 return false;
             }
-            return true;
+
+            //who should be squad leader
+            ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a=> a.Active).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.ProfileName).FirstOrDefault(a => a.Active && a.Available);
+            if (newLeader != null)
+            {
+                if (Leader != newLeader)
+                {
+                    //oh shit we got a new leader , if it's not me i should check i wasn't the old one
+                    Log.Log("New leader is {0}", newLeader.CharacterName);
+                    //check if the new leader isnt me
+                    if (newLeader.CharacterName != Self.CharacterName)
+                    {
+                        //it's not me check if i have to hand boss over
+                        if (Fleet.Members.FirstOrDefault(a => a.Boss).Name == Self.CharacterName)
+                        {
+                            //i'm the squad leader but no the leader!! better give boss to new leader
+                            Log.Log("Old leader was me, passing boss to new leader");
+                            Fleet.Members.First(a => a.Name == newLeader.CharacterName).MakeBoss();
+                            Leader = newLeader;
+                            return false;
+                        }
+                    }
+                    Leader = newLeader;
+                }            
+
+                //Am I the leader?
+                if (Leader.ProfileName == Self.ProfileName)
+                {
+                    //am I da boss
+                    if (Fleet.Members.Any(a => a.Boss && a.Name == Me.Name))
+                    {
+                        //am i the squad leader?
+                        if (Fleet.Wings[0].Squads[0].Commander != null)
+                        {
+                            //someone is squad leader, is it me?
+                            if (Fleet.Wings[0].Squads[0].Commander.Name != Me.Name)
+                            {
+                                //it's not me! , demote that guy
+                                Log.Log("Current squad leader is not me, demoting");
+                                Fleet.Wings[0].Squads[0].Commander.Move(Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            //nobody is squad leader, make me squad leader!
+                            Log.Log("No squad leader, assuming direct control");
+                            Fleet.Members.First(a => a.Name == Me.Name).Move(Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadCommander);
+                            return false;
+                        }
+
+                        //are there invites to do?
+                        if (CurrentGroup.ActiveMembers.Any(a => !a.InFleet))
+                        {
+                            Log.Log("Group members missing, handing out invites");
+                            Fleet.Invite(Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet)));
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        //im not the boss, hopefully the old boss will make me the boss
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                Log.Log("can't select a leader");
+            }
+            return false;
         }
 
         #endregion
