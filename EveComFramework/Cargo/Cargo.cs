@@ -181,17 +181,17 @@ namespace EveComFramework.Cargo
                 Command.OpenInventory.Execute();
                 return false;
             }
-            if (Session.InStation)
-            {
-                if (Station.CorpHangars != null)
-                {
-                    if (!Station.CorpHangars.Expanded)
-                    {
-                        Station.CorpHangars.Expand();
-                        return false;
-                    }
-                }
-            }
+            //if (Session.InStation)
+            //{
+            //    if (Station.CorpHangars != null)
+            //    {
+            //        if (!Station.CorpHangars.Expanded)
+            //        {
+            //            Station.CorpHangars.Expand();
+            //            return false;
+            //        }
+            //    }
+            //}
 
             if (!CurrentCargoAction.Target().IsPrimed)
             {
@@ -244,17 +244,17 @@ namespace EveComFramework.Cargo
                 Command.OpenInventory.Execute();
                 return false;
             }
-            if (Session.InStation)
-            {
-                if (Station.CorpHangars != null)
-                {
-                    if (!Station.CorpHangars.Expanded)
-                    {
-                        Station.CorpHangars.Expand();
-                        return false;
-                    }
-                }
-            }
+            //if (Session.InStation)
+            //{
+            //    if (Station.CorpHangars != null)
+            //    {
+            //        if (!Station.CorpHangars.Expanded)
+            //        {
+            //            Station.CorpHangars.Expand();
+            //            return false;
+            //        }
+            //    }
+            //}
 
             if (!CurrentCargoAction.Target().IsPrimed)
             {
