@@ -46,7 +46,7 @@ namespace EveComFramework.Core
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
             Name = Me.Name;
             Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
-            if (Session.InFleet) Fleet.Members.Select(a => a.Name).ToArray();
+            if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
             if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) CargoItems = MyShip.CargoBay.Items.Distinct().Select(a => a.Type).ToArray();
             return false;
         }
