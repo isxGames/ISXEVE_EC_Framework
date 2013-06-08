@@ -409,6 +409,8 @@ namespace EveComFramework.Security
                 EVEFrame.Log(Hostile.ToChar.FromAlliance.ToString());
                 EVEFrame.Log(Hostile.ToChar.FromCorp.ToString());
                 EVEFrame.Log(Hostile.ToChar.FromChar.ToString());
+                EVEFrame.Log(Hostile.CorpID.ToString());
+                EVEFrame.Log(Hostile.AllianceID.ToString());
             }
             if (SafeTrigger() != FleeTrigger.None) return false;
             QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
