@@ -27,7 +27,7 @@ namespace EveComFramework.Core
 
         public int DefaultFrequency { get; set; }
         public DateTime NextPulse { get; set; }
-        internal LinkedList<StateQueue> States = new LinkedList<StateQueue>();
+        public LinkedList<StateQueue> States = new LinkedList<StateQueue>();
         public StateQueue CurState;
         public bool Idle { get { return CurState == null; } }
         public Logger StateLog;
