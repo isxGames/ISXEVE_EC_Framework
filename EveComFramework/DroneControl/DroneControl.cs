@@ -251,7 +251,7 @@ namespace EveComFramework.DroneControl
 
             if (Rats.TargetList.Count == 0)
             {
-                WaitFor(30, () => Rats.TargetList.Count > 0);
+                WaitFor(5, () => Rats.TargetList.Count > 0);
                 QueueState(CombatCheck);
                 return true;
             }
