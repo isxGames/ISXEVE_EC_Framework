@@ -36,7 +36,7 @@ namespace EveComFramework.Core
         public string[] Bookmarks { get; set; }
         public string[] FleetMembers { get; set; }
         public string[] CargoItems { get; set; }
-        public Dictionary<string, double> ItemCache = new Dictionary<string, double>();
+        public Dictionary<string, double> ItemCache { get; set; }
 
         #endregion
 
@@ -45,6 +45,7 @@ namespace EveComFramework.Core
         bool Control(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
+            if (ItemCache == null) ItemCache = new Dictionary<string, double>();
             Name = Me.Name;
             Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
             if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
