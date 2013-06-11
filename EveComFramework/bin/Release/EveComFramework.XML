@@ -45,6 +45,21 @@
             </summary>
             <param name="Message">Message that is being logged</param>
         </member>
+        <member name="T:EveComFramework.Core.Config">
+            <summary>
+            This class is used to define default information for the Settings module
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Config.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Config.DefaultProfile">
+            <summary>
+            The default profile name to use if one is not defined
+            </summary>
+        </member>
         <member name="T:EveComFramework.AutoModule.UI.AutoModule">
             <summary>
             Automodule configuration form
@@ -88,6 +103,88 @@
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Settings">
+            <summary>
+            This class provides an easy-to-use XML serializer/deserializer to store configuration information to XML files
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.#ctor">
+            <summary>
+            Default constructor for this class
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.#ctor(System.String)">
+            <summary>
+            Constructor allowing a hard-coded profile name - profile is automatically stored in a "global" subfolder.  This should be used for non-profile-specific configuration information.
+            </summary>
+            <param name="profilename">String containing the profile name</param>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.Profiles">
+            <summary>
+            This provides an array of the profiles (without extensions).  Useful for populating a list of available profiles.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.TriggerUpdate">
+            <summary>
+            Raises the Updated event
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.Save">
+            <summary>
+            Save the current configuration to XML
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.Load">
+            <summary>
+            Load the configuration from XML
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Settings.ProfilePath">
+            <summary>
+            The current path to the Profile XML
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Settings.ConfigDirectory">
+            <summary>
+            The Config Directory where the Profile XML is stored
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Core.Settings.Updated">
+            <summary>
+            Event using NewAlert delegate
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Settings.NewAlert">
+            <summary>
+            Alert delegate
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Settings.SerializableDictionary`2">
+            <summary>
+            A serializable dictionary able to be saved to XML (Must be used in place of a normal dictionary to be stored in XML)
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.SerializableDictionary`2.GetSchema">
+            <summary>
+            GetSchema
+            </summary>
+            <returns>null</returns>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.SerializableDictionary`2.ReadXml(System.Xml.XmlReader)">
+            <summary>
+            ReadXML
+            </summary>
+            <param name="reader"></param>
+        </member>
+        <member name="M:EveComFramework.Core.Settings.SerializableDictionary`2.WriteXml(System.Xml.XmlWriter)">
+            <summary>
+            WriteXML
+            </summary>
+            <param name="writer"></param>
         </member>
         <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
             <summary>

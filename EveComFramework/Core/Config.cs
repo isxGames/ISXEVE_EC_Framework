@@ -5,11 +5,17 @@ using System.Text;
 
 namespace EveComFramework.Core
 {
+    /// <summary>
+    /// This class is used to define default information for the Settings module
+    /// </summary>
     public class Config
     {
         #region Instantiation
 
         static Config _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static Config Instance
         {
             get
@@ -24,12 +30,13 @@ namespace EveComFramework.Core
 
         private Config() : base()
         {
-            InUse = false;
         }
 
         #endregion
 
+        /// <summary>
+        /// The default profile name to use if one is not defined
+        /// </summary>
         public string DefaultProfile { get; set; }
-        public bool InUse { get; set; }
     }
 }

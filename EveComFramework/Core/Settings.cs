@@ -13,10 +13,19 @@ using LavishScriptAPI;
 
 namespace EveComFramework.Core
 {
+    /// <summary>
+    /// This class provides an easy-to-use XML serializer/deserializer to store configuration information to XML files
+    /// </summary>
     public class Settings
     {
         private FileSystemWatcher watcher;
+        /// <summary>
+        /// The current path to the Profile XML
+        /// </summary>
         public string ProfilePath { get; set; }
+        /// <summary>
+        /// The Config Directory where the Profile XML is stored
+        /// </summary>
         public string ConfigDirectory { get; set; }
         
         
@@ -24,6 +33,9 @@ namespace EveComFramework.Core
         {
         }
 
+        /// <summary>
+        /// Default constructor for this class
+        /// </summary>
         public Settings()
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
@@ -39,6 +51,10 @@ namespace EveComFramework.Core
             watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
+        /// <summary>
+        /// Constructor allowing a hard-coded profile name - profile is automatically stored in a "global" subfolder.  This should be used for non-profile-specific configuration information.
+        /// </summary>
+        /// <param name="profilename">String containing the profile name</param>
         public Settings(string profilename)
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\global\\";
@@ -54,6 +70,10 @@ namespace EveComFramework.Core
             watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
+        /// <summary>
+        /// This provides an array of the profiles (without extensions).  Useful for populating a list of available profiles.
+        /// </summary>
+        /// <returns></returns>
         public string[] Profiles()
         {
             string dir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
@@ -62,8 +82,17 @@ namespace EveComFramework.Core
 
         #region Events
 
+        /// <summary>
+        /// Alert delegate
+        /// </summary>
         public delegate void NewAlert();
+        /// <summary>
+        /// Event using NewAlert delegate
+        /// </summary>
         public event NewAlert Updated;
+        /// <summary>
+        /// Raises the Updated event
+        /// </summary>
         public void TriggerUpdate()
         {
             if (Updated != null)
@@ -80,9 +109,11 @@ namespace EveComFramework.Core
             TriggerUpdate();
         }
 
+        /// <summary>
+        /// Save the current configuration to XML
+        /// </summary>
         public void Save()
         {
-            Config.Instance.InUse = true;
             try
             {
                 XDocument settingsDoc;
@@ -142,12 +173,13 @@ namespace EveComFramework.Core
             catch
             {
             }
-            Config.Instance.InUse = false;
         }
 
+        /// <summary>
+        /// Load the configuration from XML
+        /// </summary>
         public void Load()
         {
-            if (Config.Instance.InUse) return;
             if (File.Exists(ProfilePath))
             {
                 try
@@ -230,14 +262,29 @@ namespace EveComFramework.Core
             return serializers[typeOfT];
         }
 
+
+        /// <summary>
+        /// A serializable dictionary able to be saved to XML (Must be used in place of a normal dictionary to be stored in XML)
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
         public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
         {
             #region IXmlSerializable Members
+
+            /// <summary>
+            /// GetSchema
+            /// </summary>
+            /// <returns>null</returns>
             public System.Xml.Schema.XmlSchema GetSchema()
             {
                 return null;
             }
 
+            /// <summary>
+            /// ReadXML
+            /// </summary>
+            /// <param name="reader"></param>
             public void ReadXml(System.Xml.XmlReader reader)
             {
                 XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
@@ -269,6 +316,10 @@ namespace EveComFramework.Core
                 reader.ReadEndElement();
             }
 
+            /// <summary>
+            /// WriteXML
+            /// </summary>
+            /// <param name="writer"></param>
             public void WriteXml(System.Xml.XmlWriter writer)
             {
                 XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
