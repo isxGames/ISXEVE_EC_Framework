@@ -87,8 +87,16 @@ namespace EveComFramework.Core
             Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
             if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
             if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) CargoItems = MyShip.CargoBay.Items.Distinct().Select(a => a.Type).ToArray();
-            if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) MyShip.CargoBay.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
-            if (Session.InStation && Station.ItemHangar != null && Station.ItemHangar.IsPrimed) Station.ItemHangar.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+            if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed)
+            {
+                MyShip.CargoBay.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                GlobalConfig.Save();
+            }
+            if (Session.InStation && Station.ItemHangar != null && Station.ItemHangar.IsPrimed)
+            {
+                Station.ItemHangar.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                GlobalConfig.Save();
+            }
             return false;
         }
 
