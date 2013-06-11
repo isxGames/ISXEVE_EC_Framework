@@ -9,6 +9,8 @@ namespace EveComFramework.Security
 {
     #region Enums
 
+    #pragma warning disable 1591
+
     public enum FleeTrigger
     {
         Pod,
@@ -30,56 +32,66 @@ namespace EveComFramework.Security
         SafeBookmarks
     }
 
+    #pragma warning restore 1591
+
     #endregion
 
     #region Settings
 
+    /// <summary>
+    /// Settings for the Security class
+    /// </summary>
     public class SecuritySettings : Settings
     {
-        public List<FleeTrigger> Triggers = new List<FleeTrigger>
+        internal List<FleeTrigger> Triggers = new List<FleeTrigger>
         {
             FleeTrigger.Pod,
             FleeTrigger.NegativeStanding,
             FleeTrigger.NeutralStanding,
-            FleeTrigger.Paranoid,
             FleeTrigger.Targeted,
             FleeTrigger.CapacitorLow,
             FleeTrigger.ShieldLow,
             FleeTrigger.ArmorLow
         };
-        public List<FleeType> Types = new List<FleeType>
+        internal List<FleeType> Types = new List<FleeType>
         {
             FleeType.NearestStation,
             FleeType.SecureBookmark,
             FleeType.SafeBookmarks
         };
-        public bool NegativeAlliance = false;
-        public bool NegativeCorp = false;
-        public bool NegativeFleet = false;
-        public bool NeutralAlliance = false;
-        public bool NeutralCorp = false;
-        public bool NeutralFleet = false;
-        public bool ParanoidAlliance = false;
-        public bool ParanoidCorp = false;
-        public bool ParanoidFleet = false;
-        public bool TargetAlliance = false;
-        public bool TargetCorp = false;
-        public bool TargetFleet = false;
-        public int CapThreshold = 30;
-        public int ShieldThreshold = 30;
-        public int ArmorThreshold = 99;
-        public string SafeSubstring = "Safe:";
-        public string SecureBookmark = "";
-        public int FleeWait = 5;
+        internal bool NegativeAlliance = false;
+        internal bool NegativeCorp = false;
+        internal bool NegativeFleet = false;
+        internal bool NeutralAlliance = false;
+        internal bool NeutralCorp = false;
+        internal bool NeutralFleet = false;
+        internal bool ParanoidAlliance = false;
+        internal bool ParanoidCorp = false;
+        internal bool ParanoidFleet = false;
+        internal bool TargetAlliance = false;
+        internal bool TargetCorp = false;
+        internal bool TargetFleet = false;
+        internal int CapThreshold = 30;
+        internal int ShieldThreshold = 30;
+        internal int ArmorThreshold = 99;
+        internal string SafeSubstring = "Safe:";
+        internal string SecureBookmark = "";
+        internal int FleeWait = 5;
     }
 
     #endregion
 
+    /// <summary>
+    /// This class manages security operations for bots.  This includes configurable flees based on pilots present in local and properties like shield/armor
+    /// </summary>
     public class Security : State
     {
         #region Instantiation
 
         static Security _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static Security Instance
         {
             get
@@ -103,25 +115,63 @@ namespace EveComFramework.Security
         #region Variables
 
         List<Bookmark> SafeSpots;
+        /// <summary>
+        /// Configuration for this class
+        /// </summary>
         public SecuritySettings Config = new SecuritySettings();
+        /// <summary>
+        /// Logger for this class
+        /// </summary>
+        public Logger Log = new Logger("Security");
+        /// <summary>
+        /// Dictionary of lists of entity IDs for entities currently scrambling a fleet member keyed by fleet member ID
+        /// </summary>
+        public Dictionary<long, List<long>> ScramblingEntities = new Dictionary<long, List<long>>();
+
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
-        public Logger Log = new Logger("Security");
         Pilot Hostile = null;
-
-        public Dictionary<long, List<long>> ScramblingEntities = new Dictionary<long, List<long>>();
 
         #endregion
 
         #region Events
 
+        /// <summary>
+        /// Event raised to alert a bot that a flee is in progress
+        /// </summary>
         public event Action Alert;
+        /// <summary>
+        /// Event raised to alert a bot that it is safe after a flee
+        /// </summary>
         public event Action ClearAlert;
 
         #endregion
 
         #region Actions
 
+        /// <summary>
+        /// Starts/stops this module
+        /// </summary>
+        /// <param name="val">Enabled=true</param>
+        public void Enable(bool val)
+        {
+            if (val)
+            {
+                if (Idle)
+                {
+                    QueueState(CheckSafe);
+                }
+            }
+            else
+            {
+                Clear();
+            }
+        }
+
+        /// <summary>
+        /// Start this module
+        /// </summary>
+        [Obsolete("Depreciated:  Use Security.Enable (6/11/13)")]
         public void Start()
         {
             if (Idle)
@@ -131,17 +181,29 @@ namespace EveComFramework.Security
 
         }
 
+        /// <summary>
+        /// Stop this module
+        /// </summary>
+        [Obsolete("Depreciated:  Use Security.Enable (6/11/13)")]
         public void Stop()
         {
             Clear();
         }
 
+        /// <summary>
+        /// Trigger a flee manually
+        /// </summary>
+        [Obsolete("Depreciated:  Not useful anymore.  Speak with Teht if you have need of this method.  6/11/13")]
         public void Flee()
         {
             Clear();
             QueueState(Flee);
         }
 
+        /// <summary>
+        /// This was originally intended to reset the security module after a certain duration.
+        /// </summary>
+        [Obsolete("Depreciated:  Not useful anymore.  Speak with Teht if you have need of this method.  6/11/13")]
         public void Reset(int? Delay = null)
         {
             int iDelay = Delay ?? Config.FleeWait * 60000;
@@ -149,6 +211,9 @@ namespace EveComFramework.Security
             QueueState(CheckSafe);
         }
 
+        /// <summary>
+        /// Configure this module
+        /// </summary>
         public void Configure()
         {
             UI.Security Configuration = new UI.Security();
@@ -315,6 +380,9 @@ namespace EveComFramework.Security
             return true;
         }
 
+        /// <summary>
+        /// Returns an entity that is scrambling or has scrambled a friendly fleet member
+        /// </summary>
         public Entity ValidScramble
         {
             get
@@ -330,7 +398,6 @@ namespace EveComFramework.Security
 
         bool CheckSafe(object[] Params)
         {
-
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
