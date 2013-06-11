@@ -7,7 +7,9 @@ using EveCom;
 
 namespace EveComFramework.Cargo
 {
-
+    /// <summary>
+    /// This class handles cargo operation, including navigation
+    /// </summary>
     public class Cargo : EveComFramework.Core.State
     {
         private class CargoAction
@@ -43,6 +45,9 @@ namespace EveComFramework.Cargo
         CargoAction CurrentCargoAction;
         CargoAction BuildCargoAction;
         Move.Move Move = EveComFramework.Move.Move.Instance;
+        /// <summary>
+        /// Log for Cargo module
+        /// </summary>
         public Core.Logger Log = new Core.Logger("Cargo");
 
         #endregion
@@ -50,6 +55,9 @@ namespace EveComFramework.Cargo
         #region Instantiation
 
         static Cargo _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static Cargo Instance
         {
             get
@@ -71,12 +79,26 @@ namespace EveComFramework.Cargo
 
         #region Actions
 
+        /// <summary>
+        /// Specify the location to perform the cargo operation
+        /// </summary>
+        /// <param name="Bookmark">Bookmark object for the location to perform the cargo operation</param>
+        /// <param name="Source">InventoryContainer to use for the operation (load source for Load, unload destination for Unload)  Default: Station Item Hangar</param>
+        /// <param name="ContainerName">Name of the entity to use for the operation (for entities with inventory containers in space)</param>
+        /// <returns></returns>
         public Cargo At(Bookmark Bookmark, Func<InventoryContainer> Source = null, string ContainerName = "")
         {
             BuildCargoAction = new CargoAction(null, Bookmark, Source ?? (() => Station.ItemHangar), ContainerName, null, 0, null);
             return this;
         }
 
+        /// <summary>
+        /// Add a Load operation
+        /// </summary>
+        /// <param name="QueryString">Linq parameters for specifying the items to load.</param>
+        /// <param name="Quantity">Quantity of the item to load (Must specify a single item type using QueryString)</param>
+        /// <param name="Target">Where to load the item(s) - Default: Cargo Hold</param>
+        /// <returns></returns>
         public Cargo Load(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
         {
             BuildCargoAction.Action = Load;
@@ -88,6 +110,13 @@ namespace EveComFramework.Cargo
             return this;
         }
 
+        /// <summary>
+        /// Add an Unload operation
+        /// </summary>
+        /// <param name="QueryString">Linq parameters for specifying the items to unload.</param>
+        /// <param name="Quantity">Quantity of the item to unload (Must specify a single item type using QueryString)</param>
+        /// <param name="Target">Where to unload the item(s) from - Default: Cargo Hold</param>
+        /// <returns></returns>
         public Cargo Unload(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
         {
             BuildCargoAction.Action = Unload;
@@ -99,6 +128,10 @@ namespace EveComFramework.Cargo
             return this;
         }
 
+        /// <summary>
+        /// Don't do anything - used in conjunction with Cargo.At to queue up a move to a location without performing a cargo operation
+        /// </summary>
+        /// <returns></returns>
         public Cargo NoOp()
         {
             BuildCargoAction.Action = NoOp;

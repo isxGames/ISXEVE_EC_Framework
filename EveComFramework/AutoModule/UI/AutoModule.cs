@@ -9,10 +9,16 @@ using System.Windows.Forms;
 
 namespace EveComFramework.AutoModule.UI
 {
+    /// <summary>
+    /// Automodule configuration form
+    /// </summary>
     public partial class AutoModule : Form
     {
         internal AutoModuleSettings Config = EveComFramework.AutoModule.AutoModule.Instance.Config;
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public AutoModule()
         {
             InitializeComponent();

@@ -45,6 +45,16 @@
             </summary>
             <param name="Message">Message that is being logged</param>
         </member>
+        <member name="T:EveComFramework.AutoModule.UI.AutoModule">
+            <summary>
+            Automodule configuration form
+            </summary>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="F:EveComFramework.AutoModule.UI.AutoModule.components">
             <summary>
             Required designer variable.
@@ -324,6 +334,54 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Cargo.Cargo">
+            <summary>
+            This class handles cargo operation, including navigation
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Cargo.Cargo.Log">
+            <summary>
+            Log for Cargo module
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.At(EveCom.Bookmark,System.Func{EveCom.InventoryContainer},System.String)">
+            <summary>
+            Specify the location to perform the cargo operation
+            </summary>
+            <param name="Bookmark">Bookmark object for the location to perform the cargo operation</param>
+            <param name="Source">InventoryContainer to use for the operation (load source for Load, unload destination for Unload)  Default: Station Item Hangar</param>
+            <param name="ContainerName">Name of the entity to use for the operation (for entities with inventory containers in space)</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.Load(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
+            <summary>
+            Add a Load operation
+            </summary>
+            <param name="QueryString">Linq parameters for specifying the items to load.</param>
+            <param name="Quantity">Quantity of the item to load (Must specify a single item type using QueryString)</param>
+            <param name="Target">Where to load the item(s) - Default: Cargo Hold</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.Unload(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
+            <summary>
+            Add an Unload operation
+            </summary>
+            <param name="QueryString">Linq parameters for specifying the items to unload.</param>
+            <param name="Quantity">Quantity of the item to unload (Must specify a single item type using QueryString)</param>
+            <param name="Target">Where to unload the item(s) from - Default: Cargo Hold</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.NoOp">
+            <summary>
+            Don't do anything - used in conjunction with Cargo.At to queue up a move to a location without performing a cargo operation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:EveComFramework.Cargo.Cargo.Instance">
+            <summary>
+            Singletoner
             </summary>
         </member>
         <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
