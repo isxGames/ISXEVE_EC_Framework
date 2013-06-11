@@ -8,46 +8,56 @@ namespace EveComFramework.AutoModule
 {
     #region Settings
 
+    /// <summary>
+    /// Configuration settings for this AutoModule
+    /// </summary>
     public class AutoModuleSettings : EveComFramework.Core.Settings
     {
-        public bool ActiveHardeners = true;
-        public bool ShieldBoosters = true;
-        public bool ArmorRepairs = true;
-        public bool Cloaks = true;
-        public bool GangLinks = true;
-        public bool SensorBoosters = true;
-        public bool TrackingComputers = true;
-        public bool ECCMs = true;
-        public bool DroneControlUnits = true;
-        public bool PropulsionModules = false;
-        public bool PropulsionModulesAlwaysOn = false;
-        public bool PropulsionModulesApproaching = false;
-        public bool PropulsionModulesOrbiting = false;
+        internal bool ActiveHardeners = true;
+        internal bool ShieldBoosters = true;
+        internal bool ArmorRepairs = true;
+        internal bool Cloaks = true;
+        internal bool GangLinks = true;
+        internal bool SensorBoosters = true;
+        internal bool TrackingComputers = true;
+        internal bool ECCMs = true;
+        internal bool DroneControlUnits = true;
+        internal bool PropulsionModules = false;
+        internal bool PropulsionModulesAlwaysOn = false;
+        internal bool PropulsionModulesApproaching = false;
+        internal bool PropulsionModulesOrbiting = false;
 
-        public int CapActiveHardeners = 30;
-        public int CapShieldBoosters = 30;
-        public int CapArmorRepairs = 30;
-        public int CapCloaks = 30;
-        public int CapGangLinks = 30;
-        public int CapSensorBoosters = 30;
-        public int CapTrackingComputers = 30;
-        public int CapECCMs = 30;
-        public int CapDroneControlUnits = 30;
-        public int CapPropulsionModules = 30;
+        internal int CapActiveHardeners = 30;
+        internal int CapShieldBoosters = 30;
+        internal int CapArmorRepairs = 30;
+        internal int CapCloaks = 30;
+        internal int CapGangLinks = 30;
+        internal int CapSensorBoosters = 30;
+        internal int CapTrackingComputers = 30;
+        internal int CapECCMs = 30;
+        internal int CapDroneControlUnits = 30;
+        internal int CapPropulsionModules = 30;
 
-        public int MaxShieldBoosters = 95;
-        public int MaxArmorRepairs = 95;
-        public int MinShieldBoosters = 80;
-        public int MinArmorRepairs = 80;
+        internal int MaxShieldBoosters = 95;
+        internal int MaxArmorRepairs = 95;
+        internal int MinShieldBoosters = 80;
+        internal int MinArmorRepairs = 80;
     }
 
     #endregion
 
+
+    /// <summary>
+    /// This class manages your ships modules intelligently
+    /// </summary>
     public class AutoModule : EveComFramework.Core.State
     {
         #region Instantiation
 
         static AutoModule _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static AutoModule Instance
         {
             get
@@ -69,15 +79,23 @@ namespace EveComFramework.AutoModule
 
         #region Variables
 
+        /// <summary>
+        /// Configuration for this module
+        /// </summary>
         public AutoModuleSettings Config = new AutoModuleSettings();
 
-        public bool Overide = false;
+        /// <summary>
+        /// Set to true to force automodule to decloak you.  Useful for handling non-covops cloaks.
+        /// </summary>
         public bool Decloak = false;
 
         #endregion
 
         #region Actions
 
+        /// <summary>
+        /// Start this module
+        /// </summary>
         public void Start()
         {
             if (Idle)
@@ -87,11 +105,17 @@ namespace EveComFramework.AutoModule
 
         }
 
+        /// <summary>
+        /// Stop this module
+        /// </summary>
         public void Stop()
         {
             Clear();
         }
 
+        /// <summary>
+        /// Configure this module
+        /// </summary>
         public void Configure()
         {
             UI.AutoModule Configuration = new UI.AutoModule();
@@ -104,7 +128,7 @@ namespace EveComFramework.AutoModule
 
         bool Control(object[] Params)
         {
-            if (!Session.InSpace || !Session.Safe || Overide)
+            if (!Session.InSpace || !Session.Safe)
             {
                 return false;
             }
@@ -332,11 +356,18 @@ namespace EveComFramework.AutoModule
         #endregion
     }
 
+    /// <summary>
+    /// This class manages one pulse of the first available propulsion module per session.
+    /// A new session starts on every solar system change or undock.
+    /// </summary>
     public class InstaWarp : EveComFramework.Core.State
     {
         #region Instantiation
 
         static InstaWarp _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static InstaWarp Instance
         {
             get
@@ -357,6 +388,10 @@ namespace EveComFramework.AutoModule
 
         #region Actions
 
+        /// <summary>
+        /// Starts/stops this module
+        /// </summary>
+        /// <param name="Val">True=Start</param>
         public void Enabled(bool Val)
         {
             if (Val)
