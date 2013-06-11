@@ -10,11 +10,11 @@ using EveComFramework.Core;
 
 namespace EveComFramework.SessionControl.UI
 {
-    public partial class SessionControl : Form
+    internal partial class SessionControl : Form
     {
         internal LoginGlobalSettings GlobalConfig = EveComFramework.SessionControl.SessionControl.Instance.GlobalConfig;
         internal LoginLocalSettings Config = EveComFramework.SessionControl.SessionControl.Instance.Config;
-        UIData UIData = UIData.Instance;
+        Cache Cache = Cache.Instance;
 
         public SessionControl()
         {
@@ -51,21 +51,21 @@ namespace EveComFramework.SessionControl.UI
 
         private void addProfileButton_Click(object sender, EventArgs e)
         {
-            if (UIData.CharName == null) return;
+            if (Cache.Name == null) return;
             Profile p = new Profile();
             p.Username = pUNameBox.Text;
             p.Password = pPasswordBox.Text;
-            p.CharacterID = UIData.CharID;
-            if (GlobalConfig.Profiles.ContainsKey(UIData.Instance.CharName))
+            p.CharacterID = Cache.CharID;
+            if (GlobalConfig.Profiles.ContainsKey(Cache.Name))
             {
-                GlobalConfig.Profiles[UIData.CharName] = p;
+                GlobalConfig.Profiles[Cache.Name] = p;
             }
             else
             {
-                GlobalConfig.Profiles.Add(UIData.CharName, p);
+                GlobalConfig.Profiles.Add(Cache.Name, p);
             }
             GlobalConfig.Save();
-            AddProfile(UIData.CharName);
+            AddProfile(Cache.Name);
         }
 
         private void removeProfile_Click(object sender, EventArgs e)

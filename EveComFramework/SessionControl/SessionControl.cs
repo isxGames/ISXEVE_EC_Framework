@@ -14,14 +14,8 @@ namespace EveComFramework.SessionControl
     [Serializable]
     public class PlaySession
     {
-        /// <summary>
-        /// The time the session started
-        /// </summary>
-        public DateTime Login;
-        /// <summary>
-        /// The time the session ended, could be up to 1 minute out
-        /// </summary>
-        public DateTime Logout;
+        internal DateTime Login;
+        internal DateTime Logout;
     }
 
     /// <summary>
@@ -30,71 +24,34 @@ namespace EveComFramework.SessionControl
     [Serializable]
     public class Profile
     {
-        public List<PlaySession> Sessions;
-        public string Username;
-        public string Password;
-        public long CharacterID;
+        internal List<PlaySession> Sessions;
+        internal string Username;
+        internal string Password;
+        internal long CharacterID;
     }
 
+    /// <summary>
+    /// Global settings for SessionControl class
+    /// </summary>
     public class LoginGlobalSettings : Settings
     {
-        public LoginGlobalSettings() : base("Login") { }
+        internal LoginGlobalSettings() : base("Login") { }
         /// <summary>
         /// Available userprofiles, keyed by the character name
         /// </summary>
-        public SerializableDictionary<string, Profile> Profiles = new SerializableDictionary<string,Profile>();
+        internal SerializableDictionary<string, Profile> Profiles = new SerializableDictionary<string, Profile>();
     }
 
+    /// <summary>
+    /// Profile-based settings for SessionControl class
+    /// </summary>
     public class LoginLocalSettings : Settings
     {
-        public int LoginDelta = 10;
-        public int LogoutHours = 4;
-        public int LogoutDelta = 20;
-        public int Downtime = 30;
-        public int DowntimeDelta = 10;
-    }
-    
-    public class UIData : State
-    {
-        #region Variables
-
-        public long CharID { get; set; }
-        public string CharName { get; set; }
-
-        #endregion
-
-        #region Instantiation
-
-        static UIData _Instance;
-        public static UIData Instance
-        {
-            get
-            {
-                if (_Instance == null)
-                {
-                    _Instance = new UIData();
-                }
-                return _Instance;
-            }
-        }
-
-        private UIData() : base()
-        {
-            QueueState(Update);
-        }
-
-
-        #endregion
-
-        #region States
-
-        bool Update(object[] Params)
-        {
-            CharID = Me.CharID;
-            CharName = Me.Name;
-            return false;
-        }
-        #endregion
+        internal int LoginDelta = 10;
+        internal int LogoutHours = 4;
+        internal int LogoutDelta = 20;
+        internal int Downtime = 30;
+        internal int DowntimeDelta = 10;
     }
 
     /// <summary>
@@ -105,6 +62,9 @@ namespace EveComFramework.SessionControl
         #region Instantiation
 
         static SessionControl _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static SessionControl Instance
         {
             get
@@ -138,10 +98,23 @@ namespace EveComFramework.SessionControl
 
         #region Variables
 
+        /// <summary>
+        /// Global config containing all login information
+        /// </summary>
         public LoginGlobalSettings GlobalConfig = new LoginGlobalSettings();
+        /// <summary>
+        /// Config for this class
+        /// </summary>
         public LoginLocalSettings Config = new LoginLocalSettings();
+        /// <summary>
+        /// Log for this class
+        /// </summary>
         public Logger Log = new Logger("LoginControl");
+        /// <summary>
+        /// The character name to work with
+        /// </summary>
         public string characterName = string.Empty;
+
         DateTime Instanced = DateTime.Now;
         DateTime SessionStart;
         Random random = new Random();
@@ -164,11 +137,17 @@ namespace EveComFramework.SessionControl
 
         #region Actions
 
+        /// <summary>
+        /// Sets up _curProfile with data from GlobalConfig
+        /// </summary>
         public void UpdateCurrentProfile()
         {
             if (GlobalConfig.Profiles.ContainsKey(characterName)) _curProfile = GlobalConfig.Profiles[characterName];
         }
 
+        /// <summary>
+        /// Perform a logout (closes the client)
+        /// </summary>
         public void PerformLogout()
         {
             QueueState(Logout);

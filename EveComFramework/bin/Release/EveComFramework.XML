@@ -447,7 +447,12 @@
         </member>
         <member name="P:EveComFramework.Core.Cache.Name">
             <summary>
-            Your pilot's name
+            Your pilot's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Cache.CharID">
+            <summary>
+            Your pilot's CharID
             </summary>
         </member>
         <member name="P:EveComFramework.Core.Cache.Bookmarks">
@@ -596,19 +601,14 @@
             Used to document periods a bot is running
             </summary>  
         </member>
-        <member name="F:EveComFramework.SessionControl.PlaySession.Login">
-            <summary>
-            The time the session started
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SessionControl.PlaySession.Logout">
-            <summary>
-            The time the session ended, could be up to 1 minute out
-            </summary>
-        </member>
         <member name="T:EveComFramework.SessionControl.Profile">
             <summary>
             Userprofile for an eve account including play sessions, can be serialized
+            </summary>
+        </member>
+        <member name="T:EveComFramework.SessionControl.LoginGlobalSettings">
+            <summary>
+            Global settings for SessionControl class
             </summary>
         </member>
         <member name="F:EveComFramework.SessionControl.LoginGlobalSettings.Profiles">
@@ -616,14 +616,54 @@
             Available userprofiles, keyed by the character name
             </summary>
         </member>
+        <member name="T:EveComFramework.SessionControl.LoginLocalSettings">
+            <summary>
+            Profile-based settings for SessionControl class
+            </summary>
+        </member>
         <member name="T:EveComFramework.SessionControl.SessionControl">
             <summary>
             Sessioncontrol provides interface for logging in and out of Eve and awareness of downtime
             </summary>
         </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.GlobalConfig">
+            <summary>
+            Global config containing all login information
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.Config">
+            <summary>
+            Config for this class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.Log">
+            <summary>
+            Log for this class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.characterName">
+            <summary>
+            The character name to work with
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SessionControl.SessionControl.UpdateCurrentProfile">
+            <summary>
+            Sets up _curProfile with data from GlobalConfig
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SessionControl.SessionControl.PerformLogout">
+            <summary>
+            Perform a logout (closes the client)
+            </summary>
+        </member>
         <member name="M:EveComFramework.SessionControl.SessionControl.Configure">
             <summary>
             Opens up the configuration dialog, this is a MODAL dialog and will block the thread!
+            </summary>
+        </member>
+        <member name="P:EveComFramework.SessionControl.SessionControl.Instance">
+            <summary>
+            Singletoner
             </summary>
         </member>
         <member name="E:EveComFramework.SessionControl.SessionControl.LogOut">
@@ -758,6 +798,82 @@
         <member name="P:EveComFramework.Cargo.Cargo.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Security.SecuritySettings">
+            <summary>
+            Settings for the Security class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Security.Security">
+            <summary>
+            This class manages security operations for bots.  This includes configurable flees based on pilots present in local and properties like shield/armor
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Security.Security.Config">
+            <summary>
+            Configuration for this class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Security.Security.Log">
+            <summary>
+            Logger for this class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Security.Security.ScramblingEntities">
+            <summary>
+            Dictionary of lists of entity IDs for entities currently scrambling a fleet member keyed by fleet member ID
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.Security.Enable(System.Boolean)">
+            <summary>
+            Starts/stops this module
+            </summary>
+            <param name="val">Enabled=true</param>
+        </member>
+        <member name="M:EveComFramework.Security.Security.Start">
+            <summary>
+            Start this module
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.Security.Stop">
+            <summary>
+            Stop this module
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.Security.Flee">
+            <summary>
+            Trigger a flee manually
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.Security.Reset(System.Nullable{System.Int32})">
+            <summary>
+            This was originally intended to reset the security module after a certain duration.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.Security.Configure">
+            <summary>
+            Configure this module
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Security.Security.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Security.Security.Alert">
+            <summary>
+            Event raised to alert a bot that a flee is in progress
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Security.Security.ClearAlert">
+            <summary>
+            Event raised to alert a bot that it is safe after a flee
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Security.Security.ValidScramble">
+            <summary>
+            Returns an entity that is scrambling or has scrambled a friendly fleet member
             </summary>
         </member>
         <member name="T:EveComFramework.Move.Move">

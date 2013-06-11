@@ -50,9 +50,13 @@ namespace EveComFramework.Core
         internal GlobalSettings GlobalConfig = new GlobalSettings();
 
         /// <summary>
-        /// Your pilot's name
+        /// Your pilot's Name
         /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Your pilot's CharID
+        /// </summary>
+        public long CharID { get; set; }
         /// <summary>
         /// Array of bookmark titles
         /// </summary>
@@ -79,6 +83,7 @@ namespace EveComFramework.Core
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
             Name = Me.Name;
+            CharID = Me.CharID;
             Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
             if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
             if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) CargoItems = MyShip.CargoBay.Items.Distinct().Select(a => a.Type).ToArray();
