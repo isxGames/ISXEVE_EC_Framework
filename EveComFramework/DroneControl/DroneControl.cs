@@ -180,6 +180,7 @@ namespace EveComFramework.DroneControl
 
         public void Stop()
         {
+            EVEFrameUtil.Do(() => { if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay(); });
             Clear();
         }
 
