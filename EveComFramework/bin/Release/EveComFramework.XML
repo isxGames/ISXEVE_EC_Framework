@@ -386,6 +386,16 @@
             Fires when there is space in the skill queue
             </summary>
         </member>
+        <member name="T:EveComFramework.Optimizer.UI.Optimizer">
+            <summary>
+            Optimizer configuration form
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.UI.Optimizer.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="F:EveComFramework.Optimizer.UI.Optimizer.components">
             <summary>
             Required designer variable.
@@ -513,6 +523,36 @@
             <param name="Val">True=Start</param>
         </member>
         <member name="P:EveComFramework.AutoModule.InstaWarp.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Optimizer.OptimizerSettings">
+            <summary>
+            Settings for the Optimizer class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Optimizer.Optimizer">
+            <summary>
+            This class helps reduce the Eve client's resource utilization
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.Optimizer.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.Optimizer.Configure">
+            <summary>
+            Configure this module
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Optimizer.Optimizer.Config">
+            <summary>
+            Config for this module
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Optimizer.Optimizer.Instance">
             <summary>
             Singletoner
             </summary>

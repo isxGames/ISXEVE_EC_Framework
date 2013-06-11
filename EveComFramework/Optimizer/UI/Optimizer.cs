@@ -9,10 +9,16 @@ using System.Windows.Forms;
 
 namespace EveComFramework.Optimizer.UI
 {
+    /// <summary>
+    /// Optimizer configuration form
+    /// </summary>
     public partial class Optimizer : Form
     {
         internal OptimizerSettings Config = EveComFramework.Optimizer.Optimizer.Instance.Config;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Optimizer()
         {
             InitializeComponent();

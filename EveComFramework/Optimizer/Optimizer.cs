@@ -10,14 +10,20 @@ namespace EveComFramework.Optimizer
 {
     #region Settings
 
+    /// <summary>
+    /// Settings for the Optimizer class
+    /// </summary>
     public class OptimizerSettings : Settings
     {
-        public bool Enable3D = true;
-        public int MaxMemorySize = 200;
+        internal bool Enable3D = true;
+        internal int MaxMemorySize = 200;
     }
 
     #endregion
 
+    /// <summary>
+    /// This class helps reduce the Eve client's resource utilization
+    /// </summary>
     public class Optimizer : State
     {
         [DllImport("kernel32.dll")]
@@ -28,6 +34,9 @@ namespace EveComFramework.Optimizer
         #region Instantiation
 
         static Optimizer _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static Optimizer Instance
         {
             get
@@ -40,6 +49,9 @@ namespace EveComFramework.Optimizer
             }
         }
 
+        /// <summary>
+        /// Destructor
+        /// </summary>
         ~Optimizer()
         {
             //EVEFrameUtil.Do(() => { if (EVEFrame.Enable3DRendering != true) EVEFrame.Enable3DRendering = true; });
@@ -54,6 +66,9 @@ namespace EveComFramework.Optimizer
 
         #region Actions
 
+        /// <summary>
+        /// Configure this module
+        /// </summary>
         public void Configure()
         {
             UI.Optimizer Configuration = new UI.Optimizer();
@@ -63,6 +78,9 @@ namespace EveComFramework.Optimizer
 
         #region Variables
 
+        /// <summary>
+        /// Config for this module
+        /// </summary>
         public OptimizerSettings Config = new OptimizerSettings();
         DateTime NextMemoryPulse = DateTime.Now;
 
