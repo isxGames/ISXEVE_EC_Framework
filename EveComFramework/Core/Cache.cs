@@ -6,6 +6,15 @@ using EveCom;
 
 namespace EveComFramework.Core
 {
+    internal class GlobalSettings : Settings
+    {
+        internal GlobalSettings() : base("Cache") { }
+        /// <summary>
+        /// Item Volumes, keyed by Types
+        /// </summary>
+        internal SerializableDictionary<string, double> ItemVolume = new SerializableDictionary<string, double>();
+    }
+
     public class Cache : State
     {
         #region Instantiation
@@ -32,11 +41,29 @@ namespace EveComFramework.Core
 
         #region Variables
 
+        internal GlobalSettings GlobalConfig = new GlobalSettings();
+
+        /// <summary>
+        /// Your pilot's name
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Array of bookmark titles
+        /// </summary>
         public string[] Bookmarks { get; set; }
+        /// <summary>
+        /// Array of fleet member names
+        /// </summary>
         public string[] FleetMembers { get; set; }
+        /// <summary>
+        /// Array of cargo item type names
+        /// </summary>
+        [Obsolete("Depreciated:  Use ItemVolume dictionary (6/11/13)")]
         public string[] CargoItems { get; set; }
-        public Dictionary<string, double> ItemCache { get; set; }
+        /// <summary>
+        /// Item Volumes, keyed by Types
+        /// </summary>
+        public Dictionary<string, double> ItemVolume { get { return GlobalConfig.ItemVolume; } }
 
         #endregion
 
@@ -45,13 +72,12 @@ namespace EveComFramework.Core
         bool Control(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
-            if (ItemCache == null) ItemCache = new Dictionary<string, double>();
             Name = Me.Name;
             Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
             if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
             if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) CargoItems = MyShip.CargoBay.Items.Distinct().Select(a => a.Type).ToArray();
-            if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) MyShip.CargoBay.Items.ForEach(a => { ItemCache.AddOrUpdate(a.Type, a.Volume); });
-            if (Session.InStation && Station.ItemHangar != null && Station.ItemHangar.IsPrimed) Station.ItemHangar.Items.ForEach(a => { ItemCache.AddOrUpdate(a.Type, a.Volume); });
+            if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) MyShip.CargoBay.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+            if (Session.InStation && Station.ItemHangar != null && Station.ItemHangar.IsPrimed) Station.ItemHangar.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
             return false;
         }
 
