@@ -6,13 +6,13 @@ using EveCom;
 
 namespace EveComFramework.Core
 {
-    internal class GlobalSettings : Settings
+    public class GlobalSettings : Settings
     {
-        internal GlobalSettings() : base("Cache") { }
+        public GlobalSettings() : base("Cache") { }
         /// <summary>
         /// Item Volumes, keyed by Types
         /// </summary>
-        internal SerializableDictionary<string, double> ItemVolume = new SerializableDictionary<string, double>();
+        public SerializableDictionary<string, double> ItemVolume = new SerializableDictionary<string, double>();
     }
 
     /// <summary>

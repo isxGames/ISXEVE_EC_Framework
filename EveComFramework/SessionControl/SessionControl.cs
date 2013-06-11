@@ -14,8 +14,8 @@ namespace EveComFramework.SessionControl
     [Serializable]
     public class PlaySession
     {
-        internal DateTime Login;
-        internal DateTime Logout;
+        public DateTime Login;
+        public DateTime Logout;
     }
 
     /// <summary>
@@ -24,10 +24,10 @@ namespace EveComFramework.SessionControl
     [Serializable]
     public class Profile
     {
-        internal List<PlaySession> Sessions;
-        internal string Username;
-        internal string Password;
-        internal long CharacterID;
+        public List<PlaySession> Sessions;
+        public string Username;
+        public string Password;
+        public long CharacterID;
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace EveComFramework.SessionControl
     /// </summary>
     public class LoginGlobalSettings : Settings
     {
-        internal LoginGlobalSettings() : base("Login") { }
+        public LoginGlobalSettings() : base("Login") { }
         /// <summary>
         /// Available userprofiles, keyed by the character name
         /// </summary>
@@ -47,11 +47,11 @@ namespace EveComFramework.SessionControl
     /// </summary>
     public class LoginLocalSettings : Settings
     {
-        internal int LoginDelta = 10;
-        internal int LogoutHours = 4;
-        internal int LogoutDelta = 20;
-        internal int Downtime = 30;
-        internal int DowntimeDelta = 10;
+        public int LoginDelta = 10;
+        public int LogoutHours = 4;
+        public int LogoutDelta = 20;
+        public int Downtime = 30;
+        public int DowntimeDelta = 10;
     }
 
     /// <summary>

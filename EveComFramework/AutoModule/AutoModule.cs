@@ -13,35 +13,35 @@ namespace EveComFramework.AutoModule
     /// </summary>
     public class AutoModuleSettings : EveComFramework.Core.Settings
     {
-        internal bool ActiveHardeners = true;
-        internal bool ShieldBoosters = true;
-        internal bool ArmorRepairs = true;
-        internal bool Cloaks = true;
-        internal bool GangLinks = true;
-        internal bool SensorBoosters = true;
-        internal bool TrackingComputers = true;
-        internal bool ECCMs = true;
-        internal bool DroneControlUnits = true;
-        internal bool PropulsionModules = false;
-        internal bool PropulsionModulesAlwaysOn = false;
-        internal bool PropulsionModulesApproaching = false;
-        internal bool PropulsionModulesOrbiting = false;
+        public bool ActiveHardeners = true;
+        public bool ShieldBoosters = true;
+        public bool ArmorRepairs = true;
+        public bool Cloaks = true;
+        public bool GangLinks = true;
+        public bool SensorBoosters = true;
+        public bool TrackingComputers = true;
+        public bool ECCMs = true;
+        public bool DroneControlUnits = true;
+        public bool PropulsionModules = false;
+        public bool PropulsionModulesAlwaysOn = false;
+        public bool PropulsionModulesApproaching = false;
+        public bool PropulsionModulesOrbiting = false;
 
-        internal int CapActiveHardeners = 30;
-        internal int CapShieldBoosters = 30;
-        internal int CapArmorRepairs = 30;
-        internal int CapCloaks = 30;
-        internal int CapGangLinks = 30;
-        internal int CapSensorBoosters = 30;
-        internal int CapTrackingComputers = 30;
-        internal int CapECCMs = 30;
-        internal int CapDroneControlUnits = 30;
-        internal int CapPropulsionModules = 30;
+        public int CapActiveHardeners = 30;
+        public int CapShieldBoosters = 30;
+        public int CapArmorRepairs = 30;
+        public int CapCloaks = 30;
+        public int CapGangLinks = 30;
+        public int CapSensorBoosters = 30;
+        public int CapTrackingComputers = 30;
+        public int CapECCMs = 30;
+        public int CapDroneControlUnits = 30;
+        public int CapPropulsionModules = 30;
 
-        internal int MaxShieldBoosters = 95;
-        internal int MaxArmorRepairs = 95;
-        internal int MinShieldBoosters = 80;
-        internal int MinArmorRepairs = 80;
+        public int MaxShieldBoosters = 95;
+        public int MaxArmorRepairs = 95;
+        public int MinShieldBoosters = 80;
+        public int MinArmorRepairs = 80;
     }
 
     #endregion

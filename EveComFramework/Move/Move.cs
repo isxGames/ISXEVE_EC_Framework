@@ -664,7 +664,7 @@ namespace EveComFramework.Move
     /// </summary>
     public class UndockWarpSettings : EveComFramework.Core.Settings
     {
-        internal string Substring = "Undock";
+        public string Substring = "Undock";
     }
 
     /// <summary>

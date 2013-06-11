@@ -43,7 +43,7 @@ namespace EveComFramework.Security
     /// </summary>
     public class SecuritySettings : Settings
     {
-        internal List<FleeTrigger> Triggers = new List<FleeTrigger>
+        public List<FleeTrigger> Triggers = new List<FleeTrigger>
         {
             FleeTrigger.Pod,
             FleeTrigger.NegativeStanding,
@@ -53,30 +53,30 @@ namespace EveComFramework.Security
             FleeTrigger.ShieldLow,
             FleeTrigger.ArmorLow
         };
-        internal List<FleeType> Types = new List<FleeType>
+        public List<FleeType> Types = new List<FleeType>
         {
             FleeType.NearestStation,
             FleeType.SecureBookmark,
             FleeType.SafeBookmarks
         };
-        internal bool NegativeAlliance = false;
-        internal bool NegativeCorp = false;
-        internal bool NegativeFleet = false;
-        internal bool NeutralAlliance = false;
-        internal bool NeutralCorp = false;
-        internal bool NeutralFleet = false;
-        internal bool ParanoidAlliance = false;
-        internal bool ParanoidCorp = false;
-        internal bool ParanoidFleet = false;
-        internal bool TargetAlliance = false;
-        internal bool TargetCorp = false;
-        internal bool TargetFleet = false;
-        internal int CapThreshold = 30;
-        internal int ShieldThreshold = 30;
-        internal int ArmorThreshold = 99;
-        internal string SafeSubstring = "Safe:";
-        internal string SecureBookmark = "";
-        internal int FleeWait = 5;
+        public bool NegativeAlliance = false;
+        public bool NegativeCorp = false;
+        public bool NegativeFleet = false;
+        public bool NeutralAlliance = false;
+        public bool NeutralCorp = false;
+        public bool NeutralFleet = false;
+        public bool ParanoidAlliance = false;
+        public bool ParanoidCorp = false;
+        public bool ParanoidFleet = false;
+        public bool TargetAlliance = false;
+        public bool TargetCorp = false;
+        public bool TargetFleet = false;
+        public int CapThreshold = 30;
+        public int ShieldThreshold = 30;
+        public int ArmorThreshold = 99;
+        public string SafeSubstring = "Safe:";
+        public string SecureBookmark = "";
+        public int FleeWait = 5;
     }
 
     #endregion
