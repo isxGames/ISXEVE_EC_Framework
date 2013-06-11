@@ -9,10 +9,23 @@ using System.Reflection;
 
 namespace EveComFramework.Data
 {
+
+    /// <summary>
+    /// This class provides static information about solar systems (without pulling data from Eve)
+    /// </summary>
     public class SolarSystem
     {
+        /// <summary>
+        /// The solar system's ID
+        /// </summary>
         public long ID { get; set; }
+        /// <summary>
+        /// The solar system's Name
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// The solar system's security level
+        /// </summary>
         public double Security { get; set; }
 
         private SolarSystem(long ID, string Name, double Security)
@@ -23,6 +36,9 @@ namespace EveComFramework.Data
         }
 
         private static List<SolarSystem> _All;
+        /// <summary>
+        /// List of all solar systems
+        /// </summary>
         public static List<SolarSystem> All
         {
             get
