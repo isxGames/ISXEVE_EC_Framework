@@ -21,10 +21,54 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:EveComFramework.Core.LoggerHelper">
+            <summary>
+            This class manages a richtextbox for you, to use as a console output
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.Loggers">
+            <summary>
+            A list of the Loggers currently available
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.BackColor1">
+            <summary>
+            The primary back color to use (Default: Black)
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.BackColor2">
+            <summary>
+            The secondary back color to use (Default: Dark gray)
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.DefaultForegroundColor">
+            <summary>
+            The default color for text (Default: White)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.LoggerHelper.RichTextboxUpdater(System.Windows.Forms.RichTextBox,System.String,System.String)">
+            <summary>
+            Use this method to update your richtextbox
+            </summary>
+            <param name="Console">Your richtextbox</param>
+            <param name="Module">The name of the module the update is from</param>
+            <param name="Message">The log message</param>
+        </member>
+        <member name="P:EveComFramework.Core.LoggerHelper.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
         <member name="T:EveComFramework.Core.Logger">
             <summary>
             Handles logging and feedback, allows multiple events to collect feedback info
             </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Logger.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Name">The name of the module this will log for</param>
         </member>
         <member name="M:EveComFramework.Core.Logger.Log(System.String,System.Object[])">
             <summary>
@@ -33,16 +77,33 @@
             <param name="Message">Message, may contain {0} type tokens like string.Format</param>
             <param name="Params">Paramters to insert into the message format string</param>
         </member>
+        <member name="P:EveComFramework.Core.Logger.Name">
+            <summary>
+            The name of the module this is logging for
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Core.Logger.Event">
+            <summary>
+            Event using LogEvent delegate
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Core.Logger.RichEvent">
+            <summary>
+            Event using RichLogEvent delegate
+            </summary>
+        </member>
         <member name="T:EveComFramework.Core.Logger.LogEvent">
             <summary>
             Delegate for log events
             </summary>
+            <param name="Module">The module sending the message</param>
             <param name="Message">Message that is being logged</param>
         </member>
         <member name="T:EveComFramework.Core.Logger.RichLogEvent">
             <summary>
             Delegate for rich log events
             </summary>
+            <param name="Module">The module sending the message</param>
             <param name="Message">Message that is being logged</param>
         </member>
         <member name="T:EveComFramework.Core.Config">

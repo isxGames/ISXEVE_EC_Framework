@@ -109,7 +109,7 @@ namespace EveComFramework.Core
         }
     }
 
-    public static class ForEachExtension
+    static class ForEachExtension
     {
         public static void ForEach<T>(this IEnumerable<T> items, Action<T> method)
         {

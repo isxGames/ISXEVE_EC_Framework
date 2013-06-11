@@ -8,11 +8,17 @@ using System.Drawing;
 
 namespace EveComFramework.Core
 {
+    /// <summary>
+    /// This class manages a richtextbox for you, to use as a console output
+    /// </summary>
     public class LoggerHelper
     {
         #region Instantiation
 
         static LoggerHelper _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static LoggerHelper Instance
         {
             get
@@ -32,12 +38,30 @@ namespace EveComFramework.Core
 
         #endregion
 
+        /// <summary>
+        /// A list of the Loggers currently available
+        /// </summary>
         public List<Logger> Loggers = new List<Logger>();
+        /// <summary>
+        /// The primary back color to use (Default: Black)
+        /// </summary>
         public Color BackColor1 = Color.Black;
+        /// <summary>
+        /// The secondary back color to use (Default: Dark gray)
+        /// </summary>
         public Color BackColor2 = Color.FromArgb(50, 50, 50);
+        /// <summary>
+        /// The default color for text (Default: White)
+        /// </summary>
         public Color DefaultForegroundColor = Color.White;
         internal Color CurrentBackColor;
 
+        /// <summary>
+        /// Use this method to update your richtextbox
+        /// </summary>
+        /// <param name="Console">Your richtextbox</param>
+        /// <param name="Module">The name of the module the update is from</param>
+        /// <param name="Message">The log message</param>
         public void RichTextboxUpdater(RichTextBox Console, string Module, string Message)
         {
             if (Console.WordWrap) Console.WordWrap = false;
@@ -128,19 +152,30 @@ namespace EveComFramework.Core
     /// </summary>
     public class Logger
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="Name">The name of the module this will log for</param>
         public Logger(string Name)
         {
             this.Name = Name;
             LoggerHelper.Instance.Loggers.Add(this);
         }
 
+        /// <summary>
+        /// The name of the module this is logging for
+        /// </summary>
         public string Name { get; set; }
 
         /// <summary>
         /// Delegate for log events
         /// </summary>
+        /// <param name="Module">The module sending the message</param>
         /// <param name="Message">Message that is being logged</param>
         public delegate void LogEvent(string Module, string Message);
+        /// <summary>
+        /// Event using LogEvent delegate
+        /// </summary>
         public event LogEvent Event;
         /// <summary>
         /// Send a log event
@@ -161,8 +196,12 @@ namespace EveComFramework.Core
         /// <summary>
         /// Delegate for rich log events
         /// </summary>
+        /// <param name="Module">The module sending the message</param>
         /// <param name="Message">Message that is being logged</param>
         public delegate void RichLogEvent(string Module, string Message);
+        /// <summary>
+        /// Event using RichLogEvent delegate
+        /// </summary>
         public event RichLogEvent RichEvent;
     }
 }
