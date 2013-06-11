@@ -336,6 +336,46 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="T:EveComFramework.Core.Busy">
+            <summary>
+            This class allows modules to signal they are busy
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.ItemIsBusy(System.String)">
+            <summary>
+            Property indicating if a specific module is busy
+            </summary>
+            <param name="Item">The name of the module</param>
+            <returns>Busy true/false</returns>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.SetBusy(System.String,System.Action)">
+            <summary>
+            Set a module as busy
+            </summary>
+            <param name="Item">The name of the module</param>
+            <param name="Signal">Action to perform when a module signals ready</param>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.SetDone(System.String)">
+            <summary>
+            Set a module as not busy
+            </summary>
+            <param name="Item">The name of the module</param>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.SignalReady">
+            <summary>
+            Signal modules that are ready using the actions defined
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Busy.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Busy.IsBusy">
+            <summary>
+            Property indicating if any module is busy
+            </summary>
+        </member>
         <member name="T:EveComFramework.Cargo.Cargo">
             <summary>
             This class handles cargo operation, including navigation
