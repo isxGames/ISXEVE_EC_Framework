@@ -39,7 +39,7 @@ namespace EveComFramework.SessionControl
         /// <summary>
         /// Available userprofiles, keyed by the character name
         /// </summary>
-        internal SerializableDictionary<string, Profile> Profiles = new SerializableDictionary<string, Profile>();
+        public SerializableDictionary<string, Profile> Profiles = new SerializableDictionary<string, Profile>();
     }
 
     /// <summary>
