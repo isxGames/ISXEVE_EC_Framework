@@ -36,11 +36,17 @@ namespace EveComFramework.Move
 
     }
 
+    /// <summary>
+    /// This class handles navigation
+    /// </summary>
     public class Move : EveComFramework.Core.State
     {
 
         #region Instantiation
         static Move _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static Move Instance
         {
             get
@@ -62,21 +68,19 @@ namespace EveComFramework.Move
 
         #region Variables
 
+        /// <summary>
+        /// The logger for this class
+        /// </summary>
         public Core.Logger Log = new Core.Logger("Move");
-        public bool Traveling {
-        get
-            {
-                if (Idle) return false;
-                if (CurState.ToString() == "OrbitState") return false;
-                if (CurState.ToString() == "ApproachState") return false;
-                return true;
-            }
-        }
 
         #endregion
 
         #region Actions
 
+        /// <summary>
+        /// Toggle on/off the autopilot
+        /// </summary>
+        /// <param name="Activate">Enable = true</param>
         public void ToggleAutopilot(bool Activate = true)
         {
             Clear();
@@ -86,24 +90,41 @@ namespace EveComFramework.Move
             }
         }
 
+        /// <summary>
+        /// Warp to a bookmark
+        /// </summary>
+        /// <param name="Bookmark">The bookmark to warp to</param>
+        /// <param name="Distance">The distance to warp at.  Default: 0</param>
         public void Bookmark(Bookmark Bookmark, int Distance = 0)
         {
             Clear();
             QueueState(BookmarkPrep, -1, Bookmark, Distance);
         }
 
+        /// <summary>
+        /// Warp to an entity
+        /// </summary>
+        /// <param name="Entity">The entity to which to warp</param>
+        /// <param name="Distance">The distance to warp at.  Default: 0</param>
         public void Object(Entity Entity, int Distance = 0)
         {
             Clear();
             QueueState(ObjectPrep, -1, Entity, Distance);
         }
 
+        /// <summary>
+        /// Activate an entity (ex: Jump gate)
+        /// </summary>
+        /// <param name="Entity"></param>
         public void Activate(Entity Entity)
         {
             Clear();
             QueueState(ActivateEntity, -1, Entity);
         }
 
+        /// <summary>
+        /// Jump through an entity (ex: Jump portal array)
+        /// </summary>
         public void Jump()
         {
             if (Idle)
@@ -112,6 +133,11 @@ namespace EveComFramework.Move
             }
         }
 
+        /// <summary>
+        /// Approach an entity
+        /// </summary>
+        /// <param name="Target">The entity to approach</param>
+        /// <param name="Distance">What distance from the entity to stop at</param>
         public void Approach(Entity Target, int Distance = 1000)
         {
             // If we're not doing anything, just start ApproachState
@@ -129,6 +155,11 @@ namespace EveComFramework.Move
             }
         }
 
+        /// <summary>
+        /// Orbit an entity
+        /// </summary>
+        /// <param name="Target">The entity to orbit</param>
+        /// <param name="Distance">The distance from the entity to orbit</param>
         public void Orbit(Entity Target, int Distance = 1000)
         {
             // If we're not doing anything, just start OrbitState
@@ -628,14 +659,24 @@ namespace EveComFramework.Move
 
     }
 
+    /// <summary>
+    /// Settings for the UndockWarp class
+    /// </summary>
     public class UndockWarpSettings : EveComFramework.Core.Settings
     {
-        public string Substring = "Undock";
+        internal string Substring = "Undock";
     }
+
+    /// <summary>
+    /// This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
+    /// </summary>
     public class UndockWarp : EveComFramework.Core.State
     {
         #region Instantiation
         static UndockWarp _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static UndockWarp Instance
         {
             get
@@ -657,6 +698,10 @@ namespace EveComFramework.Move
 
         #region Actions
 
+        /// <summary>
+        /// Toggle on/off this class
+        /// </summary>
+        /// <param name="val">Enabled = true</param>
         public void Enabled(bool val)
         {
             if (val)
@@ -676,6 +721,9 @@ namespace EveComFramework.Move
 
         #region Variables
 
+        /// <summary>
+        /// The config for this class
+        /// </summary>
         public UndockWarpSettings Config = new UndockWarpSettings();
 
         #endregion

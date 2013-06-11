@@ -607,6 +607,31 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
+        <member name="T:EveComFramework.Data.SolarSystem">
+            <summary>
+            This class provides static information about solar systems (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.ID">
+            <summary>
+            The solar system's ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.Name">
+            <summary>
+            The solar system's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.Security">
+            <summary>
+            The solar system's security level
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.All">
+            <summary>
+            List of all solar systems
+            </summary>
+        </member>
         <member name="T:EveComFramework.Core.Busy">
             <summary>
             This class allows modules to signal they are busy
@@ -691,6 +716,92 @@
             <returns></returns>
         </member>
         <member name="P:EveComFramework.Cargo.Cargo.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.Move">
+            <summary>
+            This class handles navigation
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Move.Move.Log">
+            <summary>
+            The logger for this class
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.Move.ToggleAutopilot(System.Boolean)">
+            <summary>
+            Toggle on/off the autopilot
+            </summary>
+            <param name="Activate">Enable = true</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Bookmark(EveCom.Bookmark,System.Int32)">
+            <summary>
+            Warp to a bookmark
+            </summary>
+            <param name="Bookmark">The bookmark to warp to</param>
+            <param name="Distance">The distance to warp at.  Default: 0</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Object(EveCom.Entity,System.Int32)">
+            <summary>
+            Warp to an entity
+            </summary>
+            <param name="Entity">The entity to which to warp</param>
+            <param name="Distance">The distance to warp at.  Default: 0</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Activate(EveCom.Entity)">
+            <summary>
+            Activate an entity (ex: Jump gate)
+            </summary>
+            <param name="Entity"></param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Jump">
+            <summary>
+            Jump through an entity (ex: Jump portal array)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
+            <summary>
+            Approach an entity
+            </summary>
+            <param name="Target">The entity to approach</param>
+            <param name="Distance">What distance from the entity to stop at</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Orbit(EveCom.Entity,System.Int32)">
+            <summary>
+            Orbit an entity
+            </summary>
+            <param name="Target">The entity to orbit</param>
+            <param name="Distance">The distance from the entity to orbit</param>
+        </member>
+        <member name="P:EveComFramework.Move.Move.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.UndockWarpSettings">
+            <summary>
+            Settings for the UndockWarp class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.UndockWarp">
+            <summary>
+            This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.UndockWarp.Enabled(System.Boolean)">
+            <summary>
+            Toggle on/off this class
+            </summary>
+            <param name="val">Enabled = true</param>
+        </member>
+        <member name="F:EveComFramework.Move.UndockWarp.Config">
+            <summary>
+            The config for this class
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Move.UndockWarp.Instance">
             <summary>
             Singletoner
             </summary>

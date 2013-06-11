@@ -46,7 +46,6 @@ namespace EveComFramework.AutoModule
 
     #endregion
 
-
     /// <summary>
     /// This class manages your ships modules intelligently
     /// </summary>
