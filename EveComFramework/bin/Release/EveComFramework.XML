@@ -164,6 +164,16 @@
             Item Volumes, keyed by Types
             </summary>
         </member>
+        <member name="T:EveComFramework.Core.Cache">
+            <summary>
+            This class provides cached information useful for user interfaces
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Cache.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
         <member name="P:EveComFramework.Core.Cache.Name">
             <summary>
             Your pilot's name

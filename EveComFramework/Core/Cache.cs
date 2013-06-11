@@ -15,11 +15,17 @@ namespace EveComFramework.Core
         internal SerializableDictionary<string, double> ItemVolume = new SerializableDictionary<string, double>();
     }
 
+    /// <summary>
+    /// This class provides cached information useful for user interfaces
+    /// </summary>
     public class Cache : State
     {
         #region Instantiation
 
         static Cache _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
         public static Cache Instance
         {
             get
