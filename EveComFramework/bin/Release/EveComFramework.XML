@@ -258,6 +258,109 @@
             
              </summary>
         </member>
+        <member name="T:EveComFramework.Core.State">
+            <summary>
+            This class is inherited by many ECF modules and EveCom bots to turn them into state queues
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.State.States">
+            <summary>
+            The state queue
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.State.CurState">
+            <summary>
+            The current state waiting to be processed
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.State.StateLog">
+            <summary>
+            Logger for the State class
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.State.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.State.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.State.QueueState(System.Func{System.Object[],System.Boolean},System.Int32,System.Object[])">
+            <summary>
+            Queue a new state
+            </summary>
+            <param name="State">The boolean function to process</param>
+            <param name="Frequency">The frequency to use in milliseconds: defaults to -1, which uses the currently defined Default Frequency</param>
+            <param name="Params">Array of objects to pass to the boolean function</param>
+        </member>
+        <member name="M:EveComFramework.Core.State.InsertState(System.Func{System.Object[],System.Boolean},System.Int32,System.Object[])">
+            <summary>
+            Insert a new state at the front of the queue
+            </summary>
+            <param name="State">The boolean function to process</param>
+            <param name="Frequency">The frequency to use in milliseconds: defaults to -1, which uses the currently defined Default Frequency</param>
+            <param name="Params">Array of objects to pass to the boolean function</param>
+        </member>
+        <member name="M:EveComFramework.Core.State.DislodgeCurState(System.Func{System.Object[],System.Boolean},System.Int32,System.Object[])">
+            <summary>
+            Queue a new state, pushing the current state back into the queue
+            </summary>
+            <param name="State">The boolean function to process</param>
+            <param name="Frequency">The frequency to use in milliseconds: defaults to -1, which uses the currently defined Default Frequency</param>
+            <param name="Params">Array of objects to pass to the boolean function</param>
+        </member>
+        <member name="M:EveComFramework.Core.State.Clear">
+            <summary>
+            Clear the state queue
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.State.ClearCurState">
+            <summary>
+            Clear the current state (Advances state queue and assigns current state to next item if not empty)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.State.WaitFor(System.Int32,System.Func{System.Boolean},System.Func{System.Boolean})">
+            <summary>
+            Inserts a wait for a specified time
+            </summary>
+            <param name="TimeOut">How long to wait (in seconds)</param>
+            <param name="Test">A boolean function which will instantly short circuit the timeout if returns true.  ex: () => var == true</param>
+            <param name="Reset">A boolean function which will instantly reset the timeout to it's max value if returns true.  ex: () => var == true</param>
+        </member>
+        <member name="P:EveComFramework.Core.State.DefaultFrequency">
+            <summary>
+            The default frequency to use if none is specified
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.State.NextPulse">
+            <summary>
+            The DateTime of the next scheduled pulse
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.State.Idle">
+            <summary>
+            Returns true if there are no items in the state queue waiting to be processed
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.State.StateQueue">
+            <summary>
+            Class for items placed in the State queue
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.State.StateQueue.ToString">
+            <summary>
+            The name of the state
+            </summary>
+            <returns>Name</returns>
+        </member>
+        <member name="P:EveComFramework.Core.State.StateQueue.Frequency">
+            <summary>
+            The frequency for the state in milliseconds
+            </summary>
+        </member>
         <member name="M:EveComFramework.SkillTraining.SkillTraining.StartWatch">
             <summary>
             State in passive event based mode, will fire an event when it thinks you should queue a skill
