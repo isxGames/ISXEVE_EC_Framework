@@ -216,6 +216,10 @@ namespace EveComFramework.Core
                     Save();
                 }
             }
+            else
+            {
+                Save();
+            }
         }
 
         static XElement Serialize(object source)
