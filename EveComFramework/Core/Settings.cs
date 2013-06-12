@@ -19,10 +19,21 @@ namespace EveComFramework.Core
     public class Settings
     {
         private FileSystemWatcher watcher;
+        internal string _ProfilePath = "";
         /// <summary>
         /// The current path to the Profile XML
         /// </summary>
-        public string ProfilePath { get { return ProfilePath; } set { ProfilePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\" + value + ".xml"; } }
+        public string ProfilePath 
+        { 
+            get 
+            {
+                return ConfigDirectory + _ProfilePath + ".xml";
+            } 
+            set 
+            {
+                _ProfilePath = value;
+            } 
+        }
         /// <summary>
         /// The Config Directory where the Profile XML is stored
         /// </summary>
@@ -39,7 +50,7 @@ namespace EveComFramework.Core
         public Settings()
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
-            ProfilePath = ConfigDirectory + Config.Instance.DefaultProfile + ".xml";
+            ProfilePath = Config.Instance.DefaultProfile;
             this.Load();
 
             if (!Directory.Exists(ConfigDirectory))
@@ -58,7 +69,7 @@ namespace EveComFramework.Core
         public Settings(string profilename)
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\global\\";
-            ProfilePath = ConfigDirectory + profilename + ".xml";
+            ProfilePath = profilename;
             this.Load();
 
             if (!Directory.Exists(ConfigDirectory))
