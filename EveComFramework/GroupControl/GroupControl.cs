@@ -155,6 +155,18 @@ namespace EveComFramework.GroupControl
 
         #region Actions
 
+        public bool IsLeader()
+        {
+            if (Leader != null)
+            {
+                if (Leader.ProfileName == Self.ProfileName)
+                {
+                    return true;
+                }
+            }           
+            return false;            
+        }
+
         public void Start()
         {
             if (Idle)
