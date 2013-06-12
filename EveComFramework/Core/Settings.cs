@@ -22,7 +22,7 @@ namespace EveComFramework.Core
         /// <summary>
         /// The current path to the Profile XML
         /// </summary>
-        public string ProfilePath { get; set; }
+        public string ProfilePath { get { return ProfilePath; } set { ProfilePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\" + value + ".xml"; } }
         /// <summary>
         /// The Config Directory where the Profile XML is stored
         /// </summary>
