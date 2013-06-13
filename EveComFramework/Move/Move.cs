@@ -435,7 +435,7 @@ namespace EveComFramework.Move
             Entity Collision = null;
             if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
 
-            if (Target == null || !Target.Exists || Target.Exploded)
+            if (Target == null || !Target.Exists || Target.Exploded || Target.Released)
             {
                 return true;
             }
@@ -503,7 +503,7 @@ namespace EveComFramework.Move
             Entity Collision = null;
             if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
 
-            if (Target == null || !Target.Exists || Target.Exploded)
+            if (Target == null || !Target.Exists || Target.Exploded || Target.Released)
             {
                 return true;
             }
