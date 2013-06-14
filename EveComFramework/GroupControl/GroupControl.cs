@@ -455,7 +455,7 @@ namespace EveComFramework.GroupControl
                                     Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet));
                                     Log.Log("|oInviting fleet member");
                                     Log.Log(" |-g{0}", ToInvite.Name);
-                                    Fleet.Invite(ToInvite);
+                                    Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
                                     return false;
                                 }
                             }
