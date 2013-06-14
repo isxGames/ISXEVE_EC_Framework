@@ -184,6 +184,11 @@ namespace EveComFramework.GroupControl
             }
         }
 
+        public void Stop()
+        {
+            Clear();
+        }
+
         public void Configure()
         {
             UI.GroupControl Configuration = new UI.GroupControl();
