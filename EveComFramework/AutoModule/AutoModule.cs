@@ -71,7 +71,6 @@ namespace EveComFramework.AutoModule
 
         private AutoModule() : base()
         {
-            QueueState(Control);
         }
 
         #endregion
