@@ -167,6 +167,15 @@ namespace EveComFramework.GroupControl
             return false;            
         }
 
+        public string LeaderName
+        {
+            get
+            {
+                if (Leader != null) return Leader.CharacterName;
+                return "";
+            }
+        }
+
         public void Start()
         {
             if (Idle)
