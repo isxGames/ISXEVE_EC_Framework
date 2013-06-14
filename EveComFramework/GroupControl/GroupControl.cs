@@ -18,7 +18,7 @@ namespace EveComFramework.GroupControl
     public class GroupSettings
     {
         public string FriendlyName;
-        public Guid ID = new Guid();
+        public Guid ID = Guid.NewGuid();
         public GroupType GroupType;
         public List<string> MemberProfiles = new List<string>();
     }
