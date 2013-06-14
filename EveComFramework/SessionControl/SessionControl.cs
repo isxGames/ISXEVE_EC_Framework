@@ -159,7 +159,7 @@ namespace EveComFramework.SessionControl
         public void Configure()
         {
             UI.SessionControl Configuration = new UI.SessionControl();
-            Configuration.ShowDialog();
+            Configuration.Show();
         }
 
         public void NewDowntimeDelta()
