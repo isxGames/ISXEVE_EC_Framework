@@ -210,7 +210,7 @@ namespace EveComFramework.Core
                 InsertState(WaitForState, -1, TimeOut);
             }
         }
-
+        Random rnd = new Random();
         void OnFrame(object sender, EventArgs e)
         {
             if (DateTime.Now > NextPulse)
@@ -234,11 +234,11 @@ namespace EveComFramework.Core
 
                 if (CurState == null)
                 {
-                    NextPulse = DateTime.Now.AddMilliseconds(DefaultFrequency);
+                    NextPulse = DateTime.Now.AddMilliseconds(DefaultFrequency + rnd.Next(-100, 100));
                 }
                 else
                 {
-                    NextPulse = DateTime.Now.AddMilliseconds(CurState.Frequency);
+                    NextPulse = DateTime.Now.AddMilliseconds(CurState.Frequency + rnd.Next(-100, 100));
                 }
             }
         }
