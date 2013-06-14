@@ -57,6 +57,7 @@ namespace EveComFramework.GroupControl
     {
         #region Variables
 
+        public bool FinishedCycle = false;
         public GroupControlGlobalSettings GlobalConfig = new GroupControlGlobalSettings();
         public GroupControlSettings Config = new GroupControlSettings();
         public Logger Log = new Logger("GroupControl");
@@ -155,16 +156,29 @@ namespace EveComFramework.GroupControl
 
         #region Actions
 
-        public bool IsLeader()
+        public bool IsLeader
         {
-            if (Leader != null)
+            get
             {
-                if (Leader.ProfileName == Self.ProfileName)
+                if (Leader != null)
                 {
-                    return true;
+                    if (Leader.ProfileName == Self.ProfileName)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-            }           
-            return false;            
+                return true;            
+            }
+        }
+
+        public bool InGroup
+        {
+            get
+            {
+                if (CurrentGroup != null) return true;
+                return false;
+            }
         }
 
         public string LeaderName
@@ -331,6 +345,7 @@ namespace EveComFramework.GroupControl
 
         public bool Organize(object[] Params)
         {
+            FinishedCycle = false; 
             if (CurrentGroup != null)
             {
                 try
@@ -391,7 +406,7 @@ namespace EveComFramework.GroupControl
                     }
 
                     //who should be squad leader
-                    ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a => a.Active).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.ProfileName).FirstOrDefault(a => a.Active && a.Available);
+                    ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a => a.Active).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.ProfileName).FirstOrDefault(a => a.Active && a.Available && a.InFleet);
                     if (newLeader != null)
                     {
                         if (Leader != newLeader)
@@ -460,6 +475,7 @@ namespace EveComFramework.GroupControl
                     {
                         Log.Log("can't select a leader");
                     }
+                    FinishedCycle = true;
                     return false;
                 }
                 catch (Exception e)
