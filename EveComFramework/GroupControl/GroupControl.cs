@@ -187,7 +187,7 @@ namespace EveComFramework.GroupControl
         public void Configure()
         {
             UI.GroupControl Configuration = new UI.GroupControl();
-            Configuration.Show();
+            Configuration.ShowDialog();
             RelayAll("reloadConfig", null);
             LoadConfig();
 

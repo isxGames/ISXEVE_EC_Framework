@@ -283,6 +283,7 @@
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SessionControl";
             this.Text = "SessionControl";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.LoginControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

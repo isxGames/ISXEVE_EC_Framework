@@ -37,13 +37,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.groupNameTBox = new System.Windows.Forms.TextBox();
             this.profileLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupNameTBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -150,6 +150,42 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Create New Group";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(92, 52);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 7;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(16, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(69, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Group Type :";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(73, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Group Name :";
+            // 
+            // groupNameTBox
+            // 
+            this.groupNameTBox.Location = new System.Drawing.Point(92, 22);
+            this.groupNameTBox.Name = "groupNameTBox";
+            this.groupNameTBox.Size = new System.Drawing.Size(121, 20);
+            this.groupNameTBox.TabIndex = 4;
+            this.groupNameTBox.TextChanged += new System.EventHandler(this.groupNameTBox_TextChanged);
+            // 
             // profileLabel
             // 
             this.profileLabel.AutoSize = true;
@@ -182,42 +218,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Profile Options";
             // 
-            // groupNameTBox
-            // 
-            this.groupNameTBox.Location = new System.Drawing.Point(92, 22);
-            this.groupNameTBox.Name = "groupNameTBox";
-            this.groupNameTBox.Size = new System.Drawing.Size(121, 20);
-            this.groupNameTBox.TabIndex = 4;
-            this.groupNameTBox.TextChanged += new System.EventHandler(this.groupNameTBox_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Group Name :";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 52);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Group Type :";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(92, 52);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
             // GroupControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,6 +229,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "GroupControl";
             this.Text = "GroupControl";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.GroupControl_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
