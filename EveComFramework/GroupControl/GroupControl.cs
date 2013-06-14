@@ -114,7 +114,6 @@ namespace EveComFramework.GroupControl
                         activeMember.LeadershipValue = Convert.ToInt32(args[3]);
                         activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
                         activeMember.CharacterName = args[5];
-                        Log.Log("Updated fleet member {0}", activeMember.CharacterName);
                     }
                     break;
                 case "available":
@@ -122,7 +121,6 @@ namespace EveComFramework.GroupControl
                     if (availableMember != null)
                     {
                         availableMember.Available = Convert.ToBoolean(args[3]);
-                        Log.Log("Fleet member availabilty changed, {0} , {1}", availableMember.CharacterName,availableMember.Available);
                     }
                     break;
                 case "joinedfleet":
@@ -130,7 +128,6 @@ namespace EveComFramework.GroupControl
                     if (joinedFleet != null)
                     {
                         joinedFleet.InFleet = true;
-                        Log.Log("Fleet member joined a fleet, {0}", joinedFleet.CharacterName);
                     }
                     break;
                 case "reloadConfig":
@@ -139,7 +136,6 @@ namespace EveComFramework.GroupControl
                 case "forceupdate":
                     if (Self.CharacterName != null)
                     {
-                        Log.Log("Doing forced update");
                         RelayAll("active", Self.ProfileName, Self.LeadershipValue.ToString(), Self.Role.ToString(), Self.CharacterName);
                         RelayAll("available", Self.Available.ToString());
                         if (Self.InFleet)
@@ -271,7 +267,6 @@ namespace EveComFramework.GroupControl
             }
             else
             {
-                Log.Log("Not in a group! Doing nothing");
                 CurrentGroup = null;
             }
         }
@@ -286,7 +281,6 @@ namespace EveComFramework.GroupControl
 
         bool Blank(object[] Params)
         {
-            Log.Log("Finished");
             return true;
         }
 
@@ -361,7 +355,7 @@ namespace EveComFramework.GroupControl
                         if (CurrentGroup.ActiveMembers.Count(a => a.InFleet) < 1)
                         {
                             //nobody else is in a fleet, i can make one
-                            Log.Log("No fleet active , creating fleet");
+                            Log.Log("|oCreating fleet");
                             Fleet.CreateFleet();
                             RelayAll("joinedfleet", Self.ProfileName);
                             Self.InFleet = true;
@@ -372,7 +366,7 @@ namespace EveComFramework.GroupControl
                             //someone else is in a fleet , wait for an invite from another group member
                             if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
                             {
-                                Log.Log("Fleet invite found, accepting");
+                                Log.Log("|oAccepting fleet invite");
                                 Window.All.OfType<PopupWindow>().FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => a.Message.Contains(b.CharacterName))).ClickButton(Window.Button.Yes);
                                 RelayAll("joinedfleet", Self.ProfileName);
                                 Self.InFleet = true;
@@ -380,14 +374,12 @@ namespace EveComFramework.GroupControl
                             }
                             else
                             {
-                                Log.Log("Waiting for fleet invite");
                                 return false;
                             }
                         }
                     }
                     else if (!Self.InFleet)
                     {
-                        Log.Log("I'm in a fleet already, wierd");
                         RelayAll("joinedfleet", Self.ProfileName);
                         Self.InFleet = true;
                         return false;
@@ -396,10 +388,11 @@ namespace EveComFramework.GroupControl
                     if (Fleet.Members.Count == 1)
                     {
                         //hand out invites!
-                        Log.Log("Inviting first other person into fleet");
                         Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet));
                         if (ToInvite != null)
                         {
+                            Log.Log("|oInviting fleet member");
+                            Log.Log(" |-g{0}", ToInvite.Name);
                             Fleet.Invite(Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet)), Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
                         }
                         return false;
@@ -412,7 +405,8 @@ namespace EveComFramework.GroupControl
                         if (Leader != newLeader)
                         {
                             //oh shit we got a new leader , if it's not me i should check i wasn't the old one
-                            Log.Log("New leader is {0}", newLeader.CharacterName);
+                            Log.Log("|oSelecting new leader");
+                            Log.Log(" |-g{0}", newLeader.CharacterName);
                             //check if the new leader isnt me
                             if (newLeader.CharacterName != Self.CharacterName)
                             {
@@ -420,7 +414,8 @@ namespace EveComFramework.GroupControl
                                 if (Fleet.Members.FirstOrDefault(a => a.Boss).Name == Self.CharacterName)
                                 {
                                     //i'm the squad leader but no the leader!! better give boss to new leader
-                                    Log.Log("Old leader was me, passing boss to new leader");
+                                    Log.Log("|oPassing boss to new leader");
+                                    Log.Log(" |-g{0}", newLeader.CharacterName);
                                     Fleet.Members.First(a => a.Name == newLeader.CharacterName).MakeBoss();
                                     Leader = newLeader;
                                     return false;
@@ -443,7 +438,6 @@ namespace EveComFramework.GroupControl
                                     if (commander.Name != Me.Name)
                                     {
                                         //it's not me! , demote that guy
-                                        Log.Log("Current squad leader is not me, demoting");
                                         commander.Move(Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
                                         return false;
                                     }
@@ -451,7 +445,6 @@ namespace EveComFramework.GroupControl
                                 else
                                 {
                                     //nobody is squad leader, make me squad leader!
-                                    Log.Log("No squad leader, assuming direct control");
                                     Fleet.Members.First(a => a.Name == Me.Name).Move(Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadCommander);
                                     return false;
                                 }
@@ -459,8 +452,10 @@ namespace EveComFramework.GroupControl
                                 //are there invites to do?
                                 if (CurrentGroup.ActiveMembers.Any(a => !a.InFleet))
                                 {
-                                    Log.Log("Group members missing, handing out invites");
-                                    Fleet.Invite(Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet)));
+                                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet));
+                                    Log.Log("|oInviting fleet member");
+                                    Log.Log(" |-g{0}", ToInvite.Name);
+                                    Fleet.Invite(ToInvite);
                                     return false;
                                 }
                             }
@@ -473,7 +468,6 @@ namespace EveComFramework.GroupControl
                     }
                     else
                     {
-                        Log.Log("can't select a leader");
                     }
                     FinishedCycle = true;
                     return false;
