@@ -353,6 +353,7 @@ namespace EveComFramework.GroupControl
                 {
                     Self.LeadershipValue += 10000;
                 }
+                EVEFrame.Log("My computed leadership value is " + Self.LeadershipValue);
                 RelayAll("forceupdate", "");
                 return true;
             }
