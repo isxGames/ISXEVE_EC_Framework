@@ -102,27 +102,36 @@ namespace EveComFramework.GroupControl
             switch (args[1])
             {
                 case "active":
-                    ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-                    if (activeMember != null)
+                    if (CurrentGroup != null)
                     {
-                        activeMember.Active = true;
-                        activeMember.LeadershipValue = Convert.ToInt32(args[3]);
-                        activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
-                        activeMember.CharacterName = args[2];
+                        ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
+                        if (activeMember != null)
+                        {
+                            activeMember.Active = true;
+                            activeMember.LeadershipValue = Convert.ToInt32(args[3]);
+                            activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
+                            activeMember.CharacterName = args[2];
+                        }
                     }
                     break;
                 case "available":
-                    ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-                    if (availableMember != null)
+                    if (CurrentGroup != null)
                     {
-                        availableMember.Available = Convert.ToBoolean(args[3]);
+                        ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
+                        if (availableMember != null)
+                        {
+                            availableMember.Available = Convert.ToBoolean(args[3]);
+                        }
                     }
                     break;
                 case "joinedfleet":
-                    ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-                    if (joinedFleet != null)
+                    if (CurrentGroup != null)
                     {
-                        joinedFleet.InFleet = true;
+                        ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
+                        if (joinedFleet != null)
+                        {
+                            joinedFleet.InFleet = true;
+                        }
                     }
                     break;
                 case "reloadConfig":
@@ -186,6 +195,7 @@ namespace EveComFramework.GroupControl
         {
             if (States.Count < 2)
             {
+                SetAvailable();
                 QueueState(Organize);
             }
         }
@@ -245,7 +255,7 @@ namespace EveComFramework.GroupControl
             {
                 GlobalConfig.Load();
                 Self.Active = true;
-                Self.Available = true;
+                Self.Available = false;
                 if (GlobalConfig.KnownCharacters.ContainsKey(Self.CharacterName))
                 {
 
@@ -360,8 +370,7 @@ namespace EveComFramework.GroupControl
                 try
                 {
                     //check for group members who haven't checked it, keep waiting if there are
-
-                    RelayAll("active", Core.Config.Instance.DefaultProfile, Self.LeadershipValue.ToString(), Self.Role.ToString(), Me.Name);
+                    RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
                     RelayAll("available", Self.CharacterName, Self.Available.ToString());
 
                     if (!Session.InFleet)
@@ -382,9 +391,7 @@ namespace EveComFramework.GroupControl
                             if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
                             {
                                 Log.Log("|oAccepting fleet invite");
-                                Window.All.OfType<PopupWindow>().FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => a.Message.Contains(b.CharacterName))).ClickButton(Window.Button.Yes);
-                                RelayAll("joinedfleet", Self.CharacterName);
-                                Self.InFleet = true;
+                                Window.All.OfType<PopupWindow>().FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => a.Message.Contains(b.CharacterName))).ClickButton(Window.Button.Yes);                            
                                 return false;
                             }
                             else
@@ -403,7 +410,7 @@ namespace EveComFramework.GroupControl
                     if (Fleet.Members.Count == 1)
                     {
                         //hand out invites!
-                        Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet));
+                        Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet && b.Active && b.Available));
                         if (ToInvite != null)
                         {
                             Log.Log("|oInviting fleet member");
@@ -465,9 +472,9 @@ namespace EveComFramework.GroupControl
                                 }
 
                                 //are there invites to do?
-                                if (CurrentGroup.ActiveMembers.Any(a => !a.InFleet))
+                                if (CurrentGroup.ActiveMembers.Any(a => !a.InFleet && a.Active && a.Available))
                                 {
-                                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet));
+                                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet && b.Available && b.Active));
                                     Log.Log("|oInviting fleet member");
                                     Log.Log(" |-g{0}", ToInvite.Name);
                                     Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
@@ -489,7 +496,7 @@ namespace EveComFramework.GroupControl
                 }
                 catch (Exception e)
                 {
-                    Log.Log(e.Message);
+                    Log.Log("Exception on Groupcontrol.Organize : " + e.Message);
                     return false;
                 }
             }
