@@ -218,7 +218,7 @@ namespace EveComFramework.GroupControl
 
         public void Start()
         {
-            EVEFrame.Log(CurState.ToString());
+            EVEFrame.Log("Idle: " + Idle.ToString());
             if (Idle || CurState.ToString() != "Organize")
             {
                 SetAvailable();
