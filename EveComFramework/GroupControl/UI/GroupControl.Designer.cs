@@ -53,6 +53,7 @@
             // groupTView
             // 
             this.groupTView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupTView.HideSelection = false;
             this.groupTView.Location = new System.Drawing.Point(3, 16);
             this.groupTView.Name = "groupTView";
             this.groupTView.Size = new System.Drawing.Size(310, 295);
