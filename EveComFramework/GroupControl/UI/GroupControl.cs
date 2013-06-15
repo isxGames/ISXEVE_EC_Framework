@@ -99,7 +99,7 @@ namespace EveComFramework.GroupControl.UI
         {
             Role newRole = (Role)Enum.Parse(typeof(Role), (string)roleCombo.SelectedItem);
             parent.GlobalConfig.KnownCharacters[thisProfile].Role = newRole;
-            parent.GlobalConfig.Save();            
+            parent.GlobalConfig.Save();
         }
 
         private void groupTView_AfterSelect(object sender, TreeViewEventArgs e)
