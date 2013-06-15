@@ -226,6 +226,10 @@ namespace EveComFramework.GroupControl
                 EVEFrame.Log("Queue Organize");
                 QueueState(Organize);
             }
+            if (!Idle)
+            {
+                EVEFrame.Log("State: " + CurState.ToString());
+            }
         }
 
         public void Stop()
