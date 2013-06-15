@@ -389,6 +389,7 @@ namespace EveComFramework.GroupControl
                         else
                         {
                             //someone else is in a fleet , wait for an invite from another group member
+                            EVEFrame.Log("Invite: " + CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))).ToString());
                             if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
                             {
                                 Log.Log("|oAccepting fleet invite");
