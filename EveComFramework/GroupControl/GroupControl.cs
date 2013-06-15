@@ -107,10 +107,21 @@ namespace EveComFramework.GroupControl
                         ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
                         if (activeMember != null)
                         {
-                            activeMember.Active = true;
-                            activeMember.LeadershipValue = Convert.ToInt32(args[3]);
-                            activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
-                            activeMember.CharacterName = args[2];
+                            if (!activeMember.Active)
+                            {
+                                EVEFrame.Log(String.Format("{0} is now active", args[2]));
+                                activeMember.Active = true;
+                            }
+                            if (activeMember.LeadershipValue != Convert.ToInt32(args[3]))
+                            {
+                                activeMember.LeadershipValue = Convert.ToInt32(args[3]);
+                                EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[2], args[3]));
+                            }
+                            if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[4]))
+                            {
+                                activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
+                                EVEFrame.Log(String.Format("New Role for {0}, {1}", args[2], args[4]));
+                            }                            
                         }
                     }
                     break;
@@ -120,7 +131,11 @@ namespace EveComFramework.GroupControl
                         ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
                         if (availableMember != null)
                         {
-                            availableMember.Available = Convert.ToBoolean(args[3]);
+                            if (availableMember.Available != Convert.ToBoolean(args[3]))
+                            {
+                                availableMember.Available = Convert.ToBoolean(args[3]);
+                                EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}",args[2],args[3]));
+                            }
                         }
                     }
                     break;
@@ -130,7 +145,11 @@ namespace EveComFramework.GroupControl
                         ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
                         if (joinedFleet != null)
                         {
-                            joinedFleet.InFleet = true;
+                            if (!joinedFleet.InFleet)
+                            {
+                                EVEFrame.Log(String.Format("{0} joined a fleet", args[2]));
+                                joinedFleet.InFleet = true;
+                            }
                         }
                     }
                     break;
@@ -279,6 +298,7 @@ namespace EveComFramework.GroupControl
                 CurrentGroup.GroupSettings = GlobalConfig.Groups.FirstOrDefault(a => a.ID == GlobalConfig.KnownCharacters[Self.CharacterName].CurrentGroup);
                 if (CurrentGroup.GroupSettings != null)
                 {
+                    Log.Log("I am in fleet group {0}", CurrentGroup.GroupSettings.FriendlyName);
                     foreach (string member in CurrentGroup.GroupSettings.MemberCharacternames)
                     {
                         if (member == Self.CharacterName)
