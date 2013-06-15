@@ -218,7 +218,7 @@ namespace EveComFramework.GroupControl
 
         public void Start()
         {
-            if (States.Count < 2)
+            if (Idle || CurState.ToString() != "Organize")
             {
                 SetAvailable();
                 QueueState(Organize);
