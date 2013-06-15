@@ -109,18 +109,18 @@ namespace EveComFramework.GroupControl
                         {
                             if (!activeMember.Active)
                             {
-                                Log.Log("{0} is now active", args[2]);
+                                EVEFrame.Log(String.Format("{0} is now active", args[2]));
                                 activeMember.Active = true;
                             }
                             if (activeMember.LeadershipValue != Convert.ToInt32(args[3]))
                             {
                                 activeMember.LeadershipValue = Convert.ToInt32(args[3]);
-                                Log.Log("New Leadership value for {0}, : {1}" , args[2],args[3]);
+                                EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[2], args[3]));
                             }
                             if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[4]))
                             {
                                 activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
-                                Log.Log("New Role for {0}, {1}", args[2], args[4]);
+                                EVEFrame.Log(String.Format("New Role for {0}, {1}", args[2], args[4]));
                             }                            
                         }
                     }
@@ -134,7 +134,7 @@ namespace EveComFramework.GroupControl
                             if (availableMember.Available != Convert.ToBoolean(args[3]))
                             {
                                 availableMember.Available = Convert.ToBoolean(args[3]);
-                                Log.Log("{0} availablity for fleets is now {1}",args[2],args[3]);
+                                EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}",args[2],args[3]));
                             }
                         }
                     }
@@ -147,7 +147,7 @@ namespace EveComFramework.GroupControl
                         {
                             if (!joinedFleet.InFleet)
                             {
-                                Log.Log("{0} joined a fleet", args[2]);
+                                EVEFrame.Log(String.Format("{0} joined a fleet", args[2]));
                                 joinedFleet.InFleet = true;
                             }
                         }
