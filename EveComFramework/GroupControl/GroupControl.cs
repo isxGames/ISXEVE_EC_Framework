@@ -389,6 +389,9 @@ namespace EveComFramework.GroupControl
                         else
                         {
                             //someone else is in a fleet , wait for an invite from another group member
+                            EVEFrame.Log("Waiting for invite");
+                            EVEFrame.Log("CurrentGroup.ActiveMembers count: " + CurrentGroup.ActiveMembers.Count.ToString());
+                            EVEFrame.Log("Popups: " + Window.All.OfType<PopupWindow>().Count().ToString());
                             EVEFrame.Log("Invite: " + CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))).ToString());
                             if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
                             {
