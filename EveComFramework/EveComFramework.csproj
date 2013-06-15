@@ -85,6 +85,12 @@
       <DependentUpon>FleetControl.cs</DependentUpon>
     </Compile>
     <Compile Include="GroupControl\GroupControl.cs" />
+    <Compile Include="GroupControl\UI\Debug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GroupControl\UI\Debug.Designer.cs">
+      <DependentUpon>Debug.cs</DependentUpon>
+    </Compile>
     <Compile Include="GroupControl\UI\GroupControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FleetControl\UI\FleetControl.resx">
       <DependentUpon>FleetControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroupControl\UI\Debug.resx">
+      <DependentUpon>Debug.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GroupControl\UI\GroupControl.resx">
       <DependentUpon>GroupControl.cs</DependentUpon>

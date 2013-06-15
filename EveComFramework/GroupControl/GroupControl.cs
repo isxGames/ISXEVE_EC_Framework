@@ -191,6 +191,12 @@ namespace EveComFramework.GroupControl
             }
         }
 
+        public void Debug()
+        {
+            UI.Debug debugWindow = new UI.Debug();
+            debugWindow.Show();
+        }
+
         public void Start()
         {
             if (States.Count < 2)
