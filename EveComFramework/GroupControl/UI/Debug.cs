@@ -37,5 +37,6 @@ namespace EveComFramework.GroupControl.UI
         {
 
         }
+
     }
 }
