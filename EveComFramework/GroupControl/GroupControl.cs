@@ -394,7 +394,8 @@ namespace EveComFramework.GroupControl
 
         public bool Organize(object[] Params)
         {
-            FinishedCycle = false; 
+            FinishedCycle = false;
+            EVEFrame.Log("CurrentGroup is null: " + (CurrentGroup == null).ToString());
             if (CurrentGroup != null)
             {
                 try
