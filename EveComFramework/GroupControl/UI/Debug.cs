@@ -14,11 +14,12 @@ namespace EveComFramework.GroupControl.UI
         public Debug()
         {
             InitializeComponent();
+            timer1.Enabled = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            listView1.Clear();
+            listView1.Items.Clear();
             foreach (ActiveMember x in EveComFramework.GroupControl.GroupControl.Instance.CurrentGroup.ActiveMembers)
             {
                 ListViewItem y = new ListViewItem();
@@ -28,6 +29,7 @@ namespace EveComFramework.GroupControl.UI
                 y.SubItems.Add(x.InFleet.ToString());
                 y.SubItems.Add(x.LeadershipValue.ToString());
                 y.SubItems.Add(x.Role.ToString());
+                listView1.Items.Add(y);
             }
         }
 
