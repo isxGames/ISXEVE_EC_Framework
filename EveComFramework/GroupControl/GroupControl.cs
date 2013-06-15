@@ -248,13 +248,13 @@ namespace EveComFramework.GroupControl
         public void SetUnavailable()
         {
             Self.Available = false;
-            RelayAll("available", "false");
+            RelayAll("available", Self.CharacterName, "false");
         }
 
         public void SetAvailable()
         {
             Self.Available = true;
-            RelayAll("available", "true");
+            RelayAll("available", Self.CharacterName, "true");
         }
 
         #endregion 
