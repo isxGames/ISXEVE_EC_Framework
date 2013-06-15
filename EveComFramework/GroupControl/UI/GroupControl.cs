@@ -12,7 +12,7 @@ namespace EveComFramework.GroupControl.UI
     public partial class GroupControl : Form
     {
         EveComFramework.GroupControl.GroupControl parent = EveComFramework.GroupControl.GroupControl.Instance;
-        string thisProfile = EveComFramework.Core.Config.Instance.DefaultProfile;
+        string thisProfile;
         public GroupControl()
         {
             InitializeComponent();
@@ -20,13 +20,14 @@ namespace EveComFramework.GroupControl.UI
 
         private void GroupControl_Load(object sender, EventArgs e)
         {
+            thisProfile = parent.Self.CharacterName;
             RefreshTree();
             profileLabel.Text = thisProfile;
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
                 roleCombo.Items.Add(role.ToString());                
             }
-            roleCombo.SelectedItem = roleCombo.Items.Cast<string>().First(a => a == parent.Config.Role.ToString());
+            roleCombo.SelectedItem = roleCombo.Items.Cast<string>().First(a => a == parent.Self.Role.ToString());
             foreach (GroupType gType in Enum.GetValues(typeof(GroupType)))
             {
                 comboBox1.Items.Add(gType.ToString());
@@ -41,7 +42,7 @@ namespace EveComFramework.GroupControl.UI
             {
                 TreeNode groupNode = new TreeNode(gs.FriendlyName + "-" + gs.GroupType.ToString());
                 groupNode.Tag = gs;                
-                foreach (string profile in gs.MemberProfiles)
+                foreach (string profile in gs.MemberCharacternames)
                 {
                     groupNode.Nodes.Add(profile);
                 }
@@ -60,16 +61,15 @@ namespace EveComFramework.GroupControl.UI
 
         private void joinButton_Click(object sender, EventArgs e)
         {            
-            GroupSettings activeGroup = parent.GlobalConfig.Groups.FirstOrDefault(a => a.MemberProfiles.Any(b => b == thisProfile));
+            GroupSettings activeGroup = parent.GlobalConfig.Groups.FirstOrDefault(a => a.MemberCharacternames.Any(b => b == thisProfile));
             if (activeGroup != null)
             {
-                activeGroup.MemberProfiles.Remove(thisProfile);
+                activeGroup.MemberCharacternames.Remove(thisProfile);
             }
             GroupSettings newGroup = (GroupSettings)groupTView.SelectedNode.Tag;
-            newGroup.MemberProfiles.Add(thisProfile);
-            parent.Config.CurrentGroup = newGroup.ID;
+            newGroup.MemberCharacternames.Add(thisProfile);
+            parent.GlobalConfig.KnownCharacters[thisProfile].CurrentGroup = newGroup.ID;
             parent.GlobalConfig.Save();
-            parent.Config.Save();
             RefreshTree();               
         }
 
@@ -77,7 +77,7 @@ namespace EveComFramework.GroupControl.UI
         {
             if (groupTView.SelectedNode.Tag != null)
             {
-                GroupSettings toDelete = parent.GlobalConfig.Groups.FirstOrDefault(a => a.MemberProfiles.Any(b => b == thisProfile));
+                GroupSettings toDelete = parent.GlobalConfig.Groups.FirstOrDefault(a => a.MemberCharacternames.Any(b => b == thisProfile));
                 if (toDelete != null)
                 {
                     parent.GlobalConfig.Groups.Remove(toDelete);
@@ -88,7 +88,7 @@ namespace EveComFramework.GroupControl.UI
             else
             {
                 GroupSettings parentGroup = (GroupSettings)groupTView.SelectedNode.Parent.Tag;
-                parentGroup.MemberProfiles.Remove(groupTView.SelectedNode.Text);
+                parentGroup.MemberCharacternames.Remove(groupTView.SelectedNode.Text);
                 parent.GlobalConfig.Save();
                 RefreshTree();
             }
@@ -98,8 +98,8 @@ namespace EveComFramework.GroupControl.UI
         private void roleCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             Role newRole = (Role)Enum.Parse(typeof(Role), (string)roleCombo.SelectedItem);
-            parent.Config.Role = newRole;
-            parent.Config.Save();            
+            parent.GlobalConfig.KnownCharacters[thisProfile].Role = newRole;
+            parent.GlobalConfig.Save();            
         }
 
         private void groupTView_AfterSelect(object sender, TreeViewEventArgs e)
