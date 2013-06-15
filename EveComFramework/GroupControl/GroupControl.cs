@@ -298,7 +298,8 @@ namespace EveComFramework.GroupControl
                 CurrentGroup.GroupSettings = GlobalConfig.Groups.FirstOrDefault(a => a.ID == GlobalConfig.KnownCharacters[Self.CharacterName].CurrentGroup);
                 if (CurrentGroup.GroupSettings != null)
                 {
-                    Log.Log("I am in fleet group {0}", CurrentGroup.GroupSettings.FriendlyName);
+                    Log.Log("|oCurrent fleet group");
+                    Log.Log(" |-g{0}", CurrentGroup.GroupSettings.FriendlyName);
                     foreach (string member in CurrentGroup.GroupSettings.MemberCharacternames)
                     {
                         if (member == Self.CharacterName)
