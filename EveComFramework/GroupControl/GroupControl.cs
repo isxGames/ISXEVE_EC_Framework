@@ -221,6 +221,7 @@ namespace EveComFramework.GroupControl
             EVEFrame.Log("Idle: " + Idle.ToString());
             if (Idle || CurState.ToString() != "Organize")
             {
+                EVEFrame.Log("Set Available");
                 SetAvailable();
                 EVEFrame.Log("Queue Organize");
                 QueueState(Organize);
