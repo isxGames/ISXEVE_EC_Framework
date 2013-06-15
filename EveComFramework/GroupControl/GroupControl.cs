@@ -218,9 +218,11 @@ namespace EveComFramework.GroupControl
 
         public void Start()
         {
+            EVEFrame.Log(CurState.ToString());
             if (Idle || CurState.ToString() != "Organize")
             {
                 SetAvailable();
+                EVEFrame.Log("Queue Organize");
                 QueueState(Organize);
             }
         }
@@ -394,6 +396,7 @@ namespace EveComFramework.GroupControl
 
         public bool Organize(object[] Params)
         {
+            EVEFrame.Log("Organize");
             FinishedCycle = false;
             EVEFrame.Log("CurrentGroup is null: " + (CurrentGroup == null).ToString());
             if (CurrentGroup != null)
