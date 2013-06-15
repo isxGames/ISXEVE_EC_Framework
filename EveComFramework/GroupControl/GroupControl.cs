@@ -383,6 +383,7 @@ namespace EveComFramework.GroupControl
                 }
                 EVEFrame.Log("My computed leadership value is " + Self.LeadershipValue);
                 RelayAll("forceupdate", "");
+                RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
                 return true;
             }
             else
