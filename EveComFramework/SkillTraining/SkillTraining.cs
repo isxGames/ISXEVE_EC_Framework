@@ -52,6 +52,7 @@ namespace EveComFramework.SkillTraining
         private SkillTraining()
             : base()
         {
+            QueueState(GetName);
         }
 
 
@@ -81,20 +82,20 @@ namespace EveComFramework.SkillTraining
         /// </summary>
         public void StartWatch()
         {
-            if (Idle)
+            if (Idle || CurState.ToString() != "EventMonitor")
             {
                 QueueState(EventMonitor);
-            }
+            }  
         }
         /// <summary>
         /// Handles everything and queues skills as it can.
         /// </summary>
         public void StartAuto()
         {
-            if (Idle)
+            if (Idle || CurState.ToString() != "Monitor")
             {
                 QueueState(Monitor);
-            }
+            }            
         }
 
         public void Stop()
@@ -150,6 +151,13 @@ namespace EveComFramework.SkillTraining
             return true;
         }
 
+        bool GetName(object[] Params)
+        {
+            if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
+            CharName = Me.Name;
+            return true;
+        }
+
         #endregion
 
         bool EventMonitor(object[] Params)
@@ -158,6 +166,11 @@ namespace EveComFramework.SkillTraining
             if (CharName == null)
             {
                 CharName = Me.Name;
+            }
+            if (!SkillQueue.ServiceStarted)
+            {
+                SkillQueue.StartService();
+                return false;
             }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
             {
@@ -172,12 +185,18 @@ namespace EveComFramework.SkillTraining
             }
             return false;
         }
+
         bool Monitor(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
             if (CharName == null)
             {
                 CharName = Me.Name;
+            }
+            if (!SkillQueue.ServiceStarted)
+            {
+                SkillQueue.StartService();
+                return false;
             }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
             {
