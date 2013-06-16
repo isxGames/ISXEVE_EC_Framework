@@ -194,7 +194,7 @@ namespace EveComFramework.SessionControl
             if (Login.AtLogin)
             {
                 if (Login.Loading) return false;
-                EVEFrame.Log(Login.ServerStatus);
+                EVEFrame.Log("-" + Login.ServerStatus + "-");
                 if (Login.ServerStatus != "OK") return false;
                 PopupWindow Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("There is a new build available"));
                 if (Message != null)
