@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
 using InnerSpaceAPI;
@@ -17,7 +18,9 @@ namespace EveComFramework.Security.UI
         
         string ActiveTrigger;
         SecuritySettings Config = EveComFramework.Security.Security.Instance.Config;
+        SecurityAudioSettings SpeechConfig = EveComFramework.Security.SecurityAudio.Instance.Config;
         Cache Cache = Cache.Instance;
+        SpeechSynthesizer Speech = new SpeechSynthesizer();
 
         public Security()
         {
@@ -111,6 +114,13 @@ namespace EveComFramework.Security.UI
             if (Cache.Bookmarks != null) SecureBookmark.Items.AddRange(Cache.Bookmarks);
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
+
+            checkAudioBlue.Checked = SpeechConfig.Blue;
+            checkAudioFlee.Checked = SpeechConfig.Flee;
+            checkAudioGrey.Checked = SpeechConfig.Grey;
+            checkAudioRed.Checked = SpeechConfig.Red;
+            listVoices.Items.Clear();
+            listVoices.Items.AddRange(Speech.GetInstalledVoices().Select(a => a.VoiceInfo.Name).ToArray());
 
             FleeWait.Value = Config.FleeWait;
             lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
@@ -373,6 +383,40 @@ namespace EveComFramework.Security.UI
             }
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
+        }
+
+        private void checkAudioFlee_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.Flee = checkAudioFlee.Checked;
+            SpeechConfig.Save();
+        }
+
+        private void checkAudioRed_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.Red = checkAudioRed.Checked;
+            SpeechConfig.Save();
+        }
+
+        private void checkAudioBlue_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.Blue = checkAudioBlue.Checked;
+            SpeechConfig.Save();
+        }
+
+        private void checkAudioGrey_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.Grey = checkAudioGrey.Checked;
+            SpeechConfig.Save();
+        }
+
+        private void listVoices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listVoices.SelectedIndex != -1)
+            {
+                SpeechConfig.Voice = listVoices.SelectedItem.ToString();
+                SpeechConfig.Save();
+                Speech.Speak(listVoices.SelectedItem.ToString());
+            }
         }
 
 

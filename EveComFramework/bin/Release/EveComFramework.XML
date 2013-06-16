@@ -321,6 +321,11 @@
             Singletoner
             </summary>
         </member>
+        <member name="P:EveComFramework.Security.SecurityAudio.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
         <member name="T:EveComFramework.Core.Busy">
             <summary>
             This class allows modules to signal they are busy
