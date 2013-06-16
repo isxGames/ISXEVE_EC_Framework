@@ -402,7 +402,7 @@ namespace EveComFramework.Security
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityAddScrambler " + Me.CharID + " " + WarpScrambling.ID);
                 return false;
             }
 
