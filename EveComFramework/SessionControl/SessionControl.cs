@@ -194,6 +194,7 @@ namespace EveComFramework.SessionControl
             if (Login.AtLogin)
             {
                 if (Login.Loading) return false;
+                if (Login.ServerStatus != "Accepting Connections") return false;
                 PopupWindow Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("There is a new build available"));
                 if (Message != null)
                 {
@@ -206,7 +207,8 @@ namespace EveComFramework.SessionControl
                                                             a.Message.Contains("The daily downtime will begin in") ||
                                                             a.Message.Contains("The connection to the server was closed") ||
                                                             a.Message.Contains("Unable to connect to the selected server.") ||
-                                                            a.Message.Contains("At any time you can log in to the account management page"));
+                                                            a.Message.Contains("At any time you can log in to the account management page") ||
+                                                            a.Message.Contains("Connection Failed"));
                 if (Message != null)
                 {
                     EVEFrame.Log("Click");
