@@ -121,6 +121,8 @@ namespace EveComFramework.Security.UI
             checkAudioRed.Checked = SpeechConfig.Red;
             listVoices.Items.Clear();
             listVoices.Items.AddRange(Speech.GetInstalledVoices().Select(a => a.VoiceInfo.Name).ToArray());
+            trackRate.Value = SpeechConfig.Rate;
+            trackVolume.Value = SpeechConfig.Volume;
 
             FleeWait.Value = Config.FleeWait;
             lblFleeWait.Text = String.Format("Wait {0} minutes after flee", FleeWait.Value);
@@ -418,6 +420,29 @@ namespace EveComFramework.Security.UI
                 Speech.Speak(listVoices.SelectedItem.ToString());
             }
         }
+
+        private void trackRate_Scroll(object sender, EventArgs e)
+        {
+            SpeechConfig.Rate = trackRate.Value;
+            SpeechConfig.Save();
+            if (listVoices.SelectedIndex != -1)
+            {
+                Speech.Rate = trackRate.Value;
+                Speech.Speak(listVoices.SelectedItem.ToString());
+            }
+        }
+
+        private void trackVolume_Scroll(object sender, EventArgs e)
+        {
+            SpeechConfig.Volume = trackVolume.Value;
+            SpeechConfig.Save();
+            if (listVoices.SelectedIndex != -1)
+            {
+                Speech.Volume = trackVolume.Value;
+                Speech.Speak(listVoices.SelectedItem.ToString());
+            }
+        }
+
 
 
     }

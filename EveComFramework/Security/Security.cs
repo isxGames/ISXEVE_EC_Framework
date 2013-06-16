@@ -594,6 +594,8 @@ namespace EveComFramework.Security
         public bool Blue = false;
         public bool Grey = false;
         public string Voice = "";
+        public int Rate = 0;
+        public int Volume = 100;
     }
 
     #endregion
@@ -672,7 +674,9 @@ namespace EveComFramework.Security
             PilotCache = Local.Pilots;
 
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
-            if (SpeechQueue.Any()) Speech.Speak(SpeechQueue.Dequeue());
+            Speech.Rate = Config.Rate;
+            Speech.Volume = Config.Volume;
+            if (SpeechQueue.Any()) Speech.SpeakAsync(SpeechQueue.Dequeue());
      
             return false;
         }

@@ -65,6 +65,10 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.trackVolume = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.trackRate = new System.Windows.Forms.TrackBar();
             this.listVoices = new System.Windows.Forms.ListBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.checkAudioGrey = new System.Windows.Forms.CheckBox();
@@ -86,6 +90,8 @@
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackRate)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -392,6 +398,10 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.trackVolume);
+            this.groupBox7.Controls.Add(this.label2);
+            this.groupBox7.Controls.Add(this.label1);
+            this.groupBox7.Controls.Add(this.trackRate);
             this.groupBox7.Controls.Add(this.listVoices);
             this.groupBox7.Location = new System.Drawing.Point(106, 6);
             this.groupBox7.Name = "groupBox7";
@@ -400,12 +410,49 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Voices";
             // 
+            // trackVolume
+            // 
+            this.trackVolume.Location = new System.Drawing.Point(6, 241);
+            this.trackVolume.Maximum = 100;
+            this.trackVolume.Name = "trackVolume";
+            this.trackVolume.Size = new System.Drawing.Size(188, 45);
+            this.trackVolume.TabIndex = 4;
+            this.trackVolume.Value = 100;
+            this.trackVolume.Scroll += new System.EventHandler(this.trackVolume_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 225);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Speech Volume";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 161);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Speech Rate";
+            // 
+            // trackRate
+            // 
+            this.trackRate.Location = new System.Drawing.Point(6, 177);
+            this.trackRate.Minimum = -10;
+            this.trackRate.Name = "trackRate";
+            this.trackRate.Size = new System.Drawing.Size(188, 45);
+            this.trackRate.TabIndex = 1;
+            this.trackRate.Scroll += new System.EventHandler(this.trackRate_Scroll);
+            // 
             // listVoices
             // 
             this.listVoices.FormattingEnabled = true;
             this.listVoices.Location = new System.Drawing.Point(6, 20);
             this.listVoices.Name = "listVoices";
-            this.listVoices.Size = new System.Drawing.Size(188, 264);
+            this.listVoices.Size = new System.Drawing.Size(188, 134);
             this.listVoices.TabIndex = 0;
             this.listVoices.SelectedIndexChanged += new System.EventHandler(this.listVoices_SelectedIndexChanged);
             // 
@@ -496,6 +543,9 @@
             this.groupBox1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackRate)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
@@ -536,5 +586,9 @@
         private System.Windows.Forms.CheckBox checkAudioFlee;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.ListBox listVoices;
+        private System.Windows.Forms.TrackBar trackRate;
+        private System.Windows.Forms.TrackBar trackVolume;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
