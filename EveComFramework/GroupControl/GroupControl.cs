@@ -218,12 +218,9 @@ namespace EveComFramework.GroupControl
 
         public void Start()
         {
-            EVEFrame.Log("Idle: " + Idle.ToString());
             if (Idle || CurState.ToString() != "Organize")
             {
-                EVEFrame.Log("Set Available");
                 SetAvailable();
-                EVEFrame.Log("Queue Organize");
                 QueueState(Organize);
             }
         }
@@ -274,7 +271,6 @@ namespace EveComFramework.GroupControl
                     msg = msg + " \"" + arg + "\"";
                 }            
             }
-            EVEFrame.Log(msg);
             LavishScriptAPI.LavishScript.ExecuteCommand(msg);
         }
 
@@ -397,9 +393,7 @@ namespace EveComFramework.GroupControl
 
         public bool Organize(object[] Params)
         {
-            EVEFrame.Log("Organize");
             FinishedCycle = false;
-            EVEFrame.Log("CurrentGroup is null: " + (CurrentGroup == null).ToString());
             if (CurrentGroup != null)
             {
                 try

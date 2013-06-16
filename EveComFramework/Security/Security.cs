@@ -389,6 +389,7 @@ namespace EveComFramework.Security
             {
                 if (Session.InFleet)
                 {
+                    EVEFrame.Log("Scramble count: " + ScramblingEntities.Sum(a => a.Value.Count).ToString());
                     List<long> ValidScrambles = ScramblingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
                     return Entity.All.FirstOrDefault(a => ValidScrambles.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
                 }
