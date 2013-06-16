@@ -321,11 +321,6 @@
             Singletoner
             </summary>
         </member>
-        <member name="P:EveComFramework.Security.SecurityAudio.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
         <member name="T:EveComFramework.Core.Busy">
             <summary>
             This class allows modules to signal they are busy
@@ -936,6 +931,11 @@
         <member name="P:EveComFramework.Security.Security.ValidScramble">
             <summary>
             Returns an entity that is scrambling or has scrambled a friendly fleet member
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Security.SecurityAudio.Instance">
+            <summary>
+            Singletoner
             </summary>
         </member>
         <member name="F:EveComFramework.Security.UI.Security.components">
