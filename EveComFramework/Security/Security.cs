@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
 
@@ -114,6 +115,7 @@ namespace EveComFramework.Security
 
         #region Variables
 
+        SecurityAudio SecurityAudio = SecurityAudio.Instance;
         List<Bookmark> SafeSpots;
         /// <summary>
         /// Configuration for this class
@@ -581,5 +583,124 @@ namespace EveComFramework.Security
         }
 
         #endregion
+    }
+
+    #region Settings
+
+    public class SecurityAudioSettings : Settings
+    {
+        public bool Flee = true;
+        public bool Red = false;
+        public bool Blue = false;
+        public bool Grey = false;
+        public string Voice = "";
+    }
+
+    #endregion
+
+    public class SecurityAudio : State
+    {
+        #region Instantiation
+
+        static SecurityAudio _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
+        public static SecurityAudio Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new SecurityAudio();
+                }
+                return _Instance;
+            }
+        }
+
+        private SecurityAudio() : base()
+        {
+            
+            if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
+            QueueState(Control);
+        }
+
+        #endregion
+
+        #region Variables
+
+        SpeechSynthesizer Speech = new SpeechSynthesizer();
+        Queue<string> SpeechQueue = new Queue<string>();
+        public SecurityAudioSettings Config = new SecurityAudioSettings();
+        int SolarSystem = -1;
+        List<Pilot> PilotCache = new List<Pilot>();
+        Security Core;
+
+        #endregion
+
+        #region Actions
+
+        void Alert()
+        {
+            if (Config.Flee) SpeechQueue.Enqueue("Flee");
+        }
+
+        #endregion
+
+        #region States
+
+        bool Control(object[] Params)
+        {
+            if (Core == null)
+            {
+                Core = Security.Instance;
+                Core.Alert += Alert;
+            }
+            if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
+            if (Session.SolarSystemID != SolarSystem)
+            {
+                PilotCache = Local.Pilots;
+                SolarSystem = Session.SolarSystemID;
+            }
+            List<Pilot> newPilots = Local.Pilots.Where(a => !PilotCache.Contains(a)).ToList();
+            foreach (Pilot pilot in newPilots)
+            {
+                if (Config.Blue && PilotColor(pilot) == PilotColors.Blue) SpeechQueue.Enqueue("Blue");
+                if (Config.Grey && PilotColor(pilot) == PilotColors.Grey) SpeechQueue.Enqueue("Grey");
+                if (Config.Red && PilotColor(pilot) == PilotColors.Red) SpeechQueue.Enqueue("Red");
+            }
+
+            if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
+            if (SpeechQueue.Any()) Speech.Speak(SpeechQueue.Dequeue());
+     
+            return false;
+        }
+
+        #endregion
+
+        enum PilotColors
+        {
+            Blue,
+            Red,
+            Grey
+        }
+
+        PilotColors PilotColor(Pilot pilot)
+        {
+            int val = 0 +
+                pilot.ToAlliance.FromAlliance +
+                pilot.ToAlliance.FromCorp +
+                pilot.ToAlliance.FromChar +
+                pilot.ToCorp.FromAlliance +
+                pilot.ToCorp.FromCorp +
+                pilot.ToCorp.FromChar +
+                pilot.ToChar.FromAlliance +
+                pilot.ToChar.FromCorp +
+                pilot.ToChar.FromChar;
+            if (val > 0) return PilotColors.Blue;
+            if (val == 0) return PilotColors.Grey;
+            if (val < 0) return PilotColors.Red;
+            return PilotColors.Grey;
+        }
     }
 }

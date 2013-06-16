@@ -63,6 +63,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.FleeTypes = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.listVoices = new System.Windows.Forms.ListBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.checkAudioGrey = new System.Windows.Forms.CheckBox();
+            this.checkAudioBlue = new System.Windows.Forms.CheckBox();
+            this.checkAudioRed = new System.Windows.Forms.CheckBox();
+            this.checkAudioFlee = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
@@ -76,12 +84,16 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SecureBookmarkVerify)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -366,6 +378,94 @@
             // 
             this.columnHeader2.Width = 141;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox7);
+            this.tabPage3.Controls.Add(this.groupBox6);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(312, 304);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Audio Alerts";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.listVoices);
+            this.groupBox7.Location = new System.Drawing.Point(106, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(200, 292);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Voices";
+            // 
+            // listVoices
+            // 
+            this.listVoices.FormattingEnabled = true;
+            this.listVoices.Location = new System.Drawing.Point(6, 20);
+            this.listVoices.Name = "listVoices";
+            this.listVoices.Size = new System.Drawing.Size(188, 264);
+            this.listVoices.TabIndex = 0;
+            this.listVoices.SelectedIndexChanged += new System.EventHandler(this.listVoices_SelectedIndexChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.checkAudioGrey);
+            this.groupBox6.Controls.Add(this.checkAudioBlue);
+            this.groupBox6.Controls.Add(this.checkAudioRed);
+            this.groupBox6.Controls.Add(this.checkAudioFlee);
+            this.groupBox6.Location = new System.Drawing.Point(6, 6);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(95, 292);
+            this.groupBox6.TabIndex = 0;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Enabled Alerts";
+            // 
+            // checkAudioGrey
+            // 
+            this.checkAudioGrey.AutoSize = true;
+            this.checkAudioGrey.Location = new System.Drawing.Point(6, 89);
+            this.checkAudioGrey.Name = "checkAudioGrey";
+            this.checkAudioGrey.Size = new System.Drawing.Size(73, 17);
+            this.checkAudioGrey.TabIndex = 3;
+            this.checkAudioGrey.Text = "New Grey";
+            this.checkAudioGrey.UseVisualStyleBackColor = true;
+            this.checkAudioGrey.CheckedChanged += new System.EventHandler(this.checkAudioGrey_CheckedChanged);
+            // 
+            // checkAudioBlue
+            // 
+            this.checkAudioBlue.AutoSize = true;
+            this.checkAudioBlue.Location = new System.Drawing.Point(6, 66);
+            this.checkAudioBlue.Name = "checkAudioBlue";
+            this.checkAudioBlue.Size = new System.Drawing.Size(72, 17);
+            this.checkAudioBlue.TabIndex = 2;
+            this.checkAudioBlue.Text = "New Blue";
+            this.checkAudioBlue.UseVisualStyleBackColor = true;
+            this.checkAudioBlue.CheckedChanged += new System.EventHandler(this.checkAudioBlue_CheckedChanged);
+            // 
+            // checkAudioRed
+            // 
+            this.checkAudioRed.AutoSize = true;
+            this.checkAudioRed.Location = new System.Drawing.Point(6, 43);
+            this.checkAudioRed.Name = "checkAudioRed";
+            this.checkAudioRed.Size = new System.Drawing.Size(71, 17);
+            this.checkAudioRed.TabIndex = 1;
+            this.checkAudioRed.Text = "New Red";
+            this.checkAudioRed.UseVisualStyleBackColor = true;
+            this.checkAudioRed.CheckedChanged += new System.EventHandler(this.checkAudioRed_CheckedChanged);
+            // 
+            // checkAudioFlee
+            // 
+            this.checkAudioFlee.AutoSize = true;
+            this.checkAudioFlee.Location = new System.Drawing.Point(6, 20);
+            this.checkAudioFlee.Name = "checkAudioFlee";
+            this.checkAudioFlee.Size = new System.Drawing.Size(46, 17);
+            this.checkAudioFlee.TabIndex = 0;
+            this.checkAudioFlee.Text = "Flee";
+            this.checkAudioFlee.UseVisualStyleBackColor = true;
+            this.checkAudioFlee.CheckedChanged += new System.EventHandler(this.checkAudioFlee_CheckedChanged);
+            // 
             // Security
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -394,6 +494,10 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SecureBookmarkVerify)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -424,5 +528,13 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.PictureBox SecureBookmarkVerify;
         private System.Windows.Forms.ComboBox SecureBookmark;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.CheckBox checkAudioGrey;
+        private System.Windows.Forms.CheckBox checkAudioBlue;
+        private System.Windows.Forms.CheckBox checkAudioRed;
+        private System.Windows.Forms.CheckBox checkAudioFlee;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.ListBox listVoices;
     }
 }
