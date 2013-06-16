@@ -250,7 +250,7 @@ namespace EveComFramework.Security
                 }
                 else
                 {
-                    if (ScramblingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
+                    if (!ScramblingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
                     {
                         ScramblingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
                     }
@@ -401,7 +401,6 @@ namespace EveComFramework.Security
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
-                EVEFrame.Log("Relaying scrambling entity!  " + WarpScrambling.ID);
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
