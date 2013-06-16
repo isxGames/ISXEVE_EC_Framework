@@ -669,6 +669,7 @@ namespace EveComFramework.Security
                 if (Config.Grey && PilotColor(pilot) == PilotColors.Grey) SpeechQueue.Enqueue("Grey");
                 if (Config.Red && PilotColor(pilot) == PilotColors.Red) SpeechQueue.Enqueue("Red");
             }
+            PilotCache = Local.Pilots;
 
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             if (SpeechQueue.Any()) Speech.Speak(SpeechQueue.Dequeue());
