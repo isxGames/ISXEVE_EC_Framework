@@ -51,7 +51,6 @@ namespace EveComFramework.DroneControl
 
         private DroneControl() : base()
         {
-            Rats.AddTargetingMe();
             Rats.AddNPCs();
             RatComparer ratComp = new RatComparer();
             Rats.Ordering = ratComp;
