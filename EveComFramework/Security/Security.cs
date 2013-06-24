@@ -409,7 +409,7 @@ namespace EveComFramework.Security
                 return false;
             }
 
-            if (ValidScramble != null) return false;
+            if (this.ValidScramble != null) return false;
 
             switch (SafeTrigger())
             {
