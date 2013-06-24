@@ -400,6 +400,8 @@ namespace EveComFramework.Security
 
         bool CheckSafe(object[] Params)
         {
+            if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
+
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
