@@ -25,7 +25,6 @@ namespace EveComFramework.Security.UI
         public Security()
         {
             InitializeComponent();
-            Config.Updated += LoadSettings;
         }
 
         private void LoadSettings()

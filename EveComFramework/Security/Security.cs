@@ -487,7 +487,6 @@ namespace EveComFramework.Security
             QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
             QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
             QueueState(Resume, FleeWait);
-            QueueState(CheckSafe);
             return true;
         }
 
@@ -564,10 +563,10 @@ namespace EveComFramework.Security
             FleeTrigger Trigger = SafeTrigger();
             if (Trigger != FleeTrigger.None)
             {
-                InsertState(CheckClear, -1, Trigger);
-                InsertState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
-                InsertState(LogMessage, 1, string.Format("|oNew flee condition"));
-                return true;
+                QueueState(LogMessage, 1, string.Format("|oNew flee condition"));
+                QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
+                QueueState(CheckClear, -1, Trigger);
+                return false;
             }
 
             AutoModule.AutoModule.Instance.Decloak = Decloak;
@@ -581,6 +580,7 @@ namespace EveComFramework.Security
                 Log.Log("|oSending ClearAlert command - resume operations");
                 ClearAlert();
             }
+            QueueState(CheckSafe);
             return true;
         }
 
