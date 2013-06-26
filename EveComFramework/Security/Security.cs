@@ -655,7 +655,7 @@ namespace EveComFramework.Security
 
         void NewLocalChat(object sender, LavishScriptAPI.LSEventArgs args)
         {
-            SpeechQueue.Enqueue("New local chat message");
+            if (Config.Local) SpeechQueue.Enqueue("New local chat message");
         }
 
         #endregion
