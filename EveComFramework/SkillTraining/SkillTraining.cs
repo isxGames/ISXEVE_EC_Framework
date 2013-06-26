@@ -223,10 +223,8 @@ namespace EveComFramework.SkillTraining
             DefaultFrequency = 1000;
             if (SkillQueue.InTransaction)
             {               
-                int x = 0;
                 foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
                 {
-                    x++;
                     //check if the skill is injected
                     Skill injectedSkill = Skill.All.FirstOrDefault(a => a.Type == stt.Type);
                     if (injectedSkill != null)
