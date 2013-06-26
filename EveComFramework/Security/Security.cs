@@ -595,6 +595,7 @@ namespace EveComFramework.Security
         public bool Red = false;
         public bool Blue = false;
         public bool Grey = false;
+        public bool Local = false;
         public string Voice = "";
         public int Rate = 0;
         public int Volume = 100;
@@ -627,6 +628,9 @@ namespace EveComFramework.Security
             
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             QueueState(Control);
+            LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+            LavishScriptAPI.LavishScript.Events.RegisterEvent("EVE_LocalChat");
+            LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
         }
 
         #endregion
@@ -647,6 +651,11 @@ namespace EveComFramework.Security
         void Alert()
         {
             if (Config.Flee) SpeechQueue.Enqueue("Flee");
+        }
+
+        void NewLocalChat(object sender, LavishScriptAPI.LSEventArgs args)
+        {
+            SpeechQueue.Enqueue("New local chat message");
         }
 
         #endregion

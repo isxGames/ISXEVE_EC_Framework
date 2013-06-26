@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Neutral to me only");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Targeted by another player");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Capacitor low");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Shield low");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Armor low");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Flee to closest station");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Neutral to me only");
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ThresholdGroup = new System.Windows.Forms.GroupBox();
@@ -75,6 +75,7 @@
             this.checkAudioBlue = new System.Windows.Forms.CheckBox();
             this.checkAudioRed = new System.Windows.Forms.CheckBox();
             this.checkAudioFlee = new System.Windows.Forms.CheckBox();
+            this.checkLocal = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
@@ -170,23 +171,23 @@
             this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
-            listViewItem4.StateImageIndex = 0;
-            listViewItem5.StateImageIndex = 0;
-            listViewItem6.StateImageIndex = 0;
-            listViewItem7.StateImageIndex = 0;
-            listViewItem8.StateImageIndex = 0;
+            listViewItem12.StateImageIndex = 0;
+            listViewItem13.StateImageIndex = 0;
+            listViewItem14.StateImageIndex = 0;
+            listViewItem15.StateImageIndex = 0;
+            listViewItem16.StateImageIndex = 0;
+            listViewItem17.StateImageIndex = 0;
+            listViewItem18.StateImageIndex = 0;
+            listViewItem19.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem7,
-            listViewItem8});
+            listViewItem12,
+            listViewItem13,
+            listViewItem14,
+            listViewItem15,
+            listViewItem16,
+            listViewItem17,
+            listViewItem18,
+            listViewItem19});
             this.Triggers.Location = new System.Drawing.Point(9, 20);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
@@ -365,13 +366,13 @@
             this.FleeTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem9.StateImageIndex = 0;
-            listViewItem10.StateImageIndex = 0;
-            listViewItem11.StateImageIndex = 0;
+            listViewItem20.StateImageIndex = 0;
+            listViewItem21.StateImageIndex = 0;
+            listViewItem22.StateImageIndex = 0;
             this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9,
-            listViewItem10,
-            listViewItem11});
+            listViewItem20,
+            listViewItem21,
+            listViewItem22});
             this.FleeTypes.Location = new System.Drawing.Point(10, 20);
             this.FleeTypes.Name = "FleeTypes";
             this.FleeTypes.Scrollable = false;
@@ -458,6 +459,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.checkLocal);
             this.groupBox6.Controls.Add(this.checkAudioGrey);
             this.groupBox6.Controls.Add(this.checkAudioBlue);
             this.groupBox6.Controls.Add(this.checkAudioRed);
@@ -474,7 +476,7 @@
             this.checkAudioGrey.AutoSize = true;
             this.checkAudioGrey.Location = new System.Drawing.Point(6, 89);
             this.checkAudioGrey.Name = "checkAudioGrey";
-            this.checkAudioGrey.Size = new System.Drawing.Size(73, 17);
+            this.checkAudioGrey.Size = new System.Drawing.Size(71, 17);
             this.checkAudioGrey.TabIndex = 3;
             this.checkAudioGrey.Text = "New Grey";
             this.checkAudioGrey.UseVisualStyleBackColor = true;
@@ -485,7 +487,7 @@
             this.checkAudioBlue.AutoSize = true;
             this.checkAudioBlue.Location = new System.Drawing.Point(6, 66);
             this.checkAudioBlue.Name = "checkAudioBlue";
-            this.checkAudioBlue.Size = new System.Drawing.Size(72, 17);
+            this.checkAudioBlue.Size = new System.Drawing.Size(70, 17);
             this.checkAudioBlue.TabIndex = 2;
             this.checkAudioBlue.Text = "New Blue";
             this.checkAudioBlue.UseVisualStyleBackColor = true;
@@ -496,7 +498,7 @@
             this.checkAudioRed.AutoSize = true;
             this.checkAudioRed.Location = new System.Drawing.Point(6, 43);
             this.checkAudioRed.Name = "checkAudioRed";
-            this.checkAudioRed.Size = new System.Drawing.Size(71, 17);
+            this.checkAudioRed.Size = new System.Drawing.Size(67, 17);
             this.checkAudioRed.TabIndex = 1;
             this.checkAudioRed.Text = "New Red";
             this.checkAudioRed.UseVisualStyleBackColor = true;
@@ -512,6 +514,17 @@
             this.checkAudioFlee.Text = "Flee";
             this.checkAudioFlee.UseVisualStyleBackColor = true;
             this.checkAudioFlee.CheckedChanged += new System.EventHandler(this.checkAudioFlee_CheckedChanged);
+            // 
+            // checkLocal
+            // 
+            this.checkLocal.AutoSize = true;
+            this.checkLocal.Location = new System.Drawing.Point(6, 112);
+            this.checkLocal.Name = "checkLocal";
+            this.checkLocal.Size = new System.Drawing.Size(74, 17);
+            this.checkLocal.TabIndex = 4;
+            this.checkLocal.Text = "Local chat";
+            this.checkLocal.UseVisualStyleBackColor = true;
+            this.checkLocal.CheckedChanged += new System.EventHandler(this.checkLocal_CheckedChanged);
             // 
             // Security
             // 
@@ -590,5 +603,6 @@
         private System.Windows.Forms.TrackBar trackVolume;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkLocal;
     }
 }

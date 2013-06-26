@@ -118,6 +118,7 @@ namespace EveComFramework.Security.UI
             checkAudioFlee.Checked = SpeechConfig.Flee;
             checkAudioGrey.Checked = SpeechConfig.Grey;
             checkAudioRed.Checked = SpeechConfig.Red;
+            checkLocal.Checked = SpeechConfig.Local;
             listVoices.Items.Clear();
             listVoices.Items.AddRange(Speech.GetInstalledVoices().Select(a => a.VoiceInfo.Name).ToArray());
             trackRate.Value = SpeechConfig.Rate;
@@ -440,6 +441,12 @@ namespace EveComFramework.Security.UI
                 Speech.Volume = trackVolume.Value;
                 Speech.Speak(listVoices.SelectedItem.ToString());
             }
+        }
+
+        private void checkLocal_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.Local = checkLocal.Checked;
+            SpeechConfig.Save();
         }
 
 
