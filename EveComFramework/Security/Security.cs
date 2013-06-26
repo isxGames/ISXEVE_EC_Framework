@@ -161,11 +161,13 @@ namespace EveComFramework.Security
             {
                 if (Idle)
                 {
+                    SecurityAudio.Enabled(true);
                     QueueState(CheckSafe);
                 }
             }
             else
             {
+                SecurityAudio.Enabled(false);
                 Clear();
             }
         }
@@ -178,6 +180,7 @@ namespace EveComFramework.Security
         {
             if (Idle)
             {
+                SecurityAudio.Enabled(true);
                 QueueState(CheckSafe);
             }
 
@@ -189,6 +192,7 @@ namespace EveComFramework.Security
         [Obsolete("Depreciated:  Use Security.Enable (6/11/13)")]
         public void Stop()
         {
+            SecurityAudio.Enabled(false);
             Clear();
         }
 
@@ -625,12 +629,9 @@ namespace EveComFramework.Security
 
         private SecurityAudio() : base()
         {
-            
+            LavishScriptAPI.LavishScript.Events.RegisterEvent("EVE_LocalChat");
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             QueueState(Control);
-            LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("EVE_LocalChat");
-            LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
         }
 
         #endregion
@@ -656,6 +657,20 @@ namespace EveComFramework.Security
         void NewLocalChat(object sender, LavishScriptAPI.LSEventArgs args)
         {
             if (Config.Local) SpeechQueue.Enqueue("New local chat message");
+        }
+
+        public void Enabled(bool var)
+        {
+            if (var)
+            {
+                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
+            }
+            else
+            {
+                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.Events.DetachEventTarget("EVE_LocalChat", NewLocalChat);
+            }
         }
 
         #endregion
