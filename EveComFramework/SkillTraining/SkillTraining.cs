@@ -223,12 +223,10 @@ namespace EveComFramework.SkillTraining
             DefaultFrequency = 1000;
             if (SkillQueue.InTransaction)
             {               
-                Log.Log(Config.SkillQueues[Me.Name].Count.ToString());
                 int x = 0;
                 foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
                 {
                     x++;
-                    Log.Log(x.ToString());
                     //check if the skill is injected
                     Skill injectedSkill = Skill.All.FirstOrDefault(a => a.Type == stt.Type);
                     if (injectedSkill != null)
@@ -237,14 +235,9 @@ namespace EveComFramework.SkillTraining
                         if (injectedSkill.SkillLevel < stt.Level)
                         {
                             //check if this entry is not already in the queue
-                            foreach (SkillQueue.Entry a in SkillQueue.Skills)
-                            {
-                                Log.Log(a.Skill.Type + a.ToLevel.ToString());
-                                Log.Log(stt.Type + stt.Level.ToString());
-                            }
                             if (!SkillQueue.Skills.Any(a => a.ToLevel == stt.Level && a.Skill.Type == stt.Type))
                             {
-                                //Log.Log("Queueing new skill up , Skill {0] , Level {1}", injectedSkill.Type, injectedSkill.SkillLevel);
+                                Log.Log("Queueing new skill up , Skill {0} , Level {1}", stt.Type, stt.Level);
                                 injectedSkill.AddToQueue();
                                 SkillQueue.CommitTransaction();
                                 InsertState(Blank, 1000);
@@ -253,10 +246,6 @@ namespace EveComFramework.SkillTraining
                                     SkillQueued();
                                 }
                                 return true;
-                            }
-                            else
-                            {
-                                Log.Log("Skill already in queue {0} @ level {1}", stt.Type, stt.Level);
                             }
                         }
                     }
