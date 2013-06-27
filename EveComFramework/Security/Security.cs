@@ -434,6 +434,12 @@ namespace EveComFramework.Security
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|r{0} is neutral standing", Hostile.Name);
                     return true;
+                case FleeTrigger.Paranoid:
+                    TriggerAlert();
+                    QueueState(Flee, -1, FleeTrigger.Paranoid);
+                    if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    Log.Log("|r{0} is neutral to me", Hostile.Name);
+                    return true;
                 case FleeTrigger.Targeted:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Targeted);
