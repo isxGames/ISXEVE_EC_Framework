@@ -294,7 +294,7 @@ namespace EveComFramework.SessionControl
             }
 
             if (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
-                DateTime.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
+                Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
             {
                 if (LogOut != null)
                 {
