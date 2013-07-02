@@ -576,9 +576,10 @@ namespace EveComFramework.Security
                 QueueState(LogMessage, 1, string.Format("|oNew flee condition"));
                 QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
                 QueueState(CheckClear, -1, Trigger);
-                return false;
+                return true;
             }
 
+            EVEFrame.Log("TEST FOR DRAVEN  -  After security clear, decloak on: " + Decloak);
             AutoModule.AutoModule.Instance.Decloak = Decloak;
             if (ClearAlert == null)
             {
