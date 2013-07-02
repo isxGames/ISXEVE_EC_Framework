@@ -579,7 +579,7 @@ namespace EveComFramework.Security
                 return true;
             }
 
-            EVEFrame.Log("TEST FOR DRAVEN  -  After security clear, decloak on: " + Decloak);
+            EVEFrame.Log("TEST FOR DRAVEN  -  After security clear, decloak on: " + Decloak.ToString());
             AutoModule.AutoModule.Instance.Decloak = Decloak;
             if (ClearAlert == null)
             {
