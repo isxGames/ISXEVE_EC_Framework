@@ -577,8 +577,9 @@ namespace EveComFramework.Move
                 Log.Log("|oAutopilot deactivated");
                 return true;
             }
-            if (Session.InSpace && (EveComFramework.Move.UndockWarp.Instance.Idle || EveComFramework.Move.UndockWarp.Instance.CurState.ToString() == "WaitStation"))
+            if (Session.InSpace)
             {
+                if (UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
                     Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);
