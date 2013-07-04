@@ -570,13 +570,15 @@ namespace EveComFramework.Move
             return true;
         }
 
+        bool QueueAutoPilotDeactivation = false;
         bool AutoPilot(object[] Params)
         {
-            if (Route.Path == null || Route.Path[0] == -1)
+            if (Route.Path == null || Route.Path[0] == -1 || QueueAutoPilotDeactivation)
             {
                 Log.Log("|oAutopilot deactivated");
                 return true;
             }
+
             if (Session.InSpace)
             {
                 if (UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
@@ -584,6 +586,7 @@ namespace EveComFramework.Move
                 {
                     Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);
                     Route.NextWaypoint.Jump();
+                    if (Route.Path.First() == Route.Waypoints.First()) QueueAutoPilotDeactivation = true;
                     int CurSystem = Session.SolarSystemID;
                     InsertState(AutoPilot);
                     WaitFor(10, () => Session.SolarSystemID != CurSystem, () => MyShip.ToEntity.Mode != EntityMode.Stopped);
