@@ -32,42 +32,45 @@ namespace EveComFramework.AutoModule.UI
             MaxThreshold.Hide();
             MaxThresholdLabel.Hide();
 
+            Modules.ItemChecked -= Modules_ItemChecked;
             foreach (ListViewItem i in Modules.Items)
             {
                 switch (i.Text)
                 {
                     case "Shield Boosters":
-                        i.Checked = true;
+                        i.Checked = Config.ShieldBoosters;
                         break;
                     case "Armor Repairers":
-                        i.Checked = true;
+                        i.Checked = Config.ArmorRepairs;
                         break;
                     case "Active Hardeners":
-                        i.Checked = true;
+                        i.Checked = Config.ActiveHardeners;
                         break;
                     case "Cloaks":
-                        i.Checked = true;
+                        i.Checked = Config.Cloaks;
                         break;
                     case "Gang Links":
-                        i.Checked = true;
+                        i.Checked = Config.GangLinks;
                         break;
                     case "Sensor Boosters":
-                        i.Checked = true;
+                        i.Checked = Config.SensorBoosters;
                         break;
                     case "Tracking Computers":
-                        i.Checked = true;
+                        i.Checked = Config.TrackingComputers;
                         break;
                     case "ECCMs":
-                        i.Checked = true;
+                        i.Checked = Config.ECCMs;
                         break;
                     case "Drone Control Units":
-                        i.Checked = true;
+                        i.Checked = Config.DroneControlUnits;
                         break;
                     case "Propulsion Modules":
-                        i.Checked = true;
+                        i.Checked = Config.PropulsionModules;
                         break;
                 }
             }
+            Modules.ItemChecked += Modules_ItemChecked;
+
         }
 
         private void AutoModule_Load(object sender, EventArgs e)
@@ -340,39 +343,39 @@ namespace EveComFramework.AutoModule.UI
 
         private void Modules_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            foreach (ListViewItem checkbox in Modules.CheckedItems)
+            foreach (ListViewItem checkbox in Modules.Items)
             {
                 switch (checkbox.Text)
                 {
                     case "Shield Boosters":
-                        Config.ShieldBoosters = true;
+                        Config.ShieldBoosters = checkbox.Checked;
                         break;
                     case "Armor Repairers":
-                        Config.ArmorRepairs = true;
+                        Config.ArmorRepairs = checkbox.Checked;
                         break;
                     case "Active Hardeners":
-                        Config.ActiveHardeners = true;
+                        Config.ActiveHardeners = checkbox.Checked;
                         break;
                     case "Cloaks":
-                        Config.Cloaks = true;
+                        Config.Cloaks = checkbox.Checked;
                         break;
                     case "Gang Links":
-                        Config.GangLinks = true;
+                        Config.GangLinks = checkbox.Checked;
                         break;
                     case "Sensor Boosters":
-                        Config.SensorBoosters = true;
+                        Config.SensorBoosters = checkbox.Checked;
                         break;
                     case "Tracking Computers":
-                        Config.TrackingComputers = true;
+                        Config.TrackingComputers = checkbox.Checked;
                         break;
                     case "ECCMs":
-                        Config.ECCMs = true;
+                        Config.ECCMs = checkbox.Checked;
                         break;
                     case "Drone Control Units":
-                        Config.DroneControlUnits = true;
+                        Config.DroneControlUnits = checkbox.Checked;
                         break;
                     case "Propulsion Modules":
-                        Config.PropulsionModules = true;
+                        Config.PropulsionModules = checkbox.Checked;
                         break;
                 }
             }

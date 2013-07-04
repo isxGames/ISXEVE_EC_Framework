@@ -349,6 +349,7 @@ namespace EveComFramework.Security.UI
                         build.Add(FleeTrigger.ArmorLow);
                         break;
                 }
+                EVEFrame.Log(i.Text);
             }
             Config.Triggers = build;
             Config.Save();
