@@ -71,6 +71,7 @@ namespace EveComFramework.AutoModule
 
         private AutoModule() : base()
         {
+            DefaultFrequency = 100;
         }
 
         #endregion
@@ -146,10 +147,13 @@ namespace EveComFramework.AutoModule
                 }
             }
 
+            /* I believe this may slow down speed to cloak, disabling for now, although it will cause some module failed to activate spam
+             * 
             if (MyShip.ToEntity.Cloaked)
             {
                 return false;
             }
+             */
 
             if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsOnline) > 0 &&
                     Config.Cloaks)
@@ -161,9 +165,12 @@ namespace EveComFramework.AutoModule
                         MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline) == 0)
                     {
                         MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                        return false;
                     }
                 }
             }
+
+            if (MyShip.Modules.Any(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline)) return false;
 
             #endregion
 
