@@ -586,7 +586,11 @@ namespace EveComFramework.Move
                 {
                     Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);
                     Route.NextWaypoint.Jump();
-                    if (Route.Path.First() == Route.Waypoints.First()) QueueAutoPilotDeactivation = true;
+                    if (Route.Path != null && Route.Waypoints != null)
+                    {
+                        EVEFrame.Log("Path.First: " + Route.Path.FirstOrDefault() + "Waypoints.First: " + Route.Waypoints.FirstOrDefault());
+                        if (Route.Path.FirstOrDefault() == Route.Waypoints.FirstOrDefault()) QueueAutoPilotDeactivation = true;
+                    }
                     int CurSystem = Session.SolarSystemID;
                     InsertState(AutoPilot);
                     WaitFor(10, () => Session.SolarSystemID != CurSystem, () => MyShip.ToEntity.Mode != EntityMode.Stopped);
