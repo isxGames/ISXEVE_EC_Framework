@@ -558,6 +558,7 @@ namespace EveComFramework.Move
 
         bool AutoPilotPrep(object[] Params)
         {
+            QueueAutoPilotDeactivation = false;
             if (Route.Path == null || Route.Path[0] == -1)
             {
                 return true;
@@ -575,6 +576,7 @@ namespace EveComFramework.Move
         {
             if (Route.Path == null || Route.Path[0] == -1 || QueueAutoPilotDeactivation)
             {
+                QueueAutoPilotDeactivation = false;
                 Log.Log("|oAutopilot deactivated");
                 return true;
             }
