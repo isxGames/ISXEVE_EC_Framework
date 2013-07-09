@@ -97,6 +97,84 @@ namespace EveComFramework.GroupControl
 
         #region LSCommands
 
+        //void UpdateGroupControl(object sender, LavishScriptAPI.LSEventArgs args)
+        //{
+        //    try
+        //    {
+        //        switch (args[0])
+        //        {
+        //            case "active":
+        //                if (CurrentGroup != null)
+        //                {
+        //                    ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[1]);
+        //                    if (activeMember != null)
+        //                    {
+        //                        if (!activeMember.Active)
+        //                        {
+        //                            EVEFrame.Log(String.Format("{0} is now active", args[1]));
+        //                            activeMember.Active = true;
+        //                        }
+        //                        if (activeMember.LeadershipValue != Convert.ToInt32(args[2]))
+        //                        {
+        //                            activeMember.LeadershipValue = Convert.ToInt32(args[2]);
+        //                            EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[1], args[2]));
+        //                        }
+        //                        if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[3]))
+        //                        {
+        //                            activeMember.Role = (Role)Enum.Parse(typeof(Role), args[3]);
+        //                            EVEFrame.Log(String.Format("New Role for {0}, {1}", args[1], args[3]));
+        //                        }
+        //                    }
+        //                }
+        //                break;
+        //            case "available":
+        //                if (CurrentGroup != null)
+        //                {
+        //                    ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[1]);
+        //                    if (availableMember != null)
+        //                    {
+        //                        if (availableMember.Available != Convert.ToBoolean(args[2]))
+        //                        {
+        //                            availableMember.Available = Convert.ToBoolean(args[2]);
+        //                            EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}", args[1], args[2]));
+        //                        }
+        //                    }
+        //                }
+        //                break;
+        //            case "joinedfleet":
+        //                if (CurrentGroup != null)
+        //                {
+        //                    ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[1]);
+        //                    if (joinedFleet != null)
+        //                    {
+        //                        if (!joinedFleet.InFleet)
+        //                        {
+        //                            EVEFrame.Log(String.Format("{0} joined a fleet", args[1]));
+        //                            joinedFleet.InFleet = true;
+        //                        }
+        //                    }
+        //                }
+        //                break;
+        //            case "reloadConfig":
+        //                LoadConfig();
+        //                break;
+        //            case "forceupdate":
+        //                if (Self.CharacterName != null)
+        //                {
+        //                    RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
+        //                    RelayAll("available", Self.CharacterName, Self.Available.ToString());
+        //                    if (Self.InFleet)
+        //                    {
+        //                        RelayAll("joinedfleet", Self.CharacterName);
+        //                    }
+        //                }
+        //                break;
+
+        //        }
+        //    }
+        //    catch { }
+        //}
+
         public int UpdateGroupControl(string[] args)
         {            
             switch (args[1])

@@ -98,7 +98,7 @@ namespace EveComFramework.Targets
 
         public void AddTargetingMe()
         {
-            AddQuery(a => a.IsTargetingMe);
+            AddQuery(a => a.IsTargetingMe && a.IsNPC);
         }
 
         public void AddNonFleetPlayers()
