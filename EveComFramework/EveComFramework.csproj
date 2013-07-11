@@ -39,8 +39,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Lavish.InnerSpace">
-      <HintPath>..\..\..\..\..\IS DLLs\Lavish.InnerSpace.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Lavish.InnerSpace.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -128,6 +127,7 @@
     <Compile Include="Security\UI\Security.designer.cs">
       <DependentUpon>Security.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimpleDrone\SimpleDrone.cs" />
     <Compile Include="SkillTraining\SkillTraining.cs" />
     <Compile Include="SkillTraining\UI\SkillTraining.cs">
       <SubType>Form</SubType>
