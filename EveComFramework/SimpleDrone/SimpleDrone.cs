@@ -5,6 +5,7 @@ using System.Text;
 using EveCom;
 using EveComFramework.Core;
 using EveComFramework.Targets;
+using EveComFramework.Security;
 
 namespace EveComFramework.SimpleDrone
 {
@@ -15,6 +16,8 @@ namespace EveComFramework.SimpleDrone
         public bool ShortRangeClear = true;
         public bool LongRangeClear = false;
         public bool Sentry = false;
+        public bool Fighter = false;
+        public bool PrivateTargets = true;
     }
 
     #endregion
@@ -49,7 +52,7 @@ namespace EveComFramework.SimpleDrone
 
         #region Variables
 
-        public Core.Logger Log = new Core.Logger("SimpleDrone");
+        public Core.Logger Console = new Core.Logger("SimpleDrone");
         public LocalSettings Config = new LocalSettings();
         Targets.Targets Rats = new Targets.Targets();
         public Dictionary<long, long> ActiveTargetList = new Dictionary<long, long>();
@@ -99,7 +102,61 @@ namespace EveComFramework.SimpleDrone
                 return true;
             }
 
+            // Escape for no drone modes selected
+            if (!Config.ShortRangeClear && !Config.LongRangeClear && !Config.Sentry)
+            {
+                return false;
+            }
 
+            Entity WarpScrambling = Security.Security.Instance.ValidScramble;
+
+            #region ActiveTarget selection
+
+            Double MaxRange = 0;
+            if (Config.ShortRangeClear) MaxRange = 20000;
+            if (Config.LongRangeClear) MaxRange = Me.DroneControlDistance;
+
+            if (WarpScrambling != null)
+            {
+                if (ActiveTarget != WarpScrambling && WarpScrambling.Distance < MaxRange)
+                {
+                    Console.Log("|rEntity on grid is/was warp scrambling!");
+                    Console.Log("|oOveriding current active target");
+                    Console.Log(" |-g{0}", WarpScrambling.Name);
+                    ActiveTarget = WarpScrambling;
+                    return false;
+                }
+            }
+
+            if (ActiveTarget == null || !ActiveTarget.Exists || ActiveTarget.Exploded || ActiveTarget.Released)
+            {
+                ActiveTarget = null;
+                if (Rats.LockedAndLockingTargetList.Any())
+                {
+                    if (Config.PrivateTargets)
+                    {
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID) && a.Distance < MaxRange);
+                    }
+                    if (ActiveTarget == null)
+                    {
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a =>  a.Distance < MaxRange);
+                    }
+                    if (Config.Sentry && ActiveTarget == null)
+                    {
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => a.Distance < Me.DroneControlDistance);
+                    }
+                    if (Config.Fighter && ActiveTarget == null)
+                    {
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault();
+                    }
+                    if (ActiveTarget != null)
+                    {
+                        LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[RatterUpdateActiveTargetList]:Execute[" + Me.CharID + "," + ActiveTarget.ID.ToString() + "]");
+                    }
+                }
+            }
+
+            #endregion
 
             return false;
         }
