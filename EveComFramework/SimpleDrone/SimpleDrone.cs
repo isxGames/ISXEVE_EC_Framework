@@ -18,6 +18,7 @@ namespace EveComFramework.SimpleDrone
         public bool Sentry = false;
         public bool Fighter = false;
         public bool PrivateTargets = true;
+        public int TargetSlots = 2;
     }
 
     #endregion
@@ -87,6 +88,8 @@ namespace EveComFramework.SimpleDrone
         #region States
 
         Entity ActiveTarget;
+        Dictionary<Entity, DateTime> TargetCooldown = new Dictionary<Entity, DateTime>();
+        bool OutOfTargets = false;
 
         bool Control(object[] Params)
         {
@@ -136,18 +139,26 @@ namespace EveComFramework.SimpleDrone
                     if (Config.PrivateTargets)
                     {
                         ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID) && a.Distance < MaxRange);
+                        if (Config.Sentry && ActiveTarget == null)
+                        {
+                            ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID) && a.Distance < Me.DroneControlDistance);
+                        }
+                        if (Config.Fighter && ActiveTarget == null)
+                        {
+                            ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID));
+                        }
                     }
-                    if (ActiveTarget == null)
+                    if (ActiveTarget == null && OutOfTargets)
                     {
                         ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a =>  a.Distance < MaxRange);
                     }
-                    if (Config.Sentry && ActiveTarget == null)
+                    if (Config.Sentry && ActiveTarget == null && OutOfTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => a.Distance < Me.DroneControlDistance);
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID) && a.Distance < Me.DroneControlDistance);
                     }
-                    if (Config.Fighter && ActiveTarget == null)
+                    if (Config.Fighter && ActiveTarget == null && OutOfTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault();
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID));
                     }
                     if (ActiveTarget != null)
                     {
@@ -155,6 +166,45 @@ namespace EveComFramework.SimpleDrone
                     }
                 }
             }
+
+            #endregion
+
+            #region LockManagement
+
+            TargetCooldown = TargetCooldown.Where(a => a.Value >= DateTime.Now).ToDictionary(a => a.Key, a => a.Value);
+            Rats.LockedAndLockingTargetList.ForEach(a => { TargetCooldown.AddOrUpdate(a, DateTime.Now.AddSeconds(2)); });
+            if (WarpScrambling != null)
+            {
+                if (!WarpScrambling.LockedTarget && !WarpScrambling.LockingTarget)
+                {
+                    if (Rats.LockedAndLockingTargetList.Count >= Me.TrueMaxTargetLocks)
+                    {
+                        if (Rats.LockedTargetList.Any())
+                        {
+                            Rats.LockedTargetList.FirstOrDefault().UnlockTarget();
+                        }
+                        return false;
+                    }
+                    WarpScrambling.LockTarget();
+                    return false;
+                }
+            }
+            else
+            {
+                Entity NewTarget = Rats.UnlockedTargetList.FirstOrDefault(a => !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange);
+                if (Rats.LockedAndLockingTargetList.Count < Config.TargetSlots &&
+                    NewTarget != null &&
+                    Entity.All.FirstOrDefault(a => a.IsJamming && a.IsTargetingMe) == null)
+                {
+                    Console.Log("|oLocking");
+                    Console.Log(" |-g{0}", NewTarget.Name);
+                    TargetCooldown.AddOrUpdate(NewTarget, DateTime.Now.AddSeconds(2));
+                    NewTarget.LockTarget();
+                    OutOfTargets = false;
+                    return false;
+                }
+            }
+            OutOfTargets = true;
 
             #endregion
 

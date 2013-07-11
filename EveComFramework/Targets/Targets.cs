@@ -34,11 +34,11 @@ namespace EveComFramework.Targets
                 {
                     if (Ordering != null)
                     {
-                        _TargetList = Entity.All.Where(QueriesCompiled).Where(ent => !ent.Exploded).OrderBy(ent => ent, Ordering).ThenBy(ent => ent.Distance).ToList();
+                        _TargetList = Entity.All.Where(QueriesCompiled).Where(ent => !ent.Exploded && !ent.Released).OrderBy(ent => ent, Ordering).ThenBy(ent => ent.Distance).ToList();
                     }
                     else
                     {
-                        _TargetList = Entity.All.Where(QueriesCompiled).Where(ent => !ent.Exploded).OrderBy(ent => ent.Distance).ToList();
+                        _TargetList = Entity.All.Where(QueriesCompiled).Where(ent => !ent.Exploded && !ent.Released).OrderBy(ent => ent.Distance).ToList();
                     }
                 }
                 return _TargetList;
