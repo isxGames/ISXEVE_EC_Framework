@@ -155,6 +155,7 @@ namespace EveComFramework.Move
             }
         }
 
+        int LastOrbitDistance;
         /// <summary>
         /// Orbit an entity
         /// </summary>
@@ -165,6 +166,7 @@ namespace EveComFramework.Move
             // If we're not doing anything, just start OrbitState
             if (Idle)
             {
+                LastOrbitDistance = Distance;
                 QueueState(OrbitState, -1, Target, Distance, false);
                 return;
             }
@@ -172,6 +174,14 @@ namespace EveComFramework.Move
             if ((CurState.State == OrbitState && (Entity)CurState.Params[0] != Target) || CurState.State == ApproachState)
             {
                 Clear();
+                LastOrbitDistance = Distance;
+                QueueState(OrbitState, -1, Target, Distance, false);
+            }
+
+            if (Distance != LastOrbitDistance)
+            {
+                Clear();
+                LastOrbitDistance = Distance;
                 QueueState(OrbitState, -1, Target, Distance, false);
             }
         }
