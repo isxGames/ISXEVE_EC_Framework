@@ -178,7 +178,7 @@ namespace EveComFramework.Move
                 QueueState(OrbitState, -1, Target, Distance, false);
             }
 
-            if (Distance != LastOrbitDistance)
+            if (Distance != LastOrbitDistance && LastOrbitDistance != 0 && Distance != 0)
             {
                 Clear();
                 LastOrbitDistance = Distance;
@@ -600,7 +600,6 @@ namespace EveComFramework.Move
                     Route.NextWaypoint.Jump();
                     if (Route.Path != null && Route.Waypoints != null)
                     {
-                        EVEFrame.Log("Path.First: " + Route.Path.FirstOrDefault() + "Waypoints.First: " + Route.Waypoints.FirstOrDefault());
                         if (Route.Path.FirstOrDefault() == Route.Waypoints.FirstOrDefault()) QueueAutoPilotDeactivation = true;
                     }
                     int CurSystem = Session.SolarSystemID;
