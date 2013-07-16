@@ -468,6 +468,11 @@
             The solar system's security level
             </summary>
         </member>
+        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
+            <summary>
+            The solar system's FactionID (Only works for High Sec)
+            </summary>
+        </member>
         <member name="P:EveComFramework.Data.SolarSystem.All">
             <summary>
             List of all solar systems

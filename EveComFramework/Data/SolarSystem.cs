@@ -28,11 +28,17 @@ namespace EveComFramework.Data
         /// </summary>
         public double Security { get; set; }
 
-        private SolarSystem(long ID, string Name, double Security)
+        /// <summary>
+        /// The solar system's FactionID (Only works for High Sec)
+        /// </summary>
+        public long FactionID { get; set; }
+
+        private SolarSystem(long ID, string Name, double Security, long FactionID)
         {
             this.ID = ID;
             this.Name = Name;
             this.Security = Security;
+            this.FactionID = FactionID;
         }
 
         private static List<SolarSystem> _All;
@@ -49,7 +55,7 @@ namespace EveComFramework.Data
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from System in dataDoc.Descendants("System")
-                                select new SolarSystem(Convert.ToInt64(System.Attribute("ID").Value), System.Attribute("Name").Value, Convert.ToDouble(System.Attribute("Security").Value))).ToList();
+                                select new SolarSystem(Convert.ToInt64(System.Attribute("ID").Value), System.Attribute("Name").Value, Convert.ToDouble(System.Attribute("Security").Value), Convert.ToInt64(System.Attribute("FactionID").Value))).ToList();
                     }
                 }
                 return _All;
