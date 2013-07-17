@@ -208,32 +208,14 @@ namespace EveComFramework.Cargo
 
         bool Load(object[] Params)
         {
-            if (MyShip.CargoBay == null)
-            {
-                EVEFrame.Log("Open Inventory");
-                Command.OpenInventory.Execute();
-                return false;
-            }
-            //if (Session.InStation)
-            //{
-            //    if (Station.CorpHangars != null)
-            //    {
-            //        if (!Station.CorpHangars.Expanded)
-            //        {
-            //            Station.CorpHangars.Expand();
-            //            return false;
-            //        }
-            //    }
-            //}
-
             if (!CurrentCargoAction.Target().IsPrimed)
             {
-                CurrentCargoAction.Target().MakeActive();
+                CurrentCargoAction.Target().Prime();
                 return false;
             }
             if (!CurrentCargoAction.Source().IsPrimed)
             {
-                CurrentCargoAction.Source().MakeActive();
+                CurrentCargoAction.Source().Prime();
                 return false;
             }
             Log.Log("|oLoading");
@@ -271,32 +253,14 @@ namespace EveComFramework.Cargo
 
         bool Unload(object[] Params)
         {
-            if (MyShip.CargoBay == null)
-            {
-                EVEFrame.Log("Open Inventory");
-                Command.OpenInventory.Execute();
-                return false;
-            }
-            //if (Session.InStation)
-            //{
-            //    if (Station.CorpHangars != null)
-            //    {
-            //        if (!Station.CorpHangars.Expanded)
-            //        {
-            //            Station.CorpHangars.Expand();
-            //            return false;
-            //        }
-            //    }
-            //}
-
             if (!CurrentCargoAction.Target().IsPrimed)
             {
-                CurrentCargoAction.Target().MakeActive();
+                CurrentCargoAction.Target().Prime();
                 return false;
             }
             if (!CurrentCargoAction.Source().IsPrimed)
             {
-                CurrentCargoAction.Source().MakeActive();
+                CurrentCargoAction.Source().Prime();
                 return false;
             }
             Log.Log("|oUnloading");
