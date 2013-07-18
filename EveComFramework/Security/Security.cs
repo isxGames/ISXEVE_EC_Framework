@@ -478,21 +478,6 @@ namespace EveComFramework.Security
             if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
 
             AutoModule.AutoModule.Instance.Decloak = false;
-            if (Trigger == FleeTrigger.NeutralStanding)
-            {
-                EVEFrame.Log(Hostile.Name);
-                EVEFrame.Log(Hostile.ToAlliance.FromAlliance.ToString());
-                EVEFrame.Log(Hostile.ToAlliance.FromCorp.ToString());
-                EVEFrame.Log(Hostile.ToAlliance.FromChar.ToString());
-                EVEFrame.Log(Hostile.ToCorp.FromAlliance.ToString());
-                EVEFrame.Log(Hostile.ToCorp.FromCorp.ToString());
-                EVEFrame.Log(Hostile.ToCorp.FromChar.ToString());
-                EVEFrame.Log(Hostile.ToChar.FromAlliance.ToString());
-                EVEFrame.Log(Hostile.ToChar.FromCorp.ToString());
-                EVEFrame.Log(Hostile.ToChar.FromChar.ToString());
-                EVEFrame.Log(Hostile.CorpID.ToString());
-                EVEFrame.Log(Hostile.AllianceID.ToString());
-            }
             if (SafeTrigger() != FleeTrigger.None) return false;
             QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
             QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
@@ -579,7 +564,6 @@ namespace EveComFramework.Security
                 return true;
             }
 
-            EVEFrame.Log("TEST FOR DRAVEN  -  After security clear, decloak on: " + Decloak.ToString());
             AutoModule.AutoModule.Instance.Decloak = Decloak;
             if (ClearAlert == null)
             {

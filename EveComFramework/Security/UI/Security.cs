@@ -59,7 +59,7 @@ namespace EveComFramework.Security.UI
                 switch (i.Text)
                 {
                     case "In a pod":
-                        if (Config.Triggers.Contains(FleeTrigger.NegativeStanding))
+                        if (Config.Triggers.Contains(FleeTrigger.Pod))
                         {
                             i.Checked = true;
                         }
