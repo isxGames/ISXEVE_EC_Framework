@@ -330,7 +330,14 @@ namespace EveComFramework.AutoModule
 
             #endregion
 
-            if (MyShip.ToEntity.Mode == EntityMode.Warping) return false;
+            if (MyShip.ToEntity.Mode == EntityMode.Warping)
+            {
+                if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    return false;
+                }
+            }
 
             #region Propulsion Modules
 
