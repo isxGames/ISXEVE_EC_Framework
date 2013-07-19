@@ -162,7 +162,8 @@ namespace EveComFramework.AutoModule
                     !Decloak)
                 {
                     if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                        MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline) == 0)
+                        MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline) == 0 &&
+                        !Entity.TargetedBy.Any())
                     {
                         MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                         return false;
@@ -335,8 +336,8 @@ namespace EveComFramework.AutoModule
                 if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
-                    return false;
                 }
+                return false;
             }
 
             #region Propulsion Modules
