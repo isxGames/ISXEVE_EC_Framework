@@ -81,6 +81,8 @@
   <Target Name="Dark Corpus Harbinger" />
   <Target Name="Blood Archbishop" />
   <Target Name="Blood Harbinger" />
+  <Target Name="Drone Energy Neutralizer Sentry" />
+  <Target Name="Drone Defense Vampire Battery" />
   <!-- ECM -->
   <Target Name="Dread Guristas Saboteur" />
   <Target Name="Dread Guristas Despoiler" />
@@ -303,4 +305,9 @@
   <Target Name="Serpentis Vice Admiral" />
   <Target Name="Shadow Serpentis Flotilla Admiral" />
   <Target Name="Shadow Serpentis Vice Admiral" />
+  <Target Name="Drone Light Missile Battery" />
+  <Target Name="Tower Sentry Drone III" />
+  <Target Name="Tower Sentry Drone II" />
+  <Target Name="Drone Heavy Missiles Battery" />
+  <Target Name="Drone Wall Sentry Gun" />
 </Targets>
