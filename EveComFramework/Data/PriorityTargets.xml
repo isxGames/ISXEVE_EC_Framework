@@ -83,6 +83,8 @@
   <Target Name="Blood Harbinger" />
   <Target Name="Drone Energy Neutralizer Sentry" />
   <Target Name="Drone Defense Vampire Battery" />
+  <Target Name="Lookout Tower" />
+  <Target Name="Lookout Sentry" />
   <!-- ECM -->
   <Target Name="Dread Guristas Saboteur" />
   <Target Name="Dread Guristas Despoiler" />
