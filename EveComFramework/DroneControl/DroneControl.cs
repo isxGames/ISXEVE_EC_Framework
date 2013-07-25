@@ -249,7 +249,7 @@ namespace EveComFramework.DroneControl
                 Busy.SetDone("DroneControl");
             }
 
-            if (Rats.TargetList.Count == 0)
+            if (!Rats.TargetList.Any(a => a.Distance <= Me.DroneControlDistance))
             {
                 WaitFor(5, () => Rats.TargetList.Count > 0);
                 QueueState(CombatCheck);
@@ -397,7 +397,7 @@ namespace EveComFramework.DroneControl
 
         bool CombatCheck(object[] args)
         {
-            if (Rats.TargetList.Count > 0)
+            if (Rats.TargetList.Any(a => a.Distance <= Me.DroneControlDistance))
             {
                 QueueState(Combat);
             }
