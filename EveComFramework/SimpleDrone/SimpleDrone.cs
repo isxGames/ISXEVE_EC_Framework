@@ -13,8 +13,9 @@ namespace EveComFramework.SimpleDrone
 
     public class LocalSettings : EveComFramework.Core.Settings
     {
-        public bool ShortRangeClear = true;
-        public bool LongRangeClear = false;
+        public bool ShortRange = true;
+        public bool ShortRangeFrigate = false;
+        public bool LongRange = false;
         public bool Sentry = false;
         public bool Fighter = false;
         public bool PrivateTargets = true;
@@ -90,6 +91,13 @@ namespace EveComFramework.SimpleDrone
         Entity ActiveTarget;
         Dictionary<Entity, DateTime> TargetCooldown = new Dictionary<Entity, DateTime>();
         bool OutOfTargets = false;
+        Dictionary<Drone, DateTime> NextDroneCommand = new Dictionary<Drone, DateTime>();
+        bool DroneReady(Drone drone)
+        {
+            if (!NextDroneCommand.ContainsKey(drone)) return true;
+            if (NextDroneCommand[drone] > DateTime.Now) return true;
+            return false;
+        }
 
         bool Control(object[] Params)
         {
@@ -106,7 +114,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Escape for no drone modes selected
-            if (!Config.ShortRangeClear && !Config.LongRangeClear && !Config.Sentry)
+            if (!Config.ShortRange && !Config.LongRange && !Config.Sentry)
             {
                 return false;
             }
@@ -116,8 +124,8 @@ namespace EveComFramework.SimpleDrone
             #region ActiveTarget selection
 
             Double MaxRange = 0;
-            if (Config.ShortRangeClear) MaxRange = 20000;
-            if (Config.LongRangeClear) MaxRange = Me.DroneControlDistance;
+            if (Config.ShortRange) MaxRange = 20000;
+            if (Config.LongRange) MaxRange = Me.DroneControlDistance;
 
             if (WarpScrambling != null)
             {
@@ -207,6 +215,113 @@ namespace EveComFramework.SimpleDrone
             OutOfTargets = true;
 
             #endregion
+
+            // Done with target selection and lock management.  If we get this far and nothing is getting ready to be available, recall drones
+            if (!Rats.LockedAndLockingTargetList.Any() && Drone.AllInSpace.Any(a => DroneReady(a)))
+            {
+                Drone.AllInSpace.Where(a => DroneReady(a)).ReturnToDroneBay();
+                Drone.AllInSpace.ForEach(a => { NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(2)); });
+                return false;
+            }
+
+            // Make sure ActiveTarget is locked.  If so, make sure it's the active target, if not, return.
+            if (ActiveTarget.LockedTarget)
+            {
+                if (!ActiveTarget.IsActiveTarget)
+                {
+                    ActiveTarget.MakeActive();
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+            // Handle ShortRange
+            if (Config.ShortRange && ActiveTarget.Distance < 20000)
+            {
+                // If only doing short range frigates
+                if (Config.ShortRangeFrigate)
+                {
+                    // Make sure target is a frigate
+                    if (Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
+                    {
+                        // Recall fighters and sentries
+                        if (Drone.AllInSpace.Any(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && (b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                        {
+                            foreach (Drone d in Drone.AllInSpace.Where(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && (b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                            {
+                                d.ReturnToDroneBay();
+                                NextDroneCommand.AddOrUpdate(d, DateTime.Now.AddSeconds(2));
+                            }
+                            return false;
+                        }
+                        // Send drones to attack
+                        else if (Drone.AllInSpace.Any(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                        {
+                            foreach (Drone d in Drone.AllInSpace.Where(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                            {
+                                d.Attack();
+                                NextDroneCommand.AddOrUpdate(d, DateTime.Now.AddSeconds(1));
+                            }
+                            return false;
+                        }
+                        // Launch drones
+                        if (Drone.AllInSpace.Count() < Me.MaxActiveDrones
+                            && Drone.AllInBay.Any(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                        {
+                            int capacity = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                            foreach (Drone d in Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                            {
+                                d.Launch();
+                                NextDroneCommand.AddOrUpdate(d, DateTime.Now.AddSeconds(1));
+                                capacity--;
+                                if (capacity == 0) return false;
+                            }
+                            return false;
+                        }
+                    }
+                }
+                else
+                {
+                    // Recall fighters and sentries
+                    if (Drone.AllInSpace.Any(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && (b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                    {
+                        foreach (Drone d in Drone.AllInSpace.Where(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && (b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                        {
+                            d.ReturnToDroneBay();
+                            NextDroneCommand.AddOrUpdate(d, DateTime.Now.AddSeconds(2));
+                        }
+                        return false;
+                    }
+                    // Send drones to attack
+                    else if (Drone.AllInSpace.Any(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                    {
+                        foreach (Drone d in Drone.AllInSpace.Where(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                        {
+                            d.Attack();
+                            NextDroneCommand.AddOrUpdate(d, DateTime.Now.AddSeconds(1));
+                        }
+                        return false;
+                    }
+                    // Launch drones
+                    if (Drone.AllInSpace.Count() < Me.MaxActiveDrones
+                        && Drone.AllInBay.Any(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                    {
+                        int capacity = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                        foreach (Drone d in Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && !(b.Group == "Fighters" || b.Group == "Sentry Drones"))))
+                        {
+                            d.Launch();
+                            NextDroneCommand.AddOrUpdate(d, DateTime.Now.AddSeconds(1));
+                            capacity--;
+                            if (capacity == 0) return false;
+                        }
+                        return false;
+                    }
+                }
+            }
+
 
             return false;
         }
