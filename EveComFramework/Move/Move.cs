@@ -710,7 +710,7 @@ namespace EveComFramework.Move
 
         private UndockWarp() : base()
         {
-
+            DefaultFrequency = 200;
         }
 
         #endregion
@@ -759,7 +759,7 @@ namespace EveComFramework.Move
             if (Session.InSpace)
             {
                 Bookmark undock = Bookmark.All.FirstOrDefault(a => a.Title.Contains(Config.Substring) && a.LocationID == Session.SolarSystemID && a.Distance < 2000000);
-                if (undock != null) Move.Instance.Bookmark(undock);
+                if (undock != null) undock.WarpTo(0);
                 QueueState(WaitStation);
                 return true;
             }
