@@ -132,6 +132,8 @@ namespace EveComFramework.AutoModule
                 return false;
             }
 
+            if (Move.UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
+
             #region Cloaks
 
             if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsOnline) > 0 &&
@@ -436,6 +438,9 @@ namespace EveComFramework.AutoModule
             {
                 return false;
             }
+
+            if (Move.UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
+
             if (CurrentSystem != Session.SolarSystemID)
             {
                 Reset = true;
