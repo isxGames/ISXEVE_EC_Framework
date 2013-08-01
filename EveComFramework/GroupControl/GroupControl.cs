@@ -348,6 +348,7 @@ namespace EveComFramework.GroupControl
 
         public void RelayAll(string Command , params string[] Args)
         {
+            EVEFrame.Log("BLAH");
             string msg = "relay \"all other\" Event[UpdateGroupControl]:Execute[" + Command;
             if (Args != null)
             {
@@ -536,8 +537,8 @@ namespace EveComFramework.GroupControl
                             Log.Log("|oInviting fleet member");
                             Log.Log(" |-g{0}", ToInvite.Name);
                             Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
+                            return false;
                         }
-                        return false;
                     }
 
                     //who should be squad leader
