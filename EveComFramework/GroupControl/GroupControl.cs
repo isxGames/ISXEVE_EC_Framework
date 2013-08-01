@@ -102,6 +102,12 @@ namespace EveComFramework.GroupControl
         {
             try
             {
+                string msg = "";
+                foreach (string ar in args.Args)
+                {
+                    msg = msg + ar + " : ";
+                }
+                EVEFrame.Log(msg);
                 switch (args.Args[0])
                 {
                     case "active":
