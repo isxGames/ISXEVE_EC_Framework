@@ -476,8 +476,6 @@ namespace EveComFramework.GroupControl
             FinishedCycle = false;
             if (CurrentGroup != null)
             {
-                try
-                {
                     //check for group members who haven't checked it, keep waiting if there are
                     RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
                     RelayAll("available", Self.CharacterName, Self.Available.ToString());
@@ -585,9 +583,9 @@ namespace EveComFramework.GroupControl
                                 }
 
                                 //are there invites to do?
-                                if (CurrentGroup.ActiveMembers.Any(a => !a.InFleet && a.Active && a.Available))
+                                Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
+                                if (ToInvite != null)
                                 {
-                                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
                                     Log.Log("|oInviting fleet member");
                                     Log.Log(" |-g{0}", ToInvite.Name);
                                     Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
@@ -611,12 +609,6 @@ namespace EveComFramework.GroupControl
 
                     FinishedCycle = true;
                     return false;
-                }
-                catch (Exception e)
-                {
-                    Log.Log("Exception on Groupcontrol.Organize : " + e.Message);
-                    return false;
-                }
             }
             else
             {
