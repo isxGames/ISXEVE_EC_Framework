@@ -353,7 +353,7 @@ namespace EveComFramework.GroupControl
             {
                 foreach (string arg in Args)
                 {
-                    msg = "\"" + msg + "\"," + arg;
+                    msg = msg + ",\"" + arg + "\"";
                 }            
             }
             msg = msg + "]";
