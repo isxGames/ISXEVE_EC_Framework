@@ -102,12 +102,6 @@ namespace EveComFramework.GroupControl
         {
             try
             {
-                string msg = "";
-                foreach (string ar in args.Args)
-                {
-                    msg = msg + ar + " : ";
-                }
-                EVEFrame.Log(msg);
                 switch (args.Args[0])
                 {
                     case "active":
@@ -348,7 +342,6 @@ namespace EveComFramework.GroupControl
 
         public void RelayAll(string Command , params string[] Args)
         {
-            EVEFrame.Log("BLAH");
             string msg = "relay \"all other\" Event[UpdateGroupControl]:Execute[" + Command;
             if (Args != null)
             {
@@ -358,7 +351,6 @@ namespace EveComFramework.GroupControl
                 }            
             }
             msg = msg + "]";
-            EVEFrame.Log(msg);
             LavishScriptAPI.LavishScript.ExecuteCommand(msg);
         }
 
