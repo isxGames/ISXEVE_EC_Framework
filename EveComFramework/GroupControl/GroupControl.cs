@@ -357,6 +357,7 @@ namespace EveComFramework.GroupControl
                 }            
             }
             msg = msg + "]";
+            EVEFrame.Log(msg);
             LavishScriptAPI.LavishScript.ExecuteCommand(msg);
         }
 
