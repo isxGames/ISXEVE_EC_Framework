@@ -89,7 +89,8 @@ namespace EveComFramework.GroupControl
             : base()
         {
             DefaultFrequency = 2000;
-            LavishScript.Commands.AddCommand("UpdateGroupControl", UpdateGroupControl);
+            LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateGroupControl");
+            LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateGroupControl", UpdateGroupControl);
             QueueState(InitializeSelf);
         }
         
@@ -97,158 +98,158 @@ namespace EveComFramework.GroupControl
 
         #region LSCommands
 
-        //void UpdateGroupControl(object sender, LavishScriptAPI.LSEventArgs args)
-        //{
-        //    try
-        //    {
-        //        switch (args[0])
-        //        {
-        //            case "active":
-        //                if (CurrentGroup != null)
-        //                {
-        //                    ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[1]);
-        //                    if (activeMember != null)
-        //                    {
-        //                        if (!activeMember.Active)
-        //                        {
-        //                            EVEFrame.Log(String.Format("{0} is now active", args[1]));
-        //                            activeMember.Active = true;
-        //                        }
-        //                        if (activeMember.LeadershipValue != Convert.ToInt32(args[2]))
-        //                        {
-        //                            activeMember.LeadershipValue = Convert.ToInt32(args[2]);
-        //                            EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[1], args[2]));
-        //                        }
-        //                        if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[3]))
-        //                        {
-        //                            activeMember.Role = (Role)Enum.Parse(typeof(Role), args[3]);
-        //                            EVEFrame.Log(String.Format("New Role for {0}, {1}", args[1], args[3]));
-        //                        }
-        //                    }
-        //                }
-        //                break;
-        //            case "available":
-        //                if (CurrentGroup != null)
-        //                {
-        //                    ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[1]);
-        //                    if (availableMember != null)
-        //                    {
-        //                        if (availableMember.Available != Convert.ToBoolean(args[2]))
-        //                        {
-        //                            availableMember.Available = Convert.ToBoolean(args[2]);
-        //                            EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}", args[1], args[2]));
-        //                        }
-        //                    }
-        //                }
-        //                break;
-        //            case "joinedfleet":
-        //                if (CurrentGroup != null)
-        //                {
-        //                    ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[1]);
-        //                    if (joinedFleet != null)
-        //                    {
-        //                        if (!joinedFleet.InFleet)
-        //                        {
-        //                            EVEFrame.Log(String.Format("{0} joined a fleet", args[1]));
-        //                            joinedFleet.InFleet = true;
-        //                        }
-        //                    }
-        //                }
-        //                break;
-        //            case "reloadConfig":
-        //                LoadConfig();
-        //                break;
-        //            case "forceupdate":
-        //                if (Self.CharacterName != null)
-        //                {
-        //                    RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
-        //                    RelayAll("available", Self.CharacterName, Self.Available.ToString());
-        //                    if (Self.InFleet)
-        //                    {
-        //                        RelayAll("joinedfleet", Self.CharacterName);
-        //                    }
-        //                }
-        //                break;
-
-        //        }
-        //    }
-        //    catch { }
-        //}
-
-        public int UpdateGroupControl(string[] args)
-        {            
-            switch (args[1])
+        void UpdateGroupControl(object sender, LavishScriptAPI.LSEventArgs args)
+        {
+            try
             {
-                case "active":
-                    if (CurrentGroup != null)
-                    {
-                        ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-                        if (activeMember != null)
+                switch (args.Args[0])
+                {
+                    case "active":
+                        if (CurrentGroup != null)
                         {
-                            if (!activeMember.Active)
+                            ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args.Args[1]);
+                            if (activeMember != null)
                             {
-                                EVEFrame.Log(String.Format("{0} is now active", args[2]));
-                                activeMember.Active = true;
-                            }
-                            if (activeMember.LeadershipValue != Convert.ToInt32(args[3]))
-                            {
-                                activeMember.LeadershipValue = Convert.ToInt32(args[3]);
-                                EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[2], args[3]));
-                            }
-                            if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[4]))
-                            {
-                                activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
-                                EVEFrame.Log(String.Format("New Role for {0}, {1}", args[2], args[4]));
-                            }                            
-                        }
-                    }
-                    break;
-                case "available":
-                    if (CurrentGroup != null)
-                    {
-                        ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-                        if (availableMember != null)
-                        {
-                            if (availableMember.Available != Convert.ToBoolean(args[3]))
-                            {
-                                availableMember.Available = Convert.ToBoolean(args[3]);
-                                EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}",args[2],args[3]));
+                                if (!activeMember.Active)
+                                {
+                                    EVEFrame.Log(String.Format("{0} is now active", args.Args[1]));
+                                    activeMember.Active = true;
+                                }
+                                if (activeMember.LeadershipValue != Convert.ToInt32(args.Args[2]))
+                                {
+                                    activeMember.LeadershipValue = Convert.ToInt32(args.Args[2]);
+                                    EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args.Args[1], args.Args[2]));
+                                }
+                                if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args.Args[3]))
+                                {
+                                    activeMember.Role = (Role)Enum.Parse(typeof(Role), args.Args[3]);
+                                    EVEFrame.Log(String.Format("New Role for {0}, {1}", args.Args[1], args.Args[3]));
+                                }
                             }
                         }
-                    }
-                    break;
-                case "joinedfleet":
-                    if (CurrentGroup != null)
-                    {
-                        ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-                        if (joinedFleet != null)
+                        break;
+                    case "available":
+                        if (CurrentGroup != null)
                         {
-                            if (!joinedFleet.InFleet)
+                            ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args.Args[1]);
+                            if (availableMember != null)
                             {
-                                EVEFrame.Log(String.Format("{0} joined a fleet", args[2]));
-                                joinedFleet.InFleet = true;
+                                if (availableMember.Available != Convert.ToBoolean(args.Args[2]))
+                                {
+                                    availableMember.Available = Convert.ToBoolean(args.Args[2]);
+                                    EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}", args.Args[1], args.Args[2]));
+                                }
                             }
                         }
-                    }
-                    break;
-                case "reloadConfig":
-                    LoadConfig();
-                    break;
-                case "forceupdate":
-                    if (Self.CharacterName != null)
-                    {
-                        RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
-                        RelayAll("available", Self.CharacterName, Self.Available.ToString());
-                        if (Self.InFleet)
+                        break;
+                    case "joinedfleet":
+                        if (CurrentGroup != null)
                         {
-                            RelayAll("joinedfleet", Self.CharacterName);
+                            ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args.Args[1]);
+                            if (joinedFleet != null)
+                            {
+                                if (!joinedFleet.InFleet)
+                                {
+                                    EVEFrame.Log(String.Format("{0} joined a fleet", args.Args[1]));
+                                    joinedFleet.InFleet = true;
+                                }
+                            }
                         }
-                    }
-                    break;
+                        break;
+                    case "reloadConfig":
+                        LoadConfig();
+                        break;
+                    case "forceupdate":
+                        if (Self.CharacterName != null)
+                        {
+                            RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
+                            RelayAll("available", Self.CharacterName, Self.Available.ToString());
+                            if (Self.InFleet)
+                            {
+                                RelayAll("joinedfleet", Self.CharacterName);
+                            }
+                        }
+                        break;
 
+                }
             }
-            return 0;
+            catch { }
         }
+
+        //public int UpdateGroupControl(string[] args)
+        //{            
+        //    switch (args[1])
+        //    {
+        //        case "active":
+        //            if (CurrentGroup != null)
+        //            {
+        //                ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
+        //                if (activeMember != null)
+        //                {
+        //                    if (!activeMember.Active)
+        //                    {
+        //                        EVEFrame.Log(String.Format("{0} is now active", args[2]));
+        //                        activeMember.Active = true;
+        //                    }
+        //                    if (activeMember.LeadershipValue != Convert.ToInt32(args[3]))
+        //                    {
+        //                        activeMember.LeadershipValue = Convert.ToInt32(args[3]);
+        //                        EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[2], args[3]));
+        //                    }
+        //                    if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[4]))
+        //                    {
+        //                        activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
+        //                        EVEFrame.Log(String.Format("New Role for {0}, {1}", args[2], args[4]));
+        //                    }                            
+        //                }
+        //            }
+        //            break;
+        //        case "available":
+        //            if (CurrentGroup != null)
+        //            {
+        //                ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
+        //                if (availableMember != null)
+        //                {
+        //                    if (availableMember.Available != Convert.ToBoolean(args[3]))
+        //                    {
+        //                        availableMember.Available = Convert.ToBoolean(args[3]);
+        //                        EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}",args[2],args[3]));
+        //                    }
+        //                }
+        //            }
+        //            break;
+        //        case "joinedfleet":
+        //            if (CurrentGroup != null)
+        //            {
+        //                ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
+        //                if (joinedFleet != null)
+        //                {
+        //                    if (!joinedFleet.InFleet)
+        //                    {
+        //                        EVEFrame.Log(String.Format("{0} joined a fleet", args[2]));
+        //                        joinedFleet.InFleet = true;
+        //                    }
+        //                }
+        //            }
+        //            break;
+        //        case "reloadConfig":
+        //            LoadConfig();
+        //            break;
+        //        case "forceupdate":
+        //            if (Self.CharacterName != null)
+        //            {
+        //                RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
+        //                RelayAll("available", Self.CharacterName, Self.Available.ToString());
+        //                if (Self.InFleet)
+        //                {
+        //                    RelayAll("joinedfleet", Self.CharacterName);
+        //                }
+        //            }
+        //            break;
+
+        //    }
+        //    return 0;
+        //}
 
         #endregion
 
@@ -341,14 +342,15 @@ namespace EveComFramework.GroupControl
 
         public void RelayAll(string Command , params string[] Args)
         {
-            string msg = "relay \"all other\" -noredirect UpdateGroupControl \"" + Command + "\" ";
+            string msg = "relay \"all other\" Event[UpdateGroupControl]:Execute[" + Command;
             if (Args != null)
             {
                 foreach (string arg in Args)
                 {
-                    msg = msg + " \"" + arg + "\"";
+                    msg = msg + "," + arg;
                 }            
             }
+            msg = msg + "]";
             LavishScriptAPI.LavishScript.ExecuteCommand(msg);
         }
 
@@ -521,18 +523,18 @@ namespace EveComFramework.GroupControl
                     if (Fleet.Members.Count == 1)
                     {
                         //hand out invites!
-                        Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet && b.Active && b.Available));
+                        Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Active && b.Available));
                         if (ToInvite != null)
                         {
                             Log.Log("|oInviting fleet member");
                             Log.Log(" |-g{0}", ToInvite.Name);
-                            Fleet.Invite(Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet)), Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
+                            Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
                         }
                         return false;
                     }
 
                     //who should be squad leader
-                    ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a => a.Active).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.CharacterName).FirstOrDefault(a => a.Active && a.Available && a.InFleet);
+                    ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a => a.Active).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.CharacterName).FirstOrDefault(a => a.Active && a.Available && Fleet.Members.Any(fleetmember => fleetmember.Name == a.CharacterName));
                     if (newLeader != null)
                     {
                         if (Leader != newLeader)
@@ -585,7 +587,7 @@ namespace EveComFramework.GroupControl
                                 //are there invites to do?
                                 if (CurrentGroup.ActiveMembers.Any(a => !a.InFleet && a.Active && a.Available))
                                 {
-                                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && !b.InFleet && b.Available && b.Active));
+                                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
                                     Log.Log("|oInviting fleet member");
                                     Log.Log(" |-g{0}", ToInvite.Name);
                                     Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
@@ -602,6 +604,11 @@ namespace EveComFramework.GroupControl
                     else
                     {
                     }
+
+                    // Don't mark cycle finished if there are more pilots to invite
+                    Pilot PendingInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
+                    if (PendingInvite != null) return false;
+
                     FinishedCycle = true;
                     return false;
                 }
