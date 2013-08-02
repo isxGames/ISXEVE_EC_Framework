@@ -597,12 +597,22 @@ namespace EveComFramework.GroupControl
                                 ActiveMember booster = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.Role == Role.Booster);
                                 if (booster != null)
                                 {
-                                    if (Fleet.Members.Any(a => a.Name == booster.CharacterName) && (fleetbooster == null || fleetbooster.Name != booster.CharacterName))
+                                    if (Fleet.Members.Any(a => a.Name == booster.CharacterName))
                                     {
-                                        Log.Log("|oSetting squad booster");
-                                        Log.Log(" |-g{0}", booster.CharacterName);
-                                        Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName).SetBooster(BoosterRole.SquadBooster);
-                                        return false;
+                                        if (fleetbooster == null)
+                                        {
+                                            Log.Log("|oSetting squad booster");
+                                            Log.Log(" |-g{0}", booster.CharacterName);
+                                            Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName).SetBooster(BoosterRole.SquadBooster);
+                                            return false;
+                                        }
+                                        if (fleetbooster.Name != booster.CharacterName)
+                                        {
+                                            Log.Log("|oRevoking squad booster");
+                                            Log.Log(" |-g{0}", booster.CharacterName);
+                                            Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName).SetBooster(BoosterRole.NonBooster);
+                                            return false;
+                                        }
                                     }
                                 }
                             }
