@@ -458,7 +458,7 @@ namespace EveComFramework.GroupControl
                 }
                 if (Self.Role == Role.Booster)
                 {
-                    Self.LeadershipValue += 10000;
+                    Self.LeadershipValue = -1;
                 }
                 EVEFrame.Log("My computed leadership value is " + Self.LeadershipValue);
                 RelayAll("forceupdate", "");
@@ -590,6 +590,20 @@ namespace EveComFramework.GroupControl
                                     Log.Log(" |-g{0}", ToInvite.Name);
                                     Fleet.Invite(ToInvite, Fleet.Wings[0], Fleet.Wings[0].Squads[0], FleetRole.SquadMember);
                                     return false;
+                                }
+
+                                //Is there a booster?
+                                FleetMember fleetbooster = Fleet.Wings[0].Squads[0].Members.FirstOrDefault(a => a.RoleBooster == BoosterRole.SquadBooster);
+                                ActiveMember booster = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.Role == Role.Booster);
+                                if (booster != null)
+                                {
+                                    if (Fleet.Members.Any(a => a.Name == booster.CharacterName) && (fleetbooster == null || fleetbooster.Name != booster.CharacterName))
+                                    {
+                                        Log.Log("|oSetting squad booster");
+                                        Log.Log(" |-g{0}", booster.CharacterName);
+                                        Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName).SetBooster(BoosterRole.SquadBooster);
+                                        return false;
+                                    }
                                 }
                             }
                             else
