@@ -483,7 +483,7 @@ namespace EveComFramework.GroupControl
                     if (!Session.InFleet)
                     {
                         //i'm not in a fleet, should i wait for an invite or create a fleet?
-                        if (CurrentGroup.ActiveMembers.Count(a => a.InFleet) < 1)
+                        if (!CurrentGroup.ActiveMembers.Any(a => a.InFleet) && !CurrentGroup.ActiveMembers.Any(a => a.CharacterName == Me.Name && a.Role == Role.Booster))
                         {
                             //nobody else is in a fleet, i can make one
                             Log.Log("|oCreating fleet");
