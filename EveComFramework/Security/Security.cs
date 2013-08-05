@@ -425,18 +425,21 @@ namespace EveComFramework.Security
                 case FleeTrigger.NegativeStanding:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|r{0} is negative standing", Hostile.Name);
                     return true;
                 case FleeTrigger.NeutralStanding:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|r{0} is neutral standing", Hostile.Name);
                     return true;
                 case FleeTrigger.Paranoid:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|r{0} is neutral to me", Hostile.Name);
                     return true;
@@ -444,23 +447,27 @@ namespace EveComFramework.Security
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Targeted);
                     Log.Log("|r{0} is targeting me", Hostile.Name);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     return true;
                 case FleeTrigger.CapacitorLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.CapacitorLow);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
                     return true;
                 case FleeTrigger.ShieldLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.ShieldLow);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
                     return true;
                 case FleeTrigger.ArmorLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.ArmorLow);
+                    DroneControl.DroneControl.Instance.Clear();
                     if (Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
                     return true;
