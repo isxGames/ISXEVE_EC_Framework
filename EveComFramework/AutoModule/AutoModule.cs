@@ -343,6 +343,8 @@ namespace EveComFramework.AutoModule
 
             #region Propulsion Modules
 
+            EVEFrame.Log(MyShip.ToEntity.Mode.ToString());
+
             if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsOnline) > 0 &&
                 Config.PropulsionModules)
             {
