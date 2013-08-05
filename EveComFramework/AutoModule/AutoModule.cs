@@ -343,8 +343,6 @@ namespace EveComFramework.AutoModule
 
             #region Propulsion Modules
 
-            EVEFrame.Log(MyShip.ToEntity.Mode.ToString());
-
             if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsOnline) > 0 &&
                 Config.PropulsionModules)
             {
@@ -357,8 +355,9 @@ namespace EveComFramework.AutoModule
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                 }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules || MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned) &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
+                    !Config.PropulsionModulesAlwaysOn)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
