@@ -74,6 +74,8 @@ namespace EveComFramework.Core
         /// Item Volumes, keyed by Types
         /// </summary>
         public Dictionary<string, double> ItemVolume { get { return GlobalConfig.ItemVolume; } }
+        public Double ArmorPercent = 1;
+        public Double HullPercent = 1;
 
         #endregion
 
@@ -96,6 +98,11 @@ namespace EveComFramework.Core
             {
                 Station.ItemHangar.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
                 GlobalConfig.Save();
+            }
+            if (Session.InSpace)
+            {
+                ArmorPercent = MyShip.Armor / MyShip.MaxArmor;
+                HullPercent = MyShip.Hull / MyShip.MaxHull;
             }
             return false;
         }
