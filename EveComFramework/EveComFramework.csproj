@@ -64,6 +64,7 @@
     <Compile Include="Core\Busy.cs" />
     <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\Config.cs" />
+    <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\Logger.cs" />
     <Compile Include="Data\DroneType.cs" />
     <Compile Include="Data\NPCClass.cs" />
