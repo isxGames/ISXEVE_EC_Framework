@@ -76,6 +76,7 @@ namespace EveComFramework.Core
         public Dictionary<string, double> ItemVolume { get { return GlobalConfig.ItemVolume; } }
         public Double ArmorPercent = 1;
         public Double HullPercent = 1;
+        public bool DamagedDrones = false;
 
         #endregion
 
@@ -103,6 +104,7 @@ namespace EveComFramework.Core
             {
                 ArmorPercent = MyShip.Armor / MyShip.MaxArmor;
                 HullPercent = MyShip.Hull / MyShip.MaxHull;
+                if (!DamagedDrones) DamagedDrones = Drone.AllInSpace.Any(a => a.ToEntity.ArmorPct != 1 && a.ToEntity.HullPct != 1);
             }
             return false;
         }
