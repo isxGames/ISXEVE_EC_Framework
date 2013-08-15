@@ -28,7 +28,7 @@ namespace EveComFramework.Core
                 if (!Window.All.Any(a => a.Name != null && a.Name == "repairshop"))
                 {
                     Console.Log("|oShip needs to be repaired");
-                    Console.Log("|oRequesting quote");
+                    Console.Log("|oHull: |w{0} |oArmor: |w{1} |oDamaged Drones: |w{2}", Cache.HullPercent, Cache.ArmorPercent, Cache.DamagedDrones);
                     MyShip.ToItem.RepairQuote();
                 }
                 else
