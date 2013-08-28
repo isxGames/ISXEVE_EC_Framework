@@ -481,15 +481,32 @@ namespace EveComFramework.Security
         bool CheckClear(object[] Params)
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
-            int FleeWait = Config.FleeWait * 60000;
-            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
+            int FleeWait = Config.FleeWait;
+            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = 0;
 
             AutoModule.AutoModule.Instance.Decloak = false;
             if (SafeTrigger() != FleeTrigger.None) return false;
-            QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
-            QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
-            QueueState(Resume, FleeWait);
+            Log.Log("|oArea is now safe");
+            Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
+            QueueState(CheckReset);
+            QueueState(Resume);
+
+            AllowResume = DateTime.Now.AddMinutes(FleeWait);
             return true;
+        }
+
+        DateTime AllowResume = DateTime.Now;
+
+        bool CheckReset(object[] Params)
+        {
+            if (AllowResume <= DateTime.Now) return true;
+            if (SafeTrigger() != FleeTrigger.None)
+            {
+                Log.Log("|oNew flee condition");
+                Log.Log(" |-gWaiting for safety");
+                InsertState(CheckClear);
+            }
+            return false;
         }
 
         bool Flee(object[] Params)
