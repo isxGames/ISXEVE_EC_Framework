@@ -957,6 +957,11 @@
             Dictionary of lists of entity IDs for entities currently scrambling a fleet member keyed by fleet member ID
             </summary>
         </member>
+        <member name="F:EveComFramework.Security.Security.NeutingEntities">
+            <summary>
+            Dictionary of lists of entity IDs for entities currently neuting a fleet member keyed by fleet member ID
+            </summary>
+        </member>
         <member name="M:EveComFramework.Security.Security.Enable(System.Boolean)">
             <summary>
             Starts/stops this module
@@ -1006,6 +1011,11 @@
         <member name="P:EveComFramework.Security.Security.ValidScramble">
             <summary>
             Returns an entity that is scrambling or has scrambled a friendly fleet member
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Security.Security.ValidNeuter">
+            <summary>
+            Returns an entity that is neuting or has neuted a friendly fleet member
             </summary>
         </member>
         <member name="P:EveComFramework.Security.SecurityAudio.Instance">

@@ -129,6 +129,10 @@ namespace EveComFramework.Security
         /// Dictionary of lists of entity IDs for entities currently scrambling a fleet member keyed by fleet member ID
         /// </summary>
         public Dictionary<long, List<long>> ScramblingEntities = new Dictionary<long, List<long>>();
+        /// <summary>
+        /// Dictionary of lists of entity IDs for entities currently neuting a fleet member keyed by fleet member ID
+        /// </summary>
+        public Dictionary<long, List<long>> NeutingEntities = new Dictionary<long, List<long>>();
 
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
@@ -242,6 +246,7 @@ namespace EveComFramework.Security
         void RegisterCommands()
         {
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
+            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddNeuter", NeutingEntitiesUpdate);
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -264,6 +269,29 @@ namespace EveComFramework.Security
             }
             catch { }
             
+            return 0;
+        }
+
+        int NeutingEntitiesUpdate(string[] args)
+        {
+            try
+            {
+                if (!NeutingEntities.ContainsKey(long.Parse(args[1])))
+                {
+                    List<long> add = new List<long>();
+                    add.Add(long.Parse(args[2]));
+                    NeutingEntities.Add(long.Parse(args[1]), add);
+                }
+                else
+                {
+                    if (!NeutingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
+                    {
+                        NeutingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
+                    }
+                }
+            }
+            catch { }
+
             return 0;
         }
 
@@ -402,6 +430,40 @@ namespace EveComFramework.Security
             }
         }
 
+        public bool IsScrambling(Entity Check)
+        {
+            if (Session.InFleet)
+            {
+                return ScramblingEntities.Values.Any(a => a.Contains(Check.ID));
+            }
+            return Entity.All.Any(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
+        }
+
+        /// <summary>
+        /// Returns an entity that is neuting or has neuted a friendly fleet member
+        /// </summary>
+        public Entity ValidNeuter
+        {
+            get
+            {
+                if (Session.InFleet)
+                {
+                    List<long> ValidNeuters = NeutingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
+                    return Entity.All.FirstOrDefault(a => ValidNeuters.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
+                }
+                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
+            }
+        }
+
+        public bool IsNeuting(Entity Check)
+        {
+            if (Session.InFleet)
+            {
+                return NeutingEntities.Values.Any(a => a.Contains(Check.ID));
+            }
+            return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
+        }
+
         bool CheckSafe(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
@@ -409,7 +471,13 @@ namespace EveComFramework.Security
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityAddScrambler " + Me.CharID + " " + WarpScrambling.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + Me.CharID + " " + WarpScrambling.ID);
+                return false;
+            }
+            Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing);
+            if (Neuting != null)
+            {
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter " + Me.CharID + " " + Neuting.ID);
                 return false;
             }
 
@@ -481,15 +549,32 @@ namespace EveComFramework.Security
         bool CheckClear(object[] Params)
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
-            int FleeWait = Config.FleeWait * 60000;
-            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = -1;
+            int FleeWait = Config.FleeWait;
+            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = 0;
 
             AutoModule.AutoModule.Instance.Decloak = false;
             if (SafeTrigger() != FleeTrigger.None) return false;
-            QueueState(LogMessage, 1, string.Format("|oArea is now safe"));
-            QueueState(LogMessage, 1, string.Format(" |-gWaiting for |w{0}|-g minutes", FleeWait / 60000));
-            QueueState(Resume, FleeWait);
+            Log.Log("|oArea is now safe");
+            Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
+            QueueState(CheckReset);
+            QueueState(Resume);
+
+            AllowResume = DateTime.Now.AddMinutes(FleeWait);
             return true;
+        }
+
+        DateTime AllowResume = DateTime.Now;
+
+        bool CheckReset(object[] Params)
+        {
+            if (AllowResume <= DateTime.Now) return true;
+            if (SafeTrigger() != FleeTrigger.None)
+            {
+                Log.Log("|oNew flee condition");
+                Log.Log(" |-gWaiting for safety");
+                InsertState(CheckClear);
+            }
+            return false;
         }
 
         bool Flee(object[] Params)
