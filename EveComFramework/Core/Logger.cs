@@ -137,9 +137,9 @@ namespace EveComFramework.Core
                 Console.AppendText(a.ToString());
             }
             Console.AppendText(new string(' ', 1000) + Environment.NewLine);
-            if (Console.Lines.Length > 500)
+            if (Console.Lines.Length > 100)
             {
-                Console.Select(0, Console.GetFirstCharIndexFromLine(Console.Lines.Length - 500));
+                Console.Select(0, Console.GetFirstCharIndexFromLine(Console.Lines.Length - 50));
                 Console.SelectedText = string.Empty;
             }
             Console.SelectionStart = Console.TextLength;
