@@ -13,6 +13,16 @@ using LavishScriptAPI;
 
 namespace EveComFramework.Core
 {
+    [Serializable]
+    public class WindowSettings
+    {
+        public int Width = 390;
+        public int Height = 420;
+        public int X;
+        public int Y;
+        public bool Shrunk = false;
+    }
+
     /// <summary>
     /// This class provides an easy-to-use XML serializer/deserializer to store configuration information to XML files
     /// </summary>
