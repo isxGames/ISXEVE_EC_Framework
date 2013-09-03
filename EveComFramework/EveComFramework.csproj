@@ -64,6 +64,12 @@
     <Compile Include="Core\Busy.cs" />
     <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\Config.cs" />
+    <Compile Include="Core\Configuration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Core\Configuration.Designer.cs">
+      <DependentUpon>Configuration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\Logger.cs" />
     <Compile Include="Data\DroneType.cs" />
@@ -141,6 +147,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AutoModule\UI\AutoModule.resx">
       <DependentUpon>AutoModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Configuration.resx">
+      <DependentUpon>Configuration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DroneControl\UI\DroneControl.resx">
       <DependentUpon>DroneControl.cs</DependentUpon>
