@@ -167,19 +167,23 @@ namespace EveComFramework.SkillTraining
             {
                 CharName = Me.Name;
             }
-            if (!SkillQueue.ServiceStarted)
-            {
-                SkillQueue.StartService();
+            if (!SkillQueue.Ready)
+            {                
                 return false;
             }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
             {
-                if (Config.SkillQueues.ContainsKey(Me.Name))
+                if (SkillToTrain())
                 {
                     if (SpaceInQueue != null)
                     {
                         SpaceInQueue();
                     }
+                    return true;
+                }
+                else
+                {
+                    Log.Log("No skills left to train, add a longer plan");
                     return true;
                 }
             }
@@ -193,18 +197,22 @@ namespace EveComFramework.SkillTraining
             {
                 CharName = Me.Name;
             }
-            if (!SkillQueue.ServiceStarted)
-            {
-                SkillQueue.StartService();
+            if (!SkillQueue.Ready)
+            {               
                 return false;
             }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
             {
-                if (Config.SkillQueues.ContainsKey(Me.Name))
+                if (SkillToTrain())
                 {
                     QueueState(BeginSkillTransaction);
                     QueueState(AddSkillToQueue);
                     QueueState(Monitor);
+                    return true;
+                }
+                else
+                {
+                    Log.Log("No skills left to train, add a longer plan");
                     return true;
                 }
             }
@@ -258,6 +266,33 @@ namespace EveComFramework.SkillTraining
                 InsertState(BeginSkillTransaction);
                 return true;
             }
+        }
+
+        public bool SkillToTrain()
+        {
+            if (Config.SkillQueues.ContainsKey(Me.Name) && SkillQueue.EndOfQueue < Session.Now.AddDays(1))
+            {
+                foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
+                {
+                    //check if the skill is injected
+                    Skill injectedSkill = Skill.All.FirstOrDefault(a => a.Type == stt.Type);
+                    if (injectedSkill != null)
+                    {
+                        //check if we should be training it
+                        if (injectedSkill.SkillLevel < stt.Level)
+                        {
+                            //check if this entry is not already in the queue
+                            if (!SkillQueue.Skills.Any(a => a.ToLevel == stt.Level && a.Skill.Type == stt.Type))
+                            {
+                                //not in the queue, we can train
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+            
         }
         #endregion
     }
