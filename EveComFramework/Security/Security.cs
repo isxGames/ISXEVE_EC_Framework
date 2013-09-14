@@ -750,7 +750,6 @@ namespace EveComFramework.Security
         {
             LavishScriptAPI.LavishScript.Events.RegisterEvent("EVE_LocalChat");
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
-            QueueState(Control);
         }
 
         #endregion
