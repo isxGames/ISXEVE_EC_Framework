@@ -774,6 +774,7 @@ namespace EveComFramework.Security
 
         void NewLocalChat(object sender, LavishScriptAPI.LSEventArgs args)
         {
+            EVEFrame.Log("Triggered");
             if (Config.Local) SpeechQueue.Enqueue("New local chat message");
         }
 
@@ -783,11 +784,13 @@ namespace EveComFramework.Security
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
                 LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
+                QueueState(Control);
             }
             else
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
                 LavishScriptAPI.LavishScript.Events.DetachEventTarget("EVE_LocalChat", NewLocalChat);
+                Clear();
             }
         }
 
@@ -797,6 +800,7 @@ namespace EveComFramework.Security
 
         bool Control(object[] Params)
         {
+            EVEFrame.Log("Control");
             if (Core == null)
             {
                 Core = Security.Instance;

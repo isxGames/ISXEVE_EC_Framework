@@ -448,36 +448,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:EveComFramework.Data.SolarSystem">
-            <summary>
-            This class provides static information about solar systems (without pulling data from Eve)
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.ID">
-            <summary>
-            The solar system's ID
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.Name">
-            <summary>
-            The solar system's Name
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.Security">
-            <summary>
-            The solar system's security level
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
-            <summary>
-            The solar system's FactionID (Only works for High Sec)
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.All">
-            <summary>
-            List of all solar systems
-            </summary>
-        </member>
         <member name="F:EveComFramework.GroupControl.UI.Debug.components">
             <summary>
             Required designer variable.
@@ -1021,6 +991,36 @@
         <member name="P:EveComFramework.Security.SecurityAudio.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Data.SolarSystem">
+            <summary>
+            This class provides static information about solar systems (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.ID">
+            <summary>
+            The solar system's ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.Name">
+            <summary>
+            The solar system's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.Security">
+            <summary>
+            The solar system's security level
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
+            <summary>
+            The solar system's FactionID (Only works for High Sec)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.All">
+            <summary>
+            List of all solar systems
             </summary>
         </member>
     </members>
