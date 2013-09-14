@@ -178,11 +178,11 @@
     <None Include="Resources\action_check.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\DroneTypes.xml" />
-    <Content Include="Data\NPCClasses.xml" />
-    <Content Include="Data\NPCTypes.xml" />
-    <Content Include="Data\PriorityTargets.xml" />
-    <Content Include="Data\SolarSystems.xml" />
+    <EmbeddedResource Include="Data\DroneTypes.xml" />
+    <EmbeddedResource Include="Data\NPCClasses.xml" />
+    <EmbeddedResource Include="Data\NPCTypes.xml" />
+    <EmbeddedResource Include="Data\PriorityTargets.xml" />
+    <EmbeddedResource Include="Data\SolarSystems.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
