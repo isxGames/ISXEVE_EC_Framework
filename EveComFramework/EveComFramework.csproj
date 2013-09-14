@@ -66,11 +66,11 @@
     <Compile Include="Core\Config.cs" />
     <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\Logger.cs" />
-    <Compile Include="DroneControl\Data\DroneType.cs" />
-    <Compile Include="DroneControl\Data\NPCClass.cs" />
-    <Compile Include="DroneControl\Data\NPCTypes.cs" />
-    <Compile Include="DroneControl\Data\PriorityTargets.cs" />
-    <Compile Include="DroneControl\Data\SolarSystem.cs" />
+    <Compile Include="Data\DroneType.cs" />
+    <Compile Include="Data\NPCClass.cs" />
+    <Compile Include="Data\NPCTypes.cs" />
+    <Compile Include="Data\PriorityTargets.cs" />
+    <Compile Include="Data\SolarSystem.cs" />
     <Compile Include="DroneControl\DroneControl.cs" />
     <Compile Include="DroneControl\UI\DroneControl.cs">
       <SubType>Form</SubType>
@@ -172,17 +172,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DroneControl\Data\DroneTypes.xml" />
-    <EmbeddedResource Include="DroneControl\Data\NPCClasses.xml" />
-    <EmbeddedResource Include="DroneControl\Data\NPCTypes.xml" />
-    <EmbeddedResource Include="DroneControl\Data\PriorityTargets.xml" />
-    <EmbeddedResource Include="DroneControl\Data\SolarSystems.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\action_delete.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\action_check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\DroneTypes.xml" />
+    <Content Include="Data\NPCClasses.xml" />
+    <Content Include="Data\NPCTypes.xml" />
+    <Content Include="Data\PriorityTargets.xml" />
+    <Content Include="Data\SolarSystems.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

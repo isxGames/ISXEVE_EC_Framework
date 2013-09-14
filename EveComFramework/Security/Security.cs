@@ -782,13 +782,16 @@ namespace EveComFramework.Security
         {
             if (var)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+                EVEFrame.Log("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("LavishScript:RegisterEvent[EVE_LocalChat]");
                 LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
                 QueueState(Control);
             }
             else
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("Event[EVE_LocalChat]:Unregister");
                 LavishScriptAPI.LavishScript.Events.DetachEventTarget("EVE_LocalChat", NewLocalChat);
                 Clear();
             }
