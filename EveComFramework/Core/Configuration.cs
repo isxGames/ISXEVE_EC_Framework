@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using EveComFramework.AutoModule;
+using EveComFramework.Move;
+using EveComFramework.Optimizer;
 
 namespace EveComFramework.Core
 {
     public partial class Configuration : UserControl
     {
-        AutoModuleSettings AutoModuleConfig;
-
         public Configuration()
         {
             InitializeComponent();
@@ -23,9 +23,19 @@ namespace EveComFramework.Core
         {
             if (!this.DesignMode)
             {
-                AutoModuleConfig = AutoModule.AutoModule.Instance.Config;
+                AutoModule.AutoModule AutoModuleInstance = AutoModule.AutoModule.Instance;
+                AutoModule.AutoModuleSettings AutoModuleConfig = AutoModule.AutoModule.Instance.Config;
+                UndockWarp UndockWarp = UndockWarp.Instance;
+                UndockWarpSettings UndockWarpConfig = UndockWarp.Instance.Config;
+                InstaWarp InstaWarp = InstaWarp.Instance;
+                MoveSettings MoveConfig = EveComFramework.Move.Move.Instance.Config;
+                OptimizerSettings OptimizerConfig = Optimizer.Optimizer.Instance.Config;
+                InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
 
                 #region AutoModule
+
+                checkAutoModule.Checked = AutoModuleConfig.Enabled;
+                checkAutoModule.CheckedChanged += (s, a) => { AutoModuleConfig.Enabled = checkAutoModule.Checked; AutoModuleInstance.Enabled(AutoModuleConfig.Enabled); AutoModuleConfig.Save(); };
 
                 checkShieldBoosters.Checked = AutoModuleConfig.ShieldBoosters;
                 checkShieldBoosters.CheckedChanged += (s, a) => { AutoModuleConfig.ShieldBoosters = checkShieldBoosters.Checked; AutoModuleConfig.Save(); };
@@ -92,11 +102,59 @@ namespace EveComFramework.Core
                 checkAlwaysActive.CheckedChanged += (s, a) => { AutoModuleConfig.PropulsionModulesAlwaysOn = checkAlwaysActive.Checked; AutoModuleConfig.Save(); };
 
                 #endregion
+
+                #region UndockWarp
+
+                checkUndockWarp.Checked = UndockWarpConfig.Enabled;
+                checkUndockWarp.CheckedChanged += (s, a) => { UndockWarpConfig.Enabled = checkUndockWarp.Checked; UndockWarp.Enabled(UndockWarpConfig.Enabled); UndockWarpConfig.Save(); };
+                textUndockWarp.Text = UndockWarpConfig.Substring;
+                textUndockWarp.TextChanged += (s, a) => { UndockWarpConfig.Substring = textUndockWarp.Text; UndockWarpConfig.Save(); };
+
+                #endregion
+
+                #region InstaWarp
+
+                checkInstaWarp.Checked = InstaWarpConfig.Enabled;
+                checkInstaWarp.CheckedChanged += (s, a) => { InstaWarpConfig.Enabled = checkInstaWarp.Checked; InstaWarp.Enabled(InstaWarpConfig.Enabled); InstaWarpConfig.Save(); };
+
+                #endregion
+
+                #region Move
+
+                checkWarpCollision.Checked = MoveConfig.WarpCollisionPrevention;
+                checkWarpCollision.CheckedChanged += (s, a) => { MoveConfig.WarpCollisionPrevention = checkWarpCollision.Checked; MoveConfig.Save(); };
+                numericWarpTrigger.Value = MoveConfig.WarpCollisionTrigger;
+                numericWarpTrigger.ValueChanged += (s, a) => { MoveConfig.WarpCollisionTrigger = numericWarpTrigger.Value; MoveConfig.Save(); };
+                numericWarpOrbit.Value = MoveConfig.WarpCollisionOrbit;
+                numericWarpOrbit.ValueChanged += (s, a) => { MoveConfig.WarpCollisionOrbit = numericWarpOrbit.Value; MoveConfig.Save(); };
+
+                checkApproachCollision.Checked = MoveConfig.ApproachCollisionPrevention;
+                checkApproachCollision.CheckedChanged += (s, a) => { MoveConfig.ApproachCollisionPrevention = checkApproachCollision.Checked; MoveConfig.Save(); };
+                numericApproachTrigger.Value = MoveConfig.ApproachCollisionTrigger;
+                numericApproachTrigger.ValueChanged += (s, a) => { MoveConfig.ApproachCollisionTrigger = numericApproachTrigger.Value; MoveConfig.Save(); };
+                numericApproachOrbit.Value = MoveConfig.ApproachCollisionOrbit;
+                numericApproachOrbit.ValueChanged += (s, a) => { MoveConfig.ApproachCollisionOrbit = numericApproachOrbit.Value; MoveConfig.Save(); };
+
+                checkOrbitCollision.Checked = MoveConfig.OrbitCollisionPrevention;
+                checkOrbitCollision.CheckedChanged += (s, a) => { MoveConfig.OrbitCollisionPrevention = checkOrbitCollision.Checked; MoveConfig.Save(); };
+                numericOrbitTrigger.Value = MoveConfig.OrbitCollisionTrigger;
+                numericOrbitTrigger.ValueChanged += (s, a) => { MoveConfig.OrbitCollisionTrigger = numericOrbitTrigger.Value; MoveConfig.Save(); };
+                numericOrbitOrbit.Value = MoveConfig.OrbitCollisionOrbit;
+                numericOrbitOrbit.ValueChanged += (s, a) => { MoveConfig.OrbitCollisionOrbit = numericOrbitOrbit.Value; MoveConfig.Save(); };
+
+                #endregion
+
+                #region Optimizer
+
+                checkDisable3D.Checked = !OptimizerConfig.Enable3D;
+                checkDisable3D.CheckedChanged += (s, a) => { OptimizerConfig.Enable3D = !checkDisable3D.Checked; OptimizerConfig.Save(); };
+                numericMemoryMax.Value = OptimizerConfig.MaxMemorySize;
+                numericMemoryMax.ValueChanged += (s, a) => { OptimizerConfig.MaxMemorySize = numericMemoryMax.Value; OptimizerConfig.Save(); };
+
+                #endregion
             }
 
         }
-
-
 
     }
 }
