@@ -582,6 +582,7 @@ namespace EveComFramework.Move
         }
 
         bool QueueAutoPilotDeactivation = false;
+        public bool SunMidpoint = false;
         bool AutoPilot(object[] Params)
         {
             if (Route.Path == null || Route.Path[0] == -1 || QueueAutoPilotDeactivation)
@@ -594,6 +595,15 @@ namespace EveComFramework.Move
             if (Session.InSpace)
             {
                 if (UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
+                if (MyShip.ToEntity.Mode == EntityMode.Warping) return false;
+                if (!Entity.All.Any(a => a.GroupID == Group.Sun && a.Distance < 1000000000) && SunMidpoint)
+                {
+                    Log.Log("|oWarping to |-g{0} |w(|y100 km|w)", Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).Name);
+                    Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).WarpTo(100000);
+                    InsertState(AutoPilot);
+                    WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
+                    return true;
+                }
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
                     Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);

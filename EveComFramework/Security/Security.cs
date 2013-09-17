@@ -464,6 +464,37 @@ namespace EveComFramework.Security
             return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
         }
 
+        void ReportTrigger(FleeTrigger reported)
+        {
+            switch (reported)
+            {
+                case FleeTrigger.Pod:
+                    Log.Log("|rIn a pod!");
+                    return;
+                case FleeTrigger.NegativeStanding:
+                    Log.Log("|r{0} is negative standing", Hostile.Name);
+                    return;
+                case FleeTrigger.NeutralStanding:
+                    Log.Log("|r{0} is neutral standing", Hostile.Name);
+                    return;
+                case FleeTrigger.Paranoid:
+                    Log.Log("|r{0} is neutral to me", Hostile.Name);
+                    return;
+                case FleeTrigger.Targeted:
+                    Log.Log("|r{0} is targeting me", Hostile.Name);
+                    return;
+                case FleeTrigger.CapacitorLow:
+                    Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
+                    return;
+                case FleeTrigger.ShieldLow:
+                    Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
+                    return;
+                case FleeTrigger.ArmorLow:
+                    Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
+                    return;
+            }
+        }
+
         bool CheckSafe(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
@@ -483,38 +514,40 @@ namespace EveComFramework.Security
 
             if (this.ValidScramble != null) return false;
 
-            switch (SafeTrigger())
+            FleeTrigger Reported = SafeTrigger();
+
+            switch (Reported)
             {
                 case FleeTrigger.Pod:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Pod);
-                    Log.Log("|rIn a pod!");
+                    ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NegativeStanding:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    Log.Log("|r{0} is negative standing", Hostile.Name);
+                    ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NeutralStanding:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    Log.Log("|r{0} is neutral standing", Hostile.Name);
+                    ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Paranoid:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    Log.Log("|r{0} is neutral to me", Hostile.Name);
+                    ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Targeted:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Targeted);
-                    Log.Log("|r{0} is targeting me", Hostile.Name);
+                    ReportTrigger(Reported);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     return true;
@@ -523,21 +556,21 @@ namespace EveComFramework.Security
                     QueueState(Flee, -1, FleeTrigger.CapacitorLow);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
+                    ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.ShieldLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.ShieldLow);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
+                    ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.ArmorLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.ArmorLow);
                     DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
+                    ReportTrigger(Reported);
                     return true;
             }
 
@@ -568,11 +601,13 @@ namespace EveComFramework.Security
         bool CheckReset(object[] Params)
         {
             if (AllowResume <= DateTime.Now) return true;
-            if (SafeTrigger() != FleeTrigger.None)
+            FleeTrigger Reported = SafeTrigger();
+            if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
+                ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
-                InsertState(CheckClear);
+                InsertState(CheckClear, -1, Reported);
             }
             return false;
         }
@@ -651,6 +686,7 @@ namespace EveComFramework.Security
             if (Trigger != FleeTrigger.None)
             {
                 QueueState(LogMessage, 1, string.Format("|oNew flee condition"));
+                ReportTrigger(Trigger);
                 QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
                 QueueState(CheckClear, -1, Trigger);
                 return true;
@@ -714,7 +750,6 @@ namespace EveComFramework.Security
         {
             LavishScriptAPI.LavishScript.Events.RegisterEvent("EVE_LocalChat");
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
-            QueueState(Control);
         }
 
         #endregion
@@ -739,6 +774,7 @@ namespace EveComFramework.Security
 
         void NewLocalChat(object sender, LavishScriptAPI.LSEventArgs args)
         {
+            EVEFrame.Log("Triggered");
             if (Config.Local) SpeechQueue.Enqueue("New local chat message");
         }
 
@@ -746,13 +782,18 @@ namespace EveComFramework.Security
         {
             if (var)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+                EVEFrame.Log("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("LavishScript:RegisterEvent[EVE_LocalChat]");
                 LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
+                QueueState(Control);
             }
             else
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local\\*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
+                LavishScriptAPI.LavishScript.ExecuteCommand("Event[EVE_LocalChat]:Unregister");
                 LavishScriptAPI.LavishScript.Events.DetachEventTarget("EVE_LocalChat", NewLocalChat);
+                Clear();
             }
         }
 
@@ -762,6 +803,7 @@ namespace EveComFramework.Security
 
         bool Control(object[] Params)
         {
+            EVEFrame.Log("Control");
             if (Core == null)
             {
                 Core = Security.Instance;

@@ -181,17 +181,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\action_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\action_check.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Data\DroneTypes.xml" />
     <EmbeddedResource Include="Data\NPCClasses.xml" />
     <EmbeddedResource Include="Data\NPCTypes.xml" />
     <EmbeddedResource Include="Data\PriorityTargets.xml" />
     <EmbeddedResource Include="Data\SolarSystems.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\action_delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\action_check.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

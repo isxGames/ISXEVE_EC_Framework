@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace EveComFramework.GroupControl
 {
      
-    public enum Role { Combat, Miner, Hauler , Booster };
+    public enum Role { Combat, Miner, Hauler, Booster };
     public enum GroupType { Mining, AnomalyCombat };
 
     #region Persistence Classes
@@ -112,18 +112,15 @@ namespace EveComFramework.GroupControl
                             {
                                 if (!activeMember.Active)
                                 {
-                                    EVEFrame.Log(String.Format("{0} is now active", args.Args[1]));
                                     activeMember.Active = true;
                                 }
                                 if (activeMember.LeadershipValue != Convert.ToInt32(args.Args[2]))
                                 {
                                     activeMember.LeadershipValue = Convert.ToInt32(args.Args[2]);
-                                    EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args.Args[1], args.Args[2]));
                                 }
                                 if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args.Args[3]))
                                 {
                                     activeMember.Role = (Role)Enum.Parse(typeof(Role), args.Args[3]);
-                                    EVEFrame.Log(String.Format("New Role for {0}, {1}", args.Args[1], args.Args[3]));
                                 }
                             }
                         }
@@ -137,7 +134,6 @@ namespace EveComFramework.GroupControl
                                 if (availableMember.Available != Convert.ToBoolean(args.Args[2]))
                                 {
                                     availableMember.Available = Convert.ToBoolean(args.Args[2]);
-                                    EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}", args.Args[1], args.Args[2]));
                                 }
                             }
                         }
@@ -150,7 +146,6 @@ namespace EveComFramework.GroupControl
                             {
                                 if (!joinedFleet.InFleet)
                                 {
-                                    EVEFrame.Log(String.Format("{0} joined a fleet", args.Args[1]));
                                     joinedFleet.InFleet = true;
                                 }
                             }
@@ -175,81 +170,6 @@ namespace EveComFramework.GroupControl
             }
             catch { }
         }
-
-        //public int UpdateGroupControl(string[] args)
-        //{            
-        //    switch (args[1])
-        //    {
-        //        case "active":
-        //            if (CurrentGroup != null)
-        //            {
-        //                ActiveMember activeMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-        //                if (activeMember != null)
-        //                {
-        //                    if (!activeMember.Active)
-        //                    {
-        //                        EVEFrame.Log(String.Format("{0} is now active", args[2]));
-        //                        activeMember.Active = true;
-        //                    }
-        //                    if (activeMember.LeadershipValue != Convert.ToInt32(args[3]))
-        //                    {
-        //                        activeMember.LeadershipValue = Convert.ToInt32(args[3]);
-        //                        EVEFrame.Log(String.Format("New Leadership value for {0}, : {1}", args[2], args[3]));
-        //                    }
-        //                    if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args[4]))
-        //                    {
-        //                        activeMember.Role = (Role)Enum.Parse(typeof(Role), args[4]);
-        //                        EVEFrame.Log(String.Format("New Role for {0}, {1}", args[2], args[4]));
-        //                    }                            
-        //                }
-        //            }
-        //            break;
-        //        case "available":
-        //            if (CurrentGroup != null)
-        //            {
-        //                ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-        //                if (availableMember != null)
-        //                {
-        //                    if (availableMember.Available != Convert.ToBoolean(args[3]))
-        //                    {
-        //                        availableMember.Available = Convert.ToBoolean(args[3]);
-        //                        EVEFrame.Log(String.Format("{0} availablity for fleets is now {1}",args[2],args[3]));
-        //                    }
-        //                }
-        //            }
-        //            break;
-        //        case "joinedfleet":
-        //            if (CurrentGroup != null)
-        //            {
-        //                ActiveMember joinedFleet = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args[2]);
-        //                if (joinedFleet != null)
-        //                {
-        //                    if (!joinedFleet.InFleet)
-        //                    {
-        //                        EVEFrame.Log(String.Format("{0} joined a fleet", args[2]));
-        //                        joinedFleet.InFleet = true;
-        //                    }
-        //                }
-        //            }
-        //            break;
-        //        case "reloadConfig":
-        //            LoadConfig();
-        //            break;
-        //        case "forceupdate":
-        //            if (Self.CharacterName != null)
-        //            {
-        //                RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
-        //                RelayAll("available", Self.CharacterName, Self.Available.ToString());
-        //                if (Self.InFleet)
-        //                {
-        //                    RelayAll("joinedfleet", Self.CharacterName);
-        //                }
-        //            }
-        //            break;
-
-        //    }
-        //    return 0;
-        //}
 
         #endregion
 
@@ -483,7 +403,8 @@ namespace EveComFramework.GroupControl
                     if (!Session.InFleet)
                     {
                         //i'm not in a fleet, should i wait for an invite or create a fleet?
-                        if (!CurrentGroup.ActiveMembers.Any(a => a.InFleet) && !CurrentGroup.ActiveMembers.Any(a => a.CharacterName == Me.Name && a.Role == Role.Booster))
+                        if (!CurrentGroup.ActiveMembers.Any(a => a.InFleet) 
+                            && !CurrentGroup.ActiveMembers.Any(a => a.CharacterName == Me.Name && a.Role == Role.Booster && Local.Pilots.Any(b => b.Name == a.CharacterName)))
                         {
                             //nobody else is in a fleet, i can make one
                             Log.Log("|oCreating fleet");
@@ -495,10 +416,6 @@ namespace EveComFramework.GroupControl
                         else
                         {
                             //someone else is in a fleet , wait for an invite from another group member
-                            EVEFrame.Log("Waiting for invite");
-                            EVEFrame.Log("CurrentGroup.ActiveMembers count: " + CurrentGroup.ActiveMembers.Count.ToString());
-                            EVEFrame.Log("Popups: " + Window.All.OfType<PopupWindow>().Count().ToString());
-                            EVEFrame.Log("Invite: " + CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))).ToString());
                             if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
                             {
                                 Log.Log("|oAccepting fleet invite");
@@ -594,6 +511,7 @@ namespace EveComFramework.GroupControl
 
                                 //Is there a booster?
                                 FleetMember fleetbooster = Fleet.Wings[0].Squads[0].Members.FirstOrDefault(a => a.RoleBooster == BoosterRole.SquadBooster);
+                                if (fleetbooster == null && Fleet.Wings[0].Squads[0].Commander.RoleBooster == BoosterRole.SquadBooster) fleetbooster = Fleet.Wings[0].Squads[0].Commander;
                                 ActiveMember booster = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.Role == Role.Booster);
                                 if (booster != null)
                                 {
@@ -609,8 +527,8 @@ namespace EveComFramework.GroupControl
                                         if (fleetbooster.Name != booster.CharacterName)
                                         {
                                             Log.Log("|oRevoking squad booster");
-                                            Log.Log(" |-g{0}", booster.CharacterName);
-                                            Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName).SetBooster(BoosterRole.NonBooster);
+                                            Log.Log(" |-g{0}", fleetbooster.Name);
+                                            fleetbooster.SetBooster(BoosterRole.NonBooster);
                                             return false;
                                         }
                                     }
