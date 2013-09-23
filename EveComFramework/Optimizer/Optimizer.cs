@@ -96,6 +96,7 @@ namespace EveComFramework.Optimizer
 
             if (DateTime.Now > NextMemoryPulse)
             {
+                EVEFrame.Log(GetCurrentProcess().ToString() + "  " + Convert.ToUInt32(Config.MaxMemorySize * 1048576));
                 SetProcessWorkingSetSize(GetCurrentProcess(), Convert.ToUInt32(0), Convert.ToUInt32(Config.MaxMemorySize * 1048576));
                 NextMemoryPulse = DateTime.Now.AddMinutes(2);
             }

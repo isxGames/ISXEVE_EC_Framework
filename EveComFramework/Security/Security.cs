@@ -607,7 +607,7 @@ namespace EveComFramework.Security
                 Log.Log("|oNew flee condition");
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
-                InsertState(CheckClear, -1, Reported);
+                DislodgeCurState(CheckClear, -1, Reported);
             }
             return false;
         }
@@ -803,7 +803,6 @@ namespace EveComFramework.Security
 
         bool Control(object[] Params)
         {
-            EVEFrame.Log("Control");
             if (Core == null)
             {
                 Core = Security.Instance;
