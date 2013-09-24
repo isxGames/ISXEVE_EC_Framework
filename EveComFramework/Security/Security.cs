@@ -852,6 +852,8 @@ namespace EveComFramework.Security
                 pilot.ToChar.FromAlliance +
                 pilot.ToChar.FromCorp +
                 pilot.ToChar.FromChar;
+            if (pilot.CorpID == Me.CorpID) return PilotColors.Blue;
+            if (pilot.AllianceID == Me.AllianceID) return PilotColors.Blue;
             if (val > 0) return PilotColors.Blue;
             if (val == 0) return PilotColors.Grey;
             if (val < 0) return PilotColors.Red;
