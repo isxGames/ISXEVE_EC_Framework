@@ -776,7 +776,7 @@ namespace EveComFramework.Security
         {
             if (var)
             {
-                LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
+                if (Config.Local) LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
                 QueueState(Control);
             }
             else
@@ -811,7 +811,7 @@ namespace EveComFramework.Security
             }
             PilotCache = Local.Pilots;
 
-            if (LocalCache != ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count)
+            if (Config.Local && LocalCache != ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count)
             {
                 if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message")
                 {
