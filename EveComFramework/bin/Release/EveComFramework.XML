@@ -219,23 +219,6 @@
             Singletoner
             </summary>
         </member>
-        <member name="F:EveComFramework.GroupControl.UI.GroupControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.GroupControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.GroupControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
             <summary>
             Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
@@ -476,23 +459,6 @@
         <member name="P:EveComFramework.Data.SolarSystem.All">
             <summary>
             List of all solar systems
-            </summary>
-        </member>
-        <member name="F:EveComFramework.GroupControl.UI.Debug.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.Debug.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.Debug.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
@@ -1021,6 +987,40 @@
         <member name="P:EveComFramework.Security.SecurityAudio.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="F:EveComFramework.GroupControl.UI.GroupControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.GroupControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.GroupControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.GroupControl.UI.Debug.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.Debug.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.Debug.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
     </members>

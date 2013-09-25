@@ -748,7 +748,6 @@ namespace EveComFramework.Security
 
         private SecurityAudio() : base()
         {
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("EVE_LocalChat");
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
         }
 
@@ -762,6 +761,7 @@ namespace EveComFramework.Security
         int SolarSystem = -1;
         List<Pilot> PilotCache = new List<Pilot>();
         Security Core;
+        int LocalCache;
 
         #endregion
 
@@ -772,27 +772,15 @@ namespace EveComFramework.Security
             if (Config.Flee) SpeechQueue.Enqueue("Flee");
         }
 
-        void NewLocalChat(object sender, LavishScriptAPI.LSEventArgs args)
-        {
-            EVEFrame.Log("Triggered");
-            if (Config.Local) SpeechQueue.Enqueue("New local chat message");
-        }
-
         public void Enabled(bool var)
         {
             if (var)
             {
-                EVEFrame.Log("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
-                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:RegisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
-                LavishScriptAPI.LavishScript.ExecuteCommand("LavishScript:RegisterEvent[EVE_LocalChat]");
-                LavishScriptAPI.LavishScript.Events.AttachEventTarget("EVE_LocalChat", NewLocalChat);
+                LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
                 QueueState(Control);
             }
             else
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("LogReader:UnregisterLog[\"EVE/logs/Chatlogs/Local*.txt\",\"EVE_LocalChat\"]");
-                LavishScriptAPI.LavishScript.ExecuteCommand("Event[EVE_LocalChat]:Unregister");
-                LavishScriptAPI.LavishScript.Events.DetachEventTarget("EVE_LocalChat", NewLocalChat);
                 Clear();
             }
         }
@@ -822,6 +810,15 @@ namespace EveComFramework.Security
                 if (Config.Red && PilotColor(pilot) == PilotColors.Red) SpeechQueue.Enqueue("Red");
             }
             PilotCache = Local.Pilots;
+
+            if (LocalCache != ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count)
+            {
+                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message")
+                {
+                    SpeechQueue.Enqueue("Local chat");
+                }
+                LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
+            }
 
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             Speech.Rate = Config.Rate;
