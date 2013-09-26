@@ -776,7 +776,7 @@ namespace EveComFramework.Security
         {
             if (var)
             {
-                if (Config.Local) LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
+                QueueState(Init);
                 QueueState(Control);
             }
             else
@@ -788,6 +788,14 @@ namespace EveComFramework.Security
         #endregion
 
         #region States
+
+        bool Init(object[] Params)
+        {
+            if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
+
+            LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
+            return true;
+        }
 
         bool Control(object[] Params)
         {
