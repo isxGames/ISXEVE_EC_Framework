@@ -100,6 +100,7 @@ namespace EveComFramework.Comms
 
             if (Config.UseIRC)
             {
+                EVEFrame.Log("UseIRC");
                 irc.Encoding = System.Text.Encoding.UTF8;
                 irc.SendDelay = 200;
                 irc.ActiveChannelSyncing = true;
@@ -108,17 +109,17 @@ namespace EveComFramework.Comms
                 {
                     irc.Connect(Config.Server, Config.Port);
                 }
-                catch { }
+                catch { EVEFrame.Log("Connect failed"); }
                 try
                 {
                     irc.Login(Name, Name);
                 }
-                catch { }
+                catch { EVEFrame.Log("Login failed"); }
                 try
                 {
                     irc.SendMessage(SendType.Message, Config.SendTo, "Testing");
                 }
-                catch { }
+                catch { EVEFrame.Log("Message failed"); }
             }
 
             return true;
