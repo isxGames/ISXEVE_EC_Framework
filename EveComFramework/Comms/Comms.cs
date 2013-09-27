@@ -121,16 +121,19 @@ namespace EveComFramework.Comms
 
                 try
                 {
+                    EVEFrame.Log("Connecting to: " + Config.Server + "  Port: " + Config.Port);
                     irc.Connect(Config.Server, Config.Port);
                 }
                 catch { EVEFrame.Log("Connect failed"); }
                 try
                 {
+                    EVEFrame.Log("Logging in as nick: " + Name + "  RealName: " + Name);
                     irc.Login(Name, Name);
                 }
                 catch { EVEFrame.Log("Login failed"); }
                 try
                 {
+                    EVEFrame.Log("Sending message to: " + Config.SendTo);
                     irc.SendMessage(SendType.Message, Config.SendTo, "Testing");
                 }
                 catch { EVEFrame.Log("Message failed"); }
