@@ -134,7 +134,7 @@ namespace EveComFramework.Comms
                 try
                 {
                     EVEFrame.Log("Sending message to: " + Config.SendTo);
-                    irc.SendMessage(SendType.Message, Config.SendTo, "Testing");
+                    irc.RfcPrivmsg(Config.SendTo, "Testing");
                 }
                 catch { EVEFrame.Log("Message failed"); }
             }
