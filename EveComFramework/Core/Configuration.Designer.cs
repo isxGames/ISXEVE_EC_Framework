@@ -762,7 +762,7 @@
             1,
             0,
             0,
-            0});
+            65536});
             this.numericWarpTrigger.Name = "numericWarpTrigger";
             this.numericWarpTrigger.Size = new System.Drawing.Size(60, 21);
             this.numericWarpTrigger.TabIndex = 5;
@@ -780,7 +780,7 @@
             1,
             0,
             0,
-            0});
+            65536});
             this.numericWarpOrbit.Name = "numericWarpOrbit";
             this.numericWarpOrbit.Size = new System.Drawing.Size(60, 21);
             this.numericWarpOrbit.TabIndex = 6;
@@ -798,7 +798,7 @@
             1,
             0,
             0,
-            0});
+            65536});
             this.numericApproachTrigger.Name = "numericApproachTrigger";
             this.numericApproachTrigger.Size = new System.Drawing.Size(60, 21);
             this.numericApproachTrigger.TabIndex = 7;
@@ -816,7 +816,7 @@
             1,
             0,
             0,
-            0});
+            65536});
             this.numericApproachOrbit.Name = "numericApproachOrbit";
             this.numericApproachOrbit.Size = new System.Drawing.Size(60, 21);
             this.numericApproachOrbit.TabIndex = 8;
@@ -834,7 +834,7 @@
             1,
             0,
             0,
-            0});
+            65536});
             this.numericOrbitTrigger.Name = "numericOrbitTrigger";
             this.numericOrbitTrigger.Size = new System.Drawing.Size(60, 21);
             this.numericOrbitTrigger.TabIndex = 9;
@@ -852,7 +852,7 @@
             1,
             0,
             0,
-            0});
+            65536});
             this.numericOrbitOrbit.Name = "numericOrbitOrbit";
             this.numericOrbitOrbit.Size = new System.Drawing.Size(60, 21);
             this.numericOrbitOrbit.TabIndex = 10;
