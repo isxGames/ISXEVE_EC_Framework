@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using EveComFramework.Core;
 using EveCom;
-using Meebey.SmartIrc4net;
+using Sharkbite.Irc;
 
 namespace EveComFramework.Comms
 {
@@ -64,40 +64,66 @@ namespace EveComFramework.Comms
         string LastLocal = "";
         string Name;
         Queue<string> ChatQueue = new Queue<string>();
-        public static IrcClient irc = new IrcClient();
+
+        private Connection connection;
 
         #endregion
 
         #region Actions
 
-        public static void OnQueryMessage(object sender, IrcEventArgs e)
-        {
-            switch (e.Data.MessageArray[0])
-            {
-                // debug stuff
-                case "gc":
-                    GC.Collect();
-                    break;
-                // typical commands
-                case "join":
-                    irc.RfcJoin(e.Data.MessageArray[1]);
-                    break;
-                case "part":
-                    irc.RfcPart(e.Data.MessageArray[1]);
-                    break;
-            }
-        }
+		public void OnRegistered() 
+		{
+			//We have to catch errors in our delegates because Thresher purposefully
+			//does not handle them for us. Exceptions will cause the library to exit if they are not
+			//caught.
+			try
+			{ 
+				//Don't need this anymore in this example but this can be left running
+				//if you want.
+				Identd.Stop();
 
-        public static void OnError(object sender, ErrorEventArgs e) 
-        {
-            EVEFrame.Log("Error: " + e.ErrorMessage);
-        }
+				//The connection is ready so lets join a channel.
+				//We can join any number of channels simultaneously but
+				//one will do for now.
+				//All commands are sent to IRC using the Sender object
+				//from the Connection.
+				connection.Sender.Join("#thresher");
+			}
+			catch( Exception e ) 
+			{
+				Console.WriteLine("Error in OnRegistered(): " + e ) ;
+			}
+		}
 
-        public static void OnRawMessage(object sender, IrcEventArgs e)
-        {
-            EVEFrame.Log("Received: " + e.Data.RawMessage);
-        }
+		public void OnPublic( UserInfo user, string channel, string message )
+		{
+			//Echo back any public messages
+			connection.Sender.PublicMessage( channel,  user.Nick + " said, " + message );
+		}
 
+		public void OnPrivate( UserInfo user,  string message )
+		{
+			//Quit IRC if someone sends us a 'die' message
+			if( message == "die" ) 
+			{
+				connection.Disconnect("Bye");
+			}
+		}
+
+		public void OnError( ReplyCode code, string message) 
+		{
+			//All anticipated errors have a numeric code. The custom Thresher ones start at 1000 and
+			//can be found in the ErrorCodes class. All the others are determined by the IRC spec
+			//and can be found in RFC2812Codes.
+			EVEFrame.Log("An error of type " + code + " due to " + message + " has occurred.");
+		}
+
+		public void OnDisconnected() 
+		{
+			//If this disconnection was involutary then you should have received an error
+			//message ( from OnError() ) before this was called.
+			EVEFrame.Log("Connection to the server has been closed.");
+		}
 
         #endregion
 
@@ -112,37 +138,39 @@ namespace EveComFramework.Comms
             if (Config.UseIRC)
             {
                 EVEFrame.Log("UseIRC");
-                irc.Encoding = System.Text.Encoding.UTF8;
-                irc.SendDelay = 200;
-                irc.ActiveChannelSyncing = true;
-                irc.OnQueryMessage += new IrcEventHandler(OnQueryMessage);
-                irc.OnError += new ErrorEventHandler(OnError);
-                irc.OnRawMessage += new IrcEventHandler(OnRawMessage);
+                Identd.Start(Name);
+                ConnectionArgs cargs = new ConnectionArgs();
+                cargs.Hostname = Config.Server;
+                cargs.Nick = Name;
+                cargs.Port = Config.Port;
+                cargs.RealName = Name;
+                cargs.UserName = Name;
+                connection = new Connection(cargs, false, false);
+
+			    //Listen for any messages sent to the channel
+			    connection.Listener.OnPublic += new PublicMessageEventHandler( OnPublic );
+
+			    //Listen for bot commands sent as private messages
+			    connection.Listener.OnPrivate += new PrivateMessageEventHandler( OnPrivate );
+	
+			    //Listen for notification that an error has ocurred 
+			    connection.Listener.OnError += new ErrorMessageEventHandler( OnError );
+
+			    //Listen for notification that we are no longer connected.
+			    connection.Listener.OnDisconnected += new DisconnectedEventHandler( OnDisconnected );
 
                 try
                 {
-                    EVEFrame.Log("Connecting to: " + Config.Server + "  Port: " + Config.Port);
-                    irc.Connect(Config.Server, Config.Port);
+                    connection.Connect();
+                    EVEFrame.Log("IRC Connected");
                 }
-                catch { EVEFrame.Log("Connect failed"); }
-                try
-                {
-                    EVEFrame.Log("Logging in as nick: " + Name + "  RealName: " + Name);
-                    irc.Login(Name, Name);
-                }
-                catch { EVEFrame.Log("Login failed"); }
-                try
-                {
-                    EVEFrame.Log("Joining Channel: #test459");
-                    irc.RfcJoin("#test459");
-                }
-                catch { EVEFrame.Log("Join failed"); }
-                try
-                {
-                    EVEFrame.Log("Sending message to: " + Config.SendTo);
-                    irc.RfcPrivmsg(Config.SendTo, "Testing");
-                }
-                catch { EVEFrame.Log("Message failed"); }
+			    catch( Exception e ) 
+			    {
+				    EVEFrame.Log("Error during connection process.");
+				    EVEFrame.Log( e );
+				    Identd.Stop();
+			    }
+
             }
 
             return true;

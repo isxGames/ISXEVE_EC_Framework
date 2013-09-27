@@ -143,30 +143,35 @@
     <Compile Include="SkillTraining\UI\SkillTraining.Designer.cs">
       <DependentUpon>SkillTraining.cs</DependentUpon>
     </Compile>
-    <Compile Include="SmartIRC4Net\Consts.cs" />
-    <Compile Include="SmartIRC4Net\EventArgs.cs" />
-    <Compile Include="SmartIRC4Net\Exceptions.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\BanInfo.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\Channel.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\ChannelInfo.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\ChannelUser.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\Delegates.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\EventArgs.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\IrcClient.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\IrcMessageData.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\IrcUser.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\NonRfcChannel.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\NonRfcChannelUser.cs" />
-    <Compile Include="SmartIRC4Net\IrcClient\WhoInfo.cs" />
-    <Compile Include="SmartIRC4Net\IrcCommands\IrcCommands.cs" />
-    <Compile Include="SmartIRC4Net\IrcCommands\Rfc2812.cs" />
-    <Compile Include="SmartIRC4Net\IrcConnection\Delegates.cs" />
-    <Compile Include="SmartIRC4Net\IrcConnection\EventArgs.cs" />
-    <Compile Include="SmartIRC4Net\IrcConnection\IrcConnection.cs" />
-    <Compile Include="SmartIRC4Net\IrcConnection\IrcProperties.cs" />
-    <Compile Include="SmartIRC4Net\IrcConnection\IrcTcpClient.cs" />
-    <Compile Include="SmartIRC4Net\Logger.cs" />
     <Compile Include="Targets\Targets.cs" />
+    <Compile Include="Thresher\ChannelModeInfo.cs" />
+    <Compile Include="Thresher\CommandBuilder.cs" />
+    <Compile Include="Thresher\Connection.cs" />
+    <Compile Include="Thresher\ConnectionArgs.cs" />
+    <Compile Include="Thresher\Ctcp\CtcpListener.cs" />
+    <Compile Include="Thresher\Ctcp\CtcpResponder.cs" />
+    <Compile Include="Thresher\Ctcp\CtcpSender.cs" />
+    <Compile Include="Thresher\Ctcp\CtcpUtil.cs" />
+    <Compile Include="Thresher\Dcc\DccChatSession.cs" />
+    <Compile Include="Thresher\Dcc\DccFileInfo.cs" />
+    <Compile Include="Thresher\Dcc\DccFileSession.cs" />
+    <Compile Include="Thresher\Dcc\DccFileSessionManager.cs" />
+    <Compile Include="Thresher\Dcc\DccListener.cs" />
+    <Compile Include="Thresher\Dcc\DccUserInfo.cs" />
+    <Compile Include="Thresher\Dcc\DccUtil.cs" />
+    <Compile Include="Thresher\Delegates.cs" />
+    <Compile Include="Thresher\Enums.cs" />
+    <Compile Include="Thresher\Identd.cs" />
+    <Compile Include="Thresher\IParser.cs" />
+    <Compile Include="Thresher\Listener.cs" />
+    <Compile Include="Thresher\NameGenerator.cs" />
+    <Compile Include="Thresher\ReplyCode.cs" />
+    <Compile Include="Thresher\Rfc2812Util.cs" />
+    <Compile Include="Thresher\Sender.cs" />
+    <Compile Include="Thresher\ServerProperties.cs" />
+    <Compile Include="Thresher\TextColor.cs" />
+    <Compile Include="Thresher\UserInfo.cs" />
+    <Compile Include="Thresher\WhoisInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AutoModule\UI\AutoModule.resx">
@@ -206,8 +211,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\action_delete.png" />
-    <None Include="SmartIRC4Net\Makefile.am" />
-    <None Include="SmartIRC4Net\Makefile.in" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\action_check.png" />
