@@ -139,12 +139,8 @@ namespace EveComFramework.Comms
             {
                 EVEFrame.Log("UseIRC");
                 Identd.Start(Name);
-                ConnectionArgs cargs = new ConnectionArgs();
-                cargs.Hostname = Config.Server;
-                cargs.Nick = Name;
-                cargs.Port = Config.Port;
-                cargs.RealName = Name;
-                cargs.UserName = Name;
+                ConnectionArgs cargs = new ConnectionArgs(Name, Config.Server);
+
                 connection = new Connection(cargs, false, false);
 
 			    //Listen for any messages sent to the channel
