@@ -88,6 +88,17 @@ namespace EveComFramework.Comms
             }
         }
 
+        public static void OnError(object sender, ErrorEventArgs e) 
+        {
+            EVEFrame.Log("Error: " + e.ErrorMessage);
+        }
+
+        public static void OnRawMessage(object sender, IrcEventArgs e)
+        {
+            EVEFrame.Log("Received: " + e.Data.RawMessage);
+        }
+
+
         #endregion
 
         #region States
@@ -105,6 +116,9 @@ namespace EveComFramework.Comms
                 irc.SendDelay = 200;
                 irc.ActiveChannelSyncing = true;
                 irc.OnQueryMessage += new IrcEventHandler(OnQueryMessage);
+                irc.OnError += new ErrorEventHandler(OnError);
+                irc.OnRawMessage += new IrcEventHandler(OnRawMessage);
+
                 try
                 {
                     irc.Connect(Config.Server, Config.Port);
