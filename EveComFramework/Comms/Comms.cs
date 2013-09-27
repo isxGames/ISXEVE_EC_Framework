@@ -96,6 +96,7 @@ namespace EveComFramework.Comms
 		public void OnPublic( UserInfo user, string channel, string message )
 		{
 			//Echo back any public messages
+            EVEFrame.Log("OnPublic");
 			connection.Sender.PublicMessage( channel,  user.Nick + " said, " + message );
 		}
 
