@@ -38,6 +38,9 @@
       <HintPath>..\..\EveCom\EveCom.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="IrcDotNet">
+      <HintPath>..\..\MasterDev\packages\IrcDotNet.0.4.1\lib\net40\IrcDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="Lavish.InnerSpace">
       <HintPath>..\Lavish.InnerSpace.dll</HintPath>
     </Reference>
@@ -144,34 +147,6 @@
       <DependentUpon>SkillTraining.cs</DependentUpon>
     </Compile>
     <Compile Include="Targets\Targets.cs" />
-    <Compile Include="Thresher\ChannelModeInfo.cs" />
-    <Compile Include="Thresher\CommandBuilder.cs" />
-    <Compile Include="Thresher\Connection.cs" />
-    <Compile Include="Thresher\ConnectionArgs.cs" />
-    <Compile Include="Thresher\Ctcp\CtcpListener.cs" />
-    <Compile Include="Thresher\Ctcp\CtcpResponder.cs" />
-    <Compile Include="Thresher\Ctcp\CtcpSender.cs" />
-    <Compile Include="Thresher\Ctcp\CtcpUtil.cs" />
-    <Compile Include="Thresher\Dcc\DccChatSession.cs" />
-    <Compile Include="Thresher\Dcc\DccFileInfo.cs" />
-    <Compile Include="Thresher\Dcc\DccFileSession.cs" />
-    <Compile Include="Thresher\Dcc\DccFileSessionManager.cs" />
-    <Compile Include="Thresher\Dcc\DccListener.cs" />
-    <Compile Include="Thresher\Dcc\DccUserInfo.cs" />
-    <Compile Include="Thresher\Dcc\DccUtil.cs" />
-    <Compile Include="Thresher\Delegates.cs" />
-    <Compile Include="Thresher\Enums.cs" />
-    <Compile Include="Thresher\Identd.cs" />
-    <Compile Include="Thresher\IParser.cs" />
-    <Compile Include="Thresher\Listener.cs" />
-    <Compile Include="Thresher\NameGenerator.cs" />
-    <Compile Include="Thresher\ReplyCode.cs" />
-    <Compile Include="Thresher\Rfc2812Util.cs" />
-    <Compile Include="Thresher\Sender.cs" />
-    <Compile Include="Thresher\ServerProperties.cs" />
-    <Compile Include="Thresher\TextColor.cs" />
-    <Compile Include="Thresher\UserInfo.cs" />
-    <Compile Include="Thresher\WhoisInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AutoModule\UI\AutoModule.resx">
@@ -210,6 +185,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\action_delete.png" />
   </ItemGroup>
   <ItemGroup>
