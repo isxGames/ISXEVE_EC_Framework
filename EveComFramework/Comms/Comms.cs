@@ -78,16 +78,14 @@ namespace EveComFramework.Comms
 			//caught.
 			try
 			{ 
-				//Don't need this anymore in this example but this can be left running
-				//if you want.
-				Identd.Stop();
 
 				//The connection is ready so lets join a channel.
 				//We can join any number of channels simultaneously but
 				//one will do for now.
 				//All commands are sent to IRC using the Sender object
 				//from the Connection.
-				connection.Sender.Join("#thresher");
+                EVEFrame.Log("Joining test channel");
+				connection.Sender.Join("#test459");
 			}
 			catch( Exception e ) 
 			{
@@ -138,7 +136,6 @@ namespace EveComFramework.Comms
             if (Config.UseIRC)
             {
                 EVEFrame.Log("UseIRC");
-                Identd.Start(Name);
                 ConnectionArgs cargs = new ConnectionArgs(Name, Config.Server);
 
                 connection = new Connection(cargs, false, false);
@@ -164,7 +161,6 @@ namespace EveComFramework.Comms
 			    {
 				    EVEFrame.Log("Error during connection process.");
 				    EVEFrame.Log( e );
-				    Identd.Stop();
 			    }
 
             }
