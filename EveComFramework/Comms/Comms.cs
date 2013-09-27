@@ -133,6 +133,12 @@ namespace EveComFramework.Comms
                 catch { EVEFrame.Log("Login failed"); }
                 try
                 {
+                    EVEFrame.Log("Joining Channel: #test459");
+                    irc.RfcJoin("#test459");
+                }
+                catch { EVEFrame.Log("Join failed"); }
+                try
+                {
                     EVEFrame.Log("Sending message to: " + Config.SendTo);
                     irc.RfcPrivmsg(Config.SendTo, "Testing");
                 }
