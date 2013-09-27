@@ -137,7 +137,14 @@ namespace EveComFramework.Comms
             if (Config.UseIRC)
             {
                 EVEFrame.Log("UseIRC");
-                ConnectionArgs cargs = new ConnectionArgs(Name, Config.Server);
+                ConnectionArgs cargs = new ConnectionArgs();
+
+                cargs.Hostname = Config.Server;
+                cargs.Nick = Name;
+                cargs.Port = Config.Port;
+                cargs.RealName = Name;
+                cargs.ServerPassword = "";
+                cargs.UserName = Name;
 
                 connection = new Connection(cargs, false, false);
 
