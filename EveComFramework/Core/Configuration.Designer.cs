@@ -758,49 +758,109 @@
             // 
             this.numericWarpTrigger.Location = new System.Drawing.Point(167, 26);
             this.numericWarpTrigger.Margin = new System.Windows.Forms.Padding(0);
+            this.numericWarpTrigger.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericWarpTrigger.Name = "numericWarpTrigger";
             this.numericWarpTrigger.Size = new System.Drawing.Size(60, 21);
             this.numericWarpTrigger.TabIndex = 5;
+            this.numericWarpTrigger.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericWarpOrbit
             // 
             this.numericWarpOrbit.Location = new System.Drawing.Point(227, 26);
             this.numericWarpOrbit.Margin = new System.Windows.Forms.Padding(0);
+            this.numericWarpOrbit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericWarpOrbit.Name = "numericWarpOrbit";
             this.numericWarpOrbit.Size = new System.Drawing.Size(60, 21);
             this.numericWarpOrbit.TabIndex = 6;
+            this.numericWarpOrbit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericApproachTrigger
             // 
             this.numericApproachTrigger.Location = new System.Drawing.Point(167, 47);
             this.numericApproachTrigger.Margin = new System.Windows.Forms.Padding(0);
+            this.numericApproachTrigger.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericApproachTrigger.Name = "numericApproachTrigger";
             this.numericApproachTrigger.Size = new System.Drawing.Size(60, 21);
             this.numericApproachTrigger.TabIndex = 7;
+            this.numericApproachTrigger.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericApproachOrbit
             // 
             this.numericApproachOrbit.Location = new System.Drawing.Point(227, 47);
             this.numericApproachOrbit.Margin = new System.Windows.Forms.Padding(0);
+            this.numericApproachOrbit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericApproachOrbit.Name = "numericApproachOrbit";
             this.numericApproachOrbit.Size = new System.Drawing.Size(60, 21);
             this.numericApproachOrbit.TabIndex = 8;
+            this.numericApproachOrbit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericOrbitTrigger
             // 
             this.numericOrbitTrigger.Location = new System.Drawing.Point(167, 68);
             this.numericOrbitTrigger.Margin = new System.Windows.Forms.Padding(0);
+            this.numericOrbitTrigger.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericOrbitTrigger.Name = "numericOrbitTrigger";
             this.numericOrbitTrigger.Size = new System.Drawing.Size(60, 21);
             this.numericOrbitTrigger.TabIndex = 9;
+            this.numericOrbitTrigger.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericOrbitOrbit
             // 
             this.numericOrbitOrbit.Location = new System.Drawing.Point(227, 68);
             this.numericOrbitOrbit.Margin = new System.Windows.Forms.Padding(0);
+            this.numericOrbitOrbit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericOrbitOrbit.Name = "numericOrbitOrbit";
             this.numericOrbitOrbit.Size = new System.Drawing.Size(60, 21);
             this.numericOrbitOrbit.TabIndex = 10;
+            this.numericOrbitOrbit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // groupBox5
             // 
@@ -836,9 +896,24 @@
             this.numericMemoryMax.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericMemoryMax.Location = new System.Drawing.Point(160, 13);
             this.numericMemoryMax.Margin = new System.Windows.Forms.Padding(0);
+            this.numericMemoryMax.Maximum = new decimal(new int[] {
+            99999999,
+            0,
+            0,
+            0});
+            this.numericMemoryMax.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             this.numericMemoryMax.Name = "numericMemoryMax";
             this.numericMemoryMax.Size = new System.Drawing.Size(160, 21);
             this.numericMemoryMax.TabIndex = 10;
+            this.numericMemoryMax.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // checkDisable3D
             // 
@@ -954,9 +1029,24 @@
             this.numericPort.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericPort.Location = new System.Drawing.Point(57, 38);
             this.numericPort.Margin = new System.Windows.Forms.Padding(0);
+            this.numericPort.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.numericPort.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericPort.Name = "numericPort";
             this.numericPort.Size = new System.Drawing.Size(263, 21);
             this.numericPort.TabIndex = 4;
+            this.numericPort.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // label10
             // 
