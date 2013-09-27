@@ -4,9 +4,199 @@
         <name>EveComFramework</name>
     </assembly>
     <members>
-        <member name="T:EveComFramework.Optimizer.OptimizerSettings">
+        <member name="F:EveComFramework.Security.UI.Security.components">
             <summary>
-            Settings for the Optimizer class
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.UI.Security.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.Security.UI.Security.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.LoggerHelper">
+            <summary>
+            This class manages a richtextbox for you, to use as a console output
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.Loggers">
+            <summary>
+            A list of the Loggers currently available
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.BackColor1">
+            <summary>
+            The primary back color to use (Default: Black)
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.BackColor2">
+            <summary>
+            The secondary back color to use (Default: Dark gray)
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.LoggerHelper.DefaultForegroundColor">
+            <summary>
+            The default color for text (Default: White)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.LoggerHelper.RichTextboxUpdater(System.Windows.Forms.RichTextBox,System.String,System.String)">
+            <summary>
+            Use this method to update your richtextbox
+            </summary>
+            <param name="Console">Your richtextbox</param>
+            <param name="Module">The name of the module the update is from</param>
+            <param name="Message">The log message</param>
+        </member>
+        <member name="P:EveComFramework.Core.LoggerHelper.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Logger">
+            <summary>
+            Handles logging and feedback, allows multiple events to collect feedback info
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Logger.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="Name">The name of the module this will log for</param>
+        </member>
+        <member name="M:EveComFramework.Core.Logger.Log(System.String,System.Object[])">
+            <summary>
+            Send a log event
+            </summary>
+            <param name="Message">Message, may contain {0} type tokens like string.Format</param>
+            <param name="Params">Paramters to insert into the message format string</param>
+        </member>
+        <member name="P:EveComFramework.Core.Logger.Name">
+            <summary>
+            The name of the module this is logging for
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Core.Logger.Event">
+            <summary>
+            Event using LogEvent delegate
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Core.Logger.RichEvent">
+            <summary>
+            Event using RichLogEvent delegate
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Logger.LogEvent">
+            <summary>
+            Delegate for log events
+            </summary>
+            <param name="Module">The module sending the message</param>
+            <param name="Message">Message that is being logged</param>
+        </member>
+        <member name="T:EveComFramework.Core.Logger.RichLogEvent">
+            <summary>
+            Delegate for rich log events
+            </summary>
+            <param name="Module">The module sending the message</param>
+            <param name="Message">Message that is being logged</param>
+        </member>
+        <member name="F:EveComFramework.GroupControl.UI.GroupControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.GroupControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.GroupControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Config">
+            <summary>
+            This class is used to define default information for the Settings module
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Config.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Config.DefaultProfile">
+            <summary>
+            The default profile name to use if one is not defined
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.Configuration.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Configuration.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.Core.Configuration.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.AutoModule.UI.AutoModule">
+            <summary>
+            Automodule configuration form
+            </summary>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="F:EveComFramework.AutoModule.UI.AutoModule.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SkillTraining.UI.SkillTraining.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:EveComFramework.Core.Settings">
@@ -91,10 +281,16 @@
             </summary>
             <param name="writer"></param>
         </member>
-        <member name="T:EveComFramework.Optimizer.Optimizer">
+        <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
             <summary>
-            This class helps reduce the Eve client's resource utilization
+            Available skillqueues, keyed by the character name
             </summary>
+        </member>
+        <member name="T:EveComFramework.SkillTraining.SkillTraining">
+             <summary>
+             SkillTraining will manage a skill queue for the active character, can act event based or full auto
+            
+             </summary>
         </member>
         <member name="T:EveComFramework.Core.State">
             <summary>
@@ -199,192 +395,29 @@
             The frequency for the state in milliseconds
             </summary>
         </member>
-        <member name="M:EveComFramework.Optimizer.Optimizer.Finalize">
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartWatch">
             <summary>
-            Destructor
+            State in passive event based mode, will fire an event when it thinks you should queue a skill
             </summary>
         </member>
-        <member name="M:EveComFramework.Optimizer.Optimizer.Configure">
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartAuto">
             <summary>
-            Configure this module
+            Handles everything and queues skills as it can.
             </summary>
         </member>
-        <member name="F:EveComFramework.Optimizer.Optimizer.Config">
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.DoSkillQueue">
             <summary>
-            Config for this module
+            Add stuff to the skill queue
             </summary>
         </member>
-        <member name="P:EveComFramework.Optimizer.Optimizer.Instance">
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.Configure">
             <summary>
-            Singletoner
+            Opens up the configuration dialog, this is a MODAL dialog and will block the thread! Won't work when not logged in
             </summary>
         </member>
-        <member name="F:EveComFramework.GroupControl.UI.GroupControl.components">
+        <member name="E:EveComFramework.SkillTraining.SkillTraining.SpaceInQueue">
             <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.GroupControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.GroupControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
-            <summary>
-            Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
-            </summary>
-            <param name="Class">Class of ship, such as "BattleShip", "Cruiser", or "Frigate"</param>
-            <returns>Drone that is best suited to attack that class.  Drone may be in the bay</returns>
-        </member>
-        <member name="T:EveComFramework.Core.LoggerHelper">
-            <summary>
-            This class manages a richtextbox for you, to use as a console output
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Core.LoggerHelper.Loggers">
-            <summary>
-            A list of the Loggers currently available
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Core.LoggerHelper.BackColor1">
-            <summary>
-            The primary back color to use (Default: Black)
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Core.LoggerHelper.BackColor2">
-            <summary>
-            The secondary back color to use (Default: Dark gray)
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Core.LoggerHelper.DefaultForegroundColor">
-            <summary>
-            The default color for text (Default: White)
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Core.LoggerHelper.RichTextboxUpdater(System.Windows.Forms.RichTextBox,System.String,System.String)">
-            <summary>
-            Use this method to update your richtextbox
-            </summary>
-            <param name="Console">Your richtextbox</param>
-            <param name="Module">The name of the module the update is from</param>
-            <param name="Message">The log message</param>
-        </member>
-        <member name="P:EveComFramework.Core.LoggerHelper.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Core.Logger">
-            <summary>
-            Handles logging and feedback, allows multiple events to collect feedback info
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Core.Logger.#ctor(System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="Name">The name of the module this will log for</param>
-        </member>
-        <member name="M:EveComFramework.Core.Logger.Log(System.String,System.Object[])">
-            <summary>
-            Send a log event
-            </summary>
-            <param name="Message">Message, may contain {0} type tokens like string.Format</param>
-            <param name="Params">Paramters to insert into the message format string</param>
-        </member>
-        <member name="P:EveComFramework.Core.Logger.Name">
-            <summary>
-            The name of the module this is logging for
-            </summary>
-        </member>
-        <member name="E:EveComFramework.Core.Logger.Event">
-            <summary>
-            Event using LogEvent delegate
-            </summary>
-        </member>
-        <member name="E:EveComFramework.Core.Logger.RichEvent">
-            <summary>
-            Event using RichLogEvent delegate
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Core.Logger.LogEvent">
-            <summary>
-            Delegate for log events
-            </summary>
-            <param name="Module">The module sending the message</param>
-            <param name="Message">Message that is being logged</param>
-        </member>
-        <member name="T:EveComFramework.Core.Logger.RichLogEvent">
-            <summary>
-            Delegate for rich log events
-            </summary>
-            <param name="Module">The module sending the message</param>
-            <param name="Message">Message that is being logged</param>
-        </member>
-        <member name="F:EveComFramework.Core.Configuration.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Core.Configuration.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.Core.Configuration.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.AutoModule.UI.AutoModule">
-            <summary>
-            Automodule configuration form
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="F:EveComFramework.AutoModule.UI.AutoModule.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Core.Config">
-            <summary>
-            This class is used to define default information for the Settings module
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Config.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Config.DefaultProfile">
-            <summary>
-            The default profile name to use if one is not defined
+            Fires when there is space in the skill queue
             </summary>
         </member>
         <member name="T:EveComFramework.Optimizer.UI.Optimizer">
@@ -414,23 +447,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="F:EveComFramework.Security.UI.Security.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Security.UI.Security.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.Security.UI.Security.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="F:EveComFramework.SessionControl.UI.SessionControl.components">
             <summary>
             Required designer variable.
@@ -448,53 +464,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="F:EveComFramework.SkillTraining.UI.SkillTraining.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Data.SolarSystem">
-            <summary>
-            This class provides static information about solar systems (without pulling data from Eve)
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.ID">
-            <summary>
-            The solar system's ID
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.Name">
-            <summary>
-            The solar system's Name
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.Security">
-            <summary>
-            The solar system's security level
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
-            <summary>
-            The solar system's FactionID (Only works for High Sec)
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.All">
-            <summary>
-            List of all solar systems
-            </summary>
-        </member>
         <member name="F:EveComFramework.GroupControl.UI.Debug.components">
             <summary>
             Required designer variable.
@@ -510,42 +479,6 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
-            <summary>
-            Available skillqueues, keyed by the character name
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SkillTraining.SkillTraining">
-             <summary>
-             SkillTraining will manage a skill queue for the active character, can act event based or full auto
-            
-             </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartWatch">
-            <summary>
-            State in passive event based mode, will fire an event when it thinks you should queue a skill
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartAuto">
-            <summary>
-            Handles everything and queues skills as it can.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.DoSkillQueue">
-            <summary>
-            Add stuff to the skill queue
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.Configure">
-            <summary>
-            Opens up the configuration dialog, this is a MODAL dialog and will block the thread! Won't work when not logged in
-            </summary>
-        </member>
-        <member name="E:EveComFramework.SkillTraining.SkillTraining.SpaceInQueue">
-            <summary>
-            Fires when there is space in the skill queue
             </summary>
         </member>
         <member name="F:EveComFramework.Core.GlobalSettings.ItemVolume">
@@ -593,46 +526,6 @@
             Item Volumes, keyed by Types
             </summary>
         </member>
-        <member name="T:EveComFramework.Core.Busy">
-            <summary>
-            This class allows modules to signal they are busy
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Core.Busy.ItemIsBusy(System.String)">
-            <summary>
-            Property indicating if a specific module is busy
-            </summary>
-            <param name="Item">The name of the module</param>
-            <returns>Busy true/false</returns>
-        </member>
-        <member name="M:EveComFramework.Core.Busy.SetBusy(System.String,System.Action)">
-            <summary>
-            Set a module as busy
-            </summary>
-            <param name="Item">The name of the module</param>
-            <param name="Signal">Action to perform when a module signals ready</param>
-        </member>
-        <member name="M:EveComFramework.Core.Busy.SetDone(System.String)">
-            <summary>
-            Set a module as not busy
-            </summary>
-            <param name="Item">The name of the module</param>
-        </member>
-        <member name="M:EveComFramework.Core.Busy.SignalReady">
-            <summary>
-            Signal modules that are ready using the actions defined
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Busy.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Busy.IsBusy">
-            <summary>
-            Property indicating if any module is busy
-            </summary>
-        </member>
         <member name="T:EveComFramework.AutoModule.AutoModuleSettings">
             <summary>
             Configuration settings for this AutoModule
@@ -663,6 +556,12 @@
             Stop this module
             </summary>
         </member>
+        <member name="M:EveComFramework.AutoModule.AutoModule.Enabled(System.Boolean)">
+            <summary>
+            Starts/stops this module
+            </summary>
+            <param name="Val">True=Start</param>
+        </member>
         <member name="M:EveComFramework.AutoModule.AutoModule.Configure">
             <summary>
             Configure this module
@@ -671,6 +570,11 @@
         <member name="P:EveComFramework.AutoModule.AutoModule.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.AutoModule.InstawarpSettings">
+            <summary>
+            Configuration settings for this Module
             </summary>
         </member>
         <member name="T:EveComFramework.AutoModule.InstaWarp">
@@ -685,143 +589,78 @@
             </summary>
             <param name="Val">True=Start</param>
         </member>
+        <member name="F:EveComFramework.AutoModule.InstaWarp.Config">
+            <summary>
+            The config for this class
+            </summary>
+        </member>
         <member name="P:EveComFramework.AutoModule.InstaWarp.Instance">
             <summary>
             Singletoner
             </summary>
         </member>
-        <member name="T:EveComFramework.Move.Move">
+        <member name="T:EveComFramework.Optimizer.OptimizerSettings">
             <summary>
-            This class handles navigation
+            Settings for the Optimizer class
             </summary>
         </member>
-        <member name="F:EveComFramework.Move.Move.Log">
+        <member name="T:EveComFramework.Optimizer.Optimizer">
             <summary>
-            The logger for this class
+            This class helps reduce the Eve client's resource utilization
             </summary>
         </member>
-        <member name="M:EveComFramework.Move.Move.ToggleAutopilot(System.Boolean)">
+        <member name="M:EveComFramework.Optimizer.Optimizer.Finalize">
             <summary>
-            Toggle on/off the autopilot
-            </summary>
-            <param name="Activate">Enable = true</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Bookmark(EveCom.Bookmark,System.Int32)">
-            <summary>
-            Warp to a bookmark
-            </summary>
-            <param name="Bookmark">The bookmark to warp to</param>
-            <param name="Distance">The distance to warp at.  Default: 0</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Object(EveCom.Entity,System.Int32)">
-            <summary>
-            Warp to an entity
-            </summary>
-            <param name="Entity">The entity to which to warp</param>
-            <param name="Distance">The distance to warp at.  Default: 0</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Activate(EveCom.Entity)">
-            <summary>
-            Activate an entity (ex: Jump gate)
-            </summary>
-            <param name="Entity"></param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Jump">
-            <summary>
-            Jump through an entity (ex: Jump portal array)
+            Destructor
             </summary>
         </member>
-        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
+        <member name="M:EveComFramework.Optimizer.Optimizer.Configure">
             <summary>
-            Approach an entity
+            Configure this module
             </summary>
-            <param name="Target">The entity to approach</param>
-            <param name="Distance">What distance from the entity to stop at</param>
         </member>
-        <member name="M:EveComFramework.Move.Move.Orbit(EveCom.Entity,System.Int32)">
+        <member name="F:EveComFramework.Optimizer.Optimizer.Config">
             <summary>
-            Orbit an entity
+            Config for this module
             </summary>
-            <param name="Target">The entity to orbit</param>
-            <param name="Distance">The distance from the entity to orbit</param>
         </member>
-        <member name="P:EveComFramework.Move.Move.Instance">
+        <member name="P:EveComFramework.Optimizer.Optimizer.Instance">
             <summary>
             Singletoner
             </summary>
         </member>
-        <member name="T:EveComFramework.Move.UndockWarpSettings">
+        <member name="F:EveComFramework.FleetControl.UI.FleetControl.components">
             <summary>
-            Settings for the UndockWarp class
+            Required designer variable.
             </summary>
         </member>
-        <member name="T:EveComFramework.Move.UndockWarp">
+        <member name="M:EveComFramework.FleetControl.UI.FleetControl.Dispose(System.Boolean)">
             <summary>
-            This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.FleetControl.UI.FleetControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:EveComFramework.Move.UndockWarp.Enabled(System.Boolean)">
+        <member name="F:EveComFramework.DroneControl.UI.DroneControl.components">
             <summary>
-            Toggle on/off this class
-            </summary>
-            <param name="val">Enabled = true</param>
-        </member>
-        <member name="F:EveComFramework.Move.UndockWarp.Config">
-            <summary>
-            The config for this class
+            Required designer variable.
             </summary>
         </member>
-        <member name="P:EveComFramework.Move.UndockWarp.Instance">
+        <member name="M:EveComFramework.DroneControl.UI.DroneControl.Dispose(System.Boolean)">
             <summary>
-            Singletoner
+            Clean up any resources being used.
             </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="T:EveComFramework.Cargo.Cargo">
+        <member name="M:EveComFramework.DroneControl.UI.DroneControl.InitializeComponent">
             <summary>
-            This class handles cargo operation, including navigation
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Cargo.Cargo.Log">
-            <summary>
-            Log for Cargo module
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Cargo.Cargo.At(EveCom.Bookmark,System.Func{EveCom.InventoryContainer},System.String)">
-            <summary>
-            Specify the location to perform the cargo operation
-            </summary>
-            <param name="Bookmark">Bookmark object for the location to perform the cargo operation</param>
-            <param name="Source">InventoryContainer to use for the operation (load source for Load, unload destination for Unload)  Default: Station Item Hangar</param>
-            <param name="ContainerName">Name of the entity to use for the operation (for entities with inventory containers in space)</param>
-            <returns></returns>
-        </member>
-        <member name="M:EveComFramework.Cargo.Cargo.Load(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
-            <summary>
-            Add a Load operation
-            </summary>
-            <param name="QueryString">Linq parameters for specifying the items to load.</param>
-            <param name="Quantity">Quantity of the item to load (Must specify a single item type using QueryString)</param>
-            <param name="Target">Where to load the item(s) - Default: Cargo Hold</param>
-            <returns></returns>
-        </member>
-        <member name="M:EveComFramework.Cargo.Cargo.Unload(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
-            <summary>
-            Add an Unload operation
-            </summary>
-            <param name="QueryString">Linq parameters for specifying the items to unload.</param>
-            <param name="Quantity">Quantity of the item to unload (Must specify a single item type using QueryString)</param>
-            <param name="Target">Where to unload the item(s) from - Default: Cargo Hold</param>
-            <returns></returns>
-        </member>
-        <member name="M:EveComFramework.Cargo.Cargo.NoOp">
-            <summary>
-            Don't do anything - used in conjunction with Cargo.At to queue up a move to a location without performing a cargo operation
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:EveComFramework.Cargo.Cargo.Instance">
-            <summary>
-            Singletoner
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:EveComFramework.SessionControl.PlaySession">
@@ -915,38 +754,122 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <member name="F:EveComFramework.FleetControl.UI.FleetControl.components">
+        <member name="T:EveComFramework.Data.SolarSystem">
             <summary>
-            Required designer variable.
+            This class provides static information about solar systems (without pulling data from Eve)
             </summary>
         </member>
-        <member name="M:EveComFramework.FleetControl.UI.FleetControl.Dispose(System.Boolean)">
+        <member name="P:EveComFramework.Data.SolarSystem.ID">
             <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.FleetControl.UI.FleetControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
+            The solar system's ID
             </summary>
         </member>
-        <member name="F:EveComFramework.DroneControl.UI.DroneControl.components">
+        <member name="P:EveComFramework.Data.SolarSystem.Name">
             <summary>
-            Required designer variable.
+            The solar system's Name
             </summary>
         </member>
-        <member name="M:EveComFramework.DroneControl.UI.DroneControl.Dispose(System.Boolean)">
+        <member name="P:EveComFramework.Data.SolarSystem.Security">
             <summary>
-            Clean up any resources being used.
+            The solar system's security level
             </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:EveComFramework.DroneControl.UI.DroneControl.InitializeComponent">
+        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
             <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
+            The solar system's FactionID (Only works for High Sec)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.All">
+            <summary>
+            List of all solar systems
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Core.Busy">
+            <summary>
+            This class allows modules to signal they are busy
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.ItemIsBusy(System.String)">
+            <summary>
+            Property indicating if a specific module is busy
+            </summary>
+            <param name="Item">The name of the module</param>
+            <returns>Busy true/false</returns>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.SetBusy(System.String,System.Action)">
+            <summary>
+            Set a module as busy
+            </summary>
+            <param name="Item">The name of the module</param>
+            <param name="Signal">Action to perform when a module signals ready</param>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.SetDone(System.String)">
+            <summary>
+            Set a module as not busy
+            </summary>
+            <param name="Item">The name of the module</param>
+        </member>
+        <member name="M:EveComFramework.Core.Busy.SignalReady">
+            <summary>
+            Signal modules that are ready using the actions defined
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Busy.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Core.Busy.IsBusy">
+            <summary>
+            Property indicating if any module is busy
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Cargo.Cargo">
+            <summary>
+            This class handles cargo operation, including navigation
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Cargo.Cargo.Log">
+            <summary>
+            Log for Cargo module
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.At(EveCom.Bookmark,System.Func{EveCom.InventoryContainer},System.String)">
+            <summary>
+            Specify the location to perform the cargo operation
+            </summary>
+            <param name="Bookmark">Bookmark object for the location to perform the cargo operation</param>
+            <param name="Source">InventoryContainer to use for the operation (load source for Load, unload destination for Unload)  Default: Station Item Hangar</param>
+            <param name="ContainerName">Name of the entity to use for the operation (for entities with inventory containers in space)</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.Load(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
+            <summary>
+            Add a Load operation
+            </summary>
+            <param name="QueryString">Linq parameters for specifying the items to load.</param>
+            <param name="Quantity">Quantity of the item to load (Must specify a single item type using QueryString)</param>
+            <param name="Target">Where to load the item(s) - Default: Cargo Hold</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.Unload(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
+            <summary>
+            Add an Unload operation
+            </summary>
+            <param name="QueryString">Linq parameters for specifying the items to unload.</param>
+            <param name="Quantity">Quantity of the item to unload (Must specify a single item type using QueryString)</param>
+            <param name="Target">Where to unload the item(s) from - Default: Cargo Hold</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.Cargo.Cargo.NoOp">
+            <summary>
+            Don't do anything - used in conjunction with Cargo.At to queue up a move to a location without performing a cargo operation
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:EveComFramework.Cargo.Cargo.Instance">
+            <summary>
+            Singletoner
             </summary>
         </member>
         <member name="T:EveComFramework.Security.SecuritySettings">
@@ -1039,6 +962,2941 @@
             <summary>
             Singletoner
             </summary>
+        </member>
+        <member name="T:EveComFramework.Move.MoveSettings">
+            <summary>
+            Settings for the Move class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.Move">
+            <summary>
+            This class handles navigation
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Move.Move.Log">
+            <summary>
+            The logger for this class
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.Move.ToggleAutopilot(System.Boolean)">
+            <summary>
+            Toggle on/off the autopilot
+            </summary>
+            <param name="Activate">Enable = true</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Bookmark(EveCom.Bookmark,System.Int32)">
+            <summary>
+            Warp to a bookmark
+            </summary>
+            <param name="Bookmark">The bookmark to warp to</param>
+            <param name="Distance">The distance to warp at.  Default: 0</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Object(EveCom.Entity,System.Int32)">
+            <summary>
+            Warp to an entity
+            </summary>
+            <param name="Entity">The entity to which to warp</param>
+            <param name="Distance">The distance to warp at.  Default: 0</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Activate(EveCom.Entity)">
+            <summary>
+            Activate an entity (ex: Jump gate)
+            </summary>
+            <param name="Entity"></param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Jump">
+            <summary>
+            Jump through an entity (ex: Jump portal array)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
+            <summary>
+            Approach an entity
+            </summary>
+            <param name="Target">The entity to approach</param>
+            <param name="Distance">What distance from the entity to stop at</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Orbit(EveCom.Entity,System.Int32)">
+            <summary>
+            Orbit an entity
+            </summary>
+            <param name="Target">The entity to orbit</param>
+            <param name="Distance">The distance from the entity to orbit</param>
+        </member>
+        <member name="P:EveComFramework.Move.Move.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.UndockWarpSettings">
+            <summary>
+            Settings for the UndockWarp class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.UndockWarp">
+            <summary>
+            This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.UndockWarp.Enabled(System.Boolean)">
+            <summary>
+            Toggle on/off this class
+            </summary>
+            <param name="val">Enabled = true</param>
+        </member>
+        <member name="F:EveComFramework.Move.UndockWarp.Config">
+            <summary>
+            The config for this class
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Move.UndockWarp.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
+            <summary>
+            Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
+            </summary>
+            <param name="Class">Class of ship, such as "BattleShip", "Cruiser", or "Frigate"</param>
+            <returns>Drone that is best suited to attack that class.  Drone may be in the bay</returns>
+        </member>
+        <member name="T:EveComFramework.Comms.CommsSettings">
+            <summary>
+            Settings for the Comms class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Comms.Comms.Config">
+            <summary>
+            Config for this module
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Comms.Comms.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.Rfc2812">
+             <summary>
+            
+             </summary>
+             <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.Rfc2812.IsValidNickname(System.String)">
+             <summary>
+             Checks if the passed nickname is valid according to the RFC
+            
+             Use with caution, many IRC servers are not conform with this!
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.NonRfcChannel">
+            <summary>
+            
+            </summary>
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.Channel">
+            <summary>
+            
+            </summary>
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.Channel.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"> </param>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Name">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Key">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Users">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.UnsafeUsers">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Ops">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.UnsafeOps">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Voices">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.UnsafeVoices">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Bans">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Topic">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.UserLimit">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.Mode">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.ActiveSyncStart">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.ActiveSyncStop">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.Channel.ActiveSyncTime">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.NonRfcChannel.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"> </param>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.NonRfcChannel.Halfops">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.NonRfcChannel.UnsafeHalfops">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ActionEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.CtcpEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcEventArgs">
+             <summary>
+            
+             </summary>
+             <threadsafety static="true" instance="true" />
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcEventArgs.Data">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ErrorEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.MotdEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.PingEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.PongEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.KickEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.JoinEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.NamesEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ListEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.InviteEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.PartEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.WhoEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.QuitEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.AwayEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.NickChangeEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.TopicEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.TopicChangeEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.BanEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.UnbanEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.OpEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.DeopEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.HalfopEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.DehalfopEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.VoiceEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.DevoiceEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ReadLineEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.WriteLineEventArgs">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.AutoConnectErrorEventArgs">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcCommands">
+             <summary>
+            
+             </summary>
+             <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcConnection">
+            <summary>
+            
+            </summary>
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.#ctor">
+            <summary>
+            Initializes the message queues, read and write thread
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.Connect(System.String[],System.Int32)">
+            <overloads>this method has 2 overloads</overloads>
+            <summary>
+            Connects to the specified server and port, when the connection fails
+            the next server in the list will be used.
+            </summary>
+            <param name="addresslist">List of servers to connect to</param>
+            <param name="port">Portnumber to connect to</param>
+            <exception cref="T:Meebey.SmartIrc4net.CouldNotConnectException">The connection failed</exception>
+            <exception cref="T:Meebey.SmartIrc4net.AlreadyConnectedException">If there is already an active connection</exception>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.Connect(System.String,System.Int32)">
+            <summary>
+            Connects to the specified server and port.
+            </summary>
+            <param name="address">Server address to connect to</param>
+            <param name="port">Port number to connect to</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.Reconnect">
+            <summary>
+            Reconnects to the server
+            </summary>
+            <exception cref="T:Meebey.SmartIrc4net.NotConnectedException">
+            If there was no active connection
+            </exception>
+            <exception cref="T:Meebey.SmartIrc4net.CouldNotConnectException">
+            The connection failed
+            </exception>
+            <exception cref="T:Meebey.SmartIrc4net.AlreadyConnectedException">
+            If there is already an active connection
+            </exception>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.Disconnect">
+            <summary>
+            Disconnects from the server
+            </summary>
+            <exception cref="T:Meebey.SmartIrc4net.NotConnectedException">
+            If there was no active connection
+            </exception>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.Listen(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="blocking"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.Listen">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.ListenOnce(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="blocking"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.ListenOnce">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.ReadLine(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="blocking"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.WriteLine(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.WriteLine(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnReadLine">
+            <event cref="E:Meebey.SmartIrc4net.IrcConnection.OnReadLine">
+            Raised when a \r\n terminated line is read from the socket
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnWriteLine">
+            <event cref="E:Meebey.SmartIrc4net.IrcConnection.OnWriteLine">
+            Raised when a \r\n terminated line is written to the socket
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnConnecting">
+            <event cref="!:OnConnect">
+            Raised before the connect attempt
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnConnected">
+            <event cref="!:OnConnect">
+            Raised on successful connect
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnDisconnecting">
+            <event cref="!:OnConnect">
+            Raised before the connection is closed
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnDisconnected">
+            <event cref="!:OnConnect">
+            Raised when the connection is closed
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnConnectionError">
+            <event cref="E:Meebey.SmartIrc4net.IrcConnection.OnConnectionError">
+            Raised when the connection got into an error state
+            </event>
+        </member>
+        <member name="E:Meebey.SmartIrc4net.IrcConnection.OnAutoConnectError">
+            <event cref="T:Meebey.SmartIrc4net.AutoConnectErrorEventHandler">
+            Raised when the connection got into an error state during auto connect loop
+            </event>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.IsConnectionError">
+            <summary>
+            When a connection error is detected this property will return true
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.Address">
+            <summary>
+            Gets the current address of the connection
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.AddressList">
+            <summary>
+            Gets the address list of the connection
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.Port">
+            <summary>
+            Gets the used port of the connection
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.AutoReconnect">
+            <summary>
+            By default nothing is done when the library looses the connection
+            to the server.
+            Default: false
+            </summary>
+            <value>
+            true, if the library should reconnect on lost connections
+            false, if the library should not take care of it
+            </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.AutoRetry">
+            <summary>
+            If the library should retry to connect when the connection fails.
+            Default: false
+            </summary>
+            <value>
+            true, if the library should retry to connect
+            false, if the library should not retry
+            </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.AutoRetryDelay">
+            <summary>
+            Delay between retry attempts in Connect() in seconds.
+            Default: 30
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.SendDelay">
+            <summary>
+            To prevent flooding the IRC server, it's required to delay each
+            message, given in milliseconds.
+            Default: 200
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.IsRegistered">
+            <summary>
+            On successful registration on the IRC network, this is set to true.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.IsConnected">
+            <summary>
+            On successful connect to the IRC server, this is set to true.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.VersionNumber">
+            <summary>
+            Gets the SmartIrc4net version number
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.VersionString">
+            <summary>
+            Gets the full SmartIrc4net version string
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.Encoding">
+            <summary>
+            Encoding which is used for reading and writing to the socket
+            Default: encoding of the system
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.SocketReceiveTimeout">
+            <summary>
+            Timeout in seconds for receiving data from the socket
+            Default: 600
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.SocketSendTimeout">
+            <summary>
+            Timeout in seconds for sending data to the socket
+            Default: 600
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.IdleWorkerInterval">
+            <summary>
+            Interval in seconds to run the idle worker
+            Default: 60
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.PingInterval">
+            <summary>
+            Interval in seconds to send a PING
+            Default: 60
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.PingTimeout">
+            <summary>
+            Timeout in seconds for server response to a PING
+            Default: 600
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcConnection.Lag">
+            <summary>
+            Latency between client and the server
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcConnection.ReadThread">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.ReadThread.#ctor(Meebey.SmartIrc4net.IrcConnection)">
+            <summary>
+            
+            </summary>
+            <param name="connection"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.ReadThread.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.ReadThread.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcConnection.WriteThread">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.WriteThread.#ctor(Meebey.SmartIrc4net.IrcConnection)">
+            <summary>
+            
+            </summary>
+            <param name="connection"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.WriteThread.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.WriteThread.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcConnection.IdleWorkerThread">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.IdleWorkerThread.#ctor(Meebey.SmartIrc4net.IrcConnection)">
+            <summary>
+            
+            </summary>
+            <param name="connection"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.IdleWorkerThread.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcConnection.IdleWorkerThread.Stop">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.SendMessage(Meebey.SmartIrc4net.SendType,System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="destination"></param>
+            <param name="message"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.SendMessage(Meebey.SmartIrc4net.SendType,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="destination"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.SendReply(Meebey.SmartIrc4net.IrcMessageData,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="message"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.SendReply(Meebey.SmartIrc4net.IrcMessageData,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="data"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Op(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Op(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Deop(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Deop(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Voice(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Voice(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Devoice(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Devoice(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Ban(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Ban(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Ban(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="hostmask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Ban(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="hostmask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Unban(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="hostmask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Unban(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="hostmask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Halfop(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.Dehalfop(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPass(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="password"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPass(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="password"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUser(System.String,System.Int32,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="username"></param>
+            <param name="usermode"></param>
+            <param name="realname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUser(System.String,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="username"></param>
+            <param name="usermode"></param>
+            <param name="realname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcOper(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="password"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcOper(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="password"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPrivmsg(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="destination"></param>
+            <param name="message"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPrivmsg(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="destination"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNotice(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="destination"></param>
+            <param name="message"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNotice(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="destination"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="key"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String[],System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="keys"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcJoin(System.String[],System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="keys"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="partmessage"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="partmessage"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="partmessage"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPart(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="partmessage"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nicknames"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nicknames"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nicknames"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nicknames"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="comment"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nickname"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nickname"></param>
+            <param name="comment"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nickname"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nicknames"></param>
+            <param name="comment"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String,System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="nicknames"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nicknames"></param>
+            <param name="comment"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKick(System.String[],System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="nicknames"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMotd(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMotd">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMotd(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMotd(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLuser(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLuser">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLuser(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLuser(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLuser(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLuser(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcVersion(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcVersion">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcVersion(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcVersion(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcStats(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcStats">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcStats(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcStats(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcStats(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcStats(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLinks">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLinks(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="servermask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLinks(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="servermask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLinks(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="remoteserver"></param>
+            <param name="servermask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcLinks(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="remoteserver"></param>
+            <param name="servermask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTime(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTime(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTime(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcConnect(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="targetserver"></param>
+            <param name="port"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcConnect(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="targetserver"></param>
+            <param name="port"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcConnect(System.String,System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="targetserver"></param>
+            <param name="port"></param>
+            <param name="remoteserver"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcConnect(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="targetserver"></param>
+            <param name="port"></param>
+            <param name="remoteserver"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTrace(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTrace">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTrace(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTrace(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAdmin(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAdmin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAdmin(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAdmin(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcInfo(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcInfo(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcInfo(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcServlist(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcServlist">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcServlist(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcServlist(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcServlist(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="type"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcServlist(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSquery(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="servicename"></param>
+            <param name="servicetext"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSquery(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="servicename"></param>
+            <param name="servicetext"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcList(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNames(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channels"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTopic(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTopic(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTopic(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="newtopic"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcTopic(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channel"></param>
+            <param name="newtopic"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMode(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMode(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMode(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="newmode"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcMode(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="newmode"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcService(System.String,System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="distribution"></param>
+            <param name="info"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcService(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="distribution"></param>
+            <param name="info"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcInvite(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcInvite(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNick(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="newnickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcNick(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="newnickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWho(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWho">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWho(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWho(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWho(System.String,System.Boolean,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="ircop"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWho(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="ircop"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="mask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="masks"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="masks"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="mask"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="mask"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String,System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="masks"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhois(System.String,System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="masks"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="count"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String[],System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="count"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String[],System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String,System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="count"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="count"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String[],System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="count"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWhowas(System.String[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="count"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKill(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="comment"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcKill(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPing(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPing(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPing(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="server2"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPing(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="server2"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPong(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPong(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPong(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="server2"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcPong(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="server2"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAway(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAway">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAway(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="awaytext"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcAway(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="awaytext"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcRehash">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcDie">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcRestart">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSummon(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSummon(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSummon(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSummon(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSummon(System.String,System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="target"></param>
+            <param name="channel"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSummon(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="user"></param>
+            <param name="target"></param>
+            <param name="channel"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUsers(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUsers">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUsers(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUsers(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWallops(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="wallopstext"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcWallops(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="wallopstext"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUserhost(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUserhost(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUserhost(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcUserhost(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcIson(System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcIson(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="nickname"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcIson(System.String[],Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcIson(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="nicknames"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcQuit(Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcQuit">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcQuit(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="quitmessage"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSquit(System.String,System.String,Meebey.SmartIrc4net.Priority)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="comment"></param>
+            <param name="priority"></param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcCommands.RfcSquit(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="server"></param>
+            <param name="comment"></param>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.Priority">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.SendType">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ReceiveType">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ReplyCode">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ChannelUser">
+            <summary>
+            This class manages the information of a user within a channel.
+            </summary>
+            <remarks>
+            only used with channel sync
+            </remarks>
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.ChannelUser.#ctor(System.String,Meebey.SmartIrc4net.IrcUser)">
+            <summary>
+            
+            </summary>
+            <param name="channel"> </param>
+            <param name="ircuser"> </param>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.Channel">
+            <summary>
+            Gets the channel name
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.IsIrcOp">
+            <summary>
+            Gets the server operator status of the user
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.IsOp">
+            <summary>
+            Gets or sets the op flag of the user (+o)
+            </summary>
+            <remarks>
+            only used with channel sync
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.IsVoice">
+            <summary>
+            Gets or sets the voice flag of the user (+v)
+            </summary>
+            <remarks>
+            only used with channel sync
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.IsAway">
+            <summary>
+            Gets the away status of the user
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.IrcUser">
+            <summary>
+            Gets the underlaying IrcUser object
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.Nick">
+            <summary>
+            Gets the nickname of the user
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.Ident">
+            <summary>
+            Gets the identity (username) of the user, which is used by some IRC networks for authentication.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.Host">
+            <summary>
+            Gets the hostname of the user,
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.Realname">
+            <summary>
+            Gets the supposed real name of the user.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.Server">
+            <summary>
+            Gets the server the user is connected to.
+            </summary>
+            <value> </value>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.HopCount">
+            <summary>
+            Gets or sets the count of hops between you and the user's server
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.ChannelUser.JoinedChannels">
+            <summary>
+            Gets the list of channels the user has joined
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcClient">
+            <summary>
+            This layer is an event driven high-level API with all features you could need for IRC programming.
+            </summary>
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.#ctor">
+            <summary>
+            This class manages the connection server and provides access to all the objects needed to send and receive messages.
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Connect(System.String[],System.Int32)">
+            <summary>
+            Connection parameters required to establish an server connection.
+            </summary>
+            <param name="addresslist">The list of server hostnames.</param>
+            <param name="port">The TCP port the server listens on.</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Reconnect(System.Boolean,System.Boolean)">
+            <overloads>
+            Reconnects to the current server.
+            </overloads>
+            <param name="login">If the login data should be sent, after successful connect.</param>
+            <param name="channels">If the channels should be rejoined, after successful connect.</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Reconnect(System.Boolean)">
+            <param name="login">If the login data should be sent, after successful connect.</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String[],System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nicklist">The users list of 'nick' names which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+            <param name="usermode">A numeric mode parameter.  
+              <remark>
+                Set to 0 to recieve wallops and be invisible. 
+                Set to 4 to be invisible and not receive wallops.
+              </remark>
+            </param>
+            <param name="username">The user's machine logon name</param>        
+            <param name="password">The optional password can and MUST be set before any attempt to register
+             the connection is made.</param>        
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String[],System.String,System.Int32,System.String)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nicklist">The users list of 'nick' names which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+            <param name="usermode">A numeric mode parameter.  
+            Set to 0 to recieve wallops and be invisible. 
+            Set to 4 to be invisible and not receive wallops.</param>        
+            <param name="username">The user's machine logon name</param>        
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String[],System.String,System.Int32)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nicklist">The users list of 'nick' names which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+            <param name="usermode">A numeric mode parameter.  
+            Set to 0 to recieve wallops and be invisible. 
+            Set to 4 to be invisible and not receive wallops.</param>        
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String[],System.String)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nicklist">The users list of 'nick' names which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param> 
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nick">The users 'nick' name which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+            <param name="usermode">A numeric mode parameter.  
+            Set to 0 to recieve wallops and be invisible. 
+            Set to 4 to be invisible and not receive wallops.</param>        
+            <param name="username">The user's machine logon name</param>        
+            <param name="password">The optional password can and MUST be set before any attempt to register
+             the connection is made.</param>   
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nick">The users 'nick' name which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+            <param name="usermode">A numeric mode parameter.  
+            Set to 0 to recieve wallops and be invisible. 
+            Set to 4 to be invisible and not receive wallops.</param>        
+            <param name="username">The user's machine logon name</param>        
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String,System.String,System.Int32)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nick">The users 'nick' name which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+            <param name="usermode">A numeric mode parameter.  
+            Set to 0 to recieve wallops and be invisible. 
+            Set to 4 to be invisible and not receive wallops.</param>        
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.Login(System.String,System.String)">
+            <summary>
+            Login parameters required identify with server connection
+            </summary>
+            <remark>Login is used at the beginning of connection to specify the username, hostname and realname of a new user.</remark>
+            <param name="nick">The users 'nick' name which may NOT contain spaces</param>
+            <param name="realname">The users 'real' name which may contain space characters</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.IsMe(System.String)">
+            <summary>
+            Determine if a specifier nickname is you
+            </summary>
+            <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
+            <returns>True if nickname belongs to you</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.IsJoined(System.String)">
+            <summary>
+            Determines if your nickname can be found in a specified channel
+            </summary>
+            <param name="channelname">The name of the channel you wish to query</param>
+            <returns>True if you are found in channel</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.IsJoined(System.String,System.String)">
+            <summary>
+            Determine if a specified nickname can be found in a specified channel
+            </summary>
+            <param name="channelname">The name of the channel you wish to query</param>
+            <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
+            <returns>True if nickname is found in channel</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetIrcUser(System.String)">
+            <summary>
+            Returns user information
+            </summary>
+            <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
+            <returns>IrcUser object of requested nickname</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetChannelUser(System.String,System.String)">
+            <summary>
+            Returns extended user information including channel information
+            </summary>
+            <param name="channelname">The name of the channel you wish to query</param>
+            <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
+            <returns>ChannelUser object of requested channelname/nickname</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetChannel(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="channelname">The name of the channel you wish to query</param>
+            <returns>Channel object of requested channel</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetChannels">
+            <summary>
+            Gets a list of all joined channels on server
+            </summary>
+            <returns>String array of all joined channel names</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetChannelList(System.String)">
+            <summary>
+            Fetches a fresh list of all available channels that match the passed mask
+            </summary>
+            <returns>List of ListInfo</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetWhoList(System.String)">
+            <summary>
+            Fetches a fresh list of users that matches the passed mask
+            </summary>
+            <returns>List of ListInfo</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient.GetBanList(System.String)">
+            <summary>
+            Fetches a fresh ban list of the specified channel
+            </summary>
+            <returns>List of ListInfo</returns>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._NextNickname">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._RemoveIrcUser(System.String)">
+            <summary>
+            Removes a specified user from all channel lists
+            </summary>
+            <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._RemoveChannelUser(System.String,System.String)">
+            <summary>
+            Removes a specified user from a specified channel list
+            </summary>
+            <param name="channelname">The name of the channel you wish to query</param>
+            <param name="nickname">The users 'nick' name which may NOT contain spaces</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._InterpretChannelMode(Meebey.SmartIrc4net.IrcMessageData,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="ircdata">Message data containing channel mode information</param>
+            <param name="mode">Channel mode</param>
+            <param name="parameter">List of supplied paramaters</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_PING(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for ping messages
+            </summary>
+            <param name="ircdata">Message data containing ping information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_PONG(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for PONG messages
+            </summary>
+            <param name="ircdata">Message data containing pong information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_ERROR(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for error messages
+            </summary>
+            <param name="ircdata">Message data containing error information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_JOIN(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for join messages
+            </summary>
+            <param name="ircdata">Message data containing join information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_PART(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for part messages
+            </summary>
+            <param name="ircdata">Message data containing part information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_KICK(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for kick messages
+            </summary>
+            <param name="ircdata">Message data containing kick information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_QUIT(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for quit messages
+            </summary>
+            <param name="ircdata">Message data containing quit information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_PRIVMSG(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for private messages
+            </summary>
+            <param name="ircdata">Message data containing private message information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_NOTICE(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for notice messages
+            </summary>
+            <param name="ircdata">Message data containing notice information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_TOPIC(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for topic messages
+            </summary>
+            <param name="ircdata">Message data containing topic information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_NICK(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for nickname messages
+            </summary>
+            <param name="ircdata">Message data containing nickname information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_INVITE(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for invite messages
+            </summary>
+            <param name="ircdata">Message data containing invite information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_MODE(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for mode messages
+            </summary>
+            <param name="ircdata">Message data containing mode information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_RPL_CHANNELMODEIS(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for channel mode reply messages
+            </summary>
+            <param name="ircdata">Message data containing reply information</param>
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcClient._Event_RPL_WELCOME(Meebey.SmartIrc4net.IrcMessageData)">
+            <summary>
+            Event handler for welcome reply messages
+            </summary>
+            <remark>
+            Upon success, the client will receive an RPL_WELCOME (for users) or
+            RPL_YOURESERVICE (for services) message indicating that the
+            connection is now registered and known the to the entire IRC network.
+            The reply message MUST contain the full client identifier upon which
+            it was registered.
+            </remark>
+            <param name="ircdata">Message data containing reply information</param>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.ActiveChannelSyncing">
+            <summary>
+            Enables/disables the active channel sync feature.
+            Default: false
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.PassiveChannelSyncing">
+            <summary>
+            Enables/disables the passive channel sync feature. Not implemented yet!
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.CtcpVersion">
+            <summary>
+            Sets the ctcp version that should be replied on ctcp version request.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.AutoJoinOnInvite">
+            <summary>
+            Enables/disables auto joining of channels when invited.
+            Default: false
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.AutoRejoin">
+            <summary>
+            Enables/disables automatic rejoining of channels when a connection to the server is lost.
+            Default: false
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.AutoRejoinOnKick">
+            <summary>
+            Enables/disables auto rejoining of channels when kicked.
+            Default: false
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.AutoRelogin">
+            <summary>
+            Enables/disables auto relogin to the server after a reconnect.
+            Default: false
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.AutoNickHandling">
+            <summary>
+            Enables/disables auto nick handling on nick collisions
+            Default: true
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.SupportNonRfc">
+            <summary>
+            Enables/disables support for non rfc features.
+            Default: false
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.Nickname">
+            <summary>
+            Gets the nickname of us.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.NicknameList">
+            <summary>
+            Gets the list of nicknames of us.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.Realname">
+            <summary>
+            Gets the supposed real name of us.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.Username">
+            <summary>
+            Gets the username for the server.
+            </summary>
+            <remarks>
+            System username is set by default 
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.Usermode">
+            <summary>
+            Gets the alphanumeric mode mask of us.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.IUsermode">
+            <summary>
+            Gets the numeric mode mask of us.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.IsAway">
+            <summary>
+            Returns if we are away on this connection
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.Password">
+            <summary>
+            Gets the password for the server.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.JoinedChannels">
+            <summary>
+            Gets the list of channels we are joined.
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcClient.Motd">
+            <summary>
+            Gets the server message of the day.
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcTcpClient">
+             <summary>
+            
+             </summary>
+             <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.NonRfcChannelUser">
+             <summary>
+            
+             </summary>
+             <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.NonRfcChannelUser.#ctor(System.String,Meebey.SmartIrc4net.IrcUser)">
+            <summary>
+            
+            </summary>
+            <param name="channel"> </param>
+            <param name="ircuser"> </param>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.NonRfcChannelUser.IsHalfop">
+            <summary>
+            
+            </summary>
+            <value> </value>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcUser">
+            <summary>
+            This class manages the user information.
+            </summary>
+            <remarks>
+            only used with channel sync
+            <seealso cref="P:Meebey.SmartIrc4net.IrcClient.ActiveChannelSyncing">
+              IrcClient.ActiveChannelSyncing
+            </seealso>
+            </remarks>
+            <threadsafety static="true" instance="true"/>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.Nick">
+            <summary>
+            Gets or sets the nickname of the user.
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.Ident">
+            <summary>
+            Gets or sets the identity (username) of the user which is used by some IRC networks for authentication. 
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.Host">
+            <summary>
+            Gets or sets the hostname of the user. 
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.Realname">
+            <summary>
+            Gets or sets the supposed real name of the user.
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.IsIrcOp">
+            <summary>
+            Gets or sets the server operator status of the user
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.IsAway">
+            <summary>
+            Gets or sets away status of the user
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.Server">
+            <summary>
+            Gets or sets the server the user is connected to
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.HopCount">
+            <summary>
+            Gets or sets the count of hops between you and the user's server
+            </summary>
+            <remarks>
+            Do _not_ set this value, it will break channel sync!
+            </remarks>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcUser.JoinedChannels">
+            <summary>
+            Gets the list of channels the user has joined
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.IrcMessageData">
+            <summary>
+            This class contains an IRC message in a parsed form
+            </summary>
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="M:Meebey.SmartIrc4net.IrcMessageData.#ctor(Meebey.SmartIrc4net.IrcClient,System.String,System.String,System.String,System.String,System.String,System.String,System.String,Meebey.SmartIrc4net.ReceiveType,Meebey.SmartIrc4net.ReplyCode)">
+            <summary>
+            Constructor to create an instace of IrcMessageData
+            </summary>
+            <param name="ircclient">IrcClient the message originated from</param>
+            <param name="from">combined nickname, identity and host of the user that sent the message (nick!ident@host)</param>
+            <param name="nick">nickname of the user that sent the message</param>
+            <param name="ident">identity (username) of the userthat sent the message</param>
+            <param name="host">hostname of the user that sent the message</param>
+            <param name="channel">channel the message originated from</param>
+            <param name="message">message</param>
+            <param name="rawmessage">raw message sent by the server</param>
+            <param name="type">message type</param>
+            <param name="replycode">message reply code</param>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Irc">
+            <summary>
+            Gets the IrcClient object the message originated from
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.From">
+            <summary>
+            Gets the combined nickname, identity and hostname of the user that sent the message
+            </summary>
+            <example>
+            nick!ident@host
+            </example>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Nick">
+            <summary>
+            Gets the nickname of the user that sent the message
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Ident">
+            <summary>
+            Gets the identity (username) of the user that sent the message
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Host">
+            <summary>
+            Gets the hostname of the user that sent the message
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Channel">
+            <summary>
+            Gets the channel the message originated from
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Message">
+            <summary>
+            Gets the message
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.MessageArray">
+            <summary>
+            Gets the message as an array of strings (splitted by space)
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.RawMessage">
+            <summary>
+            Gets the raw message sent by the server
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.RawMessageArray">
+            <summary>
+            Gets the raw message sent by the server as array of strings (splitted by space)
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.Type">
+            <summary>
+            Gets the message type
+            </summary>
+        </member>
+        <member name="P:Meebey.SmartIrc4net.IrcMessageData.ReplyCode">
+            <summary>
+            Gets the message reply code
+            </summary>
+        </member>
+        <member name="T:Meebey.SmartIrc4net.SmartIrc4netException">
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.ConnectionException">
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.CouldNotConnectException">
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.NotConnectedException">
+            <threadsafety static="true" instance="true" />
+        </member>
+        <member name="T:Meebey.SmartIrc4net.AlreadyConnectedException">
+            <threadsafety static="true" instance="true" />
         </member>
     </members>
 </doc>

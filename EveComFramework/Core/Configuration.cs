@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using EveComFramework.AutoModule;
 using EveComFramework.Move;
 using EveComFramework.Optimizer;
+using EveComFramework.Comms;
 
 namespace EveComFramework.Core
 {
@@ -31,6 +32,8 @@ namespace EveComFramework.Core
                 MoveSettings MoveConfig = EveComFramework.Move.Move.Instance.Config;
                 OptimizerSettings OptimizerConfig = Optimizer.Optimizer.Instance.Config;
                 InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
+                Comms.Comms CommsInstance = Comms.Comms.Instance;
+                CommsSettings CommsConfig = Comms.Comms.Instance.Config;
 
                 #region AutoModule
 
@@ -150,6 +153,21 @@ namespace EveComFramework.Core
                 checkDisable3D.CheckedChanged += (s, a) => { OptimizerConfig.Enable3D = !checkDisable3D.Checked; OptimizerConfig.Save(); };
                 numericMemoryMax.Value = OptimizerConfig.MaxMemorySize;
                 numericMemoryMax.ValueChanged += (s, a) => { OptimizerConfig.MaxMemorySize = numericMemoryMax.Value; OptimizerConfig.Save(); };
+
+                #endregion
+
+                #region IRC
+
+                checkUseIRC.Checked = CommsConfig.UseIRC;
+                checkUseIRC.CheckedChanged += (s, a) => { CommsConfig.UseIRC = checkUseIRC.Checked; CommsConfig.Save(); };
+                textServer.Text = CommsConfig.Server;
+                textServer.TextChanged += (s, a) => { CommsConfig.Server = textServer.Text; CommsConfig.Save(); };
+                numericPort.Value = CommsConfig.Port;
+                numericPort.ValueChanged += (s, a) => { CommsConfig.Port = (int)Math.Floor(numericPort.Value); CommsConfig.Save(); };
+                textIRCPrefix.Text = CommsConfig.Prefix;
+                textIRCPrefix.TextChanged += (s, a) => { CommsConfig.Prefix = textIRCPrefix.Text; CommsConfig.Save(); };
+                textSendTo.Text = CommsConfig.SendTo;
+                textSendTo.TextChanged += (s, a) => { CommsConfig.SendTo = textSendTo.Text; CommsConfig.Save(); };
 
                 #endregion
             }

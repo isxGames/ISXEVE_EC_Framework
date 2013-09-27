@@ -61,6 +61,7 @@
       <DependentUpon>AutoModule.cs</DependentUpon>
     </Compile>
     <Compile Include="Cargo\Cargo.cs" />
+    <Compile Include="Comms\Comms.cs" />
     <Compile Include="Core\Busy.cs" />
     <Compile Include="Core\Cache.cs" />
     <Compile Include="Core\Config.cs" />
@@ -142,6 +143,29 @@
     <Compile Include="SkillTraining\UI\SkillTraining.Designer.cs">
       <DependentUpon>SkillTraining.cs</DependentUpon>
     </Compile>
+    <Compile Include="SmartIRC4Net\Consts.cs" />
+    <Compile Include="SmartIRC4Net\EventArgs.cs" />
+    <Compile Include="SmartIRC4Net\Exceptions.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\BanInfo.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\Channel.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\ChannelInfo.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\ChannelUser.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\Delegates.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\EventArgs.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\IrcClient.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\IrcMessageData.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\IrcUser.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\NonRfcChannel.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\NonRfcChannelUser.cs" />
+    <Compile Include="SmartIRC4Net\IrcClient\WhoInfo.cs" />
+    <Compile Include="SmartIRC4Net\IrcCommands\IrcCommands.cs" />
+    <Compile Include="SmartIRC4Net\IrcCommands\Rfc2812.cs" />
+    <Compile Include="SmartIRC4Net\IrcConnection\Delegates.cs" />
+    <Compile Include="SmartIRC4Net\IrcConnection\EventArgs.cs" />
+    <Compile Include="SmartIRC4Net\IrcConnection\IrcConnection.cs" />
+    <Compile Include="SmartIRC4Net\IrcConnection\IrcProperties.cs" />
+    <Compile Include="SmartIRC4Net\IrcConnection\IrcTcpClient.cs" />
+    <Compile Include="SmartIRC4Net\Logger.cs" />
     <Compile Include="Targets\Targets.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +206,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\action_delete.png" />
+    <None Include="SmartIRC4Net\Makefile.am" />
+    <None Include="SmartIRC4Net\Makefile.in" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\action_check.png" />

@@ -63,8 +63,9 @@
             this.checkAutoModule = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkUndockWarp = new System.Windows.Forms.CheckBox();
             this.textUndockWarp = new System.Windows.Forms.TextBox();
+            this.checkUndockWarp = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.checkInstaWarp = new System.Windows.Forms.CheckBox();
@@ -83,10 +84,20 @@
             this.numericOrbitOrbit = new System.Windows.Forms.NumericUpDown();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.checkDisable3D = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.numericMemoryMax = new System.Windows.Forms.NumericUpDown();
+            this.checkDisable3D = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkUseIRC = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textServer = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numericPort = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textIRCPrefix = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textSendTo = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -118,6 +129,9 @@
             this.groupBox5.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericMemoryMax)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPort)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -570,6 +584,15 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(323, 41);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // textUndockWarp
+            // 
+            this.textUndockWarp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textUndockWarp.Location = new System.Drawing.Point(64, 20);
+            this.textUndockWarp.Margin = new System.Windows.Forms.Padding(0);
+            this.textUndockWarp.Name = "textUndockWarp";
+            this.textUndockWarp.Size = new System.Drawing.Size(259, 21);
+            this.textUndockWarp.TabIndex = 1;
+            // 
             // checkUndockWarp
             // 
             this.checkUndockWarp.AutoSize = true;
@@ -582,14 +605,17 @@
             this.checkUndockWarp.Text = "Enabled";
             this.checkUndockWarp.UseVisualStyleBackColor = true;
             // 
-            // textUndockWarp
+            // label6
             // 
-            this.textUndockWarp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textUndockWarp.Location = new System.Drawing.Point(64, 20);
-            this.textUndockWarp.Margin = new System.Windows.Forms.Padding(0);
-            this.textUndockWarp.Name = "textUndockWarp";
-            this.textUndockWarp.Size = new System.Drawing.Size(259, 21);
-            this.textUndockWarp.TabIndex = 1;
+            this.label6.AutoSize = true;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(64, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(259, 20);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Substring";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox3
             // 
@@ -805,6 +831,15 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(320, 34);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
+            // numericMemoryMax
+            // 
+            this.numericMemoryMax.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericMemoryMax.Location = new System.Drawing.Point(160, 13);
+            this.numericMemoryMax.Margin = new System.Windows.Forms.Padding(0);
+            this.numericMemoryMax.Name = "numericMemoryMax";
+            this.numericMemoryMax.Size = new System.Drawing.Size(160, 21);
+            this.numericMemoryMax.TabIndex = 10;
+            // 
             // checkDisable3D
             // 
             this.checkDisable3D.AutoSize = true;
@@ -816,18 +851,6 @@
             this.checkDisable3D.TabIndex = 0;
             this.checkDisable3D.Text = "Disable 3D Rendering";
             this.checkDisable3D.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(64, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(259, 20);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Substring";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
@@ -841,20 +864,148 @@
             this.label7.Text = "Restrict Memory Usage (MB)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // numericMemoryMax
+            // groupBox6
             // 
-            this.numericMemoryMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericMemoryMax.Location = new System.Drawing.Point(160, 13);
-            this.numericMemoryMax.Margin = new System.Windows.Forms.Padding(0);
-            this.numericMemoryMax.Name = "numericMemoryMax";
-            this.numericMemoryMax.Size = new System.Drawing.Size(160, 21);
-            this.numericMemoryMax.TabIndex = 10;
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.tableLayoutPanel6);
+            this.groupBox6.Location = new System.Drawing.Point(3, 621);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(326, 118);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "IRC Relay";
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.checkUseIRC, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label8, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.textServer, 2, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label9, 1, 2);
+            this.tableLayoutPanel6.Controls.Add(this.numericPort, 2, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label10, 1, 3);
+            this.tableLayoutPanel6.Controls.Add(this.textIRCPrefix, 2, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label11, 1, 4);
+            this.tableLayoutPanel6.Controls.Add(this.textSendTo, 2, 4);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 5;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(320, 98);
+            this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // checkUseIRC
+            // 
+            this.checkUseIRC.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.checkUseIRC, 3);
+            this.checkUseIRC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkUseIRC.Location = new System.Drawing.Point(0, 0);
+            this.checkUseIRC.Margin = new System.Windows.Forms.Padding(0);
+            this.checkUseIRC.Name = "checkUseIRC";
+            this.checkUseIRC.Size = new System.Drawing.Size(320, 17);
+            this.checkUseIRC.TabIndex = 0;
+            this.checkUseIRC.Text = "Enabled";
+            this.checkUseIRC.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label8.Location = new System.Drawing.Point(15, 17);
+            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(42, 21);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Server";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textServer
+            // 
+            this.textServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textServer.Location = new System.Drawing.Point(57, 17);
+            this.textServer.Margin = new System.Windows.Forms.Padding(0);
+            this.textServer.Name = "textServer";
+            this.textServer.Size = new System.Drawing.Size(263, 21);
+            this.textServer.TabIndex = 2;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label9.Location = new System.Drawing.Point(15, 38);
+            this.label9.Margin = new System.Windows.Forms.Padding(0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(42, 21);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "Port";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numericPort
+            // 
+            this.numericPort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericPort.Location = new System.Drawing.Point(57, 38);
+            this.numericPort.Margin = new System.Windows.Forms.Padding(0);
+            this.numericPort.Name = "numericPort";
+            this.numericPort.Size = new System.Drawing.Size(263, 21);
+            this.numericPort.TabIndex = 4;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Location = new System.Drawing.Point(15, 59);
+            this.label10.Margin = new System.Windows.Forms.Padding(0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 21);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "Prefix";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textIRCPrefix
+            // 
+            this.textIRCPrefix.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textIRCPrefix.Location = new System.Drawing.Point(57, 59);
+            this.textIRCPrefix.Margin = new System.Windows.Forms.Padding(0);
+            this.textIRCPrefix.Name = "textIRCPrefix";
+            this.textIRCPrefix.Size = new System.Drawing.Size(263, 21);
+            this.textIRCPrefix.TabIndex = 6;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label11.Location = new System.Drawing.Point(15, 80);
+            this.label11.Margin = new System.Windows.Forms.Padding(0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 21);
+            this.label11.TabIndex = 7;
+            this.label11.Text = "Send To";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textSendTo
+            // 
+            this.textSendTo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textSendTo.Location = new System.Drawing.Point(57, 80);
+            this.textSendTo.Margin = new System.Windows.Forms.Padding(0);
+            this.textSendTo.Name = "textSendTo";
+            this.textSendTo.Size = new System.Drawing.Size(263, 21);
+            this.textSendTo.TabIndex = 8;
             // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -862,7 +1013,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Configuration";
-            this.Size = new System.Drawing.Size(350, 715);
+            this.Size = new System.Drawing.Size(350, 773);
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -900,6 +1051,10 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericMemoryMax)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPort)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -965,5 +1120,16 @@
         private System.Windows.Forms.CheckBox checkDisable3D;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown numericMemoryMax;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.CheckBox checkUseIRC;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textServer;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown numericPort;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textIRCPrefix;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textSendTo;
     }
 }
