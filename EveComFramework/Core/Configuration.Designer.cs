@@ -94,10 +94,11 @@
             this.textServer = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.numericPort = new System.Windows.Forms.NumericUpDown();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textIRCPrefix = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textSendTo = new System.Windows.Forms.TextBox();
+            this.checkLocal = new System.Windows.Forms.CheckBox();
+            this.checkWallet = new System.Windows.Forms.CheckBox();
+            this.checkNPC = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -946,36 +947,40 @@
             this.groupBox6.Controls.Add(this.tableLayoutPanel6);
             this.groupBox6.Location = new System.Drawing.Point(3, 621);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 118);
+            this.groupBox6.Size = new System.Drawing.Size(326, 140);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "IRC Relay";
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnCount = 4;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel6.Controls.Add(this.checkUseIRC, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label8, 1, 1);
             this.tableLayoutPanel6.Controls.Add(this.textServer, 2, 1);
             this.tableLayoutPanel6.Controls.Add(this.label9, 1, 2);
             this.tableLayoutPanel6.Controls.Add(this.numericPort, 2, 2);
-            this.tableLayoutPanel6.Controls.Add(this.label10, 1, 3);
-            this.tableLayoutPanel6.Controls.Add(this.textIRCPrefix, 2, 3);
             this.tableLayoutPanel6.Controls.Add(this.label11, 1, 4);
             this.tableLayoutPanel6.Controls.Add(this.textSendTo, 2, 4);
+            this.tableLayoutPanel6.Controls.Add(this.checkNPC, 3, 5);
+            this.tableLayoutPanel6.Controls.Add(this.checkLocal, 1, 5);
+            this.tableLayoutPanel6.Controls.Add(this.checkWallet, 1, 6);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 5;
+            this.tableLayoutPanel6.RowCount = 7;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(320, 98);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(320, 120);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // checkUseIRC
@@ -986,7 +991,7 @@
             this.checkUseIRC.Location = new System.Drawing.Point(0, 0);
             this.checkUseIRC.Margin = new System.Windows.Forms.Padding(0);
             this.checkUseIRC.Name = "checkUseIRC";
-            this.checkUseIRC.Size = new System.Drawing.Size(320, 17);
+            this.checkUseIRC.Size = new System.Drawing.Size(149, 17);
             this.checkUseIRC.TabIndex = 0;
             this.checkUseIRC.Text = "Enabled";
             this.checkUseIRC.UseVisualStyleBackColor = true;
@@ -1005,11 +1010,12 @@
             // 
             // textServer
             // 
+            this.tableLayoutPanel6.SetColumnSpan(this.textServer, 2);
             this.textServer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textServer.Location = new System.Drawing.Point(57, 17);
             this.textServer.Margin = new System.Windows.Forms.Padding(0);
             this.textServer.Name = "textServer";
-            this.textServer.Size = new System.Drawing.Size(263, 21);
+            this.textServer.Size = new System.Drawing.Size(312, 21);
             this.textServer.TabIndex = 2;
             // 
             // label9
@@ -1026,6 +1032,7 @@
             // 
             // numericPort
             // 
+            this.tableLayoutPanel6.SetColumnSpan(this.numericPort, 2);
             this.numericPort.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numericPort.Location = new System.Drawing.Point(57, 38);
             this.numericPort.Margin = new System.Windows.Forms.Padding(0);
@@ -1040,7 +1047,7 @@
             0,
             0});
             this.numericPort.Name = "numericPort";
-            this.numericPort.Size = new System.Drawing.Size(263, 21);
+            this.numericPort.Size = new System.Drawing.Size(312, 21);
             this.numericPort.TabIndex = 4;
             this.numericPort.Value = new decimal(new int[] {
             1,
@@ -1048,32 +1055,11 @@
             0,
             0});
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(15, 59);
-            this.label10.Margin = new System.Windows.Forms.Padding(0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 21);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "Prefix";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // textIRCPrefix
-            // 
-            this.textIRCPrefix.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textIRCPrefix.Location = new System.Drawing.Point(57, 59);
-            this.textIRCPrefix.Margin = new System.Windows.Forms.Padding(0);
-            this.textIRCPrefix.Name = "textIRCPrefix";
-            this.textIRCPrefix.Size = new System.Drawing.Size(263, 21);
-            this.textIRCPrefix.TabIndex = 6;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(15, 80);
+            this.label11.Location = new System.Drawing.Point(15, 59);
             this.label11.Margin = new System.Windows.Forms.Padding(0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 21);
@@ -1083,12 +1069,51 @@
             // 
             // textSendTo
             // 
+            this.tableLayoutPanel6.SetColumnSpan(this.textSendTo, 2);
             this.textSendTo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textSendTo.Location = new System.Drawing.Point(57, 80);
+            this.textSendTo.Location = new System.Drawing.Point(57, 59);
             this.textSendTo.Margin = new System.Windows.Forms.Padding(0);
             this.textSendTo.Name = "textSendTo";
-            this.textSendTo.Size = new System.Drawing.Size(263, 21);
+            this.textSendTo.Size = new System.Drawing.Size(312, 21);
             this.textSendTo.TabIndex = 8;
+            // 
+            // checkLocal
+            // 
+            this.checkLocal.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.checkLocal, 2);
+            this.checkLocal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkLocal.Location = new System.Drawing.Point(15, 80);
+            this.checkLocal.Margin = new System.Windows.Forms.Padding(0);
+            this.checkLocal.Name = "checkLocal";
+            this.checkLocal.Size = new System.Drawing.Size(134, 20);
+            this.checkLocal.TabIndex = 9;
+            this.checkLocal.Text = "Report Local";
+            this.checkLocal.UseVisualStyleBackColor = true;
+            // 
+            // checkWallet
+            // 
+            this.checkWallet.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.checkWallet, 2);
+            this.checkWallet.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkWallet.Location = new System.Drawing.Point(15, 100);
+            this.checkWallet.Margin = new System.Windows.Forms.Padding(0);
+            this.checkWallet.Name = "checkWallet";
+            this.checkWallet.Size = new System.Drawing.Size(134, 20);
+            this.checkWallet.TabIndex = 10;
+            this.checkWallet.Text = "Report Wallet Changes";
+            this.checkWallet.UseVisualStyleBackColor = true;
+            // 
+            // checkNPC
+            // 
+            this.checkNPC.AutoSize = true;
+            this.checkNPC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkNPC.Location = new System.Drawing.Point(149, 80);
+            this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
+            this.checkNPC.Name = "checkNPC";
+            this.checkNPC.Size = new System.Drawing.Size(220, 20);
+            this.checkNPC.TabIndex = 11;
+            this.checkNPC.Text = "Include NPC Chat";
+            this.checkNPC.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
@@ -1103,7 +1128,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Configuration";
-            this.Size = new System.Drawing.Size(350, 773);
+            this.Size = new System.Drawing.Size(350, 895);
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1217,9 +1242,10 @@
         private System.Windows.Forms.TextBox textServer;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numericPort;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textIRCPrefix;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox textSendTo;
+        private System.Windows.Forms.CheckBox checkLocal;
+        private System.Windows.Forms.CheckBox checkWallet;
+        private System.Windows.Forms.CheckBox checkNPC;
     }
 }
