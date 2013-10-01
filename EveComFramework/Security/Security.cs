@@ -129,11 +129,11 @@ namespace EveComFramework.Security
         /// <summary>
         /// Dictionary of lists of entity IDs for entities currently scrambling a fleet member keyed by fleet member ID
         /// </summary>
-        public Dictionary<long, List<long>> ScramblingEntities = new Dictionary<long, List<long>>();
+        public HashSet<long> ScramblingEntities = new HashSet<long>();
         /// <summary>
         /// Dictionary of lists of entity IDs for entities currently neuting a fleet member keyed by fleet member ID
         /// </summary>
-        public Dictionary<long, List<long>> NeutingEntities = new Dictionary<long, List<long>>();
+        public HashSet<long> NeutingEntities = new HashSet<long>();
 
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
@@ -255,19 +255,7 @@ namespace EveComFramework.Security
         {
             try
             {
-                if (!ScramblingEntities.ContainsKey(long.Parse(args[1])))
-                {
-                    List<long> add = new List<long>();
-                    add.Add(long.Parse(args[2]));
-                    ScramblingEntities.Add(long.Parse(args[1]), add);
-                }
-                else
-                {
-                    if (!ScramblingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
-                    {
-                        ScramblingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
-                    }
-                }
+                ScramblingEntities.Add(long.Parse(args[1]));
             }
             catch { }
             
@@ -278,19 +266,7 @@ namespace EveComFramework.Security
         {
             try
             {
-                if (!NeutingEntities.ContainsKey(long.Parse(args[1])))
-                {
-                    List<long> add = new List<long>();
-                    add.Add(long.Parse(args[2]));
-                    NeutingEntities.Add(long.Parse(args[1]), add);
-                }
-                else
-                {
-                    if (!NeutingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
-                    {
-                        NeutingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
-                    }
-                }
+                NeutingEntities.Add(long.Parse(args[1]));
             }
             catch { }
 
@@ -425,10 +401,9 @@ namespace EveComFramework.Security
             {
                 if (Session.InFleet)
                 {
-                    List<long> ValidScrambles = ScramblingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
-                    return Entity.All.FirstOrDefault(a => ValidScrambles.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
+                    return Entity.All.FirstOrDefault(a => ScramblingEntities.Contains(a.ID) && !a.Exploded && !a.Released);
                 }
-                return Entity.All.FirstOrDefault(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
+                return Entity.All.FirstOrDefault(a => a.IsWarpScrambling && !a.Exploded && !a.Released);
             }
         }
 
@@ -436,7 +411,7 @@ namespace EveComFramework.Security
         {
             if (Session.InFleet)
             {
-                return ScramblingEntities.Values.Any(a => a.Contains(Check.ID));
+                return ScramblingEntities.Contains(Check.ID);
             }
             return Entity.All.Any(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
         }
@@ -450,10 +425,9 @@ namespace EveComFramework.Security
             {
                 if (Session.InFleet)
                 {
-                    List<long> ValidNeuters = NeutingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
-                    return Entity.All.FirstOrDefault(a => ValidNeuters.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
+                    return Entity.All.FirstOrDefault(a => NeutingEntities.Contains(a.ID) && !a.Exploded && !a.Released);
                 }
-                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
+                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
             }
         }
 
@@ -461,9 +435,9 @@ namespace EveComFramework.Security
         {
             if (Session.InFleet)
             {
-                return NeutingEntities.Values.Any(a => a.Contains(Check.ID));
+                return NeutingEntities.Contains(Check.ID);
             }
-            return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
+            return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
         }
 
         void ReportTrigger(FleeTrigger reported)
@@ -512,13 +486,13 @@ namespace EveComFramework.Security
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + Me.CharID + " " + WarpScrambling.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
             Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing);
             if (Neuting != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter " + Me.CharID + " " + Neuting.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
                 return false;
             }
 

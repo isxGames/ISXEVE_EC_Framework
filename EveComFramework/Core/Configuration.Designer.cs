@@ -96,9 +96,9 @@
             this.numericPort = new System.Windows.Forms.NumericUpDown();
             this.label11 = new System.Windows.Forms.Label();
             this.textSendTo = new System.Windows.Forms.TextBox();
+            this.checkNPC = new System.Windows.Forms.CheckBox();
             this.checkLocal = new System.Windows.Forms.CheckBox();
             this.checkWallet = new System.Windows.Forms.CheckBox();
-            this.checkNPC = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1015,7 +1015,7 @@
             this.textServer.Location = new System.Drawing.Point(57, 17);
             this.textServer.Margin = new System.Windows.Forms.Padding(0);
             this.textServer.Name = "textServer";
-            this.textServer.Size = new System.Drawing.Size(312, 21);
+            this.textServer.Size = new System.Drawing.Size(361, 21);
             this.textServer.TabIndex = 2;
             // 
             // label9
@@ -1047,7 +1047,7 @@
             0,
             0});
             this.numericPort.Name = "numericPort";
-            this.numericPort.Size = new System.Drawing.Size(312, 21);
+            this.numericPort.Size = new System.Drawing.Size(361, 21);
             this.numericPort.TabIndex = 4;
             this.numericPort.Value = new decimal(new int[] {
             1,
@@ -1074,8 +1074,20 @@
             this.textSendTo.Location = new System.Drawing.Point(57, 59);
             this.textSendTo.Margin = new System.Windows.Forms.Padding(0);
             this.textSendTo.Name = "textSendTo";
-            this.textSendTo.Size = new System.Drawing.Size(312, 21);
+            this.textSendTo.Size = new System.Drawing.Size(361, 21);
             this.textSendTo.TabIndex = 8;
+            // 
+            // checkNPC
+            // 
+            this.checkNPC.AutoSize = true;
+            this.checkNPC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkNPC.Location = new System.Drawing.Point(149, 80);
+            this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
+            this.checkNPC.Name = "checkNPC";
+            this.checkNPC.Size = new System.Drawing.Size(269, 20);
+            this.checkNPC.TabIndex = 11;
+            this.checkNPC.Text = "Include NPC Chat";
+            this.checkNPC.UseVisualStyleBackColor = true;
             // 
             // checkLocal
             // 
@@ -1102,18 +1114,6 @@
             this.checkWallet.TabIndex = 10;
             this.checkWallet.Text = "Report Wallet Changes";
             this.checkWallet.UseVisualStyleBackColor = true;
-            // 
-            // checkNPC
-            // 
-            this.checkNPC.AutoSize = true;
-            this.checkNPC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkNPC.Location = new System.Drawing.Point(149, 80);
-            this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
-            this.checkNPC.Name = "checkNPC";
-            this.checkNPC.Size = new System.Drawing.Size(220, 20);
-            this.checkNPC.TabIndex = 11;
-            this.checkNPC.Text = "Include NPC Chat";
-            this.checkNPC.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
