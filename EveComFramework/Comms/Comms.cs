@@ -50,6 +50,8 @@ namespace EveComFramework.Comms
         {
             DefaultFrequency = 200;
             QueueState(Init);
+            QueueState(ConnectIRC);
+            QueueState(Blank, 5000);
             QueueState(PostInit);
             QueueState(Control);
         }
@@ -82,8 +84,22 @@ namespace EveComFramework.Comms
         {
             if (!Session.Safe || (!Session.InSpace && !Session.InStation)) return false;
 
-            if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any()) LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
+            try
+            {
+                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any()) LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
+            }
+            catch
+            {
+                LastLocal = "";
+            }
             LastWallet = Wallet.ISK;
+
+            return true;
+        }
+
+        bool ConnectIRC(object[] Params)
+        {
+            if (!Session.Safe || (!Session.InSpace && !Session.InStation)) return false;
 
             if (Config.UseIRC)
             {
@@ -101,14 +117,21 @@ namespace EveComFramework.Comms
                     EVEFrame.Log("Connect failed");
                 }
             }
-
+            return true;
+        }
+        bool Blank (object[] Params)
+        {
             return true;
         }
 
         bool PostInit(object[] Params)
         {
-            EVEFrame.Log("Waiting for registration");
-            if (!IRC.IsRegistered) return false;
+            if (!IRC.IsRegistered)
+            {
+                DislodgeCurState(ConnectIRC);
+                InsertState(Blank, 5000);
+                return false;
+            }
             IRC.LocalUser.SendMessage(Config.SendTo, "Connected");
             return true;
         }
@@ -117,17 +140,21 @@ namespace EveComFramework.Comms
         {
             if (!Session.Safe || (!Session.InSpace && !Session.InStation)) return false;
 
-            if (Config.Local && ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any())
+            try
             {
-                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text != LastLocal)
+                if (Config.Local && ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any())
                 {
-                    LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
-                    if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
+                    if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text != LastLocal)
                     {
-                        ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + ": " + LastLocal);
+                        LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
+                        if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
+                        {
+                            ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + ": " + LastLocal);
+                        }
                     }
                 }
             }
+            catch { }
             if (Config.Wallet && LastWallet != Wallet.ISK)
             {
                 double difference = Wallet.ISK - LastWallet;
