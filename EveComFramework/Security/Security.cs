@@ -5,6 +5,7 @@ using System.Text;
 using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
+using EveComFramework.Comms;
 
 namespace EveComFramework.Security
 {
@@ -137,6 +138,7 @@ namespace EveComFramework.Security
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
         Pilot Hostile = null;
+        Comms.Comms Comms = EveComFramework.Comms.Comms.Instance;
 
         #endregion
 
@@ -470,27 +472,35 @@ namespace EveComFramework.Security
             {
                 case FleeTrigger.Pod:
                     Log.Log("|rIn a pod!");
+                    Comms.ChatQueue.Enqueue("<Security> In a pod!");
                     return;
                 case FleeTrigger.NegativeStanding:
                     Log.Log("|r{0} is negative standing", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is negative standing");
                     return;
                 case FleeTrigger.NeutralStanding:
                     Log.Log("|r{0} is neutral standing", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is neutral standing");
                     return;
                 case FleeTrigger.Paranoid:
                     Log.Log("|r{0} is neutral to me", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is neutral to me");
                     return;
                 case FleeTrigger.Targeted:
                     Log.Log("|r{0} is targeting me", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is targeting me");
                     return;
                 case FleeTrigger.CapacitorLow:
                     Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
+                    Comms.ChatQueue.Enqueue(string.Format("Capacitor is below threshold ({0}%)", Config.CapThreshold));
                     return;
                 case FleeTrigger.ShieldLow:
                     Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
+                    Comms.ChatQueue.Enqueue(string.Format("Shield is below threshold ({0}%)", Config.ShieldThreshold));
                     return;
                 case FleeTrigger.ArmorLow:
                     Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
+                    Comms.ChatQueue.Enqueue(string.Format("Armor is below threshold ({0}%)", Config.ArmorThreshold));
                     return;
             }
         }
@@ -589,6 +599,8 @@ namespace EveComFramework.Security
             if (SafeTrigger() != FleeTrigger.None) return false;
             Log.Log("|oArea is now safe");
             Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
+            Comms.ChatQueue.Enqueue("Area is now safe");
+            Comms.ChatQueue.Enqueue(string.Format("Waiting for {0} minutes", FleeWait));
             QueueState(CheckReset);
             QueueState(Resume);
 
@@ -605,11 +617,22 @@ namespace EveComFramework.Security
             if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
+                Comms.ChatQueue.Enqueue("New flee condition");
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
+                Comms.ChatQueue.Enqueue("Waiting for safety");
                 DislodgeCurState(CheckClear, -1, Reported);
             }
             return false;
+        }
+
+        bool SignalSuccessful(object[] Params)
+        {
+            Log.Log("|oReached flee target");
+            Log.Log(" |-gWaiting for safety");
+            Comms.ChatQueue.Enqueue("Reached flee target");
+            Comms.ChatQueue.Enqueue("Waiting for safety");
+            return true;
         }
 
         bool Flee(object[] Params)
@@ -622,8 +645,7 @@ namespace EveComFramework.Security
             Decloak = AutoModule.AutoModule.Instance.Decloak;
 
             QueueState(Traveling);
-            QueueState(LogMessage, 1, string.Format("|oReached flee target"));
-            QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
+            QueueState(SignalSuccessful);
             QueueState(CheckClear, -1, Trigger);
 
             if (Session.InStation)
@@ -685,9 +707,11 @@ namespace EveComFramework.Security
             FleeTrigger Trigger = SafeTrigger();
             if (Trigger != FleeTrigger.None)
             {
-                QueueState(LogMessage, 1, string.Format("|oNew flee condition"));
+                Log.Log("|oNew flee condition");
+                Comms.ChatQueue.Enqueue("New flee condition");
                 ReportTrigger(Trigger);
-                QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
+                Log.Log(" |-gWaiting for safety");
+                Comms.ChatQueue.Enqueue("Waiting for safety");
                 QueueState(CheckClear, -1, Trigger);
                 return true;
             }

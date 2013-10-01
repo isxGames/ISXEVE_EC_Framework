@@ -563,11 +563,6 @@
             Fires when there is space in the skill queue
             </summary>
         </member>
-        <member name="F:EveComFramework.Core.GlobalSettings.ItemVolume">
-            <summary>
-            Item Volumes, keyed by Types
-            </summary>
-        </member>
         <member name="T:EveComFramework.Core.Cache">
             <summary>
             This class provides cached information useful for user interfaces
@@ -596,11 +591,6 @@
         <member name="P:EveComFramework.Core.Cache.FleetMembers">
             <summary>
             Array of fleet member names
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.CargoItems">
-            <summary>
-            Array of cargo item type names
             </summary>
         </member>
         <member name="P:EveComFramework.Core.Cache.ItemVolume">

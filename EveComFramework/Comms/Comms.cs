@@ -65,7 +65,7 @@ namespace EveComFramework.Comms
         string LastLocal = "";
         double LastWallet;
 
-        Queue<string> ChatQueue = new Queue<string>();
+        public Queue<string> ChatQueue = new Queue<string>();
 
         IrcClient IRC = new IrcClient();
 
