@@ -492,15 +492,15 @@ namespace EveComFramework.Security
                     return;
                 case FleeTrigger.CapacitorLow:
                     Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
-                    Comms.ChatQueue.Enqueue(string.Format("Capacitor is below threshold ({0}%)", Config.CapThreshold));
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Capacitor is below threshold ({0}%)", Config.CapThreshold));
                     return;
                 case FleeTrigger.ShieldLow:
                     Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
-                    Comms.ChatQueue.Enqueue(string.Format("Shield is below threshold ({0}%)", Config.ShieldThreshold));
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Shield is below threshold ({0}%)", Config.ShieldThreshold));
                     return;
                 case FleeTrigger.ArmorLow:
                     Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
-                    Comms.ChatQueue.Enqueue(string.Format("Armor is below threshold ({0}%)", Config.ArmorThreshold));
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Armor is below threshold ({0}%)", Config.ArmorThreshold));
                     return;
             }
         }
@@ -599,8 +599,8 @@ namespace EveComFramework.Security
             if (SafeTrigger() != FleeTrigger.None) return false;
             Log.Log("|oArea is now safe");
             Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
-            Comms.ChatQueue.Enqueue("Area is now safe");
-            Comms.ChatQueue.Enqueue(string.Format("Waiting for {0} minutes", FleeWait));
+            Comms.ChatQueue.Enqueue("<Security> Area is now safe");
+            Comms.ChatQueue.Enqueue(string.Format("<Security> Waiting for {0} minutes", FleeWait));
             QueueState(CheckReset);
             QueueState(Resume);
 
@@ -617,10 +617,10 @@ namespace EveComFramework.Security
             if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
-                Comms.ChatQueue.Enqueue("New flee condition");
+                Comms.ChatQueue.Enqueue("<Security> New flee condition");
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
-                Comms.ChatQueue.Enqueue("Waiting for safety");
+                Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
                 DislodgeCurState(CheckClear, -1, Reported);
             }
             return false;
@@ -630,8 +630,8 @@ namespace EveComFramework.Security
         {
             Log.Log("|oReached flee target");
             Log.Log(" |-gWaiting for safety");
-            Comms.ChatQueue.Enqueue("Reached flee target");
-            Comms.ChatQueue.Enqueue("Waiting for safety");
+            Comms.ChatQueue.Enqueue("<Security> Reached flee target");
+            Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
             return true;
         }
 
@@ -708,10 +708,10 @@ namespace EveComFramework.Security
             if (Trigger != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
-                Comms.ChatQueue.Enqueue("New flee condition");
+                Comms.ChatQueue.Enqueue("<Security> New flee condition");
                 ReportTrigger(Trigger);
                 Log.Log(" |-gWaiting for safety");
-                Comms.ChatQueue.Enqueue("Waiting for safety");
+                Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
                 QueueState(CheckClear, -1, Trigger);
                 return true;
             }
@@ -725,6 +725,7 @@ namespace EveComFramework.Security
             else
             {
                 Log.Log("|oSending ClearAlert command - resume operations");
+                Comms.ChatQueue.Enqueue("<Security> Resuming operations");
                 ClearAlert();
             }
             QueueState(CheckSafe);
