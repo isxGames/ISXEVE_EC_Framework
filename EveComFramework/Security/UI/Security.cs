@@ -113,6 +113,7 @@ namespace EveComFramework.Security.UI
             if (Cache.Bookmarks != null) SecureBookmark.Items.AddRange(Cache.Bookmarks);
             SecureBookmark.Text = Config.SecureBookmark;
             CheckBookmark();
+            LoadWhiteList();
 
             checkAudioBlue.Checked = SpeechConfig.Blue;
             checkAudioFlee.Checked = SpeechConfig.Flee;
