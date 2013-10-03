@@ -47,8 +47,8 @@ namespace EveComFramework.SessionControl
     /// </summary>
     public class LoginLocalSettings : Settings
     {
-        public int LoginDelta = 10;
-        public int LogoutHours = 4;
+        public int LoginDelta = 0;
+        public int LogoutHours = 24;
         public int LogoutDelta = 20;
         public int Downtime = 30;
         public int DowntimeDelta = 10;
