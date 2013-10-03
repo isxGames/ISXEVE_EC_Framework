@@ -128,33 +128,28 @@ namespace EveComFramework.SimpleDrone
                 Drone.AllInSpace.ReturnToDroneBay();
                 return true;
             }
-
-            if (Config.Mode == Mode.AFKHeavy)
+            if (!Rats.TargetList.Any())
             {
-                if (Rats.TargetList.Any())
+                List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a)).ToList();
+                // Recall drones
+                if (Recall.Any())
                 {
-                    int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
-                    List<Drone> Deploy = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Heavy Attack Drones")).Take(AvailableSlots).ToList();
-                    // Launch drones
-                    if (Deploy.Any())
-                    {
-                        Console.Log("|oLaunching drones");
-                        Deploy.Launch();
-                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
-                        return false;
-                    }
+                    Console.Log("|oRecalling drones");
+                    Recall.ReturnToDroneBay();
+                    Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
+                    return false;
                 }
-                else
+            }
+            if (Config.Mode == Mode.AFKHeavy && Rats.TargetList.Any())
+            {
+                int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                List<Drone> Deploy = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Heavy Attack Drones")).Take(AvailableSlots).ToList();
+                // Launch drones
+                if (Deploy.Any())
                 {
-                    List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a)).ToList();
-                    // Recall drones
-                    if (Recall.Any())
-                    {
-                        Console.Log("|oRecalling drones");
-                        Recall.ReturnToDroneBay();
-                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
-                        return false;
-                    }
+                    Console.Log("|oLaunching drones");
+                    Deploy.Launch();
+                    Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                 }
                 return false;
             }
@@ -293,7 +288,7 @@ namespace EveComFramework.SimpleDrone
             #endregion
 
             // Make sure ActiveTarget is locked.  If so, make sure it's the active target, if not, return.
-            if (ActiveTarget.LockedTarget)
+            if (ActiveTarget != null && ActiveTarget.Exists && ActiveTarget.LockedTarget)
             {
                 if (!ActiveTarget.IsActiveTarget)
                 {
