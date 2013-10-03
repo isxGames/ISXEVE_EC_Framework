@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("In a pod");
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Neutral to me only");
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Targeted by another player");
-            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Capacitor low");
-            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Shield low");
-            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Armor low");
-            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
-            System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
-            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Neutral to me only");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ThresholdGroup = new System.Windows.Forms.GroupBox();
@@ -71,11 +71,15 @@
             this.trackRate = new System.Windows.Forms.TrackBar();
             this.listVoices = new System.Windows.Forms.ListBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.checkLocal = new System.Windows.Forms.CheckBox();
             this.checkAudioGrey = new System.Windows.Forms.CheckBox();
             this.checkAudioBlue = new System.Windows.Forms.CheckBox();
             this.checkAudioRed = new System.Windows.Forms.CheckBox();
             this.checkAudioFlee = new System.Windows.Forms.CheckBox();
-            this.checkLocal = new System.Windows.Forms.CheckBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.buttonAddWhiteList = new System.Windows.Forms.Button();
+            this.textWhiteListPilot = new System.Windows.Forms.TextBox();
+            this.listWhiteList = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
@@ -94,6 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackRate)).BeginInit();
             this.groupBox6.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -101,6 +106,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -171,23 +177,23 @@
             this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem12.StateImageIndex = 0;
-            listViewItem13.StateImageIndex = 0;
-            listViewItem14.StateImageIndex = 0;
-            listViewItem15.StateImageIndex = 0;
-            listViewItem16.StateImageIndex = 0;
-            listViewItem17.StateImageIndex = 0;
-            listViewItem18.StateImageIndex = 0;
-            listViewItem19.StateImageIndex = 0;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem12,
-            listViewItem13,
-            listViewItem14,
-            listViewItem15,
-            listViewItem16,
-            listViewItem17,
-            listViewItem18,
-            listViewItem19});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8});
             this.Triggers.Location = new System.Drawing.Point(9, 20);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
@@ -366,13 +372,13 @@
             this.FleeTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem20.StateImageIndex = 0;
-            listViewItem21.StateImageIndex = 0;
-            listViewItem22.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
+            listViewItem11.StateImageIndex = 0;
             this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem20,
-            listViewItem21,
-            listViewItem22});
+            listViewItem9,
+            listViewItem10,
+            listViewItem11});
             this.FleeTypes.Location = new System.Drawing.Point(10, 20);
             this.FleeTypes.Name = "FleeTypes";
             this.FleeTypes.Scrollable = false;
@@ -471,12 +477,23 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Enabled Alerts";
             // 
+            // checkLocal
+            // 
+            this.checkLocal.AutoSize = true;
+            this.checkLocal.Location = new System.Drawing.Point(6, 112);
+            this.checkLocal.Name = "checkLocal";
+            this.checkLocal.Size = new System.Drawing.Size(76, 17);
+            this.checkLocal.TabIndex = 4;
+            this.checkLocal.Text = "Local chat";
+            this.checkLocal.UseVisualStyleBackColor = true;
+            this.checkLocal.CheckedChanged += new System.EventHandler(this.checkLocal_CheckedChanged);
+            // 
             // checkAudioGrey
             // 
             this.checkAudioGrey.AutoSize = true;
             this.checkAudioGrey.Location = new System.Drawing.Point(6, 89);
             this.checkAudioGrey.Name = "checkAudioGrey";
-            this.checkAudioGrey.Size = new System.Drawing.Size(71, 17);
+            this.checkAudioGrey.Size = new System.Drawing.Size(73, 17);
             this.checkAudioGrey.TabIndex = 3;
             this.checkAudioGrey.Text = "New Grey";
             this.checkAudioGrey.UseVisualStyleBackColor = true;
@@ -487,7 +504,7 @@
             this.checkAudioBlue.AutoSize = true;
             this.checkAudioBlue.Location = new System.Drawing.Point(6, 66);
             this.checkAudioBlue.Name = "checkAudioBlue";
-            this.checkAudioBlue.Size = new System.Drawing.Size(70, 17);
+            this.checkAudioBlue.Size = new System.Drawing.Size(72, 17);
             this.checkAudioBlue.TabIndex = 2;
             this.checkAudioBlue.Text = "New Blue";
             this.checkAudioBlue.UseVisualStyleBackColor = true;
@@ -498,7 +515,7 @@
             this.checkAudioRed.AutoSize = true;
             this.checkAudioRed.Location = new System.Drawing.Point(6, 43);
             this.checkAudioRed.Name = "checkAudioRed";
-            this.checkAudioRed.Size = new System.Drawing.Size(67, 17);
+            this.checkAudioRed.Size = new System.Drawing.Size(71, 17);
             this.checkAudioRed.TabIndex = 1;
             this.checkAudioRed.Text = "New Red";
             this.checkAudioRed.UseVisualStyleBackColor = true;
@@ -515,16 +532,44 @@
             this.checkAudioFlee.UseVisualStyleBackColor = true;
             this.checkAudioFlee.CheckedChanged += new System.EventHandler(this.checkAudioFlee_CheckedChanged);
             // 
-            // checkLocal
+            // tabPage4
             // 
-            this.checkLocal.AutoSize = true;
-            this.checkLocal.Location = new System.Drawing.Point(6, 112);
-            this.checkLocal.Name = "checkLocal";
-            this.checkLocal.Size = new System.Drawing.Size(74, 17);
-            this.checkLocal.TabIndex = 4;
-            this.checkLocal.Text = "Local chat";
-            this.checkLocal.UseVisualStyleBackColor = true;
-            this.checkLocal.CheckedChanged += new System.EventHandler(this.checkLocal_CheckedChanged);
+            this.tabPage4.Controls.Add(this.buttonAddWhiteList);
+            this.tabPage4.Controls.Add(this.textWhiteListPilot);
+            this.tabPage4.Controls.Add(this.listWhiteList);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(312, 304);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Whitelist";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddWhiteList
+            // 
+            this.buttonAddWhiteList.Location = new System.Drawing.Point(226, 274);
+            this.buttonAddWhiteList.Name = "buttonAddWhiteList";
+            this.buttonAddWhiteList.Size = new System.Drawing.Size(80, 23);
+            this.buttonAddWhiteList.TabIndex = 2;
+            this.buttonAddWhiteList.Text = "Add";
+            this.buttonAddWhiteList.UseVisualStyleBackColor = true;
+            this.buttonAddWhiteList.Click += new System.EventHandler(this.buttonAddWhiteList_Click);
+            // 
+            // textWhiteListPilot
+            // 
+            this.textWhiteListPilot.Location = new System.Drawing.Point(6, 276);
+            this.textWhiteListPilot.Name = "textWhiteListPilot";
+            this.textWhiteListPilot.Size = new System.Drawing.Size(214, 21);
+            this.textWhiteListPilot.TabIndex = 1;
+            // 
+            // listWhiteList
+            // 
+            this.listWhiteList.FormattingEnabled = true;
+            this.listWhiteList.Location = new System.Drawing.Point(6, 6);
+            this.listWhiteList.Name = "listWhiteList";
+            this.listWhiteList.Size = new System.Drawing.Size(300, 264);
+            this.listWhiteList.TabIndex = 0;
+            this.listWhiteList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listWhiteList_KeyUp);
             // 
             // Security
             // 
@@ -561,6 +606,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackRate)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -604,5 +651,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkLocal;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Button buttonAddWhiteList;
+        private System.Windows.Forms.TextBox textWhiteListPilot;
+        private System.Windows.Forms.ListBox listWhiteList;
     }
 }

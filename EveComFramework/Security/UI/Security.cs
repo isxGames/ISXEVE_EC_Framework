@@ -450,7 +450,37 @@ namespace EveComFramework.Security.UI
             SpeechConfig.Save();
         }
 
+        private void LoadWhiteList()
+        {
+            listWhiteList.Items.Clear();
+            listWhiteList.Items.AddRange(Config.WhiteList.ToArray());
+        }
 
+        private void buttonAddWhiteList_Click(object sender, EventArgs e)
+        {
+            if (textWhiteListPilot.Text != "")
+            {
+                Config.WhiteList.Add(textWhiteListPilot.Text);
+                Config.Save();
+                LoadWhiteList();
+            }
+        }
+
+        private void listWhiteList_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (listWhiteList.SelectedIndex >= 0)
+            {
+                if (e.KeyCode == Keys.Delete && e.KeyCode == Keys.Back)
+                {
+                    if (Config.WhiteList.Contains(listWhiteList.SelectedItem.ToString()))
+                    {
+                        Config.WhiteList.Remove(listWhiteList.SelectedItem.ToString());
+                        Config.Save();
+                        LoadWhiteList();
+                    }
+                }
+            }
+        }
 
     }
 

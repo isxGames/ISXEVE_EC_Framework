@@ -61,7 +61,7 @@ namespace EveComFramework.Security
             FleeType.SecureBookmark,
             FleeType.SafeBookmarks
         };
-        public List<String> WhiteList = new List<string>();
+        public HashSet<String> WhiteList = new HashSet<string>();
         public bool NegativeAlliance = false;
         public bool NegativeCorp = false;
         public bool NegativeFleet = false;
@@ -300,6 +300,7 @@ namespace EveComFramework.Security
                         if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
                         if (!Config.NegativeCorp) { NegativePilots.RemoveAll(a => a.CorpID == Me.CorpID); }
                         if (!Config.NegativeFleet) { NegativePilots.RemoveAll(a => a.IsFleetMember); }
+                        NegativePilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
                         if (NegativePilots.Any())
                         {
                             Hostile = NegativePilots.FirstOrDefault();
@@ -321,6 +322,7 @@ namespace EveComFramework.Security
                         if (!Config.NeutralAlliance) { NeutralPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
                         if (!Config.NeutralCorp) { NeutralPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
                         if (!Config.NeutralFleet) { NeutralPilots.RemoveAll(a => a.IsFleetMember); }
+                        NeutralPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
                         if (NeutralPilots.Any())
                         {
                             Hostile = NeutralPilots.FirstOrDefault();
@@ -336,6 +338,7 @@ namespace EveComFramework.Security
                         if (!Config.ParanoidAlliance) { Paranoid.RemoveAll(a => a.AllianceID == Me.AllianceID); }
                         if (!Config.ParanoidCorp) { Paranoid.RemoveAll(a => a.CorpID == Me.CorpID); }
                         if (!Config.ParanoidFleet) { Paranoid.RemoveAll(a => a.IsFleetMember); }
+                        Paranoid.RemoveAll(a => Config.WhiteList.Contains(a.Name));
                         if (Paranoid.Any())
                         {
                             Hostile = Paranoid.FirstOrDefault();
@@ -351,6 +354,7 @@ namespace EveComFramework.Security
                         if (!Config.TargetAlliance) { TargetingPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
                         if (!Config.TargetCorp) { TargetingPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
                         if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
+                        TargetingPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
                         if (TargetingPilots.Any())
                         {
                             Hostile = TargetingPilots.FirstOrDefault();
