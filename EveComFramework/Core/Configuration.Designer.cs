@@ -99,6 +99,13 @@
             this.checkNPC = new System.Windows.Forms.CheckBox();
             this.checkLocal = new System.Windows.Forms.CheckBox();
             this.checkWallet = new System.Windows.Forms.CheckBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numericDroneTargetSlots = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboDroneMode = new System.Windows.Forms.ComboBox();
+            this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -133,6 +140,9 @@
             this.groupBox6.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).BeginInit();
+            this.groupBox7.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1015,7 +1025,7 @@
             this.textServer.Location = new System.Drawing.Point(57, 17);
             this.textServer.Margin = new System.Windows.Forms.Padding(0);
             this.textServer.Name = "textServer";
-            this.textServer.Size = new System.Drawing.Size(361, 21);
+            this.textServer.Size = new System.Drawing.Size(410, 21);
             this.textServer.TabIndex = 2;
             // 
             // label9
@@ -1047,7 +1057,7 @@
             0,
             0});
             this.numericPort.Name = "numericPort";
-            this.numericPort.Size = new System.Drawing.Size(361, 21);
+            this.numericPort.Size = new System.Drawing.Size(410, 21);
             this.numericPort.TabIndex = 4;
             this.numericPort.Value = new decimal(new int[] {
             1,
@@ -1074,7 +1084,7 @@
             this.textSendTo.Location = new System.Drawing.Point(57, 59);
             this.textSendTo.Margin = new System.Windows.Forms.Padding(0);
             this.textSendTo.Name = "textSendTo";
-            this.textSendTo.Size = new System.Drawing.Size(361, 21);
+            this.textSendTo.Size = new System.Drawing.Size(410, 21);
             this.textSendTo.TabIndex = 8;
             // 
             // checkNPC
@@ -1084,7 +1094,7 @@
             this.checkNPC.Location = new System.Drawing.Point(149, 80);
             this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
             this.checkNPC.Name = "checkNPC";
-            this.checkNPC.Size = new System.Drawing.Size(269, 20);
+            this.checkNPC.Size = new System.Drawing.Size(318, 20);
             this.checkNPC.TabIndex = 11;
             this.checkNPC.Text = "Include NPC Chat";
             this.checkNPC.UseVisualStyleBackColor = true;
@@ -1115,11 +1125,100 @@
             this.checkWallet.Text = "Report Wallet Changes";
             this.checkWallet.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox7.Controls.Add(this.tableLayoutPanel7);
+            this.groupBox7.Location = new System.Drawing.Point(3, 767);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(326, 83);
+            this.groupBox7.TabIndex = 7;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Drone Control";
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Controls.Add(this.label10, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.numericDroneTargetSlots, 1, 0);
+            this.tableLayoutPanel7.Controls.Add(this.label12, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.comboDroneMode, 1, 1);
+            this.tableLayoutPanel7.Controls.Add(this.checkDronePrivateTargets, 1, 2);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 3;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(320, 63);
+            this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label10.Location = new System.Drawing.Point(0, 0);
+            this.label10.Margin = new System.Windows.Forms.Padding(0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 20);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Target Slots";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // numericDroneTargetSlots
+            // 
+            this.numericDroneTargetSlots.Location = new System.Drawing.Point(61, 0);
+            this.numericDroneTargetSlots.Margin = new System.Windows.Forms.Padding(0);
+            this.numericDroneTargetSlots.Name = "numericDroneTargetSlots";
+            this.numericDroneTargetSlots.Size = new System.Drawing.Size(44, 21);
+            this.numericDroneTargetSlots.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label12.Location = new System.Drawing.Point(0, 20);
+            this.label12.Margin = new System.Windows.Forms.Padding(0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(61, 21);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Mode";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // comboDroneMode
+            // 
+            this.comboDroneMode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboDroneMode.FormattingEnabled = true;
+            this.comboDroneMode.Items.AddRange(new object[] {
+            "AFK Heavy",
+            "Point Defence",
+            "Sentry"});
+            this.comboDroneMode.Location = new System.Drawing.Point(61, 20);
+            this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
+            this.comboDroneMode.Name = "comboDroneMode";
+            this.comboDroneMode.Size = new System.Drawing.Size(259, 21);
+            this.comboDroneMode.TabIndex = 3;
+            // 
+            // checkDronePrivateTargets
+            // 
+            this.checkDronePrivateTargets.AutoSize = true;
+            this.checkDronePrivateTargets.Location = new System.Drawing.Point(64, 44);
+            this.checkDronePrivateTargets.Name = "checkDronePrivateTargets";
+            this.checkDronePrivateTargets.Size = new System.Drawing.Size(96, 16);
+            this.checkDronePrivateTargets.TabIndex = 4;
+            this.checkDronePrivateTargets.Text = "Private Targets";
+            this.checkDronePrivateTargets.UseVisualStyleBackColor = true;
+            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -1170,6 +1269,10 @@
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1247,5 +1350,12 @@
         private System.Windows.Forms.CheckBox checkLocal;
         private System.Windows.Forms.CheckBox checkWallet;
         private System.Windows.Forms.CheckBox checkNPC;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown numericDroneTargetSlots;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox comboDroneMode;
+        private System.Windows.Forms.CheckBox checkDronePrivateTargets;
     }
 }

@@ -34,6 +34,8 @@ namespace EveComFramework.Core
                 InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
                 Comms.Comms CommsInstance = Comms.Comms.Instance;
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
+                SimpleDrone.SimpleDrone DroneInstance = SimpleDrone.SimpleDrone.Instance;
+                SimpleDrone.LocalSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
 
                 #region AutoModule
 
@@ -173,6 +175,43 @@ namespace EveComFramework.Core
                 checkWallet.Checked = CommsConfig.Wallet;
                 checkWallet.CheckedChanged += (s, a) => { CommsConfig.Wallet = checkWallet.Checked; CommsConfig.Save(); };
 
+                #endregion
+
+                #region Drone Control
+
+                numericDroneTargetSlots.Value = DroneConfig.TargetSlots;
+                numericDroneTargetSlots.ValueChanged += (s, a) => { DroneConfig.TargetSlots = (int)Math.Floor(numericDroneTargetSlots.Value); DroneConfig.Save(); };
+                checkDronePrivateTargets.Checked = DroneConfig.PrivateTargets;
+                checkDronePrivateTargets.CheckedChanged += (s, a) => { DroneConfig.PrivateTargets = checkDronePrivateTargets.Checked; DroneConfig.Save(); };
+                switch (DroneConfig.Mode)
+                {
+                    case SimpleDrone.Mode.AFKHeavy:
+                        comboDroneMode.SelectedItem = "AFK Heavy";
+                        break;
+                    case SimpleDrone.Mode.PointDefense:
+                        comboDroneMode.SelectedItem = "Point Defense";
+                        break;
+                    case SimpleDrone.Mode.Sentry:
+                        comboDroneMode.SelectedItem = "Sentry";
+                        break;
+                }
+                comboDroneMode.SelectedIndexChanged += (s, a) =>
+                {
+                    switch (comboDroneMode.SelectedItem.ToString())
+                    {
+                        case "AFK Heavy":
+                            DroneConfig.Mode = SimpleDrone.Mode.AFKHeavy;
+                            break;
+                        case "Point Defense":
+                            DroneConfig.Mode = SimpleDrone.Mode.PointDefense;
+                            break;
+                        case "Sentry":
+                            DroneConfig.Mode = SimpleDrone.Mode.Sentry;
+                            break;
+                    }
+                    DroneConfig.Save();
+                };
+                
                 #endregion
             }
 
