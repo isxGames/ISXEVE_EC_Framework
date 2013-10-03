@@ -61,6 +61,7 @@ namespace EveComFramework.Security
             FleeType.SecureBookmark,
             FleeType.SafeBookmarks
         };
+        public List<String> WhiteList = new List<string>();
         public bool NegativeAlliance = false;
         public bool NegativeCorp = false;
         public bool NegativeFleet = false;

@@ -347,7 +347,7 @@ namespace EveComFramework.SimpleDrone
             if (ActiveTarget.Distance < MaxRange && Config.Mode == Mode.Sentry)
             {
                 // Is the target a frigate?
-                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
+                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")) || ActiveTarget.Distance > 20000)
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Sentry Drones")).ToList();
                     // Recall non sentries
