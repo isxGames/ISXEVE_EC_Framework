@@ -185,6 +185,9 @@ namespace EveComFramework.Core
                 checkDronePrivateTargets.CheckedChanged += (s, a) => { DroneConfig.PrivateTargets = checkDronePrivateTargets.Checked; DroneConfig.Save(); };
                 switch (DroneConfig.Mode)
                 {
+                    case SimpleDrone.Mode.None:
+                        comboDroneMode.SelectedItem = "None";
+                        break;
                     case SimpleDrone.Mode.AFKHeavy:
                         comboDroneMode.SelectedItem = "AFK Heavy";
                         break;
@@ -199,6 +202,9 @@ namespace EveComFramework.Core
                 {
                     switch (comboDroneMode.SelectedItem.ToString())
                     {
+                        case "None":
+                            DroneConfig.Mode = SimpleDrone.Mode.None;
+                            break;
                         case "AFK Heavy":
                             DroneConfig.Mode = SimpleDrone.Mode.AFKHeavy;
                             break;
