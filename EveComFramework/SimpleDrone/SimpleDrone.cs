@@ -311,6 +311,7 @@ namespace EveComFramework.SimpleDrone
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Light Scout Drones")).ToList();
                     if (Recall.Any())
                     {
+                        Console.Log("|oRecalling scout drones");
                         Recall.ReturnToDroneBay();
                         Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                         return false;
@@ -319,6 +320,7 @@ namespace EveComFramework.SimpleDrone
                     List<Drone> Attack = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).ToList();
                     if (Attack.Any())
                     {
+                        Console.Log("|oSending scout drones to attack");
                         Attack.Attack();
                         Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
@@ -329,6 +331,7 @@ namespace EveComFramework.SimpleDrone
                     // Launch drones
                     if (Deploy.Any())
                     {
+                        Console.Log("|oLaunching scout drones");
                         Deploy.Launch();
                         Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
@@ -350,6 +353,7 @@ namespace EveComFramework.SimpleDrone
                     // Recall non sentries
                     if (Recall.Any())
                     {
+                        Console.Log("|oRecalling drones");
                         Recall.ReturnToDroneBay();
                         Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                         return false;
@@ -358,6 +362,7 @@ namespace EveComFramework.SimpleDrone
                     // Send drones to attack
                     if (Attack.Any())
                     {
+                        Console.Log("|oOrdering sentry drones to attack");
                         Attack.Attack();
                         Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
@@ -368,6 +373,7 @@ namespace EveComFramework.SimpleDrone
                     // Launch drones
                     if (Deploy.Any())
                     {
+                        Console.Log("|oLaunching sentry drones");
                         Deploy.Launch();
                         Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
