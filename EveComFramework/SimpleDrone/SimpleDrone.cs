@@ -204,6 +204,7 @@ namespace EveComFramework.SimpleDrone
                     if (ActiveTarget != null)
                     {
                         LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[SimpleDroneUpdateActiveTargetList]:Execute[" + Me.CharID + "," + ActiveTarget.ID.ToString() + "]");
+                        LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[RatterUpdateActiveTargetList]:Execute[" + Me.CharID + "," + ActiveTarget.ID.ToString() + "]");
                     }
                 }
             }
@@ -290,7 +291,7 @@ namespace EveComFramework.SimpleDrone
                     if (Recall.Any())
                     {
                         Recall.ReturnToDroneBay();
-                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(1)));
+                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                         return false;
                     }
                     // Send drones to attack
@@ -298,7 +299,7 @@ namespace EveComFramework.SimpleDrone
                     if (Attack.Any())
                     {
                         Attack.Attack();
-                        Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(1)));
+                        Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
                     int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
@@ -307,7 +308,7 @@ namespace EveComFramework.SimpleDrone
                     if (Deploy.Any())
                     {
                         Deploy.Launch();
-                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(1)));
+                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
                 }
@@ -318,7 +319,7 @@ namespace EveComFramework.SimpleDrone
                     if (Recall.Any())
                     {
                         Recall.ReturnToDroneBay();
-                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(1)));
+                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                         return false;
                     }
                     List<Drone> Attack = Drone.AllInSpace.Where(a => DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).ToList();
@@ -326,7 +327,7 @@ namespace EveComFramework.SimpleDrone
                     if (Attack.Any())
                     {
                         Attack.Attack();
-                        Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(1)));
+                        Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
                     int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
@@ -335,7 +336,7 @@ namespace EveComFramework.SimpleDrone
                     if (Deploy.Any())
                     {
                         Deploy.Launch();
-                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(1)));
+                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
                 }
