@@ -563,7 +563,7 @@
             this.checkAutoModule.Name = "checkAutoModule";
             this.checkAutoModule.Size = new System.Drawing.Size(120, 17);
             this.checkAutoModule.TabIndex = 31;
-            this.checkAutoModule.Text = "Enabled";
+            this.checkAutoModule.Text = "Always Enabled";
             this.checkAutoModule.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -1025,7 +1025,7 @@
             this.textServer.Location = new System.Drawing.Point(57, 17);
             this.textServer.Margin = new System.Windows.Forms.Padding(0);
             this.textServer.Name = "textServer";
-            this.textServer.Size = new System.Drawing.Size(410, 21);
+            this.textServer.Size = new System.Drawing.Size(459, 21);
             this.textServer.TabIndex = 2;
             // 
             // label9
@@ -1057,7 +1057,7 @@
             0,
             0});
             this.numericPort.Name = "numericPort";
-            this.numericPort.Size = new System.Drawing.Size(410, 21);
+            this.numericPort.Size = new System.Drawing.Size(459, 21);
             this.numericPort.TabIndex = 4;
             this.numericPort.Value = new decimal(new int[] {
             1,
@@ -1084,7 +1084,7 @@
             this.textSendTo.Location = new System.Drawing.Point(57, 59);
             this.textSendTo.Margin = new System.Windows.Forms.Padding(0);
             this.textSendTo.Name = "textSendTo";
-            this.textSendTo.Size = new System.Drawing.Size(410, 21);
+            this.textSendTo.Size = new System.Drawing.Size(459, 21);
             this.textSendTo.TabIndex = 8;
             // 
             // checkNPC
@@ -1094,7 +1094,7 @@
             this.checkNPC.Location = new System.Drawing.Point(149, 80);
             this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
             this.checkNPC.Name = "checkNPC";
-            this.checkNPC.Size = new System.Drawing.Size(318, 20);
+            this.checkNPC.Size = new System.Drawing.Size(367, 20);
             this.checkNPC.TabIndex = 11;
             this.checkNPC.Text = "Include NPC Chat";
             this.checkNPC.UseVisualStyleBackColor = true;
@@ -1164,7 +1164,7 @@
             this.label10.Location = new System.Drawing.Point(0, 0);
             this.label10.Margin = new System.Windows.Forms.Padding(0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(61, 20);
+            this.label10.Size = new System.Drawing.Size(61, 21);
             this.label10.TabIndex = 0;
             this.label10.Text = "Target Slots";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1181,7 +1181,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(0, 20);
+            this.label12.Location = new System.Drawing.Point(0, 21);
             this.label12.Margin = new System.Windows.Forms.Padding(0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(61, 21);
@@ -1197,7 +1197,7 @@
             "AFK Heavy",
             "Point Defence",
             "Sentry"});
-            this.comboDroneMode.Location = new System.Drawing.Point(61, 20);
+            this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
             this.comboDroneMode.Size = new System.Drawing.Size(259, 21);
@@ -1206,9 +1206,9 @@
             // checkDronePrivateTargets
             // 
             this.checkDronePrivateTargets.AutoSize = true;
-            this.checkDronePrivateTargets.Location = new System.Drawing.Point(64, 44);
+            this.checkDronePrivateTargets.Location = new System.Drawing.Point(64, 45);
             this.checkDronePrivateTargets.Name = "checkDronePrivateTargets";
-            this.checkDronePrivateTargets.Size = new System.Drawing.Size(96, 16);
+            this.checkDronePrivateTargets.Size = new System.Drawing.Size(96, 15);
             this.checkDronePrivateTargets.TabIndex = 4;
             this.checkDronePrivateTargets.Text = "Private Targets";
             this.checkDronePrivateTargets.UseVisualStyleBackColor = true;
