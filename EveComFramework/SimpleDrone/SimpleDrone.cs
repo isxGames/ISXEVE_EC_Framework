@@ -23,7 +23,7 @@ namespace EveComFramework.SimpleDrone
 
     #region Settings
 
-    public class LocalSettings : EveComFramework.Core.Settings
+    public class SimpleDroneSettings : EveComFramework.Core.Settings
     {
         public Mode Mode = Mode.None;
         public bool PrivateTargets = true;
@@ -65,7 +65,7 @@ namespace EveComFramework.SimpleDrone
         #region Variables
 
         public Core.Logger Console = new Core.Logger("SimpleDrone");
-        public LocalSettings Config = new LocalSettings();
+        public SimpleDroneSettings Config = new SimpleDroneSettings();
         Targets.Targets Rats = new Targets.Targets();
         public Dictionary<long, long> ActiveTargetList = new Dictionary<long, long>();
         Security.Security SecurityCore = Security.Security.Instance;

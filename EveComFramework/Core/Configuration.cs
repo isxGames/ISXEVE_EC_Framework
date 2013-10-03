@@ -35,7 +35,7 @@ namespace EveComFramework.Core
                 Comms.Comms CommsInstance = Comms.Comms.Instance;
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
                 SimpleDrone.SimpleDrone DroneInstance = SimpleDrone.SimpleDrone.Instance;
-                SimpleDrone.LocalSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
+                SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
 
                 #region AutoModule
 
