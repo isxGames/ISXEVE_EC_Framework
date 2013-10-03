@@ -306,8 +306,8 @@ namespace EveComFramework.SimpleDrone
                 return false;
             }
 
-            // Handle Attacking
-            if (ActiveTarget.Distance < MaxRange)
+            // Handle Attacking frigates - this should work for PointDefense AND Sentry modes
+            if (ActiveTarget.Distance < 20000)
             {
                 // Is the target a frigate?
                 if (Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
@@ -343,7 +343,13 @@ namespace EveComFramework.SimpleDrone
                         DroneCooldown.Clear();
                     }
                 }
-                else
+            }
+
+            // Handle managing sentries
+            if (ActiveTarget.Distance < MaxRange && Config.Mode == Mode.Sentry)
+            {
+                // Is the target a frigate?
+                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Sentry Drones")).ToList();
                     // Recall non sentries
