@@ -13,6 +13,7 @@ namespace EveComFramework.SimpleDrone
 
     public enum Mode
     {
+        None,
         Sentry,
         PointDefense,
         AFKHeavy
@@ -24,7 +25,7 @@ namespace EveComFramework.SimpleDrone
 
     public class LocalSettings : EveComFramework.Core.Settings
     {
-        public Mode Mode = Mode.PointDefense;
+        public Mode Mode = Mode.None;
         public bool PrivateTargets = true;
         public int TargetSlots = 2;
     }
@@ -114,7 +115,7 @@ namespace EveComFramework.SimpleDrone
 
         bool Control(object[] Params)
         {
-            if (!Session.InSpace)
+            if (!Session.InSpace || Config.Mode == Mode.None)
             {
                 return false;
             }
@@ -128,7 +129,6 @@ namespace EveComFramework.SimpleDrone
 
             if (Config.Mode == Mode.AFKHeavy)
             {
-                EVEFrame.Log("AFKHeavy");
                 if (Rats.TargetList.Any())
                 {
                     int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
