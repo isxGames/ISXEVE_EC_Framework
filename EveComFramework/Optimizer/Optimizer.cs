@@ -16,7 +16,7 @@ namespace EveComFramework.Optimizer
     public class OptimizerSettings : Settings
     {
         public bool Enable3D = true;
-        public int MaxMemorySize = 200;
+        public decimal MaxMemorySize = 200;
     }
 
     #endregion

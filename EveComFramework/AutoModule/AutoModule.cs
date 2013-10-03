@@ -13,6 +13,7 @@ namespace EveComFramework.AutoModule
     /// </summary>
     public class AutoModuleSettings : EveComFramework.Core.Settings
     {
+        public bool Enabled = false;
         public bool ActiveHardeners = true;
         public bool ShieldBoosters = true;
         public bool ArmorRepairs = true;
@@ -72,6 +73,7 @@ namespace EveComFramework.AutoModule
         private AutoModule() : base()
         {
             DefaultFrequency = 100;
+            if (Config.Enabled) QueueState(Control);
         }
 
         #endregion
@@ -110,6 +112,25 @@ namespace EveComFramework.AutoModule
         public void Stop()
         {
             Clear();
+        }
+
+        /// <summary>
+        /// Starts/stops this module
+        /// </summary>
+        /// <param name="Val">True=Start</param>
+        public void Enabled(bool Val)
+        {
+            if (Val)
+            {
+                if (Idle)
+                {
+                    QueueState(Control);
+                }
+            }
+            else
+            {
+                Clear();
+            }
         }
 
         /// <summary>
@@ -371,6 +392,18 @@ namespace EveComFramework.AutoModule
         #endregion
     }
 
+    #region Settings
+
+    /// <summary>
+    /// Configuration settings for this Module
+    /// </summary>
+    public class InstawarpSettings : EveComFramework.Core.Settings
+    {
+        public bool Enabled = false;
+    }
+
+    #endregion
+
     /// <summary>
     /// This class manages one pulse of the first available propulsion module per session.
     /// A new session starts on every solar system change or undock.
@@ -397,6 +430,7 @@ namespace EveComFramework.AutoModule
 
         private InstaWarp() : base()
         {
+            if (Config.Enabled) QueueState(Control);
         }
 
         #endregion
@@ -426,6 +460,11 @@ namespace EveComFramework.AutoModule
 
         #region Variables
 
+        /// <summary>
+        /// The config for this class
+        /// </summary>
+        public InstawarpSettings Config = new InstawarpSettings(); 
+        
         int CurrentSystem = 0;
         bool Reset = true;
 

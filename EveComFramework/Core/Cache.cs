@@ -6,15 +6,6 @@ using EveCom;
 
 namespace EveComFramework.Core
 {
-    public class GlobalSettings : Settings
-    {
-        public GlobalSettings() : base("Cache") { }
-        /// <summary>
-        /// Item Volumes, keyed by Types
-        /// </summary>
-        public SerializableDictionary<string, double> ItemVolume = new SerializableDictionary<string, double>();
-    }
-
     /// <summary>
     /// This class provides cached information useful for user interfaces
     /// </summary>
@@ -40,14 +31,13 @@ namespace EveComFramework.Core
 
         private Cache() : base()
         {
+            ItemVolume = new Dictionary<string, double>();
             QueueState(Control);
         }
 
         #endregion
 
         #region Variables
-
-        internal GlobalSettings GlobalConfig = new GlobalSettings();
 
         /// <summary>
         /// Your pilot's Name
@@ -66,14 +56,9 @@ namespace EveComFramework.Core
         /// </summary>
         public string[] FleetMembers { get; set; }
         /// <summary>
-        /// Array of cargo item type names
-        /// </summary>
-        [Obsolete("Depreciated:  Use ItemVolume dictionary (6/11/13)")]
-        public string[] CargoItems { get; set; }
-        /// <summary>
         /// Item Volumes, keyed by Types
         /// </summary>
-        public Dictionary<string, double> ItemVolume { get { return GlobalConfig.ItemVolume; } }
+        public Dictionary<string, double> ItemVolume { get; set; }
         public Double ArmorPercent = 1;
         public Double HullPercent = 1;
         public bool DamagedDrones = false;
@@ -89,17 +74,49 @@ namespace EveComFramework.Core
             CharID = Me.CharID;
             Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
             if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
-            if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed) CargoItems = MyShip.CargoBay.Items.Distinct().Select(a => a.Type).ToArray();
-            if (MyShip.CargoBay != null && MyShip.CargoBay.IsPrimed)
+            if (MyShip.CargoBay != null)
             {
-                MyShip.CargoBay.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
-                GlobalConfig.Save();
+                if (MyShip.CargoBay.IsPrimed)
+                {
+                    MyShip.CargoBay.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                }
+                else
+                {
+                    MyShip.CargoBay.Prime();
+                    return false;
+                }
             }
-            if (Session.InStation && Station.ItemHangar != null && Station.ItemHangar.IsPrimed)
+            if (Session.InStation)
             {
-                Station.ItemHangar.Items.ForEach(a => { GlobalConfig.ItemVolume.AddOrUpdate(a.Type, a.Volume); });
-                GlobalConfig.Save();
+                if (Station.ItemHangar != null)
+                {
+                    if (Station.ItemHangar.IsPrimed)
+                    {
+                        Station.ItemHangar.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                    }
+                    else
+                    {
+                        Station.ItemHangar.Prime();
+                        return false;
+                    }
+                }
+                //for (int i = 0; i <= 6; i++)
+                //{
+                //    if (Session.InStation && Station.CorpHangar(i) != null)
+                //    {
+                //        if (Station.CorpHangar(i).IsPrimed)
+                //        {
+                //            Station.CorpHangar(i).Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                //        }
+                //        else
+                //        {
+                //            Station.CorpHangar(i).Prime();
+                //            return false;
+                //        }
+                //    }
+                //}
             }
+
             if (Session.InSpace)
             {
                 ArmorPercent = MyShip.Armor / MyShip.MaxArmor;

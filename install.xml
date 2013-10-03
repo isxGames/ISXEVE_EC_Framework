@@ -15,6 +15,10 @@
 			<Get>EveComFramework/bin/Release/EveComFramework.pdb</Get>
 			<Put>EveComFramework.pdb</Put>
 		</File>
+		<File>
+			<Get>EveComFramework/bin/Release/IrcDotNet.dll</Get>
+			<Put>IrcDotNet.dll</Put>
+		</File>
 	</Files>
 	<Global>false</Global>
 	<Type>DLL</Type>

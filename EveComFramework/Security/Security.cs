@@ -5,6 +5,7 @@ using System.Text;
 using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
+using EveComFramework.Comms;
 
 namespace EveComFramework.Security
 {
@@ -128,15 +129,16 @@ namespace EveComFramework.Security
         /// <summary>
         /// Dictionary of lists of entity IDs for entities currently scrambling a fleet member keyed by fleet member ID
         /// </summary>
-        public Dictionary<long, List<long>> ScramblingEntities = new Dictionary<long, List<long>>();
+        public HashSet<long> ScramblingEntities = new HashSet<long>();
         /// <summary>
         /// Dictionary of lists of entity IDs for entities currently neuting a fleet member keyed by fleet member ID
         /// </summary>
-        public Dictionary<long, List<long>> NeutingEntities = new Dictionary<long, List<long>>();
+        public HashSet<long> NeutingEntities = new HashSet<long>();
 
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
         Pilot Hostile = null;
+        Comms.Comms Comms = EveComFramework.Comms.Comms.Instance;
 
         #endregion
 
@@ -253,19 +255,7 @@ namespace EveComFramework.Security
         {
             try
             {
-                if (!ScramblingEntities.ContainsKey(long.Parse(args[1])))
-                {
-                    List<long> add = new List<long>();
-                    add.Add(long.Parse(args[2]));
-                    ScramblingEntities.Add(long.Parse(args[1]), add);
-                }
-                else
-                {
-                    if (!ScramblingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
-                    {
-                        ScramblingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
-                    }
-                }
+                ScramblingEntities.Add(long.Parse(args[1]));
             }
             catch { }
             
@@ -276,19 +266,7 @@ namespace EveComFramework.Security
         {
             try
             {
-                if (!NeutingEntities.ContainsKey(long.Parse(args[1])))
-                {
-                    List<long> add = new List<long>();
-                    add.Add(long.Parse(args[2]));
-                    NeutingEntities.Add(long.Parse(args[1]), add);
-                }
-                else
-                {
-                    if (!NeutingEntities[long.Parse(args[1])].Contains(long.Parse(args[2])))
-                    {
-                        NeutingEntities[long.Parse(args[1])].Add(long.Parse(args[2]));
-                    }
-                }
+                NeutingEntities.Add(long.Parse(args[1]));
             }
             catch { }
 
@@ -423,10 +401,9 @@ namespace EveComFramework.Security
             {
                 if (Session.InFleet)
                 {
-                    List<long> ValidScrambles = ScramblingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
-                    return Entity.All.FirstOrDefault(a => ValidScrambles.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
+                    return Entity.All.FirstOrDefault(a => ScramblingEntities.Contains(a.ID) && !a.Exploded && !a.Released);
                 }
-                return Entity.All.FirstOrDefault(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
+                return Entity.All.FirstOrDefault(a => a.IsWarpScrambling && !a.Exploded && !a.Released);
             }
         }
 
@@ -434,7 +411,7 @@ namespace EveComFramework.Security
         {
             if (Session.InFleet)
             {
-                return ScramblingEntities.Values.Any(a => a.Contains(Check.ID));
+                return ScramblingEntities.Contains(Check.ID);
             }
             return Entity.All.Any(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
         }
@@ -448,10 +425,9 @@ namespace EveComFramework.Security
             {
                 if (Session.InFleet)
                 {
-                    List<long> ValidNeuters = NeutingEntities.Where(kvp => Fleet.Members.Any(mem => mem.ID == kvp.Key)).SelectMany(kvp => kvp.Value).Distinct().ToList();
-                    return Entity.All.FirstOrDefault(a => ValidNeuters.Contains(a.ID) && a.Exists && !a.Exploded && !a.Released);
+                    return Entity.All.FirstOrDefault(a => NeutingEntities.Contains(a.ID) && !a.Exploded && !a.Released);
                 }
-                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
+                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
             }
         }
 
@@ -459,9 +435,9 @@ namespace EveComFramework.Security
         {
             if (Session.InFleet)
             {
-                return NeutingEntities.Values.Any(a => a.Contains(Check.ID));
+                return NeutingEntities.Contains(Check.ID);
             }
-            return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && a.Exists && !a.Exploded && !a.Released);
+            return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
         }
 
         void ReportTrigger(FleeTrigger reported)
@@ -470,27 +446,35 @@ namespace EveComFramework.Security
             {
                 case FleeTrigger.Pod:
                     Log.Log("|rIn a pod!");
+                    Comms.ChatQueue.Enqueue("<Security> In a pod!");
                     return;
                 case FleeTrigger.NegativeStanding:
                     Log.Log("|r{0} is negative standing", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is negative standing");
                     return;
                 case FleeTrigger.NeutralStanding:
                     Log.Log("|r{0} is neutral standing", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is neutral standing");
                     return;
                 case FleeTrigger.Paranoid:
                     Log.Log("|r{0} is neutral to me", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is neutral to me");
                     return;
                 case FleeTrigger.Targeted:
                     Log.Log("|r{0} is targeting me", Hostile.Name);
+                    Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is targeting me");
                     return;
                 case FleeTrigger.CapacitorLow:
                     Log.Log("|rCapacitor is below threshold (|w{0}%|r)", Config.CapThreshold);
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Capacitor is below threshold ({0}%)", Config.CapThreshold));
                     return;
                 case FleeTrigger.ShieldLow:
                     Log.Log("|rShield is below threshold (|w{0}%|r)", Config.ShieldThreshold);
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Shield is below threshold ({0}%)", Config.ShieldThreshold));
                     return;
                 case FleeTrigger.ArmorLow:
                     Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Armor is below threshold ({0}%)", Config.ArmorThreshold));
                     return;
             }
         }
@@ -502,13 +486,13 @@ namespace EveComFramework.Security
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + Me.CharID + " " + WarpScrambling.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
             Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing);
             if (Neuting != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter " + Me.CharID + " " + Neuting.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
                 return false;
             }
 
@@ -589,6 +573,8 @@ namespace EveComFramework.Security
             if (SafeTrigger() != FleeTrigger.None) return false;
             Log.Log("|oArea is now safe");
             Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
+            Comms.ChatQueue.Enqueue("<Security> Area is now safe");
+            Comms.ChatQueue.Enqueue(string.Format("<Security> Waiting for {0} minutes", FleeWait));
             QueueState(CheckReset);
             QueueState(Resume);
 
@@ -605,11 +591,22 @@ namespace EveComFramework.Security
             if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
+                Comms.ChatQueue.Enqueue("<Security> New flee condition");
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
+                Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
                 DislodgeCurState(CheckClear, -1, Reported);
             }
             return false;
+        }
+
+        bool SignalSuccessful(object[] Params)
+        {
+            Log.Log("|oReached flee target");
+            Log.Log(" |-gWaiting for safety");
+            Comms.ChatQueue.Enqueue("<Security> Reached flee target");
+            Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
+            return true;
         }
 
         bool Flee(object[] Params)
@@ -622,8 +619,7 @@ namespace EveComFramework.Security
             Decloak = AutoModule.AutoModule.Instance.Decloak;
 
             QueueState(Traveling);
-            QueueState(LogMessage, 1, string.Format("|oReached flee target"));
-            QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
+            QueueState(SignalSuccessful);
             QueueState(CheckClear, -1, Trigger);
 
             if (Session.InStation)
@@ -685,9 +681,11 @@ namespace EveComFramework.Security
             FleeTrigger Trigger = SafeTrigger();
             if (Trigger != FleeTrigger.None)
             {
-                QueueState(LogMessage, 1, string.Format("|oNew flee condition"));
+                Log.Log("|oNew flee condition");
+                Comms.ChatQueue.Enqueue("<Security> New flee condition");
                 ReportTrigger(Trigger);
-                QueueState(LogMessage, 1, string.Format(" |-gWaiting for safety"));
+                Log.Log(" |-gWaiting for safety");
+                Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
                 QueueState(CheckClear, -1, Trigger);
                 return true;
             }
@@ -701,6 +699,7 @@ namespace EveComFramework.Security
             else
             {
                 Log.Log("|oSending ClearAlert command - resume operations");
+                Comms.ChatQueue.Enqueue("<Security> Resuming operations");
                 ClearAlert();
             }
             QueueState(CheckSafe);
