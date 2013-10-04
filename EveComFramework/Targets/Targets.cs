@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using EveCom;
+using EveComFramework.Core;
 using LavishScriptAPI;
 
 namespace EveComFramework.Targets
@@ -152,6 +153,48 @@ namespace EveComFramework.Targets
 
         #endregion
 
+    }
+
+    public class IPC : EveComFramework.Core.State
+    {
+        #region Instantiation
+
+        static IPC _Instance;
+        public static IPC Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new IPC();
+                }
+                return _Instance;
+            }
+        }
+
+        private IPC() : base()
+        {
+            LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateActiveTargets");
+            LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateActiveTargets", UpdateActiveTargets);
+        }
+
+        #endregion
+
+        public Dictionary<long, long> ActiveTargets = new Dictionary<long, long>();
+
+        void UpdateActiveTargets(object sender, LavishScriptAPI.LSEventArgs args)
+        {
+            try
+            {
+                ActiveTargets.AddOrUpdate(long.Parse(args.Args[0]), long.Parse(args.Args[1]));
+            }
+            catch { }
+        }
+
+        public void Relay(long Pilot, long ID)
+        {
+            LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[UpdateActiveTargets]:Execute[" + Pilot + "," + ID.ToString() + "]");
+        }
     }
 
     public class ParameterRebinder : ExpressionVisitor

@@ -56,8 +56,6 @@ namespace EveComFramework.SimpleDrone
             Rats.AddTargetingMe();
 
             Rats.Ordering = new RatComparer();
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("SimpleDroneUpdateActiveTargetList");
-            LavishScriptAPI.LavishScript.Events.AttachEventTarget("SimpleDroneUpdateActiveTargetList", UpdateActiveTargetList);
         }
 
         #endregion
@@ -67,10 +65,10 @@ namespace EveComFramework.SimpleDrone
         public Core.Logger Console = new Core.Logger("SimpleDrone");
         public SimpleDroneSettings Config = new SimpleDroneSettings();
         Targets.Targets Rats = new Targets.Targets();
-        public Dictionary<long, long> ActiveTargetList = new Dictionary<long, long>();
         Security.Security SecurityCore = Security.Security.Instance;
         HashSet<Drone> DroneCooldown = new HashSet<Drone>();
         Dictionary<Drone, double> DroneHealthCache = new Dictionary<Drone, double>();
+        IPC IPC = IPC.Instance;
 
         #endregion
 
@@ -91,14 +89,7 @@ namespace EveComFramework.SimpleDrone
             }
         }
 
-        void UpdateActiveTargetList(object sender, LavishScriptAPI.LSEventArgs args)
-        {
-            try
-            {
-                ActiveTargetList.AddOrUpdate(long.Parse(args.Args[0]), long.Parse(args.Args[1]));
-            }
-            catch { }
-        }
+
 
         #endregion
 
@@ -216,7 +207,7 @@ namespace EveComFramework.SimpleDrone
                 {
                     if (Config.PrivateTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !ActiveTargetList.ContainsValue(a.ID) && a.Distance < MaxRange);
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !IPC.ActiveTargets.ContainsValue(a.ID) && a.Distance < MaxRange);
                     }
                     if (ActiveTarget == null && OutOfTargets)
                     {
@@ -224,8 +215,7 @@ namespace EveComFramework.SimpleDrone
                     }
                     if (ActiveTarget != null)
                     {
-                        LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[SimpleDroneUpdateActiveTargetList]:Execute[" + Me.CharID + "," + ActiveTarget.ID.ToString() + "]");
-                        LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[RatterUpdateActiveTargetList]:Execute[" + Me.CharID + "," + ActiveTarget.ID.ToString() + "]");
+                        IPC.Relay(Me.CharID, ActiveTarget.ID);
                     }
                 }
             }
