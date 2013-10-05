@@ -288,6 +288,14 @@ namespace EveComFramework.SimpleDrone
             }
             else
             {
+                List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
+                // Recall drones if in point defense and no frig/destroyers in range
+                if (Recall.Any())
+                {
+                    Console.Log("|oRecalling drones");
+                    Recall.ReturnToDroneBay();
+                    Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
+                }
                 return false;
             }
 
@@ -342,18 +350,6 @@ namespace EveComFramework.SimpleDrone
                         Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                         return false;
                     }
-                }
-            }
-            else if (Config.Mode == Mode.PointDefense)
-            {
-                List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
-                // Recall drones if in point defense and no frig/destroyers in range
-                if (Recall.Any())
-                {
-                    Console.Log("|oRecalling drones");
-                    Recall.ReturnToDroneBay();
-                    Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
-                    return false;
                 }
             }
 
