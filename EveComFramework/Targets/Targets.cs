@@ -155,6 +155,14 @@ namespace EveComFramework.Targets
 
     }
 
+    public class IPCPilot
+    {
+        public double Hull;
+        public double Armor;
+        public double Shield;
+        public double Capacitor;
+    }
+
     public class IPC : EveComFramework.Core.State
     {
         #region Instantiation
@@ -176,17 +184,42 @@ namespace EveComFramework.Targets
         {
             LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateActiveTargets");
             LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateActiveTargets", UpdateActiveTargets);
+            LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateIPCPilots");
+            LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateIPCPilots", UpdateIPCPilots);
+            QueueState(Control);
         }
 
         #endregion
 
         public Dictionary<long, long> ActiveTargets = new Dictionary<long, long>();
+        public Dictionary<long, IPCPilot> IPCPilots = new Dictionary<long, IPCPilot>();
+
+        bool Control(object[] Params)
+        {
+            if (!Session.InSpace || !Session.Safe) return false;
+            LavishScriptAPI.LavishScript.ExecuteCommand(string.Format("relay \"all other\" Event[UpdateIPCPilots]:Execute[{0},{1},{2},{3},{4}]", Me.CharID, MyShip.ToEntity.HullPct, MyShip.ToEntity.ArmorPct, MyShip.ToEntity.ShieldPct, MyShip.Capacitor / MyShip.MaxCapacitor));
+            return false;
+        }
 
         void UpdateActiveTargets(object sender, LavishScriptAPI.LSEventArgs args)
         {
             try
             {
                 ActiveTargets.AddOrUpdate(long.Parse(args.Args[0]), long.Parse(args.Args[1]));
+            }
+            catch { }
+        }
+
+        void UpdateIPCPilots(object sender, LavishScriptAPI.LSEventArgs args)
+        {
+            try
+            {
+                IPCPilot newpilot = new IPCPilot();
+                newpilot.Hull = double.Parse(args.Args[1]);
+                newpilot.Armor = double.Parse(args.Args[2]);
+                newpilot.Shield = double.Parse(args.Args[3]);
+                newpilot.Capacitor = double.Parse(args.Args[4]);
+                IPCPilots.AddOrUpdate(long.Parse(args.Args[0]), newpilot);
             }
             catch { }
         }
