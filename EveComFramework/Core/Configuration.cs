@@ -197,6 +197,9 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.Sentry:
                         comboDroneMode.SelectedItem = "Sentry";
                         break;
+                    case SimpleDrone.Mode.Fighter:
+                        comboDroneMode.SelectedItem = "Fighter";
+                        break;
                 }
                 comboDroneMode.SelectedIndexChanged += (s, a) =>
                 {
@@ -213,6 +216,9 @@ namespace EveComFramework.Core
                             break;
                         case "Sentry":
                             DroneConfig.Mode = SimpleDrone.Mode.Sentry;
+                            break;
+                        case "Fighter":
+                            DroneConfig.Mode = SimpleDrone.Mode.Fighter;
                             break;
                     }
                     DroneConfig.Save();
