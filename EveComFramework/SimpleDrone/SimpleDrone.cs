@@ -17,6 +17,7 @@ namespace EveComFramework.SimpleDrone
         Sentry,
         Fighter,
         PointDefense,
+        AgressiveScout,
         AFKHeavy
     }
 
@@ -304,7 +305,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle Attacking frigates - this should work for PointDefense AND Sentry modes
-            if (ActiveTarget.Distance < 20000)
+            if (ActiveTarget.Distance < 20000 && Config.Mode != Mode.AgressiveScout)
             {
                 // Is the target a frigate?
                 if (Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
@@ -354,6 +355,44 @@ namespace EveComFramework.SimpleDrone
                         Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                         return false;
                     }
+                }
+            }
+
+            // Handle Attacking anything if in AgressiveScout mode
+            if (Config.Mode == Mode.AgressiveScout)
+            {
+                // Recall fighters and sentries
+                List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Light Scout Drones") && a.State != EntityState.Departing).ToList();
+                if (Recall.Any())
+                {
+                    Console.Log("|oRecalling scout drones");
+                    Recall.ReturnToDroneBay();
+                    Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
+                    return false;
+                }
+                // Send drones to attack
+                List<Drone> Attack = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones") && (a.State != EntityState.Combat || a.Target == null || a.Target != ActiveTarget)).ToList();
+                if (Attack.Any())
+                {
+                    Console.Log("|oSending scout drones to attack");
+                    Attack.Attack();
+                    Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
+                    return false;
+                }
+                int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).Take(AvailableSlots).ToList();
+                List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).Take(AvailableSlots).ToList();
+                // Launch drones
+                if (Deploy.Any())
+                {
+                    Console.Log("|oLaunching scout drones");
+                    Deploy.Launch();
+                    Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
+                    return false;
+                }
+                else if (AvailableSlots > 0 && DeployIgnoreCooldown.Any())
+                {
+                    DroneCooldown.Clear();
                 }
             }
 

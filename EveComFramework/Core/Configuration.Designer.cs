@@ -1198,7 +1198,8 @@
             "AFK Heavy",
             "Point Defense",
             "Sentry",
-            "Fighter"});
+            "Fighter",
+            "Agressive Scout"});
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
