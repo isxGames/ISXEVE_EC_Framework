@@ -81,6 +81,7 @@ namespace EveComFramework.Comms
         #region Events
 
         public event Action ToggleStop;
+        public event Action Start;
 
         void PMReceived(object sender, IrcMessageEventArgs e)
         {
@@ -89,6 +90,10 @@ namespace EveComFramework.Comms
                 if (e.Text.ToLower().StartsWith("togglestop") && ToggleStop != null)
                 {
                     ToggleStop();
+                }
+                if (e.Text.ToLower().StartsWith("start") && Start != null)
+                {
+                    Start();
                 }
             }
         }
