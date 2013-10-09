@@ -26,7 +26,7 @@ namespace EveComFramework.Comms
 
     #endregion
 
-    class Comms : State
+    public class Comms : State
     {
         #region Instantiation
 
@@ -84,7 +84,13 @@ namespace EveComFramework.Comms
 
         void PMReceived(object sender, IrcMessageEventArgs e)
         {
-            ChatQueue.Enqueue("Received message from " + e.Source.Name);
+            if (e.Source.Name == Config.SendTo)
+            {
+                if (e.Text.ToLower().StartsWith("togglestop") && ToggleStop != null)
+                {
+                    ToggleStop();
+                }
+            }
         }
 
         #endregion
