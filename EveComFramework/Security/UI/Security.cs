@@ -471,7 +471,7 @@ namespace EveComFramework.Security.UI
         {
             if (listWhiteList.SelectedIndex >= 0)
             {
-                if (e.KeyCode == Keys.Delete && e.KeyCode == Keys.Back)
+                if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
                 {
                     if (Config.WhiteList.Contains(listWhiteList.SelectedItem.ToString()))
                     {
