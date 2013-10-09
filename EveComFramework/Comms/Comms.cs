@@ -78,6 +78,17 @@ namespace EveComFramework.Comms
 
         #endregion
 
+        #region Events
+
+        public event Action ToggleStop;
+
+        void PMReceived(object sender, IrcMessageEventArgs e)
+        {
+            ChatQueue.Enqueue("Received message from " + e.Source.Name);
+        }
+
+        #endregion
+
         #region States
 
         bool Init(object[] Params)
@@ -132,6 +143,7 @@ namespace EveComFramework.Comms
                 InsertState(Blank, 5000);
                 return false;
             }
+            IRC.LocalUser.MessageReceived += PMReceived;
             IRC.LocalUser.SendMessage(Config.SendTo, "Connected");
             return true;
         }
