@@ -82,6 +82,7 @@ namespace EveComFramework.Comms
 
         public event Action ToggleStop;
         public event Action Start;
+        public event Action Skip;
 
         void PMReceived(object sender, IrcMessageEventArgs e)
         {
@@ -94,6 +95,10 @@ namespace EveComFramework.Comms
                 if (e.Text.ToLower().StartsWith("start") && Start != null)
                 {
                     Start();
+                }
+                if (e.Text.ToLower().StartsWith("skip") && Skip != null)
+                {
+                    Skip();
                 }
             }
         }
