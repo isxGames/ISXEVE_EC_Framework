@@ -723,6 +723,7 @@ namespace EveComFramework.Security
         public bool Blue = false;
         public bool Grey = false;
         public bool Local = false;
+        public bool ChatInvite = true;
         public string Voice = "";
         public int Rate = 0;
         public int Volume = 100;
@@ -766,6 +767,7 @@ namespace EveComFramework.Security
         List<Pilot> PilotCache = new List<Pilot>();
         Security Core;
         int LocalCache;
+        bool ChatInviteSeen = false;
 
         #endregion
 
@@ -822,6 +824,20 @@ namespace EveComFramework.Security
                 if (Config.Red && PilotColor(pilot) == PilotColors.Red) SpeechQueue.Enqueue("Red");
             }
             PilotCache = Local.Pilots;
+
+            if (Config.ChatInvite)
+            {
+                Window ChatInvite = Window.All.FirstOrDefault(a => a.Name.Contains("ChatInvitation"));
+                if (!ChatInviteSeen && ChatInvite != null)
+                {
+                    SpeechQueue.Enqueue("New Chat Invite");
+                    ChatInviteSeen = true;
+                }
+                if (ChatInviteSeen && ChatInvite == null)
+                {
+                    ChatInviteSeen = false;
+                }
+            }
 
             if (Config.Local && LocalCache != ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count)
             {

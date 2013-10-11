@@ -120,6 +120,7 @@ namespace EveComFramework.Security.UI
             checkAudioGrey.Checked = SpeechConfig.Grey;
             checkAudioRed.Checked = SpeechConfig.Red;
             checkLocal.Checked = SpeechConfig.Local;
+            checkChatInvite.Checked = SpeechConfig.ChatInvite;
             listVoices.Items.Clear();
             listVoices.Items.AddRange(Speech.GetInstalledVoices().Select(a => a.VoiceInfo.Name).ToArray());
             trackRate.Value = SpeechConfig.Rate;
@@ -481,6 +482,12 @@ namespace EveComFramework.Security.UI
                     }
                 }
             }
+        }
+
+        private void checkChatInvite_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.ChatInvite = checkChatInvite.Checked;
+            SpeechConfig.Save();
         }
 
     }

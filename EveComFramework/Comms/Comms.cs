@@ -22,6 +22,7 @@ namespace EveComFramework.Comms
         public bool Local = true;
         public bool NPC = false;
         public bool Wallet = true;
+        public bool ChatInvite = true;
     }
 
     #endregion
@@ -66,6 +67,7 @@ namespace EveComFramework.Comms
         public CommsSettings Config = new CommsSettings();
         string LastLocal = "";
         double LastWallet;
+        bool ChatInviteSeen = false;
 
         public Queue<string> ChatQueue = new Queue<string>();
 
@@ -183,6 +185,21 @@ namespace EveComFramework.Comms
                 }
             }
             catch { }
+
+            if (Config.ChatInvite)
+            {
+                Window ChatInvite = Window.All.FirstOrDefault(a => a.Name.Contains("ChatInvitation"));
+                if (!ChatInviteSeen && ChatInvite != null)
+                {
+                    ChatQueue.Enqueue("<Comms> !!!!!!!!!!!!!!!!!!!!New Chat Invitation received!!!!!!!!!!!!!!!!!!!!");
+                    ChatInviteSeen = true;
+                }
+                if (ChatInviteSeen && ChatInvite == null)
+                {
+                    ChatInviteSeen = false;
+                }
+            }
+
             if (Config.Wallet && LastWallet != Wallet.ISK)
             {
                 double difference = Wallet.ISK - LastWallet;

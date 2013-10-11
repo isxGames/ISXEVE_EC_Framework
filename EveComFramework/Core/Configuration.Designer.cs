@@ -106,6 +106,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
+            this.checkReportChatInvite = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -957,7 +958,7 @@
             this.groupBox6.Controls.Add(this.tableLayoutPanel6);
             this.groupBox6.Location = new System.Drawing.Point(3, 621);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 140);
+            this.groupBox6.Size = new System.Drawing.Size(326, 158);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "IRC Relay";
@@ -979,10 +980,11 @@
             this.tableLayoutPanel6.Controls.Add(this.checkNPC, 3, 5);
             this.tableLayoutPanel6.Controls.Add(this.checkLocal, 1, 5);
             this.tableLayoutPanel6.Controls.Add(this.checkWallet, 1, 6);
+            this.tableLayoutPanel6.Controls.Add(this.checkReportChatInvite, 1, 7);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 7;
+            this.tableLayoutPanel6.RowCount = 8;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -990,7 +992,8 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(320, 120);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(320, 138);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // checkUseIRC
@@ -1130,7 +1133,7 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.tableLayoutPanel7);
-            this.groupBox7.Location = new System.Drawing.Point(3, 767);
+            this.groupBox7.Location = new System.Drawing.Point(3, 785);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(326, 83);
             this.groupBox7.TabIndex = 7;
@@ -1215,6 +1218,19 @@
             this.checkDronePrivateTargets.TabIndex = 4;
             this.checkDronePrivateTargets.Text = "Private Targets";
             this.checkDronePrivateTargets.UseVisualStyleBackColor = true;
+            // 
+            // checkReportChatInvite
+            // 
+            this.checkReportChatInvite.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.checkReportChatInvite, 2);
+            this.checkReportChatInvite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkReportChatInvite.Location = new System.Drawing.Point(15, 120);
+            this.checkReportChatInvite.Margin = new System.Windows.Forms.Padding(0);
+            this.checkReportChatInvite.Name = "checkReportChatInvite";
+            this.checkReportChatInvite.Size = new System.Drawing.Size(134, 20);
+            this.checkReportChatInvite.TabIndex = 12;
+            this.checkReportChatInvite.Text = "Report Chat Invites";
+            this.checkReportChatInvite.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
@@ -1360,5 +1376,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboDroneMode;
         private System.Windows.Forms.CheckBox checkDronePrivateTargets;
+        private System.Windows.Forms.CheckBox checkReportChatInvite;
     }
 }
