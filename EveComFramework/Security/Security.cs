@@ -412,15 +412,6 @@ namespace EveComFramework.Security
             }
         }
 
-        public bool IsScrambling(Entity Check)
-        {
-            if (Session.InFleet)
-            {
-                return ScramblingEntities.Contains(Check.ID);
-            }
-            return Entity.All.Any(a => a.IsWarpScrambling && a.Exists && !a.Exploded && !a.Released);
-        }
-
         /// <summary>
         /// Returns an entity that is neuting or has neuted a friendly fleet member
         /// </summary>
@@ -434,15 +425,6 @@ namespace EveComFramework.Security
                 }
                 return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
             }
-        }
-
-        public bool IsNeuting(Entity Check)
-        {
-            if (Session.InFleet)
-            {
-                return NeutingEntities.Contains(Check.ID);
-            }
-            return Entity.All.Any(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
         }
 
         void ReportTrigger(FleeTrigger reported)
@@ -498,7 +480,6 @@ namespace EveComFramework.Security
             if (Neuting != null)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
-                return false;
             }
 
             if (this.ValidScramble != null) return false;
@@ -515,21 +496,18 @@ namespace EveComFramework.Security
                 case FleeTrigger.NegativeStanding:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NeutralStanding:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Paranoid:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
@@ -537,27 +515,23 @@ namespace EveComFramework.Security
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Targeted);
                     ReportTrigger(Reported);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     return true;
                 case FleeTrigger.CapacitorLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.CapacitorLow);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.ShieldLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.ShieldLow);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.ArmorLow:
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.ArmorLow);
-                    DroneControl.DroneControl.Instance.Clear();
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
@@ -571,10 +545,9 @@ namespace EveComFramework.Security
         bool CheckClear(object[] Params)
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
-            int FleeWait = Config.FleeWait;
-            if (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) FleeWait = 0;
+            int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) ? Config.FleeWait : 0;
+            if (Trigger != FleeTrigger.ArmorLow && Trigger != FleeTrigger.CapacitorLow && Trigger != FleeTrigger.ShieldLow && Trigger != FleeTrigger.Forced) AutoModule.AutoModule.Instance.Decloak = false;
 
-            AutoModule.AutoModule.Instance.Decloak = false;
             if (SafeTrigger() != FleeTrigger.None) return false;
             Log.Log("|oArea is now safe");
             Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
@@ -600,7 +573,8 @@ namespace EveComFramework.Security
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
                 Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
-                DislodgeCurState(CheckClear, -1, Reported);
+                Clear();
+                QueueState(CheckClear, -1, Reported);
             }
             return false;
         }
@@ -683,18 +657,6 @@ namespace EveComFramework.Security
 
         bool Resume(object[] Params)
         {
-            FleeTrigger Trigger = SafeTrigger();
-            if (Trigger != FleeTrigger.None)
-            {
-                Log.Log("|oNew flee condition");
-                Comms.ChatQueue.Enqueue("<Security> New flee condition");
-                ReportTrigger(Trigger);
-                Log.Log(" |-gWaiting for safety");
-                Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
-                QueueState(CheckClear, -1, Trigger);
-                return true;
-            }
-
             AutoModule.AutoModule.Instance.Decloak = Decloak;
             if (ClearAlert == null)
             {
