@@ -180,7 +180,7 @@ namespace EveComFramework.SimpleDrone
 
             if (WarpScrambling != null)
             {
-                if (!SecurityCore.IsScrambling(ActiveTarget) && WarpScrambling.Distance < MaxRange)
+                if (ActiveTarget != WarpScrambling && WarpScrambling.Distance < MaxRange)
                 {
                     Console.Log("|rEntity on grid is/was warp scrambling!");
                     Console.Log("|oOveriding current drone target");
@@ -189,10 +189,9 @@ namespace EveComFramework.SimpleDrone
                     return false;
                 }
             }
-
-            if (Neuting != null && !SecurityCore.IsScrambling(ActiveTarget))
+            else if (Neuting != null)
             {
-                if (!SecurityCore.IsNeuting(ActiveTarget) && Neuting.Distance < MaxRange)
+                if (ActiveTarget != Neuting && Neuting.Distance < MaxRange)
                 {
                     Console.Log("|rEntity on grid is/was neuting!");
                     Console.Log("|oOveriding current drone target");
