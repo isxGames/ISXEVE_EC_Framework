@@ -67,12 +67,17 @@ namespace EveComFramework.Core
 
         #region States
 
+        DateTime BookmarkUpdate = DateTime.Now;
         bool Control(object[] Params)
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
             Name = Me.Name;
             CharID = Me.CharID;
-            Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
+            if (Bookmarks == null || BookmarkUpdate < DateTime.Now)
+            {
+                Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
+                BookmarkUpdate = DateTime.Now.AddMinutes(1);
+            }
             if (Session.InFleet) FleetMembers = Fleet.Members.Select(a => a.Name).ToArray();
             if (MyShip.CargoBay != null)
             {
