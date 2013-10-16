@@ -545,7 +545,7 @@ namespace EveComFramework.Security
         bool CheckClear(object[] Params)
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
-            int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) ? Config.FleeWait : 0;
+            int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) ? 0 : Config.FleeWait;
             if (Trigger != FleeTrigger.ArmorLow && Trigger != FleeTrigger.CapacitorLow && Trigger != FleeTrigger.ShieldLow && Trigger != FleeTrigger.Forced) AutoModule.AutoModule.Instance.Decloak = false;
 
             if (SafeTrigger() != FleeTrigger.None) return false;

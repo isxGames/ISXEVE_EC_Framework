@@ -200,8 +200,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>md "C:\Program Files (x86)\InnerSpace\.NET Programs\trash"
-del "C:\Program Files (x86)\InnerSpace\.NET Programs\trash\*.*" /Q /F
+    <PostBuildEvent>del "C:\Program Files (x86)\InnerSpace\.NET Programs\trash\*.*" /Q /F
 move "C:\Program Files (x86)\InnerSpace\.NET Programs\EveComFramework.dll"  "C:\Program Files (x86)\InnerSpace\.NET Programs\trash\%25TIME::=-%25"
 copy "$(TargetDir)*.*" "C:\Program Files (x86)\InnerSpace\.NET Programs"</PostBuildEvent>
   </PropertyGroup>

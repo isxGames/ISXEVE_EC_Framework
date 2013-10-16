@@ -73,6 +73,7 @@ namespace EveComFramework.Core
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
             Name = Me.Name;
             CharID = Me.CharID;
+
             if (Bookmarks == null || BookmarkUpdate < DateTime.Now)
             {
                 Bookmarks = Bookmark.All.Select(a => a.Title).ToArray();
