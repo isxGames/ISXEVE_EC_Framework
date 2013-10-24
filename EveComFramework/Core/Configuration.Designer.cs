@@ -99,6 +99,7 @@
             this.checkNPC = new System.Windows.Forms.CheckBox();
             this.checkLocal = new System.Windows.Forms.CheckBox();
             this.checkWallet = new System.Windows.Forms.CheckBox();
+            this.checkReportChatInvite = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
@@ -106,7 +107,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
-            this.checkReportChatInvite = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1128,6 +1128,19 @@
             this.checkWallet.Text = "Report Wallet Changes";
             this.checkWallet.UseVisualStyleBackColor = true;
             // 
+            // checkReportChatInvite
+            // 
+            this.checkReportChatInvite.AutoSize = true;
+            this.tableLayoutPanel6.SetColumnSpan(this.checkReportChatInvite, 2);
+            this.checkReportChatInvite.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkReportChatInvite.Location = new System.Drawing.Point(15, 120);
+            this.checkReportChatInvite.Margin = new System.Windows.Forms.Padding(0);
+            this.checkReportChatInvite.Name = "checkReportChatInvite";
+            this.checkReportChatInvite.Size = new System.Drawing.Size(134, 20);
+            this.checkReportChatInvite.TabIndex = 12;
+            this.checkReportChatInvite.Text = "Report Chat Invites";
+            this.checkReportChatInvite.UseVisualStyleBackColor = true;
+            // 
             // groupBox7
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1202,7 +1215,8 @@
             "Point Defense",
             "Sentry",
             "Fighter",
-            "Agressive Scout"});
+            "Agressive Scout",
+            "Agressive Medium"});
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
@@ -1218,19 +1232,6 @@
             this.checkDronePrivateTargets.TabIndex = 4;
             this.checkDronePrivateTargets.Text = "Private Targets";
             this.checkDronePrivateTargets.UseVisualStyleBackColor = true;
-            // 
-            // checkReportChatInvite
-            // 
-            this.checkReportChatInvite.AutoSize = true;
-            this.tableLayoutPanel6.SetColumnSpan(this.checkReportChatInvite, 2);
-            this.checkReportChatInvite.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkReportChatInvite.Location = new System.Drawing.Point(15, 120);
-            this.checkReportChatInvite.Margin = new System.Windows.Forms.Padding(0);
-            this.checkReportChatInvite.Name = "checkReportChatInvite";
-            this.checkReportChatInvite.Size = new System.Drawing.Size(134, 20);
-            this.checkReportChatInvite.TabIndex = 12;
-            this.checkReportChatInvite.Text = "Report Chat Invites";
-            this.checkReportChatInvite.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 

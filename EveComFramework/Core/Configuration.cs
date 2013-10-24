@@ -205,6 +205,9 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.AgressiveScout:
                         comboDroneMode.SelectedItem = "Agressive Scout";
                         break;
+                    case SimpleDrone.Mode.AgressiveMedium:
+                        comboDroneMode.SelectedItem = "Agressive Medium";
+                        break;
                 }
                 comboDroneMode.SelectedIndexChanged += (s, a) =>
                 {
@@ -227,6 +230,9 @@ namespace EveComFramework.Core
                             break;
                         case "Agressive Scout":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveScout;
+                            break;
+                        case "Agressive Medium":
+                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveMedium;
                             break;
                     }
                     DroneConfig.Save();
