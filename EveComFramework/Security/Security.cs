@@ -153,6 +153,10 @@ namespace EveComFramework.Security
         /// Event raised to alert a bot that it is safe after a flee
         /// </summary>
         public event Action ClearAlert;
+        /// <summary>
+        /// Event raised to alert a bot a flee was unsuccessful (usually due to a scramble)
+        /// </summary>
+        public event Action AbandonAlert;
 
         #endregion
 
@@ -597,7 +601,7 @@ namespace EveComFramework.Security
 
             Decloak = AutoModule.AutoModule.Instance.Decloak;
 
-            QueueState(Traveling);
+            QueueState(WaitFlee);
             QueueState(SignalSuccessful);
             QueueState(CheckClear, -1, Trigger);
 
@@ -640,8 +644,21 @@ namespace EveComFramework.Security
             return true;
         }
 
-        bool Traveling(object[] Params)
+        bool WaitFlee(object[] Params)
         {
+            if (this.ValidScramble != null)
+            {
+                if (AbandonAlert != null)
+                {
+                    Log.Log("|rAbandoning flee due to a scramble!");
+                    Log.Log("|rReturning control to bot!");
+                    Comms.ChatQueue.Enqueue("<Security> Flee canceled due to a new scramble!");
+                    Clear();
+                    QueueState(CheckSafe);
+                    AbandonAlert();
+                    return false;
+                }
+            }
             if (!Move.Idle || (Session.InSpace && MyShip.ToEntity.Mode == EntityMode.Warping))
             {
                 return false;
