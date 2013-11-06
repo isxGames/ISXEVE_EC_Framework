@@ -23,6 +23,7 @@ namespace EveComFramework.AutoModule
         public bool TrackingComputers = true;
         public bool ECCMs = true;
         public bool DroneControlUnits = true;
+        public bool AutoTargeters = true;
         public bool PropulsionModules = false;
         public bool PropulsionModulesAlwaysOn = false;
         public bool PropulsionModulesApproaching = false;
@@ -37,6 +38,7 @@ namespace EveComFramework.AutoModule
         public int CapTrackingComputers = 30;
         public int CapECCMs = 30;
         public int CapDroneControlUnits = 30;
+        public int CapAutoTargeters = 30;
         public int CapPropulsionModules = 30;
 
         public int MaxShieldBoosters = 95;
@@ -348,6 +350,25 @@ namespace EveComFramework.AutoModule
                     MyShip.Modules.Count(a => a.GroupID == Group.DroneControlUnit && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneControlUnit && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                }
+            }
+
+            #endregion
+
+            #region AutoTargeters
+
+            if (MyShip.Modules.Count(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsOnline) > 0 &&
+                Config.AutoTargeters)
+            {
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapAutoTargeters &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.AutomatedTargetingSystem && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.AutomatedTargetingSystem && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                }
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapAutoTargeters &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
             }
 

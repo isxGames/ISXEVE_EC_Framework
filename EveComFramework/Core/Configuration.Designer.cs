@@ -107,6 +107,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
+            this.checkAutoTargeters = new System.Windows.Forms.CheckBox();
+            this.numericAutoTargetersCap = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -144,6 +146,7 @@
             this.groupBox7.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -153,7 +156,7 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(329, 327);
+            this.groupBox1.Size = new System.Drawing.Size(329, 352);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AutoModule";
@@ -182,7 +185,7 @@
             this.tableLayoutPanel1.Controls.Add(this.numericTrackingComputerCap, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.numericECCMCap, 2, 9);
             this.tableLayoutPanel1.Controls.Add(this.numericDroneControlUnitCap, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.numericPropulsionModuleCap, 2, 11);
+            this.tableLayoutPanel1.Controls.Add(this.numericPropulsionModuleCap, 2, 12);
             this.tableLayoutPanel1.Controls.Add(this.checkShieldBoosters, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.checkArmorRepairers, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.checkActiveHardeners, 0, 4);
@@ -192,21 +195,18 @@
             this.tableLayoutPanel1.Controls.Add(this.checkTrackingComputers, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.checkECCMs, 0, 9);
             this.tableLayoutPanel1.Controls.Add(this.checkDroneControlUnits, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.checkPropulsionModules, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.checkActivateApproaching, 1, 13);
-            this.tableLayoutPanel1.Controls.Add(this.checkActivateOrbiting, 1, 14);
-            this.tableLayoutPanel1.Controls.Add(this.checkAlwaysActive, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.checkPropulsionModules, 0, 12);
+            this.tableLayoutPanel1.Controls.Add(this.checkActivateApproaching, 1, 14);
+            this.tableLayoutPanel1.Controls.Add(this.checkActivateOrbiting, 1, 15);
+            this.tableLayoutPanel1.Controls.Add(this.checkAlwaysActive, 1, 16);
             this.tableLayoutPanel1.Controls.Add(this.checkAutoModule, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.checkAutoTargeters, 0, 11);
+            this.tableLayoutPanel1.Controls.Add(this.numericAutoTargetersCap, 2, 11);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 16;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowCount = 17;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -219,8 +219,14 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(323, 307);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(323, 332);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericArmorCap
@@ -379,7 +385,7 @@
             // numericPropulsionModuleCap
             // 
             this.numericPropulsionModuleCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericPropulsionModuleCap.Location = new System.Drawing.Point(120, 232);
+            this.numericPropulsionModuleCap.Location = new System.Drawing.Point(120, 252);
             this.numericPropulsionModuleCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericPropulsionModuleCap.Name = "numericPropulsionModuleCap";
             this.numericPropulsionModuleCap.Size = new System.Drawing.Size(53, 21);
@@ -507,7 +513,7 @@
             this.checkPropulsionModules.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkPropulsionModules, 2);
             this.checkPropulsionModules.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkPropulsionModules.Location = new System.Drawing.Point(0, 232);
+            this.checkPropulsionModules.Location = new System.Drawing.Point(0, 252);
             this.checkPropulsionModules.Margin = new System.Windows.Forms.Padding(0);
             this.checkPropulsionModules.Name = "checkPropulsionModules";
             this.checkPropulsionModules.Size = new System.Drawing.Size(120, 21);
@@ -520,7 +526,7 @@
             this.checkActivateApproaching.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkActivateApproaching, 2);
             this.checkActivateApproaching.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkActivateApproaching.Location = new System.Drawing.Point(20, 253);
+            this.checkActivateApproaching.Location = new System.Drawing.Point(20, 273);
             this.checkActivateApproaching.Margin = new System.Windows.Forms.Padding(0);
             this.checkActivateApproaching.Name = "checkActivateApproaching";
             this.checkActivateApproaching.Size = new System.Drawing.Size(153, 17);
@@ -533,7 +539,7 @@
             this.checkActivateOrbiting.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkActivateOrbiting, 2);
             this.checkActivateOrbiting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkActivateOrbiting.Location = new System.Drawing.Point(20, 270);
+            this.checkActivateOrbiting.Location = new System.Drawing.Point(20, 290);
             this.checkActivateOrbiting.Margin = new System.Windows.Forms.Padding(0);
             this.checkActivateOrbiting.Name = "checkActivateOrbiting";
             this.checkActivateOrbiting.Size = new System.Drawing.Size(153, 17);
@@ -546,10 +552,10 @@
             this.checkAlwaysActive.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkAlwaysActive, 2);
             this.checkAlwaysActive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkAlwaysActive.Location = new System.Drawing.Point(20, 287);
+            this.checkAlwaysActive.Location = new System.Drawing.Point(20, 307);
             this.checkAlwaysActive.Margin = new System.Windows.Forms.Padding(0);
             this.checkAlwaysActive.Name = "checkAlwaysActive";
-            this.checkAlwaysActive.Size = new System.Drawing.Size(153, 20);
+            this.checkAlwaysActive.Size = new System.Drawing.Size(153, 25);
             this.checkAlwaysActive.TabIndex = 30;
             this.checkAlwaysActive.Text = "Always Active";
             this.checkAlwaysActive.UseVisualStyleBackColor = true;
@@ -572,7 +578,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox2.Location = new System.Drawing.Point(3, 336);
+            this.groupBox2.Location = new System.Drawing.Point(3, 361);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(329, 61);
             this.groupBox2.TabIndex = 2;
@@ -634,7 +640,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox3.Location = new System.Drawing.Point(3, 400);
+            this.groupBox3.Location = new System.Drawing.Point(3, 425);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(329, 40);
             this.groupBox3.TabIndex = 3;
@@ -673,7 +679,7 @@
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.tableLayoutPanel4);
-            this.groupBox4.Location = new System.Drawing.Point(3, 446);
+            this.groupBox4.Location = new System.Drawing.Point(3, 471);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(329, 109);
             this.groupBox4.TabIndex = 4;
@@ -879,7 +885,7 @@
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.tableLayoutPanel5);
-            this.groupBox5.Location = new System.Drawing.Point(3, 561);
+            this.groupBox5.Location = new System.Drawing.Point(3, 586);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(326, 54);
             this.groupBox5.TabIndex = 5;
@@ -956,7 +962,7 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.tableLayoutPanel6);
-            this.groupBox6.Location = new System.Drawing.Point(3, 621);
+            this.groupBox6.Location = new System.Drawing.Point(3, 646);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(326, 158);
             this.groupBox6.TabIndex = 6;
@@ -1146,7 +1152,7 @@
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox7.Controls.Add(this.tableLayoutPanel7);
-            this.groupBox7.Location = new System.Drawing.Point(3, 785);
+            this.groupBox7.Location = new System.Drawing.Point(3, 810);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(326, 83);
             this.groupBox7.TabIndex = 7;
@@ -1233,6 +1239,28 @@
             this.checkDronePrivateTargets.Text = "Private Targets";
             this.checkDronePrivateTargets.UseVisualStyleBackColor = true;
             // 
+            // checkAutoTargeters
+            // 
+            this.checkAutoTargeters.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkAutoTargeters, 2);
+            this.checkAutoTargeters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkAutoTargeters.Location = new System.Drawing.Point(0, 232);
+            this.checkAutoTargeters.Margin = new System.Windows.Forms.Padding(0);
+            this.checkAutoTargeters.Name = "checkAutoTargeters";
+            this.checkAutoTargeters.Size = new System.Drawing.Size(120, 20);
+            this.checkAutoTargeters.TabIndex = 32;
+            this.checkAutoTargeters.Text = "Auto Targeters";
+            this.checkAutoTargeters.UseVisualStyleBackColor = true;
+            // 
+            // numericAutoTargetersCap
+            // 
+            this.numericAutoTargetersCap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericAutoTargetersCap.Location = new System.Drawing.Point(120, 232);
+            this.numericAutoTargetersCap.Margin = new System.Windows.Forms.Padding(0);
+            this.numericAutoTargetersCap.Name = "numericAutoTargetersCap";
+            this.numericAutoTargetersCap.Size = new System.Drawing.Size(53, 21);
+            this.numericAutoTargetersCap.TabIndex = 33;
+            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1247,7 +1275,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Configuration";
-            this.Size = new System.Drawing.Size(350, 895);
+            this.Size = new System.Drawing.Size(350, 908);
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1293,6 +1321,7 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1378,5 +1407,7 @@
         private System.Windows.Forms.ComboBox comboDroneMode;
         private System.Windows.Forms.CheckBox checkDronePrivateTargets;
         private System.Windows.Forms.CheckBox checkReportChatInvite;
+        private System.Windows.Forms.CheckBox checkAutoTargeters;
+        private System.Windows.Forms.NumericUpDown numericAutoTargetersCap;
     }
 }
