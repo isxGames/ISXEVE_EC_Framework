@@ -646,8 +646,10 @@ namespace EveComFramework.Security
 
         bool WaitFlee(object[] Params)
         {
-            if (this.ValidScramble != null)
+            Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
+            if (WarpScrambling != null || this.ValidScramble != null)
             {
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 if (AbandonAlert != null)
                 {
                     Log.Log("|rAbandoning flee due to a scramble!");
@@ -655,9 +657,10 @@ namespace EveComFramework.Security
                     Comms.ChatQueue.Enqueue("<Security> Flee canceled due to a new scramble!");
                     Clear();
                     QueueState(CheckSafe);
+                    Move.Clear();
                     AbandonAlert();
-                    return false;
                 }
+                return false;
             }
             if (!Move.Idle || (Session.InSpace && MyShip.ToEntity.Mode == EntityMode.Warping))
             {
