@@ -262,18 +262,18 @@ namespace EveComFramework.AutoModule
 
             #region Gang Links
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.IsOnline) > 0 &&
+            if (MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsOnline) > 0 &&
                 Config.GangLinks)
             {
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapGangLinks &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                    MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.GangCoordinator && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                 }
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapGangLinks &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                    MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.GangCoordinator && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
             }
 
