@@ -70,6 +70,7 @@ namespace EveComFramework.Comms
         bool ChatInviteSeen = false;
 
         public Queue<string> ChatQueue = new Queue<string>();
+        public Queue<string> LocalQueue = new Queue<string>();
 
         IrcClient IRC = new IrcClient();
 
@@ -101,6 +102,10 @@ namespace EveComFramework.Comms
                 if (e.Text.ToLower().StartsWith("skip") && Skip != null)
                 {
                     Skip();
+                }
+                if (e.Text.ToLower().StartsWith("local"))
+                {
+                    LocalQueue.Enqueue(e.Text.Remove(0,6));
                 }
             }
         }
@@ -215,6 +220,10 @@ namespace EveComFramework.Comms
                 }
             }
 
+            if (LocalQueue.Count > 0)
+            {
+                ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Send(LocalQueue.Dequeue());
+            }
             return false;
         }
 
