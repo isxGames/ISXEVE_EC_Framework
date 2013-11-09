@@ -113,7 +113,7 @@ namespace EveComFramework.SessionControl
         /// <summary>
         /// The character name to work with
         /// </summary>
-        public string characterName = string.Empty;
+        public string characterName { get; set; }
 
         DateTime Instanced = DateTime.Now;
         DateTime SessionStart;
@@ -142,7 +142,7 @@ namespace EveComFramework.SessionControl
         /// </summary>
         public void UpdateCurrentProfile()
         {
-            if (GlobalConfig.Profiles.ContainsKey(characterName)) _curProfile = GlobalConfig.Profiles[characterName];
+            if (characterName != null && GlobalConfig.Profiles.ContainsKey(characterName)) _curProfile = GlobalConfig.Profiles[characterName];
         }
 
         /// <summary>

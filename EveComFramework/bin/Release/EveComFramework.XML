@@ -713,11 +713,6 @@
             Log for this class
             </summary>
         </member>
-        <member name="F:EveComFramework.SessionControl.SessionControl.characterName">
-            <summary>
-            The character name to work with
-            </summary>
-        </member>
         <member name="M:EveComFramework.SessionControl.SessionControl.UpdateCurrentProfile">
             <summary>
             Sets up _curProfile with data from GlobalConfig
@@ -736,6 +731,11 @@
         <member name="P:EveComFramework.SessionControl.SessionControl.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.SessionControl.SessionControl.characterName">
+            <summary>
+            The character name to work with
             </summary>
         </member>
         <member name="E:EveComFramework.SessionControl.SessionControl.LogOut">
@@ -951,6 +951,11 @@
         <member name="E:EveComFramework.Security.Security.ClearAlert">
             <summary>
             Event raised to alert a bot that it is safe after a flee
+            </summary>
+        </member>
+        <member name="E:EveComFramework.Security.Security.AbandonAlert">
+            <summary>
+            Event raised to alert a bot a flee was unsuccessful (usually due to a scramble)
             </summary>
         </member>
         <member name="P:EveComFramework.Security.Security.ValidScramble">

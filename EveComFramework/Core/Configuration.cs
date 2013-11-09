@@ -93,7 +93,12 @@ namespace EveComFramework.Core
                 checkDroneControlUnits.Checked = AutoModuleConfig.DroneControlUnits;
                 checkDroneControlUnits.CheckedChanged += (s, a) => { AutoModuleConfig.DroneControlUnits = checkDroneControlUnits.Checked; AutoModuleConfig.Save(); };
                 numericDroneControlUnitCap.Value = AutoModuleConfig.CapDroneControlUnits;
-                numericDroneControlUnitCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericDroneControlUnitCap.Value; AutoModuleConfig.Save(); };
+                numericDroneControlUnitCap.ValueChanged += (s, a) => { AutoModuleConfig.CapDroneControlUnits = (int)numericDroneControlUnitCap.Value; AutoModuleConfig.Save(); };
+
+                checkAutoTargeters.Checked = AutoModuleConfig.AutoTargeters;
+                checkAutoTargeters.CheckedChanged += (s, a) => { AutoModuleConfig.AutoTargeters = checkAutoTargeters.Checked; AutoModuleConfig.Save(); };
+                numericAutoTargetersCap.Value = AutoModuleConfig.CapAutoTargeters;
+                numericAutoTargetersCap.ValueChanged += (s, a) => { AutoModuleConfig.CapAutoTargeters = (int)numericAutoTargetersCap.Value; AutoModuleConfig.Save(); };
 
                 checkPropulsionModules.Checked = AutoModuleConfig.PropulsionModules;
                 checkPropulsionModules.CheckedChanged += (s, a) => { AutoModuleConfig.PropulsionModules = checkPropulsionModules.Checked; AutoModuleConfig.Save(); };

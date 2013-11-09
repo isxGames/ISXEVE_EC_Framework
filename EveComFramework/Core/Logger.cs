@@ -192,6 +192,12 @@ namespace EveComFramework.Core
             {
                 Event(Name, string.Format(Regex.Replace(Message, "\\|.", string.Empty), Params));
             }
+            string charname = SessionControl.SessionControl.Instance.characterName;
+            if (charname == null) charname = Cache.Instance.Name;
+            if (charname != null)
+            {
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink Event[ControlCenter_LogUpdate]:Execute[\"" + charname + "\"," + Name + ",\"" + string.Format(Message, Params) + "\"]");
+            }
         }
         /// <summary>
         /// Delegate for rich log events

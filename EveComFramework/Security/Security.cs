@@ -153,6 +153,10 @@ namespace EveComFramework.Security
         /// Event raised to alert a bot that it is safe after a flee
         /// </summary>
         public event Action ClearAlert;
+        /// <summary>
+        /// Event raised to alert a bot a flee was unsuccessful (usually due to a scramble)
+        /// </summary>
+        public event Action AbandonAlert;
 
         #endregion
 
@@ -597,7 +601,7 @@ namespace EveComFramework.Security
 
             Decloak = AutoModule.AutoModule.Instance.Decloak;
 
-            QueueState(Traveling);
+            QueueState(WaitFlee);
             QueueState(SignalSuccessful);
             QueueState(CheckClear, -1, Trigger);
 
@@ -640,8 +644,24 @@ namespace EveComFramework.Security
             return true;
         }
 
-        bool Traveling(object[] Params)
+        bool WaitFlee(object[] Params)
         {
+            Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
+            if (WarpScrambling != null || this.ValidScramble != null)
+            {
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
+                if (AbandonAlert != null)
+                {
+                    Log.Log("|rAbandoning flee due to a scramble!");
+                    Log.Log("|rReturning control to bot!");
+                    Comms.ChatQueue.Enqueue("<Security> Flee canceled due to a new scramble!");
+                    Clear();
+                    QueueState(CheckSafe);
+                    Move.Clear();
+                    AbandonAlert();
+                }
+                return false;
+            }
             if (!Move.Idle || (Session.InSpace && MyShip.ToEntity.Mode == EntityMode.Warping))
             {
                 return false;
