@@ -30,6 +30,7 @@ namespace EveComFramework.SimpleDrone
     {
         public Mode Mode = Mode.None;
         public bool PrivateTargets = true;
+        public bool SharedTargets = false;
         public int TargetSlots = 2;
     }
 
@@ -209,7 +210,14 @@ namespace EveComFramework.SimpleDrone
                 {
                     if (Config.PrivateTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !IPC.ActiveTargets.ContainsValue(a.ID) && a.Distance < MaxRange);
+                        if (Config.SharedTargets)
+                        {
+                            ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => IPC.ActiveTargets.ContainsValue(a.ID) && a.Distance < MaxRange);
+                        }
+                        else
+                        {
+                            ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => !IPC.ActiveTargets.ContainsValue(a.ID) && a.Distance < MaxRange);
+                        }
                     }
                     if (ActiveTarget == null && OutOfTargets)
                     {

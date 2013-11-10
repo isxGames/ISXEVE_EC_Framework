@@ -61,6 +61,8 @@
             this.checkActivateOrbiting = new System.Windows.Forms.CheckBox();
             this.checkAlwaysActive = new System.Windows.Forms.CheckBox();
             this.checkAutoModule = new System.Windows.Forms.CheckBox();
+            this.checkAutoTargeters = new System.Windows.Forms.CheckBox();
+            this.numericAutoTargetersCap = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.textUndockWarp = new System.Windows.Forms.TextBox();
@@ -107,8 +109,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
-            this.checkAutoTargeters = new System.Windows.Forms.CheckBox();
-            this.numericAutoTargetersCap = new System.Windows.Forms.NumericUpDown();
+            this.checkDroneFocus = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -125,6 +126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericECCMCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneControlUnitCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPropulsionModuleCap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -146,7 +148,6 @@
             this.groupBox7.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -572,6 +573,28 @@
             this.checkAutoModule.TabIndex = 31;
             this.checkAutoModule.Text = "Always Enabled";
             this.checkAutoModule.UseVisualStyleBackColor = true;
+            // 
+            // checkAutoTargeters
+            // 
+            this.checkAutoTargeters.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkAutoTargeters, 2);
+            this.checkAutoTargeters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkAutoTargeters.Location = new System.Drawing.Point(0, 232);
+            this.checkAutoTargeters.Margin = new System.Windows.Forms.Padding(0);
+            this.checkAutoTargeters.Name = "checkAutoTargeters";
+            this.checkAutoTargeters.Size = new System.Drawing.Size(120, 20);
+            this.checkAutoTargeters.TabIndex = 32;
+            this.checkAutoTargeters.Text = "Auto Targeters";
+            this.checkAutoTargeters.UseVisualStyleBackColor = true;
+            // 
+            // numericAutoTargetersCap
+            // 
+            this.numericAutoTargetersCap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericAutoTargetersCap.Location = new System.Drawing.Point(120, 232);
+            this.numericAutoTargetersCap.Margin = new System.Windows.Forms.Padding(0);
+            this.numericAutoTargetersCap.Name = "numericAutoTargetersCap";
+            this.numericAutoTargetersCap.Size = new System.Drawing.Size(53, 21);
+            this.numericAutoTargetersCap.TabIndex = 33;
             // 
             // groupBox2
             // 
@@ -1161,14 +1184,16 @@
             // 
             // tableLayoutPanel7
             // 
-            this.tableLayoutPanel7.ColumnCount = 2;
+            this.tableLayoutPanel7.ColumnCount = 3;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel7.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.numericDroneTargetSlots, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label12, 0, 1);
             this.tableLayoutPanel7.Controls.Add(this.comboDroneMode, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.checkDronePrivateTargets, 1, 2);
+            this.tableLayoutPanel7.Controls.Add(this.checkDroneFocus, 2, 2);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -1213,6 +1238,7 @@
             // 
             // comboDroneMode
             // 
+            this.tableLayoutPanel7.SetColumnSpan(this.comboDroneMode, 2);
             this.comboDroneMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboDroneMode.FormattingEnabled = true;
             this.comboDroneMode.Items.AddRange(new object[] {
@@ -1234,32 +1260,22 @@
             this.checkDronePrivateTargets.AutoSize = true;
             this.checkDronePrivateTargets.Location = new System.Drawing.Point(64, 45);
             this.checkDronePrivateTargets.Name = "checkDronePrivateTargets";
-            this.checkDronePrivateTargets.Size = new System.Drawing.Size(96, 15);
+            this.checkDronePrivateTargets.Size = new System.Drawing.Size(77, 15);
             this.checkDronePrivateTargets.TabIndex = 4;
-            this.checkDronePrivateTargets.Text = "Private Targets";
+            this.checkDronePrivateTargets.Text = "IPC Targets";
             this.checkDronePrivateTargets.UseVisualStyleBackColor = true;
             // 
-            // checkAutoTargeters
+            // checkDroneFocus
             // 
-            this.checkAutoTargeters.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.checkAutoTargeters, 2);
-            this.checkAutoTargeters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkAutoTargeters.Location = new System.Drawing.Point(0, 232);
-            this.checkAutoTargeters.Margin = new System.Windows.Forms.Padding(0);
-            this.checkAutoTargeters.Name = "checkAutoTargeters";
-            this.checkAutoTargeters.Size = new System.Drawing.Size(120, 20);
-            this.checkAutoTargeters.TabIndex = 32;
-            this.checkAutoTargeters.Text = "Auto Targeters";
-            this.checkAutoTargeters.UseVisualStyleBackColor = true;
-            // 
-            // numericAutoTargetersCap
-            // 
-            this.numericAutoTargetersCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericAutoTargetersCap.Location = new System.Drawing.Point(120, 232);
-            this.numericAutoTargetersCap.Margin = new System.Windows.Forms.Padding(0);
-            this.numericAutoTargetersCap.Name = "numericAutoTargetersCap";
-            this.numericAutoTargetersCap.Size = new System.Drawing.Size(53, 21);
-            this.numericAutoTargetersCap.TabIndex = 33;
+            this.checkDroneFocus.AutoSize = true;
+            this.checkDroneFocus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkDroneFocus.Location = new System.Drawing.Point(185, 42);
+            this.checkDroneFocus.Margin = new System.Windows.Forms.Padding(0);
+            this.checkDroneFocus.Name = "checkDroneFocus";
+            this.checkDroneFocus.Size = new System.Drawing.Size(135, 21);
+            this.checkDroneFocus.TabIndex = 5;
+            this.checkDroneFocus.Text = "Focus";
+            this.checkDroneFocus.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
@@ -1294,6 +1310,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericECCMCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneControlUnitCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPropulsionModuleCap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -1321,7 +1338,6 @@
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1405,9 +1421,10 @@
         private System.Windows.Forms.NumericUpDown numericDroneTargetSlots;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox comboDroneMode;
-        private System.Windows.Forms.CheckBox checkDronePrivateTargets;
         private System.Windows.Forms.CheckBox checkReportChatInvite;
         private System.Windows.Forms.CheckBox checkAutoTargeters;
         private System.Windows.Forms.NumericUpDown numericAutoTargetersCap;
+        private System.Windows.Forms.CheckBox checkDronePrivateTargets;
+        private System.Windows.Forms.CheckBox checkDroneFocus;
     }
 }

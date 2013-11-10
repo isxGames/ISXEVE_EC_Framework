@@ -91,6 +91,16 @@ namespace EveComFramework.Comms
         {
             if (e.Source.Name == Config.SendTo)
             {
+                if (e.Text.ToLower().StartsWith("?") || e.Text.ToLower().StartsWith("help"))
+                {
+                    ChatQueue.Enqueue("---------------Currently supported commands---------------");
+                    ChatQueue.Enqueue("? or help - Display this menu!");
+                    ChatQueue.Enqueue("Togglestop - Toggles on/off a stop at next opportunity");
+                    ChatQueue.Enqueue("Start - Starts the bot (ignored if bot is running)");
+                    ChatQueue.Enqueue("Skip - Forces the bot to skip the current anomaly");
+                    ChatQueue.Enqueue("Local <message> - Relays <message> to local (space must follow Local and don't put the <>!)");
+                    ChatQueue.Enqueue("All commands are not case sensitive!");
+                }
                 if (e.Text.ToLower().StartsWith("togglestop") && ToggleStop != null)
                 {
                     ToggleStop();
@@ -167,7 +177,7 @@ namespace EveComFramework.Comms
                 return false;
             }
             IRC.LocalUser.MessageReceived += PMReceived;
-            IRC.LocalUser.SendMessage(Config.SendTo, "Connected");
+            IRC.LocalUser.SendMessage(Config.SendTo, "Connected - type ? or help for instructions");
             return true;
         }
 

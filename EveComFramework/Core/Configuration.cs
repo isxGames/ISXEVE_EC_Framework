@@ -190,6 +190,8 @@ namespace EveComFramework.Core
                 numericDroneTargetSlots.ValueChanged += (s, a) => { DroneConfig.TargetSlots = (int)Math.Floor(numericDroneTargetSlots.Value); DroneConfig.Save(); };
                 checkDronePrivateTargets.Checked = DroneConfig.PrivateTargets;
                 checkDronePrivateTargets.CheckedChanged += (s, a) => { DroneConfig.PrivateTargets = checkDronePrivateTargets.Checked; DroneConfig.Save(); };
+                checkDroneFocus.Checked = DroneConfig.SharedTargets;
+                checkDroneFocus.CheckedChanged += (s, a) => { DroneConfig.SharedTargets = checkDroneFocus.Checked; DroneConfig.Save(); };
                 switch (DroneConfig.Mode)
                 {
                     case SimpleDrone.Mode.None:
