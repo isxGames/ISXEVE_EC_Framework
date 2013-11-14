@@ -124,7 +124,7 @@ namespace EveComFramework.Comms
                     EVEFrameUtil.Do(() => {
                         foreach (Pilot p in Local.Pilots)
                         {
-                            ChatQueue.Enqueue(p.Name + " - http://evewho.com/pilot/" + p.Name);
+                            ChatQueue.Enqueue(p.Name + " - http://evewho.com/pilot/" + p.Name.Replace(" ", "%20"));
                         }
                     });
                     ChatQueue.Enqueue("----------------End List----------------");
