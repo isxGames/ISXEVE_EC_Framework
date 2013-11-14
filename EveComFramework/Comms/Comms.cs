@@ -114,7 +114,7 @@ namespace EveComFramework.Comms
                 {
                     Skip();
                 }
-                if (e.Text.ToLower().StartsWith("local"))
+                if (e.Text.ToLower().StartsWith("local "))
                 {
                     LocalQueue.Enqueue(e.Text.Remove(0,6));
                 }
