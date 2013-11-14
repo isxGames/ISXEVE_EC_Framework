@@ -99,6 +99,7 @@ namespace EveComFramework.Comms
                     ChatQueue.Enqueue("Start - Starts the bot (ignored if bot is running)");
                     ChatQueue.Enqueue("Skip - Forces the bot to skip the current anomaly");
                     ChatQueue.Enqueue("Local <message> - Relays <message> to local (space must follow Local and don't put the <>!)");
+                    ChatQueue.Enqueue("Listlocal or Locallist - Lists pilots currently in local chat");
                     ChatQueue.Enqueue("All commands are not case sensitive!");
                 }
                 if (e.Text.ToLower().StartsWith("togglestop") && ToggleStop != null)
@@ -116,6 +117,17 @@ namespace EveComFramework.Comms
                 if (e.Text.ToLower().StartsWith("local"))
                 {
                     LocalQueue.Enqueue(e.Text.Remove(0,6));
+                }
+                if (e.Text.ToLower().StartsWith("listlocal") || e.Text.ToLower().StartsWith("locallist"))
+                {
+                    ChatQueue.Enqueue("---------------Local List---------------");
+                    EVEFrameUtil.Do(() => {
+                        foreach (Pilot p in Local.Pilots)
+                        {
+                            ChatQueue.Enqueue(p.Name + " - http://evewho.com/pilot/" + p.Name);
+                        }
+                    });
+                    ChatQueue.Enqueue("----------------End List----------------");
                 }
             }
         }
