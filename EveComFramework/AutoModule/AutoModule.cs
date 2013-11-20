@@ -486,8 +486,7 @@ namespace EveComFramework.AutoModule
         /// </summary>
         public InstawarpSettings Config = new InstawarpSettings(); 
         
-        int CurrentSystem = 0;
-        bool Reset = true;
+        bool CycleComplete = false;
 
         #endregion
 
@@ -502,19 +501,21 @@ namespace EveComFramework.AutoModule
 
             if (Move.UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
 
-            if (CurrentSystem != Session.SolarSystemID)
+            if (MyShip.ToEntity.Mode != EntityMode.Warping)
             {
-                Reset = true;
-                CurrentSystem = Session.SolarSystemID;
+                CycleComplete = false;
+                return false;
             }
+
+            if (CycleComplete) return false;
 
             #region Propulsion Modules
 
             if (MyShip.Modules.Any(a => a.GroupID == Group.PropulsionModule && a.IsOnline))
             {
                 if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 &&
-                    Reset)
+                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 && 
+                    !CycleComplete)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                     return false;
@@ -522,7 +523,7 @@ namespace EveComFramework.AutoModule
                 if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
-                    Reset = false;
+                    CycleComplete = true;
                 }
             }
 
