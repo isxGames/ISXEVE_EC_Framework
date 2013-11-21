@@ -157,7 +157,7 @@
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(329, 352);
+            this.groupBox1.Size = new System.Drawing.Size(293, 352);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AutoModule";
@@ -227,7 +227,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(323, 332);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(287, 332);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericArmorCap
@@ -254,7 +254,7 @@
             this.numericArmorMax.Location = new System.Drawing.Point(227, 64);
             this.numericArmorMax.Margin = new System.Windows.Forms.Padding(0);
             this.numericArmorMax.Name = "numericArmorMax";
-            this.numericArmorMax.Size = new System.Drawing.Size(96, 21);
+            this.numericArmorMax.Size = new System.Drawing.Size(60, 21);
             this.numericArmorMax.TabIndex = 11;
             // 
             // label1
@@ -306,7 +306,7 @@
             this.label3.Location = new System.Drawing.Point(227, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 26);
+            this.label3.Size = new System.Drawing.Size(60, 26);
             this.label3.TabIndex = 5;
             this.label3.Text = "Maximum\r\nThreshold";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -317,7 +317,7 @@
             this.numericShieldMax.Location = new System.Drawing.Point(227, 43);
             this.numericShieldMax.Margin = new System.Windows.Forms.Padding(0);
             this.numericShieldMax.Name = "numericShieldMax";
-            this.numericShieldMax.Size = new System.Drawing.Size(96, 21);
+            this.numericShieldMax.Size = new System.Drawing.Size(60, 21);
             this.numericShieldMax.TabIndex = 6;
             // 
             // numericActiveHardenerCap
@@ -603,7 +603,7 @@
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Location = new System.Drawing.Point(3, 361);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(329, 61);
+            this.groupBox2.Size = new System.Drawing.Size(293, 61);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Undock Warp";
@@ -622,7 +622,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(323, 41);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(287, 41);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // textUndockWarp
@@ -665,7 +665,7 @@
             this.groupBox3.Controls.Add(this.tableLayoutPanel3);
             this.groupBox3.Location = new System.Drawing.Point(3, 425);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(329, 40);
+            this.groupBox3.Size = new System.Drawing.Size(293, 40);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "InstaWarp";
@@ -682,7 +682,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(323, 20);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(287, 20);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // checkInstaWarp
@@ -704,7 +704,7 @@
             this.groupBox4.Controls.Add(this.tableLayoutPanel4);
             this.groupBox4.Location = new System.Drawing.Point(3, 471);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(329, 109);
+            this.groupBox4.Size = new System.Drawing.Size(293, 109);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Movement Settings";
@@ -734,7 +734,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(323, 89);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(287, 89);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // label4
@@ -910,7 +910,7 @@
             this.groupBox5.Controls.Add(this.tableLayoutPanel5);
             this.groupBox5.Location = new System.Drawing.Point(3, 586);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(326, 54);
+            this.groupBox5.Size = new System.Drawing.Size(290, 54);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Optimizer";
@@ -929,13 +929,13 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(320, 34);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(284, 34);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // numericMemoryMax
             // 
             this.numericMemoryMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericMemoryMax.Location = new System.Drawing.Point(160, 13);
+            this.numericMemoryMax.Location = new System.Drawing.Point(142, 13);
             this.numericMemoryMax.Margin = new System.Windows.Forms.Padding(0);
             this.numericMemoryMax.Maximum = new decimal(new int[] {
             99999999,
@@ -948,7 +948,7 @@
             0,
             0});
             this.numericMemoryMax.Name = "numericMemoryMax";
-            this.numericMemoryMax.Size = new System.Drawing.Size(160, 21);
+            this.numericMemoryMax.Size = new System.Drawing.Size(142, 21);
             this.numericMemoryMax.TabIndex = 10;
             this.numericMemoryMax.Value = new decimal(new int[] {
             50,
@@ -963,7 +963,7 @@
             this.checkDisable3D.Location = new System.Drawing.Point(0, 13);
             this.checkDisable3D.Margin = new System.Windows.Forms.Padding(0);
             this.checkDisable3D.Name = "checkDisable3D";
-            this.checkDisable3D.Size = new System.Drawing.Size(160, 21);
+            this.checkDisable3D.Size = new System.Drawing.Size(142, 21);
             this.checkDisable3D.TabIndex = 0;
             this.checkDisable3D.Text = "Disable 3D Rendering";
             this.checkDisable3D.UseVisualStyleBackColor = true;
@@ -972,10 +972,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(160, 0);
+            this.label7.Location = new System.Drawing.Point(142, 0);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(160, 13);
+            this.label7.Size = new System.Drawing.Size(142, 13);
             this.label7.TabIndex = 1;
             this.label7.Text = "Restrict Memory Usage (MB)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -987,7 +987,7 @@
             this.groupBox6.Controls.Add(this.tableLayoutPanel6);
             this.groupBox6.Location = new System.Drawing.Point(3, 646);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(326, 158);
+            this.groupBox6.Size = new System.Drawing.Size(290, 158);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "IRC Relay";
@@ -1022,7 +1022,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(320, 138);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(284, 138);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // checkUseIRC
@@ -1177,7 +1177,7 @@
             this.groupBox7.Controls.Add(this.tableLayoutPanel7);
             this.groupBox7.Location = new System.Drawing.Point(3, 810);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(326, 83);
+            this.groupBox7.Size = new System.Drawing.Size(290, 83);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Drone Control";
@@ -1201,7 +1201,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(320, 63);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(284, 63);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // label10
@@ -1252,7 +1252,7 @@
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
-            this.comboDroneMode.Size = new System.Drawing.Size(259, 21);
+            this.comboDroneMode.Size = new System.Drawing.Size(223, 21);
             this.comboDroneMode.TabIndex = 3;
             // 
             // checkDronePrivateTargets
@@ -1269,10 +1269,10 @@
             // 
             this.checkDroneFocus.AutoSize = true;
             this.checkDroneFocus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkDroneFocus.Location = new System.Drawing.Point(185, 42);
+            this.checkDroneFocus.Location = new System.Drawing.Point(144, 42);
             this.checkDroneFocus.Margin = new System.Windows.Forms.Padding(0);
             this.checkDroneFocus.Name = "checkDroneFocus";
-            this.checkDroneFocus.Size = new System.Drawing.Size(135, 21);
+            this.checkDroneFocus.Size = new System.Drawing.Size(140, 21);
             this.checkDroneFocus.TabIndex = 5;
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
@@ -1291,7 +1291,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Configuration";
-            this.Size = new System.Drawing.Size(350, 908);
+            this.Size = new System.Drawing.Size(314, 908);
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
