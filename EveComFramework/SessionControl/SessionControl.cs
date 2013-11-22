@@ -8,15 +8,6 @@ using EveCom;
 
 namespace EveComFramework.SessionControl
 {
-    /// <summary>
-    /// Used to document periods a bot is running
-    /// </summary>  
-    [Serializable]
-    public class PlaySession
-    {
-        public DateTime Login;
-        public DateTime Logout;
-    }
 
     /// <summary>
     /// Userprofile for an eve account including play sessions, can be serialized
@@ -24,7 +15,6 @@ namespace EveComFramework.SessionControl
     [Serializable]
     public class Profile
     {
-        public List<PlaySession> Sessions;
         public string Username;
         public string Password;
         public long CharacterID;
@@ -243,14 +233,6 @@ namespace EveComFramework.SessionControl
             UpdateCurrentProfile();
             if (Session.InSpace || Session.InStation)
             {
-                PlaySession newSession = new PlaySession();
-                newSession.Login = Session.Now;
-                newSession.Logout = Session.Now.AddMinutes(1);
-                if (_curProfile != null)
-                {
-                    _curProfile.Sessions.Add(newSession);
-                    GlobalConfig.Save();
-                }
                 SessionStart = DateTime.Now.AddMinutes(random.Next(Config.LogoutDelta));
                 DowntimeDelta = random.Next(Config.DowntimeDelta);
                 LogoutDelta = random.Next(Config.LogoutDelta);
@@ -310,11 +292,6 @@ namespace EveComFramework.SessionControl
 
         bool Logout(object[] Params)
         {
-            if (_curProfile != null)
-            {
-                _curProfile.Sessions.Last().Logout = EveCom.Session.Now;
-                GlobalConfig.Save();
-            }
             LavishScriptAPI.LavishScript.ExecuteCommand("Exit");            
             return true;
         }

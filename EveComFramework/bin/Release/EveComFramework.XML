@@ -668,11 +668,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:EveComFramework.SessionControl.PlaySession">
-            <summary>
-            Used to document periods a bot is running
-            </summary>  
-        </member>
         <member name="T:EveComFramework.SessionControl.Profile">
             <summary>
             Userprofile for an eve account including play sessions, can be serialized
