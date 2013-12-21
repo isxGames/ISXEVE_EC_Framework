@@ -121,6 +121,7 @@ namespace EveComFramework.Security.UI
             checkAudioRed.Checked = SpeechConfig.Red;
             checkLocal.Checked = SpeechConfig.Local;
             checkChatInvite.Checked = SpeechConfig.ChatInvite;
+            checkGridTraffic.Checked = SpeechConfig.Grid;
             listVoices.Items.Clear();
             listVoices.Items.AddRange(Speech.GetInstalledVoices().Select(a => a.VoiceInfo.Name).ToArray());
             trackRate.Value = SpeechConfig.Rate;
@@ -487,6 +488,12 @@ namespace EveComFramework.Security.UI
         private void checkChatInvite_CheckedChanged(object sender, EventArgs e)
         {
             SpeechConfig.ChatInvite = checkChatInvite.Checked;
+            SpeechConfig.Save();
+        }
+
+        private void checkGridTraffic_CheckedChanged(object sender, EventArgs e)
+        {
+            SpeechConfig.Grid = checkGridTraffic.Checked;
             SpeechConfig.Save();
         }
 

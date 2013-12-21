@@ -23,6 +23,7 @@ namespace EveComFramework.Comms
         public bool NPC = false;
         public bool Wallet = true;
         public bool ChatInvite = true;
+        public bool Grid = false;
     }
 
     #endregion
@@ -73,6 +74,9 @@ namespace EveComFramework.Comms
         public Queue<string> LocalQueue = new Queue<string>();
 
         IrcClient IRC = new IrcClient();
+
+        EveComFramework.Targets.Targets NonFleetPlayers = new EveComFramework.Targets.Targets();
+        List<Entity> NonFleetMemberOnGrid = new List<Entity>();
 
         #endregion
 
@@ -171,6 +175,7 @@ namespace EveComFramework.Comms
                 catch
                 {
                     EVEFrame.Log("Connect failed");
+                    return false;
                 }
             }
             return true;
@@ -232,6 +237,20 @@ namespace EveComFramework.Comms
                 double difference = Wallet.ISK - LastWallet;
                 LastWallet = Wallet.ISK;
                 ChatQueue.Enqueue("<Wallet> " + toISK(LastWallet) + " Delta: " + toISK(difference));
+            }
+
+            if (Session.InSpace)
+            {
+                if (Config.Grid)
+                {
+                    Entity AddNonFleet = NonFleetPlayers.TargetList.FirstOrDefault(a => !NonFleetMemberOnGrid.Contains(a));
+                    if (AddNonFleet != null)
+                    {
+                        ChatQueue.Enqueue("<Security> Non fleet member on grid while in combat: " + AddNonFleet.Name);
+                        NonFleetMemberOnGrid.Add(AddNonFleet);
+                    }
+                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => !NonFleetMemberOnGrid.Contains(a)).ToList();
+                }
             }
 
             if (Config.UseIRC)

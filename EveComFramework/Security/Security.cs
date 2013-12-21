@@ -706,6 +706,7 @@ namespace EveComFramework.Security
         public bool Grey = false;
         public bool Local = false;
         public bool ChatInvite = true;
+        public bool Grid = false;
         public string Voice = "";
         public int Rate = 0;
         public int Volume = 100;
@@ -750,6 +751,8 @@ namespace EveComFramework.Security
         Security Core;
         int LocalCache;
         bool ChatInviteSeen = false;
+        EveComFramework.Targets.Targets NonFleetPlayers = new EveComFramework.Targets.Targets();
+        List<Entity> NonFleetMemberOnGrid = new List<Entity>();
 
         #endregion
 
@@ -829,6 +832,21 @@ namespace EveComFramework.Security
                 }
                 LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
             }
+
+            if (Session.InSpace)
+            {
+                if (Config.Grid)
+                {
+                    Entity AddNonFleet = NonFleetPlayers.TargetList.FirstOrDefault(a => !NonFleetMemberOnGrid.Contains(a));
+                    if (AddNonFleet != null)
+                    {
+                        SpeechQueue.Enqueue("Non fleet member on grid");
+                        NonFleetMemberOnGrid.Add(AddNonFleet);
+                    }
+                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => !NonFleetMemberOnGrid.Contains(a)).ToList();
+                }
+            }
+
 
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             Speech.Rate = Config.Rate;

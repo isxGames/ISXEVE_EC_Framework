@@ -181,6 +181,8 @@ namespace EveComFramework.Core
                 checkWallet.CheckedChanged += (s, a) => { CommsConfig.Wallet = checkWallet.Checked; CommsConfig.Save(); };
                 checkReportChatInvite.Checked = CommsConfig.ChatInvite;
                 checkReportChatInvite.CheckedChanged += (s, a) => { CommsConfig.ChatInvite = checkReportChatInvite.Checked; CommsConfig.Save(); };
+                checkGridTraffic.Checked = CommsConfig.Grid;
+                checkGridTraffic.CheckedChanged += (s, a) => { CommsConfig.Grid = checkGridTraffic.Checked; CommsConfig.Save(); };
 
                 #endregion
 

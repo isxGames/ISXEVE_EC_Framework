@@ -28,17 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("In a pod");
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Neutral to me only");
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Targeted by another player");
-            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Capacitor low");
-            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Shield low");
-            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Armor low");
-            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
-            System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
-            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Neutral to me only");
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ThresholdGroup = new System.Windows.Forms.GroupBox();
@@ -71,6 +72,7 @@
             this.trackRate = new System.Windows.Forms.TrackBar();
             this.listVoices = new System.Windows.Forms.ListBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.checkChatInvite = new System.Windows.Forms.CheckBox();
             this.checkLocal = new System.Windows.Forms.CheckBox();
             this.checkAudioGrey = new System.Windows.Forms.CheckBox();
             this.checkAudioBlue = new System.Windows.Forms.CheckBox();
@@ -80,7 +82,8 @@
             this.buttonAddWhiteList = new System.Windows.Forms.Button();
             this.textWhiteListPilot = new System.Windows.Forms.TextBox();
             this.listWhiteList = new System.Windows.Forms.ListBox();
-            this.checkChatInvite = new System.Windows.Forms.CheckBox();
+            this.checkGridTraffic = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
@@ -178,23 +181,23 @@
             this.Triggers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem12.StateImageIndex = 0;
-            listViewItem13.StateImageIndex = 0;
-            listViewItem14.StateImageIndex = 0;
-            listViewItem15.StateImageIndex = 0;
-            listViewItem16.StateImageIndex = 0;
-            listViewItem17.StateImageIndex = 0;
-            listViewItem18.StateImageIndex = 0;
-            listViewItem19.StateImageIndex = 0;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
+            listViewItem5.StateImageIndex = 0;
+            listViewItem6.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem12,
-            listViewItem13,
-            listViewItem14,
-            listViewItem15,
-            listViewItem16,
-            listViewItem17,
-            listViewItem18,
-            listViewItem19});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6,
+            listViewItem7,
+            listViewItem8});
             this.Triggers.Location = new System.Drawing.Point(9, 20);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
@@ -373,13 +376,13 @@
             this.FleeTypes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem20.StateImageIndex = 0;
-            listViewItem21.StateImageIndex = 0;
-            listViewItem22.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
+            listViewItem10.StateImageIndex = 0;
+            listViewItem11.StateImageIndex = 0;
             this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem20,
-            listViewItem21,
-            listViewItem22});
+            listViewItem9,
+            listViewItem10,
+            listViewItem11});
             this.FleeTypes.Location = new System.Drawing.Point(10, 20);
             this.FleeTypes.Name = "FleeTypes";
             this.FleeTypes.Scrollable = false;
@@ -466,6 +469,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.checkGridTraffic);
             this.groupBox6.Controls.Add(this.checkChatInvite);
             this.groupBox6.Controls.Add(this.checkLocal);
             this.groupBox6.Controls.Add(this.checkAudioGrey);
@@ -479,6 +483,18 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Enabled Alerts";
             // 
+            // checkChatInvite
+            // 
+            this.checkChatInvite.AutoSize = true;
+            this.checkChatInvite.Location = new System.Drawing.Point(6, 135);
+            this.checkChatInvite.Name = "checkChatInvite";
+            this.checkChatInvite.Size = new System.Drawing.Size(77, 17);
+            this.checkChatInvite.TabIndex = 5;
+            this.checkChatInvite.Text = "Chat Invite";
+            this.toolTip1.SetToolTip(this.checkChatInvite, "Perform audio alert when a chat invite is received");
+            this.checkChatInvite.UseVisualStyleBackColor = true;
+            this.checkChatInvite.CheckedChanged += new System.EventHandler(this.checkChatInvite_CheckedChanged);
+            // 
             // checkLocal
             // 
             this.checkLocal.AutoSize = true;
@@ -487,6 +503,7 @@
             this.checkLocal.Size = new System.Drawing.Size(74, 17);
             this.checkLocal.TabIndex = 4;
             this.checkLocal.Text = "Local chat";
+            this.toolTip1.SetToolTip(this.checkLocal, "Perform audio alert when a new message is posted in local chat");
             this.checkLocal.UseVisualStyleBackColor = true;
             this.checkLocal.CheckedChanged += new System.EventHandler(this.checkLocal_CheckedChanged);
             // 
@@ -498,6 +515,7 @@
             this.checkAudioGrey.Size = new System.Drawing.Size(71, 17);
             this.checkAudioGrey.TabIndex = 3;
             this.checkAudioGrey.Text = "New Grey";
+            this.toolTip1.SetToolTip(this.checkAudioGrey, "Perform audio alert when a new grey appears in local");
             this.checkAudioGrey.UseVisualStyleBackColor = true;
             this.checkAudioGrey.CheckedChanged += new System.EventHandler(this.checkAudioGrey_CheckedChanged);
             // 
@@ -509,6 +527,7 @@
             this.checkAudioBlue.Size = new System.Drawing.Size(70, 17);
             this.checkAudioBlue.TabIndex = 2;
             this.checkAudioBlue.Text = "New Blue";
+            this.toolTip1.SetToolTip(this.checkAudioBlue, "Perform audio alert when a new blue appears in local");
             this.checkAudioBlue.UseVisualStyleBackColor = true;
             this.checkAudioBlue.CheckedChanged += new System.EventHandler(this.checkAudioBlue_CheckedChanged);
             // 
@@ -520,6 +539,7 @@
             this.checkAudioRed.Size = new System.Drawing.Size(67, 17);
             this.checkAudioRed.TabIndex = 1;
             this.checkAudioRed.Text = "New Red";
+            this.toolTip1.SetToolTip(this.checkAudioRed, "Perform audio alert when a new red appears in local");
             this.checkAudioRed.UseVisualStyleBackColor = true;
             this.checkAudioRed.CheckedChanged += new System.EventHandler(this.checkAudioRed_CheckedChanged);
             // 
@@ -531,6 +551,7 @@
             this.checkAudioFlee.Size = new System.Drawing.Size(46, 17);
             this.checkAudioFlee.TabIndex = 0;
             this.checkAudioFlee.Text = "Flee";
+            this.toolTip1.SetToolTip(this.checkAudioFlee, "Perform audio alert when a flee is triggered");
             this.checkAudioFlee.UseVisualStyleBackColor = true;
             this.checkAudioFlee.CheckedChanged += new System.EventHandler(this.checkAudioFlee_CheckedChanged);
             // 
@@ -573,16 +594,17 @@
             this.listWhiteList.TabIndex = 0;
             this.listWhiteList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listWhiteList_KeyUp);
             // 
-            // checkChatInvite
+            // checkGridTraffic
             // 
-            this.checkChatInvite.AutoSize = true;
-            this.checkChatInvite.Location = new System.Drawing.Point(6, 135);
-            this.checkChatInvite.Name = "checkChatInvite";
-            this.checkChatInvite.Size = new System.Drawing.Size(77, 17);
-            this.checkChatInvite.TabIndex = 5;
-            this.checkChatInvite.Text = "Chat Invite";
-            this.checkChatInvite.UseVisualStyleBackColor = true;
-            this.checkChatInvite.CheckedChanged += new System.EventHandler(this.checkChatInvite_CheckedChanged);
+            this.checkGridTraffic.AutoSize = true;
+            this.checkGridTraffic.Location = new System.Drawing.Point(6, 158);
+            this.checkGridTraffic.Name = "checkGridTraffic";
+            this.checkGridTraffic.Size = new System.Drawing.Size(76, 17);
+            this.checkGridTraffic.TabIndex = 6;
+            this.checkGridTraffic.Text = "Grid Traffic";
+            this.toolTip1.SetToolTip(this.checkGridTraffic, "Perform audio alert when a non fleet member is on grid");
+            this.checkGridTraffic.UseVisualStyleBackColor = true;
+            this.checkGridTraffic.CheckedChanged += new System.EventHandler(this.checkGridTraffic_CheckedChanged);
             // 
             // Security
             // 
@@ -669,5 +691,7 @@
         private System.Windows.Forms.TextBox textWhiteListPilot;
         private System.Windows.Forms.ListBox listWhiteList;
         private System.Windows.Forms.CheckBox checkChatInvite;
+        private System.Windows.Forms.CheckBox checkGridTraffic;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
