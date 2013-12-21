@@ -843,7 +843,7 @@ namespace EveComFramework.Security
                         SpeechQueue.Enqueue("Non fleet member on grid");
                         NonFleetMemberOnGrid.Add(AddNonFleet);
                     }
-                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => !NonFleetMemberOnGrid.Contains(a)).ToList();
+                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();
                 }
             }
 

@@ -136,6 +136,12 @@ namespace EveComFramework.Comms
             }
         }
 
+        void Error(object sender, IrcErrorEventArgs e)
+        {
+            EVEFrame.Log("Error: " + e.Error.Message);
+        }
+
+
         #endregion
 
         #region States
@@ -154,6 +160,8 @@ namespace EveComFramework.Comms
             }
             LastWallet = Wallet.ISK;
 
+            IRC.Error += Error;
+
             return true;
         }
 
@@ -165,6 +173,7 @@ namespace EveComFramework.Comms
             {
                 try
                 {
+                    EVEFrame.Log("Attempting to connect");
                     IrcUserRegistrationInfo reginfo = new IrcUserRegistrationInfo();
                     reginfo.NickName = Me.Name.Replace(" ", string.Empty);
                     reginfo.RealName = Me.Name.Replace(" ", string.Empty);
@@ -178,6 +187,8 @@ namespace EveComFramework.Comms
                     return false;
                 }
             }
+
+            EVEFrame.Log("Connect successful");
             return true;
         }
         bool Blank (object[] Params)
@@ -187,8 +198,9 @@ namespace EveComFramework.Comms
 
         bool PostInit(object[] Params)
         {
-            if (!IRC.IsRegistered)
+            if (!IRC.IsConnected)
             {
+                EVEFrame.Log("IRC is not connected");
                 DislodgeCurState(ConnectIRC);
                 InsertState(Blank, 5000);
                 return false;
@@ -249,7 +261,7 @@ namespace EveComFramework.Comms
                         ChatQueue.Enqueue("<Security> Non fleet member on grid while in combat: " + AddNonFleet.Name);
                         NonFleetMemberOnGrid.Add(AddNonFleet);
                     }
-                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => !NonFleetMemberOnGrid.Contains(a)).ToList();
+                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();
                 }
             }
 
