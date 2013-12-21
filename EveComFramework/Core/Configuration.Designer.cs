@@ -1062,7 +1062,7 @@
             this.textServer.Location = new System.Drawing.Point(125, 17);
             this.textServer.Margin = new System.Windows.Forms.Padding(0);
             this.textServer.Name = "textServer";
-            this.textServer.Size = new System.Drawing.Size(220, 21);
+            this.textServer.Size = new System.Drawing.Size(152, 21);
             this.textServer.TabIndex = 2;
             // 
             // label9
@@ -1094,7 +1094,7 @@
             0,
             0});
             this.numericPort.Name = "numericPort";
-            this.numericPort.Size = new System.Drawing.Size(220, 21);
+            this.numericPort.Size = new System.Drawing.Size(152, 21);
             this.numericPort.TabIndex = 4;
             this.numericPort.Value = new decimal(new int[] {
             1,
@@ -1121,7 +1121,7 @@
             this.textSendTo.Location = new System.Drawing.Point(125, 59);
             this.textSendTo.Margin = new System.Windows.Forms.Padding(0);
             this.textSendTo.Name = "textSendTo";
-            this.textSendTo.Size = new System.Drawing.Size(220, 21);
+            this.textSendTo.Size = new System.Drawing.Size(152, 21);
             this.textSendTo.TabIndex = 8;
             // 
             // checkNPC
@@ -1131,7 +1131,7 @@
             this.checkNPC.Location = new System.Drawing.Point(149, 80);
             this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
             this.checkNPC.Name = "checkNPC";
-            this.checkNPC.Size = new System.Drawing.Size(196, 20);
+            this.checkNPC.Size = new System.Drawing.Size(128, 20);
             this.checkNPC.TabIndex = 11;
             this.checkNPC.Text = "Include NPC Chat";
             this.checkNPC.UseVisualStyleBackColor = true;
@@ -1244,7 +1244,6 @@
             // comboDroneMode
             // 
             this.tableLayoutPanel7.SetColumnSpan(this.comboDroneMode, 2);
-            this.comboDroneMode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboDroneMode.FormattingEnabled = true;
             this.comboDroneMode.Items.AddRange(new object[] {
             "None",
@@ -1257,7 +1256,7 @@
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
-            this.comboDroneMode.Size = new System.Drawing.Size(219, 21);
+            this.comboDroneMode.Size = new System.Drawing.Size(163, 21);
             this.comboDroneMode.TabIndex = 3;
             // 
             // checkDronePrivateTargets
@@ -1274,10 +1273,10 @@
             // 
             this.checkDroneFocus.AutoSize = true;
             this.checkDroneFocus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkDroneFocus.Location = new System.Drawing.Point(145, 42);
+            this.checkDroneFocus.Location = new System.Drawing.Point(144, 42);
             this.checkDroneFocus.Margin = new System.Windows.Forms.Padding(0);
             this.checkDroneFocus.Name = "checkDroneFocus";
-            this.checkDroneFocus.Size = new System.Drawing.Size(135, 21);
+            this.checkDroneFocus.Size = new System.Drawing.Size(136, 21);
             this.checkDroneFocus.TabIndex = 5;
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
