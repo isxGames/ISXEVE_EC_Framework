@@ -172,13 +172,11 @@ namespace EveComFramework.AutoModule
                 }
             }
 
-            /* I believe this may slow down speed to cloak, disabling for now, although it will cause some module failed to activate spam
-             * 
             if (MyShip.ToEntity.Cloaked)
             {
+                EVEFrame.Log("Cloak already active");
                 return false;
             }
-             */
 
             if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsOnline) > 0 &&
                     Config.Cloaks)
