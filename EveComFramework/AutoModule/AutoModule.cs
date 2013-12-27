@@ -182,7 +182,8 @@ namespace EveComFramework.AutoModule
                     Config.Cloaks)
             {
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapCloaks &&
-                    !Decloak)
+                    !Decloak &&
+                    !Entity.All.Any(a => a.Distance < 2000))
                 {
                     if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
                         MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline) == 0)
