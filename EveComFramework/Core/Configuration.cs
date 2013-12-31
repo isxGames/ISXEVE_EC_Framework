@@ -206,7 +206,7 @@ namespace EveComFramework.Core
                         comboDroneMode.SelectedItem = "Point Defense";
                         break;
                     case SimpleDrone.Mode.Sentry:
-                        comboDroneMode.SelectedItem = "Sentry";
+                        comboDroneMode.SelectedItem = "Sentry with Point Defense";
                         break;
                     case SimpleDrone.Mode.Fighter:
                         comboDroneMode.SelectedItem = "Fighter";
@@ -216,6 +216,12 @@ namespace EveComFramework.Core
                         break;
                     case SimpleDrone.Mode.AgressiveMedium:
                         comboDroneMode.SelectedItem = "Agressive Medium";
+                        break;
+                    case SimpleDrone.Mode.AgressiveHeavy:
+                        comboDroneMode.SelectedItem = "Agressive Heavy";
+                        break;
+                    case SimpleDrone.Mode.AgressiveSentry:
+                        comboDroneMode.SelectedItem = "Agressive Sentry";
                         break;
                 }
                 comboDroneMode.SelectedIndexChanged += (s, a) =>
@@ -231,7 +237,7 @@ namespace EveComFramework.Core
                         case "Point Defense":
                             DroneConfig.Mode = SimpleDrone.Mode.PointDefense;
                             break;
-                        case "Sentry":
+                        case "Sentry with Point Defense":
                             DroneConfig.Mode = SimpleDrone.Mode.Sentry;
                             break;
                         case "Fighter":
@@ -242,6 +248,12 @@ namespace EveComFramework.Core
                             break;
                         case "Agressive Medium":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveMedium;
+                            break;
+                        case "Agressive Heavy":
+                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveHeavy;
+                            break;
+                        case "Agressive Sentry":
+                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveSentry;
                             break;
                     }
                     DroneConfig.Save();

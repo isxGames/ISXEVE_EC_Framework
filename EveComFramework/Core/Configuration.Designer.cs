@@ -102,6 +102,7 @@
             this.checkLocal = new System.Windows.Forms.CheckBox();
             this.checkWallet = new System.Windows.Forms.CheckBox();
             this.checkReportChatInvite = new System.Windows.Forms.CheckBox();
+            this.checkGridTraffic = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
@@ -110,7 +111,6 @@
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
             this.checkDroneFocus = new System.Windows.Forms.CheckBox();
-            this.checkGridTraffic = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1175,6 +1175,17 @@
             this.checkReportChatInvite.Text = "Report Chat Invites";
             this.checkReportChatInvite.UseVisualStyleBackColor = true;
             // 
+            // checkGridTraffic
+            // 
+            this.checkGridTraffic.AutoSize = true;
+            this.checkGridTraffic.Location = new System.Drawing.Point(15, 140);
+            this.checkGridTraffic.Margin = new System.Windows.Forms.Padding(0);
+            this.checkGridTraffic.Name = "checkGridTraffic";
+            this.checkGridTraffic.Size = new System.Drawing.Size(110, 17);
+            this.checkGridTraffic.TabIndex = 13;
+            this.checkGridTraffic.Text = "Report Grid Traffic";
+            this.checkGridTraffic.UseVisualStyleBackColor = true;
+            // 
             // groupBox7
             // 
             this.groupBox7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
@@ -1249,14 +1260,16 @@
             "None",
             "AFK Heavy",
             "Point Defense",
-            "Sentry",
+            "Sentry with Point Defense",
             "Fighter",
             "Agressive Scout",
-            "Agressive Medium"});
+            "Agressive Medium",
+            "Agressive Heavy",
+            "Agressive Sentry"});
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
-            this.comboDroneMode.Size = new System.Drawing.Size(163, 21);
+            this.comboDroneMode.Size = new System.Drawing.Size(186, 21);
             this.comboDroneMode.TabIndex = 3;
             // 
             // checkDronePrivateTargets
@@ -1280,17 +1293,6 @@
             this.checkDroneFocus.TabIndex = 5;
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
-            // 
-            // checkGridTraffic
-            // 
-            this.checkGridTraffic.AutoSize = true;
-            this.checkGridTraffic.Location = new System.Drawing.Point(15, 140);
-            this.checkGridTraffic.Margin = new System.Windows.Forms.Padding(0);
-            this.checkGridTraffic.Name = "checkGridTraffic";
-            this.checkGridTraffic.Size = new System.Drawing.Size(110, 17);
-            this.checkGridTraffic.TabIndex = 13;
-            this.checkGridTraffic.Text = "Report Grid Traffic";
-            this.checkGridTraffic.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
