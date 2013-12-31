@@ -174,7 +174,6 @@ namespace EveComFramework.Comms
             {
                 try
                 {
-                    EVEFrame.Log("Attempting to connect");
                     IrcUserRegistrationInfo reginfo = new IrcUserRegistrationInfo();
                     reginfo.NickName = Me.Name.Replace(" ", string.Empty);
                     reginfo.RealName = Me.Name.Replace(" ", string.Empty);
@@ -184,12 +183,10 @@ namespace EveComFramework.Comms
                 }
                 catch
                 {
-                    EVEFrame.Log("Connect failed");
                     return false;
                 }
             }
 
-            EVEFrame.Log("Connect successful");
             return true;
         }
         bool Blank (object[] Params)
@@ -201,7 +198,6 @@ namespace EveComFramework.Comms
         {
             if (!IRC.IsConnected)
             {
-                EVEFrame.Log("IRC is not connected");
                 DislodgeCurState(ConnectIRC);
                 InsertState(Blank, 5000);
                 return false;

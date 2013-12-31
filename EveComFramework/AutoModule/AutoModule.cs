@@ -174,7 +174,6 @@ namespace EveComFramework.AutoModule
 
             if (MyShip.ToEntity.Cloaked)
             {
-                EVEFrame.Log("Cloak already active");
                 return false;
             }
 
