@@ -737,6 +737,7 @@ namespace EveComFramework.Security
         private SecurityAudio() : base()
         {
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
+            NonFleetPlayers.AddNonFleetPlayers();
         }
 
         #endregion

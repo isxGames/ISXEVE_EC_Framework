@@ -56,6 +56,7 @@ namespace EveComFramework.Comms
             QueueState(Blank, 5000);
             QueueState(PostInit);
             QueueState(Control);
+            NonFleetPlayers.AddNonFleetPlayers();
         }
 
         #endregion
@@ -251,18 +252,15 @@ namespace EveComFramework.Comms
                 ChatQueue.Enqueue("<Wallet> " + toISK(LastWallet) + " Delta: " + toISK(difference));
             }
 
-            if (Session.InSpace)
+            if (Session.InSpace && Config.Grid)
             {
-                if (Config.Grid)
+                Entity AddNonFleet = NonFleetPlayers.TargetList.FirstOrDefault(a => !NonFleetMemberOnGrid.Contains(a));
+                if (AddNonFleet != null)
                 {
-                    Entity AddNonFleet = NonFleetPlayers.TargetList.FirstOrDefault(a => !NonFleetMemberOnGrid.Contains(a));
-                    if (AddNonFleet != null)
-                    {
-                        ChatQueue.Enqueue("<Security> Non fleet member on grid while in combat: " + AddNonFleet.Name);
-                        NonFleetMemberOnGrid.Add(AddNonFleet);
-                    }
-                    NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();
+                    ChatQueue.Enqueue("<Security> Non fleet member on grid while in combat: " + AddNonFleet.Name);
+                    NonFleetMemberOnGrid.Add(AddNonFleet);
                 }
+                NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();
             }
 
             if (Config.UseIRC)
