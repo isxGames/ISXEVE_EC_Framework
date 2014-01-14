@@ -175,9 +175,9 @@ namespace EveComFramework.Comms
                 try
                 {
                     IrcUserRegistrationInfo reginfo = new IrcUserRegistrationInfo();
-                    reginfo.NickName = Me.Name.Replace(" ", string.Empty);
-                    reginfo.RealName = Me.Name.Replace(" ", string.Empty);
-                    reginfo.UserName = Me.Name.Replace(" ", string.Empty);
+                    reginfo.NickName = Me.Name.Replace(" ", string.Empty).Replace("'", string.Empty);
+                    reginfo.RealName = Me.Name.Replace(" ", string.Empty).Replace("'", string.Empty);
+                    reginfo.UserName = Me.Name.Replace(" ", string.Empty).Replace("'", string.Empty);
                     IRC.FloodPreventer = new IrcStandardFloodPreventer(4, 2000);
                     IRC.Connect(new Uri("irc://" + Config.Server), reginfo);
                 }
