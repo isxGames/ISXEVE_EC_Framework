@@ -415,7 +415,7 @@ namespace EveComFramework.Move
             return true;
         }
 
-        bool Undock(object[] Params)
+        public bool Undock(object[] Params)
         {
             if (Session.InSpace)
             {

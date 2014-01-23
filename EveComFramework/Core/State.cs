@@ -210,12 +210,14 @@ namespace EveComFramework.Core
                 InsertState(WaitForState, -1, TimeOut);
             }
         }
+
+        public bool SafetyOff = false;
         Random rnd = new Random();
         void OnFrame(object sender, EventArgs e)
         {
             if (DateTime.Now > NextPulse)
             {
-                if (CurState != null && Session.Safe && Session.NextSessionChange < Session.Now)
+                if (CurState != null && ((Session.Safe && Session.NextSessionChange < Session.Now) || SafetyOff))
                 {
                     if (CurState.State(CurState.Params))
                     {

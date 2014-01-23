@@ -39,7 +39,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="IrcDotNet">
-      <HintPath>..\..\MasterDev\packages\IrcDotNet.0.4.1\lib\net40\IrcDotNet.dll</HintPath>
+      <HintPath>bin\Release\IrcDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Lavish.InnerSpace">
       <HintPath>..\Lavish.InnerSpace.dll</HintPath>
