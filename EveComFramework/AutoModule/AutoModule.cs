@@ -23,6 +23,7 @@ namespace EveComFramework.AutoModule
         public bool TrackingComputers = true;
         public bool ECCMs = true;
         public bool DroneControlUnits = true;
+        public bool DroneTrackingModules = true;
         public bool AutoTargeters = true;
         public bool PropulsionModules = false;
         public bool PropulsionModulesAlwaysOn = false;
@@ -40,6 +41,7 @@ namespace EveComFramework.AutoModule
         public int CapDroneControlUnits = 30;
         public int CapAutoTargeters = 30;
         public int CapPropulsionModules = 30;
+        public int CapDroneTrackingModules = 30;
 
         public int MaxShieldBoosters = 95;
         public int MaxArmorRepairs = 95;
@@ -308,6 +310,25 @@ namespace EveComFramework.AutoModule
                 }
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapTrackingComputers &&
                     MyShip.Modules.Count(a => a.GroupID == Group.TrackingComputer && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                }
+            }
+
+            #endregion
+
+            #region Drone Tracking Modules
+
+            if (MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && a.IsOnline) > 0 &&
+                Config.DroneTrackingModules)
+            {
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneTrackingModules &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                }
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneTrackingModules &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
