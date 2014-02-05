@@ -63,7 +63,7 @@ namespace EveComFramework.Core
                 checkActiveHardeners.Checked = AutoModuleConfig.ActiveHardeners;
                 checkActiveHardeners.CheckedChanged += (s, a) => { AutoModuleConfig.ActiveHardeners = checkActiveHardeners.Checked; AutoModuleConfig.Save(); };
                 numericActiveHardenerCap.Value = AutoModuleConfig.CapActiveHardeners;
-                numericActiveHardenerCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericActiveHardenerCap.Value; AutoModuleConfig.Save(); };
+                numericActiveHardenerCap.ValueChanged += (s, a) => { AutoModuleConfig.CapActiveHardeners = (int)numericActiveHardenerCap.Value; AutoModuleConfig.Save(); };
 
                 checkCloaks.Checked = AutoModuleConfig.Cloaks;
                 checkCloaks.CheckedChanged += (s, a) => { AutoModuleConfig.Cloaks = checkCloaks.Checked; AutoModuleConfig.Save(); };
