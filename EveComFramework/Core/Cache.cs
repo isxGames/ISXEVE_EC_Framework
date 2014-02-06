@@ -59,6 +59,7 @@ namespace EveComFramework.Core
         /// Item Volumes, keyed by Types
         /// </summary>
         public Dictionary<string, double> ItemVolume { get; set; }
+        public List<string> Fittings { get; set; }
         public Double ArmorPercent = 1;
         public Double HullPercent = 1;
         public bool DamagedDrones = false;
@@ -105,6 +106,15 @@ namespace EveComFramework.Core
                         Station.ItemHangar.Prime();
                         return false;
                     }
+                }
+
+                if (FittingManager.Ready)
+                {
+                    Fittings = FittingManager.Fittings.Select(fit => fit.Name).ToList();
+                }
+                else
+                {
+                    FittingManager.Prime();
                 }
                 //for (int i = 0; i <= 6; i++)
                 //{
