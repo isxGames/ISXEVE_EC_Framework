@@ -38,5 +38,10 @@ namespace EveComFramework.Core
         /// The default profile name to use if one is not defined
         /// </summary>
         public string DefaultProfile { get; set; }
+
+        /// <summary>
+        /// A custom name to use for specialized global settings filed (bot-dependent)
+        /// </summary>
+        public string CustomGlobal { get; set; }
     }
 }
