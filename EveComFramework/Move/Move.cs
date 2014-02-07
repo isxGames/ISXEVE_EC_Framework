@@ -303,7 +303,7 @@ namespace EveComFramework.Move
                 Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.Distance <= (double)(Config.WarpCollisionTrigger * 500));
                 Log.Log("|oOrbiting");
                 Log.Log(" |-g{0}(|w{1} km|-g)", Collision.Name, Config.WarpCollisionOrbit);
-                Collision.Orbit((int)(Config.WarpCollisionTrigger * 1000));
+                Collision.Orbit((int)(Config.WarpCollisionOrbit * 1000));
                 InsertState(BookmarkWarp, -1, Destination, Distance, Collision);
             }
             else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.Distance <= (double)(Config.WarpCollisionTrigger * 900)) == null)
