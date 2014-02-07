@@ -18,7 +18,6 @@ namespace EveComFramework.Core
     /// </summary>
     public class Settings
     {
-        private FileSystemWatcher watcher;
         internal string _ProfilePath = "";
         /// <summary>
         /// The current path to the Profile XML
@@ -58,8 +57,6 @@ namespace EveComFramework.Core
                 Directory.CreateDirectory(ConfigDirectory);
             }
 
-            watcher = new FileSystemWatcher(ConfigDirectory, Config.Instance.DefaultProfile + ".xml");
-            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
         /// <summary>
@@ -77,8 +74,6 @@ namespace EveComFramework.Core
                 Directory.CreateDirectory(ConfigDirectory);
             }
 
-            watcher = new FileSystemWatcher(ConfigDirectory, profilename + ".xml");
-            watcher.Changed += new FileSystemEventHandler(watcher_Changed);
         }
 
         /// <summary>
@@ -114,11 +109,6 @@ namespace EveComFramework.Core
 
         #endregion
 
-        void watcher_Changed(object sender, FileSystemEventArgs e)
-        {
- 	        this.Load();
-            TriggerUpdate();
-        }
 
         /// <summary>
         /// Save the current configuration to XML
