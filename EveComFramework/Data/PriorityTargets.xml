@@ -311,5 +311,4 @@
   <Target Name="Tower Sentry Drone II" />
   <Target Name="Drone Heavy Missiles Battery" />
   <Target Name="Drone Wall Sentry Gun" />
-  <Target Name="Lookout Tower" />
 </Targets>

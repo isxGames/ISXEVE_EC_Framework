@@ -373,6 +373,7 @@ namespace EveComFramework.Move
             }
 
 
+            EVEFrame.Log("Collision management");
             if (Entity.All.Any(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.Distance <= (double)(Config.WarpCollisionTrigger * 900))
                     && Collision == null)
             {
