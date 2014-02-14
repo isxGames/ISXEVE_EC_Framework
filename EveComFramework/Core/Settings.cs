@@ -171,9 +171,8 @@ namespace EveComFramework.Core
                 }
                 settingsDoc.Save(ProfilePath);
             }
-            catch (Exception ex)
+            catch
             {
-                EVEFrame.Log(ex.Message);
             }
         }
 

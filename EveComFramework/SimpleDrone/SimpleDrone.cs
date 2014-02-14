@@ -125,14 +125,6 @@ namespace EveComFramework.SimpleDrone
                 Drone.AllInSpace.ReturnToDroneBay();
                 return true;
             }
-
-            if (Entity.All.Any(ent => ent.CategoryID == Category.Drone && ent.OwnerID == Session.CharID && Drone.AllInSpace.Select(drone => drone.ToEntity).Contains(ent)))
-            {
-                Command.CmdReconnectToDrones.Execute();
-                WaitFor(2);
-                return false;
-            }
-
             if (!Rats.TargetList.Any())
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
