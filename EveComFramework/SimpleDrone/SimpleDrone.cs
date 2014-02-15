@@ -126,11 +126,11 @@ namespace EveComFramework.SimpleDrone
                 return true;
             }
 
-            if (MyShip.DronesToReconnect)
-            {
-                MyShip.ReconnectToDrones();
-                return false;
-            }
+            //if (MyShip.DronesToReconnect)
+            //{
+            //    MyShip.ReconnectToDrones();
+            //    return false;
+            //}
 
             if (!Rats.TargetList.Any())
             {
