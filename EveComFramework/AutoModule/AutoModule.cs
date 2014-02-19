@@ -325,12 +325,12 @@ namespace EveComFramework.AutoModule
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneTrackingModules &&
                     MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneTrackingModules && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                 }
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneTrackingModules &&
                     MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneTrackingModules && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
             }
 
