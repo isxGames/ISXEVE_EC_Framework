@@ -140,6 +140,7 @@ namespace EveComFramework.Security
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
         Pilot Hostile = null;
         Comms.Comms Comms = EveComFramework.Comms.Comms.Instance;
+        Exceptions Exceptions = new Exceptions();
 
         #endregion
 
@@ -280,115 +281,123 @@ namespace EveComFramework.Security
 
         FleeTrigger SafeTrigger()
         {
-            if (!Standing.Ready) Standing.LoadStandings();
-
-            foreach (FleeTrigger Trigger in Config.Triggers)
+            try
             {
-                switch (Trigger)
+                if (!Standing.Ready) Standing.LoadStandings();
+
+                foreach (FleeTrigger Trigger in Config.Triggers)
                 {
-                    case FleeTrigger.Pod:
-                        if (MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
-                        break;
-                    case FleeTrigger.NegativeStanding:
-                        List<Pilot> NegativePilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance < 0 ||
-                                                                                a.ToAlliance.FromCorp < 0 ||
-                                                                                a.ToAlliance.FromChar < 0 ||
-                                                                                a.ToCorp.FromAlliance < 0 ||
-                                                                                a.ToCorp.FromCorp < 0 ||
-                                                                                a.ToCorp.FromChar < 0 ||
-                                                                                a.ToChar.FromAlliance < 0 ||
-                                                                                a.ToChar.FromCorp < 0 ||
-                                                                                a.ToChar.FromChar < 0
-                                                                             ) &&
-                                                                             a.ID != Me.CharID).ToList();
-                        if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
-                        if (!Config.NegativeCorp) { NegativePilots.RemoveAll(a => a.CorpID == Me.CorpID); }
-                        if (!Config.NegativeFleet) { NegativePilots.RemoveAll(a => a.IsFleetMember); }
-                        NegativePilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
-                        if (NegativePilots.Any())
-                        {
-                            Hostile = NegativePilots.FirstOrDefault();
-                            return FleeTrigger.NegativeStanding;
-                        }
-                        break;
-                    case FleeTrigger.NeutralStanding:
-                        List<Pilot> NeutralPilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance <= 0 &&
-                                                                                a.ToAlliance.FromCorp <= 0 &&
-                                                                                a.ToAlliance.FromChar <= 0 &&
-                                                                                a.ToCorp.FromAlliance <= 0 &&
-                                                                                a.ToCorp.FromCorp <= 0 &&
-                                                                                a.ToCorp.FromChar <= 0 &&
-                                                                                a.ToChar.FromAlliance <= 0 &&
-                                                                                a.ToChar.FromCorp <= 0 &&
-                                                                                a.ToChar.FromChar <= 0
-                                                                             ) &&
-                                                                             a.ID != Me.CharID).ToList();
-                        if (!Config.NeutralAlliance) { NeutralPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
-                        if (!Config.NeutralCorp) { NeutralPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
-                        if (!Config.NeutralFleet) { NeutralPilots.RemoveAll(a => a.IsFleetMember); }
-                        NeutralPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
-                        if (NeutralPilots.Any())
-                        {
-                            Hostile = NeutralPilots.FirstOrDefault();
-                            return FleeTrigger.NeutralStanding;
-                        }
-                        break;
-                    case FleeTrigger.Paranoid:
-                        List<Pilot> Paranoid = Local.Pilots.Where(a => (        a.ToAlliance.FromChar <= 0 &&
-                                                                                a.ToCorp.FromChar <= 0 &&
-                                                                                a.ToChar.FromChar <= 0
-                                                                             ) &&
-                                                                             a.ID != Me.CharID).ToList();
-                        if (!Config.ParanoidAlliance) { Paranoid.RemoveAll(a => a.AllianceID == Me.AllianceID); }
-                        if (!Config.ParanoidCorp) { Paranoid.RemoveAll(a => a.CorpID == Me.CorpID); }
-                        if (!Config.ParanoidFleet) { Paranoid.RemoveAll(a => a.IsFleetMember); }
-                        Paranoid.RemoveAll(a => Config.WhiteList.Contains(a.Name));
-                        if (Paranoid.Any())
-                        {
-                            Hostile = Paranoid.FirstOrDefault();
-                            return FleeTrigger.Paranoid;
-                        }
-                        break;
-                    case FleeTrigger.Targeted:
-                        if (!Session.InSpace)
-                        {
+                    switch (Trigger)
+                    {
+                        case FleeTrigger.Pod:
+                            if (MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
                             break;
-                        }
-                        List<Pilot> TargetingPilots = Local.Pilots.Where(a => Entity.All.FirstOrDefault(b => b.CharID == a.ID && b.IsTargetingMe) != null).ToList();
-                        if (!Config.TargetAlliance) { TargetingPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
-                        if (!Config.TargetCorp) { TargetingPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
-                        if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
-                        TargetingPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
-                        if (TargetingPilots.Any())
-                        {
-                            Hostile = TargetingPilots.FirstOrDefault();
-                            return FleeTrigger.NeutralStanding;
-                        }
-                        break;
-                    case FleeTrigger.CapacitorLow:
-                        if (!Session.InSpace)
-                        {
+                        case FleeTrigger.NegativeStanding:
+                            List<Pilot> NegativePilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance < 0 ||
+                                                                                    a.ToAlliance.FromCorp < 0 ||
+                                                                                    a.ToAlliance.FromChar < 0 ||
+                                                                                    a.ToCorp.FromAlliance < 0 ||
+                                                                                    a.ToCorp.FromCorp < 0 ||
+                                                                                    a.ToCorp.FromChar < 0 ||
+                                                                                    a.ToChar.FromAlliance < 0 ||
+                                                                                    a.ToChar.FromCorp < 0 ||
+                                                                                    a.ToChar.FromChar < 0
+                                                                                 ) &&
+                                                                                 a.ID != Me.CharID).ToList();
+                            if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
+                            if (!Config.NegativeCorp) { NegativePilots.RemoveAll(a => a.CorpID == Me.CorpID); }
+                            if (!Config.NegativeFleet) { NegativePilots.RemoveAll(a => a.IsFleetMember); }
+                            NegativePilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
+                            if (NegativePilots.Any())
+                            {
+                                Hostile = NegativePilots.FirstOrDefault();
+                                return FleeTrigger.NegativeStanding;
+                            }
                             break;
-                        }
-                        if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapThreshold) return FleeTrigger.CapacitorLow;
-                        break;
-                    case FleeTrigger.ShieldLow:
-                        if (!Session.InSpace)
-                        {
+                        case FleeTrigger.NeutralStanding:
+                            List<Pilot> NeutralPilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance <= 0 &&
+                                                                                    a.ToAlliance.FromCorp <= 0 &&
+                                                                                    a.ToAlliance.FromChar <= 0 &&
+                                                                                    a.ToCorp.FromAlliance <= 0 &&
+                                                                                    a.ToCorp.FromCorp <= 0 &&
+                                                                                    a.ToCorp.FromChar <= 0 &&
+                                                                                    a.ToChar.FromAlliance <= 0 &&
+                                                                                    a.ToChar.FromCorp <= 0 &&
+                                                                                    a.ToChar.FromChar <= 0
+                                                                                 ) &&
+                                                                                 a.ID != Me.CharID).ToList();
+                            if (!Config.NeutralAlliance) { NeutralPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
+                            if (!Config.NeutralCorp) { NeutralPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
+                            if (!Config.NeutralFleet) { NeutralPilots.RemoveAll(a => a.IsFleetMember); }
+                            NeutralPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
+                            if (NeutralPilots.Any())
+                            {
+                                Hostile = NeutralPilots.FirstOrDefault();
+                                return FleeTrigger.NeutralStanding;
+                            }
                             break;
-                        }
-                        if (MyShip.ToEntity.ShieldPct < Config.ShieldThreshold) return FleeTrigger.ShieldLow;
-                        break;
-                    case FleeTrigger.ArmorLow:
-                        if (!Session.InSpace)
-                        {
+                        case FleeTrigger.Paranoid:
+                            List<Pilot> Paranoid = Local.Pilots.Where(a => (a.ToAlliance.FromChar <= 0 &&
+                                                                                    a.ToCorp.FromChar <= 0 &&
+                                                                                    a.ToChar.FromChar <= 0
+                                                                                 ) &&
+                                                                                 a.ID != Me.CharID).ToList();
+                            if (!Config.ParanoidAlliance) { Paranoid.RemoveAll(a => a.AllianceID == Me.AllianceID); }
+                            if (!Config.ParanoidCorp) { Paranoid.RemoveAll(a => a.CorpID == Me.CorpID); }
+                            if (!Config.ParanoidFleet) { Paranoid.RemoveAll(a => a.IsFleetMember); }
+                            Paranoid.RemoveAll(a => Config.WhiteList.Contains(a.Name));
+                            if (Paranoid.Any())
+                            {
+                                Hostile = Paranoid.FirstOrDefault();
+                                return FleeTrigger.Paranoid;
+                            }
                             break;
-                        }
-                        if (MyShip.ToEntity.ArmorPct < Config.ArmorThreshold) return FleeTrigger.ArmorLow;
-                        break;
+                        case FleeTrigger.Targeted:
+                            if (!Session.InSpace)
+                            {
+                                break;
+                            }
+                            List<Pilot> TargetingPilots = Local.Pilots.Where(a => Entity.All.FirstOrDefault(b => b.CharID == a.ID && b.IsTargetingMe) != null).ToList();
+                            if (!Config.TargetAlliance) { TargetingPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
+                            if (!Config.TargetCorp) { TargetingPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
+                            if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
+                            TargetingPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
+                            if (TargetingPilots.Any())
+                            {
+                                Hostile = TargetingPilots.FirstOrDefault();
+                                return FleeTrigger.NeutralStanding;
+                            }
+                            break;
+                        case FleeTrigger.CapacitorLow:
+                            if (!Session.InSpace)
+                            {
+                                break;
+                            }
+                            if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapThreshold) return FleeTrigger.CapacitorLow;
+                            break;
+                        case FleeTrigger.ShieldLow:
+                            if (!Session.InSpace)
+                            {
+                                break;
+                            }
+                            if (MyShip.ToEntity.ShieldPct < Config.ShieldThreshold) return FleeTrigger.ShieldLow;
+                            break;
+                        case FleeTrigger.ArmorLow:
+                            if (!Session.InSpace)
+                            {
+                                break;
+                            }
+                            if (MyShip.ToEntity.ArmorPct < Config.ArmorThreshold) return FleeTrigger.ArmorLow;
+                            break;
+                    }
                 }
+                return FleeTrigger.None;
             }
-            return FleeTrigger.None;
+            catch (Exception e)
+            {
+                Exceptions.Post("Security", e);
+                return FleeTrigger.None;
+            }
         }
 
         #endregion
