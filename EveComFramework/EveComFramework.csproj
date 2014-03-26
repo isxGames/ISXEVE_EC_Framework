@@ -74,6 +74,7 @@
     <Compile Include="Core\Configuration.Designer.cs">
       <DependentUpon>Configuration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Diagnostics.cs" />
     <Compile Include="Core\Exceptions.cs" />
     <Compile Include="Core\Helper.cs" />
     <Compile Include="Core\Logger.cs" />

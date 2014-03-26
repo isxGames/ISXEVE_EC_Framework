@@ -69,6 +69,7 @@ namespace EveComFramework.Core
         /// </summary>
         public State()
         {
+            Diagnostics.Instance.States.Add(this);
             StateLog = new Logger("State: " + this.GetType().Name);
             DefaultFrequency = 1000;
             EVEFrame.OnFrame += OnFrame;
