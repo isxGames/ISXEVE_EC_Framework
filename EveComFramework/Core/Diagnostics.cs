@@ -35,12 +35,11 @@ namespace EveComFramework.Core
 
         public void RegisterCommands()
         {
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("ECF");
-            LavishScriptAPI.LavishScript.Events.AttachEventTarget("ECF", Event);
+            LavishScriptAPI.LavishScript.Commands.AddCommand("ECF", Event);
+            LavishScriptAPI.LavishScript.Commands.AddCommand("ecf", Event);
         }
 
-
-        void Event(object sender, LavishScriptAPI.LSEventArgs args)
+        private int Event(string[] args)
         {
             Exceptions exceptions = Exceptions.Instance;
             StringBuilder data = new StringBuilder();
@@ -95,6 +94,7 @@ namespace EveComFramework.Core
 
             EVEFrame.Log("Diagnostic information has been uploaded to https://privatepaste.com" + response.Headers[HttpResponseHeader.Location] + " and the link has been copied to your clipboard.");
             Clipboard.SetText("https://privatepaste.com" + response.Headers[HttpResponseHeader.Location]);
+            return 0;
         }
 
         #endregion
