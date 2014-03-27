@@ -9,7 +9,28 @@ namespace EveComFramework.Core
 {
     public class Exceptions
     {
-        string file { get; set; }
+        #region Instantiation
+
+        static Exceptions _Instance;
+        public static Exceptions Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new Exceptions();
+                }
+                return _Instance;
+            }
+        }
+
+        private Exceptions() : base()
+        {
+        }
+
+        #endregion
+        
+        public string file { get; set; }
 
         public void Post(string title, Exception val)
         {

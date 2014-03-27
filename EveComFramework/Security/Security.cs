@@ -140,7 +140,7 @@ namespace EveComFramework.Security
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
         Pilot Hostile = null;
         Comms.Comms Comms = EveComFramework.Comms.Comms.Instance;
-        Exceptions Exceptions = new Exceptions();
+        Exceptions Exceptions = Exceptions.Instance;
 
         #endregion
 
