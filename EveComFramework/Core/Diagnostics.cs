@@ -39,6 +39,7 @@ namespace EveComFramework.Core
             LavishScriptAPI.LavishScript.Commands.AddCommand("ecf", Event);
         }
 
+        [STAThread]
         private int Event(string[] args)
         {
             Exceptions exceptions = Exceptions.Instance;
