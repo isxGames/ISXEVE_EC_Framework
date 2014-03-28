@@ -212,6 +212,34 @@ namespace EveComFramework.Core
             }
         }
 
+        /// <summary>
+        /// Inserts a wait for a specified time
+        /// </summary>
+        /// <param name="TimeOut">How long to wait (in seconds)</param>
+        /// <param name="Test">A boolean function which will instantly short circuit the timeout if returns true.  ex: () => var == true</param>
+        /// <param name="Reset">A boolean function which will instantly reset the timeout to it's max value if returns true.  ex: () => var == true</param>
+        public void DislodgeWaitFor(int TimeOut, Func<bool> Test = null, Func<bool> Reset = null)
+        {
+            if (CurState != null)
+            {
+                States.AddLast(CurState);
+                CurState = null;
+            }
+
+            if (Reset != null)
+            {
+                InsertState(WaitForState, -1, TimeOut, Test, Reset, TimeOut);
+            }
+            else if (Test != null)
+            {
+                InsertState(WaitForState, -1, TimeOut, Test);
+            }
+            else
+            {
+                InsertState(WaitForState, -1, TimeOut);
+            }
+        }
+
         public bool SafetyOff = false;
         Random rnd = new Random();
         void OnFrame(object sender, EventArgs e)

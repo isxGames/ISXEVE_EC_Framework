@@ -150,28 +150,6 @@ namespace EveComFramework.Move
             }
         }
 
-        /// <summary>
-        /// Approach an entity
-        /// </summary>
-        /// <param name="Target">The entity to approach</param>
-        /// <param name="Distance">What distance from the entity to stop at</param>
-        public void Approach(Entity Target, int Distance = 1000)
-        {
-            // If we're not doing anything, just start ApproachState
-            InnerSpaceAPI.InnerSpace.Echo(Idle.ToString());
-            if (Idle)
-            {
-                QueueState(ApproachState, -1, Target, Distance, false);
-                return;
-            }
-            // If we're approaching something else or orbiting something, change to approaching the new target - retain collision information!
-            if ((CurState.State == ApproachState && (Entity)CurState.Params[0] != Target) || CurState.State == OrbitState)
-            {
-                Clear();
-                QueueState(ApproachState, -1, Target, Distance, false);
-            }
-        }
-
         int LastOrbitDistance;
         /// <summary>
         /// Orbit an entity
@@ -474,76 +452,105 @@ namespace EveComFramework.Move
             return true;
         }
 
+        #region Approach
+
+        /// <summary>
+        /// Approach an entity
+        /// </summary>
+        /// <param name="Target">The entity to approach</param>
+        /// <param name="Distance">What distance from the entity to stop at</param>
+        public void Approach(Entity Target, int Distance = 1000)
+        {
+            // If we're not doing anything, just start ApproachState
+            if (Idle)
+            {
+                ApproachTarget = Target;
+                ApproachDistance = Distance;
+                Approaching = false;
+                ApproachCollision = null;
+                QueueState(ApproachState);
+                return;
+            }
+            // If we're approaching something else or orbiting something, change to approaching the new target - retain collision information!
+            if ((CurState.State == ApproachState && ApproachTarget != Target) || CurState.State == OrbitState)
+            {
+                ApproachTarget = Target;
+                ApproachDistance = Distance;
+                Clear();
+                QueueState(ApproachState, -1, Target, Distance, false);
+            }
+        }
+
+        Entity ApproachTarget;
+        int ApproachDistance;
+        bool Approaching;
+        Entity ApproachCollision;
+
         bool ApproachState(object[] Params)
         {
-            Entity Target = ((Entity)Params[0]);
-            int Distance = (int)Params[1];
-            bool Approaching = (bool)Params[2];
-            Entity Collision = null;
-            if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
-
-            if (Target == null || !Target.Exists || Target.Exploded || Target.Released)
+            if (ApproachTarget == null || !ApproachTarget.Exists || ApproachTarget.Exploded || ApproachTarget.Released)
             {
                 return true;
             }
 
-            if (Target.Distance > Distance)
+            if (ApproachTarget.Distance > ApproachDistance)
             {
                 // Start approaching our approach target if we're not currently approaching anything
                 if (!Approaching || (MyShip.ToEntity.Mode != EntityMode.Orbiting && MyShip.ToEntity.Mode != EntityMode.Approaching))
                 {
+                    Approaching = true;
                     Log.Log("|oApproaching");
-                    Log.Log(" |-g{0}(|w{1} km|-g)", Target.Name, Distance / 1000);
-                    Target.Approach();
-                    InsertState(ApproachState, -1, Target, Distance, true);
-                    WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Approaching);
-                }
-                // Else, if we're in trigger of a structure and aren't already orbiting a structure, orbit it and set it as our collision target
-                else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 900)) != null
-                        && Collision == null
-                        && Config.ApproachCollisionPrevention)
-                {
-                    Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 900));
-                    Log.Log("|oOrbiting");
-                    Log.Log(" |-g{0}(|w{1} km|-g)", Collision.Name, Config.ApproachCollisionOrbit);
-                    Collision.Orbit((int)(Config.ApproachCollisionOrbit * 1000));
-                    InsertState(ApproachState, -1, Target, Distance, true, Collision);
-                }
-                // Else, if we're in half trigger of a structure that isn't our current collision target, change orbit and collision target to it
-                else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 500)) != null
-                        && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 500))
-                        && Config.ApproachCollisionPrevention)
-                {
-                    Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 500));
-                    Log.Log("|oOrbiting");
-                    Log.Log(" |-g{0}(|w{1} km|-g)", Collision.Name, Config.ApproachCollisionOrbit);
-                    Collision.Orbit((int)(Config.ApproachCollisionOrbit * 1000));
-                    InsertState(ApproachState, -1, Target, Distance, true, Collision);
-                }
-                // Else, if we're not within trigger of a structure and we have a collision target (orbiting a structure) change approach back to our approach target
-                else if (Entity.All.Where(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 900)).FirstOrDefault() == null
-                        && Collision != null
-                        && Config.ApproachCollisionPrevention)
-                {
-                    Log.Log("|oApproaching");
-                    Log.Log(" |-g{0}(|w{1} km|-g)", Target.Name, Distance / 1000);
-                    Target.Approach();
-                    InsertState(ApproachState, -1, Target, Distance, true);
-                }
-                else
-                {
-                    InsertState(ApproachState, -1, Target, Distance, Approaching, Collision);
+                    Log.Log(" |-g{0}(|w{1} km|-g)", ApproachTarget.Name, ApproachDistance / 1000);
+                    ApproachTarget.Approach();
+                    DislodgeWaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Approaching);
+                    return false;
                 }
 
+                if (Config.ApproachCollisionPrevention)
+                {
+                    Entity CollisionCheck;
+
+                    // Else, if we're in trigger of a structure and aren't already orbiting a structure, orbit it and set it as our collision target
+                    CollisionCheck = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 900));
+                    if (CollisionCheck != null && ApproachCollision == null)
+                    {
+                        ApproachCollision = CollisionCheck;
+                        Log.Log("|oOrbiting");
+                        Log.Log(" |-g{0}(|w{1} km|-g)", ApproachCollision.Name, Config.ApproachCollisionOrbit);
+                        ApproachCollision.Orbit((int)(Config.ApproachCollisionOrbit * 1000));
+                        return false;
+                    }
+                    // Else, if we're in half trigger of a structure that isn't our current collision target, change orbit and collision target to it
+                    CollisionCheck = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 500));
+                    if (CollisionCheck != null && CollisionCheck != ApproachCollision)
+                    {
+                        ApproachCollision = CollisionCheck;
+                        Log.Log("|oOrbiting");
+                        Log.Log(" |-g{0}(|w{1} km|-g)", ApproachCollision.Name, Config.ApproachCollisionOrbit);
+                        ApproachCollision.Orbit((int)(Config.ApproachCollisionOrbit * 1000));
+                        return false;
+                    }
+                    // Else, if we're not within trigger of a structure and we have a collision target (orbiting a structure) change approach back to our approach target
+                    CollisionCheck = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.Distance <= (double)(Config.ApproachCollisionTrigger * 900));
+                    if (CollisionCheck == null && ApproachCollision != null)
+                    {
+                        ApproachCollision = null;
+                        Log.Log("|oApproaching");
+                        Log.Log(" |-g{0}(|w{1} km|-g)", ApproachTarget.Name, ApproachDistance / 1000);
+                        ApproachTarget.Approach();
+                        return false;
+                    }
+                }
             }
             else
             {
                 Command.CmdStopShip.Execute();
+                return true;
             }
-
-
-            return true;
+            return false;
         }
+
+        #endregion
 
         bool OrbitState(object[] Params)
         {

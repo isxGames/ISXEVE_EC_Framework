@@ -319,6 +319,14 @@
             <param name="Test">A boolean function which will instantly short circuit the timeout if returns true.  ex: () => var == true</param>
             <param name="Reset">A boolean function which will instantly reset the timeout to it's max value if returns true.  ex: () => var == true</param>
         </member>
+        <member name="M:EveComFramework.Core.State.DislodgeWaitFor(System.Int32,System.Func{System.Boolean},System.Func{System.Boolean})">
+            <summary>
+            Inserts a wait for a specified time
+            </summary>
+            <param name="TimeOut">How long to wait (in seconds)</param>
+            <param name="Test">A boolean function which will instantly short circuit the timeout if returns true.  ex: () => var == true</param>
+            <param name="Reset">A boolean function which will instantly reset the timeout to it's max value if returns true.  ex: () => var == true</param>
+        </member>
         <member name="P:EveComFramework.Core.State.DefaultFrequency">
             <summary>
             The default frequency to use if none is specified
@@ -1019,19 +1027,19 @@
             Jump through an entity (ex: Jump portal array)
             </summary>
         </member>
-        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
-            <summary>
-            Approach an entity
-            </summary>
-            <param name="Target">The entity to approach</param>
-            <param name="Distance">What distance from the entity to stop at</param>
-        </member>
         <member name="M:EveComFramework.Move.Move.Orbit(EveCom.Entity,System.Int32)">
             <summary>
             Orbit an entity
             </summary>
             <param name="Target">The entity to orbit</param>
             <param name="Distance">The distance from the entity to orbit</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
+            <summary>
+            Approach an entity
+            </summary>
+            <param name="Target">The entity to approach</param>
+            <param name="Distance">What distance from the entity to stop at</param>
         </member>
         <member name="P:EveComFramework.Move.Move.Instance">
             <summary>
