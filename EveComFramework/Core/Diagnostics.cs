@@ -39,7 +39,6 @@ namespace EveComFramework.Core
             LavishScriptAPI.LavishScript.Commands.AddCommand("ecf", Event);
         }
 
-        [STAThread]
         private int Event(string[] args)
         {
             Exceptions exceptions = Exceptions.Instance;
@@ -94,7 +93,8 @@ namespace EveComFramework.Core
             WebResponse response = client.GetResponse();
 
             EVEFrame.Log("Diagnostic information has been uploaded to https://privatepaste.com" + response.Headers[HttpResponseHeader.Location] + " and the link has been copied to your clipboard.");
-            Clipboard.SetText("https://privatepaste.com" + response.Headers[HttpResponseHeader.Location]);
+            string clip = string.Format("System:SetClipboardText[\"https://privatepaste.com{0}\"]", response.Headers[HttpResponseHeader.Location]);
+            LavishScriptAPI.LavishScript.ExecuteCommand(clip);
             return 0;
         }
 
