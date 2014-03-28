@@ -44,7 +44,6 @@
     <Reference Include="Lavish.InnerSpace">
       <HintPath>..\Lavish.InnerSpace.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
