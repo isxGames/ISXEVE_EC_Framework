@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EveCom;
-using System.Windows.Forms;
 using System.Net;
 using System.IO;
 
@@ -93,8 +92,7 @@ namespace EveComFramework.Core
             WebResponse response = client.GetResponse();
 
             EVEFrame.Log("Diagnostic information has been uploaded to https://privatepaste.com" + response.Headers[HttpResponseHeader.Location] + " and the link has been copied to your clipboard.");
-            string clip = string.Format("System:SetClipboardText[\"https://privatepaste.com{0}\"]", response.Headers[HttpResponseHeader.Location]);
-            LavishScriptAPI.LavishScript.ExecuteCommand(clip);
+            System.Windows.Clipboard.SetText("https://privatepaste.com" + response.Headers[HttpResponseHeader.Location]);
             return 0;
         }
 
