@@ -419,8 +419,10 @@ namespace EveComFramework.Move
             }
             if (JumpPortalArray.Distance > 2500)
             {
+                ApproachTarget = JumpPortalArray;
+                ApproachDistance = 2500;
                 InsertState(JumpThroughArray);
-                InsertState(ApproachState, -1, JumpPortalArray, 2500);
+                InsertState(ApproachState);
                 return true;
             }
             Log.Log("|oJumping through");
@@ -439,7 +441,9 @@ namespace EveComFramework.Move
             if (Target.Distance > 2500)
             {
                 Clear();
-                QueueState(ApproachState, -1, Target, 2500, false);
+                ApproachTarget = Target;
+                ApproachDistance = 2500;
+                QueueState(ApproachState);
                 QueueState(ActivateEntity, -1, Target);
                 return false;
             }
