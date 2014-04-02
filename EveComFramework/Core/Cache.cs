@@ -32,6 +32,8 @@ namespace EveComFramework.Core
         private Cache() : base()
         {
             ItemVolume = new Dictionary<string, double>();
+            CachedMissions = new Dictionary<string, CachedMission>();
+            AvailableAgents = new List<string>();
             QueueState(Control);
         }
 
@@ -63,6 +65,25 @@ namespace EveComFramework.Core
         public Double ArmorPercent = 1;
         public Double HullPercent = 1;
         public bool DamagedDrones = false;
+        public List<string> AvailableAgents { get; set; }
+
+        public class CachedMission
+        {
+            public int ContentID;
+            public string Name;
+            public int Level;
+            public AgentMission.MissionState State;
+            public AgentMission.MissionType Type;
+            internal CachedMission (int ContentID, string Name, int Level, AgentMission.MissionState State, AgentMission.MissionType Type)
+            {
+                this.ContentID = ContentID;
+                this.Name = Name;
+                this.Level = Level;
+                this.State = State;
+                this.Type = Type;
+            }
+        }
+        public Dictionary<string, CachedMission> CachedMissions { get; set; }
 
         #endregion
 
@@ -93,6 +114,8 @@ namespace EveComFramework.Core
                     return false;
                 }
             }
+            AgentMission.All.ForEach(a => { CachedMissions.AddOrUpdate(Agent.Get(a.AgentID).Name, new CachedMission(a.ContentID, a.Name, Agent.Get(a.AgentID).Level, a.State, a.Type)); });
+            AvailableAgents = Agent.MyAgents.Select(a => a.Name).ToList();
             if (Session.InStation)
             {
                 if (Station.ItemHangar != null)
