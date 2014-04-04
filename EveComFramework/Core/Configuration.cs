@@ -188,6 +188,8 @@ namespace EveComFramework.Core
                 checkReportChatInvite.CheckedChanged += (s, a) => { CommsConfig.ChatInvite = checkReportChatInvite.Checked; CommsConfig.Save(); };
                 checkGridTraffic.Checked = CommsConfig.Grid;
                 checkGridTraffic.CheckedChanged += (s, a) => { CommsConfig.Grid = checkGridTraffic.Checked; CommsConfig.Save(); };
+                checkLocalTraffic.Checked = CommsConfig.LocalTraffic;
+                checkLocalTraffic.CheckedChanged += (s, a) => { CommsConfig.LocalTraffic = checkLocalTraffic.Checked; CommsConfig.Save(); };
 
                 #endregion
 

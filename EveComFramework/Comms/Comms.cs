@@ -24,6 +24,7 @@ namespace EveComFramework.Comms
         public bool Wallet = true;
         public bool ChatInvite = true;
         public bool Grid = false;
+        public bool LocalTraffic = false;
     }
 
     #endregion
@@ -78,6 +79,8 @@ namespace EveComFramework.Comms
 
         EveComFramework.Targets.Targets NonFleetPlayers = new EveComFramework.Targets.Targets();
         List<Entity> NonFleetMemberOnGrid = new List<Entity>();
+        List<Pilot> PilotCache = new List<Pilot>();
+        int SolarSystem = -1;
 
         #endregion
 
@@ -211,6 +214,23 @@ namespace EveComFramework.Comms
         {
             if (!Session.Safe || (!Session.InSpace && !Session.InStation)) return false;
 
+            if (Session.SolarSystemID != SolarSystem)
+            {
+                PilotCache = Local.Pilots;
+                SolarSystem = Session.SolarSystemID;
+            }
+
+            if (Config.LocalTraffic)
+            {
+                List<Pilot> newPilots = Local.Pilots.Where(a => !PilotCache.Contains(a)).ToList();
+                foreach (Pilot pilot in newPilots)
+                {
+                    ChatQueue.Enqueue("<Local> New Pilot: " + pilot.Name + " - http://evewho.com/pilot/" + pilot.Name.Replace(" ", "%20"));
+                }
+            }
+
+            PilotCache = Local.Pilots;
+
             try
             {
                 if (Config.Local && ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any())
@@ -220,7 +240,7 @@ namespace EveComFramework.Comms
                         LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
                         if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
                         {
-                            ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + ": " + LastLocal);
+                            ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + " - http://evewho.com/pilot/" + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName.Replace(" ", "%20") + ": " + LastLocal);
                         }
                     }
                 }
@@ -253,7 +273,7 @@ namespace EveComFramework.Comms
                 Entity AddNonFleet = NonFleetPlayers.TargetList.FirstOrDefault(a => !NonFleetMemberOnGrid.Contains(a));
                 if (AddNonFleet != null)
                 {
-                    ChatQueue.Enqueue("<Security> Non fleet member on grid: " + AddNonFleet.Name);
+                    ChatQueue.Enqueue("<Security> Non fleet member on grid: " + AddNonFleet.Name + " - http://evewho.com/pilot/" + AddNonFleet.Name.Replace(" ", "%20"));
                     NonFleetMemberOnGrid.Add(AddNonFleet);
                 }
                 NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();

@@ -113,6 +113,7 @@
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
             this.checkDroneFocus = new System.Windows.Forms.CheckBox();
+            this.checkLocalTraffic = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1043,6 +1044,7 @@
             this.tableLayoutPanel6.Controls.Add(this.checkWallet, 1, 6);
             this.tableLayoutPanel6.Controls.Add(this.checkReportChatInvite, 1, 7);
             this.tableLayoutPanel6.Controls.Add(this.checkGridTraffic, 1, 8);
+            this.tableLayoutPanel6.Controls.Add(this.checkLocalTraffic, 3, 8);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 9;
@@ -1174,7 +1176,7 @@
             this.checkLocal.Name = "checkLocal";
             this.checkLocal.Size = new System.Drawing.Size(134, 20);
             this.checkLocal.TabIndex = 9;
-            this.checkLocal.Text = "Report Local";
+            this.checkLocal.Text = "Report Local Chat";
             this.checkLocal.UseVisualStyleBackColor = true;
             // 
             // checkWallet
@@ -1321,6 +1323,17 @@
             this.checkDroneFocus.TabIndex = 5;
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
+            // 
+            // checkLocalTraffic
+            // 
+            this.checkLocalTraffic.AutoSize = true;
+            this.checkLocalTraffic.Location = new System.Drawing.Point(149, 140);
+            this.checkLocalTraffic.Margin = new System.Windows.Forms.Padding(0);
+            this.checkLocalTraffic.Name = "checkLocalTraffic";
+            this.checkLocalTraffic.Size = new System.Drawing.Size(115, 17);
+            this.checkLocalTraffic.TabIndex = 14;
+            this.checkLocalTraffic.Text = "Report Local Traffic";
+            this.checkLocalTraffic.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
@@ -1475,5 +1488,6 @@
         private System.Windows.Forms.CheckBox checkGridTraffic;
         private System.Windows.Forms.CheckBox checkDroneTrackingModules;
         private System.Windows.Forms.NumericUpDown numericDroneTrackingModule;
+        private System.Windows.Forms.CheckBox checkLocalTraffic;
     }
 }
