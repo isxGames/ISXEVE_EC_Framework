@@ -32,8 +32,10 @@ namespace EveComFramework.Core
         private Cache() : base()
         {
             ItemVolume = new Dictionary<string, double>();
+            ShipVolume = new Dictionary<string, double>();
             CachedMissions = new Dictionary<string, CachedMission>();
             AvailableAgents = new List<string>();
+            ShipNames = new HashSet<string>();
             QueueState(Control);
         }
 
@@ -61,6 +63,8 @@ namespace EveComFramework.Core
         /// Item Volumes, keyed by Types
         /// </summary>
         public Dictionary<string, double> ItemVolume { get; set; }
+        public Dictionary<string, double> ShipVolume { get; set; }
+        public HashSet<string> ShipNames { get; set; }
         public List<string> Fittings { get; set; }
         public Double ArmorPercent = 1;
         public Double HullPercent = 1;
@@ -127,6 +131,18 @@ namespace EveComFramework.Core
                     else
                     {
                         Station.ItemHangar.Prime();
+                        return false;
+                    }
+                }
+                if (Station.ShipHangar != null)
+                {
+                    if (Station.ShipHangar.IsPrimed)
+                    {
+                        Station.ShipHangar.Items.ForEach(a => { ShipVolume.AddOrUpdate(a.Type, a.Volume); ShipNames.Add(a.Name); });
+                    }
+                    else
+                    {
+                        Station.ShipHangar.Prime();
                         return false;
                     }
                 }
