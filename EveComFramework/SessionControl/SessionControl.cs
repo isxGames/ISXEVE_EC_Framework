@@ -37,11 +37,14 @@ namespace EveComFramework.SessionControl
     /// </summary>
     public class LoginLocalSettings : Settings
     {
+        public string Mode = "Duration";
         public int LoginDelta = 0;
         public int LogoutHours = 24;
         public int LogoutDelta = 20;
         public int Downtime = 30;
         public int DowntimeDelta = 10;
+        public DateTime PeriodStart = DateTime.Now;
+        public DateTime PeriodEnd = DateTime.Now.AddHours(2);
     }
 
     /// <summary>
@@ -215,8 +218,16 @@ namespace EveComFramework.SessionControl
 
                 if (Login.Connecting) return false;
 
-                if (_curProfile != null && DateTime.Now > Instanced.AddMinutes(LoginDelta))
+                if (_curProfile != null)
                 {
+                    if (Config.Mode == "Duration" && DateTime.Now <= Instanced.AddMinutes(LoginDelta)) return false;
+                    if (Config.Mode == "Period" && DateTime.Now.TimeOfDay < Config.PeriodStart.TimeOfDay) return false;
+                    if (Config.Mode == "Period" && DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
+                    {
+                        Log.Log("|oRun period already complete, closing");
+                        Clear();
+                        QueueState(Logout);
+                    }
                     Log.Log("|oLogging into account");
                     Log.Log(" |g{0}", _curProfile.Username);
                     Login.Connect(_curProfile.Username, _curProfile.Password);
@@ -275,8 +286,18 @@ namespace EveComFramework.SessionControl
                 return false;
             }
 
-            if (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
-                Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
+            if (Config.Mode == "Duration" &&
+                (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
+                Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime))
+            {
+                if (LogOut != null)
+                {
+                    LogOut();
+                }
+                return true;
+            }
+
+            if (Config.Mode == "Period" && DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
             {
                 if (LogOut != null)
                 {

@@ -37,6 +37,23 @@ namespace EveComFramework.SessionControl.UI
             numLogoutHoursDelta.Value = Config.LogoutDelta;
             numDowntime.Value = Config.Downtime;
             numDowntimeDelta.Value = Config.DowntimeDelta;
+            switch (Config.Mode)
+            {
+                case "Duration":
+                    groupDuration.Show();
+                    groupPeriod.Hide();
+                    comboMode.Text = "Log in and run for a specific length of time";
+                    break;
+                case "Period":
+                    groupDuration.Hide();
+                    groupPeriod.Show();
+                    comboMode.Text = "Log in and run during a scheduled period of the day";
+                    break;
+            }
+            datePeriodStart.Value = Config.PeriodStart;
+            datePeriodEnd.Value = Config.PeriodEnd;
+            datePeriodStart.ValueChanged += (s, a) => { Config.PeriodStart = datePeriodStart.Value; Config.Save(); };
+            datePeriodEnd.ValueChanged += (s, a) => { Config.PeriodEnd = datePeriodEnd.Value; Config.Save(); };
         }
 
 
@@ -106,6 +123,25 @@ namespace EveComFramework.SessionControl.UI
             Config.Save();
             EveComFramework.SessionControl.SessionControl.Instance.NewDowntimeDelta();
         }
+
+        private void comboMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboMode.Text)
+            {
+                case "Log in and run for a specific length of time":
+                    groupDuration.Show();
+                    groupPeriod.Hide();
+                    Config.Mode = "Duration";
+                    break;
+                case "Log in and run during a scheduled period of the day":
+                    groupDuration.Hide();
+                    groupPeriod.Show();
+                    Config.Mode = "Period";
+                    break;
+            }
+        }
+
+
 
 
     }
