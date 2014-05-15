@@ -286,6 +286,26 @@ namespace EveComFramework.SessionControl
                 return false;
             }
 
+            if (Config.Mode == "Period")
+            {
+                
+                //if (LavishScriptAPI.LavishScript.Objects.GetObject("ISBoxerSlot") != null)
+                //{
+                //    string command = "relay uplink TimedCommand 300 run isboxer " + LavishScriptAPI.LavishScript.Objects.GetObject("ISBoxerCharacterSet") + " " + LavishScriptAPI.LavishScript.Objects.GetObject("ISBoxerSlot");
+                //    LavishScriptAPI.LavishScript.ExecuteCommand(command);
+                //    LavishScriptAPI.LavishScript.ExecuteCommand("Exit");
+                //}
+
+                if (DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
+                {
+                    if (LogOut != null)
+                    {
+                        LogOut();
+                    }
+                    return true;
+                }
+            }
+
             if (Config.Mode == "Duration" &&
                 (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
                 Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime))
@@ -297,14 +317,6 @@ namespace EveComFramework.SessionControl
                 return true;
             }
 
-            if (Config.Mode == "Period" && DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
-            {
-                if (LogOut != null)
-                {
-                    LogOut();
-                }
-                return true;
-            }
 
             return false;
         }
