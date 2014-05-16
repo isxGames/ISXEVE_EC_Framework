@@ -288,13 +288,17 @@ namespace EveComFramework.SessionControl
 
             if (Config.Mode == "Period")
             {
-
                 PopupWindow disconnectWindow = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Name != null && a.Name == "modal" && a.Message.Contains("The socket was closed"));
-                if (disconnectWindow != null && LavishScriptAPI.LavishScript.Objects.GetObject("ISBoxerSlot") != null)
+                string set = string.Empty;
+                string slot = string.Empty;
+                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerSlot}", ref slot);
+                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerCharacterSet}", ref set);
+                if (disconnectWindow != null && set != "NULL" && slot != "NULL")
                 {
-                    string command = "relay uplink TimedCommand 300 run isboxer " + LavishScriptAPI.LavishScript.Objects.GetObject("ISBoxerCharacterSet") + " " + LavishScriptAPI.LavishScript.Objects.GetObject("ISBoxerSlot");
-                    LavishScriptAPI.LavishScript.ExecuteCommand(command);
-                    LavishScriptAPI.LavishScript.ExecuteCommand("Exit");
+                    Log.Log("|rDisconnect detected, restarting");
+                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect TimedCommand 100 run isboxer -launchslot \"" + set + "\" " + slot);
+                    DislodgeCurState(Logout);
+                    return false;
                 }
 
                 if (DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
