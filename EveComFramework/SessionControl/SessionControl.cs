@@ -45,6 +45,8 @@ namespace EveComFramework.SessionControl
         public int DowntimeDelta = 10;
         public DateTime PeriodStart = DateTime.Now;
         public DateTime PeriodEnd = DateTime.Now.AddHours(2);
+        public SerializableDictionary<long, DateTime> SessionStart = new SerializableDictionary<long, DateTime>();
+        public SerializableDictionary<long, bool> Reconnect = new SerializableDictionary<long, bool>();
     }
 
     /// <summary>
@@ -109,7 +111,6 @@ namespace EveComFramework.SessionControl
         public string characterName { get; set; }
 
         DateTime Instanced = DateTime.Now;
-        DateTime SessionStart;
         Random random = new Random();
         int DowntimeDelta = 0;
         int LoginDelta = 0;
@@ -244,7 +245,12 @@ namespace EveComFramework.SessionControl
             UpdateCurrentProfile();
             if (Session.InSpace || Session.InStation)
             {
-                SessionStart = DateTime.Now.AddMinutes(random.Next(Config.LogoutDelta));
+                if (!Config.Reconnect.ContainsKey(_curProfile.CharacterID) || !Config.Reconnect[_curProfile.CharacterID])
+                {
+                    Config.SessionStart.AddOrUpdate(_curProfile.CharacterID, DateTime.Now);
+                    Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
+                    Config.Save();
+                }
                 DowntimeDelta = random.Next(Config.DowntimeDelta);
                 LogoutDelta = random.Next(Config.LogoutDelta);
                 return true;
@@ -311,17 +317,33 @@ namespace EveComFramework.SessionControl
                 }
             }
 
-            if (Config.Mode == "Duration" &&
-                (DateTime.Now > SessionStart.AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
-                Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime))
+            if (Config.Mode == "Duration")
             {
-                if (LogOut != null)
+                PopupWindow disconnectWindow = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Name != null && a.Name == "modal" && a.Message.Contains("The socket was closed"));
+                string set = string.Empty;
+                string slot = string.Empty;
+                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerSlot}", ref slot);
+                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerCharacterSet}", ref set);
+                if (disconnectWindow != null && set != "NULL" && slot != "NULL")
                 {
-                    LogOut();
-                }
-                return true;
-            }
+                    Log.Log("|rDisconnect detected, restarting");
+                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect TimedCommand 100 run isboxer -launchslot \"" + set + "\" " + slot);
+                    Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, true);
+                    Config.Save();
+                    DislodgeCurState(Logout);
+                    return false;
+                }                
 
+                if (DateTime.Now > Config.SessionStart[_curProfile.CharacterID].AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
+                Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
+                {
+                    if (LogOut != null)
+                    {
+                        LogOut();
+                    }
+                    return true;
+                }
+            }
 
             return false;
         }
