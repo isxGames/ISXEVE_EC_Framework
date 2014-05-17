@@ -332,8 +332,8 @@ namespace EveComFramework.SessionControl
                 if (disconnectWindow != null && set != "NULL" && slot != "NULL")
                 {
                     Log.Log("|rDisconnect detected, restarting");
-                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect echo TimedCommand 100 \"run isboxer -launchslot \\\"" + set + "\\\" " + slot + "\"");
-                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect TimedCommand 100 \"run isboxer -launchslot \\\"" + set + "\\\" " + slot + "\"");
+                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect echo TimedCommand 100 \"run isboxer -launchslot \\\\\"" + set + "\\\\\" " + slot + "\"");
+                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect TimedCommand 100 \"run isboxer -launchslot \\\\\"" + set + "\\\\\" " + slot + "\"");
                     Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, true);
                     Config.Save();
                     DislodgeCurState(Logout);
