@@ -251,6 +251,11 @@ namespace EveComFramework.SessionControl
                     Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
                     Config.Save();
                 }
+                else
+                {
+                    Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
+                    Config.Save();
+                }
                 DowntimeDelta = random.Next(Config.DowntimeDelta);
                 LogoutDelta = random.Next(Config.LogoutDelta);
                 return true;

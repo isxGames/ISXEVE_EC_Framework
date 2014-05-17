@@ -105,6 +105,7 @@
             this.checkWallet = new System.Windows.Forms.CheckBox();
             this.checkReportChatInvite = new System.Windows.Forms.CheckBox();
             this.checkGridTraffic = new System.Windows.Forms.CheckBox();
+            this.checkLocalTraffic = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label10 = new System.Windows.Forms.Label();
@@ -113,7 +114,6 @@
             this.comboDroneMode = new System.Windows.Forms.ComboBox();
             this.checkDronePrivateTargets = new System.Windows.Forms.CheckBox();
             this.checkDroneFocus = new System.Windows.Forms.CheckBox();
-            this.checkLocalTraffic = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1068,7 +1068,7 @@
             this.checkUseIRC.Location = new System.Drawing.Point(0, 0);
             this.checkUseIRC.Margin = new System.Windows.Forms.Padding(0);
             this.checkUseIRC.Name = "checkUseIRC";
-            this.checkUseIRC.Size = new System.Drawing.Size(149, 17);
+            this.checkUseIRC.Size = new System.Drawing.Size(162, 17);
             this.checkUseIRC.TabIndex = 0;
             this.checkUseIRC.Text = "Enabled";
             this.checkUseIRC.UseVisualStyleBackColor = true;
@@ -1158,10 +1158,10 @@
             // 
             this.checkNPC.AutoSize = true;
             this.checkNPC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkNPC.Location = new System.Drawing.Point(149, 80);
+            this.checkNPC.Location = new System.Drawing.Point(162, 80);
             this.checkNPC.Margin = new System.Windows.Forms.Padding(0);
             this.checkNPC.Name = "checkNPC";
-            this.checkNPC.Size = new System.Drawing.Size(128, 20);
+            this.checkNPC.Size = new System.Drawing.Size(115, 20);
             this.checkNPC.TabIndex = 11;
             this.checkNPC.Text = "Include NPC Chat";
             this.checkNPC.UseVisualStyleBackColor = true;
@@ -1174,7 +1174,7 @@
             this.checkLocal.Location = new System.Drawing.Point(15, 80);
             this.checkLocal.Margin = new System.Windows.Forms.Padding(0);
             this.checkLocal.Name = "checkLocal";
-            this.checkLocal.Size = new System.Drawing.Size(134, 20);
+            this.checkLocal.Size = new System.Drawing.Size(147, 20);
             this.checkLocal.TabIndex = 9;
             this.checkLocal.Text = "Report Local Chat";
             this.checkLocal.UseVisualStyleBackColor = true;
@@ -1187,7 +1187,7 @@
             this.checkWallet.Location = new System.Drawing.Point(15, 100);
             this.checkWallet.Margin = new System.Windows.Forms.Padding(0);
             this.checkWallet.Name = "checkWallet";
-            this.checkWallet.Size = new System.Drawing.Size(134, 20);
+            this.checkWallet.Size = new System.Drawing.Size(147, 20);
             this.checkWallet.TabIndex = 10;
             this.checkWallet.Text = "Report Wallet Changes";
             this.checkWallet.UseVisualStyleBackColor = true;
@@ -1200,7 +1200,7 @@
             this.checkReportChatInvite.Location = new System.Drawing.Point(15, 120);
             this.checkReportChatInvite.Margin = new System.Windows.Forms.Padding(0);
             this.checkReportChatInvite.Name = "checkReportChatInvite";
-            this.checkReportChatInvite.Size = new System.Drawing.Size(134, 20);
+            this.checkReportChatInvite.Size = new System.Drawing.Size(147, 20);
             this.checkReportChatInvite.TabIndex = 12;
             this.checkReportChatInvite.Text = "Report Chat Invites";
             this.checkReportChatInvite.UseVisualStyleBackColor = true;
@@ -1215,6 +1215,17 @@
             this.checkGridTraffic.TabIndex = 13;
             this.checkGridTraffic.Text = "Report Grid Traffic";
             this.checkGridTraffic.UseVisualStyleBackColor = true;
+            // 
+            // checkLocalTraffic
+            // 
+            this.checkLocalTraffic.AutoSize = true;
+            this.checkLocalTraffic.Location = new System.Drawing.Point(162, 140);
+            this.checkLocalTraffic.Margin = new System.Windows.Forms.Padding(0);
+            this.checkLocalTraffic.Name = "checkLocalTraffic";
+            this.checkLocalTraffic.Size = new System.Drawing.Size(115, 17);
+            this.checkLocalTraffic.TabIndex = 14;
+            this.checkLocalTraffic.Text = "Report Local Traffic";
+            this.checkLocalTraffic.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
@@ -1323,17 +1334,6 @@
             this.checkDroneFocus.TabIndex = 5;
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
-            // 
-            // checkLocalTraffic
-            // 
-            this.checkLocalTraffic.AutoSize = true;
-            this.checkLocalTraffic.Location = new System.Drawing.Point(149, 140);
-            this.checkLocalTraffic.Margin = new System.Windows.Forms.Padding(0);
-            this.checkLocalTraffic.Name = "checkLocalTraffic";
-            this.checkLocalTraffic.Size = new System.Drawing.Size(115, 17);
-            this.checkLocalTraffic.TabIndex = 14;
-            this.checkLocalTraffic.Text = "Report Local Traffic";
-            this.checkLocalTraffic.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
