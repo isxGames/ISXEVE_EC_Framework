@@ -240,7 +240,7 @@ namespace EveComFramework.Comms
                         LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
                         if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
                         {
-                            ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + " - http://evewho.com/pilot/" + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName.Replace(" ", "%20") + ": " + LastLocal);
+                            ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + " - http://evewho.com/pilot/" + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName.Replace(" ", "%20") + " : " + LastLocal);
                         }
                     }
                 }
