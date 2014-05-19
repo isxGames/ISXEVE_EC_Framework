@@ -449,7 +449,7 @@ namespace EveComFramework.GroupControl
                     }
 
                     //who should be squad leader
-                    ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a => a.Active).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.CharacterName).FirstOrDefault(a => a.Active && a.Available && Fleet.Members.Any(fleetmember => fleetmember.Name == a.CharacterName));
+                    ActiveMember newLeader = CurrentGroup.ActiveMembers.Where(a => a.Active && a.Role != Role.Hauler).OrderByDescending(a => a.LeadershipValue).ThenBy(b => b.CharacterName).FirstOrDefault(a => a.Active && a.Available && Fleet.Members.Any(fleetmember => fleetmember.Name == a.CharacterName));
                     if (newLeader != null)
                     {
                         if (Leader != newLeader)
