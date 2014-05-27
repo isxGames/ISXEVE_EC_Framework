@@ -118,6 +118,18 @@ namespace EveComFramework.Core
                     return false;
                 }
             }
+            if (MyShip.DroneBay != null)
+            {
+                if (MyShip.DroneBay.IsPrimed)
+                {
+                    MyShip.DroneBay.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                }
+                else
+                {
+                    MyShip.DroneBay.Prime();
+                    return false;
+                }
+            }
             AgentMission.All.ForEach(a => { CachedMissions.AddOrUpdate(Agent.Get(a.AgentID).Name, new CachedMission(a.ContentID, a.Name, Agent.Get(a.AgentID).Level, a.State, a.Type)); });
             AvailableAgents = Agent.MyAgents.Select(a => a.Name).ToList();
             if (Session.InStation)
