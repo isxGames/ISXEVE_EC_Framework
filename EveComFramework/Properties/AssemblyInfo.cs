@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EveComFramework")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Lowes Companies, Inc")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("EveComFramework")]
-[assembly: AssemblyCopyright("Copyright © Lowes Companies, Inc 2013")]
+[assembly: AssemblyCopyright("Copyright © 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
