@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <Drones>
+  <Drone Name="Gecko" ID="33681" Race="1" Volume="25" Group="Heavy Attack Drones" />
   <Drone Name="Wasp I" ID="1201" Race="1" Volume="25" Group="Heavy Attack Drones" />
   <Drone Name="Infiltrator I" ID="2173" Race="4" Volume="10" Group="Medium Scout Drones" />
   <Drone Name="Infiltrator II" ID="2175" Race="4" Volume="10" Group="Medium Scout Drones" />
