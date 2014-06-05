@@ -245,7 +245,7 @@ namespace EveComFramework.SessionControl
             UpdateCurrentProfile();
             if (Session.InSpace || Session.InStation)
             {
-                if (!Config.Reconnect.ContainsKey(_curProfile.CharacterID) || !Config.Reconnect[_curProfile.CharacterID])
+                if (Config.Reconnect == null ||!Config.Reconnect.ContainsKey(_curProfile.CharacterID) || !Config.Reconnect[_curProfile.CharacterID])
                 {
                     Config.SessionStart.AddOrUpdate(_curProfile.CharacterID, DateTime.Now);
                     Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);

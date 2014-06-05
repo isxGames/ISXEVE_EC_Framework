@@ -150,7 +150,7 @@ namespace EveComFramework.Core
                 {
                     if (Station.ShipHangar.IsPrimed)
                     {
-                        Station.ShipHangar.Items.ForEach(a => { ShipVolume.AddOrUpdate(a.Type, a.Volume); ShipNames.Add(a.Name); });
+                        Station.ShipHangar.Items.ForEach(a => { ShipVolume.AddOrUpdate(a.Type, a.Volume); if (a.Name != null) ShipNames.Add(a.Name); });
                     }
                     else
                     {
