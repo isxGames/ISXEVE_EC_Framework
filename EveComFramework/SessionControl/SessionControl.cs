@@ -136,6 +136,7 @@ namespace EveComFramework.SessionControl
         /// </summary>
         public void UpdateCurrentProfile()
         {
+            if (characterName == null) characterName = Cache.Instance.Name;
             if (characterName != null && GlobalConfig.Profiles.ContainsKey(characterName)) _curProfile = GlobalConfig.Profiles[characterName];
         }
 
@@ -292,6 +293,8 @@ namespace EveComFramework.SessionControl
 
         bool Monitor(object[] Params)
         {
+            UpdateCurrentProfile();
+
             //close downtime warning windows
             Window dtWindow = Window.All.FirstOrDefault(a => a.Caption != null && a.Caption.ToLower().Contains("downtime"));
             if (dtWindow != null)
@@ -341,16 +344,19 @@ namespace EveComFramework.SessionControl
                     Config.Save();
                     DislodgeCurState(Logout);
                     return false;
-                }                
+                }
 
-                if (DateTime.Now > Config.SessionStart[_curProfile.CharacterID].AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
-                Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
+                if (_curProfile != null)
                 {
-                    if (LogOut != null)
+                    if (DateTime.Now > Config.SessionStart[_curProfile.CharacterID].AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
+                    Session.Now.AddMinutes(Config.Downtime + DowntimeDelta) > Session.NextDowntime)
                     {
-                        LogOut();
+                        if (LogOut != null)
+                        {
+                            LogOut();
+                        }
+                        return true;
                     }
-                    return true;
                 }
             }
 
