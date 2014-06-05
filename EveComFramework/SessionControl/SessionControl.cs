@@ -245,16 +245,19 @@ namespace EveComFramework.SessionControl
             UpdateCurrentProfile();
             if (Session.InSpace || Session.InStation)
             {
-                if (Config.Reconnect == null ||!Config.Reconnect.ContainsKey(_curProfile.CharacterID) || !Config.Reconnect[_curProfile.CharacterID])
+                if (_curProfile != null)
                 {
-                    Config.SessionStart.AddOrUpdate(_curProfile.CharacterID, DateTime.Now);
-                    Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
-                    Config.Save();
-                }
-                else
-                {
-                    Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
-                    Config.Save();
+                    if (Config.Reconnect == null || !Config.Reconnect.ContainsKey(_curProfile.CharacterID) || !Config.Reconnect[_curProfile.CharacterID])
+                    {
+                        Config.SessionStart.AddOrUpdate(_curProfile.CharacterID, DateTime.Now);
+                        Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
+                        Config.Save();
+                    }
+                    else
+                    {
+                        Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, false);
+                        Config.Save();
+                    }
                 }
                 DowntimeDelta = random.Next(Config.DowntimeDelta);
                 LogoutDelta = random.Next(Config.LogoutDelta);
