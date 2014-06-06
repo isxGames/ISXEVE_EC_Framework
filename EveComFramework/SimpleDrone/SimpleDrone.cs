@@ -139,6 +139,7 @@ namespace EveComFramework.SimpleDrone
                 if (Recall.Any())
                 {
                     Console.Log("|oRecalling drones");
+                    Console.Log(" |-gNo rats available");
                     Recall.ReturnToDroneBay();
                     Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
                     return false;
@@ -572,9 +573,6 @@ namespace EveComFramework.SimpleDrone
             // Handle managing fighters
             if (ActiveTarget.Distance < MaxRange && Config.Mode == Mode.Fighter)
             {
-                // Is the target a frigate?
-                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")) || ActiveTarget.Distance > 20000)
-                {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
                     // Recall non fighters
                     if (Recall.Any())
@@ -608,7 +606,6 @@ namespace EveComFramework.SimpleDrone
                     {
                         DroneCooldown.Clear();
                     }
-                }
             }
 
 
