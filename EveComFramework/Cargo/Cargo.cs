@@ -241,7 +241,23 @@ namespace EveComFramework.Cargo
                 }
                 else
                 {
-                    CurrentCargoAction.Source().Items.Where(CurrentCargoAction.QueryString).MoveTo(CurrentCargoAction.Target());
+                    double AvailableSpace = CurrentCargoAction.Target().MaxCapacity - CurrentCargoAction.Target().UsedCapacity;
+                    foreach (Item item in CurrentCargoAction.Source().Items.Where(CurrentCargoAction.QueryString))
+                    {
+                        if (item.Quantity * item.Volume < AvailableSpace)
+                        {
+                            EVEFrame.Log("Moving " + item.Quantity);
+                            CurrentCargoAction.Target().Add(item);
+                            AvailableSpace = AvailableSpace - item.Quantity * item.Volume;
+                        }
+                        else
+                        {
+                            int nextMove = (int)Math.Floor(AvailableSpace / item.Volume);
+                            EVEFrame.Log("Moving " + nextMove);
+                            CurrentCargoAction.Target().Add(item, nextMove);
+                            AvailableSpace = AvailableSpace - nextMove * item.Volume;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -302,4 +318,15 @@ namespace EveComFramework.Cargo
 
     }
 
+
+    public static class ForEachExtension
+    {
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T> method)
+        {
+            foreach (T item in items)
+            {
+                method(item);
+            }
+        }
+    }
 }
