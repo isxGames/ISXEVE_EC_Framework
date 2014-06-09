@@ -137,6 +137,7 @@ namespace EveComFramework.Security
         public HashSet<long> NeutingEntities = new HashSet<long>();
 
         public bool PerformFlee = true;
+        public bool ReportCC = true;
 
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
@@ -486,13 +487,13 @@ namespace EveComFramework.Security
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
 
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
-            if (WarpScrambling != null)
+            if (WarpScrambling != null && ReportCC)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
             Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing);
-            if (Neuting != null)
+            if (Neuting != null && ReportCC)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
             }
@@ -658,7 +659,7 @@ namespace EveComFramework.Security
         bool WaitFlee(object[] Params)
         {
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
-            if (WarpScrambling != null || this.ValidScramble != null)
+            if ((WarpScrambling != null || this.ValidScramble != null) && ReportCC)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 if (AbandonAlert != null)
