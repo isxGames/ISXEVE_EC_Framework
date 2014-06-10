@@ -17,6 +17,7 @@ namespace EveComFramework.SimpleDrone
         Sentry,
         Fighter,
         PointDefense,
+        FighterPointDefense,
         AgressiveScout,
         AgressiveMedium,
         AFKHeavy,
@@ -322,8 +323,8 @@ namespace EveComFramework.SimpleDrone
                 return false;
             }
 
-            // Handle Attacking frigates - this should work for PointDefense AND Sentry modes
-            if (ActiveTarget.Distance < 20000 && (Config.Mode == Mode.PointDefense || Config.Mode == Mode.Sentry))
+            // Handle Attacking frigates - this should work for PointDefense AND Sentry AND FighterPointDefense modes
+            if (ActiveTarget.Distance < 20000 && (Config.Mode == Mode.PointDefense || Config.Mode == Mode.Sentry || Config.Mode == Mode.FighterPointDefense))
             {
                 // Is the target a frigate?
                 if (Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
@@ -571,7 +572,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle managing fighters
-            if (ActiveTarget.Distance < MaxRange && Config.Mode == Mode.Fighter)
+            if (Config.Mode == Mode.Fighter)
             {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
                     // Recall non fighters
@@ -608,6 +609,47 @@ namespace EveComFramework.SimpleDrone
                     }
             }
 
+            // Handle managing fighters
+            if (Config.Mode == Mode.FighterPointDefense)
+            {
+                // Is the target a frigate?
+                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")) || ActiveTarget.Distance > 20000)
+                {
+                    List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
+                    // Recall non fighters
+                    if (Recall.Any())
+                    {
+                        Console.Log("|oRecalling non fighters");
+                        Recall.ReturnToDroneBay();
+                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
+                        return false;
+                    }
+                    List<Drone> Attack = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters") && (a.State != EntityState.Combat || a.Target == null || a.Target != ActiveTarget)).ToList();
+                    // Send fighters to attack
+                    if (Attack.Any())
+                    {
+                        Console.Log("|oOrdering fighters to attack");
+                        Attack.Attack();
+                        Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
+                        return false;
+                    }
+                    int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                    List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters")).Take(AvailableSlots).ToList();
+                    List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters")).Take(AvailableSlots).ToList();
+                    // Launch fighters
+                    if (Deploy.Any())
+                    {
+                        Console.Log("|oLaunching fighters");
+                        Deploy.Launch();
+                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
+                        return false;
+                    }
+                    else if (AvailableSlots > 0 && DeployIgnoreCooldown.Any())
+                    {
+                        DroneCooldown.Clear();
+                    }
+                }
+            }
 
             return false;
         }
