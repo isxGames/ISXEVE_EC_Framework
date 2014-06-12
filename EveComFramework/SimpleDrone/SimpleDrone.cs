@@ -135,7 +135,7 @@ namespace EveComFramework.SimpleDrone
             //    return false;
             //}
 
-            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)));
+            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)))
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
                 // Recall drones
