@@ -77,6 +77,8 @@ namespace EveComFramework.SimpleDrone
         Dictionary<Drone, double> DroneHealthCache = new Dictionary<Drone, double>();
         IPC IPC = IPC.Instance;
 
+        public List<string> PriorityTargets = new List<string>();
+
         #endregion
 
         #region Actions
@@ -133,7 +135,7 @@ namespace EveComFramework.SimpleDrone
             //    return false;
             //}
 
-            if (!Rats.TargetList.Any())
+            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)));
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
                 // Recall drones
@@ -146,7 +148,7 @@ namespace EveComFramework.SimpleDrone
                     return false;
                 }
             }
-            if (Config.Mode == Mode.AFKHeavy && Rats.TargetList.Any())
+            if (Config.Mode == Mode.AFKHeavy && (Rats.TargetList.Any() || Entity.All.Any(a => PriorityTargets.Contains(a.Name))))
             {
                 int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Heavy Attack Drones")).Take(AvailableSlots).ToList();
@@ -217,7 +219,8 @@ namespace EveComFramework.SimpleDrone
             if (ActiveTarget == null || !ActiveTarget.Exists || ActiveTarget.Exploded || ActiveTarget.Released)
             {
                 ActiveTarget = null;
-                if (Rats.LockedAndLockingTargetList.Any())
+                ActiveTarget = Entity.Targets.Union(Entity.Targeting).FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released);
+                if (Rats.LockedAndLockingTargetList.Any() && ActiveTarget == null)
                 {
                     if (Config.PrivateTargets)
                     {
@@ -281,7 +284,8 @@ namespace EveComFramework.SimpleDrone
             }
             else
             {
-                Entity NewTarget = Rats.UnlockedTargetList.FirstOrDefault(a => !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange);
+                Entity NewTarget = Entity.All.FirstOrDefault(a => !a.LockedTarget && !a.LockingTarget && !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange && PriorityTargets.Contains(a.Name));
+                if (NewTarget == null) NewTarget = Rats.UnlockedTargetList.FirstOrDefault(a => !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange);
                 if (Rats.LockedAndLockingTargetList.Count < Config.TargetSlots &&
                     NewTarget != null &&
                     Entity.All.FirstOrDefault(a => a.IsJamming && a.IsTargetingMe) == null)
