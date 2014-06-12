@@ -219,7 +219,7 @@ namespace EveComFramework.SimpleDrone
             if (ActiveTarget == null || !ActiveTarget.Exists || ActiveTarget.Exploded || ActiveTarget.Released)
             {
                 ActiveTarget = null;
-                ActiveTarget = Entity.Targets.Union(Entity.Targeting).FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released);
+                ActiveTarget = Entity.All.FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released && (a.LockedTarget || a.LockingTarget));
                 if (Rats.LockedAndLockingTargetList.Any() && ActiveTarget == null)
                 {
                     if (Config.PrivateTargets)
@@ -284,7 +284,7 @@ namespace EveComFramework.SimpleDrone
             }
             else
             {
-                Entity NewTarget = Entity.All.FirstOrDefault(a => !a.LockedTarget && !a.LockingTarget && !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange && PriorityTargets.Contains(a.Name));
+                Entity NewTarget = Entity.All.FirstOrDefault(a => !a.LockedTarget && !a.LockingTarget && PriorityTargets.Contains(a.Name) && a.Distance < MyShip.MaxTargetRange && !TargetCooldown.ContainsKey(a));
                 if (NewTarget == null) NewTarget = Rats.UnlockedTargetList.FirstOrDefault(a => !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange);
                 if (Rats.LockedAndLockingTargetList.Count < Config.TargetSlots &&
                     NewTarget != null &&
