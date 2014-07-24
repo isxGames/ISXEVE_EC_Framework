@@ -53,7 +53,7 @@ namespace EveComFramework.Security
             FleeTrigger.Targeted,
             FleeTrigger.CapacitorLow,
             FleeTrigger.ShieldLow,
-            FleeTrigger.ArmorLow
+            FleeTrigger.ArmorLow,
         };
         public List<FleeType> Types = new List<FleeType>
         {
@@ -74,6 +74,8 @@ namespace EveComFramework.Security
         public bool TargetAlliance = false;
         public bool TargetCorp = false;
         public bool TargetFleet = false;
+        public bool IncludeBroadcastTriggers = false;
+        public bool BroadcastTrigger = false;
         public int CapThreshold = 30;
         public int ShieldThreshold = 30;
         public int ArmorThreshold = 99;
@@ -258,6 +260,7 @@ namespace EveComFramework.Security
         {
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddNeuter", NeutingEntitiesUpdate);
+            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityBroadcastTrigger", BroadcastTrigger);
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -278,6 +281,18 @@ namespace EveComFramework.Security
                 NeutingEntities.Add(long.Parse(args[1]));
             }
             catch { }
+
+            return 0;
+        }
+
+        int BroadcastTrigger(string[] args)
+        {
+            if (!Config.IncludeBroadcastTriggers) return 0;
+            Clear();
+            TriggerAlert();
+            QueueState(Flee, -1, FleeTrigger.Forced);
+            if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+            ReportTrigger(FleeTrigger.Forced);
 
             return 0;
         }
@@ -479,6 +494,10 @@ namespace EveComFramework.Security
                     Log.Log("|rArmor is below threshold (|w{0}%|r)", Config.ArmorThreshold);
                     Comms.ChatQueue.Enqueue(string.Format("<Security> Armor is below threshold ({0}%)", Config.ArmorThreshold));
                     return;
+                case FleeTrigger.Forced:
+                    Log.Log("|rFlee trigger forced.");
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Flee trigger forced."));
+                    return;
             }
         }
 
@@ -510,18 +529,21 @@ namespace EveComFramework.Security
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NegativeStanding:
+                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityBroadcastTrigger");
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NeutralStanding:
+                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityBroadcastTrigger");
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Paranoid:
+                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityBroadcastTrigger");
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
@@ -562,7 +584,9 @@ namespace EveComFramework.Security
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
             int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) ? 0 : Config.FleeWait;
-            if (Trigger != FleeTrigger.ArmorLow && Trigger != FleeTrigger.CapacitorLow && Trigger != FleeTrigger.ShieldLow && Trigger != FleeTrigger.Forced) AutoModule.AutoModule.Instance.Decloak = false;
+            AutoModule.AutoModule.Instance.Decloak = false;
+            if (Trigger == FleeTrigger.CapacitorLow && Trigger == FleeTrigger.ShieldLow) AutoModule.AutoModule.Instance.Decloak = true;
+            if (Trigger == FleeTrigger.ArmorLow && MyShip.Modules.Any(a => a.GroupID == Group.ArmorRepairUnit && a.IsOnline)) AutoModule.AutoModule.Instance.Decloak = true;
 
             if (SafeTrigger() != FleeTrigger.None) return false;
             Log.Log("|oArea is now safe");

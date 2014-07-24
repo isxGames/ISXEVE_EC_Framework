@@ -115,6 +115,8 @@ namespace EveComFramework.Security.UI
             CheckBookmark();
             LoadWhiteList();
 
+            checkBroadcastTrigger.Checked = Config.BroadcastTrigger;
+            checkIncludeBroadcastTriggers.Checked = Config.IncludeBroadcastTriggers;
             checkAudioBlue.Checked = SpeechConfig.Blue;
             checkAudioFlee.Checked = SpeechConfig.Flee;
             checkAudioGrey.Checked = SpeechConfig.Grey;
@@ -495,6 +497,18 @@ namespace EveComFramework.Security.UI
         {
             SpeechConfig.Grid = checkGridTraffic.Checked;
             SpeechConfig.Save();
+        }
+
+        private void checkIncludeBroadcastTriggers_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.IncludeBroadcastTriggers = checkIncludeBroadcastTriggers.Checked;
+            Config.Save();
+        }
+
+        private void checkBroadcastTrigger_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.BroadcastTrigger = checkBroadcastTrigger.Checked;
+            Config.Save();
         }
 
     }
