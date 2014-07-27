@@ -261,6 +261,7 @@ namespace EveComFramework.Security
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddNeuter", NeutingEntitiesUpdate);
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityBroadcastTrigger", BroadcastTrigger);
+            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityClearBroadcastTrigger", ClearBroadcastTrigger);
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -293,6 +294,15 @@ namespace EveComFramework.Security
             QueueState(Flee, -1, FleeTrigger.Forced);
             if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
             ReportTrigger(FleeTrigger.Forced);
+
+            return 0;
+        }
+
+        int ClearBroadcastTrigger(string[] args)
+        {
+            if (!Config.IncludeBroadcastTriggers) return 0;
+            Clear();
+            QueueState(CheckSafe);
 
             return 0;
         }
@@ -639,7 +649,7 @@ namespace EveComFramework.Security
 
             QueueState(WaitFlee);
             QueueState(SignalSuccessful);
-            QueueState(CheckClear, -1, Trigger);
+            if (Trigger != FleeTrigger.Forced) QueueState(CheckClear, -1, Trigger);
 
             if (Session.InStation || !PerformFlee)
             {
@@ -725,6 +735,7 @@ namespace EveComFramework.Security
                 Comms.ChatQueue.Enqueue("<Security> Resuming operations");
                 ClearAlert();
             }
+            if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityClearBroadcastTrigger");
             QueueState(CheckSafe);
             return true;
         }
