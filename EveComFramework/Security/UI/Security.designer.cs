@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("In a pod");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Neutral to me only");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Targeted by another player");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("Capacitor low");
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem("Shield low");
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Armor low");
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Flee to closest station");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("In a pod");
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Negative standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Neutral standing pilot in local");
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Neutral to me only");
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Targeted by another player");
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Capacitor low");
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Shield low");
+            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
+            System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
+            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.checkIncludeBroadcastTriggers = new System.Windows.Forms.CheckBox();
@@ -87,6 +87,8 @@
             this.textWhiteListPilot = new System.Windows.Forms.TextBox();
             this.listWhiteList = new System.Windows.Forms.ListBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.checkAlternateStationFlee = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.ThresholdGroup.SuspendLayout();
@@ -109,6 +111,7 @@
             this.groupBox6.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -131,10 +134,10 @@
             this.tabPage2.Controls.Add(this.ThresholdGroup);
             this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Controls.Add(this.StandingGroup);
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(336, 303);
+            this.tabPage2.Size = new System.Drawing.Size(336, 307);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Flee Triggers";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -145,7 +148,7 @@
             this.checkIncludeBroadcastTriggers.Dock = System.Windows.Forms.DockStyle.Top;
             this.checkIncludeBroadcastTriggers.Location = new System.Drawing.Point(3, 275);
             this.checkIncludeBroadcastTriggers.Name = "checkIncludeBroadcastTriggers";
-            this.checkIncludeBroadcastTriggers.Size = new System.Drawing.Size(330, 21);
+            this.checkIncludeBroadcastTriggers.Size = new System.Drawing.Size(330, 17);
             this.checkIncludeBroadcastTriggers.TabIndex = 4;
             this.checkIncludeBroadcastTriggers.Text = "Include Broadcast Triggers";
             this.checkIncludeBroadcastTriggers.UseVisualStyleBackColor = true;
@@ -180,7 +183,7 @@
             this.Threshold.Location = new System.Drawing.Point(6, 20);
             this.Threshold.Maximum = 100;
             this.Threshold.Name = "Threshold";
-            this.Threshold.Size = new System.Drawing.Size(288, 53);
+            this.Threshold.Size = new System.Drawing.Size(288, 45);
             this.Threshold.TabIndex = 4;
             this.Threshold.Tag = "Use this slider to set the threshold for the corresponding Flee Trigger.";
             this.Threshold.Scroll += new System.EventHandler(this.Threshold_ValueChanged);
@@ -204,28 +207,28 @@
             this.columnHeader1});
             this.Triggers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Triggers.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
-            listViewItem4.StateImageIndex = 0;
-            listViewItem5.StateImageIndex = 0;
-            listViewItem6.StateImageIndex = 0;
-            listViewItem7.StateImageIndex = 0;
-            listViewItem8.StateImageIndex = 0;
+            listViewItem12.StateImageIndex = 0;
+            listViewItem13.StateImageIndex = 0;
+            listViewItem14.StateImageIndex = 0;
+            listViewItem15.StateImageIndex = 0;
+            listViewItem16.StateImageIndex = 0;
+            listViewItem17.StateImageIndex = 0;
+            listViewItem18.StateImageIndex = 0;
+            listViewItem19.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6,
-            listViewItem7,
-            listViewItem8});
-            this.Triggers.Location = new System.Drawing.Point(3, 20);
+            listViewItem12,
+            listViewItem13,
+            listViewItem14,
+            listViewItem15,
+            listViewItem16,
+            listViewItem17,
+            listViewItem18,
+            listViewItem19});
+            this.Triggers.Location = new System.Drawing.Point(3, 17);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
             this.Triggers.Scrollable = false;
-            this.Triggers.Size = new System.Drawing.Size(324, 161);
+            this.Triggers.Size = new System.Drawing.Size(324, 164);
             this.Triggers.TabIndex = 3;
             this.Triggers.UseCompatibleStateImageBehavior = false;
             this.Triggers.View = System.Windows.Forms.View.Details;
@@ -253,7 +256,7 @@
             this.IncludeFleetMembers.AutoSize = true;
             this.IncludeFleetMembers.Location = new System.Drawing.Point(6, 66);
             this.IncludeFleetMembers.Name = "IncludeFleetMembers";
-            this.IncludeFleetMembers.Size = new System.Drawing.Size(159, 21);
+            this.IncludeFleetMembers.Size = new System.Drawing.Size(134, 17);
             this.IncludeFleetMembers.TabIndex = 2;
             this.IncludeFleetMembers.Tag = "If this is checked, fleet members will be included in the trigger.";
             this.IncludeFleetMembers.Text = "Include Fleet Members";
@@ -265,7 +268,7 @@
             this.IncludeAllianceMembers.AutoSize = true;
             this.IncludeAllianceMembers.Location = new System.Drawing.Point(6, 43);
             this.IncludeAllianceMembers.Name = "IncludeAllianceMembers";
-            this.IncludeAllianceMembers.Size = new System.Drawing.Size(175, 21);
+            this.IncludeAllianceMembers.Size = new System.Drawing.Size(148, 17);
             this.IncludeAllianceMembers.TabIndex = 1;
             this.IncludeAllianceMembers.Tag = "If this is checked, alliance members will be included in the trigger.";
             this.IncludeAllianceMembers.Text = "Include Alliance Members";
@@ -277,7 +280,7 @@
             this.IncludeCorpMembers.AutoSize = true;
             this.IncludeCorpMembers.Location = new System.Drawing.Point(6, 20);
             this.IncludeCorpMembers.Name = "IncludeCorpMembers";
-            this.IncludeCorpMembers.Size = new System.Drawing.Size(198, 21);
+            this.IncludeCorpMembers.Size = new System.Drawing.Size(166, 17);
             this.IncludeCorpMembers.TabIndex = 0;
             this.IncludeCorpMembers.Tag = "If this is checked, corporate members will be included in the trigger.";
             this.IncludeCorpMembers.Text = "Include Corporation Members";
@@ -286,15 +289,15 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.checkBroadcastTrigger);
+            this.tabPage1.Controls.Add(this.tableLayoutPanel2);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(336, 303);
+            this.tabPage1.Size = new System.Drawing.Size(336, 307);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Flee Responses";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -302,10 +305,10 @@
             // checkBroadcastTrigger
             // 
             this.checkBroadcastTrigger.AutoSize = true;
-            this.checkBroadcastTrigger.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkBroadcastTrigger.Location = new System.Drawing.Point(3, 273);
+            this.checkBroadcastTrigger.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBroadcastTrigger.Location = new System.Drawing.Point(3, 3);
             this.checkBroadcastTrigger.Name = "checkBroadcastTrigger";
-            this.checkBroadcastTrigger.Size = new System.Drawing.Size(330, 21);
+            this.checkBroadcastTrigger.Size = new System.Drawing.Size(103, 32);
             this.checkBroadcastTrigger.TabIndex = 4;
             this.checkBroadcastTrigger.Text = "Broadcast Trigger";
             this.checkBroadcastTrigger.UseVisualStyleBackColor = true;
@@ -339,7 +342,7 @@
             this.FleeWait.Location = new System.Drawing.Point(7, 18);
             this.FleeWait.Maximum = 100;
             this.FleeWait.Name = "FleeWait";
-            this.FleeWait.Size = new System.Drawing.Size(320, 53);
+            this.FleeWait.Size = new System.Drawing.Size(320, 45);
             this.FleeWait.TabIndex = 6;
             this.FleeWait.Tag = "Use this slider to set the threshold for the corresponding Flee Trigger.";
             this.FleeWait.Value = 5;
@@ -359,9 +362,9 @@
             // SafeSubstring
             // 
             this.SafeSubstring.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SafeSubstring.Location = new System.Drawing.Point(3, 20);
+            this.SafeSubstring.Location = new System.Drawing.Point(3, 17);
             this.SafeSubstring.Name = "SafeSubstring";
-            this.SafeSubstring.Size = new System.Drawing.Size(324, 24);
+            this.SafeSubstring.Size = new System.Drawing.Size(324, 21);
             this.SafeSubstring.TabIndex = 0;
             this.SafeSubstring.Tag = "Substring to use to identify safe bookmarks.  Any bookmark in-system which contai" +
                 "ns this substring will be used as a safe bookmark.";
@@ -383,9 +386,9 @@
             // 
             this.SecureBookmarkVerify.Dock = System.Windows.Forms.DockStyle.Right;
             this.SecureBookmarkVerify.Image = global::EveComFramework.Properties.Resources.action_delete;
-            this.SecureBookmarkVerify.Location = new System.Drawing.Point(307, 20);
+            this.SecureBookmarkVerify.Location = new System.Drawing.Point(307, 17);
             this.SecureBookmarkVerify.Name = "SecureBookmarkVerify";
-            this.SecureBookmarkVerify.Size = new System.Drawing.Size(20, 26);
+            this.SecureBookmarkVerify.Size = new System.Drawing.Size(20, 29);
             this.SecureBookmarkVerify.TabIndex = 3;
             this.SecureBookmarkVerify.TabStop = false;
             // 
@@ -395,9 +398,9 @@
             this.SecureBookmark.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.SecureBookmark.Dock = System.Windows.Forms.DockStyle.Left;
             this.SecureBookmark.FormattingEnabled = true;
-            this.SecureBookmark.Location = new System.Drawing.Point(3, 20);
+            this.SecureBookmark.Location = new System.Drawing.Point(3, 17);
             this.SecureBookmark.Name = "SecureBookmark";
-            this.SecureBookmark.Size = new System.Drawing.Size(298, 25);
+            this.SecureBookmark.Size = new System.Drawing.Size(298, 21);
             this.SecureBookmark.TabIndex = 2;
             this.SecureBookmark.TextChanged += new System.EventHandler(this.SecureBookmark_TextChanged);
             // 
@@ -420,17 +423,17 @@
             this.columnHeader2});
             this.FleeTypes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FleeTypes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem9.StateImageIndex = 0;
-            listViewItem10.StateImageIndex = 0;
-            listViewItem11.StateImageIndex = 0;
+            listViewItem20.StateImageIndex = 0;
+            listViewItem21.StateImageIndex = 0;
+            listViewItem22.StateImageIndex = 0;
             this.FleeTypes.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9,
-            listViewItem10,
-            listViewItem11});
-            this.FleeTypes.Location = new System.Drawing.Point(3, 20);
+            listViewItem20,
+            listViewItem21,
+            listViewItem22});
+            this.FleeTypes.Location = new System.Drawing.Point(3, 17);
             this.FleeTypes.Name = "FleeTypes";
             this.FleeTypes.Scrollable = false;
-            this.FleeTypes.Size = new System.Drawing.Size(324, 75);
+            this.FleeTypes.Size = new System.Drawing.Size(324, 78);
             this.FleeTypes.TabIndex = 2;
             this.FleeTypes.UseCompatibleStateImageBehavior = false;
             this.FleeTypes.View = System.Windows.Forms.View.Details;
@@ -443,10 +446,10 @@
             // 
             this.tabPage3.Controls.Add(this.groupBox7);
             this.tabPage3.Controls.Add(this.groupBox6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(336, 303);
+            this.tabPage3.Size = new System.Drawing.Size(336, 307);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Audio Alerts";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -467,7 +470,7 @@
             // 
             this.groupBox9.Controls.Add(this.trackVolume);
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox9.Location = new System.Drawing.Point(3, 206);
+            this.groupBox9.Location = new System.Drawing.Point(3, 201);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(212, 65);
             this.groupBox9.TabIndex = 6;
@@ -477,10 +480,10 @@
             // trackVolume
             // 
             this.trackVolume.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackVolume.Location = new System.Drawing.Point(3, 20);
+            this.trackVolume.Location = new System.Drawing.Point(3, 17);
             this.trackVolume.Maximum = 100;
             this.trackVolume.Name = "trackVolume";
-            this.trackVolume.Size = new System.Drawing.Size(206, 42);
+            this.trackVolume.Size = new System.Drawing.Size(206, 45);
             this.trackVolume.TabIndex = 4;
             this.trackVolume.Value = 100;
             this.trackVolume.Scroll += new System.EventHandler(this.trackVolume_Scroll);
@@ -489,7 +492,7 @@
             // 
             this.groupBox8.Controls.Add(this.trackRate);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox8.Location = new System.Drawing.Point(3, 143);
+            this.groupBox8.Location = new System.Drawing.Point(3, 138);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(212, 63);
             this.groupBox8.TabIndex = 5;
@@ -499,10 +502,10 @@
             // trackRate
             // 
             this.trackRate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackRate.Location = new System.Drawing.Point(3, 20);
+            this.trackRate.Location = new System.Drawing.Point(3, 17);
             this.trackRate.Minimum = -10;
             this.trackRate.Name = "trackRate";
-            this.trackRate.Size = new System.Drawing.Size(206, 40);
+            this.trackRate.Size = new System.Drawing.Size(206, 43);
             this.trackRate.TabIndex = 1;
             this.trackRate.Scroll += new System.EventHandler(this.trackRate_Scroll);
             // 
@@ -510,10 +513,9 @@
             // 
             this.listVoices.Dock = System.Windows.Forms.DockStyle.Top;
             this.listVoices.FormattingEnabled = true;
-            this.listVoices.ItemHeight = 17;
-            this.listVoices.Location = new System.Drawing.Point(3, 20);
+            this.listVoices.Location = new System.Drawing.Point(3, 17);
             this.listVoices.Name = "listVoices";
-            this.listVoices.Size = new System.Drawing.Size(212, 123);
+            this.listVoices.Size = new System.Drawing.Size(212, 121);
             this.listVoices.TabIndex = 0;
             this.listVoices.SelectedIndexChanged += new System.EventHandler(this.listVoices_SelectedIndexChanged);
             // 
@@ -538,7 +540,7 @@
             this.checkGridTraffic.AutoSize = true;
             this.checkGridTraffic.Location = new System.Drawing.Point(6, 158);
             this.checkGridTraffic.Name = "checkGridTraffic";
-            this.checkGridTraffic.Size = new System.Drawing.Size(92, 21);
+            this.checkGridTraffic.Size = new System.Drawing.Size(76, 17);
             this.checkGridTraffic.TabIndex = 6;
             this.checkGridTraffic.Text = "Grid Traffic";
             this.toolTip1.SetToolTip(this.checkGridTraffic, "Perform audio alert when a non fleet member is on grid");
@@ -550,7 +552,7 @@
             this.checkChatInvite.AutoSize = true;
             this.checkChatInvite.Location = new System.Drawing.Point(6, 135);
             this.checkChatInvite.Name = "checkChatInvite";
-            this.checkChatInvite.Size = new System.Drawing.Size(91, 21);
+            this.checkChatInvite.Size = new System.Drawing.Size(77, 17);
             this.checkChatInvite.TabIndex = 5;
             this.checkChatInvite.Text = "Chat Invite";
             this.toolTip1.SetToolTip(this.checkChatInvite, "Perform audio alert when a chat invite is received");
@@ -562,7 +564,7 @@
             this.checkLocal.AutoSize = true;
             this.checkLocal.Location = new System.Drawing.Point(6, 112);
             this.checkLocal.Name = "checkLocal";
-            this.checkLocal.Size = new System.Drawing.Size(87, 21);
+            this.checkLocal.Size = new System.Drawing.Size(74, 17);
             this.checkLocal.TabIndex = 4;
             this.checkLocal.Text = "Local chat";
             this.toolTip1.SetToolTip(this.checkLocal, "Perform audio alert when a new message is posted in local chat");
@@ -574,7 +576,7 @@
             this.checkAudioGrey.AutoSize = true;
             this.checkAudioGrey.Location = new System.Drawing.Point(6, 89);
             this.checkAudioGrey.Name = "checkAudioGrey";
-            this.checkAudioGrey.Size = new System.Drawing.Size(86, 21);
+            this.checkAudioGrey.Size = new System.Drawing.Size(71, 17);
             this.checkAudioGrey.TabIndex = 3;
             this.checkAudioGrey.Text = "New Grey";
             this.toolTip1.SetToolTip(this.checkAudioGrey, "Perform audio alert when a new grey appears in local");
@@ -586,7 +588,7 @@
             this.checkAudioBlue.AutoSize = true;
             this.checkAudioBlue.Location = new System.Drawing.Point(6, 66);
             this.checkAudioBlue.Name = "checkAudioBlue";
-            this.checkAudioBlue.Size = new System.Drawing.Size(84, 21);
+            this.checkAudioBlue.Size = new System.Drawing.Size(70, 17);
             this.checkAudioBlue.TabIndex = 2;
             this.checkAudioBlue.Text = "New Blue";
             this.toolTip1.SetToolTip(this.checkAudioBlue, "Perform audio alert when a new blue appears in local");
@@ -598,7 +600,7 @@
             this.checkAudioRed.AutoSize = true;
             this.checkAudioRed.Location = new System.Drawing.Point(6, 43);
             this.checkAudioRed.Name = "checkAudioRed";
-            this.checkAudioRed.Size = new System.Drawing.Size(81, 21);
+            this.checkAudioRed.Size = new System.Drawing.Size(67, 17);
             this.checkAudioRed.TabIndex = 1;
             this.checkAudioRed.Text = "New Red";
             this.toolTip1.SetToolTip(this.checkAudioRed, "Perform audio alert when a new red appears in local");
@@ -610,7 +612,7 @@
             this.checkAudioFlee.AutoSize = true;
             this.checkAudioFlee.Location = new System.Drawing.Point(6, 20);
             this.checkAudioFlee.Name = "checkAudioFlee";
-            this.checkAudioFlee.Size = new System.Drawing.Size(53, 21);
+            this.checkAudioFlee.Size = new System.Drawing.Size(46, 17);
             this.checkAudioFlee.TabIndex = 0;
             this.checkAudioFlee.Text = "Flee";
             this.toolTip1.SetToolTip(this.checkAudioFlee, "Perform audio alert when a flee is triggered");
@@ -621,10 +623,10 @@
             // 
             this.tabPage4.Controls.Add(this.tableLayoutPanel1);
             this.tabPage4.Controls.Add(this.listWhiteList);
-            this.tabPage4.Location = new System.Drawing.Point(4, 26);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(336, 303);
+            this.tabPage4.Size = new System.Drawing.Size(336, 307);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Whitelist";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -637,7 +639,7 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonAddWhiteList, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textWhiteListPilot, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 262);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 254);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -660,23 +662,49 @@
             this.textWhiteListPilot.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textWhiteListPilot.Location = new System.Drawing.Point(3, 3);
             this.textWhiteListPilot.Name = "textWhiteListPilot";
-            this.textWhiteListPilot.Size = new System.Drawing.Size(233, 24);
+            this.textWhiteListPilot.Size = new System.Drawing.Size(233, 21);
             this.textWhiteListPilot.TabIndex = 1;
             // 
             // listWhiteList
             // 
             this.listWhiteList.Dock = System.Windows.Forms.DockStyle.Top;
             this.listWhiteList.FormattingEnabled = true;
-            this.listWhiteList.ItemHeight = 17;
             this.listWhiteList.Location = new System.Drawing.Point(3, 3);
             this.listWhiteList.Name = "listWhiteList";
-            this.listWhiteList.Size = new System.Drawing.Size(330, 259);
+            this.listWhiteList.Size = new System.Drawing.Size(330, 251);
             this.listWhiteList.TabIndex = 0;
             this.listWhiteList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listWhiteList_KeyUp);
             // 
+            // checkAlternateStationFlee
+            // 
+            this.checkAlternateStationFlee.AutoSize = true;
+            this.checkAlternateStationFlee.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkAlternateStationFlee.Location = new System.Drawing.Point(112, 3);
+            this.checkAlternateStationFlee.Name = "checkAlternateStationFlee";
+            this.checkAlternateStationFlee.Size = new System.Drawing.Size(215, 32);
+            this.checkAlternateStationFlee.TabIndex = 5;
+            this.checkAlternateStationFlee.Text = "Flee to Station for Armor/Shield/Capacitor";
+            this.checkAlternateStationFlee.UseVisualStyleBackColor = true;
+            this.checkAlternateStationFlee.CheckedChanged += new System.EventHandler(this.checkAlternateStationFlee_CheckedChanged);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
+            this.tableLayoutPanel2.Controls.Add(this.checkBroadcastTrigger, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.checkAlternateStationFlee, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 273);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(330, 38);
+            this.tableLayoutPanel2.TabIndex = 6;
+            // 
             // Security
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(344, 333);
             this.Controls.Add(this.tabControl1);
@@ -695,7 +723,6 @@
             this.StandingGroup.ResumeLayout(false);
             this.StandingGroup.PerformLayout();
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FleeWait)).EndInit();
@@ -717,6 +744,8 @@
             this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -770,5 +799,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.CheckBox checkAlternateStationFlee;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }

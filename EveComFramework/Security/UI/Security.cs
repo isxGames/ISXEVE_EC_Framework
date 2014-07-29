@@ -117,6 +117,7 @@ namespace EveComFramework.Security.UI
 
             checkBroadcastTrigger.Checked = Config.BroadcastTrigger;
             checkIncludeBroadcastTriggers.Checked = Config.IncludeBroadcastTriggers;
+            checkAlternateStationFlee.Checked = Config.AlternateStationFlee;
             checkAudioBlue.Checked = SpeechConfig.Blue;
             checkAudioFlee.Checked = SpeechConfig.Flee;
             checkAudioGrey.Checked = SpeechConfig.Grey;
@@ -508,6 +509,12 @@ namespace EveComFramework.Security.UI
         private void checkBroadcastTrigger_CheckedChanged(object sender, EventArgs e)
         {
             Config.BroadcastTrigger = checkBroadcastTrigger.Checked;
+            Config.Save();
+        }
+
+        private void checkAlternateStationFlee_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.AlternateStationFlee = checkAlternateStationFlee.Checked;
             Config.Save();
         }
 

@@ -76,6 +76,7 @@ namespace EveComFramework.Security
         public bool TargetFleet = false;
         public bool IncludeBroadcastTriggers = false;
         public bool BroadcastTrigger = false;
+        public bool AlternateStationFlee = false;
         public int CapThreshold = 30;
         public int ShieldThreshold = 30;
         public int ArmorThreshold = 99;
@@ -656,6 +657,13 @@ namespace EveComFramework.Security
 
             if (Session.InStation || !PerformFlee)
             {
+                return true;
+            }
+            if (Config.AlternateStationFlee &&
+                (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.CapacitorLow) &&
+                Entity.All.FirstOrDefault(a => a.GroupID == Group.Station) != null)
+            {
+                Move.Object(Entity.All.FirstOrDefault(a => a.GroupID == Group.Station));
                 return true;
             }
             foreach (FleeType FleeType in Config.Types)
