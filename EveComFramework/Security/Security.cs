@@ -295,7 +295,10 @@ namespace EveComFramework.Security
             Clear();
             TriggerAlert();
             QueueState(Flee, -1, FleeTrigger.Forced);
-            if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+            EVEFrameUtil.Do(() =>
+                {
+                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                });
             ReportTrigger(FleeTrigger.Forced);
             BroadcastSafe[args[1]] = false;
 
