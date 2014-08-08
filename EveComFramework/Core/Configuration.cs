@@ -279,7 +279,6 @@ namespace EveComFramework.Core
 
         private void buttonUpload_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Diagnostics.Instance.file);
             if (Diagnostics.Instance.Upload(Diagnostics.Instance.file))
             {
                 labelUploadResult.Text = "Upload Successful";
