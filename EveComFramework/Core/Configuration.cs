@@ -279,12 +279,13 @@ namespace EveComFramework.Core
 
         private void buttonUpload_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(Diagnostics.Instance.file);
             if (Diagnostics.Instance.Upload(Diagnostics.Instance.file))
             {
-                labelUploadResult.Text = "Upload" + Environment.NewLine + "Successful";
+                labelUploadResult.Text = "Upload Successful";
             }
             {
-                labelUploadResult.Text = "Upload" + Environment.NewLine + "Failed";
+                labelUploadResult.Text = "Upload Failed";
             }
         }
 
@@ -297,10 +298,10 @@ namespace EveComFramework.Core
             {
                 if (Diagnostics.Instance.Upload(openFileDialog1.FileName))
                 {
-                    labelUploadResult.Text = "Upload" + Environment.NewLine + "Successful";
+                    labelUploadResult.Text = "Upload Successful";
                 }
                 {
-                    labelUploadResult.Text = "Upload" + Environment.NewLine + "Failed";
+                    labelUploadResult.Text = "Upload Failed";
                 }
             }
         }
