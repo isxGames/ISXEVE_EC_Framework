@@ -30,28 +30,20 @@ namespace EveComFramework.Core
         private Diagnostics() : base()
         {
             RegisterCommands();
-            EVEFrame.Log("Define directory");
             LogDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\logs\\";
 
-            EVEFrame.Log("Check directory");
             if (!Directory.Exists(LogDirectory))
             {
-                EVEFrame.Log("Create directory");
                 Directory.CreateDirectory(LogDirectory);
             }
 
-            EVEFrame.Log("Check file");
             if (file == null)
             {
-                EVEFrame.Log("Define file");
                 file = LogDirectory + DateTime.Now.Ticks + ".txt";
             }
 
-            EVEFrame.Log("Open file");
             StreamWriter oWriter = new StreamWriter(file, true);
-            EVEFrame.Log("Append file");
             oWriter.Write("Diagnostics log started: " + DateTime.Now.ToString() + Environment.NewLine + Environment.NewLine);
-            EVEFrame.Log("Close file");
             oWriter.Close();
 
         }

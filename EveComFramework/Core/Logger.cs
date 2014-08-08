@@ -201,11 +201,11 @@ namespace EveComFramework.Core
             {
                 if (RichEvent != null)
                 {
-                    RichEvent(Name, string.Format(Message, Params), type);
+                    RichEvent(Name, string.Format(Message, Params));
                 }
                 if (Event != null)
                 {
-                    Event(Name, string.Format(Regex.Replace(Message, "\\|.", string.Empty), Params), type);
+                    Event(Name, string.Format(Regex.Replace(Message, "\\|.", string.Empty), Params));
                 }
             }
             else
