@@ -182,7 +182,7 @@ namespace EveComFramework.Core
         /// </summary>
         /// <param name="Module">The module sending the message</param>
         /// <param name="Message">Message that is being logged</param>
-        public delegate void LogEvent(string Module, string Message, LogType logtype = LogType.INFO);
+        public delegate void LogEvent(string Module, string Message);
         /// <summary>
         /// Event using LogEvent delegate
         /// </summary>
@@ -210,7 +210,7 @@ namespace EveComFramework.Core
             }
             else
             {
-                //Diagnostics.Instance.Post(string.Format(Message, Params), type);
+                Diagnostics.Instance.Post(string.Format(Message, Params), type);
             }
             string charname = SessionControl.SessionControl.Instance.characterName;
             if (charname == null) charname = Cache.Instance.Name;
@@ -224,7 +224,7 @@ namespace EveComFramework.Core
         /// </summary>
         /// <param name="Module">The module sending the message</param>
         /// <param name="Message">Message that is being logged</param>
-        public delegate void RichLogEvent(string Module, string Message, LogType logtype = LogType.INFO);
+        public delegate void RichLogEvent(string Module, string Message);
         /// <summary>
         /// Event using RichLogEvent delegate
         /// </summary>
