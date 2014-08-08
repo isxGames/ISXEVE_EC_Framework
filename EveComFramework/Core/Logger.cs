@@ -150,10 +150,10 @@ namespace EveComFramework.Core
 
     public enum LogType
     {
+        INFO,
         FATAL,
         ERROR,
         WARN,
-        INFO,
         DEBUG
     }
 
@@ -195,14 +195,7 @@ namespace EveComFramework.Core
         public void Log(string Message, params object[] Params)
         {
             LogType type = Params.OfType<LogType>().FirstOrDefault();
-            if (type == null)
-            {
-                type = LogType.INFO;
-            }
-            else
-            {
-                Params = Params.Where(a => !(a is LogType)).ToArray();
-            }
+            Params = Params.Where(a => !(a is LogType)).ToArray();
 
             if (type == LogType.INFO)
             {
