@@ -210,7 +210,7 @@ namespace EveComFramework.Core
             }
             else
             {
-                Diagnostics.Instance.Post(string.Format(Message, Params), type);
+                //Diagnostics.Instance.Post(string.Format(Message, Params), type);
             }
             string charname = SessionControl.SessionControl.Instance.characterName;
             if (charname == null) charname = Cache.Instance.Name;
