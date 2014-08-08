@@ -277,5 +277,43 @@ namespace EveComFramework.Core
 
         }
 
+        private void buttonUpload_Click(object sender, EventArgs e)
+        {
+            if (Diagnostics.Instance.Upload(Diagnostics.Instance.file))
+            {
+                labelUploadResult.Text = "Upload" + Environment.NewLine + "Successful";
+            }
+            {
+                labelUploadResult.Text = "Upload" + Environment.NewLine + "Failed";
+            }
+        }
+
+        private void buttonUploadPrevious_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = Diagnostics.Instance.LogDirectory;
+            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 1;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if (Diagnostics.Instance.Upload(openFileDialog1.FileName))
+                {
+                    labelUploadResult.Text = "Upload" + Environment.NewLine + "Successful";
+                }
+                {
+                    labelUploadResult.Text = "Upload" + Environment.NewLine + "Failed";
+                }
+            }
+        }
+
+        private void buttonOpenLogFolder_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", Diagnostics.Instance.LogDirectory);
+        }
+
+        private void buttonView_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(Diagnostics.Instance.file);
+        }
+
     }
 }

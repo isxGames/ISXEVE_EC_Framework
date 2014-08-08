@@ -112,6 +112,7 @@ namespace EveComFramework.Security
 
         private Security() : base()
         {
+            Log.Log("Security module initialized", LogType.DEBUG);
             RegisterCommands();
         }
 
@@ -292,6 +293,7 @@ namespace EveComFramework.Security
         int BroadcastTrigger(string[] args)
         {
             if (!Config.IncludeBroadcastTriggers) return 0;
+            Log.Log("Received broadcasted trigger, processing", LogType.DEBUG);
             Clear();
             TriggerAlert();
             QueueState(Flee, -1, FleeTrigger.Forced);
@@ -308,6 +310,7 @@ namespace EveComFramework.Security
         int ClearBroadcastTrigger(string[] args)
         {
             if (!Config.IncludeBroadcastTriggers) return 0;
+            Log.Log("Received clear broadcasted trigger, processing", LogType.DEBUG);
             BroadcastSafe[args[1]] = true;
 
             return 0;
@@ -545,21 +548,21 @@ namespace EveComFramework.Security
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NegativeStanding:
-                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
+                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NeutralStanding:
-                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
+                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Paranoid:
-                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
+                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
@@ -749,7 +752,7 @@ namespace EveComFramework.Security
                 Comms.ChatQueue.Enqueue("<Security> Resuming operations");
                 ClearAlert();
             }
-            if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID);
+            if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID);
             QueueState(CheckSafe);
             return true;
         }

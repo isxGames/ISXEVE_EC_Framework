@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
 
+
 namespace EveComFramework.Core
 {
     /// <summary>
@@ -147,6 +148,15 @@ namespace EveComFramework.Core
         }
     }
 
+    public enum LogType
+    {
+        FATAL,
+        ERROR,
+        WARN,
+        INFO,
+        DEBUG
+    }
+
     /// <summary>
     /// Handles logging and feedback, allows multiple events to collect feedback info
     /// </summary>
@@ -172,7 +182,7 @@ namespace EveComFramework.Core
         /// </summary>
         /// <param name="Module">The module sending the message</param>
         /// <param name="Message">Message that is being logged</param>
-        public delegate void LogEvent(string Module, string Message);
+        public delegate void LogEvent(string Module, string Message, LogType logtype = LogType.INFO);
         /// <summary>
         /// Event using LogEvent delegate
         /// </summary>
@@ -184,13 +194,30 @@ namespace EveComFramework.Core
         /// <param name="Params">Paramters to insert into the message format string</param>
         public void Log(string Message, params object[] Params)
         {
-            if (RichEvent != null)
+            LogType type = Params.OfType<LogType>().FirstOrDefault();
+            if (type == null)
             {
-                RichEvent(Name, string.Format(Message, Params));
+                type = LogType.INFO;
             }
-            if (Event != null)
+            else
             {
-                Event(Name, string.Format(Regex.Replace(Message, "\\|.", string.Empty), Params));
+                Params = Params.Where(a => !(a is LogType)).ToArray();
+            }
+
+            if (type == LogType.INFO)
+            {
+                if (RichEvent != null)
+                {
+                    RichEvent(Name, string.Format(Message, Params), type);
+                }
+                if (Event != null)
+                {
+                    Event(Name, string.Format(Regex.Replace(Message, "\\|.", string.Empty), Params), type);
+                }
+            }
+            else
+            {
+                Diagnostics.Instance.Post(string.Format(Message, Params), type);
             }
             string charname = SessionControl.SessionControl.Instance.characterName;
             if (charname == null) charname = Cache.Instance.Name;
@@ -204,10 +231,12 @@ namespace EveComFramework.Core
         /// </summary>
         /// <param name="Module">The module sending the message</param>
         /// <param name="Message">Message that is being logged</param>
-        public delegate void RichLogEvent(string Module, string Message);
+        public delegate void RichLogEvent(string Module, string Message, LogType logtype = LogType.INFO);
         /// <summary>
         /// Event using RichLogEvent delegate
         /// </summary>
         public event RichLogEvent RichEvent;
+
+
     }
 }

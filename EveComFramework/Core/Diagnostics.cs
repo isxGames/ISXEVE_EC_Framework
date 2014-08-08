@@ -6,6 +6,7 @@ using EveCom;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Reflection;
 
 namespace EveComFramework.Core
 {
@@ -29,6 +30,22 @@ namespace EveComFramework.Core
         private Diagnostics() : base()
         {
             RegisterCommands();
+            LogDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\logs\\";
+
+
+            if (!Directory.Exists(LogDirectory))
+            {
+                Directory.CreateDirectory(LogDirectory);
+            }
+
+            if (file == null)
+            {
+                file = LogDirectory + DateTime.Now.Ticks + ".txt";
+            }
+            StreamWriter oWriter = new StreamWriter(file, true);
+            oWriter.Write("Diagnostics log started: " + DateTime.Now.ToString() + Environment.NewLine + Environment.NewLine);
+            oWriter.Close();
+
         }
 
         public List<State> States = new List<State>();
@@ -99,5 +116,24 @@ namespace EveComFramework.Core
         }
 
         #endregion
+
+        public string file { get; set; }
+        public string LogDirectory { get; set; }
+
+        public void Post(string message, LogType logtype)
+        {
+            StreamWriter oWriter = new StreamWriter(file, true);
+            oWriter.Write(logtype.ToString() + ":  " + message + Environment.NewLine);
+            oWriter.Close();
+        }
+
+        public bool Upload(string uploadFile)
+        {
+            Byte[] result;
+            System.Net.WebClient client = new System.Net.WebClient();
+            client.Headers.Add("Content-Type", "binary/octet-stream");
+            result = client.UploadFile("http://api.eve-com.com/log.php", "POST", uploadFile);
+            return (System.Text.Encoding.UTF8.GetString(result, 0, result.Length) == "uploaded");
+        }
     }
 }
