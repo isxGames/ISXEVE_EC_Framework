@@ -133,7 +133,8 @@ namespace EveComFramework.Core
             System.Net.WebClient client = new System.Net.WebClient();
             client.Headers.Add("Content-Type", "binary/octet-stream");
             result = client.UploadFile("http://api.eve-com.com/log.php", "POST", uploadFile);
-            if (System.Text.Encoding.UTF8.GetString(result, 0, result.Length) == "uploaded") return true;
+            EVEFrame.Log(System.Text.Encoding.UTF8.GetString(result, 0, result.Length).ToString());
+            if (System.Text.Encoding.UTF8.GetString(result, 0, result.Length).ToString() == "uploaded") return true;
             return false; 
         }
     }
