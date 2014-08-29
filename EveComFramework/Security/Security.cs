@@ -296,11 +296,8 @@ namespace EveComFramework.Security
             Log.Log("Received broadcasted trigger, processing", LogType.DEBUG);
             Clear();
             TriggerAlert();
+            QueueState(RecallDrones);
             QueueState(Flee, -1, FleeTrigger.Forced);
-            EVEFrameUtil.Do(() =>
-                {
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                });
             ReportTrigger(FleeTrigger.Forced);
             BroadcastSafe[args[1]] = false;
 
@@ -444,6 +441,12 @@ namespace EveComFramework.Security
         bool Blank(object[] Params)
         {
             Log.Log("Finished");
+            return true;
+        }
+
+        bool RecallDrones(object[] Params)
+        {
+            if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
             return true;
         }
 
