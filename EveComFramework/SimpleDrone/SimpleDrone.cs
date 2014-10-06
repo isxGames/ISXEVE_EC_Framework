@@ -78,6 +78,8 @@ namespace EveComFramework.SimpleDrone
         IPC IPC = IPC.Instance;
 
         public List<string> PriorityTargets = new List<string>();
+        public List<string> Triggers = new List<string>();
+
 
         #endregion
 
@@ -220,7 +222,7 @@ namespace EveComFramework.SimpleDrone
             if (ActiveTarget == null || !ActiveTarget.Exists || ActiveTarget.Exploded || ActiveTarget.Released)
             {
                 ActiveTarget = null;
-                ActiveTarget = Entity.All.FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released && (a.LockedTarget || a.LockingTarget));
+                ActiveTarget = Entity.All.FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released && (a.LockedTarget || a.LockingTarget) && !Triggers.Contains(a.Name));
                 if (Rats.LockedAndLockingTargetList.Any() && ActiveTarget == null)
                 {
                     if (Config.PrivateTargets)
@@ -285,7 +287,7 @@ namespace EveComFramework.SimpleDrone
             }
             else
             {
-                Entity NewTarget = Entity.All.FirstOrDefault(a => !a.LockedTarget && !a.LockingTarget && PriorityTargets.Contains(a.Name) && a.Distance < MyShip.MaxTargetRange && !TargetCooldown.ContainsKey(a));
+                Entity NewTarget = Entity.All.FirstOrDefault(a => !a.LockedTarget && !a.LockingTarget && PriorityTargets.Contains(a.Name) && a.Distance < MyShip.MaxTargetRange && !TargetCooldown.ContainsKey(a) && !Triggers.Contains(a.Name));
                 if (NewTarget == null) NewTarget = Rats.UnlockedTargetList.FirstOrDefault(a => !TargetCooldown.ContainsKey(a) && a.Distance < MyShip.MaxTargetRange);
                 if (Rats.LockedAndLockingTargetList.Count < Config.TargetSlots &&
                     NewTarget != null &&
