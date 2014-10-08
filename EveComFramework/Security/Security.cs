@@ -149,6 +149,8 @@ namespace EveComFramework.Security
         Comms.Comms Comms = EveComFramework.Comms.Comms.Instance;
         Exceptions Exceptions = Exceptions.Instance;
 
+        public List<string> Triggers = new List<string>();
+
         #endregion
 
         #region Events
@@ -474,9 +476,9 @@ namespace EveComFramework.Security
             {
                 if (Session.InFleet)
                 {
-                    return Entity.All.FirstOrDefault(a => NeutingEntities.Contains(a.ID) && !a.Exploded && !a.Released);
+                    return Entity.All.FirstOrDefault(a => NeutingEntities.Contains(a.ID) && !a.Exploded && !a.Released && !Triggers.Contains(a.Name));
                 }
-                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released);
+                return Entity.All.FirstOrDefault(a => (a.IsEnergyNeuting || a.IsEnergyStealing) && !a.Exploded && !a.Released && !Triggers.Contains(a.Name));
             }
         }
 
@@ -533,7 +535,7 @@ namespace EveComFramework.Security
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
-            Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing);
+            Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing && !Triggers.Contains(a.Name));
             if (Neuting != null && ReportCC)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
