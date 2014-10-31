@@ -635,6 +635,7 @@ namespace EveComFramework.Security
             {
                 Log.Log("|oNew flee condition");
                 Comms.ChatQueue.Enqueue("<Security> New flee condition");
+                if (Config.BroadcastTrigger && (Reported == FleeTrigger.NegativeStanding || Reported == FleeTrigger.NeutralStanding || Reported == FleeTrigger.Paranoid)) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID);
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
                 Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
