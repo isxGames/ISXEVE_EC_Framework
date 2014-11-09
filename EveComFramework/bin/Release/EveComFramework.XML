@@ -4,28 +4,6 @@
         <name>EveComFramework</name>
     </assembly>
     <members>
-        <member name="F:EveComFramework.Security.UI.Security.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Security.UI.Security.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.Security.UI.Security.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Optimizer.OptimizerSettings">
-            <summary>
-            Settings for the Optimizer class
-            </summary>
-        </member>
         <member name="T:EveComFramework.Core.Settings">
             <summary>
             This class provides an easy-to-use XML serializer/deserializer to store configuration information to XML files
@@ -107,11 +85,6 @@
             WriteXML
             </summary>
             <param name="writer"></param>
-        </member>
-        <member name="T:EveComFramework.Optimizer.Optimizer">
-            <summary>
-            This class helps reduce the Eve client's resource utilization
-            </summary>
         </member>
         <member name="T:EveComFramework.Core.State">
             <summary>
@@ -224,200 +197,6 @@
             The frequency for the state in milliseconds
             </summary>
         </member>
-        <member name="M:EveComFramework.Optimizer.Optimizer.Finalize">
-            <summary>
-            Destructor
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Optimizer.Optimizer.Configure">
-            <summary>
-            Configure this module
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Optimizer.Optimizer.Config">
-            <summary>
-            Config for this module
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Optimizer.Optimizer.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SessionControl.Profile">
-            <summary>
-            Userprofile for an eve account including play sessions, can be serialized
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SessionControl.LoginGlobalSettings">
-            <summary>
-            Global settings for SessionControl class
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SessionControl.LoginGlobalSettings.Profiles">
-            <summary>
-            Available userprofiles, keyed by the character name
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SessionControl.LoginLocalSettings">
-            <summary>
-            Profile-based settings for SessionControl class
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SessionControl.SessionControl">
-            <summary>
-            Sessioncontrol provides interface for logging in and out of Eve and awareness of downtime
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SessionControl.SessionControl.GlobalConfig">
-            <summary>
-            Global config containing all login information
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SessionControl.SessionControl.Config">
-            <summary>
-            Config for this class
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SessionControl.SessionControl.Log">
-            <summary>
-            Log for this class
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SessionControl.SessionControl.UpdateCurrentProfile">
-            <summary>
-            Sets up _curProfile with data from GlobalConfig
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SessionControl.SessionControl.PerformLogout">
-            <summary>
-            Perform a logout (closes the client)
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SessionControl.SessionControl.Configure">
-            <summary>
-            Opens up the configuration dialog, this is a MODAL dialog and will block the thread!
-            </summary>
-        </member>
-        <member name="P:EveComFramework.SessionControl.SessionControl.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="P:EveComFramework.SessionControl.SessionControl.characterName">
-            <summary>
-            The character name to work with
-            </summary>
-        </member>
-        <member name="E:EveComFramework.SessionControl.SessionControl.LogOut">
-            <summary>
-            Fired when LoginControl thinks it is time to get ready to log out, call PerformLogout afterwards to finish it
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="F:EveComFramework.GroupControl.UI.Debug.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.Debug.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.Debug.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Optimizer.UI.Optimizer">
-            <summary>
-            Optimizer configuration form
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Optimizer.UI.Optimizer.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Optimizer.UI.Optimizer.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.Optimizer.UI.Optimizer.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Optimizer.UI.Optimizer.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="F:EveComFramework.GroupControl.UI.GroupControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.GroupControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.GroupControl.UI.GroupControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.AutoModule.UI.AutoModule">
-            <summary>
-            Automodule configuration form
-            </summary>
-        </member>
-        <member name="F:EveComFramework.AutoModule.UI.AutoModule.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
         <member name="T:EveComFramework.Core.Busy">
             <summary>
             This class allows modules to signal they are busy
@@ -458,165 +237,39 @@
             Property indicating if any module is busy
             </summary>
         </member>
-        <member name="F:EveComFramework.SessionControl.UI.SessionControl.components">
+        <member name="T:EveComFramework.Core.Cache">
             <summary>
-            Required designer variable.
+            This class provides cached information useful for user interfaces
             </summary>
         </member>
-        <member name="M:EveComFramework.SessionControl.UI.SessionControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.SessionControl.UI.SessionControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Move.MoveSettings">
-            <summary>
-            Settings for the Move class
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Move.Move">
-            <summary>
-            This class handles navigation
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Move.Move.Log">
-            <summary>
-            The logger for this class
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Move.Move.ToggleAutopilot(System.Boolean)">
-            <summary>
-            Toggle on/off the autopilot
-            </summary>
-            <param name="Activate">Enable = true</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Bookmark(EveCom.Bookmark,System.Int32)">
-            <summary>
-            Warp to a bookmark
-            </summary>
-            <param name="Bookmark">The bookmark to warp to</param>
-            <param name="Distance">The distance to warp at.  Default: 0</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Object(EveCom.Entity,System.Int32)">
-            <summary>
-            Warp to an entity
-            </summary>
-            <param name="Entity">The entity to which to warp</param>
-            <param name="Distance">The distance to warp at.  Default: 0</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Activate(EveCom.Entity)">
-            <summary>
-            Activate an entity (ex: Jump gate)
-            </summary>
-            <param name="Entity"></param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Jump">
-            <summary>
-            Jump through an entity (ex: Jump portal array)
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Orbit(EveCom.Entity,System.Int32)">
-            <summary>
-            Orbit an entity
-            </summary>
-            <param name="Target">The entity to orbit</param>
-            <param name="Distance">The distance from the entity to orbit</param>
-        </member>
-        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
-            <summary>
-            Approach an entity
-            </summary>
-            <param name="Target">The entity to approach</param>
-            <param name="Distance">What distance from the entity to stop at</param>
-        </member>
-        <member name="P:EveComFramework.Move.Move.Instance">
+        <member name="P:EveComFramework.Core.Cache.Instance">
             <summary>
             Singletoner
             </summary>
         </member>
-        <member name="T:EveComFramework.Move.UndockWarpSettings">
+        <member name="P:EveComFramework.Core.Cache.Name">
             <summary>
-            Settings for the UndockWarp class
+            Your pilot's Name
             </summary>
         </member>
-        <member name="T:EveComFramework.Move.UndockWarp">
+        <member name="P:EveComFramework.Core.Cache.CharID">
             <summary>
-            This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
+            Your pilot's CharID
             </summary>
         </member>
-        <member name="M:EveComFramework.Move.UndockWarp.Enabled(System.Boolean)">
+        <member name="P:EveComFramework.Core.Cache.Bookmarks">
             <summary>
-            Toggle on/off this class
+            Array of bookmark titles
             </summary>
-            <param name="val">Enabled = true</param>
         </member>
-        <member name="F:EveComFramework.Move.UndockWarp.Config">
+        <member name="P:EveComFramework.Core.Cache.FleetMembers">
             <summary>
-            The config for this class
+            Array of fleet member names
             </summary>
         </member>
-        <member name="P:EveComFramework.Move.UndockWarp.Instance">
+        <member name="P:EveComFramework.Core.Cache.ItemVolume">
             <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Core.Configuration.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Core.Configuration.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.Core.Configuration.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
-            <summary>
-            Available skillqueues, keyed by the character name
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SkillTraining.SkillTraining">
-             <summary>
-             SkillTraining will manage a skill queue for the active character, can act event based or full auto
-            
-             </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartWatch">
-            <summary>
-            State in passive event based mode, will fire an event when it thinks you should queue a skill
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartAuto">
-            <summary>
-            Handles everything and queues skills as it can.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.DoSkillQueue">
-            <summary>
-            Add stuff to the skill queue
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.Configure">
-            <summary>
-            Opens up the configuration dialog, this is a MODAL dialog and will block the thread! Won't work when not logged in
-            </summary>
-        </member>
-        <member name="E:EveComFramework.SkillTraining.SkillTraining.SpaceInQueue">
-            <summary>
-            Fires when there is space in the skill queue
+            Item Volumes, keyed by Types
             </summary>
         </member>
         <member name="T:EveComFramework.Security.SecuritySettings">
@@ -715,6 +368,342 @@
             Singletoner
             </summary>
         </member>
+        <member name="T:EveComFramework.Optimizer.UI.Optimizer">
+            <summary>
+            Optimizer configuration form
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Optimizer.UI.Optimizer.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.UI.Optimizer.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.Optimizer.UI.Optimizer.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.UI.Optimizer.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="F:EveComFramework.GroupControl.UI.GroupControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.GroupControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.GroupControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Core.Configuration.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Core.Configuration.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.Core.Configuration.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.AutoModule.UI.AutoModule">
+            <summary>
+            Automodule configuration form
+            </summary>
+        </member>
+        <member name="F:EveComFramework.AutoModule.UI.AutoModule.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.AutoModule.UI.AutoModule.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.MoveSettings">
+            <summary>
+            Settings for the Move class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.Move">
+            <summary>
+            This class handles navigation
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Move.Move.Log">
+            <summary>
+            The logger for this class
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.Move.ToggleAutopilot(System.Boolean)">
+            <summary>
+            Toggle on/off the autopilot
+            </summary>
+            <param name="Activate">Enable = true</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Bookmark(EveCom.Bookmark,System.Int32)">
+            <summary>
+            Warp to a bookmark
+            </summary>
+            <param name="Bookmark">The bookmark to warp to</param>
+            <param name="Distance">The distance to warp at.  Default: 0</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Object(EveCom.Entity,System.Int32)">
+            <summary>
+            Warp to an entity
+            </summary>
+            <param name="Entity">The entity to which to warp</param>
+            <param name="Distance">The distance to warp at.  Default: 0</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Activate(EveCom.Entity)">
+            <summary>
+            Activate an entity (ex: Jump gate)
+            </summary>
+            <param name="Entity"></param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Jump">
+            <summary>
+            Jump through an entity (ex: Jump portal array)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Orbit(EveCom.Entity,System.Int32)">
+            <summary>
+            Orbit an entity
+            </summary>
+            <param name="Target">The entity to orbit</param>
+            <param name="Distance">The distance from the entity to orbit</param>
+        </member>
+        <member name="M:EveComFramework.Move.Move.Approach(EveCom.Entity,System.Int32)">
+            <summary>
+            Approach an entity
+            </summary>
+            <param name="Target">The entity to approach</param>
+            <param name="Distance">What distance from the entity to stop at</param>
+        </member>
+        <member name="P:EveComFramework.Move.Move.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.UndockWarpSettings">
+            <summary>
+            Settings for the UndockWarp class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Move.UndockWarp">
+            <summary>
+            This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Move.UndockWarp.Enabled(System.Boolean)">
+            <summary>
+            Toggle on/off this class
+            </summary>
+            <param name="val">Enabled = true</param>
+        </member>
+        <member name="F:EveComFramework.Move.UndockWarp.Config">
+            <summary>
+            The config for this class
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Move.UndockWarp.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.SessionControl.Profile">
+            <summary>
+            Userprofile for an eve account including play sessions, can be serialized
+            </summary>
+        </member>
+        <member name="T:EveComFramework.SessionControl.LoginGlobalSettings">
+            <summary>
+            Global settings for SessionControl class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.LoginGlobalSettings.Profiles">
+            <summary>
+            Available userprofiles, keyed by the character name
+            </summary>
+        </member>
+        <member name="T:EveComFramework.SessionControl.LoginLocalSettings">
+            <summary>
+            Profile-based settings for SessionControl class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.SessionControl.SessionControl">
+            <summary>
+            Sessioncontrol provides interface for logging in and out of Eve and awareness of downtime
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.GlobalConfig">
+            <summary>
+            Global config containing all login information
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.Config">
+            <summary>
+            Config for this class
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.SessionControl.Log">
+            <summary>
+            Log for this class
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SessionControl.SessionControl.UpdateCurrentProfile">
+            <summary>
+            Sets up _curProfile with data from GlobalConfig
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SessionControl.SessionControl.PerformLogout">
+            <summary>
+            Perform a logout (closes the client)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SessionControl.SessionControl.Configure">
+            <summary>
+            Opens up the configuration dialog, this is a MODAL dialog and will block the thread!
+            </summary>
+        </member>
+        <member name="P:EveComFramework.SessionControl.SessionControl.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.SessionControl.SessionControl.characterName">
+            <summary>
+            The character name to work with
+            </summary>
+        </member>
+        <member name="E:EveComFramework.SessionControl.SessionControl.LogOut">
+            <summary>
+            Fired when LoginControl thinks it is time to get ready to log out, call PerformLogout afterwards to finish it
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.FleetControl.UI.FleetControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.FleetControl.UI.FleetControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.FleetControl.UI.FleetControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.DroneControl.UI.DroneControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.DroneControl.UI.DroneControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.DroneControl.UI.DroneControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
+            <summary>
+            Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
+            </summary>
+            <param name="Class">Class of ship, such as "BattleShip", "Cruiser", or "Frigate"</param>
+            <returns>Drone that is best suited to attack that class.  Drone may be in the bay</returns>
+        </member>
+        <member name="T:EveComFramework.Data.SolarSystem">
+            <summary>
+            This class provides static information about solar systems (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.ID">
+            <summary>
+            The solar system's ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.Name">
+            <summary>
+            The solar system's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.Security">
+            <summary>
+            The solar system's security level
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
+            <summary>
+            The solar system's FactionID (Only works for High Sec)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.SolarSystem.All">
+            <summary>
+            List of all solar systems
+            </summary>
+        </member>
         <member name="T:EveComFramework.Cargo.Cargo">
             <summary>
             This class handles cargo operation, including navigation
@@ -762,77 +751,6 @@
             <summary>
             Singletoner
             </summary>
-        </member>
-        <member name="F:EveComFramework.FleetControl.UI.FleetControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.FleetControl.UI.FleetControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.FleetControl.UI.FleetControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:EveComFramework.DroneControl.UI.DroneControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.DroneControl.UI.DroneControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.DroneControl.UI.DroneControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Data.SolarSystem">
-            <summary>
-            This class provides static information about solar systems (without pulling data from Eve)
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.ID">
-            <summary>
-            The solar system's ID
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.Name">
-            <summary>
-            The solar system's Name
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.Security">
-            <summary>
-            The solar system's security level
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.FactionID">
-            <summary>
-            The solar system's FactionID (Only works for High Sec)
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Data.SolarSystem.All">
-            <summary>
-            List of all solar systems
-            </summary>
-        </member>
-        <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
-            <summary>
-            Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
-            </summary>
-            <param name="Class">Class of ship, such as "BattleShip", "Cruiser", or "Frigate"</param>
-            <returns>Drone that is best suited to attack that class.  Drone may be in the bay</returns>
         </member>
         <member name="T:EveComFramework.AutoModule.AutoModuleSettings">
             <summary>
@@ -905,6 +823,140 @@
         <member name="P:EveComFramework.AutoModule.InstaWarp.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SessionControl.UI.SessionControl.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SessionControl.UI.SessionControl.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.SessionControl.UI.SessionControl.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SkillTraining.UI.SkillTraining.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.GroupControl.UI.Debug.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.Debug.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.GroupControl.UI.Debug.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Security.UI.Security.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Security.UI.Security.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:EveComFramework.Security.UI.Security.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Optimizer.OptimizerSettings">
+            <summary>
+            Settings for the Optimizer class
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Optimizer.Optimizer">
+            <summary>
+            This class helps reduce the Eve client's resource utilization
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.Optimizer.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Optimizer.Optimizer.Configure">
+            <summary>
+            Configure this module
+            </summary>
+        </member>
+        <member name="F:EveComFramework.Optimizer.Optimizer.Config">
+            <summary>
+            Config for this module
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Optimizer.Optimizer.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
+            <summary>
+            Available skillqueues, keyed by the character name
+            </summary>
+        </member>
+        <member name="T:EveComFramework.SkillTraining.SkillTraining">
+             <summary>
+             SkillTraining will manage a skill queue for the active character, can act event based or full auto
+            
+             </summary>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartWatch">
+            <summary>
+            State in passive event based mode, will fire an event when it thinks you should queue a skill
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartAuto">
+            <summary>
+            Handles everything and queues skills as it can.
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.DoSkillQueue">
+            <summary>
+            Add stuff to the skill queue
+            </summary>
+        </member>
+        <member name="M:EveComFramework.SkillTraining.SkillTraining.Configure">
+            <summary>
+            Opens up the configuration dialog, this is a MODAL dialog and will block the thread! Won't work when not logged in
+            </summary>
+        </member>
+        <member name="E:EveComFramework.SkillTraining.SkillTraining.SpaceInQueue">
+            <summary>
+            Fires when there is space in the skill queue
             </summary>
         </member>
         <member name="T:EveComFramework.Core.LoggerHelper">
@@ -991,58 +1043,6 @@
             </summary>
             <param name="Module">The module sending the message</param>
             <param name="Message">Message that is being logged</param>
-        </member>
-        <member name="T:EveComFramework.Core.Cache">
-            <summary>
-            This class provides cached information useful for user interfaces
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.Name">
-            <summary>
-            Your pilot's Name
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.CharID">
-            <summary>
-            Your pilot's CharID
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.Bookmarks">
-            <summary>
-            Array of bookmark titles
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.FleetMembers">
-            <summary>
-            Array of fleet member names
-            </summary>
-        </member>
-        <member name="P:EveComFramework.Core.Cache.ItemVolume">
-            <summary>
-            Item Volumes, keyed by Types
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SkillTraining.UI.SkillTraining.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
         </member>
         <member name="T:EveComFramework.Core.Config">
             <summary>
