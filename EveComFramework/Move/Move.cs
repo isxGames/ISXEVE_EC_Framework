@@ -673,7 +673,7 @@ namespace EveComFramework.Move
                 if (MyShip.ToEntity.Mode == EntityMode.Warping) return false;
                 if (!Entity.All.Any(a => a.GroupID == Group.Sun && a.Distance < 1000000000) && SunMidpoint)
                 {
-                    if (Bubbled())
+                    if (Bubbled() && MyShip.ToEntity.GroupID != Group.Interceptor)
                     {
                         if (MyShip.Mode == EntityMode.Stopped)
                         {
@@ -700,7 +700,7 @@ namespace EveComFramework.Move
                 }
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
-                    if (Bubbled() && Route.NextWaypoint.Distance > 2000)
+                    if (Bubbled() && Route.NextWaypoint.Distance > 2000 && MyShip.ToEntity.GroupID != Group.Interceptor)
                     {
                         if (MyShip.Mode == EntityMode.Stopped)
                         {
@@ -732,7 +732,7 @@ namespace EveComFramework.Move
                 }
                 if (Route.NextWaypoint.GroupID == Group.Station)
                 {
-                    if (Bubbled() && Route.NextWaypoint.Distance > 2000)
+                    if (Bubbled() && Route.NextWaypoint.Distance > 2000 && MyShip.ToEntity.GroupID != Group.Interceptor)
                     {
                         if (MyShip.Mode == EntityMode.Stopped)
                         {
