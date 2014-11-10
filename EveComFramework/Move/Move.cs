@@ -620,6 +620,27 @@ namespace EveComFramework.Move
 
         }
 
+        Dictionary<int, int> Bubbles = new Dictionary<int, int> {
+                        {12200, 26500},
+                        {26888, 40000},
+                        {12199, 11500},
+                        {26890, 17500},
+                        {12198, 5000},
+                        {26892, 7500},
+                        {22778, 20000}
+                        };
+
+        bool Bubbled()
+        {
+            if (!Entity.All.Any(a => Bubbles.Keys.Contains(a.TypeID)) || !Entity.All.Any(a => a.Distance < Bubbles.Values.Max() && Bubbles.Keys.Contains(a.TypeID))) return false;
+
+            foreach (KeyValuePair<int, int> bubble in Bubbles)
+            {
+                if (Entity.All.Any(a => a.TypeID == bubble.Key && a.Distance < bubble.Value)) return true;
+            }
+            return false;
+        }
+
         bool AutoPilotPrep(object[] Params)
         {
             QueueAutoPilotDeactivation = false;
@@ -652,6 +673,25 @@ namespace EveComFramework.Move
                 if (MyShip.ToEntity.Mode == EntityMode.Warping) return false;
                 if (!Entity.All.Any(a => a.GroupID == Group.Sun && a.Distance < 1000000000) && SunMidpoint)
                 {
+                    if (Bubbled())
+                    {
+                        if (MyShip.Mode == EntityMode.Stopped)
+                        {
+                            Log.Log("|rBubble detected!");
+                            Log.Log("|oAligning to |-g{0}", Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).Name);
+                            Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).AlignTo();
+                            InsertState(AutoPilot);
+                            WaitFor(10, () => MyShip.ToEntity.Mode != EntityMode.Stopped);
+                            return true;
+                        }
+                        else
+                        {
+                            Log.Log("|oWarping");
+                            Log.Log(" |-g{0}", Route.NextWaypoint.Name);
+                            Route.NextWaypoint.WarpTo();
+                            return false;
+                        }   
+                    }
                     Log.Log("|oWarping to |-g{0} |w(|y100 km|w)", Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).Name);
                     Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).WarpTo(100000);
                     InsertState(AutoPilot);
@@ -660,6 +700,25 @@ namespace EveComFramework.Move
                 }
                 if (Route.NextWaypoint.GroupID == Group.Stargate)
                 {
+                    if (Bubbled() && Route.NextWaypoint.Distance > 2000)
+                    {
+                        if (MyShip.Mode == EntityMode.Stopped)
+                        {
+                            Log.Log("|rBubble detected!");
+                            Log.Log("|oAligning to |-g{0}", Route.NextWaypoint.Name);
+                            Route.NextWaypoint.AlignTo();
+                            InsertState(AutoPilot);
+                            WaitFor(10, () => MyShip.ToEntity.Mode != EntityMode.Stopped);
+                            return true;
+                        }
+                        else
+                        {
+                            Log.Log("|oWarping");
+                            Log.Log(" |-g{0}", Route.NextWaypoint.Name);
+                            Route.NextWaypoint.WarpTo();
+                            return false;
+                        }
+                    }
                     Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);
                     Route.NextWaypoint.Jump();
                     if (Route.Path != null && Route.Waypoints != null)
@@ -673,6 +732,24 @@ namespace EveComFramework.Move
                 }
                 if (Route.NextWaypoint.GroupID == Group.Station)
                 {
+                    if (Bubbled() && Route.NextWaypoint.Distance > 2000)
+                    {
+                        if (MyShip.Mode == EntityMode.Stopped)
+                        {
+                            Log.Log("|rBubble detected!");
+                            Log.Log("|oAligning to |-g{0}", Route.NextWaypoint.Name);
+                            Route.NextWaypoint.AlignTo();
+                            InsertState(AutoPilot);
+                            WaitFor(10, () => MyShip.ToEntity.Mode != EntityMode.Stopped);
+                            return true;
+                        }
+                        else
+                        {
+                            Log.Log("|oWarping");
+                            Log.Log(" |-g{0}", Route.NextWaypoint.Name);
+                            Route.NextWaypoint.WarpTo();
+                            return false;
+                        }                    }
                     InsertState(Dock, 500, Route.NextWaypoint);
                     return true;
                 }
