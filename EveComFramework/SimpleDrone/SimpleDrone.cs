@@ -222,7 +222,7 @@ namespace EveComFramework.SimpleDrone
             if (ActiveTarget == null || !ActiveTarget.Exists || ActiveTarget.Exploded || ActiveTarget.Released)
             {
                 ActiveTarget = null;
-                ActiveTarget = Entity.All.FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released && (a.LockedTarget || a.LockingTarget) && !Triggers.Contains(a.Name));
+                ActiveTarget = Entity.All.FirstOrDefault(a => PriorityTargets.Contains(a.Name) && !a.Exploded && !a.Released && (a.LockedTarget || a.LockingTarget) && !Triggers.Contains(a.Name) && a.Distance < MaxRange);
                 if (Rats.LockedAndLockingTargetList.Any() && ActiveTarget == null)
                 {
                     if (Config.PrivateTargets)
