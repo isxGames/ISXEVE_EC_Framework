@@ -117,11 +117,12 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonUpload = new System.Windows.Forms.Button();
-            this.labelUploadResult = new System.Windows.Forms.Label();
             this.buttonUploadPrevious = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonOpenLogFolder = new System.Windows.Forms.Button();
             this.buttonView = new System.Windows.Forms.Button();
+            this.labelUploadResult = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.numericActiveMinThreshold = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -163,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).BeginInit();
             this.groupBox8.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericActiveMinThreshold)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -180,10 +182,10 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 5;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.Controls.Add(this.numericArmorCap, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericArmorMin, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericArmorMax, 4, 3);
@@ -219,6 +221,7 @@
             this.tableLayoutPanel1.Controls.Add(this.numericAutoTargetersCap, 2, 12);
             this.tableLayoutPanel1.Controls.Add(this.checkDroneTrackingModules, 0, 10);
             this.tableLayoutPanel1.Controls.Add(this.numericDroneTrackingModule, 2, 10);
+            this.tableLayoutPanel1.Controls.Add(this.numericActiveMinThreshold, 3, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -242,46 +245,44 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(304, 370);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericArmorCap
             // 
             this.numericArmorCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericArmorCap.Location = new System.Drawing.Point(123, 90);
+            this.numericArmorCap.Location = new System.Drawing.Point(120, 64);
             this.numericArmorCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericArmorCap.Name = "numericArmorCap";
-            this.numericArmorCap.Size = new System.Drawing.Size(89, 21);
+            this.numericArmorCap.Size = new System.Drawing.Size(60, 21);
             this.numericArmorCap.TabIndex = 9;
             // 
             // numericArmorMin
             // 
             this.numericArmorMin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericArmorMin.Location = new System.Drawing.Point(212, 90);
+            this.numericArmorMin.Location = new System.Drawing.Point(180, 64);
             this.numericArmorMin.Margin = new System.Windows.Forms.Padding(0);
             this.numericArmorMin.Name = "numericArmorMin";
-            this.numericArmorMin.Size = new System.Drawing.Size(54, 21);
+            this.numericArmorMin.Size = new System.Drawing.Size(60, 21);
             this.numericArmorMin.TabIndex = 10;
             // 
             // numericArmorMax
             // 
             this.numericArmorMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericArmorMax.Location = new System.Drawing.Point(266, 90);
+            this.numericArmorMax.Location = new System.Drawing.Point(240, 64);
             this.numericArmorMax.Margin = new System.Windows.Forms.Padding(0);
             this.numericArmorMax.Name = "numericArmorMax";
-            this.numericArmorMax.Size = new System.Drawing.Size(38, 21);
+            this.numericArmorMax.Size = new System.Drawing.Size(64, 21);
             this.numericArmorMax.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(123, 17);
+            this.label1.Location = new System.Drawing.Point(120, 17);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 52);
+            this.label1.Size = new System.Drawing.Size(60, 26);
             this.label1.TabIndex = 1;
             this.label1.Text = "Minimum\r\nCapacitor";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -289,20 +290,20 @@
             // numericShieldCap
             // 
             this.numericShieldCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericShieldCap.Location = new System.Drawing.Point(123, 69);
+            this.numericShieldCap.Location = new System.Drawing.Point(120, 43);
             this.numericShieldCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericShieldCap.Name = "numericShieldCap";
-            this.numericShieldCap.Size = new System.Drawing.Size(89, 21);
+            this.numericShieldCap.Size = new System.Drawing.Size(60, 21);
             this.numericShieldCap.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(212, 17);
+            this.label2.Location = new System.Drawing.Point(180, 17);
             this.label2.Margin = new System.Windows.Forms.Padding(0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 52);
+            this.label2.Size = new System.Drawing.Size(60, 26);
             this.label2.TabIndex = 3;
             this.label2.Text = "Minimum\r\nThreshold";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -310,20 +311,20 @@
             // numericShieldMin
             // 
             this.numericShieldMin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericShieldMin.Location = new System.Drawing.Point(212, 69);
+            this.numericShieldMin.Location = new System.Drawing.Point(180, 43);
             this.numericShieldMin.Margin = new System.Windows.Forms.Padding(0);
             this.numericShieldMin.Name = "numericShieldMin";
-            this.numericShieldMin.Size = new System.Drawing.Size(54, 21);
+            this.numericShieldMin.Size = new System.Drawing.Size(60, 21);
             this.numericShieldMin.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(266, 17);
+            this.label3.Location = new System.Drawing.Point(240, 17);
             this.label3.Margin = new System.Windows.Forms.Padding(0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 52);
+            this.label3.Size = new System.Drawing.Size(64, 26);
             this.label3.TabIndex = 5;
             this.label3.Text = "Maximum\r\nThreshold";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -331,82 +332,82 @@
             // numericShieldMax
             // 
             this.numericShieldMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericShieldMax.Location = new System.Drawing.Point(266, 69);
+            this.numericShieldMax.Location = new System.Drawing.Point(240, 43);
             this.numericShieldMax.Margin = new System.Windows.Forms.Padding(0);
             this.numericShieldMax.Name = "numericShieldMax";
-            this.numericShieldMax.Size = new System.Drawing.Size(38, 21);
+            this.numericShieldMax.Size = new System.Drawing.Size(64, 21);
             this.numericShieldMax.TabIndex = 6;
             // 
             // numericActiveHardenerCap
             // 
             this.numericActiveHardenerCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericActiveHardenerCap.Location = new System.Drawing.Point(123, 111);
+            this.numericActiveHardenerCap.Location = new System.Drawing.Point(120, 85);
             this.numericActiveHardenerCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericActiveHardenerCap.Name = "numericActiveHardenerCap";
-            this.numericActiveHardenerCap.Size = new System.Drawing.Size(89, 21);
+            this.numericActiveHardenerCap.Size = new System.Drawing.Size(60, 21);
             this.numericActiveHardenerCap.TabIndex = 13;
             // 
             // numericCloakCap
             // 
             this.numericCloakCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericCloakCap.Location = new System.Drawing.Point(123, 132);
+            this.numericCloakCap.Location = new System.Drawing.Point(120, 106);
             this.numericCloakCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericCloakCap.Name = "numericCloakCap";
-            this.numericCloakCap.Size = new System.Drawing.Size(89, 21);
+            this.numericCloakCap.Size = new System.Drawing.Size(60, 21);
             this.numericCloakCap.TabIndex = 15;
             // 
             // numericGangLinkCap
             // 
             this.numericGangLinkCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericGangLinkCap.Location = new System.Drawing.Point(123, 153);
+            this.numericGangLinkCap.Location = new System.Drawing.Point(120, 127);
             this.numericGangLinkCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericGangLinkCap.Name = "numericGangLinkCap";
-            this.numericGangLinkCap.Size = new System.Drawing.Size(89, 21);
+            this.numericGangLinkCap.Size = new System.Drawing.Size(60, 21);
             this.numericGangLinkCap.TabIndex = 17;
             // 
             // numericSensorBoosterCap
             // 
             this.numericSensorBoosterCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericSensorBoosterCap.Location = new System.Drawing.Point(123, 174);
+            this.numericSensorBoosterCap.Location = new System.Drawing.Point(120, 148);
             this.numericSensorBoosterCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericSensorBoosterCap.Name = "numericSensorBoosterCap";
-            this.numericSensorBoosterCap.Size = new System.Drawing.Size(89, 21);
+            this.numericSensorBoosterCap.Size = new System.Drawing.Size(60, 21);
             this.numericSensorBoosterCap.TabIndex = 19;
             // 
             // numericTrackingComputerCap
             // 
             this.numericTrackingComputerCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericTrackingComputerCap.Location = new System.Drawing.Point(123, 195);
+            this.numericTrackingComputerCap.Location = new System.Drawing.Point(120, 169);
             this.numericTrackingComputerCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericTrackingComputerCap.Name = "numericTrackingComputerCap";
-            this.numericTrackingComputerCap.Size = new System.Drawing.Size(89, 21);
+            this.numericTrackingComputerCap.Size = new System.Drawing.Size(60, 21);
             this.numericTrackingComputerCap.TabIndex = 21;
             // 
             // numericECCMCap
             // 
             this.numericECCMCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericECCMCap.Location = new System.Drawing.Point(123, 216);
+            this.numericECCMCap.Location = new System.Drawing.Point(120, 190);
             this.numericECCMCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericECCMCap.Name = "numericECCMCap";
-            this.numericECCMCap.Size = new System.Drawing.Size(89, 21);
+            this.numericECCMCap.Size = new System.Drawing.Size(60, 21);
             this.numericECCMCap.TabIndex = 23;
             // 
             // numericDroneControlUnitCap
             // 
             this.numericDroneControlUnitCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericDroneControlUnitCap.Location = new System.Drawing.Point(123, 257);
+            this.numericDroneControlUnitCap.Location = new System.Drawing.Point(120, 231);
             this.numericDroneControlUnitCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericDroneControlUnitCap.Name = "numericDroneControlUnitCap";
-            this.numericDroneControlUnitCap.Size = new System.Drawing.Size(89, 21);
+            this.numericDroneControlUnitCap.Size = new System.Drawing.Size(60, 21);
             this.numericDroneControlUnitCap.TabIndex = 25;
             // 
             // numericPropulsionModuleCap
             // 
             this.numericPropulsionModuleCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericPropulsionModuleCap.Location = new System.Drawing.Point(123, 298);
+            this.numericPropulsionModuleCap.Location = new System.Drawing.Point(120, 272);
             this.numericPropulsionModuleCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericPropulsionModuleCap.Name = "numericPropulsionModuleCap";
-            this.numericPropulsionModuleCap.Size = new System.Drawing.Size(89, 21);
+            this.numericPropulsionModuleCap.Size = new System.Drawing.Size(60, 21);
             this.numericPropulsionModuleCap.TabIndex = 27;
             // 
             // checkShieldBoosters
@@ -414,10 +415,10 @@
             this.checkShieldBoosters.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkShieldBoosters, 2);
             this.checkShieldBoosters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkShieldBoosters.Location = new System.Drawing.Point(0, 69);
+            this.checkShieldBoosters.Location = new System.Drawing.Point(0, 43);
             this.checkShieldBoosters.Margin = new System.Windows.Forms.Padding(0);
             this.checkShieldBoosters.Name = "checkShieldBoosters";
-            this.checkShieldBoosters.Size = new System.Drawing.Size(123, 21);
+            this.checkShieldBoosters.Size = new System.Drawing.Size(120, 21);
             this.checkShieldBoosters.TabIndex = 0;
             this.checkShieldBoosters.Text = "Shield Boosters";
             this.checkShieldBoosters.UseVisualStyleBackColor = true;
@@ -427,10 +428,10 @@
             this.checkArmorRepairers.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkArmorRepairers, 2);
             this.checkArmorRepairers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkArmorRepairers.Location = new System.Drawing.Point(0, 90);
+            this.checkArmorRepairers.Location = new System.Drawing.Point(0, 64);
             this.checkArmorRepairers.Margin = new System.Windows.Forms.Padding(0);
             this.checkArmorRepairers.Name = "checkArmorRepairers";
-            this.checkArmorRepairers.Size = new System.Drawing.Size(123, 21);
+            this.checkArmorRepairers.Size = new System.Drawing.Size(120, 21);
             this.checkArmorRepairers.TabIndex = 7;
             this.checkArmorRepairers.Text = "Armor Repairers";
             this.checkArmorRepairers.UseVisualStyleBackColor = true;
@@ -440,10 +441,10 @@
             this.checkActiveHardeners.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkActiveHardeners, 2);
             this.checkActiveHardeners.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkActiveHardeners.Location = new System.Drawing.Point(0, 111);
+            this.checkActiveHardeners.Location = new System.Drawing.Point(0, 85);
             this.checkActiveHardeners.Margin = new System.Windows.Forms.Padding(0);
             this.checkActiveHardeners.Name = "checkActiveHardeners";
-            this.checkActiveHardeners.Size = new System.Drawing.Size(123, 21);
+            this.checkActiveHardeners.Size = new System.Drawing.Size(120, 21);
             this.checkActiveHardeners.TabIndex = 12;
             this.checkActiveHardeners.Text = "Active Hardeners";
             this.checkActiveHardeners.UseVisualStyleBackColor = true;
@@ -453,10 +454,10 @@
             this.checkCloaks.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkCloaks, 2);
             this.checkCloaks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkCloaks.Location = new System.Drawing.Point(0, 132);
+            this.checkCloaks.Location = new System.Drawing.Point(0, 106);
             this.checkCloaks.Margin = new System.Windows.Forms.Padding(0);
             this.checkCloaks.Name = "checkCloaks";
-            this.checkCloaks.Size = new System.Drawing.Size(123, 21);
+            this.checkCloaks.Size = new System.Drawing.Size(120, 21);
             this.checkCloaks.TabIndex = 14;
             this.checkCloaks.Text = "Cloaks";
             this.checkCloaks.UseVisualStyleBackColor = true;
@@ -466,10 +467,10 @@
             this.checkGangLinks.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkGangLinks, 2);
             this.checkGangLinks.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkGangLinks.Location = new System.Drawing.Point(0, 153);
+            this.checkGangLinks.Location = new System.Drawing.Point(0, 127);
             this.checkGangLinks.Margin = new System.Windows.Forms.Padding(0);
             this.checkGangLinks.Name = "checkGangLinks";
-            this.checkGangLinks.Size = new System.Drawing.Size(123, 21);
+            this.checkGangLinks.Size = new System.Drawing.Size(120, 21);
             this.checkGangLinks.TabIndex = 16;
             this.checkGangLinks.Text = "Gang Links";
             this.checkGangLinks.UseVisualStyleBackColor = true;
@@ -479,10 +480,10 @@
             this.checkSensorBoosters.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkSensorBoosters, 2);
             this.checkSensorBoosters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkSensorBoosters.Location = new System.Drawing.Point(0, 174);
+            this.checkSensorBoosters.Location = new System.Drawing.Point(0, 148);
             this.checkSensorBoosters.Margin = new System.Windows.Forms.Padding(0);
             this.checkSensorBoosters.Name = "checkSensorBoosters";
-            this.checkSensorBoosters.Size = new System.Drawing.Size(123, 21);
+            this.checkSensorBoosters.Size = new System.Drawing.Size(120, 21);
             this.checkSensorBoosters.TabIndex = 18;
             this.checkSensorBoosters.Text = "Sensor Boosters";
             this.checkSensorBoosters.UseVisualStyleBackColor = true;
@@ -492,10 +493,10 @@
             this.checkTrackingComputers.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkTrackingComputers, 2);
             this.checkTrackingComputers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkTrackingComputers.Location = new System.Drawing.Point(0, 195);
+            this.checkTrackingComputers.Location = new System.Drawing.Point(0, 169);
             this.checkTrackingComputers.Margin = new System.Windows.Forms.Padding(0);
             this.checkTrackingComputers.Name = "checkTrackingComputers";
-            this.checkTrackingComputers.Size = new System.Drawing.Size(123, 21);
+            this.checkTrackingComputers.Size = new System.Drawing.Size(120, 21);
             this.checkTrackingComputers.TabIndex = 20;
             this.checkTrackingComputers.Text = "Tracking Computers";
             this.checkTrackingComputers.UseVisualStyleBackColor = true;
@@ -505,10 +506,10 @@
             this.checkECCMs.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkECCMs, 2);
             this.checkECCMs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkECCMs.Location = new System.Drawing.Point(0, 216);
+            this.checkECCMs.Location = new System.Drawing.Point(0, 190);
             this.checkECCMs.Margin = new System.Windows.Forms.Padding(0);
             this.checkECCMs.Name = "checkECCMs";
-            this.checkECCMs.Size = new System.Drawing.Size(123, 21);
+            this.checkECCMs.Size = new System.Drawing.Size(120, 21);
             this.checkECCMs.TabIndex = 22;
             this.checkECCMs.Text = "ECCMs";
             this.checkECCMs.UseVisualStyleBackColor = true;
@@ -518,10 +519,10 @@
             this.checkDroneControlUnits.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkDroneControlUnits, 2);
             this.checkDroneControlUnits.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkDroneControlUnits.Location = new System.Drawing.Point(0, 257);
+            this.checkDroneControlUnits.Location = new System.Drawing.Point(0, 231);
             this.checkDroneControlUnits.Margin = new System.Windows.Forms.Padding(0);
             this.checkDroneControlUnits.Name = "checkDroneControlUnits";
-            this.checkDroneControlUnits.Size = new System.Drawing.Size(123, 21);
+            this.checkDroneControlUnits.Size = new System.Drawing.Size(120, 21);
             this.checkDroneControlUnits.TabIndex = 24;
             this.checkDroneControlUnits.Text = "Drone Control Units";
             this.checkDroneControlUnits.UseVisualStyleBackColor = true;
@@ -531,10 +532,10 @@
             this.checkPropulsionModules.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkPropulsionModules, 2);
             this.checkPropulsionModules.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkPropulsionModules.Location = new System.Drawing.Point(0, 298);
+            this.checkPropulsionModules.Location = new System.Drawing.Point(0, 272);
             this.checkPropulsionModules.Margin = new System.Windows.Forms.Padding(0);
             this.checkPropulsionModules.Name = "checkPropulsionModules";
-            this.checkPropulsionModules.Size = new System.Drawing.Size(123, 21);
+            this.checkPropulsionModules.Size = new System.Drawing.Size(120, 21);
             this.checkPropulsionModules.TabIndex = 26;
             this.checkPropulsionModules.Text = "Propulsion Modules";
             this.checkPropulsionModules.UseVisualStyleBackColor = true;
@@ -544,10 +545,10 @@
             this.checkActivateApproaching.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkActivateApproaching, 2);
             this.checkActivateApproaching.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkActivateApproaching.Location = new System.Drawing.Point(20, 319);
+            this.checkActivateApproaching.Location = new System.Drawing.Point(20, 293);
             this.checkActivateApproaching.Margin = new System.Windows.Forms.Padding(0);
             this.checkActivateApproaching.Name = "checkActivateApproaching";
-            this.checkActivateApproaching.Size = new System.Drawing.Size(192, 17);
+            this.checkActivateApproaching.Size = new System.Drawing.Size(160, 17);
             this.checkActivateApproaching.TabIndex = 28;
             this.checkActivateApproaching.Text = "Activate on Approach";
             this.checkActivateApproaching.UseVisualStyleBackColor = true;
@@ -557,10 +558,10 @@
             this.checkActivateOrbiting.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkActivateOrbiting, 2);
             this.checkActivateOrbiting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkActivateOrbiting.Location = new System.Drawing.Point(20, 336);
+            this.checkActivateOrbiting.Location = new System.Drawing.Point(20, 310);
             this.checkActivateOrbiting.Margin = new System.Windows.Forms.Padding(0);
             this.checkActivateOrbiting.Name = "checkActivateOrbiting";
-            this.checkActivateOrbiting.Size = new System.Drawing.Size(192, 17);
+            this.checkActivateOrbiting.Size = new System.Drawing.Size(160, 17);
             this.checkActivateOrbiting.TabIndex = 29;
             this.checkActivateOrbiting.Text = "Activate on Orbit";
             this.checkActivateOrbiting.UseVisualStyleBackColor = true;
@@ -570,10 +571,10 @@
             this.checkAlwaysActive.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkAlwaysActive, 2);
             this.checkAlwaysActive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkAlwaysActive.Location = new System.Drawing.Point(20, 353);
+            this.checkAlwaysActive.Location = new System.Drawing.Point(20, 327);
             this.checkAlwaysActive.Margin = new System.Windows.Forms.Padding(0);
             this.checkAlwaysActive.Name = "checkAlwaysActive";
-            this.checkAlwaysActive.Size = new System.Drawing.Size(192, 17);
+            this.checkAlwaysActive.Size = new System.Drawing.Size(160, 43);
             this.checkAlwaysActive.TabIndex = 30;
             this.checkAlwaysActive.Text = "Always Active";
             this.checkAlwaysActive.UseVisualStyleBackColor = true;
@@ -586,7 +587,7 @@
             this.checkAutoModule.Location = new System.Drawing.Point(0, 0);
             this.checkAutoModule.Margin = new System.Windows.Forms.Padding(0);
             this.checkAutoModule.Name = "checkAutoModule";
-            this.checkAutoModule.Size = new System.Drawing.Size(123, 17);
+            this.checkAutoModule.Size = new System.Drawing.Size(120, 17);
             this.checkAutoModule.TabIndex = 31;
             this.checkAutoModule.Text = "Always Enabled";
             this.checkAutoModule.UseVisualStyleBackColor = true;
@@ -596,10 +597,10 @@
             this.checkAutoTargeters.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkAutoTargeters, 2);
             this.checkAutoTargeters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkAutoTargeters.Location = new System.Drawing.Point(0, 278);
+            this.checkAutoTargeters.Location = new System.Drawing.Point(0, 252);
             this.checkAutoTargeters.Margin = new System.Windows.Forms.Padding(0);
             this.checkAutoTargeters.Name = "checkAutoTargeters";
-            this.checkAutoTargeters.Size = new System.Drawing.Size(123, 20);
+            this.checkAutoTargeters.Size = new System.Drawing.Size(120, 20);
             this.checkAutoTargeters.TabIndex = 32;
             this.checkAutoTargeters.Text = "Auto Targeters";
             this.checkAutoTargeters.UseVisualStyleBackColor = true;
@@ -607,10 +608,10 @@
             // numericAutoTargetersCap
             // 
             this.numericAutoTargetersCap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericAutoTargetersCap.Location = new System.Drawing.Point(123, 278);
+            this.numericAutoTargetersCap.Location = new System.Drawing.Point(120, 252);
             this.numericAutoTargetersCap.Margin = new System.Windows.Forms.Padding(0);
             this.numericAutoTargetersCap.Name = "numericAutoTargetersCap";
-            this.numericAutoTargetersCap.Size = new System.Drawing.Size(89, 21);
+            this.numericAutoTargetersCap.Size = new System.Drawing.Size(60, 21);
             this.numericAutoTargetersCap.TabIndex = 33;
             // 
             // checkDroneTrackingModules
@@ -618,10 +619,10 @@
             this.checkDroneTrackingModules.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.checkDroneTrackingModules, 2);
             this.checkDroneTrackingModules.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkDroneTrackingModules.Location = new System.Drawing.Point(0, 237);
+            this.checkDroneTrackingModules.Location = new System.Drawing.Point(0, 211);
             this.checkDroneTrackingModules.Margin = new System.Windows.Forms.Padding(0);
             this.checkDroneTrackingModules.Name = "checkDroneTrackingModules";
-            this.checkDroneTrackingModules.Size = new System.Drawing.Size(123, 20);
+            this.checkDroneTrackingModules.Size = new System.Drawing.Size(120, 20);
             this.checkDroneTrackingModules.TabIndex = 34;
             this.checkDroneTrackingModules.Text = "Drone Tracking Mods";
             this.checkDroneTrackingModules.UseVisualStyleBackColor = true;
@@ -629,10 +630,10 @@
             // numericDroneTrackingModule
             // 
             this.numericDroneTrackingModule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericDroneTrackingModule.Location = new System.Drawing.Point(123, 237);
+            this.numericDroneTrackingModule.Location = new System.Drawing.Point(120, 211);
             this.numericDroneTrackingModule.Margin = new System.Windows.Forms.Padding(0);
             this.numericDroneTrackingModule.Name = "numericDroneTrackingModule";
-            this.numericDroneTrackingModule.Size = new System.Drawing.Size(89, 21);
+            this.numericDroneTrackingModule.Size = new System.Drawing.Size(60, 21);
             this.numericDroneTrackingModule.TabIndex = 35;
             // 
             // groupBox2
@@ -1028,9 +1029,9 @@
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel6.ColumnCount = 4;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 15F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -1247,7 +1248,7 @@
             this.tableLayoutPanel7.ColumnCount = 3;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152F));
             this.tableLayoutPanel7.Controls.Add(this.label10, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.numericDroneTargetSlots, 1, 0);
             this.tableLayoutPanel7.Controls.Add(this.label12, 0, 1);
@@ -1374,13 +1375,46 @@
             // buttonUpload
             // 
             this.buttonUpload.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUpload.Location = new System.Drawing.Point(158, 29);
+            this.buttonUpload.Location = new System.Drawing.Point(157, 29);
             this.buttonUpload.Name = "buttonUpload";
-            this.buttonUpload.Size = new System.Drawing.Size(143, 20);
+            this.buttonUpload.Size = new System.Drawing.Size(144, 20);
             this.buttonUpload.TabIndex = 0;
             this.buttonUpload.Text = "Upload Current Log";
             this.buttonUpload.UseVisualStyleBackColor = true;
             this.buttonUpload.Click += new System.EventHandler(this.buttonUpload_Click);
+            // 
+            // buttonUploadPrevious
+            // 
+            this.buttonUploadPrevious.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUploadPrevious.Location = new System.Drawing.Point(157, 55);
+            this.buttonUploadPrevious.Name = "buttonUploadPrevious";
+            this.buttonUploadPrevious.Size = new System.Drawing.Size(144, 19);
+            this.buttonUploadPrevious.TabIndex = 2;
+            this.buttonUploadPrevious.Text = "Upload Previous Log";
+            this.buttonUploadPrevious.UseVisualStyleBackColor = true;
+            this.buttonUploadPrevious.Click += new System.EventHandler(this.buttonUploadPrevious_Click);
+            // 
+            // buttonOpenLogFolder
+            // 
+            this.buttonOpenLogFolder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonOpenLogFolder.Location = new System.Drawing.Point(3, 55);
+            this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
+            this.buttonOpenLogFolder.Size = new System.Drawing.Size(148, 19);
+            this.buttonOpenLogFolder.TabIndex = 3;
+            this.buttonOpenLogFolder.Text = "Open Log Folder";
+            this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
+            this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
+            // 
+            // buttonView
+            // 
+            this.buttonView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonView.Location = new System.Drawing.Point(3, 29);
+            this.buttonView.Name = "buttonView";
+            this.buttonView.Size = new System.Drawing.Size(148, 20);
+            this.buttonView.TabIndex = 4;
+            this.buttonView.Text = "View Current Log";
+            this.buttonView.UseVisualStyleBackColor = true;
+            this.buttonView.Click += new System.EventHandler(this.buttonView_Click);
             // 
             // labelUploadResult
             // 
@@ -1394,42 +1428,18 @@
             this.labelUploadResult.TabIndex = 1;
             this.labelUploadResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // buttonUploadPrevious
-            // 
-            this.buttonUploadPrevious.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUploadPrevious.Location = new System.Drawing.Point(158, 55);
-            this.buttonUploadPrevious.Name = "buttonUploadPrevious";
-            this.buttonUploadPrevious.Size = new System.Drawing.Size(143, 19);
-            this.buttonUploadPrevious.TabIndex = 2;
-            this.buttonUploadPrevious.Text = "Upload Previous Log";
-            this.buttonUploadPrevious.UseVisualStyleBackColor = true;
-            this.buttonUploadPrevious.Click += new System.EventHandler(this.buttonUploadPrevious_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // buttonOpenLogFolder
+            // numericActiveMinThreshold
             // 
-            this.buttonOpenLogFolder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonOpenLogFolder.Location = new System.Drawing.Point(3, 55);
-            this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
-            this.buttonOpenLogFolder.Size = new System.Drawing.Size(149, 19);
-            this.buttonOpenLogFolder.TabIndex = 3;
-            this.buttonOpenLogFolder.Text = "Open Log Folder";
-            this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
-            this.buttonOpenLogFolder.Click += new System.EventHandler(this.buttonOpenLogFolder_Click);
-            // 
-            // buttonView
-            // 
-            this.buttonView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonView.Location = new System.Drawing.Point(3, 29);
-            this.buttonView.Name = "buttonView";
-            this.buttonView.Size = new System.Drawing.Size(149, 20);
-            this.buttonView.TabIndex = 4;
-            this.buttonView.Text = "View Current Log";
-            this.buttonView.UseVisualStyleBackColor = true;
-            this.buttonView.Click += new System.EventHandler(this.buttonView_Click);
+            this.numericActiveMinThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericActiveMinThreshold.Location = new System.Drawing.Point(180, 85);
+            this.numericActiveMinThreshold.Margin = new System.Windows.Forms.Padding(0);
+            this.numericActiveMinThreshold.Name = "numericActiveMinThreshold";
+            this.numericActiveMinThreshold.Size = new System.Drawing.Size(60, 21);
+            this.numericActiveMinThreshold.TabIndex = 37;
             // 
             // Configuration
             // 
@@ -1497,6 +1507,7 @@
             this.groupBox8.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericActiveMinThreshold)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1597,5 +1608,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button buttonOpenLogFolder;
         private System.Windows.Forms.Button buttonView;
+        private System.Windows.Forms.NumericUpDown numericActiveMinThreshold;
     }
 }

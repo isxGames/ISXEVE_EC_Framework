@@ -47,6 +47,7 @@ namespace EveComFramework.AutoModule
         public int MaxArmorRepairs = 95;
         public int MinShieldBoosters = 80;
         public int MinArmorRepairs = 80;
+        public int MinActiveThreshold = 100;
     }
 
     #endregion
@@ -243,18 +244,46 @@ namespace EveComFramework.AutoModule
 
             #region Active Hardeners
 
-            if (MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl || a.GroupID == Group.ShieldHardener || a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener) && a.IsOnline) > 0 &&
+            if (MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl) && a.IsOnline) > 0 &&
+                Config.ActiveHardeners)
+            {
+                if (MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl) && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => (a.GroupID == Group.DamageControl) && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                }
+            }
+
+            if (MyShip.Modules.Count(a => a.GroupID == Group.ShieldHardener && a.IsOnline) > 0 &&
+                    Config.ActiveHardeners)
+            {
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapActiveHardeners &&
+                    MyShip.ToEntity.ShieldPct <= Config.MinActiveThreshold &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.ShieldHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ShieldHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                }
+                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners ||
+                    MyShip.ToEntity.ShieldPct > Config.MinActiveThreshold) &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.ShieldHardener && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ShieldHardener && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                }
+            }
+
+            if (MyShip.Modules.Count(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && a.IsOnline) > 0 &&
                 Config.ActiveHardeners)
             {
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapActiveHardeners &&
-                    MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl || a.GroupID == Group.ShieldHardener || a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener) && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                    MyShip.ToEntity.ArmorPct <= Config.MinActiveThreshold &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
-                    MyShip.Modules.FirstOrDefault(a => (a.GroupID == Group.DamageControl || a.GroupID == Group.ShieldHardener || a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener) && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                 }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners &&
-                    MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl || a.GroupID == Group.ShieldHardener || a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener) && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners ||
+                    MyShip.ToEntity.ArmorPct > Config.MinActiveThreshold) &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
-                    MyShip.Modules.FirstOrDefault(a => (a.GroupID == Group.DamageControl || a.GroupID == Group.ShieldHardener || a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener) && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
             }
 

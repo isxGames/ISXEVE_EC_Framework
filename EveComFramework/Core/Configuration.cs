@@ -64,6 +64,8 @@ namespace EveComFramework.Core
                 checkActiveHardeners.CheckedChanged += (s, a) => { AutoModuleConfig.ActiveHardeners = checkActiveHardeners.Checked; AutoModuleConfig.Save(); };
                 numericActiveHardenerCap.Value = AutoModuleConfig.CapActiveHardeners;
                 numericActiveHardenerCap.ValueChanged += (s, a) => { AutoModuleConfig.CapActiveHardeners = (int)numericActiveHardenerCap.Value; AutoModuleConfig.Save(); };
+                numericActiveMinThreshold.Value = AutoModuleConfig.MinActiveThreshold;
+                numericActiveMinThreshold.ValueChanged += (s, a) => { AutoModuleConfig.MinActiveThreshold = (int)numericActiveMinThreshold.Value; AutoModuleConfig.Save(); };
 
                 checkCloaks.Checked = AutoModuleConfig.Cloaks;
                 checkCloaks.CheckedChanged += (s, a) => { AutoModuleConfig.Cloaks = checkCloaks.Checked; AutoModuleConfig.Save(); };
