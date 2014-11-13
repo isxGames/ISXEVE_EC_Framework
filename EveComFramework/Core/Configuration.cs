@@ -110,7 +110,7 @@ namespace EveComFramework.Core
                 checkPropulsionModules.Checked = AutoModuleConfig.PropulsionModules;
                 checkPropulsionModules.CheckedChanged += (s, a) => { AutoModuleConfig.PropulsionModules = checkPropulsionModules.Checked; AutoModuleConfig.Save(); };
                 numericPropulsionModuleCap.Value = AutoModuleConfig.CapPropulsionModules;
-                numericPropulsionModuleCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericPropulsionModuleCap.Value; AutoModuleConfig.Save(); };
+                numericPropulsionModuleCap.ValueChanged += (s, a) => { AutoModuleConfig.CapPropulsionModules = (int)numericPropulsionModuleCap.Value; AutoModuleConfig.Save(); };
                 checkActivateApproaching.Checked = AutoModuleConfig.PropulsionModulesApproaching;
                 checkActivateApproaching.CheckedChanged += (s, a) => { AutoModuleConfig.PropulsionModulesApproaching = checkActivateApproaching.Checked; AutoModuleConfig.Save(); };
                 checkActivateOrbiting.Checked = AutoModuleConfig.PropulsionModulesOrbiting;
@@ -316,6 +316,8 @@ namespace EveComFramework.Core
         {
             System.Diagnostics.Process.Start(Diagnostics.Instance.file);
         }
+
+
 
     }
 }
