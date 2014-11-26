@@ -12,6 +12,11 @@ namespace EveComFramework.Core
     public class State
     {
         /// <summary>
+        /// Event raised to increment retardedfalcon
+        /// </summary>
+        public event Action Alert;
+
+        /// <summary>
         /// Class for items placed in the State queue
         /// </summary>
         public class StateQueue
@@ -73,6 +78,8 @@ namespace EveComFramework.Core
             StateLog = new Logger("State: " + this.GetType().Name);
             DefaultFrequency = 1000;
             EVEFrame.OnFrame += OnFrame;
+
+            LavishScriptAPI.LavishScript.Commands.AddCommand("failedFalconPunch", increment_pulse_because_birds_of_prey_are_douchebags);
         }
 
         /// <summary>
@@ -240,6 +247,17 @@ namespace EveComFramework.Core
             }
         }
 
+        int increment_pulse_because_birds_of_prey_are_douchebags(string[] args)
+        {
+            if (!Security.Security.Instance.Config.falconPunch) return 0;
+            if (DateTime.Now.AddMilliseconds(100) > NextPulse)
+            {
+                NextPulse = DateTime.Now.AddMilliseconds(100 + rnd.Next(-100, 100));
+            }
+
+            return 0;
+        }
+
         public bool SafetyOff = false;
         Random rnd = new Random();
         void OnFrame(object sender, EventArgs e)
@@ -271,8 +289,10 @@ namespace EveComFramework.Core
                 {
                     NextPulse = DateTime.Now.AddMilliseconds(CurState.Frequency + rnd.Next(-100, 100));
                 }
+                if (!Security.Security.Instance.Config.falconPunch) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect failedFalconPunch");
             }
         }
+
 
 
     }
