@@ -78,8 +78,7 @@ namespace EveComFramework.Core
             StateLog = new Logger("State: " + this.GetType().Name);
             DefaultFrequency = 1000;
             EVEFrame.OnFrame += OnFrame;
-
-            LavishScriptAPI.LavishScript.Commands.AddCommand("failedFalconPunch", increment_pulse_because_birds_of_prey_are_douchebags);
+            Cache.Instance.myStates.Add(this);
         }
 
         /// <summary>
@@ -245,17 +244,6 @@ namespace EveComFramework.Core
             {
                 InsertState(WaitForState, -1, TimeOut);
             }
-        }
-
-        int increment_pulse_because_birds_of_prey_are_douchebags(string[] args)
-        {
-            if (!Security.Security.Instance.Config.falconPunch) return 0;
-            if (DateTime.Now.AddMilliseconds(100) > NextPulse)
-            {
-                NextPulse = DateTime.Now.AddMilliseconds(100 + rnd.Next(-100, 100));
-            }
-
-            return 0;
         }
 
         public bool SafetyOff = false;
