@@ -65,6 +65,7 @@
             this.numericAutoTargetersCap = new System.Windows.Forms.NumericUpDown();
             this.checkDroneTrackingModules = new System.Windows.Forms.CheckBox();
             this.numericDroneTrackingModule = new System.Windows.Forms.NumericUpDown();
+            this.numericActiveMinThreshold = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.textUndockWarp = new System.Windows.Forms.TextBox();
@@ -122,7 +123,8 @@
             this.buttonView = new System.Windows.Forms.Button();
             this.labelUploadResult = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.numericActiveMinThreshold = new System.Windows.Forms.NumericUpDown();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.checkFalconPunch = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -141,6 +143,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericPropulsionModuleCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTrackingModule)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericActiveMinThreshold)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -164,7 +167,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).BeginInit();
             this.groupBox8.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericActiveMinThreshold)).BeginInit();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -173,7 +176,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 390);
+            this.groupBox1.Size = new System.Drawing.Size(293, 390);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "AutoModule";
@@ -185,7 +188,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.tableLayoutPanel1.Controls.Add(this.numericArmorCap, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericArmorMin, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.numericArmorMax, 4, 3);
@@ -245,7 +248,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(304, 370);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(287, 370);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // numericArmorCap
@@ -636,13 +639,22 @@
             this.numericDroneTrackingModule.Size = new System.Drawing.Size(60, 21);
             this.numericDroneTrackingModule.TabIndex = 35;
             // 
+            // numericActiveMinThreshold
+            // 
+            this.numericActiveMinThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericActiveMinThreshold.Location = new System.Drawing.Point(180, 85);
+            this.numericActiveMinThreshold.Margin = new System.Windows.Forms.Padding(0);
+            this.numericActiveMinThreshold.Name = "numericActiveMinThreshold";
+            this.numericActiveMinThreshold.Size = new System.Drawing.Size(60, 21);
+            this.numericActiveMinThreshold.TabIndex = 37;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(0, 390);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(310, 61);
+            this.groupBox2.Size = new System.Drawing.Size(293, 61);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Undock Warp";
@@ -661,7 +673,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(304, 41);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(287, 41);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // textUndockWarp
@@ -703,7 +715,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(0, 451);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(310, 40);
+            this.groupBox3.Size = new System.Drawing.Size(293, 40);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "InstaWarp";
@@ -720,7 +732,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(304, 20);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(287, 20);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // checkInstaWarp
@@ -741,7 +753,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(0, 491);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(310, 109);
+            this.groupBox4.Size = new System.Drawing.Size(293, 109);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Movement Settings";
@@ -771,7 +783,7 @@
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(304, 89);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(287, 89);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // label4
@@ -946,7 +958,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(0, 600);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(310, 54);
+            this.groupBox5.Size = new System.Drawing.Size(293, 54);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Optimizer";
@@ -965,13 +977,13 @@
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(304, 34);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(287, 34);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // numericMemoryMax
             // 
             this.numericMemoryMax.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericMemoryMax.Location = new System.Drawing.Point(152, 13);
+            this.numericMemoryMax.Location = new System.Drawing.Point(143, 13);
             this.numericMemoryMax.Margin = new System.Windows.Forms.Padding(0);
             this.numericMemoryMax.Maximum = new decimal(new int[] {
             99999999,
@@ -984,7 +996,7 @@
             0,
             0});
             this.numericMemoryMax.Name = "numericMemoryMax";
-            this.numericMemoryMax.Size = new System.Drawing.Size(152, 21);
+            this.numericMemoryMax.Size = new System.Drawing.Size(144, 21);
             this.numericMemoryMax.TabIndex = 10;
             this.numericMemoryMax.Value = new decimal(new int[] {
             50,
@@ -999,7 +1011,7 @@
             this.checkDisable3D.Location = new System.Drawing.Point(0, 13);
             this.checkDisable3D.Margin = new System.Windows.Forms.Padding(0);
             this.checkDisable3D.Name = "checkDisable3D";
-            this.checkDisable3D.Size = new System.Drawing.Size(152, 21);
+            this.checkDisable3D.Size = new System.Drawing.Size(143, 21);
             this.checkDisable3D.TabIndex = 0;
             this.checkDisable3D.Text = "Disable 3D Rendering";
             this.checkDisable3D.UseVisualStyleBackColor = true;
@@ -1008,10 +1020,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(152, 0);
+            this.label7.Location = new System.Drawing.Point(143, 0);
             this.label7.Margin = new System.Windows.Forms.Padding(0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(152, 13);
+            this.label7.Size = new System.Drawing.Size(144, 13);
             this.label7.TabIndex = 1;
             this.label7.Text = "Restrict Memory Usage (MB)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1022,7 +1034,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(0, 654);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(310, 179);
+            this.groupBox6.Size = new System.Drawing.Size(293, 179);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "IRC Relay";
@@ -1062,7 +1074,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(301, 159);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(284, 159);
             this.tableLayoutPanel6.TabIndex = 0;
             // 
             // checkUseIRC
@@ -1238,7 +1250,7 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox7.Location = new System.Drawing.Point(0, 833);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(310, 83);
+            this.groupBox7.Size = new System.Drawing.Size(293, 83);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Drone Control";
@@ -1262,7 +1274,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(304, 63);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(287, 63);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // label10
@@ -1335,7 +1347,7 @@
             this.checkDroneFocus.Location = new System.Drawing.Point(144, 42);
             this.checkDroneFocus.Margin = new System.Windows.Forms.Padding(0);
             this.checkDroneFocus.Name = "checkDroneFocus";
-            this.checkDroneFocus.Size = new System.Drawing.Size(160, 21);
+            this.checkDroneFocus.Size = new System.Drawing.Size(152, 21);
             this.checkDroneFocus.TabIndex = 5;
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
@@ -1346,7 +1358,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox8.Location = new System.Drawing.Point(0, 916);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(310, 97);
+            this.groupBox8.Size = new System.Drawing.Size(293, 97);
             this.groupBox8.TabIndex = 8;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Log Upload";
@@ -1369,15 +1381,15 @@
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(304, 77);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(287, 77);
             this.tableLayoutPanel8.TabIndex = 0;
             // 
             // buttonUpload
             // 
             this.buttonUpload.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUpload.Location = new System.Drawing.Point(157, 29);
+            this.buttonUpload.Location = new System.Drawing.Point(149, 29);
             this.buttonUpload.Name = "buttonUpload";
-            this.buttonUpload.Size = new System.Drawing.Size(144, 20);
+            this.buttonUpload.Size = new System.Drawing.Size(135, 20);
             this.buttonUpload.TabIndex = 0;
             this.buttonUpload.Text = "Upload Current Log";
             this.buttonUpload.UseVisualStyleBackColor = true;
@@ -1386,9 +1398,9 @@
             // buttonUploadPrevious
             // 
             this.buttonUploadPrevious.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUploadPrevious.Location = new System.Drawing.Point(157, 55);
+            this.buttonUploadPrevious.Location = new System.Drawing.Point(149, 55);
             this.buttonUploadPrevious.Name = "buttonUploadPrevious";
-            this.buttonUploadPrevious.Size = new System.Drawing.Size(144, 19);
+            this.buttonUploadPrevious.Size = new System.Drawing.Size(135, 19);
             this.buttonUploadPrevious.TabIndex = 2;
             this.buttonUploadPrevious.Text = "Upload Previous Log";
             this.buttonUploadPrevious.UseVisualStyleBackColor = true;
@@ -1399,7 +1411,7 @@
             this.buttonOpenLogFolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonOpenLogFolder.Location = new System.Drawing.Point(3, 55);
             this.buttonOpenLogFolder.Name = "buttonOpenLogFolder";
-            this.buttonOpenLogFolder.Size = new System.Drawing.Size(148, 19);
+            this.buttonOpenLogFolder.Size = new System.Drawing.Size(140, 19);
             this.buttonOpenLogFolder.TabIndex = 3;
             this.buttonOpenLogFolder.Text = "Open Log Folder";
             this.buttonOpenLogFolder.UseVisualStyleBackColor = true;
@@ -1410,7 +1422,7 @@
             this.buttonView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonView.Location = new System.Drawing.Point(3, 29);
             this.buttonView.Name = "buttonView";
-            this.buttonView.Size = new System.Drawing.Size(148, 20);
+            this.buttonView.Size = new System.Drawing.Size(140, 20);
             this.buttonView.TabIndex = 4;
             this.buttonView.Text = "View Current Log";
             this.buttonView.UseVisualStyleBackColor = true;
@@ -1424,7 +1436,7 @@
             this.labelUploadResult.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUploadResult.Location = new System.Drawing.Point(3, 0);
             this.labelUploadResult.Name = "labelUploadResult";
-            this.labelUploadResult.Size = new System.Drawing.Size(298, 26);
+            this.labelUploadResult.Size = new System.Drawing.Size(281, 26);
             this.labelUploadResult.TabIndex = 1;
             this.labelUploadResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -1432,20 +1444,34 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // numericActiveMinThreshold
+            // groupBox9
             // 
-            this.numericActiveMinThreshold.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericActiveMinThreshold.Location = new System.Drawing.Point(180, 85);
-            this.numericActiveMinThreshold.Margin = new System.Windows.Forms.Padding(0);
-            this.numericActiveMinThreshold.Name = "numericActiveMinThreshold";
-            this.numericActiveMinThreshold.Size = new System.Drawing.Size(60, 21);
-            this.numericActiveMinThreshold.TabIndex = 37;
+            this.groupBox9.Controls.Add(this.checkFalconPunch);
+            this.groupBox9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox9.Location = new System.Drawing.Point(0, 1013);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(293, 35);
+            this.groupBox9.TabIndex = 9;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Falcon Punch";
+            // 
+            // checkFalconPunch
+            // 
+            this.checkFalconPunch.AutoSize = true;
+            this.checkFalconPunch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkFalconPunch.Location = new System.Drawing.Point(3, 17);
+            this.checkFalconPunch.Name = "checkFalconPunch";
+            this.checkFalconPunch.Size = new System.Drawing.Size(287, 15);
+            this.checkFalconPunch.TabIndex = 0;
+            this.checkFalconPunch.Text = "Enabled";
+            this.checkFalconPunch.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -1456,7 +1482,7 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Configuration";
-            this.Size = new System.Drawing.Size(310, 1039);
+            this.Size = new System.Drawing.Size(293, 1050);
             this.Load += new System.EventHandler(this.Configuration_Load);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -1477,6 +1503,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericPropulsionModuleCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTrackingModule)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericActiveMinThreshold)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -1507,7 +1534,8 @@
             this.groupBox8.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericActiveMinThreshold)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1609,5 +1637,7 @@
         private System.Windows.Forms.Button buttonOpenLogFolder;
         private System.Windows.Forms.Button buttonView;
         private System.Windows.Forms.NumericUpDown numericActiveMinThreshold;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.CheckBox checkFalconPunch;
     }
 }

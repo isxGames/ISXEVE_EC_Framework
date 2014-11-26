@@ -36,6 +36,7 @@ namespace EveComFramework.Core
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
                 SimpleDrone.SimpleDrone DroneInstance = SimpleDrone.SimpleDrone.Instance;
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
+                Security.SecuritySettings SecurityConfig = Security.Security.Instance.Config;
 
                 #region AutoModule
 
@@ -274,6 +275,13 @@ namespace EveComFramework.Core
                     DroneConfig.Save();
                 };
                 
+                #endregion
+
+                #region Security
+
+                checkFalconPunch.Checked = SecurityConfig.falconPunch;
+                checkFalconPunch.CheckedChanged += (s, a) => { SecurityConfig.falconPunch = checkFalconPunch.Checked; SecurityConfig.Save(); };
+
                 #endregion
             }
 
