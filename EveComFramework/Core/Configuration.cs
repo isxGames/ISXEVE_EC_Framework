@@ -235,6 +235,9 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.AgressiveMedium:
                         comboDroneMode.SelectedItem = "Agressive Medium";
                         break;
+                    case SimpleDrone.Mode.AgressiveMediumGila:
+                        comboDroneMode.SelectedItem = "Agressive Medium Gila";
+                        break;
                     case SimpleDrone.Mode.AgressiveHeavy:
                         comboDroneMode.SelectedItem = "Agressive Heavy";
                         break;
@@ -272,6 +275,9 @@ namespace EveComFramework.Core
                             break;
                         case "Agressive Medium":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveMedium;
+                            break;
+                        case "Agressive Medium Gila":
+                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveMediumGila;
                             break;
                         case "Agressive Heavy":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveHeavy;

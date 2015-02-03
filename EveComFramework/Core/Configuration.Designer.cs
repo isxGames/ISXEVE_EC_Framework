@@ -1325,6 +1325,7 @@
             "Fighter with Point Defense",
             "Agressive Scout",
             "Agressive Medium",
+            "Agressive Medium Gila",
             "Agressive Heavy",
             "Agressive Sentry"});
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);

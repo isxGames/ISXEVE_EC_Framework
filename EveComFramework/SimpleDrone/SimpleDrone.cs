@@ -21,6 +21,7 @@ namespace EveComFramework.SimpleDrone
         FighterPointDefense,
         AgressiveScout,
         AgressiveMedium,
+        AgressiveMediumGila,
         AFKHeavy,
         AgressiveHeavy,
         AgressiveSentry
@@ -424,7 +425,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle Attacking anything if in AgressiveMedium mode
-            if (Config.Mode == Mode.AgressiveMedium)
+            if (Config.Mode == Mode.AgressiveMedium || Config.Mode == Mode.AgressiveMediumGila)
             {
                 // Recall fighters and sentries
                 List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Medium Scout Drones") && a.State != EntityState.Departing).ToList();
@@ -444,7 +445,7 @@ namespace EveComFramework.SimpleDrone
                     Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                     return false;
                 }
-                int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                int AvailableSlots = ((Config.Mode == Mode.AgressiveMediumGila)?2:Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 // Launch drones
