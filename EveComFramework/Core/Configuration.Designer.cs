@@ -1319,6 +1319,7 @@
             "Point Defense",
             "Sentry with Point Defense",
             "Fighter",
+            "Fighter Support",
             "Fighter with Point Defense",
             "Agressive Scout",
             "Agressive Medium",
