@@ -185,6 +185,8 @@ namespace EveComFramework.Core
                 checkLocal.CheckedChanged += (s, a) => { CommsConfig.Local = checkLocal.Checked; CommsConfig.Save(); };
                 checkNPC.Checked = CommsConfig.NPC;
                 checkNPC.CheckedChanged += (s, a) => { CommsConfig.NPC = checkNPC.Checked; CommsConfig.Save(); };
+                checkAllChat.Checked = CommsConfig.AllChat;
+                checkAllChat.CheckedChanged += (s, a) => { CommsConfig.AllChat = checkAllChat.Checked; CommsConfig.Save(); };
                 checkWallet.Checked = CommsConfig.Wallet;
                 checkWallet.CheckedChanged += (s, a) => { CommsConfig.Wallet = checkWallet.Checked; CommsConfig.Save(); };
                 checkReportChatInvite.Checked = CommsConfig.ChatInvite;

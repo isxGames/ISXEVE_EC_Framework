@@ -21,6 +21,7 @@ namespace EveComFramework.Comms
         public string SendTo;
         public bool Local = true;
         public bool NPC = false;
+        public bool AllChat = false;
         public bool Wallet = true;
         public bool ChatInvite = true;
         public bool Grid = false;
@@ -49,7 +50,8 @@ namespace EveComFramework.Comms
             }
         }
 
-        private Comms() : base()
+        private Comms()
+            : base()
         {
             DefaultFrequency = 200;
             QueueState(Init);
@@ -69,6 +71,7 @@ namespace EveComFramework.Comms
         /// </summary>
         public CommsSettings Config = new CommsSettings();
         string LastLocal = "";
+        Dictionary<string, string> chatMessages = new Dictionary<string, string>();
         double LastWallet;
         bool ChatInviteSeen = false;
 
@@ -124,12 +127,13 @@ namespace EveComFramework.Comms
                 }
                 if (e.Text.ToLower().StartsWith("local "))
                 {
-                    LocalQueue.Enqueue(e.Text.Remove(0,6));
+                    LocalQueue.Enqueue(e.Text.Remove(0, 6));
                 }
                 if (e.Text.ToLower().StartsWith("listlocal") || e.Text.ToLower().StartsWith("locallist"))
                 {
                     ChatQueue.Enqueue("---------------Local List---------------");
-                    EVEFrameUtil.Do(() => {
+                    EVEFrameUtil.Do(() =>
+                    {
                         foreach (Pilot p in Local.Pilots)
                         {
                             ChatQueue.Enqueue(p.Name + " - http://evewho.com/pilot/" + p.Name.Replace(" ", "%20"));
@@ -192,7 +196,7 @@ namespace EveComFramework.Comms
 
             return true;
         }
-        bool Blank (object[] Params)
+        bool Blank(object[] Params)
         {
             return true;
         }
@@ -225,7 +229,7 @@ namespace EveComFramework.Comms
                 List<Pilot> newPilots = Local.Pilots.Where(a => !PilotCache.Contains(a)).ToList();
                 foreach (Pilot pilot in newPilots)
                 {
-                    ChatQueue.Enqueue("<Local> New Pilot: " + pilot.Name + " - http://evewho.com/pilot/" + pilot.Name.Replace(" ", "%20"));
+                    ChatQueue.Enqueue("<Local> New Pilot: " + pilot.Name);
                 }
             }
 
@@ -233,19 +237,56 @@ namespace EveComFramework.Comms
 
             try
             {
-                if (Config.Local && ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any())
+                if (Config.Local)
                 {
-                    if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text != LastLocal)
+                    if (Config.AllChat)
                     {
-                        LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
-                        if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
+                        foreach (ChatChannel channel in ChatChannel.All)
                         {
-                            ChatQueue.Enqueue("<Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + " - http://evewho.com/pilot/" + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName.Replace(" ", "%20") + " : " + LastLocal);
+                            try
+                            {
+                                if (channel.Messages.Count > 0)
+                                {
+                                    if (!chatMessages.ContainsKey(channel.ID))
+                                    {
+                                        chatMessages.Add(channel.ID, string.Empty);
+                                    }
+                                    if (chatMessages.FirstOrDefault(a => a.Key == channel.ID).Value != channel.Messages.Last().Text)
+                                    {
+                                        chatMessages.AddOrUpdate(channel.ID, channel.Messages.Last().Text);
+                                        if (!(channel.Messages.Last().SenderName == "Message" || channel.Messages.Last().SenderName == "EVE System" ) || Config.NPC)
+                                        {
+                                            ChatQueue.Enqueue("[Chat] <" + channel.Name + "> " + channel.Messages.Last().SenderName + ": " + channel.Messages.Last().Text);
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                EVEFrame.Log(e);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any())
+                        {
+                            if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text != LastLocal)
+                            {
+                                LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
+                                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
+                                {
+                                    ChatQueue.Enqueue("[Chat] <Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + ": " + LastLocal);
+                                }
+                            }
                         }
                     }
                 }
             }
-            catch { }
+            catch (Exception e)
+            {
+                EVEFrame.Log(e);
+            }
 
             if (Config.ChatInvite)
             {
@@ -299,10 +340,10 @@ namespace EveComFramework.Comms
 
         string toISK(double val)
         {
-            if (val > 1000000000) return string.Format("{0:C2}b isk", val / 1000000000);
-            if (val > 1000000) return string.Format("{0:C2}m isk", val / 1000000);
-            if (val > 1000) return string.Format("{0:C2}k isk", val / 1000);
-            return string.Format("{0:C2} isk", val);
+            if (val > 1000000000) return string.Format("{0:2}b isk", val / 1000000000);
+            if (val > 1000000) return string.Format("{0:2}m isk", val / 1000000);
+            if (val > 1000) return string.Format("{0:2}k isk", val / 1000);
+            return string.Format("{0:2} isk", val);
         }
     }
 
