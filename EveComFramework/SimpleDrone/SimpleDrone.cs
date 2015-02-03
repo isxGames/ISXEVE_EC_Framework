@@ -239,7 +239,7 @@ namespace EveComFramework.SimpleDrone
                     }
                     if (ActiveTarget == null && OutOfTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault();
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a =>  a.Distance < MaxRange);
                     }
                     if (ActiveTarget != null)
                     {
