@@ -497,7 +497,7 @@ namespace EveComFramework.Move
                 return true;
             }
 
-            if (ApproachTarget.Distance > ApproachDistance)
+            if ((ApproachTarget.CategoryID == Category.Asteroid ? ApproachTarget.SurfaceDistance : ApproachTarget.Distance) > ApproachDistance)
             {
                 // Start approaching our approach target if we're not currently approaching anything
                 if (!Approaching || (MyShip.ToEntity.Mode != EntityMode.Orbiting && MyShip.ToEntity.Mode != EntityMode.Approaching))
