@@ -14,12 +14,14 @@ namespace EveComFramework.Data
         public long ID { get; set; }
         public string Name { get; set; }
         public string Group { get; set; }
+        public long Volume { get; set; }
 
-        private DroneType(long ID, string Name, string Group)
+        private DroneType(long ID, string Name, string Group, long Volume)
         {
             this.ID = ID;
             this.Name = Name;
             this.Group = Group;
+            this.Volume = Volume;
         }
 
         private static List<DroneType> _All;
@@ -33,7 +35,7 @@ namespace EveComFramework.Data
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from a in dataDoc.Descendants("Drone")
-                                select new DroneType(Convert.ToInt64(a.Attribute("ID").Value), a.Attribute("Name").Value, a.Attribute("Group").Value)).ToList();
+                                select new DroneType(Convert.ToInt64(a.Attribute("ID").Value), a.Attribute("Name").Value, a.Attribute("Group").Value, Convert.ToInt64(a.Attribute("Volume").Value))).ToList();
                     }
                 }
                 return _All;
