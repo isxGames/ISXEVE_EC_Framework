@@ -507,7 +507,7 @@ namespace EveComFramework.Move
                 // Start approaching our approach target if we're not currently approaching anything
                 if (!Approaching || (MyShip.ToEntity.Mode != EntityMode.Orbiting && MyShip.ToEntity.Mode != EntityMode.Approaching))
                 {
-                    if (ApproachTarget.SurfaceDistance > 150000)
+                    if (ApproachTarget.SurfaceDistance > 150000 && (ApproachTarget.CategoryID == Category.Asteroid || ApproachTarget.CategoryID == Category.Structure || ApproachTarget.CategoryID == Category.Station))
                     {
                         Log.Log("|oWarping");
                         Log.Log(" |-g{0}(|w{1} km|-g)", ApproachTarget.Name, ApproachDistance / 1000);
