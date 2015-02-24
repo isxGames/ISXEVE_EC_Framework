@@ -497,11 +497,25 @@ namespace EveComFramework.Move
                 return true;
             }
 
+            if (MyShip.ToEntity.Mode == EntityMode.Warping)
+            {
+                return false;
+            }
+
             if ((ApproachTarget.CategoryID == Category.Asteroid ? ApproachTarget.SurfaceDistance : ApproachTarget.Distance) > ApproachDistance)
             {
                 // Start approaching our approach target if we're not currently approaching anything
                 if (!Approaching || (MyShip.ToEntity.Mode != EntityMode.Orbiting && MyShip.ToEntity.Mode != EntityMode.Approaching))
                 {
+                    if (ApproachTarget.SurfaceDistance > 150000)
+                    {
+                        Log.Log("|oWarping");
+                        Log.Log(" |-g{0}(|w{1} km|-g)", ApproachTarget.Name, ApproachDistance / 1000);
+                        ApproachTarget.WarpTo(ApproachDistance);
+                        DislodgeWaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
+                        return false;
+                    }
+
                     Approaching = true;
                     Log.Log("|oApproaching");
                     Log.Log(" |-g{0}(|w{1} km|-g)", ApproachTarget.Name, ApproachDistance / 1000);
