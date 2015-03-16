@@ -55,10 +55,12 @@ namespace EveComFramework.Core
         /// The state queue
         /// </summary>
         public LinkedList<StateQueue> States = new LinkedList<StateQueue>();
+
         /// <summary>
         /// The current state waiting to be processed
         /// </summary>
-        public StateQueue CurState;
+        public StateQueue CurState { get; set; }
+
         /// <summary>
         /// Returns true if there are no items in the state queue waiting to be processed
         /// </summary>
@@ -280,9 +282,5 @@ namespace EveComFramework.Core
                 //if (!Security.Security.Instance.Config.falconPunch) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect failedFalconPunch");
             }
         }
-
-
-
     }
-
 }
