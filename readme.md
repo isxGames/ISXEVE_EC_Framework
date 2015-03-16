@@ -1,10 +1,3 @@
-Ratter is a bot meant to replace ComBot's ratter mode.  It uses EveComFramework to enhance its abilities with the available modules.  Features:
-
-Anomaly scanning and warping
-Intelligent range checks for weapons
-Speed tanking with collision detection
-Fleet tethering
-
 Please connect to irc.lavishsoft.com and join #evecom for support.
 
 Please report issues / feature requests on the [issue tracker](http://git.eve-com.com/r1pt1de/EveComFramework/issues).
