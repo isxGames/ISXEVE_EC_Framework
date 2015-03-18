@@ -254,7 +254,7 @@ namespace EveComFramework.Comms
                                     if (chatMessages.FirstOrDefault(a => a.Key == channel.ID).Value != channel.Messages.Last().Text)
                                     {
                                         chatMessages.AddOrUpdate(channel.ID, channel.Messages.Last().Text);
-                                        if (!(channel.Messages.Last().SenderName == "Message" || channel.Messages.Last().SenderName == "EVE System" ) || Config.NPC)
+                                        if (!(channel.Messages.Last().SenderName == "Message" || channel.Messages.Last().SenderName == "EVE System") || Config.NPC)
                                         {
                                             ChatQueue.Enqueue("[Chat] <" + channel.Name + "> " + channel.Messages.Last().SenderName + ": " + channel.Messages.Last().Text);
                                         }
@@ -340,10 +340,10 @@ namespace EveComFramework.Comms
 
         string toISK(double val)
         {
-            if (val > 1000000000) return string.Format("{0:2}b isk", val / 1000000000);
-            if (val > 1000000) return string.Format("{0:2}m isk", val / 1000000);
-            if (val > 1000) return string.Format("{0:2}k isk", val / 1000);
-            return string.Format("{0:2} isk", val);
+            if (val > 1000000000) return string.Format("{0:0.00}b isk", val / 1000000000);
+            if (val > 1000000) return string.Format("{0:0.00}m isk", val / 1000000);
+            if (val > 1000) return string.Format("{0:0.00}k isk", val / 1000);
+            return string.Format("{0:0.00} isk", val);
         }
     }
 

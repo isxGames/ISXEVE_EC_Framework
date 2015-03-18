@@ -128,7 +128,10 @@ namespace EveComFramework.Core
             {
                 if (MyShip.CargoBay.IsPrimed)
                 {
-                    MyShip.CargoBay.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                    if (MyShip.CargoBay.Items != null && MyShip.CargoBay.Items.Any())
+                    {
+                        MyShip.CargoBay.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                    }
                 }
                 else
                 {
@@ -140,7 +143,10 @@ namespace EveComFramework.Core
             {
                 if (MyShip.DroneBay.IsPrimed)
                 {
-                    MyShip.DroneBay.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                    if (MyShip.DroneBay.Items != null && MyShip.DroneBay.Items.Any())
+                    {
+                        MyShip.DroneBay.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                    }
                 }
                 else
                 {
@@ -156,7 +162,10 @@ namespace EveComFramework.Core
                 {
                     if (Station.ItemHangar.IsPrimed)
                     {
-                        Station.ItemHangar.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
+                        if (Station.ItemHangar.Items != null && Station.ItemHangar.Items.Any())
+                        {
+                            Station.ItemHangar.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });    
+                        }
                     }
                     else
                     {
@@ -168,7 +177,14 @@ namespace EveComFramework.Core
                 {
                     if (Station.ShipHangar.IsPrimed)
                     {
-                        Station.ShipHangar.Items.ForEach(a => { ShipVolume.AddOrUpdate(a.Type, a.Volume); if (a.Name != null) ShipNames.Add(a.Name); });
+                        if (Station.ShipHangar.Items != null && Station.ShipHangar.Items.Any())
+                        {
+                            foreach (Item ship in Station.ShipHangar.Items)
+                            {
+                                ShipVolume.AddOrUpdate(ship.Type, ship.Volume);
+                                if (ship.Name != null) ShipNames.Add(ship.Name);
+                            }
+                        }
                     }
                     else
                     {
@@ -179,7 +195,10 @@ namespace EveComFramework.Core
 
                 if (FittingManager.Ready)
                 {
-                    Fittings = FittingManager.Fittings.Select(fit => fit.Name).ToList();
+                    if (FittingManager.Fittings != null && FittingManager.Fittings.Any())
+                    {
+                        Fittings = FittingManager.Fittings.Select(fit => fit.Name).ToList();    
+                    }
                 }
                 else
                 {
