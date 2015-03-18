@@ -125,6 +125,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.checkFalconPunch = new System.Windows.Forms.CheckBox();
+            this.checkAllChat = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1060,8 +1061,9 @@
             this.tableLayoutPanel6.Controls.Add(this.checkLocal, 1, 5);
             this.tableLayoutPanel6.Controls.Add(this.checkWallet, 1, 6);
             this.tableLayoutPanel6.Controls.Add(this.checkReportChatInvite, 1, 7);
-            this.tableLayoutPanel6.Controls.Add(this.checkGridTraffic, 1, 8);
             this.tableLayoutPanel6.Controls.Add(this.checkLocalTraffic, 3, 8);
+            this.tableLayoutPanel6.Controls.Add(this.checkGridTraffic, 1, 8);
+            this.tableLayoutPanel6.Controls.Add(this.checkAllChat, 3, 6);
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 9;
@@ -1319,9 +1321,11 @@
             "Point Defense",
             "Sentry with Point Defense",
             "Fighter",
+            "Fighter Support",
             "Fighter with Point Defense",
             "Agressive Scout",
             "Agressive Medium",
+            "Agressive Medium Gila",
             "Agressive Heavy",
             "Agressive Sentry"});
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
@@ -1465,6 +1469,17 @@
             this.checkFalconPunch.TabIndex = 0;
             this.checkFalconPunch.Text = "Enabled";
             this.checkFalconPunch.UseVisualStyleBackColor = true;
+            // 
+            // checkAllChat
+            // 
+            this.checkAllChat.AutoSize = true;
+            this.checkAllChat.Location = new System.Drawing.Point(149, 100);
+            this.checkAllChat.Margin = new System.Windows.Forms.Padding(0);
+            this.checkAllChat.Name = "checkAllChat";
+            this.checkAllChat.Size = new System.Drawing.Size(127, 17);
+            this.checkAllChat.TabIndex = 15;
+            this.checkAllChat.Text = "Include all other Chat";
+            this.checkAllChat.UseVisualStyleBackColor = true;
             // 
             // Configuration
             // 
@@ -1639,5 +1654,6 @@
         private System.Windows.Forms.NumericUpDown numericActiveMinThreshold;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.CheckBox checkFalconPunch;
+        private System.Windows.Forms.CheckBox checkAllChat;
     }
 }

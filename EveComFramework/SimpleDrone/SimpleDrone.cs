@@ -16,10 +16,12 @@ namespace EveComFramework.SimpleDrone
         None,
         Sentry,
         Fighter,
+        FighterSupport,
         PointDefense,
         FighterPointDefense,
         AgressiveScout,
         AgressiveMedium,
+        AgressiveMediumGila,
         AFKHeavy,
         AgressiveHeavy,
         AgressiveSentry
@@ -125,7 +127,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // If we're warping and drones are in space, recall them and stop the module
-            if (MyShip.ToEntity.Mode == EntityMode.Warping && Drone.AllInSpace.Any())
+            if (MyShip.ToEntity.Mode == EntityMode.Warping && Drone.AllInSpace.Any() && Config.Mode != Mode.FighterSupport)
             {
                 Drone.AllInSpace.ReturnToDroneBay();
                 return true;
@@ -138,7 +140,7 @@ namespace EveComFramework.SimpleDrone
                 return false;
             }
 
-            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)))
+            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)) && Config.Mode != Mode.FighterSupport)
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
                 // Recall drones
@@ -181,7 +183,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             List<Drone> RecallDamaged = Drone.AllInSpace.Where(a => DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
-            if (RecallDamaged.Any())
+            if (RecallDamaged.Any() && Config.Mode != Mode.FighterSupport)
             {
                 Console.Log("|oRecalling damaged drones");
                 RecallDamaged.ReturnToDroneBay();
@@ -194,7 +196,7 @@ namespace EveComFramework.SimpleDrone
 
             #region ActiveTarget selection
 
-            Double MaxRange = (Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance;
+			Double MaxRange = (Config.Mode == Mode.FighterSupport) ? 150000 : ((Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance);
 
             if (WarpScrambling != null)
             {
@@ -238,7 +240,7 @@ namespace EveComFramework.SimpleDrone
                     }
                     if (ActiveTarget == null && OutOfTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault();
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a =>  a.Distance < MaxRange);
                     }
                     if (ActiveTarget != null)
                     {
@@ -316,7 +318,7 @@ namespace EveComFramework.SimpleDrone
             }
             else
             {
-                if (ActiveTarget == null)
+                if (ActiveTarget == null && Config.Mode != Mode.FighterSupport)
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
                     // Recall drones if in point defense and no frig/destroyers in range
@@ -423,7 +425,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle Attacking anything if in AgressiveMedium mode
-            if (Config.Mode == Mode.AgressiveMedium)
+            if (Config.Mode == Mode.AgressiveMedium || Config.Mode == Mode.AgressiveMediumGila)
             {
                 // Recall fighters and sentries
                 List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Medium Scout Drones") && a.State != EntityState.Departing).ToList();
@@ -443,7 +445,7 @@ namespace EveComFramework.SimpleDrone
                     Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                     return false;
                 }
-                int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                int AvailableSlots = ((Config.Mode == Mode.AgressiveMediumGila)?2:Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 // Launch drones
@@ -579,7 +581,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle managing fighters
-            if (Config.Mode == Mode.Fighter)
+            if (Config.Mode == Mode.Fighter || Config.Mode == Mode.FighterSupport)
             {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
                     // Recall non fighters

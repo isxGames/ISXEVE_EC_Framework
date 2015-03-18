@@ -185,6 +185,8 @@ namespace EveComFramework.Core
                 checkLocal.CheckedChanged += (s, a) => { CommsConfig.Local = checkLocal.Checked; CommsConfig.Save(); };
                 checkNPC.Checked = CommsConfig.NPC;
                 checkNPC.CheckedChanged += (s, a) => { CommsConfig.NPC = checkNPC.Checked; CommsConfig.Save(); };
+                checkAllChat.Checked = CommsConfig.AllChat;
+                checkAllChat.CheckedChanged += (s, a) => { CommsConfig.AllChat = checkAllChat.Checked; CommsConfig.Save(); };
                 checkWallet.Checked = CommsConfig.Wallet;
                 checkWallet.CheckedChanged += (s, a) => { CommsConfig.Wallet = checkWallet.Checked; CommsConfig.Save(); };
                 checkReportChatInvite.Checked = CommsConfig.ChatInvite;
@@ -221,6 +223,9 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.Fighter:
                         comboDroneMode.SelectedItem = "Fighter";
                         break;
+                    case SimpleDrone.Mode.FighterSupport:
+                        comboDroneMode.SelectedItem = "Fighter Support";
+                        break;
                     case SimpleDrone.Mode.FighterPointDefense:
                         comboDroneMode.SelectedItem = "Fighter with Point Defense";
                         break;
@@ -229,6 +234,9 @@ namespace EveComFramework.Core
                         break;
                     case SimpleDrone.Mode.AgressiveMedium:
                         comboDroneMode.SelectedItem = "Agressive Medium";
+                        break;
+                    case SimpleDrone.Mode.AgressiveMediumGila:
+                        comboDroneMode.SelectedItem = "Agressive Medium Gila";
                         break;
                     case SimpleDrone.Mode.AgressiveHeavy:
                         comboDroneMode.SelectedItem = "Agressive Heavy";
@@ -256,6 +264,9 @@ namespace EveComFramework.Core
                         case "Fighter":
                             DroneConfig.Mode = SimpleDrone.Mode.Fighter;
                             break;
+                        case "Fighter Support":
+                            DroneConfig.Mode = SimpleDrone.Mode.FighterSupport;
+                            break;
                         case "Fighter with Point Defense":
                             DroneConfig.Mode = SimpleDrone.Mode.FighterPointDefense;
                             break;
@@ -264,6 +275,9 @@ namespace EveComFramework.Core
                             break;
                         case "Agressive Medium":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveMedium;
+                            break;
+                        case "Agressive Medium Gila":
+                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveMediumGila;
                             break;
                         case "Agressive Heavy":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveHeavy;
