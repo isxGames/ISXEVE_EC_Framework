@@ -560,11 +560,16 @@ namespace EveComFramework.Move
                     }
                 }
             }
-            else
+            else 
             {
-                Command.CmdStopShip.Execute();
+                if (EveCom.MyShip.ToEntity.Velocity.Magnitude > 0)
+                {
+                    Command.CmdStopShip.Execute();    
+                }
+                
                 return true;
             }
+
             return false;
         }
 
@@ -763,7 +768,8 @@ namespace EveComFramework.Move
                             Log.Log(" |-g{0}", Route.NextWaypoint.Name);
                             Route.NextWaypoint.WarpTo();
                             return false;
-                        }                    }
+                        }                    
+                    }
                     InsertState(Dock, 500, Route.NextWaypoint);
                     return true;
                 }
@@ -954,5 +960,4 @@ namespace EveComFramework.Move
 
         #endregion
     }
-
 }
