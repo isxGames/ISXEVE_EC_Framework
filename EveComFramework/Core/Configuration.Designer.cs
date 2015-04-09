@@ -1320,14 +1320,16 @@
             "AFK Heavy",
             "Point Defense",
             "Sentry with Point Defense",
+            "Sentry with Point Defense (Rattlesnake)",
             "Fighter",
             "Fighter Support",
             "Fighter with Point Defense",
             "Agressive Scout",
             "Agressive Medium",
-            "Agressive Medium Gila",
+            "Agressive Medium (Gila)",
             "Agressive Heavy",
-            "Agressive Sentry"});
+            "Agressive Sentry",
+            "Agressive Sentry (Rattlesnake)"});
             this.comboDroneMode.Location = new System.Drawing.Point(61, 21);
             this.comboDroneMode.Margin = new System.Windows.Forms.Padding(0);
             this.comboDroneMode.Name = "comboDroneMode";
