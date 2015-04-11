@@ -180,7 +180,7 @@ namespace EveComFramework.Core
                     {
                         if (Station.ShipHangar.Items != null && Station.ShipHangar.Items.Any())
                         {
-                            foreach (Item ship in Station.ShipHangar.Items)
+                            foreach (Item ship in Station.ShipHangar.Items.Where(ship => ship != null && ship.isUnpacked))
                             {
                                 ShipVolume.AddOrUpdate(ship.Type, ship.Volume);
                                 if (ship.Name != null) ShipNames.Add(ship.Name);
