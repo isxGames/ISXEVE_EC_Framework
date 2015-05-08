@@ -948,6 +948,11 @@
             Dictionary of lists of entity IDs for entities currently neuting a fleet member keyed by fleet member ID
             </summary>
         </member>
+        <member name="F:EveComFramework.Security.Security.ReportCC">
+            <summary>
+            This property has no longer any effect
+            </summary>
+        </member>
         <member name="M:EveComFramework.Security.Security.Enable(System.Boolean)">
             <summary>
             Starts/stops this module

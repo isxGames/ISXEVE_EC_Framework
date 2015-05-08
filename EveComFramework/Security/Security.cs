@@ -142,6 +142,11 @@ namespace EveComFramework.Security
         public HashSet<long> NeutingEntities = new HashSet<long>();
 
         public bool PerformFlee = true;
+
+        /// <summary>
+        /// This property has no longer any effect
+        /// </summary>
+        [Obsolete("Deprecated: Was only used by the ESSBot so far and has been removed in favour of a better solution as of 2015-05-08")]
         public bool ReportCC = true;
 
         Move.Move Move = EveComFramework.Move.Move.Instance;
@@ -531,13 +536,13 @@ namespace EveComFramework.Security
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
 
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
-            if (WarpScrambling != null && ReportCC)
+            if (WarpScrambling != null && WarpScrambling.GroupID != Group.EncounterSurveillanceSystem)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
             Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing && !Triggers.Contains(a.Name));
-            if (Neuting != null && ReportCC)
+            if (Neuting != null)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
             }
@@ -717,7 +722,7 @@ namespace EveComFramework.Security
         bool WaitFlee(object[] Params)
         {
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
-            if ((WarpScrambling != null || this.ValidScramble != null) && ReportCC)
+            if ((WarpScrambling != null || this.ValidScramble != null) && WarpScrambling.GroupID != Group.EncounterSurveillanceSystem)
             {
                 LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 if (AbandonAlert != null)
