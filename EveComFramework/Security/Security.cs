@@ -330,15 +330,15 @@ namespace EveComFramework.Security
                             if (MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
                             break;
                         case FleeTrigger.NegativeStanding:
-                            List<Pilot> NegativePilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance < 0 ||
-                                                                                    a.ToAlliance.FromCorp < 0 ||
-                                                                                    a.ToAlliance.FromChar < 0 ||
-                                                                                    a.ToCorp.FromAlliance < 0 ||
-                                                                                    a.ToCorp.FromCorp < 0 ||
-                                                                                    a.ToCorp.FromChar < 0 ||
-                                                                                    a.ToChar.FromAlliance < 0 ||
-                                                                                    a.ToChar.FromCorp < 0 ||
-                                                                                    a.ToChar.FromChar < 0
+                            List<Pilot> NegativePilots = Local.Pilots.Where(a => (a.ToAlliance.FromAllianceDouble < 0.0 ||
+                                                                                    a.ToAlliance.FromCorpDouble < 0.0 ||
+                                                                                    a.ToAlliance.FromCharDouble < 0.0 ||
+                                                                                    a.ToCorp.FromAllianceDouble < 0.0 ||
+                                                                                    a.ToCorp.FromCorpDouble < 0.0 ||
+                                                                                    a.ToCorp.FromCharDouble < 0.0 ||
+                                                                                    a.ToChar.FromAllianceDouble < 0.0 ||
+                                                                                    a.ToChar.FromCorpDouble < 0.0 ||
+                                                                                    a.ToChar.FromCharDouble < 0.0
                                                                                  ) &&
                                                                                  a.ID != Me.CharID).ToList();
                             if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
@@ -352,15 +352,15 @@ namespace EveComFramework.Security
                             }
                             break;
                         case FleeTrigger.NeutralStanding:
-                            List<Pilot> NeutralPilots = Local.Pilots.Where(a => (a.ToAlliance.FromAlliance <= 0 &&
-                                                                                    a.ToAlliance.FromCorp <= 0 &&
-                                                                                    a.ToAlliance.FromChar <= 0 &&
-                                                                                    a.ToCorp.FromAlliance <= 0 &&
-                                                                                    a.ToCorp.FromCorp <= 0 &&
-                                                                                    a.ToCorp.FromChar <= 0 &&
-                                                                                    a.ToChar.FromAlliance <= 0 &&
-                                                                                    a.ToChar.FromCorp <= 0 &&
-                                                                                    a.ToChar.FromChar <= 0
+                            List<Pilot> NeutralPilots = Local.Pilots.Where(a => (a.ToAlliance.FromAllianceDouble <= 0.0 &&
+                                                                                    a.ToAlliance.FromCorpDouble <= 0.0 &&
+                                                                                    a.ToAlliance.FromCharDouble <= 0.0 &&
+                                                                                    a.ToCorp.FromAllianceDouble <= 0.0 &&
+                                                                                    a.ToCorp.FromCorpDouble <= 0.0 &&
+                                                                                    a.ToCorp.FromCharDouble <= 0.0 &&
+                                                                                    a.ToChar.FromAllianceDouble <= 0.0 &&
+                                                                                    a.ToChar.FromCorpDouble <= 0.0 &&
+                                                                                    a.ToChar.FromCharDouble <= 0.0
                                                                                  ) &&
                                                                                  a.ID != Me.CharID).ToList();
                             if (!Config.NeutralAlliance) { NeutralPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
@@ -374,9 +374,9 @@ namespace EveComFramework.Security
                             }
                             break;
                         case FleeTrigger.Paranoid:
-                            List<Pilot> Paranoid = Local.Pilots.Where(a => (a.ToAlliance.FromChar <= 0 &&
-                                                                                    a.ToCorp.FromChar <= 0 &&
-                                                                                    a.ToChar.FromChar <= 0
+                            List<Pilot> Paranoid = Local.Pilots.Where(a => (a.ToAlliance.FromCharDouble <= 0.0 &&
+                                                                                    a.ToCorp.FromCharDouble <= 0.0 &&
+                                                                                    a.ToChar.FromCharDouble <= 0.0
                                                                                  ) &&
                                                                                  a.ID != Me.CharID).ToList();
                             if (!Config.ParanoidAlliance) { Paranoid.RemoveAll(a => a.AllianceID == Me.AllianceID); }
@@ -939,21 +939,32 @@ namespace EveComFramework.Security
 
         PilotColors PilotColor(Pilot pilot)
         {
-            int val = 0 +
-                pilot.ToAlliance.FromAlliance +
-                pilot.ToAlliance.FromCorp +
-                pilot.ToAlliance.FromChar +
-                pilot.ToCorp.FromAlliance +
-                pilot.ToCorp.FromCorp +
-                pilot.ToCorp.FromChar +
-                pilot.ToChar.FromAlliance +
-                pilot.ToChar.FromCorp +
-                pilot.ToChar.FromChar;
             if (pilot.CorpID == Me.CorpID) return PilotColors.Blue;
             if (pilot.AllianceID == Me.AllianceID) return PilotColors.Blue;
-            if (val > 0) return PilotColors.Blue;
-            if (val == 0) return PilotColors.Grey;
-            if (val < 0) return PilotColors.Red;
+
+            double relationship = 0;
+            double[] relationships = {
+				pilot.ToCorp.FromCharDouble,
+				pilot.ToChar.FromCharDouble,
+				pilot.ToAlliance.FromCharDouble,
+				pilot.ToChar.FromCorpDouble,
+				pilot.ToCorp.FromCorpDouble,
+				pilot.ToAlliance.FromCorpDouble,
+				pilot.ToChar.FromAllianceDouble,
+				pilot.ToCorp.FromAllianceDouble,
+				pilot.ToAlliance.FromAllianceDouble
+			};
+
+            foreach (int r in relationships)
+            {
+                if (r != 0 && r > relationship || relationship == 0)
+                {
+                    relationship = r;
+                }
+            }
+
+            if (relationship > 0) return PilotColors.Blue;
+            if (relationship < 0) return PilotColors.Red;
             return PilotColors.Grey;
         }
     }
