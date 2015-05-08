@@ -960,16 +960,16 @@ namespace EveComFramework.Security
 				pilot.ToAlliance.FromAllianceDouble
 			};
 
-            foreach (int r in relationships)
+            foreach (double r in relationships)
             {
-                if (r != 0 && r > relationship || relationship == 0)
+                if (r != 0.0 && r > relationship || relationship == 0.0)
                 {
                     relationship = r;
                 }
             }
 
-            if (relationship > 0) return PilotColors.Blue;
-            if (relationship < 0) return PilotColors.Red;
+            if (relationship > 0.0) return PilotColors.Blue;
+            if (relationship < 0.0) return PilotColors.Red;
             return PilotColors.Grey;
         }
     }
