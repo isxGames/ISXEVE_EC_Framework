@@ -143,12 +143,6 @@ namespace EveComFramework.Security
 
         public bool PerformFlee = true;
 
-        /// <summary>
-        /// This property has no longer any effect
-        /// </summary>
-        [Obsolete("Deprecated: Was only used by the ESSBot so far and has been removed in favour of a better solution as of 2015-05-08")]
-        public bool ReportCC = true;
-
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
         Pilot Hostile = null;
@@ -197,51 +191,6 @@ namespace EveComFramework.Security
                 SecurityAudio.Enabled(false);
                 Clear();
             }
-        }
-
-        /// <summary>
-        /// Start this module
-        /// </summary>
-        [Obsolete("Depreciated:  Use Security.Enable (6/11/13)")]
-        public void Start()
-        {
-            if (Idle)
-            {
-                SecurityAudio.Enabled(true);
-                QueueState(CheckSafe);
-            }
-
-        }
-
-        /// <summary>
-        /// Stop this module
-        /// </summary>
-        [Obsolete("Depreciated:  Use Security.Enable (6/11/13)")]
-        public void Stop()
-        {
-            SecurityAudio.Enabled(false);
-            Clear();
-        }
-
-        /// <summary>
-        /// Trigger a flee manually
-        /// </summary>
-        [Obsolete("Depreciated:  Not useful anymore.  Speak with Teht if you have need of this method.  6/11/13")]
-        public void Flee()
-        {
-            Clear();
-            QueueState(Flee);
-        }
-
-        /// <summary>
-        /// This was originally intended to reset the security module after a certain duration.
-        /// </summary>
-        [Obsolete("Depreciated:  Not useful anymore.  Speak with Teht if you have need of this method.  6/11/13")]
-        public void Reset(int? Delay = null)
-        {
-            int iDelay = Delay ?? Config.FleeWait * 60000;
-            QueueState(Blank, iDelay);
-            QueueState(CheckSafe);
         }
 
         /// <summary>

@@ -948,36 +948,11 @@
             Dictionary of lists of entity IDs for entities currently neuting a fleet member keyed by fleet member ID
             </summary>
         </member>
-        <member name="F:EveComFramework.Security.Security.ReportCC">
-            <summary>
-            This property has no longer any effect
-            </summary>
-        </member>
         <member name="M:EveComFramework.Security.Security.Enable(System.Boolean)">
             <summary>
             Starts/stops this module
             </summary>
             <param name="val">Enabled=true</param>
-        </member>
-        <member name="M:EveComFramework.Security.Security.Start">
-            <summary>
-            Start this module
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Security.Security.Stop">
-            <summary>
-            Stop this module
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Security.Security.Flee">
-            <summary>
-            Trigger a flee manually
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Security.Security.Reset(System.Nullable{System.Int32})">
-            <summary>
-            This was originally intended to reset the security module after a certain duration.
-            </summary>
         </member>
         <member name="M:EveComFramework.Security.Security.Configure">
             <summary>
