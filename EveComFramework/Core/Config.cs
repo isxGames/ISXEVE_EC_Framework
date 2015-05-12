@@ -28,7 +28,8 @@ namespace EveComFramework.Core
             }
         }
 
-        private Config() : base()
+        private Config()
+            : base()
         {
         }
 

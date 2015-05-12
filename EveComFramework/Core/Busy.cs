@@ -28,12 +28,13 @@ namespace EveComFramework.Core
             }
         }
 
-        private Busy() : base()
+        private Busy()
+            : base()
         {
         }
 
         #endregion
-        
+
         static Dictionary<string, Action> BusySet = new Dictionary<string, Action>();
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace EveComFramework.Core
                 BusySet.Remove(Item);
             }
         }
-        
+
         /// <summary>
         /// Signal modules that are ready using the actions defined
         /// </summary>

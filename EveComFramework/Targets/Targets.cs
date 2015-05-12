@@ -180,7 +180,8 @@ namespace EveComFramework.Targets
             }
         }
 
-        private IPC() : base()
+        private IPC()
+            : base()
         {
             LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateActiveTargets");
             LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateActiveTargets", UpdateActiveTargets);

@@ -27,7 +27,8 @@ namespace EveComFramework.Core
             }
         }
 
-        private Diagnostics() : base()
+        private Diagnostics()
+            : base()
         {
             RegisterCommands();
             LogDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\logs\\";
@@ -135,7 +136,7 @@ namespace EveComFramework.Core
             result = client.UploadFile("http://api.eve-com.com/log.php", "POST", uploadFile);
             EVEFrame.Log(System.Text.Encoding.UTF8.GetString(result, 0, result.Length).ToString());
             if (System.Text.Encoding.UTF8.GetString(result, 0, result.Length).ToString() == "uploaded") return true;
-            return false; 
+            return false;
         }
     }
 }

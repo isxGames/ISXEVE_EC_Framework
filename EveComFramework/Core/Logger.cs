@@ -32,7 +32,8 @@ namespace EveComFramework.Core
             }
         }
 
-        private LoggerHelper() : base()
+        private LoggerHelper()
+            : base()
         {
             CurrentBackColor = BackColor1;
         }

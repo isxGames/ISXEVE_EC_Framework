@@ -60,7 +60,8 @@ namespace EveComFramework.SimpleDrone
             }
         }
 
-        private SimpleDrone() : base()
+        private SimpleDrone()
+            : base()
         {
             Rats.AddPriorityTargets();
             Rats.AddNPCs();
@@ -198,7 +199,7 @@ namespace EveComFramework.SimpleDrone
 
             #region ActiveTarget selection
 
-			Double MaxRange = (Config.Mode == Mode.FighterSupport) ? 150000 : ((Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance);
+            Double MaxRange = (Config.Mode == Mode.FighterSupport) ? 150000 : ((Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance);
 
             if (WarpScrambling != null)
             {
@@ -242,7 +243,7 @@ namespace EveComFramework.SimpleDrone
                     }
                     if (ActiveTarget == null && OutOfTargets)
                     {
-                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a =>  a.Distance < MaxRange);
+                        ActiveTarget = Rats.LockedAndLockingTargetList.FirstOrDefault(a => a.Distance < MaxRange);
                     }
                     if (ActiveTarget != null)
                     {
@@ -358,7 +359,7 @@ namespace EveComFramework.SimpleDrone
                         Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
-                    int AvailableSlots = ((Config.Mode == Mode.SentryRattle)?2:Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                    int AvailableSlots = ((Config.Mode == Mode.SentryRattle) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                     List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).Take(AvailableSlots).ToList();
                     List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).Take(AvailableSlots).ToList();
                     // Launch drones
@@ -447,7 +448,7 @@ namespace EveComFramework.SimpleDrone
                     Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                     return false;
                 }
-                int AvailableSlots = ((Config.Mode == Mode.AgressiveMediumGila)?2:Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                int AvailableSlots = ((Config.Mode == Mode.AgressiveMediumGila) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 // Launch drones
@@ -523,7 +524,7 @@ namespace EveComFramework.SimpleDrone
                     Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                     return false;
                 }
-                int AvailableSlots = ((Config.Mode == Mode.AgressiveSentryRattle)?2:Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                int AvailableSlots = ((Config.Mode == Mode.AgressiveSentryRattle) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                 List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                 // Launch drones
@@ -564,7 +565,7 @@ namespace EveComFramework.SimpleDrone
                         Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
-                    int AvailableSlots = ((Config.Mode == Mode.SentryRattle)?2:Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                    int AvailableSlots = ((Config.Mode == Mode.SentryRattle) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                     List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                     List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                     // Launch drones
@@ -585,39 +586,39 @@ namespace EveComFramework.SimpleDrone
             // Handle managing fighters
             if (Config.Mode == Mode.Fighter || Config.Mode == Mode.FighterSupport)
             {
-                    List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
-                    // Recall non fighters
-                    if (Recall.Any())
-                    {
-                        Console.Log("|oRecalling non fighters");
-                        Recall.ReturnToDroneBay();
-                        Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
-                        return false;
-                    }
-                    List<Drone> Attack = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters") && (a.State != EntityState.Combat || a.Target == null || a.Target != ActiveTarget)).ToList();
-                    // Send fighters to attack
-                    if (Attack.Any())
-                    {
-                        Console.Log("|oOrdering fighters to attack");
-                        Attack.Attack();
-                        Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
-                        return false;
-                    }
-                    int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
-                    List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters")).Take(AvailableSlots).ToList();
-                    List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters")).Take(AvailableSlots).ToList();
-                    // Launch fighters
-                    if (Deploy.Any())
-                    {
-                        Console.Log("|oLaunching fighters");
-                        Deploy.Launch();
-                        Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
-                        return false;
-                    }
-                    else if (AvailableSlots > 0 && DeployIgnoreCooldown.Any())
-                    {
-                        DroneCooldown.Clear();
-                    }
+                List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
+                // Recall non fighters
+                if (Recall.Any())
+                {
+                    Console.Log("|oRecalling non fighters");
+                    Recall.ReturnToDroneBay();
+                    Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
+                    return false;
+                }
+                List<Drone> Attack = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters") && (a.State != EntityState.Combat || a.Target == null || a.Target != ActiveTarget)).ToList();
+                // Send fighters to attack
+                if (Attack.Any())
+                {
+                    Console.Log("|oOrdering fighters to attack");
+                    Attack.Attack();
+                    Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
+                    return false;
+                }
+                int AvailableSlots = Me.MaxActiveDrones - Drone.AllInSpace.Count();
+                List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters")).Take(AvailableSlots).ToList();
+                List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Fighters")).Take(AvailableSlots).ToList();
+                // Launch fighters
+                if (Deploy.Any())
+                {
+                    Console.Log("|oLaunching fighters");
+                    Deploy.Launch();
+                    Deploy.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
+                    return false;
+                }
+                else if (AvailableSlots > 0 && DeployIgnoreCooldown.Any())
+                {
+                    DroneCooldown.Clear();
+                }
             }
 
             // Handle managing fighters

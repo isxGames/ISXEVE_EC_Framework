@@ -24,12 +24,13 @@ namespace EveComFramework.Core
             }
         }
 
-        private Exceptions() : base()
+        private Exceptions()
+            : base()
         {
         }
 
         #endregion
-        
+
         public string file { get; set; }
 
         public void Post(string title, Exception val)

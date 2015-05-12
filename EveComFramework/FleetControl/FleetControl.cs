@@ -55,7 +55,7 @@ namespace EveComFramework.FleetControl
 
     #endregion
 
-    public class FleetControl: EveComFramework.Core.State
+    public class FleetControl : EveComFramework.Core.State
     {
         #region Instantiation
 
@@ -72,7 +72,8 @@ namespace EveComFramework.FleetControl
             }
         }
 
-        private FleetControl() : base()
+        private FleetControl()
+            : base()
         {
             QueueState(Control);
         }
@@ -154,7 +155,7 @@ namespace EveComFramework.FleetControl
             //        _Fleet.Invite(Local.Pilots.FirstOrDefault(a => a.ID == Config.Fleets[Config.CurrentFleet].Commander), role: FleetRole.FleetCommander);
             //        return false;
             //    }
-                
+
             //}
 
 

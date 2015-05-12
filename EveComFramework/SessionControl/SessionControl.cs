@@ -72,7 +72,8 @@ namespace EveComFramework.SessionControl
             }
         }
 
-        private SessionControl() : base()
+        private SessionControl()
+            : base()
         {
             LoginDelta = random.Next(Config.LoginDelta);
             QueueState(LoginScreen);
@@ -286,7 +287,7 @@ namespace EveComFramework.SessionControl
                 }
             }
 
-            return false;        
+            return false;
         }
 
         #endregion
@@ -367,11 +368,11 @@ namespace EveComFramework.SessionControl
 
         bool Logout(object[] Params)
         {
-            LavishScriptAPI.LavishScript.ExecuteCommand("Exit");            
+            LavishScriptAPI.LavishScript.ExecuteCommand("Exit");
             return true;
         }
 
-        #endregion        
+        #endregion
 
         #endregion
     }

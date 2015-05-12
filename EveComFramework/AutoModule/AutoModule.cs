@@ -75,7 +75,8 @@ namespace EveComFramework.AutoModule
             }
         }
 
-        private AutoModule() : base()
+        private AutoModule()
+            : base()
         {
             DefaultFrequency = 100;
             if (Config.Enabled) QueueState(Control);
@@ -497,7 +498,8 @@ namespace EveComFramework.AutoModule
             }
         }
 
-        private InstaWarp() : base()
+        private InstaWarp()
+            : base()
         {
             if (Config.Enabled) QueueState(Control);
         }
@@ -532,8 +534,8 @@ namespace EveComFramework.AutoModule
         /// <summary>
         /// The config for this class
         /// </summary>
-        public InstawarpSettings Config = new InstawarpSettings(); 
-        
+        public InstawarpSettings Config = new InstawarpSettings();
+
         bool CycleComplete = false;
 
         #endregion
@@ -562,7 +564,7 @@ namespace EveComFramework.AutoModule
             if (MyShip.Modules.Any(a => a.GroupID == Group.PropulsionModule && a.IsOnline))
             {
                 if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 && 
+                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 &&
                     !CycleComplete)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();

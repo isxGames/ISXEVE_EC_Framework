@@ -15,7 +15,7 @@ namespace EveComFramework.AutoModule.UI
     public partial class AutoModule : Form
     {
         internal AutoModuleSettings Config = EveComFramework.AutoModule.AutoModule.Instance.Config;
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -88,7 +88,7 @@ namespace EveComFramework.AutoModule.UI
             groupBox1.Show();
             switch (Modules.SelectedItems[0].Text)
             {
-                case "Shield Boosters" :
+                case "Shield Boosters":
                     CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapShieldBoosters + "% capacitor";
                     MaxThresholdLabel.Text = "Deactivate if above " + Config.MaxShieldBoosters + "% shields";
                     MinThresholdLabel.Text = "Activate at or below " + Config.MinShieldBoosters + "% shields";
@@ -103,7 +103,7 @@ namespace EveComFramework.AutoModule.UI
                     ActivateApproaching.Hide();
                     ActivateOrbiting.Hide();
                     break;
-                case "Armor Repairers" :
+                case "Armor Repairers":
                     CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapArmorRepairs + "% capacitor";
                     MaxThresholdLabel.Text = "Deactivate if above " + Config.MaxArmorRepairs + "% armor";
                     MinThresholdLabel.Text = "Activate at or below " + Config.MinArmorRepairs + "% armor";

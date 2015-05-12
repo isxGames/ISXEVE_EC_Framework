@@ -15,7 +15,7 @@ namespace EveComFramework.Security.UI
 {
     internal partial class Security : Form
     {
-        
+
         string ActiveTrigger;
         SecuritySettings Config = EveComFramework.Security.Security.Instance.Config;
         SecurityAudioSettings SpeechConfig = EveComFramework.Security.SecurityAudio.Instance.Config;

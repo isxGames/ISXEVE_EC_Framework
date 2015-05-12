@@ -25,13 +25,13 @@ namespace EveComFramework.GroupControl.UI
             profileLabel.Text = thisProfile;
             foreach (Role role in Enum.GetValues(typeof(Role)))
             {
-                roleCombo.Items.Add(role.ToString());                
+                roleCombo.Items.Add(role.ToString());
             }
             roleCombo.SelectedItem = roleCombo.Items.Cast<string>().First(a => a == parent.Self.Role.ToString());
             foreach (GroupType gType in Enum.GetValues(typeof(GroupType)))
             {
                 comboBox1.Items.Add(gType.ToString());
-            }            
+            }
             comboBox1.SelectedItem = comboBox1.Items[0];
         }
 
@@ -41,7 +41,7 @@ namespace EveComFramework.GroupControl.UI
             foreach (GroupSettings gs in parent.GlobalConfig.Groups)
             {
                 TreeNode groupNode = new TreeNode(gs.FriendlyName + "-" + gs.GroupType.ToString());
-                groupNode.Tag = gs;                
+                groupNode.Tag = gs;
                 foreach (string profile in gs.MemberCharacternames)
                 {
                     groupNode.Nodes.Add(profile);
@@ -60,7 +60,7 @@ namespace EveComFramework.GroupControl.UI
         }
 
         private void joinButton_Click(object sender, EventArgs e)
-        {            
+        {
             GroupSettings activeGroup = parent.GlobalConfig.Groups.FirstOrDefault(a => a.MemberCharacternames.Any(b => b == thisProfile));
             if (activeGroup != null)
             {
@@ -70,7 +70,7 @@ namespace EveComFramework.GroupControl.UI
             newGroup.MemberCharacternames.Add(thisProfile);
             parent.GlobalConfig.KnownCharacters[thisProfile].CurrentGroup = newGroup.ID;
             parent.GlobalConfig.Save();
-            RefreshTree();               
+            RefreshTree();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)

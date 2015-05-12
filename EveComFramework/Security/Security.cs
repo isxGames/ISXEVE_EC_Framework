@@ -11,7 +11,7 @@ namespace EveComFramework.Security
 {
     #region Enums
 
-    #pragma warning disable 1591
+#pragma warning disable 1591
 
     public enum FleeTrigger
     {
@@ -34,7 +34,7 @@ namespace EveComFramework.Security
         SafeBookmarks
     }
 
-    #pragma warning restore 1591
+#pragma warning restore 1591
 
     #endregion
 
@@ -111,7 +111,8 @@ namespace EveComFramework.Security
             }
         }
 
-        private Security() : base()
+        private Security()
+            : base()
         {
             Log.Log("Security module initialized", LogType.DEBUG);
             RegisterCommands();
@@ -230,7 +231,7 @@ namespace EveComFramework.Security
                 ScramblingEntities.Add(long.Parse(args[1]));
             }
             catch { }
-            
+
             return 0;
         }
 
@@ -245,7 +246,7 @@ namespace EveComFramework.Security
             return 0;
         }
 
-        Dictionary<string, bool> BroadcastSafe = new Dictionary<string,bool>();
+        Dictionary<string, bool> BroadcastSafe = new Dictionary<string, bool>();
 
         int BroadcastTrigger(string[] args)
         {
@@ -527,7 +528,7 @@ namespace EveComFramework.Security
             Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing && !Triggers.Contains(a.Name));
             if (Neuting != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter "+ Neuting.ID);
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter " + Neuting.ID);
             }
 
             if (this.ValidScramble != null) return false;
@@ -793,7 +794,8 @@ namespace EveComFramework.Security
             }
         }
 
-        private SecurityAudio() : base()
+        private SecurityAudio()
+            : base()
         {
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             NonFleetPlayers.AddNonFleetPlayers();
@@ -912,7 +914,7 @@ namespace EveComFramework.Security
             Speech.Rate = Config.Rate;
             Speech.Volume = Config.Volume;
             if (SpeechQueue.Any()) Speech.SpeakAsync(SpeechQueue.Dequeue());
-     
+
             return false;
         }
 

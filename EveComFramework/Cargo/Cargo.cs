@@ -70,7 +70,8 @@ namespace EveComFramework.Cargo
             }
         }
 
-        private Cargo() : base()
+        private Cargo()
+            : base()
         {
 
         }

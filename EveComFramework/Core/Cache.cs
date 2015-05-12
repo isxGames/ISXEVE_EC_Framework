@@ -29,7 +29,8 @@ namespace EveComFramework.Core
             }
         }
 
-        private Cache() : base()
+        private Cache()
+            : base()
         {
             ItemVolume = new Dictionary<string, double>();
             ShipVolume = new Dictionary<string, double>();
@@ -96,7 +97,7 @@ namespace EveComFramework.Core
             public int Level;
             public AgentMission.MissionState State;
             public AgentMission.MissionType Type;
-            internal CachedMission (int ContentID, string Name, int Level, AgentMission.MissionState State, AgentMission.MissionType Type)
+            internal CachedMission(int ContentID, string Name, int Level, AgentMission.MissionState State, AgentMission.MissionType Type)
             {
                 this.ContentID = ContentID;
                 this.Name = Name;
@@ -164,7 +165,7 @@ namespace EveComFramework.Core
                     {
                         if (Station.ItemHangar.Items != null && Station.ItemHangar.Items.Any())
                         {
-                            Station.ItemHangar.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });    
+                            Station.ItemHangar.Items.ForEach(a => { ItemVolume.AddOrUpdate(a.Type, a.Volume); });
                         }
                     }
                     else
@@ -197,7 +198,7 @@ namespace EveComFramework.Core
                 {
                     if (FittingManager.Fittings != null && FittingManager.Fittings.Any())
                     {
-                        Fittings = FittingManager.Fittings.Select(fit => fit.Name).ToList();    
+                        Fittings = FittingManager.Fittings.Select(fit => fit.Name).ToList();
                     }
                 }
                 else

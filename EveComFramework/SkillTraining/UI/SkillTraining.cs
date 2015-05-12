@@ -21,7 +21,7 @@ namespace EveComFramework.SkillTraining.UI
             SkillPlan = currentSkillplan;
             InitializeComponent();
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (DialogResult.OK == openFileDialog1.ShowDialog())
@@ -49,7 +49,7 @@ namespace EveComFramework.SkillTraining.UI
                 {
                     MessageBox.Show("Something went wrong loading that skillplan, try again");
                     SkillPlan = OldPlan;
-                }                    
+                }
             }
         }
 
@@ -57,7 +57,7 @@ namespace EveComFramework.SkillTraining.UI
         {
             foreach (SkillToTrain stt in SkillPlan)
             {
-                plan_displaybox.Items.Add(String.Format("Skill : {0} , Level {1}",stt.Type ,stt.Level));
+                plan_displaybox.Items.Add(String.Format("Skill : {0} , Level {1}", stt.Type, stt.Level));
             }
 
         }

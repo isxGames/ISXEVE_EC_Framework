@@ -12,7 +12,7 @@ namespace EveComFramework.SkillTraining
 {
     [Serializable]
     public class SkillToTrain
-    {       
+    {
         public string Type;
         public int Level;
     }
@@ -24,7 +24,7 @@ namespace EveComFramework.SkillTraining
         /// <summary>
         /// Available skillqueues, keyed by the character name
         /// </summary>
-        public SerializableDictionary<string, List<SkillToTrain>> SkillQueues = new SerializableDictionary<string,List<SkillToTrain>>();
+        public SerializableDictionary<string, List<SkillToTrain>> SkillQueues = new SerializableDictionary<string, List<SkillToTrain>>();
     }
 
 
@@ -85,7 +85,7 @@ namespace EveComFramework.SkillTraining
             if (Idle || CurState.ToString() != "EventMonitor")
             {
                 QueueState(EventMonitor);
-            }  
+            }
         }
         /// <summary>
         /// Handles everything and queues skills as it can.
@@ -95,7 +95,7 @@ namespace EveComFramework.SkillTraining
             if (Idle || CurState.ToString() != "Monitor")
             {
                 QueueState(Monitor);
-            }            
+            }
         }
 
         public void Stop()
@@ -168,7 +168,7 @@ namespace EveComFramework.SkillTraining
                 CharName = Me.Name;
             }
             if (!SkillQueue.Ready)
-            {                
+            {
                 return false;
             }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
@@ -198,7 +198,7 @@ namespace EveComFramework.SkillTraining
                 CharName = Me.Name;
             }
             if (!SkillQueue.Ready)
-            {               
+            {
                 return false;
             }
             if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
@@ -230,7 +230,7 @@ namespace EveComFramework.SkillTraining
         {
             DefaultFrequency = 1000;
             if (SkillQueue.InTransaction)
-            {               
+            {
                 foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
                 {
                     //check if the skill is injected
@@ -292,7 +292,7 @@ namespace EveComFramework.SkillTraining
                 }
             }
             return false;
-            
+
         }
         #endregion
     }

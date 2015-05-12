@@ -49,7 +49,8 @@ namespace EveComFramework.DroneControl
             }
         }
 
-        private DroneControl() : base()
+        private DroneControl()
+            : base()
         {
             Rats.AddNPCs();
             RatComparer ratComp = new RatComparer();
@@ -133,8 +134,8 @@ namespace EveComFramework.DroneControl
                 if (x == y)
                     return 0;
                 int orderx = 0;
-                
-                if(Data.NPCClasses.All.ContainsKey(x.GroupID))
+
+                if (Data.NPCClasses.All.ContainsKey(x.GroupID))
                 {
                     orderx = ClassOrder.IndexOf(Data.NPCClasses.All[x.GroupID]) + 2;
                 }
@@ -143,9 +144,9 @@ namespace EveComFramework.DroneControl
                     orderx = 1;
                 }
                 int ordery = 0;
-                
 
-                if(Data.NPCClasses.All.ContainsKey(y.GroupID))
+
+                if (Data.NPCClasses.All.ContainsKey(y.GroupID))
                 {
                     ordery = ClassOrder.IndexOf(Data.NPCClasses.All[y.GroupID]) + 2;
                 }
@@ -272,7 +273,7 @@ namespace EveComFramework.DroneControl
 
             Drone.AllInSpace.ForEach(drone => { DroneData[drone].Health = drone.ToEntity.ShieldPct; DroneData[drone].Armor = drone.ToEntity.ArmorPct; DroneData[drone].Hull = drone.ToEntity.HullPct; });
 
-            if(ReturnedDrones.Count > 0)
+            if (ReturnedDrones.Count > 0)
             {
                 ReturnedDrones.ReturnToDroneBay();
                 ReturnedDrones.ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
@@ -336,7 +337,7 @@ namespace EveComFramework.DroneControl
                 while (DroneData.Keys.Count(drone => DroneData[drone].Assigned) < Me.MaxActiveDrones)
                 {
                     Drone Best;
-                    if (Config.Sentries && FirstTarget.Distance > Config.SentryRange*1000)
+                    if (Config.Sentries && FirstTarget.Distance > Config.SentryRange * 1000)
                     {
                         Best = FindDroneByGroup("Sentry Drones") ?? BestDrone(ratClass);
                     }
@@ -357,7 +358,7 @@ namespace EveComFramework.DroneControl
 
             if (DroneData.Count(drone => drone.Value.Group == "Sentry Drones") > Config.SentryCountLimit)
             {
-                DroneData.Where(drone => drone.Value.Group != "Sentry Drones" && drone.Value.Assigned && drone.Value.Target.Distance > Config.SentryDistanceLimit*1000).Select(drone => drone.Key).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
+                DroneData.Where(drone => drone.Value.Group != "Sentry Drones" && drone.Value.Assigned && drone.Value.Target.Distance > Config.SentryDistanceLimit * 1000).Select(drone => drone.Key).ToList().ForEach(drone => { DroneData[drone].Assigned = false; DroneData[drone].Target = null; });
             }
 
             if (Drone.AllInSpace.Count(drone => !DroneData[drone].Assigned && drone.State != EntityState.Departing && drone.State != EntityState.Departing_2) > Me.MaxActiveDrones - Drone.AllInBay.Count(drone => DroneData[drone].Assigned))
@@ -591,7 +592,7 @@ namespace EveComFramework.DroneControl
                 return false;
             }
 
-            if(Drone.AllInSpace.Count(drone => drone.GroupID == Group.SalvageDrone) < Me.MaxActiveDrones && Me.MaxActiveDrones > Drone.AllInSpace.Count() && Drone.AllInBay.Count(drone => drone.GroupID == Group.SalvageDrone) > 0)
+            if (Drone.AllInSpace.Count(drone => drone.GroupID == Group.SalvageDrone) < Me.MaxActiveDrones && Me.MaxActiveDrones > Drone.AllInSpace.Count() && Drone.AllInBay.Count(drone => drone.GroupID == Group.SalvageDrone) > 0)
             {
                 Drone.AllInBay.Where(drone => drone.GroupID == Group.SalvageDrone).Take(Me.MaxActiveDrones - Drone.AllInSpace.Count()).Launch();
                 Busy.SetBusy("DroneControl", Pause);

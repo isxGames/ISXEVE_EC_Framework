@@ -300,7 +300,7 @@ namespace EveComFramework.Core
                     }
                     DroneConfig.Save();
                 };
-                
+
                 #endregion
 
                 #region Security

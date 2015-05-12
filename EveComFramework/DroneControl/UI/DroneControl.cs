@@ -13,7 +13,7 @@ namespace EveComFramework.DroneControl.UI
     public partial class DroneControl : Form
     {
         internal DroneControlSettings Config = EveComFramework.DroneControl.DroneControl.Instance.Config;
-        
+
         public DroneControl()
         {
             InitializeComponent();
@@ -178,6 +178,6 @@ namespace EveComFramework.DroneControl.UI
 
 
 
-       
+
     }
 }

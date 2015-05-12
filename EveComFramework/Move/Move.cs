@@ -75,7 +75,8 @@ namespace EveComFramework.Move
             }
         }
 
-        private Move() : base()
+        private Move()
+            : base()
         {
 
         }
@@ -560,13 +561,13 @@ namespace EveComFramework.Move
                     }
                 }
             }
-            else 
+            else
             {
                 if (EveCom.MyShip.ToEntity.Velocity.Magnitude > 0)
                 {
-                    Command.CmdStopShip.Execute();    
+                    Command.CmdStopShip.Execute();
                 }
-                
+
                 return true;
             }
 
@@ -579,7 +580,7 @@ namespace EveComFramework.Move
         {
             Entity Target = ((Entity)Params[0]);
             int Distance = (int)Params[1];
-            bool Orbiting = (bool)Params[2]; 
+            bool Orbiting = (bool)Params[2];
             Entity Collision = null;
             if (Params.Count() > 3) { Collision = (Entity)Params[3]; }
 
@@ -709,7 +710,7 @@ namespace EveComFramework.Move
                             Log.Log(" |-g{0}", Route.NextWaypoint.Name);
                             Route.NextWaypoint.WarpTo();
                             return false;
-                        }   
+                        }
                     }
                     Log.Log("|oWarping to |-g{0} |w(|y100 km|w)", Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).Name);
                     Entity.All.FirstOrDefault(a => a.GroupID == Group.Sun).WarpTo(100000);
@@ -768,7 +769,7 @@ namespace EveComFramework.Move
                             Log.Log(" |-g{0}", Route.NextWaypoint.Name);
                             Route.NextWaypoint.WarpTo();
                             return false;
-                        }                    
+                        }
                     }
                     InsertState(Dock, 500, Route.NextWaypoint);
                     return true;
@@ -879,7 +880,8 @@ namespace EveComFramework.Move
             }
         }
 
-        private UndockWarp() : base()
+        private UndockWarp()
+            : base()
         {
             DefaultFrequency = 200;
             if (Config.Enabled) QueueState(WaitStation);
@@ -905,7 +907,7 @@ namespace EveComFramework.Move
             else
             {
                 Clear();
-            }            
+            }
         }
 
         #endregion
@@ -936,7 +938,7 @@ namespace EveComFramework.Move
                 return true;
             }
             return false;
-        }       
+        }
 
         bool WaitStation(object[] Params)
         {
