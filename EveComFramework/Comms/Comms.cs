@@ -96,6 +96,7 @@ namespace EveComFramework.Comms
 
         public event Action ToggleStop;
         public event Action Start;
+        public event Action Panic;
         public event Action Skip;
 
         void PMReceived(object sender, IrcMessageEventArgs e)
@@ -111,6 +112,7 @@ namespace EveComFramework.Comms
                     ChatQueue.Enqueue("Skip - Forces the bot to skip the current anomaly");
                     ChatQueue.Enqueue("Local <message> - Relays <message> to local (space must follow Local and don't put the <>!)");
                     ChatQueue.Enqueue("Listlocal or Locallist - Lists pilots currently in local chat");
+                    ChatQueue.Enqueue("panic - Trigger panicked flee");
                     ChatQueue.Enqueue("All commands are not case sensitive!");
                 }
                 if (e.Text.ToLower().StartsWith("togglestop") && ToggleStop != null)
@@ -120,6 +122,10 @@ namespace EveComFramework.Comms
                 if (e.Text.ToLower().StartsWith("start") && Start != null)
                 {
                     Start();
+                }
+                if (e.Text.ToLower().StartsWith("panic") && Panic != null)
+                {
+                    Panic();
                 }
                 if (e.Text.ToLower().StartsWith("skip") && Skip != null)
                 {

@@ -959,6 +959,11 @@
             Configure this module
             </summary>
         </member>
+        <member name="M:EveComFramework.Security.Security.Panic">
+            <summary>
+            Causes Security to trigger an alert, flee and wait until manually restarted
+            </summary>
+        </member>
         <member name="P:EveComFramework.Security.Security.Instance">
             <summary>
             Singletoner

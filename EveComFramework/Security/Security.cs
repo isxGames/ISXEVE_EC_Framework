@@ -24,6 +24,7 @@ namespace EveComFramework.Security
         ShieldLow,
         ArmorLow,
         Forced,
+        Panic,
         None
     }
 
@@ -183,12 +184,14 @@ namespace EveComFramework.Security
             {
                 if (Idle)
                 {
+                    Comms.Panic += Panic;
                     SecurityAudio.Enabled(true);
                     QueueState(CheckSafe);
                 }
             }
             else
             {
+                Comms.Panic -= Panic;
                 SecurityAudio.Enabled(false);
                 Clear();
             }
@@ -222,6 +225,18 @@ namespace EveComFramework.Security
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddNeuter", NeutingEntitiesUpdate);
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityBroadcastTrigger", BroadcastTrigger);
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityClearBroadcastTrigger", ClearBroadcastTrigger);
+        }
+
+        /// <summary>
+        /// Causes Security to trigger an alert, flee and wait until manually restarted
+        /// </summary>
+        public void Panic()
+        {
+            Clear();
+            TriggerAlert();
+            QueueState(RecallDrones);
+            QueueState(Flee, -1, FleeTrigger.Panic);
+            ReportTrigger(FleeTrigger.Panic);
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -511,6 +526,10 @@ namespace EveComFramework.Security
                     Log.Log("|rFlee trigger forced.");
                     Comms.ChatQueue.Enqueue(string.Format("<Security> Flee trigger forced."));
                     return;
+                case FleeTrigger.Panic:
+                    Log.Log("|rPanicking!");
+                    Comms.ChatQueue.Enqueue(string.Format("<Security> Panicking!"));
+                    return;
             }
         }
 
@@ -651,7 +670,11 @@ namespace EveComFramework.Security
 
             QueueState(WaitFlee);
             QueueState(SignalSuccessful);
-            if (Trigger != FleeTrigger.Forced) QueueState(CheckClear, -1, Trigger);
+
+            if (Trigger != FleeTrigger.Panic)
+            {
+                if (Trigger != FleeTrigger.Forced) QueueState(CheckClear, -1, Trigger);
+            }
 
             if (Session.InStation || !PerformFlee)
             {
