@@ -651,7 +651,7 @@ namespace EveComFramework.Security
 
             QueueState(WaitFlee);
             QueueState(SignalSuccessful);
-            if (Trigger != FleeTrigger.Forced) QueueState(CheckClear, -1, Trigger);
+            QueueState(CheckClear, -1, Trigger);
 
             if (Session.InStation || !PerformFlee)
             {
