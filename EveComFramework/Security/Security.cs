@@ -11,8 +11,6 @@ namespace EveComFramework.Security
 {
     #region Enums
 
-#pragma warning disable 1591
-
     public enum FleeTrigger
     {
         Pod,
@@ -34,8 +32,6 @@ namespace EveComFramework.Security
         SecureBookmark,
         SafeBookmarks
     }
-
-#pragma warning restore 1591
 
     #endregion
 
