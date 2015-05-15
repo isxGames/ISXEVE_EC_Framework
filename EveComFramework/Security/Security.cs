@@ -357,7 +357,7 @@ namespace EveComFramework.Security
                             if (TargetingPilots.Any())
                             {
                                 Hostile = TargetingPilots.FirstOrDefault();
-                                return FleeTrigger.NeutralStanding;
+                                return FleeTrigger.Targeted;
                             }
                             break;
                         case FleeTrigger.CapacitorLow:
@@ -383,13 +383,12 @@ namespace EveComFramework.Security
                             break;
                     }
                 }
-                return FleeTrigger.None;
             }
             catch (Exception e)
             {
                 Exceptions.Post("Security", e);
-                return FleeTrigger.None;
             }
+            return FleeTrigger.None;
         }
 
         public double PilotRelationship(Pilot pilot)
@@ -606,8 +605,7 @@ namespace EveComFramework.Security
             if (Config.IncludeBroadcastTriggers && BroadcastSafe.ContainsValue(false)) return false;
             Log.Log("|oArea is now safe");
             Log.Log(" |-gWaiting for |w{0}|-g minutes", FleeWait);
-            Comms.ChatQueue.Enqueue("<Security> Area is now safe");
-            Comms.ChatQueue.Enqueue(string.Format("<Security> Waiting for {0} minutes", FleeWait));
+            Comms.ChatQueue.Enqueue(string.Format("<Security> Area is now safe, waiting for {0} minutes", FleeWait));
             QueueState(CheckReset);
             QueueState(Resume);
 
@@ -624,11 +622,10 @@ namespace EveComFramework.Security
             if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
-                Comms.ChatQueue.Enqueue("<Security> New flee condition");
                 if (Config.BroadcastTrigger && (Reported == FleeTrigger.NegativeStanding || Reported == FleeTrigger.NeutralStanding || Reported == FleeTrigger.Paranoid)) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
-                Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
+                Comms.ChatQueue.Enqueue("<Security> New flee condition, waiting for safety");
                 Clear();
                 QueueState(CheckClear, -1, Reported);
             }
@@ -639,8 +636,7 @@ namespace EveComFramework.Security
         {
             Log.Log("|oReached flee target");
             Log.Log(" |-gWaiting for safety");
-            Comms.ChatQueue.Enqueue("<Security> Reached flee target");
-            Comms.ChatQueue.Enqueue("<Security> Waiting for safety");
+            Comms.ChatQueue.Enqueue("<Security> Reached flee target, waiting for safety");
             return true;
         }
 
@@ -748,7 +744,10 @@ namespace EveComFramework.Security
                 Comms.ChatQueue.Enqueue("<Security> Resuming operations");
                 ClearAlert();
             }
-            if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+            if (Config.BroadcastTrigger)
+            {
+                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+            }
             QueueState(CheckSafe);
             return true;
         }
