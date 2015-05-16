@@ -669,7 +669,7 @@ namespace EveComFramework.Security
 
             if (Trigger != FleeTrigger.Panic)
             {
-                if (Trigger != FleeTrigger.Forced) QueueState(CheckClear, -1, Trigger);
+                QueueState(CheckClear, -1, Trigger);
             }
 
             if (Session.InStation || !PerformFlee)
