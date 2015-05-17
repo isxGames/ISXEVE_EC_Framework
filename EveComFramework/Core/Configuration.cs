@@ -226,9 +226,6 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.Fighter:
                         comboDroneMode.SelectedItem = "Fighter";
                         break;
-                    case SimpleDrone.Mode.FighterSupport:
-                        comboDroneMode.SelectedItem = "Fighter Support";
-                        break;
                     case SimpleDrone.Mode.FighterPointDefense:
                         comboDroneMode.SelectedItem = "Fighter with Point Defense";
                         break;
@@ -272,9 +269,6 @@ namespace EveComFramework.Core
                             break;
                         case "Fighter":
                             DroneConfig.Mode = SimpleDrone.Mode.Fighter;
-                            break;
-                        case "Fighter Support":
-                            DroneConfig.Mode = SimpleDrone.Mode.FighterSupport;
                             break;
                         case "Fighter with Point Defense":
                             DroneConfig.Mode = SimpleDrone.Mode.FighterPointDefense;

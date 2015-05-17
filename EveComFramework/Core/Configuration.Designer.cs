@@ -1322,7 +1322,6 @@
             "Sentry with Point Defense",
             "Sentry with Point Defense (Rattlesnake)",
             "Fighter",
-            "Fighter Support",
             "Fighter with Point Defense",
             "Agressive Scout",
             "Agressive Medium",

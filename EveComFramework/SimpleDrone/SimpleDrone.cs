@@ -17,7 +17,6 @@ namespace EveComFramework.SimpleDrone
         Sentry,
         SentryRattle,
         Fighter,
-        FighterSupport,
         PointDefense,
         FighterPointDefense,
         AgressiveScout,
@@ -130,7 +129,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // If we're warping and drones are in space, recall them and stop the module
-            if (MyShip.ToEntity.Mode == EntityMode.Warping && Drone.AllInSpace.Any() && Config.Mode != Mode.FighterSupport)
+            if (MyShip.ToEntity.Mode == EntityMode.Warping && Drone.AllInSpace.Any())
             {
                 Drone.AllInSpace.ReturnToDroneBay();
                 return true;
@@ -143,7 +142,7 @@ namespace EveComFramework.SimpleDrone
                 return false;
             }
 
-            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)) && Config.Mode != Mode.FighterSupport)
+            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)))
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
                 // Recall drones
@@ -186,7 +185,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             List<Drone> RecallDamaged = Drone.AllInSpace.Where(a => DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
-            if (RecallDamaged.Any() && Config.Mode != Mode.FighterSupport)
+            if (RecallDamaged.Any())
             {
                 Console.Log("|oRecalling damaged drones");
                 RecallDamaged.ReturnToDroneBay();
@@ -199,7 +198,7 @@ namespace EveComFramework.SimpleDrone
 
             #region ActiveTarget selection
 
-            Double MaxRange = (Config.Mode == Mode.FighterSupport) ? 150000 : ((Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance);
+            Double MaxRange = (Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance;
 
             if (WarpScrambling != null)
             {
@@ -321,7 +320,7 @@ namespace EveComFramework.SimpleDrone
             }
             else
             {
-                if (ActiveTarget == null && Config.Mode != Mode.FighterSupport)
+                if (ActiveTarget == null)
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
                     // Recall drones if in point defense and no frig/destroyers in range
@@ -584,7 +583,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle managing fighters
-            if (Config.Mode == Mode.Fighter || Config.Mode == Mode.FighterSupport)
+            if (Config.Mode == Mode.Fighter)
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
                 // Recall non fighters
