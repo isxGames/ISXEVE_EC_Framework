@@ -191,19 +191,10 @@ namespace EveComFramework.SessionControl
             {
                 if (Login.Loading) return false;
                 if (Login.ServerStatus != "Status: OK") return false;
-                PopupWindow Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("There is a new build available"));
-                if (Message != null)
-                {
-                    Message.ClickButton(Window.Button.Yes);
-                    return false;
-                }
-                Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("A client update is available") ||
-                                                            a.Message.Contains("The client update has been installed.") ||
-                                                            a.Message.Contains("The update has been downloaded.") ||
+                PopupWindow Message = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Message.Contains("A client update is available") ||
                                                             a.Message.Contains("The daily downtime will begin in") ||
                                                             a.Message.Contains("The connection to the server was closed") ||
                                                             a.Message.Contains("Unable to connect to the selected server.") ||
-                                                            a.Message.Contains("At any time you can log in to the account management page") ||
                                                             a.Message.Contains("Connection Failed"));
                 if (Message != null)
                 {
