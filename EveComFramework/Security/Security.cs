@@ -139,8 +139,6 @@ namespace EveComFramework.Security
         /// </summary>
         public HashSet<long> NeutingEntities = new HashSet<long>();
 
-        public bool PerformFlee = true;
-
         Move.Move Move = EveComFramework.Move.Move.Instance;
         Cargo.Cargo Cargo = EveComFramework.Cargo.Cargo.Instance;
         Pilot Hostile = null;
@@ -672,7 +670,7 @@ namespace EveComFramework.Security
                 QueueState(CheckClear, -1, Trigger);
             }
 
-            if (Session.InStation || !PerformFlee)
+            if (Session.InStation)
             {
                 return true;
             }
