@@ -191,7 +191,7 @@ namespace EveComFramework.AutoModule
                     if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
                         MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline) == 0)
                     {
-                        if (!Entity.All.Any(a => a.IsTargetingMe))
+                        if (!Entity.All.Any(a => a.IsTargetingMe && !a.Released && !a.Exploded))
                         {
                             MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
                             return false;
