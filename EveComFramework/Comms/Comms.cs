@@ -125,7 +125,7 @@ namespace EveComFramework.Comms
                 {
                     Start();
                 }
-                if (e.Text.ToLower().StartsWith("tpgglelogoff") && Panic != null)
+                if (e.Text.ToLower().StartsWith("togglelogoff") && Panic != null)
                 {
                     ToggleLogoff();
                 }
