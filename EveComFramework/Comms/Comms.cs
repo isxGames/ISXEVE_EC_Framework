@@ -95,6 +95,7 @@ namespace EveComFramework.Comms
         #region Events
 
         public event Action ToggleStop;
+        public event Action ToggleLogoff;
         public event Action Start;
         public event Action Panic;
         public event Action Skip;
@@ -108,6 +109,7 @@ namespace EveComFramework.Comms
                     ChatQueue.Enqueue("---------------Currently supported commands---------------");
                     ChatQueue.Enqueue("? or help - Display this menu!");
                     ChatQueue.Enqueue("Togglestop - Toggles on/off a stop at next opportunity");
+                    ChatQueue.Enqueue("Togglelogoff - Toggles logoff on stop");
                     ChatQueue.Enqueue("Start - Starts the bot (ignored if bot is running)");
                     ChatQueue.Enqueue("Skip - Forces the bot to skip the current anomaly");
                     ChatQueue.Enqueue("Local <message> - Relays <message> to local (space must follow Local and don't put the <>!)");
@@ -122,6 +124,10 @@ namespace EveComFramework.Comms
                 if (e.Text.ToLower().StartsWith("start") && Start != null)
                 {
                     Start();
+                }
+                if (e.Text.ToLower().StartsWith("tpgglelogoff") && Panic != null)
+                {
+                    ToggleLogoff();
                 }
                 if (e.Text.ToLower().StartsWith("panic") && Panic != null)
                 {
