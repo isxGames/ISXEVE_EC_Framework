@@ -228,10 +228,7 @@ namespace EveComFramework.Security
         {
             Clear();
             TriggerAlert();
-            if (MyShip.DroneBay.IsPrimed && MyShip.DroneBay.MaxCapacity > 0.0)
-            {
-                QueueState(RecallDrones);
-            }
+            QueueState(RecallDrones);
             QueueState(Flee, -1, FleeTrigger.Panic);
             ReportTrigger(FleeTrigger.Panic);
         }
@@ -266,10 +263,7 @@ namespace EveComFramework.Security
             Log.Log("Received broadcasted trigger, processing", LogType.DEBUG);
             Clear();
             TriggerAlert();
-            if (MyShip.DroneBay.IsPrimed && MyShip.DroneBay.MaxCapacity > 0.0)
-            {
-                QueueState(RecallDrones);
-            }
+            QueueState(RecallDrones);
             QueueState(Flee, -1, FleeTrigger.Forced);
             ReportTrigger(FleeTrigger.Forced);
             BroadcastSafe[args[1]] = false;
