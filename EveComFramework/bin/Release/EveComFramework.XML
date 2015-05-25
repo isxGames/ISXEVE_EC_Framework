@@ -964,6 +964,11 @@
             Causes Security to trigger an alert, flee and wait until manually restarted
             </summary>
         </member>
+        <member name="M:EveComFramework.Security.Security.ClearPanic">
+            <summary>
+            Causes security to abandon the panic state
+            </summary>
+        </member>
         <member name="P:EveComFramework.Security.Security.Instance">
             <summary>
             Singletoner

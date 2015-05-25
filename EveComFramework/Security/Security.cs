@@ -226,11 +226,25 @@ namespace EveComFramework.Security
         /// </summary>
         public void Panic()
         {
-            Clear();
-            TriggerAlert();
-            QueueState(RecallDrones);
-            QueueState(Flee, -1, FleeTrigger.Panic);
-            ReportTrigger(FleeTrigger.Panic);
+            if (!Idle)
+            {
+                Clear();
+                TriggerAlert();
+                QueueState(RecallDrones);
+                QueueState(Flee, -1, FleeTrigger.Panic);
+                ReportTrigger(FleeTrigger.Panic);
+            }
+        }
+
+        /// <summary>
+        /// Causes security to abandon the panic state
+        /// </summary>
+        public void ClearPanic()
+        {
+            if (Idle)
+            {
+                QueueState(CheckClear, -1, FleeTrigger.Panic);
+            }
         }
 
         int ScramblingEntitiesUpdate(string[] args)
