@@ -135,7 +135,7 @@ namespace EveComFramework.SimpleDrone
                 return true;
             }
 
-            if (MyShip.DronesToReconnect)
+            if (MyShip.DronesToReconnect && MyShip.ToEntity.GroupID != Group.Capsule)
             {
                 MyShip.ReconnectToDrones();
                 DislodgeWaitFor(2);

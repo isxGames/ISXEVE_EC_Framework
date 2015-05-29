@@ -460,7 +460,7 @@ namespace EveComFramework.Security
 
         bool RecallDrones(object[] Params)
         {
-            if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+            if (Session.InSpace && Drone.AllInSpace.Any() && MyShip.ToEntity.GroupID != Group.Capsule) Drone.AllInSpace.ReturnToDroneBay();
             return true;
         }
 
