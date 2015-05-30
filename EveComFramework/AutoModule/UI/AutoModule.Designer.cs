@@ -38,6 +38,7 @@
             System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("ECCMs");
             System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Drone Control Units");
             System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Propulsion Modules");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("ECMBursts");
             this.CapacitorThresholdLabel = new System.Windows.Forms.Label();
             this.CapacitorThreshold = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();

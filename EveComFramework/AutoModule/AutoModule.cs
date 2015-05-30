@@ -22,6 +22,7 @@ namespace EveComFramework.AutoModule
         public bool SensorBoosters = true;
         public bool TrackingComputers = true;
         public bool ECCMs = true;
+        public bool ECMBursts = true;
         public bool DroneControlUnits = true;
         public bool DroneTrackingModules = true;
         public bool AutoTargeters = true;
@@ -38,6 +39,7 @@ namespace EveComFramework.AutoModule
         public int CapSensorBoosters = 30;
         public int CapTrackingComputers = 30;
         public int CapECCMs = 30;
+        public int CapECMBursts = 30;
         public int CapDroneControlUnits = 30;
         public int CapAutoTargeters = 30;
         public int CapPropulsionModules = 30;
@@ -371,8 +373,7 @@ namespace EveComFramework.AutoModule
 
             #region ECCMs
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.ECCM && a.IsOnline) > 0 &&
-                Config.ECCMs)
+            if (Config.ECCMs && MyShip.Modules.Count(a => a.GroupID == Group.ECCM && a.IsOnline) > 0)
             {
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECCMs &&
                     MyShip.Modules.Count(a => a.GroupID == Group.ECCM && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
@@ -383,6 +384,24 @@ namespace EveComFramework.AutoModule
                     MyShip.Modules.Count(a => a.GroupID == Group.ECCM && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
                 {
                     MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECCM && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                }
+            }
+
+            #endregion
+
+            #region ECMBursts
+
+            if (Config.ECMBursts && MyShip.Modules.Count(a => a.GroupID == Group.ECMBurst && a.IsOnline) > 0)
+            {
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECMBursts &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.ECMBurst && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECMBurst && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                }
+                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECMBursts &&
+                    MyShip.Modules.Count(a => a.GroupID == Group.ECMBurst && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                {
+                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECMBurst && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
                 }
             }
 

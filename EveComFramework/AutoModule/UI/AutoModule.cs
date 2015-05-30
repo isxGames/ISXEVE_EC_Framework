@@ -61,6 +61,9 @@ namespace EveComFramework.AutoModule.UI
                     case "ECCMs":
                         i.Checked = Config.ECCMs;
                         break;
+                    case "ECMBursts":
+                        i.Checked = Config.ECMBursts;
+                        break;
                     case "Drone Control Units":
                         i.Checked = Config.DroneControlUnits;
                         break;
@@ -184,6 +187,17 @@ namespace EveComFramework.AutoModule.UI
                     ActivateApproaching.Hide();
                     ActivateOrbiting.Hide();
                     break;
+                case "ECMBursts":
+                    CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapECMBursts + "% capacitor";
+                    CapacitorThreshold.Value = Config.CapECMBursts;
+                    MaxThreshold.Hide();
+                    MaxThresholdLabel.Hide();
+                    MinThreshold.Hide();
+                    MinThresholdLabel.Hide();
+                    AlwaysActive.Hide();
+                    ActivateApproaching.Hide();
+                    ActivateOrbiting.Hide();
+                    break;
                 case "Drone Control Units":
                     CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapDroneControlUnits + "% capacitor";
                     CapacitorThreshold.Value = Config.CapDroneControlUnits;
@@ -263,6 +277,11 @@ namespace EveComFramework.AutoModule.UI
                     Config.CapECCMs = CapacitorThreshold.Value;
                     Config.Save();
                     CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapECCMs + "% capacitor";
+                    break;
+                case "ECMBursts":
+                    Config.CapECMBursts = CapacitorThreshold.Value;
+                    Config.Save();
+                    CapacitorThresholdLabel.Text = "Only activate if above " + Config.CapECMBursts + "% capacitor";
                     break;
                 case "Drone Control Units":
                     Config.CapDroneControlUnits = CapacitorThreshold.Value;
@@ -370,6 +389,9 @@ namespace EveComFramework.AutoModule.UI
                         break;
                     case "ECCMs":
                         Config.ECCMs = checkbox.Checked;
+                        break;
+                    case "ECMBursts":
+                        Config.ECMBursts = checkbox.Checked;
                         break;
                     case "Drone Control Units":
                         Config.DroneControlUnits = checkbox.Checked;

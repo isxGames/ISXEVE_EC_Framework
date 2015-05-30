@@ -93,6 +93,11 @@ namespace EveComFramework.Core
                 numericECCMCap.Value = AutoModuleConfig.CapECCMs;
                 numericECCMCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericECCMCap.Value; AutoModuleConfig.Save(); };
 
+                checkECMBursts.Checked = AutoModuleConfig.ECMBursts;
+                checkECMBursts.CheckedChanged += (s, a) => { AutoModuleConfig.ECMBursts = checkECMBursts.Checked; AutoModuleConfig.Save(); };
+                numericECMBurstCap.Value = AutoModuleConfig.CapECMBursts;
+                numericECMBurstCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericECMBurstCap.Value; AutoModuleConfig.Save(); };
+
                 checkDroneTrackingModules.Checked = AutoModuleConfig.DroneTrackingModules;
                 checkDroneTrackingModules.CheckedChanged += (s, a) => { AutoModuleConfig.DroneTrackingModules = checkDroneTrackingModules.Checked; AutoModuleConfig.Save(); };
                 numericDroneTrackingModule.Value = AutoModuleConfig.CapDroneTrackingModules;

@@ -45,6 +45,7 @@
             this.numericSensorBoosterCap = new System.Windows.Forms.NumericUpDown();
             this.numericTrackingComputerCap = new System.Windows.Forms.NumericUpDown();
             this.numericECCMCap = new System.Windows.Forms.NumericUpDown();
+            this.numericECMBurstCap = new System.Windows.Forms.NumericUpDown();
             this.numericDroneControlUnitCap = new System.Windows.Forms.NumericUpDown();
             this.numericPropulsionModuleCap = new System.Windows.Forms.NumericUpDown();
             this.checkShieldBoosters = new System.Windows.Forms.CheckBox();
@@ -55,6 +56,7 @@
             this.checkSensorBoosters = new System.Windows.Forms.CheckBox();
             this.checkTrackingComputers = new System.Windows.Forms.CheckBox();
             this.checkECCMs = new System.Windows.Forms.CheckBox();
+            this.checkECMBursts = new System.Windows.Forms.CheckBox();
             this.checkDroneControlUnits = new System.Windows.Forms.CheckBox();
             this.checkPropulsionModules = new System.Windows.Forms.CheckBox();
             this.checkActivateApproaching = new System.Windows.Forms.CheckBox();
@@ -140,6 +142,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericSensorBoosterCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTrackingComputerCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericECCMCap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericECMBurstCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneControlUnitCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPropulsionModuleCap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).BeginInit();
@@ -205,6 +208,7 @@
             this.tableLayoutPanel1.Controls.Add(this.numericSensorBoosterCap, 2, 7);
             this.tableLayoutPanel1.Controls.Add(this.numericTrackingComputerCap, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.numericECCMCap, 2, 9);
+            this.tableLayoutPanel1.Controls.Add(this.numericECMBurstCap, 2, 18);
             this.tableLayoutPanel1.Controls.Add(this.numericDroneControlUnitCap, 2, 11);
             this.tableLayoutPanel1.Controls.Add(this.numericPropulsionModuleCap, 2, 13);
             this.tableLayoutPanel1.Controls.Add(this.checkShieldBoosters, 0, 2);
@@ -215,6 +219,7 @@
             this.tableLayoutPanel1.Controls.Add(this.checkSensorBoosters, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.checkTrackingComputers, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.checkECCMs, 0, 9);
+            this.tableLayoutPanel1.Controls.Add(this.checkECMBursts, 0, 18);
             this.tableLayoutPanel1.Controls.Add(this.checkDroneControlUnits, 0, 11);
             this.tableLayoutPanel1.Controls.Add(this.checkPropulsionModules, 0, 13);
             this.tableLayoutPanel1.Controls.Add(this.checkActivateApproaching, 1, 15);
@@ -396,6 +401,15 @@
             this.numericECCMCap.Size = new System.Drawing.Size(60, 21);
             this.numericECCMCap.TabIndex = 23;
             // 
+            // numericECMBurstCap
+            // 
+            this.numericECMBurstCap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericECMBurstCap.Location = new System.Drawing.Point(120, 190);
+            this.numericECMBurstCap.Margin = new System.Windows.Forms.Padding(0);
+            this.numericECMBurstCap.Name = "numericECMBurstCap";
+            this.numericECMBurstCap.Size = new System.Drawing.Size(60, 21);
+            this.numericECMBurstCap.TabIndex = 98;
+            // 
             // numericDroneControlUnitCap
             // 
             this.numericDroneControlUnitCap.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -517,6 +531,19 @@
             this.checkECCMs.TabIndex = 22;
             this.checkECCMs.Text = "ECCMs";
             this.checkECCMs.UseVisualStyleBackColor = true;
+            // 
+            // checkECMBursts
+            // 
+            this.checkECMBursts.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.checkECMBursts, 2);
+            this.checkECMBursts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkECMBursts.Location = new System.Drawing.Point(0, 190);
+            this.checkECMBursts.Margin = new System.Windows.Forms.Padding(0);
+            this.checkECMBursts.Name = "checkECMBursts";
+            this.checkECMBursts.Size = new System.Drawing.Size(120, 21);
+            this.checkECMBursts.TabIndex = 99;
+            this.checkECMBursts.Text = "ECMBursts";
+            this.checkECMBursts.UseVisualStyleBackColor = true;
             // 
             // checkDroneControlUnits
             // 
@@ -1515,6 +1542,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericSensorBoosterCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTrackingComputerCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericECCMCap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericECMBurstCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneControlUnitCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericPropulsionModuleCap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAutoTargetersCap)).EndInit();
@@ -1582,7 +1610,9 @@
         private System.Windows.Forms.CheckBox checkTrackingComputers;
         private System.Windows.Forms.NumericUpDown numericTrackingComputerCap;
         private System.Windows.Forms.CheckBox checkECCMs;
+        private System.Windows.Forms.CheckBox checkECMBursts;
         private System.Windows.Forms.NumericUpDown numericECCMCap;
+        private System.Windows.Forms.NumericUpDown numericECMBurstCap;
         private System.Windows.Forms.CheckBox checkDroneControlUnits;
         private System.Windows.Forms.NumericUpDown numericDroneControlUnitCap;
         private System.Windows.Forms.CheckBox checkPropulsionModules;
