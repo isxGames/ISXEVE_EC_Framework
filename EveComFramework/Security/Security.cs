@@ -623,7 +623,7 @@ namespace EveComFramework.Security
         bool CheckClear(object[] Params)
         {
             FleeTrigger Trigger = (FleeTrigger)Params[0];
-            int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced) ? 0 : Config.FleeWait;
+            int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced || Trigger == FleeTrigger.Panic) ? 0 : Config.FleeWait;
             AutoModule.AutoModule.Instance.Decloak = false;
             if (Trigger == FleeTrigger.CapacitorLow && Trigger == FleeTrigger.ShieldLow) AutoModule.AutoModule.Instance.Decloak = true;
             if (Trigger == FleeTrigger.ArmorLow && MyShip.Modules.Any(a => a.GroupID == Group.ArmorRepairUnit && a.IsOnline)) AutoModule.AutoModule.Instance.Decloak = true;
