@@ -221,6 +221,8 @@ namespace EveComFramework.Security
             LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityClearBroadcastTrigger", ClearBroadcastTrigger);
         }
 
+        public bool IsPanic = false;
+
         /// <summary>
         /// Causes Security to trigger an alert, flee and wait until manually restarted
         /// </summary>
@@ -228,6 +230,7 @@ namespace EveComFramework.Security
         {
             if (!Idle)
             {
+                this.IsPanic = true;
                 Clear();
                 TriggerAlert();
                 QueueState(RecallDrones);
@@ -241,10 +244,7 @@ namespace EveComFramework.Security
         /// </summary>
         public void ClearPanic()
         {
-            if (Idle)
-            {
-                QueueState(CheckClear, -1, FleeTrigger.Panic);
-            }
+            this.IsPanic = false;
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -622,6 +622,7 @@ namespace EveComFramework.Security
 
         bool CheckClear(object[] Params)
         {
+            if (this.IsPanic) return false;
             FleeTrigger Trigger = (FleeTrigger)Params[0];
             int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced || Trigger == FleeTrigger.Panic) ? 0 : Config.FleeWait;
             AutoModule.AutoModule.Instance.Decloak = false;
@@ -679,10 +680,7 @@ namespace EveComFramework.Security
             QueueState(WaitFlee);
             QueueState(SignalSuccessful);
 
-            if (Trigger != FleeTrigger.Panic)
-            {
-                QueueState(CheckClear, -1, Trigger);
-            }
+            QueueState(CheckClear, -1, Trigger);
 
             if (Session.InStation)
             {
