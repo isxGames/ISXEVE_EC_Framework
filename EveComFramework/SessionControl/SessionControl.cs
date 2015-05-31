@@ -297,19 +297,6 @@ namespace EveComFramework.SessionControl
 
             if (Config.Mode == "Period")
             {
-                PopupWindow disconnectWindow = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Name != null && a.Name == "modal" && a.Message.Contains("The socket was closed"));
-                string set = string.Empty;
-                string slot = string.Empty;
-                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerSlot}", ref slot);
-                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerCharacterSet}", ref set);
-                if (disconnectWindow != null && set != "NULL" && slot != "NULL")
-                {
-                    Log.Log("|rDisconnect detected, restarting");
-                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect TimedCommand 100 run isboxer -launchslot \"" + set + "\" " + slot);
-                    DislodgeCurState(Logout);
-                    return false;
-                }
-
                 if (DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
                 {
                     if (LogOut != null)
@@ -322,22 +309,6 @@ namespace EveComFramework.SessionControl
 
             if (Config.Mode == "Duration")
             {
-                PopupWindow disconnectWindow = Window.All.OfType<PopupWindow>().FirstOrDefault(a => a.Name != null && a.Name == "modal" && a.Message.Contains("The socket was closed"));
-                string set = string.Empty;
-                string slot = string.Empty;
-                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerSlot}", ref slot);
-                LavishScriptAPI.LavishScript.DataParse<string>("${ISBoxerCharacterSet}", ref set);
-                if (disconnectWindow != null && set != "NULL" && slot != "NULL")
-                {
-                    Log.Log("|rDisconnect detected, restarting");
-                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect echo TimedCommand 100 \"run isboxer -launchslot \\\\\"" + set + "\\\\\" " + slot + "\"");
-                    LavishScriptAPI.LavishScript.ExecuteCommand("relay uplink -noredirect TimedCommand 100 \"run isboxer -launchslot \\\\\"" + set + "\\\\\" " + slot + "\"");
-                    Config.Reconnect.AddOrUpdate(_curProfile.CharacterID, true);
-                    Config.Save();
-                    DislodgeCurState(Logout);
-                    return false;
-                }
-
                 if (_curProfile != null)
                 {
                     if (DateTime.Now > Config.SessionStart[_curProfile.CharacterID].AddHours(Config.LogoutHours).AddMinutes(LogoutDelta) ||
