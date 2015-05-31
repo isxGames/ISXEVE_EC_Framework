@@ -179,6 +179,7 @@ namespace EveComFramework.Security
                 if (Idle)
                 {
                     Comms.Panic += Panic;
+                    Comms.ClearPanic += ClearPanic;
                     SecurityAudio.Enabled(true);
                     QueueState(CheckSafe);
                 }
@@ -186,6 +187,7 @@ namespace EveComFramework.Security
             else
             {
                 Comms.Panic -= Panic;
+                Comms.ClearPanic -= ClearPanic;
                 SecurityAudio.Enabled(false);
                 Clear();
             }
@@ -202,12 +204,7 @@ namespace EveComFramework.Security
 
         void TriggerAlert()
         {
-            if (Alert == null)
-            {
-                Log.Log("|rYou do not have an event handler subscribed to Security.Alert!");
-                Log.Log("|rThis is bad!  Tell your developer they're not using Security right!");
-            }
-            else
+            if (Alert != null)
             {
                 Alert();
             }
@@ -226,7 +223,10 @@ namespace EveComFramework.Security
         /// Simple getter for the panic status
         /// </summary>
         /// <returns>Whether the panic alert is currently triggered</returns>
-        public bool IsPanic() { return isPanic; }
+        public bool IsPanic()
+        {
+            return isPanic;
+        }
 
         /// <summary>
         /// Causes Security to trigger an alert, flee and wait until manually restarted
@@ -278,24 +278,26 @@ namespace EveComFramework.Security
 
         int BroadcastTrigger(string[] args)
         {
-            if (!Config.IncludeBroadcastTriggers) return 0;
-            Log.Log("Received broadcasted trigger, processing", LogType.DEBUG);
-            Clear();
-            TriggerAlert();
-            QueueState(RecallDrones);
-            QueueState(Flee, -1, FleeTrigger.Forced);
-            ReportTrigger(FleeTrigger.Forced);
-            BroadcastSafe[args[1]] = false;
-
+            if (Config.IncludeBroadcastTriggers)
+            {
+                Log.Log("Received broadcasted trigger, processing", LogType.DEBUG);
+                Clear();
+                TriggerAlert();
+                QueueState(RecallDrones);
+                QueueState(Flee, -1, FleeTrigger.Forced);
+                ReportTrigger(FleeTrigger.Forced);
+                BroadcastSafe[args[1]] = false;
+            }
             return 0;
         }
 
         int ClearBroadcastTrigger(string[] args)
         {
-            if (!Config.IncludeBroadcastTriggers) return 0;
-            Log.Log("Received clear broadcasted trigger, processing", LogType.DEBUG);
-            BroadcastSafe[args[1]] = true;
-
+            if (Config.IncludeBroadcastTriggers)
+            {
+                Log.Log("Received clear broadcasted trigger, processing", LogType.DEBUG);
+                BroadcastSafe[args[1]] = true;
+            }
             return 0;
         }
 
@@ -310,7 +312,7 @@ namespace EveComFramework.Security
                     switch (Trigger)
                     {
                         case FleeTrigger.Pod:
-                            if (MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
+                            if (Session.InSpace && MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
                             break;
                         case FleeTrigger.NegativeStanding:
                             List<Pilot> NegativePilots = Local.Pilots.Where(a => (a.ToAlliance.FromAllianceDouble < 0.0 ||
@@ -373,41 +375,28 @@ namespace EveComFramework.Security
                             }
                             break;
                         case FleeTrigger.Targeted:
-                            if (!Session.InSpace)
+                            if (Session.InSpace)
                             {
-                                break;
-                            }
-                            List<Pilot> TargetingPilots = Local.Pilots.Where(a => Entity.All.FirstOrDefault(b => b.CharID == a.ID && b.IsTargetingMe) != null).ToList();
-                            if (!Config.TargetAlliance) { TargetingPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
-                            if (!Config.TargetCorp) { TargetingPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
-                            if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
-                            TargetingPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
-                            if (TargetingPilots.Any())
-                            {
-                                Hostile = TargetingPilots.FirstOrDefault();
-                                return FleeTrigger.Targeted;
+                                List<Pilot> TargetingPilots = Local.Pilots.Where(a => Entity.All.FirstOrDefault(b => b.CharID == a.ID && b.IsTargetingMe) != null).ToList();
+                                if (!Config.TargetAlliance) { TargetingPilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
+                                if (!Config.TargetCorp) { TargetingPilots.RemoveAll(a => a.CorpID == Me.CorpID); }
+                                if (!Config.TargetFleet) { TargetingPilots.RemoveAll(a => a.IsFleetMember); }
+                                TargetingPilots.RemoveAll(a => Config.WhiteList.Contains(a.Name));
+                                if (TargetingPilots.Any())
+                                {
+                                    Hostile = TargetingPilots.FirstOrDefault();
+                                    return FleeTrigger.Targeted;
+                                }
                             }
                             break;
                         case FleeTrigger.CapacitorLow:
-                            if (!Session.InSpace)
-                            {
-                                break;
-                            }
-                            if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapThreshold) return FleeTrigger.CapacitorLow;
+                            if (Session.InSpace && (MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapThreshold) return FleeTrigger.CapacitorLow;
                             break;
                         case FleeTrigger.ShieldLow:
-                            if (!Session.InSpace)
-                            {
-                                break;
-                            }
-                            if (MyShip.ToEntity.ShieldPct < Config.ShieldThreshold) return FleeTrigger.ShieldLow;
+                            if (Session.InSpace && MyShip.ToEntity.ShieldPct < Config.ShieldThreshold) return FleeTrigger.ShieldLow;
                             break;
                         case FleeTrigger.ArmorLow:
-                            if (!Session.InSpace)
-                            {
-                                break;
-                            }
-                            if (MyShip.ToEntity.ArmorPct < Config.ArmorThreshold) return FleeTrigger.ArmorLow;
+                            if (Session.InSpace && MyShip.ToEntity.ArmorPct < Config.ArmorThreshold) return FleeTrigger.ArmorLow;
                             break;
                     }
                 }

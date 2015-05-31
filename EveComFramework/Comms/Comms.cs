@@ -98,6 +98,7 @@ namespace EveComFramework.Comms
         public event Action ToggleLogoff;
         public event Action Start;
         public event Action Panic;
+        public event Action ClearPanic;
         public event Action Skip;
 
         void PMReceived(object sender, IrcMessageEventArgs e)
@@ -115,6 +116,7 @@ namespace EveComFramework.Comms
                     ChatQueue.Enqueue("Local <message> - Relays <message> to local (space must follow Local and don't put the <>!)");
                     ChatQueue.Enqueue("Listlocal or Locallist - Lists pilots currently in local chat");
                     ChatQueue.Enqueue("panic - Trigger panicked flee");
+                    ChatQueue.Enqueue("clearpanic - Clear panic");
                     ChatQueue.Enqueue("All commands are not case sensitive!");
                 }
                 if (e.Text.ToLower().StartsWith("togglestop") && ToggleStop != null)
@@ -125,13 +127,17 @@ namespace EveComFramework.Comms
                 {
                     Start();
                 }
-                if (e.Text.ToLower().StartsWith("togglelogoff") && Panic != null)
+                if (e.Text.ToLower().StartsWith("togglelogoff") && ToggleLogoff != null)
                 {
                     ToggleLogoff();
                 }
                 if (e.Text.ToLower().StartsWith("panic") && Panic != null)
                 {
                     Panic();
+                }
+                if (e.Text.ToLower().StartsWith("clearpanic") && ClearPanic != null)
+                {
+                    ClearPanic();
                 }
                 if (e.Text.ToLower().StartsWith("skip") && Skip != null)
                 {
