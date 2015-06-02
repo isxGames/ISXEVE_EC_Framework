@@ -118,6 +118,34 @@ namespace EveComFramework.SimpleDrone
             return false;
         }
 
+        bool SmallTarget(Entity target)
+        {
+            if (Data.NPCClasses.All.Any(a => a.Key == target.GroupID && (a.Value == "Frigate" || a.Value == "Destroyer")))
+            {
+                return true;
+            }
+
+            if (target.IsHostile)
+            {
+                if (target.GroupID == Group.Shuttle || 
+                    target.GroupID == Group.Frigate ||
+                    target.GroupID == Group.AssaultFrigate ||
+                    target.GroupID == Group.CovertOps ||
+                    target.GroupID == Group.ElectronicAttackShip ||
+                    target.GroupID == Group.Interceptor ||
+                    target.GroupID == Group.ExpeditionFrigate ||
+                    target.GroupID == Group.Destroyer ||
+                    target.GroupID == Group.Interdictor ||
+                    ((int) target.GroupID) == 1305 || // Group.TacticalDestroyer
+                    target.GroupID == Group.Capsule)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         bool Control(object[] Params)
         {
             if (!Session.InSpace || Config.Mode == Mode.None)
@@ -334,8 +362,8 @@ namespace EveComFramework.SimpleDrone
             // Handle Attacking small targets - this should work for PointDefense AND Sentry AND FighterPointDefense modes
             if (ActiveTarget.Distance < 20000 && (Config.Mode == Mode.PointDefense || Config.Mode == Mode.Sentry || Config.Mode == Mode.FighterPointDefense))
             {
-                // Is the target a frigate?
-                if (Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
+                // Is the target a small target?
+                if (SmallTarget(ActiveTarget))
                 {
                     // Recall fighters and sentries
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Light Scout Drones") && a.State != EntityState.Departing).ToList();
@@ -540,8 +568,8 @@ namespace EveComFramework.SimpleDrone
             // Handle managing sentries
             if (ActiveTarget.Distance < MaxRange && Config.Mode == Mode.Sentry)
             {
-                // Is the target a frigate?
-                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")) || ActiveTarget.Distance > 20000)
+                // Is the target a small target?
+                if (!SmallTarget(ActiveTarget) || ActiveTarget.Distance > 20000)
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Sentry Drones") && a.State != EntityState.Departing).ToList();
                     // Recall non sentries
@@ -620,8 +648,8 @@ namespace EveComFramework.SimpleDrone
             // Handle managing fighters
             if (Config.Mode == Mode.FighterPointDefense)
             {
-                // Is the target a frigate?
-                if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")) || ActiveTarget.Distance > 20000)
+                // Is the target a small target?
+                if (!SmallTarget(ActiveTarget) || ActiveTarget.Distance > 20000)
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Fighters") && a.State != EntityState.Departing).ToList();
                     // Recall non fighters
