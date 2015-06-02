@@ -42,7 +42,7 @@
       <HintPath>bin\Release\IrcDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Lavish.InnerSpace">
-      <HintPath>..\Lavish.InnerSpace.dll</HintPath>
+      <HintPath>..\..\Lavish.InnerSpace.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
