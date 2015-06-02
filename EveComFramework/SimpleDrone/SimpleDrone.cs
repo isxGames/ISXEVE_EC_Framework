@@ -160,7 +160,7 @@ namespace EveComFramework.SimpleDrone
                 return true;
             }
 
-            if (MyShip.DronesToReconnect && MyShip.ToEntity.GroupID != Group.Capsule)
+            if (MyShip.DronesToReconnect && MyShip.DroneBay.UsedCapacity < MyShip.DroneBay.MaxCapacity && MyShip.ToEntity.GroupID != Group.Capsule)
             {
                 MyShip.ReconnectToDrones();
                 DislodgeWaitFor(2);
