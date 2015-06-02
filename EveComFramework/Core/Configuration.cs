@@ -225,9 +225,6 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.Sentry:
                         comboDroneMode.SelectedItem = "Sentry with Point Defense";
                         break;
-                    case SimpleDrone.Mode.SentryRattle:
-                        comboDroneMode.SelectedItem = "Sentry with Point Defense (Rattlesnake)";
-                        break;
                     case SimpleDrone.Mode.Fighter:
                         comboDroneMode.SelectedItem = "Fighter";
                         break;
@@ -240,17 +237,11 @@ namespace EveComFramework.Core
                     case SimpleDrone.Mode.AgressiveMedium:
                         comboDroneMode.SelectedItem = "Agressive Medium";
                         break;
-                    case SimpleDrone.Mode.AgressiveMediumGila:
-                        comboDroneMode.SelectedItem = "Agressive Medium (Gila)";
-                        break;
                     case SimpleDrone.Mode.AgressiveHeavy:
                         comboDroneMode.SelectedItem = "Agressive Heavy";
                         break;
                     case SimpleDrone.Mode.AgressiveSentry:
                         comboDroneMode.SelectedItem = "Agressive Sentry";
-                        break;
-                    case SimpleDrone.Mode.AgressiveSentryRattle:
-                        comboDroneMode.SelectedItem = "Agressive Sentry (Rattlesnake)";
                         break;
                 }
                 comboDroneMode.SelectedIndexChanged += (s, a) =>
@@ -269,9 +260,6 @@ namespace EveComFramework.Core
                         case "Sentry with Point Defense":
                             DroneConfig.Mode = SimpleDrone.Mode.Sentry;
                             break;
-                        case "Sentry with Point Defense (Rattlesnake)":
-                            DroneConfig.Mode = SimpleDrone.Mode.SentryRattle;
-                            break;
                         case "Fighter":
                             DroneConfig.Mode = SimpleDrone.Mode.Fighter;
                             break;
@@ -284,17 +272,11 @@ namespace EveComFramework.Core
                         case "Agressive Medium":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveMedium;
                             break;
-                        case "Agressive Medium (Gila)":
-                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveMediumGila;
-                            break;
                         case "Agressive Heavy":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveHeavy;
                             break;
                         case "Agressive Sentry":
                             DroneConfig.Mode = SimpleDrone.Mode.AgressiveSentry;
-                            break;
-                        case "Agressive Sentry (Rattlesnake)":
-                            DroneConfig.Mode = SimpleDrone.Mode.AgressiveSentryRattle;
                             break;
                     }
                     DroneConfig.Save();

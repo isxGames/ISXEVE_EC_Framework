@@ -15,17 +15,14 @@ namespace EveComFramework.SimpleDrone
     {
         None,
         Sentry,
-        SentryRattle,
         Fighter,
         PointDefense,
         FighterPointDefense,
         AgressiveScout,
         AgressiveMedium,
-        AgressiveMediumGila,
         AFKHeavy,
         AgressiveHeavy,
-        AgressiveSentry,
-        AgressiveSentryRattle
+        AgressiveSentry
     }
 
     #endregion
@@ -334,8 +331,8 @@ namespace EveComFramework.SimpleDrone
                 return false;
             }
 
-            // Handle Attacking frigates - this should work for PointDefense AND Sentry AND FighterPointDefense modes
-            if (ActiveTarget.Distance < 20000 && (Config.Mode == Mode.PointDefense || Config.Mode == Mode.Sentry || Config.Mode == Mode.SentryRattle || Config.Mode == Mode.FighterPointDefense))
+            // Handle Attacking small targets - this should work for PointDefense AND Sentry AND FighterPointDefense modes
+            if (ActiveTarget.Distance < 20000 && (Config.Mode == Mode.PointDefense || Config.Mode == Mode.Sentry || Config.Mode == Mode.FighterPointDefense))
             {
                 // Is the target a frigate?
                 if (Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")))
@@ -358,7 +355,7 @@ namespace EveComFramework.SimpleDrone
                         Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
-                    int AvailableSlots = ((Config.Mode == Mode.SentryRattle) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                    int AvailableSlots = ((MyShip.ToEntity.TypeID == 17918 /* Rattlesnake */) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                     List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).Take(AvailableSlots).ToList();
                     List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Light Scout Drones")).Take(AvailableSlots).ToList();
                     // Launch drones
@@ -427,7 +424,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle Attacking anything if in AgressiveMedium mode
-            if (Config.Mode == Mode.AgressiveMedium || Config.Mode == Mode.AgressiveMediumGila)
+            if (Config.Mode == Mode.AgressiveMedium)
             {
                 // Recall fighters and sentries
                 List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Medium Scout Drones") && a.State != EntityState.Departing).ToList();
@@ -447,7 +444,7 @@ namespace EveComFramework.SimpleDrone
                     Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                     return false;
                 }
-                int AvailableSlots = ((Config.Mode == Mode.AgressiveMediumGila) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                int AvailableSlots = ((MyShip.ToEntity.TypeID == 17715 /* Gila */) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Medium Scout Drones")).Take(AvailableSlots).ToList();
                 // Launch drones
@@ -503,7 +500,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle Attacking anything if in AgressiveSentry mode
-            if (Config.Mode == Mode.AgressiveSentry || Config.Mode == Mode.AgressiveSentryRattle)
+            if (Config.Mode == Mode.AgressiveSentry)
             {
                 // Recall non heavy
                 List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group != "Sentry Drones") && a.State != EntityState.Departing).ToList();
@@ -523,7 +520,7 @@ namespace EveComFramework.SimpleDrone
                     Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                     return false;
                 }
-                int AvailableSlots = ((Config.Mode == Mode.AgressiveSentryRattle) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                int AvailableSlots = ((MyShip.ToEntity.TypeID == 17918 /* Rattlesnake */) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                 List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                 List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                 // Launch drones
@@ -541,7 +538,7 @@ namespace EveComFramework.SimpleDrone
             }
 
             // Handle managing sentries
-            if (ActiveTarget.Distance < MaxRange && (Config.Mode == Mode.Sentry || Config.Mode == Mode.SentryRattle))
+            if (ActiveTarget.Distance < MaxRange && Config.Mode == Mode.Sentry)
             {
                 // Is the target a frigate?
                 if (!Data.NPCClasses.All.Any(a => a.Key == ActiveTarget.GroupID && (a.Value == "Destroyer" || a.Value == "Frigate")) || ActiveTarget.Distance > 20000)
@@ -564,7 +561,7 @@ namespace EveComFramework.SimpleDrone
                         Attack.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(3)));
                         return false;
                     }
-                    int AvailableSlots = ((Config.Mode == Mode.SentryRattle) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
+                    int AvailableSlots = ((MyShip.ToEntity.TypeID == 17918) ? 2 : Me.MaxActiveDrones) - Drone.AllInSpace.Count();
                     List<Drone> Deploy = Drone.AllInBay.Where(a => !DroneCooldown.Contains(a) && Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                     List<Drone> DeployIgnoreCooldown = Drone.AllInBay.Where(a => Data.DroneType.All.Any(b => b.ID == a.TypeID && b.Group == "Sentry Drones")).Take(AvailableSlots).ToList();
                     // Launch drones
