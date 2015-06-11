@@ -770,6 +770,28 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:EveComFramework.MiningToolkit.MiningToolkit">
+            <summary>
+            Mining Toolkit
+            </summary>
+        </member>
+        <member name="F:EveComFramework.MiningToolkit.MiningToolkit.CrystalSwapCooldown">
+            <summary>
+            Load mining crystal for a given asteroid
+            </summary>
+        </member>
+        <member name="M:EveComFramework.MiningToolkit.MiningToolkit.MatchingMiningCrystal(EveCom.Entity)">
+            <summary>
+            Get compatible mining crystal types for a given asteroid
+            </summary>
+            <param name="Asteroid">Asteroid</param>
+            <returns></returns>
+        </member>
+        <member name="P:EveComFramework.MiningToolkit.MiningToolkit.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
         <member name="T:EveComFramework.Move.MoveSettings">
             <summary>
             Settings for the Move class
