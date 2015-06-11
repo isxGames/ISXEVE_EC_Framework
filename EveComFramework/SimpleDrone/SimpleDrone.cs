@@ -136,7 +136,7 @@ namespace EveComFramework.SimpleDrone
                     target.GroupID == Group.ExpeditionFrigate ||
                     target.GroupID == Group.Destroyer ||
                     target.GroupID == Group.Interdictor ||
-                    ((int) target.GroupID) == 1305 || // Group.TacticalDestroyer
+                    target.GroupID == Group.TacticalDestroyer ||
                     target.GroupID == Group.Capsule)
                 {
                     return true;
