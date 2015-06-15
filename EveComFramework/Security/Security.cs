@@ -6,6 +6,7 @@ using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
 using EveComFramework.Comms;
+using LavishScriptAPI;
 
 namespace EveComFramework.Security
 {
@@ -149,6 +150,20 @@ namespace EveComFramework.Security
 
         #endregion
 
+        #region LSCommands
+        private int LSPanic(string[] args)
+        {
+            Panic();
+            return 0;
+        }
+
+        private int LSClearPanic(string[] args)
+        {
+            ClearPanic();
+            return 0;
+        }
+        #endregion
+
         #region Events
 
         /// <summary>
@@ -181,6 +196,8 @@ namespace EveComFramework.Security
                     Comms.Panic += Panic;
                     Comms.ClearPanic += ClearPanic;
                     SecurityAudio.Enabled(true);
+                    LavishScript.Commands.AddCommand("Panic", LSPanic);
+                    LavishScript.Commands.AddCommand("ClearPanic", LSClearPanic);
                     QueueState(CheckSafe);
                 }
             }
@@ -189,6 +206,8 @@ namespace EveComFramework.Security
                 Comms.Panic -= Panic;
                 Comms.ClearPanic -= ClearPanic;
                 SecurityAudio.Enabled(false);
+                LavishScript.Commands.RemoveCommand("Panic");
+                LavishScript.Commands.RemoveCommand("ClearPanic");
                 Clear();
             }
         }
