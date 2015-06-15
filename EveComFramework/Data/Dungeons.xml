@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<Dungeons>
+	<!-- Ore -->
+	<Dungeon Type="Ore" ID="289689" Name="Colossal Rich Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289690" Name="Colossal Rich Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289546" Name="Colossal Potent Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289547" Name="Colossal Potent Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="112359" Name="Colossal Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="126393" Name="Colossal Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289559" Name="Enormous Rich Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289560" Name="Enormous Rich Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289416" Name="Enormous Potent Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289417" Name="Enormous Potent Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="112358" Name="Enormous Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="126394" Name="Enormous Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289556" Name="Large Rich Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289557" Name="Large Rich Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289412" Name="Large Potent Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="289413" Name="Large Potent Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="112357" Name="Large Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="126395" Name="Large Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="112356" Name="Medium Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="126396" Name="Medium Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="112355" Name="Small Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="126397" Name="Small Asteroid Cluster" />
+	<Dungeon Type="Ore" ID="112058" Name="Ordinary Perimeter Deposit  OLD" />
+	<Dungeon Type="Ore" ID="112059" Name="Ordinary Perimeter Deposit" />
+	<Dungeon Type="Ore" ID="112060" Name="Common Perimeter Deposit OLD" />
+	<Dungeon Type="Ore" ID="112061" Name="Common Perimeter Deposit" />
+	<Dungeon Type="Ore" ID="112062" Name="Average Frontier Deposit" />
+	<Dungeon Type="Ore" ID="112063" Name="Unexceptional Frontier Deposit" />
+	<Dungeon Type="Ore" ID="112064" Name="Infrequent Core Deposit" />
+	<Dungeon Type="Ore" ID="112065" Name="Unusual Core Deposit" />
+	<Dungeon Type="Ore" ID="112066" Name="Exceptional Core Deposit" />
+	<Dungeon Type="Ore" ID="112067" Name="Rarified Core Deposit" />
+	<Dungeon Type="Ore" ID="112076" Name="Isolated Core Deposit" />
+	<Dungeon Type="Ore" ID="112127" Name="Uncommon Core Deposit" />
+	<Dungeon Type="Ore" ID="112309" Name="Large Arkonor and Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112310" Name="Large Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112311" Name="Large Crokite, Dark Ochre and Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112312" Name="Large Dark Ochre and Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112313" Name="Large Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112314" Name="Large Hedbergite, Hemorphite and Jaspet Deposit" />
+	<Dungeon Type="Ore" ID="112315" Name="Large Hemorphite, Jaspet and Kernite Deposit" />
+	<Dungeon Type="Ore" ID="112316" Name="Large Jaspet, Kernite and Omber Deposit" />
+	<Dungeon Type="Ore" ID="112317" Name="Large Kernite and Omber Deposit" />
+	<Dungeon Type="Ore" ID="112318" Name="Large Mercoxit, Arkonor and Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112319" Name="Large Omber Deposit" />
+	<Dungeon Type="Ore" ID="112320" Name="Large Spodumain, Crokite and Dark Ochre Deposit" />
+	<Dungeon Type="Ore" ID="112321" Name="Average Arkonor and Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112322" Name="Average Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112323" Name="Average Omber, Dark Ochre and Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112324" Name="Average Dark Ochre and Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112325" Name="Average Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112326" Name="Average Hedbergite, Hemorphite and Jaspet Deposit" />
+	<Dungeon Type="Ore" ID="112327" Name="Average Hemorphite, Jaspet and Kernite Deposit" />
+	<Dungeon Type="Ore" ID="112328" Name="Average Jaspet, Kernite and Omber Deposit" />
+	<Dungeon Type="Ore" ID="112329" Name="Average Kernite and Omber Deposit" />
+	<Dungeon Type="Ore" ID="112330" Name="Average Mercoxit, Arkonor and Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112331" Name="Average Omber Deposit" />
+	<Dungeon Type="Ore" ID="112332" Name="Average Spodumain, Crokite and Dark Ochre Deposit" />
+	<Dungeon Type="Ore" ID="112333" Name="Small Arkonor and Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112334" Name="Small Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112335" Name="Small Crokite, Dark Ochre and Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112336" Name="Small Dark Ochre and Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112337" Name="Small Gneiss Deposit" />
+	<Dungeon Type="Ore" ID="112338" Name="Small Hedbergite, Hemorphite and Jaspet Deposit" />
+	<Dungeon Type="Ore" ID="112339" Name="Small Hemorphite, Jaspet and Kernite Deposit" />
+	<Dungeon Type="Ore" ID="112340" Name="Small Jaspet, Kernite and Omber Deposit" />
+	<Dungeon Type="Ore" ID="112341" Name="Small Kernite and Omber Deposit" />
+	<Dungeon Type="Ore" ID="112342" Name="Small Mercoxit, Arkonor and Bistot Deposit" />
+	<Dungeon Type="Ore" ID="112343" Name="Small Spodumain, Crokite and Dark Ochre Deposit" />
+	<Dungeon Type="Ore" ID="112344" Name="Small Omber Deposit" />
+	<Dungeon Type="Ore" ID="126182" Name="Common Perimeter Deposit" />
+	<Dungeon Type="Ore" ID="126183" Name="Ordinary Perimeter Deposit " />
+	<Dungeon Type="Ore" ID="126325" Name="Common Perimeter Deposit" />
+	<Dungeon Type="Ore" ID="126327" Name="Isolated Core Deposit " />
+	<Dungeon Type="Ore" ID="126328" Name="Unexceptional Frontier Deposit" />
+	<Dungeon Type="Ore" ID="126329" Name="Ordinary Perimeter Deposit " />
+	<Dungeon Type="Ore" ID="126330" Name="Unusual Core Deposit" />
+	<Dungeon Type="Ore" ID="126331" Name="Infrequent Core Deposit" />
+	<Dungeon Type="Ore" ID="126333" Name="Rarified Core Deposit" />
+	<Dungeon Type="Ore" ID="126334" Name="Exceptional Core Deposit " />
+	<Dungeon Type="Ore" ID="126335" Name="Uncommon Core Deposit" />
+	<Dungeon Type="Ore" ID="305452" Name="Average Frontier Deposit" />
+	<!-- Ice -->
+	<Dungeon Type="Ice" ID="288486" Name="White Glaze Belt" />
+	<Dungeon Type="Ice" ID="288501" Name="White Glaze Belt" />
+	<Dungeon Type="Ice" ID="288519" Name="Pristine White Glaze Belt" />
+	<Dungeon Type="Ice" ID="288579" Name="Pristine White Glaze Belt" />
+	<Dungeon Type="Ice" ID="288491" Name="Glacial Mass Belt" />
+	<Dungeon Type="Ice" ID="288502" Name="Glacial Mass Belt" />
+	<Dungeon Type="Ice" ID="288520" Name="Smooth Glacial Mass Belt" />
+	<Dungeon Type="Ice" ID="288580" Name="Smooth Glacial Mass Belt" />
+	<Dungeon Type="Ice" ID="288496" Name="Clear Icicle Belt" />
+	<Dungeon Type="Ice" ID="288517" Name="Clear Icicle Belt" />
+	<Dungeon Type="Ice" ID="288521" Name="Enriched Clear Icicle Belt" />
+	<Dungeon Type="Ice" ID="288581" Name="Enriched Clear Icicle Belt" />
+	<Dungeon Type="Ice" ID="288481" Name="Blue Ice Belt" />
+	<Dungeon Type="Ice" ID="288497" Name="Blue Ice Belt" />
+	<Dungeon Type="Ice" ID="288518" Name="Thick Blue Ice Belt" />
+	<Dungeon Type="Ice" ID="288578" Name="Thick Blue Ice Belt" />
+</Dungeons>

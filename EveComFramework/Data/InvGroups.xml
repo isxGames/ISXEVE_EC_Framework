@@ -1,0 +1,1012 @@
+<?xml version="1.0"?>
+<InvGroups>
+	<InvGroup ID="0" Name="#System" />
+	<InvGroup ID="1" Name="Character" />
+	<InvGroup ID="2" Name="Corporation" />
+	<InvGroup ID="3" Name="Region" />
+	<InvGroup ID="4" Name="Constellation" />
+	<InvGroup ID="5" Name="Solar System" />
+	<InvGroup ID="6" Name="Sun" />
+	<InvGroup ID="7" Name="Planet" />
+	<InvGroup ID="8" Name="Moon" />
+	<InvGroup ID="9" Name="Asteroid Belt" />
+	<InvGroup ID="10" Name="Stargate" />
+	<InvGroup ID="11" Name="Asteroid OLD" />
+	<InvGroup ID="12" Name="Cargo Container" />
+	<InvGroup ID="13" Name="Ring" />
+	<InvGroup ID="14" Name="Biomass" />
+	<InvGroup ID="15" Name="Station" />
+	<InvGroup ID="16" Name="Station Services" />
+	<InvGroup ID="17" Name="Money" />
+	<InvGroup ID="18" Name="Mineral" />
+	<InvGroup ID="19" Name="Faction" />
+	<InvGroup ID="20" Name="Drug" />
+	<InvGroup ID="23" Name="Clone" />
+	<InvGroup ID="24" Name="Voucher" />
+	<InvGroup ID="25" Name="Frigate" />
+	<InvGroup ID="26" Name="Cruiser" />
+	<InvGroup ID="27" Name="Battleship" />
+	<InvGroup ID="28" Name="Industrial" />
+	<InvGroup ID="29" Name="Capsule" />
+	<InvGroup ID="30" Name="Titan" />
+	<InvGroup ID="31" Name="Shuttle" />
+	<InvGroup ID="32" Name="Alliance" />
+	<InvGroup ID="38" Name="Shield Extender" />
+	<InvGroup ID="39" Name="Shield Recharger" />
+	<InvGroup ID="40" Name="Shield Booster" />
+	<InvGroup ID="41" Name="Remote Shield Booster" />
+	<InvGroup ID="43" Name="Capacitor Recharger" />
+	<InvGroup ID="46" Name="Propulsion Module" />
+	<InvGroup ID="47" Name="Cargo Scanner" />
+	<InvGroup ID="48" Name="Ship Scanner" />
+	<InvGroup ID="49" Name="Survey Scanner" />
+	<InvGroup ID="52" Name="Warp Scrambler" />
+	<InvGroup ID="53" Name="Energy Weapon" />
+	<InvGroup ID="54" Name="Mining Laser" />
+	<InvGroup ID="55" Name="Projectile Weapon" />
+	<InvGroup ID="56" Name="Missile Launcher" />
+	<InvGroup ID="57" Name="Shield Power Relay" />
+	<InvGroup ID="59" Name="Gyrostabilizer" />
+	<InvGroup ID="60" Name="Damage Control" />
+	<InvGroup ID="61" Name="Capacitor Battery" />
+	<InvGroup ID="62" Name="Armor Repair Unit" />
+	<InvGroup ID="63" Name="Hull Repair Unit" />
+	<InvGroup ID="65" Name="Stasis Web" />
+	<InvGroup ID="67" Name="Remote Capacitor Transmitter" />
+	<InvGroup ID="68" Name="Energy Vampire" />
+	<InvGroup ID="71" Name="Energy Destabilizer" />
+	<InvGroup ID="72" Name="Smart Bomb" />
+	<InvGroup ID="74" Name="Hybrid Weapon" />
+	<InvGroup ID="76" Name="Capacitor Booster" />
+	<InvGroup ID="77" Name="Shield Hardener" />
+	<InvGroup ID="78" Name="Reinforced Bulkhead" />
+	<InvGroup ID="80" Name="ECM Burst" />
+	<InvGroup ID="82" Name="Passive Targeting System" />
+	<InvGroup ID="83" Name="Projectile Ammo" />
+	<InvGroup ID="85" Name="Hybrid Charge" />
+	<InvGroup ID="86" Name="Frequency Crystal" />
+	<InvGroup ID="87" Name="Capacitor Booster Charge" />
+	<InvGroup ID="88" Name="Light Defender Missile" />
+	<InvGroup ID="89" Name="Torpedo" />
+	<InvGroup ID="90" Name="Bomb" />
+	<InvGroup ID="92" Name="Mine" />
+	<InvGroup ID="94" Name="Trading" />
+	<InvGroup ID="95" Name="Trade Session" />
+	<InvGroup ID="96" Name="Automated Targeting System" />
+	<InvGroup ID="97" Name="Proximity Drone" />
+	<InvGroup ID="98" Name="Armor Coating" />
+	<InvGroup ID="99" Name="Sentry Gun" />
+	<InvGroup ID="100" Name="Combat Drone" />
+	<InvGroup ID="101" Name="Mining Drone" />
+	<InvGroup ID="104" Name="Clone Blueprint" />
+	<InvGroup ID="105" Name="Frigate Blueprint" />
+	<InvGroup ID="106" Name="Cruiser Blueprint" />
+	<InvGroup ID="107" Name="Battleship Blueprint" />
+	<InvGroup ID="108" Name="Industrial Blueprint" />
+	<InvGroup ID="109" Name="Capsule Blueprint" />
+	<InvGroup ID="110" Name="Titan Blueprint" />
+	<InvGroup ID="111" Name="Shuttle Blueprint" />
+	<InvGroup ID="118" Name="Shield Extender Blueprint" />
+	<InvGroup ID="119" Name="Shield Recharger Blueprint" />
+	<InvGroup ID="120" Name="Shield Booster Blueprint" />
+	<InvGroup ID="121" Name="Remote Shield Booster Blueprint" />
+	<InvGroup ID="123" Name="Capacitor Recharger Blueprint" />
+	<InvGroup ID="126" Name="Propulsion Module Blueprint" />
+	<InvGroup ID="127" Name="Cargo Scanner Blueprint" />
+	<InvGroup ID="128" Name="Ship Scanner Blueprint" />
+	<InvGroup ID="129" Name="Survey Scanner Blueprint" />
+	<InvGroup ID="130" Name="ECM Blueprint" />
+	<InvGroup ID="131" Name="ECCM Blueprint" />
+	<InvGroup ID="132" Name="Warp Scrambler Blueprint" />
+	<InvGroup ID="133" Name="Energy Weapon Blueprint" />
+	<InvGroup ID="134" Name="Mining Laser Blueprint" />
+	<InvGroup ID="135" Name="Projectile Weapon Blueprint" />
+	<InvGroup ID="136" Name="Missile Launcher Blueprint" />
+	<InvGroup ID="137" Name="Power Manager Blueprint" />
+	<InvGroup ID="139" Name="Fast Loader Blueprint" />
+	<InvGroup ID="140" Name="Damage Control Blueprint" />
+	<InvGroup ID="141" Name="Capacitor Battery Blueprint" />
+	<InvGroup ID="142" Name="Armor Repair Unit Blueprint" />
+	<InvGroup ID="143" Name="Hull Repair Unit Blueprint" />
+	<InvGroup ID="145" Name="Stasis Web Blueprint" />
+	<InvGroup ID="147" Name="Remote Capacitor Transmitter Blueprint" />
+	<InvGroup ID="148" Name="Energy Vampire Blueprint" />
+	<InvGroup ID="151" Name="Energy Destabilizer Blueprint" />
+	<InvGroup ID="152" Name="Smart Bomb Blueprint" />
+	<InvGroup ID="154" Name="Hybrid Weapon Blueprint" />
+	<InvGroup ID="156" Name="Capacitor Booster Blueprint" />
+	<InvGroup ID="157" Name="Shield Hardener Blueprint" />
+	<InvGroup ID="158" Name="Hull Mods Blueprint" />
+	<InvGroup ID="160" Name="ECM Burst Blueprint" />
+	<InvGroup ID="161" Name="Passive Targeting System Blueprint" />
+	<InvGroup ID="162" Name="Automated Targeting System Blueprint" />
+	<InvGroup ID="163" Name="Armor Coating Blueprint" />
+	<InvGroup ID="165" Name="Projectile Ammo Blueprint" />
+	<InvGroup ID="166" Name="Missile Blueprint" />
+	<InvGroup ID="167" Name="Hybrid Charge Blueprint" />
+	<InvGroup ID="168" Name="Frequency Crystal Blueprint" />
+	<InvGroup ID="169" Name="Capacitor Booster Charge Blueprint" />
+	<InvGroup ID="170" Name="Defender Missile Blueprint" />
+	<InvGroup ID="172" Name="Bomb Blueprint" />
+	<InvGroup ID="174" Name="Mine Blueprint" />
+	<InvGroup ID="175" Name="Proximity Drone Blueprint" />
+	<InvGroup ID="176" Name="Combat Drone Blueprint" />
+	<InvGroup ID="177" Name="Mining Drone Blueprint" />
+	<InvGroup ID="178" Name="Drug Blueprint" />
+	<InvGroup ID="180" Name="Protective Sentry Gun" />
+	<InvGroup ID="182" Name="Police Drone" />
+	<InvGroup ID="185" Name="Pirate Drone" />
+	<InvGroup ID="186" Name="Wreck" />
+	<InvGroup ID="190" Name="Bloodline Bonus" />
+	<InvGroup ID="191" Name="Physical Benefit" />
+	<InvGroup ID="192" Name="Physical Handicap" />
+	<InvGroup ID="193" Name="Phobia Handicap" />
+	<InvGroup ID="194" Name="Social Handicap" />
+	<InvGroup ID="195" Name="Amarr Education" />
+	<InvGroup ID="196" Name="Caldari Education" />
+	<InvGroup ID="197" Name="Gallente Education" />
+	<InvGroup ID="198" Name="Minmatar Education" />
+	<InvGroup ID="199" Name="Career Bonus" />
+	<InvGroup ID="201" Name="ECM" />
+	<InvGroup ID="202" Name="ECCM" />
+	<InvGroup ID="203" Name="Sensor Backup Array" />
+	<InvGroup ID="205" Name="Heat Sink" />
+	<InvGroup ID="208" Name="Remote Sensor Damper" />
+	<InvGroup ID="209" Name="Remote Tracking Computer" />
+	<InvGroup ID="210" Name="Signal Amplifier" />
+	<InvGroup ID="211" Name="Tracking Enhancer" />
+	<InvGroup ID="212" Name="Sensor Booster" />
+	<InvGroup ID="213" Name="Tracking Computer" />
+	<InvGroup ID="218" Name="Heat Sink Blueprint" />
+	<InvGroup ID="223" Name="Sensor Booster Blueprint" />
+	<InvGroup ID="224" Name="Tracking Computer Blueprint" />
+	<InvGroup ID="225" Name="Cheat Module Group" />
+	<InvGroup ID="226" Name="Large Collidable Object" />
+	<InvGroup ID="227" Name="Cloud" />
+	<InvGroup ID="237" Name="Rookie ship" />
+	<InvGroup ID="255" Name="Gunnery" />
+	<InvGroup ID="256" Name="Missiles" />
+	<InvGroup ID="257" Name="Spaceship Command" />
+	<InvGroup ID="258" Name="Leadership" />
+	<InvGroup ID="266" Name="Corporation Management" />
+	<InvGroup ID="267" Name="Obsolete Books" />
+	<InvGroup ID="268" Name="Production" />
+	<InvGroup ID="269" Name="Rigging" />
+	<InvGroup ID="270" Name="Science" />
+	<InvGroup ID="272" Name="Electronic Systems" />
+	<InvGroup ID="273" Name="Drones" />
+	<InvGroup ID="274" Name="Trade" />
+	<InvGroup ID="275" Name="Navigation" />
+	<InvGroup ID="278" Name="Social" />
+	<InvGroup ID="279" Name="LCO Drone" />
+	<InvGroup ID="280" Name="General" />
+	<InvGroup ID="281" Name="Frozen" />
+	<InvGroup ID="282" Name="Radioactive" />
+	<InvGroup ID="283" Name="Livestock" />
+	<InvGroup ID="284" Name="Biohazard" />
+	<InvGroup ID="285" Name="CPU Enhancer" />
+	<InvGroup ID="286" Name="Minor Threat" />
+	<InvGroup ID="287" Name="Rogue Drone" />
+	<InvGroup ID="288" Name="Faction Drone" />
+	<InvGroup ID="289" Name="Projected ECCM" />
+	<InvGroup ID="290" Name="Remote Sensor Booster" />
+	<InvGroup ID="291" Name="Tracking Disruptor" />
+	<InvGroup ID="295" Name="Shield Amplifier" />
+	<InvGroup ID="296" Name="Shield Amplifier Blueprint" />
+	<InvGroup ID="297" Name="Convoy" />
+	<InvGroup ID="298" Name="Convoy Drone" />
+	<InvGroup ID="299" Name="Repair Drone" />
+	<InvGroup ID="300" Name="Cyberimplant" />
+	<InvGroup ID="301" Name="Concord Drone" />
+	<InvGroup ID="302" Name="Magnetic Field Stabilizer" />
+	<InvGroup ID="303" Name="Booster" />
+	<InvGroup ID="304" Name="DNA Mutator" />
+	<InvGroup ID="305" Name="Comet" />
+	<InvGroup ID="306" Name="Spawn Container" />
+	<InvGroup ID="307" Name="Construction Platform" />
+	<InvGroup ID="308" Name="Countermeasure Launcher" />
+	<InvGroup ID="309" Name="Autopilot" />
+	<InvGroup ID="310" Name="Beacon" />
+	<InvGroup ID="311" Name="Reprocessing Array" />
+	<InvGroup ID="312" Name="Planetary Cloud" />
+	<InvGroup ID="313" Name="Drugs" />
+	<InvGroup ID="314" Name="Miscellaneous" />
+	<InvGroup ID="315" Name="Warp Core Stabilizer" />
+	<InvGroup ID="316" Name="Gang Coordinator" />
+	<InvGroup ID="317" Name="Computer Interface Node" />
+	<InvGroup ID="318" Name="Landmark" />
+	<InvGroup ID="319" Name="Large Collidable Structure" />
+	<InvGroup ID="321" Name="Shield Disruptor" />
+	<InvGroup ID="323" Name="Billboard" />
+	<InvGroup ID="324" Name="Assault Frigate" />
+	<InvGroup ID="325" Name="Remote Armor Repairer" />
+	<InvGroup ID="326" Name="Armor Plating Energized" />
+	<InvGroup ID="328" Name="Armor Hardener" />
+	<InvGroup ID="329" Name="Armor Reinforcer" />
+	<InvGroup ID="330" Name="Cloaking Device" />
+	<InvGroup ID="332" Name="Tool" />
+	<InvGroup ID="333" Name="Datacores" />
+	<InvGroup ID="334" Name="Construction Components" />
+	<InvGroup ID="335" Name="Temporary Cloud" />
+	<InvGroup ID="336" Name="Mobile Sentry Gun" />
+	<InvGroup ID="337" Name="Mission Drone" />
+	<InvGroup ID="338" Name="Shield Boost Amplifier" />
+	<InvGroup ID="339" Name="Auxiliary Power Core" />
+	<InvGroup ID="340" Name="Secure Cargo Container" />
+	<InvGroup ID="341" Name="Signature Scrambling" />
+	<InvGroup ID="342" Name="Anti Warp Scrambler Blueprint" />
+	<InvGroup ID="343" Name="Tracking Disruptor Blueprint" />
+	<InvGroup ID="344" Name="Tracking Enhancer Blueprint" />
+	<InvGroup ID="345" Name="Remote Tracking Computer Blueprint" />
+	<InvGroup ID="346" Name="Co-Processor Blueprint" />
+	<InvGroup ID="347" Name="Signal Amplifier Blueprint" />
+	<InvGroup ID="348" Name="Armor Hardener Blueprint" />
+	<InvGroup ID="349" Name="Armor Reinforcer Blueprint" />
+	<InvGroup ID="350" Name="Remote Armor Repairer Blueprint" />
+	<InvGroup ID="352" Name="Auxiliary Power Core Blueprint" />
+	<InvGroup ID="353" Name="QA Module" />
+	<InvGroup ID="355" Name="Refinables" />
+	<InvGroup ID="356" Name="Tool Blueprint" />
+	<InvGroup ID="357" Name="DroneBayExpander" />
+	<InvGroup ID="358" Name="Heavy Assault Cruiser" />
+	<InvGroup ID="360" Name="Shield Boost Amplifier Blueprint" />
+	<InvGroup ID="361" Name="Mobile Warp Disruptor" />
+	<InvGroup ID="363" Name="Ship Maintenance Array" />
+	<InvGroup ID="364" Name="Mobile Storage" />
+	<InvGroup ID="365" Name="Control Tower" />
+	<InvGroup ID="366" Name="Warp Gate" />
+	<InvGroup ID="367" Name="Ballistic Control system" />
+	<InvGroup ID="368" Name="Global Warp Disruptor" />
+	<InvGroup ID="369" Name="Ship Logs" />
+	<InvGroup ID="370" Name="Criminal Tags" />
+	<InvGroup ID="371" Name="Mobile Warp Disruptor Blueprint" />
+	<InvGroup ID="372" Name="Advanced Autocannon Ammo" />
+	<InvGroup ID="373" Name="Advanced Railgun Charge" />
+	<InvGroup ID="374" Name="Advanced Beam Laser Crystal" />
+	<InvGroup ID="375" Name="Advanced Pulse Laser Crystal" />
+	<InvGroup ID="376" Name="Advanced Artillery Ammo" />
+	<InvGroup ID="377" Name="Advanced Blaster Charge" />
+	<InvGroup ID="378" Name="Cruise Control" />
+	<InvGroup ID="379" Name="Target Painter" />
+	<InvGroup ID="380" Name="Deep Space Transport" />
+	<InvGroup ID="381" Name="Elite Battleship" />
+	<InvGroup ID="382" Name="Shipping Crates" />
+	<InvGroup ID="383" Name="Destructible Sentry Gun" />
+	<InvGroup ID="384" Name="Light Missile" />
+	<InvGroup ID="385" Name="Heavy Missile" />
+	<InvGroup ID="386" Name="Cruise Missile" />
+	<InvGroup ID="387" Name="Rocket" />
+	<InvGroup ID="394" Name="FoF Light Missile" />
+	<InvGroup ID="395" Name="FoF Heavy Missile" />
+	<InvGroup ID="396" Name="FoF Cruise Missile" />
+	<InvGroup ID="397" Name="Assembly Array" />
+	<InvGroup ID="400" Name="Ballistic Control System Blueprint" />
+	<InvGroup ID="401" Name="Cloaking Device Blueprint" />
+	<InvGroup ID="404" Name="Silo" />
+	<InvGroup ID="405" Name="Anti Cloaking Pulse" />
+	<InvGroup ID="406" Name="Smartbomb Supercharger" />
+	<InvGroup ID="407" Name="Drone Control Unit" />
+	<InvGroup ID="408" Name="Drone Control Unit Blueprint" />
+	<InvGroup ID="409" Name="Empire Insignia Drops" />
+	<InvGroup ID="410" Name="Anti Cloaking Pulse Blueprint" />
+	<InvGroup ID="411" Name="Force Field" />
+	<InvGroup ID="413" Name="Laboratory" />
+	<InvGroup ID="414" Name="Mobile Power Core" />
+	<InvGroup ID="416" Name="Moon Mining" />
+	<InvGroup ID="417" Name="Mobile Missile Sentry" />
+	<InvGroup ID="418" Name="Mobile Shield Generator" />
+	<InvGroup ID="419" Name="Combat Battlecruiser" />
+	<InvGroup ID="420" Name="Destroyer" />
+	<InvGroup ID="422" Name="Gas Isotopes" />
+	<InvGroup ID="423" Name="Ice Product" />
+	<InvGroup ID="425" Name="Orbital Assault Unit" />
+	<InvGroup ID="426" Name="Mobile Projectile Sentry" />
+	<InvGroup ID="427" Name="Moon Materials" />
+	<InvGroup ID="428" Name="Intermediate Materials" />
+	<InvGroup ID="429" Name="Composite" />
+	<InvGroup ID="430" Name="Mobile Laser Sentry" />
+	<InvGroup ID="435" Name="Deadspace Overseer" />
+	<InvGroup ID="436" Name="Simple Reaction" />
+	<InvGroup ID="438" Name="Mobile Reactor" />
+	<InvGroup ID="439" Name="Electronic Warfare Battery" />
+	<InvGroup ID="440" Name="Sensor Dampening Battery" />
+	<InvGroup ID="441" Name="Stasis Webification Battery" />
+	<InvGroup ID="443" Name="Warp Scrambling Battery" />
+	<InvGroup ID="444" Name="Shield Hardening Array" />
+	<InvGroup ID="445" Name="Force Field Array" />
+	<InvGroup ID="446" Name="Customs Official" />
+	<InvGroup ID="447" Name="Construction Component Blueprints" />
+	<InvGroup ID="448" Name="Audit Log Secure Container" />
+	<InvGroup ID="449" Name="Mobile Hybrid Sentry" />
+	<InvGroup ID="450" Name="Arkonor" />
+	<InvGroup ID="451" Name="Bistot" />
+	<InvGroup ID="452" Name="Crokite" />
+	<InvGroup ID="453" Name="Dark Ochre" />
+	<InvGroup ID="454" Name="Hedbergite" />
+	<InvGroup ID="455" Name="Hemorphite" />
+	<InvGroup ID="456" Name="Jaspet" />
+	<InvGroup ID="457" Name="Kernite" />
+	<InvGroup ID="458" Name="Plagioclase" />
+	<InvGroup ID="459" Name="Pyroxeres" />
+	<InvGroup ID="460" Name="Scordite" />
+	<InvGroup ID="461" Name="Spodumain" />
+	<InvGroup ID="462" Name="Veldspar" />
+	<InvGroup ID="463" Name="Mining Barge" />
+	<InvGroup ID="464" Name="Strip Miner" />
+	<InvGroup ID="465" Name="Ice" />
+	<InvGroup ID="467" Name="Gneiss" />
+	<InvGroup ID="468" Name="Mercoxit" />
+	<InvGroup ID="469" Name="Omber" />
+	<InvGroup ID="470" Name="Unanchoring Drone" />
+	<InvGroup ID="471" Name="Corporate Hangar Array" />
+	<InvGroup ID="472" Name="System Scanner" />
+	<InvGroup ID="473" Name="Tracking Array" />
+	<InvGroup ID="474" Name="Acceleration Gate Keys" />
+	<InvGroup ID="475" Name="Microwarpdrive" />
+	<InvGroup ID="476" Name="Citadel Torpedo" />
+	<InvGroup ID="477" Name="Mining Barge Blueprint" />
+	<InvGroup ID="478" Name="System Scanner Blueprint" />
+	<InvGroup ID="479" Name="Scanner Probe" />
+	<InvGroup ID="480" Name="Stealth Emitter Array" />
+	<InvGroup ID="481" Name="Scan Probe Launcher" />
+	<InvGroup ID="482" Name="Mining Crystal" />
+	<InvGroup ID="483" Name="Frequency Mining Laser" />
+	<InvGroup ID="484" Name="Complex Reactions" />
+	<InvGroup ID="485" Name="Dreadnought" />
+	<InvGroup ID="486" Name="Scan Probe Blueprint" />
+	<InvGroup ID="487" Name="Destroyer Blueprint" />
+	<InvGroup ID="489" Name="Battlecruiser Blueprint" />
+	<InvGroup ID="490" Name="Strip Miner Blueprint" />
+	<InvGroup ID="492" Name="Survey Probe" />
+	<InvGroup ID="493" Name="Overseer Personal Effects" />
+	<InvGroup ID="494" Name="Deadspace Overseer's Structure" />
+	<InvGroup ID="495" Name="Deadspace Overseer's Sentry" />
+	<InvGroup ID="496" Name="Deadspace Overseer's Belongings" />
+	<InvGroup ID="497" Name="Fuel" />
+	<InvGroup ID="498" Name="Modifications" />
+	<InvGroup ID="499" Name="New EW Testing" />
+	<InvGroup ID="500" Name="Festival Charges" />
+	<InvGroup ID="501" Name="Festival Launcher" />
+	<InvGroup ID="502" Name="Cosmic Signature" />
+	<InvGroup ID="503" Name="Elite Industrial Blueprint" />
+	<InvGroup ID="504" Name="Target Painter Blueprint" />
+	<InvGroup ID="505" Name="Fake Skills" />
+	<InvGroup ID="506" Name="Missile Launcher Cruise" />
+	<InvGroup ID="507" Name="Missile Launcher Rocket" />
+	<InvGroup ID="508" Name="Missile Launcher Torpedo" />
+	<InvGroup ID="509" Name="Missile Launcher Light" />
+	<InvGroup ID="510" Name="Missile Launcher Heavy" />
+	<InvGroup ID="511" Name="Missile Launcher Rapid Light" />
+	<InvGroup ID="512" Name="Missile Launcher Defender" />
+	<InvGroup ID="513" Name="Freighter" />
+	<InvGroup ID="514" Name="ECM Stabilizer" />
+	<InvGroup ID="515" Name="Siege Module" />
+	<InvGroup ID="516" Name="Siege Module Blueprint" />
+	<InvGroup ID="517" Name="Agents in Space" />
+	<InvGroup ID="518" Name="Anti Ballistic Defense System" />
+	<InvGroup ID="519" Name="Terran Artifacts" />
+	<InvGroup ID="520" Name="Storyline Frigate" />
+	<InvGroup ID="521" Name="Identification" />
+	<InvGroup ID="522" Name="Storyline Cruiser" />
+	<InvGroup ID="523" Name="Storyline Battleship" />
+	<InvGroup ID="524" Name="Missile Launcher Citadel" />
+	<InvGroup ID="525" Name="Freighter Blueprint" />
+	<InvGroup ID="526" Name="Commodities" />
+	<InvGroup ID="527" Name="Storyline Mission Frigate" />
+	<InvGroup ID="528" Name="Artifacts and Prototypes" />
+	<InvGroup ID="530" Name="Materials and Compounds" />
+	<InvGroup ID="532" Name="Gang Coordinator Blueprint" />
+	<InvGroup ID="533" Name="Storyline Mission Cruiser" />
+	<InvGroup ID="534" Name="Storyline Mission Battleship" />
+	<InvGroup ID="535" Name="Construction Platform Blueprint" />
+	<InvGroup ID="536" Name="Station Components" />
+	<InvGroup ID="537" Name="Dreadnought Blueprint" />
+	<InvGroup ID="538" Name="Data Miners" />
+	<InvGroup ID="540" Name="Command Ship" />
+	<InvGroup ID="541" Name="Interdictor" />
+	<InvGroup ID="543" Name="Exhumer" />
+	<InvGroup ID="544" Name="Cap Drain Drone" />
+	<InvGroup ID="545" Name="Warp Scrambling Drone" />
+	<InvGroup ID="546" Name="Mining Upgrade" />
+	<InvGroup ID="547" Name="Carrier" />
+	<InvGroup ID="548" Name="Interdiction Probe" />
+	<InvGroup ID="549" Name="Fighter Drone" />
+	<InvGroup ID="550" Name="Asteroid Angel Cartel Frigate" />
+	<InvGroup ID="551" Name="Asteroid Angel Cartel Cruiser" />
+	<InvGroup ID="552" Name="Asteroid Angel Cartel Battleship" />
+	<InvGroup ID="553" Name="Asteroid Angel Cartel Officer" />
+	<InvGroup ID="554" Name="Asteroid Angel Cartel Hauler" />
+	<InvGroup ID="555" Name="Asteroid Blood Raiders Cruiser" />
+	<InvGroup ID="556" Name="Asteroid Blood Raiders Battleship" />
+	<InvGroup ID="557" Name="Asteroid Blood Raiders Frigate" />
+	<InvGroup ID="558" Name="Asteroid Blood Raiders Hauler" />
+	<InvGroup ID="559" Name="Asteroid Blood Raiders Officer" />
+	<InvGroup ID="560" Name="Asteroid Guristas Battleship" />
+	<InvGroup ID="561" Name="Asteroid Guristas Cruiser" />
+	<InvGroup ID="562" Name="Asteroid Guristas Frigate" />
+	<InvGroup ID="563" Name="Asteroid Guristas Hauler" />
+	<InvGroup ID="564" Name="Asteroid Guristas Officer" />
+	<InvGroup ID="565" Name="Asteroid Sansha's Nation Battleship" />
+	<InvGroup ID="566" Name="Asteroid Sansha's Nation Cruiser" />
+	<InvGroup ID="567" Name="Asteroid Sansha's Nation Frigate" />
+	<InvGroup ID="568" Name="Asteroid Sansha's Nation Hauler" />
+	<InvGroup ID="569" Name="Asteroid Sansha's Nation Officer" />
+	<InvGroup ID="570" Name="Asteroid Serpentis Battleship" />
+	<InvGroup ID="571" Name="Asteroid Serpentis Cruiser" />
+	<InvGroup ID="572" Name="Asteroid Serpentis Frigate" />
+	<InvGroup ID="573" Name="Asteroid Serpentis Hauler" />
+	<InvGroup ID="574" Name="Asteroid Serpentis Officer" />
+	<InvGroup ID="575" Name="Asteroid Angel Cartel Destroyer" />
+	<InvGroup ID="576" Name="Asteroid Angel Cartel BattleCruiser" />
+	<InvGroup ID="577" Name="Asteroid Blood Raiders Destroyer" />
+	<InvGroup ID="578" Name="Asteroid Blood Raiders BattleCruiser" />
+	<InvGroup ID="579" Name="Asteroid Guristas Destroyer" />
+	<InvGroup ID="580" Name="Asteroid Guristas BattleCruiser" />
+	<InvGroup ID="581" Name="Asteroid Sansha's Nation Destroyer" />
+	<InvGroup ID="582" Name="Asteroid Sansha's Nation BattleCruiser" />
+	<InvGroup ID="583" Name="Asteroid Serpentis Destroyer" />
+	<InvGroup ID="584" Name="Asteroid Serpentis BattleCruiser" />
+	<InvGroup ID="585" Name="Remote Hull Repairer" />
+	<InvGroup ID="586" Name="Drone Modules" />
+	<InvGroup ID="588" Name="Super Weapon" />
+	<InvGroup ID="589" Name="Interdiction Sphere Launcher" />
+	<InvGroup ID="590" Name="Jump Portal Generator" />
+	<InvGroup ID="593" Name="Deadspace Angel Cartel BattleCruiser" />
+	<InvGroup ID="594" Name="Deadspace Angel Cartel Battleship" />
+	<InvGroup ID="595" Name="Deadspace Angel Cartel Cruiser" />
+	<InvGroup ID="596" Name="Deadspace Angel Cartel Destroyer" />
+	<InvGroup ID="597" Name="Deadspace Angel Cartel Frigate" />
+	<InvGroup ID="602" Name="Deadspace Blood Raiders BattleCruiser" />
+	<InvGroup ID="603" Name="Deadspace Blood Raiders Battleship" />
+	<InvGroup ID="604" Name="Deadspace Blood Raiders Cruiser" />
+	<InvGroup ID="605" Name="Deadspace Blood Raiders Destroyer" />
+	<InvGroup ID="606" Name="Deadspace Blood Raiders Frigate" />
+	<InvGroup ID="611" Name="Deadspace Guristas BattleCruiser" />
+	<InvGroup ID="612" Name="Deadspace Guristas Battleship" />
+	<InvGroup ID="613" Name="Deadspace Guristas Cruiser" />
+	<InvGroup ID="614" Name="Deadspace Guristas Destroyer" />
+	<InvGroup ID="615" Name="Deadspace Guristas Frigate" />
+	<InvGroup ID="620" Name="Deadspace Sansha's Nation BattleCruiser" />
+	<InvGroup ID="621" Name="Deadspace Sansha's Nation Battleship" />
+	<InvGroup ID="622" Name="Deadspace Sansha's Nation Cruiser" />
+	<InvGroup ID="623" Name="Deadspace Sansha's Nation Destroyer" />
+	<InvGroup ID="624" Name="Deadspace Sansha's Nation Frigate" />
+	<InvGroup ID="629" Name="Deadspace Serpentis BattleCruiser" />
+	<InvGroup ID="630" Name="Deadspace Serpentis Battleship" />
+	<InvGroup ID="631" Name="Deadspace Serpentis Cruiser" />
+	<InvGroup ID="632" Name="Deadspace Serpentis Destroyer" />
+	<InvGroup ID="633" Name="Deadspace Serpentis Frigate" />
+	<InvGroup ID="638" Name="Navigation Computer" />
+	<InvGroup ID="639" Name="Electronic Warfare Drone" />
+	<InvGroup ID="640" Name="Logistic Drone" />
+	<InvGroup ID="641" Name="Stasis Webifying Drone" />
+	<InvGroup ID="642" Name="Super Gang Enhancer" />
+	<InvGroup ID="643" Name="Carrier Blueprint" />
+	<InvGroup ID="644" Name="Drone Navigation Computer" />
+	<InvGroup ID="645" Name="Drone Damage Modules" />
+	<InvGroup ID="646" Name="Drone Tracking Modules" />
+	<InvGroup ID="647" Name="Drone Control Range Module" />
+	<InvGroup ID="648" Name="Advanced Rocket" />
+	<InvGroup ID="649" Name="Freight Container" />
+	<InvGroup ID="650" Name="Tractor Beam" />
+	<InvGroup ID="651" Name="Super Weapon Blueprint" />
+	<InvGroup ID="652" Name="Lease" />
+	<InvGroup ID="653" Name="Advanced Light Missile" />
+	<InvGroup ID="654" Name="Advanced Heavy Assault Missile" />
+	<InvGroup ID="655" Name="Advanced Heavy Missile" />
+	<InvGroup ID="656" Name="Advanced Cruise Missile" />
+	<InvGroup ID="657" Name="Advanced Torpedo" />
+	<InvGroup ID="658" Name="Cynosural Field" />
+	<InvGroup ID="659" Name="Supercarrier" />
+	<InvGroup ID="660" Name="Energy Vampire Slayer" />
+	<InvGroup ID="661" Name="Simple Biochemical Reactions" />
+	<InvGroup ID="662" Name="Complex Biochemical Reactions" />
+	<InvGroup ID="663" Name="Mercoxit Mining Crystal" />
+	<InvGroup ID="665" Name="Mission Amarr Empire Frigate" />
+	<InvGroup ID="666" Name="Mission Amarr Empire Battlecruiser" />
+	<InvGroup ID="667" Name="Mission Amarr Empire Battleship" />
+	<InvGroup ID="668" Name="Mission Amarr Empire Cruiser" />
+	<InvGroup ID="669" Name="Mission Amarr Empire Destroyer" />
+	<InvGroup ID="670" Name="Mission Amarr Empire Other" />
+	<InvGroup ID="671" Name="Mission Caldari State Frigate" />
+	<InvGroup ID="672" Name="Mission Caldari State Battlecruiser" />
+	<InvGroup ID="673" Name="Mission Caldari State Cruiser" />
+	<InvGroup ID="674" Name="Mission Caldari State Battleship" />
+	<InvGroup ID="675" Name="Mission Caldari State Other" />
+	<InvGroup ID="676" Name="Mission Caldari State Destroyer" />
+	<InvGroup ID="677" Name="Mission Gallente Federation Frigate" />
+	<InvGroup ID="678" Name="Mission Gallente Federation Cruiser" />
+	<InvGroup ID="679" Name="Mission Gallente Federation Destroyer" />
+	<InvGroup ID="680" Name="Mission Gallente Federation Battleship" />
+	<InvGroup ID="681" Name="Mission Gallente Federation Battlecruiser" />
+	<InvGroup ID="682" Name="Mission Gallente Federation Other" />
+	<InvGroup ID="683" Name="Mission Minmatar Republic Frigate" />
+	<InvGroup ID="684" Name="Mission Minmatar Republic Destroyer" />
+	<InvGroup ID="685" Name="Mission Minmatar Republic Battlecruiser" />
+	<InvGroup ID="686" Name="Mission Minmatar Republic Other" />
+	<InvGroup ID="687" Name="Mission Khanid Frigate" />
+	<InvGroup ID="688" Name="Mission Khanid Destroyer" />
+	<InvGroup ID="689" Name="Mission Khanid Cruiser" />
+	<InvGroup ID="690" Name="Mission Khanid Battlecruiser" />
+	<InvGroup ID="691" Name="Mission Khanid Battleship" />
+	<InvGroup ID="692" Name="Mission Khanid Other" />
+	<InvGroup ID="693" Name="Mission CONCORD Frigate" />
+	<InvGroup ID="694" Name="Mission CONCORD Destroyer" />
+	<InvGroup ID="695" Name="Mission CONCORD Cruiser" />
+	<InvGroup ID="696" Name="Mission CONCORD Battlecruiser" />
+	<InvGroup ID="697" Name="Mission CONCORD Battleship" />
+	<InvGroup ID="698" Name="Mission CONCORD Other" />
+	<InvGroup ID="699" Name="Mission Mordu Frigate" />
+	<InvGroup ID="700" Name="Mission Mordu Destroyer" />
+	<InvGroup ID="701" Name="Mission Mordu Cruiser" />
+	<InvGroup ID="702" Name="Mission Mordu Battlecruiser" />
+	<InvGroup ID="703" Name="Mission Mordu Battleship" />
+	<InvGroup ID="704" Name="Mission Mordu Other" />
+	<InvGroup ID="705" Name="Mission Minmatar Republic Cruiser" />
+	<InvGroup ID="706" Name="Mission Minmatar Republic Battleship" />
+	<InvGroup ID="707" Name="Jump Portal Array" />
+	<InvGroup ID="709" Name="Scanner Array" />
+	<InvGroup ID="710" Name="Logistics Array" />
+	<InvGroup ID="711" Name="Harvestable Cloud" />
+	<InvGroup ID="712" Name="Biochemical Material" />
+	<InvGroup ID="715" Name="Destructible Agents In Space" />
+	<InvGroup ID="716" Name="Data Interfaces" />
+	<InvGroup ID="718" Name="Booster Blueprints" />
+	<InvGroup ID="721" Name="Temp" />
+	<InvGroup ID="722" Name="Advanced Hybrid Charge Blueprint" />
+	<InvGroup ID="723" Name="Tractor Beam Blueprint" />
+	<InvGroup ID="724" Name="Implant Blueprints" />
+	<InvGroup ID="725" Name="Advanced Projectile Ammo Blueprint" />
+	<InvGroup ID="726" Name="Advanced Frequency Crystal Blueprint" />
+	<InvGroup ID="727" Name="Mining Crystal Blueprint" />
+	<InvGroup ID="728" Name="Decryptors - Amarr" />
+	<InvGroup ID="729" Name="Decryptors - Minmatar" />
+	<InvGroup ID="730" Name="Decryptors - Gallente" />
+	<InvGroup ID="731" Name="Decryptors - Caldari" />
+	<InvGroup ID="732" Name="Decryptors - Sleepers" />
+	<InvGroup ID="733" Name="Decryptors - Yan Jung" />
+	<InvGroup ID="734" Name="Decryptors - Takmahl" />
+	<InvGroup ID="735" Name="Decryptors - Talocan" />
+	<InvGroup ID="737" Name="Gas Cloud Harvester" />
+	<InvGroup ID="738" Name="Cyber Armor" />
+	<InvGroup ID="739" Name="Cyber Drones" />
+	<InvGroup ID="740" Name="Cyber Electronic Systems" />
+	<InvGroup ID="741" Name="Cyber Engineering" />
+	<InvGroup ID="742" Name="Cyber Gunnery" />
+	<InvGroup ID="743" Name="Cyber Production" />
+	<InvGroup ID="744" Name="Cyber Leadership" />
+	<InvGroup ID="745" Name="Cyber Learning" />
+	<InvGroup ID="746" Name="Cyber Missile" />
+	<InvGroup ID="747" Name="Cyber Navigation" />
+	<InvGroup ID="748" Name="Cyber Science" />
+	<InvGroup ID="749" Name="Cyber Shields" />
+	<InvGroup ID="750" Name="Cyber Social" />
+	<InvGroup ID="751" Name="Cyber Trade" />
+	<InvGroup ID="753" Name="ECM Enhancer" />
+	<InvGroup ID="754" Name="Salvaged Materials" />
+	<InvGroup ID="755" Name="Asteroid Rogue Drone BattleCruiser" />
+	<InvGroup ID="756" Name="Asteroid Rogue Drone Battleship" />
+	<InvGroup ID="757" Name="Asteroid Rogue Drone Cruiser" />
+	<InvGroup ID="758" Name="Asteroid Rogue Drone Destroyer" />
+	<InvGroup ID="759" Name="Asteroid Rogue Drone Frigate" />
+	<InvGroup ID="760" Name="Asteroid Rogue Drone Hauler" />
+	<InvGroup ID="761" Name="Asteroid Rogue Drone Swarm" />
+	<InvGroup ID="762" Name="Inertial Stabilizer" />
+	<InvGroup ID="763" Name="Nanofiber Internal Structure" />
+	<InvGroup ID="764" Name="Overdrive Injector System" />
+	<InvGroup ID="765" Name="Expanded Cargohold" />
+	<InvGroup ID="766" Name="Power Diagnostic System" />
+	<InvGroup ID="767" Name="Capacitor Power Relay" />
+	<InvGroup ID="768" Name="Capacitor Flux Coil" />
+	<InvGroup ID="769" Name="Reactor Control Unit" />
+	<InvGroup ID="770" Name="Shield Flux Coil" />
+	<InvGroup ID="771" Name="Missile Launcher Heavy Assault" />
+	<InvGroup ID="772" Name="Heavy Assault Missile" />
+	<InvGroup ID="773" Name="Rig Armor" />
+	<InvGroup ID="774" Name="Rig Shield" />
+	<InvGroup ID="775" Name="Rig Energy Weapon" />
+	<InvGroup ID="776" Name="Rig Hybrid Weapon" />
+	<InvGroup ID="777" Name="Rig Projectile Weapon" />
+	<InvGroup ID="778" Name="Rig Drones" />
+	<InvGroup ID="779" Name="Rig Launcher" />
+	<InvGroup ID="781" Name="Rig Core" />
+	<InvGroup ID="782" Name="Rig Navigation" />
+	<InvGroup ID="783" Name="Cyber X Specials" />
+	<InvGroup ID="784" Name="Large Collidable Ship" />
+	<InvGroup ID="786" Name="Rig Electronic Systems" />
+	<InvGroup ID="787" Name="Rig Blueprint" />
+	<InvGroup ID="789" Name="Asteroid Angel Cartel Commander Frigate" />
+	<InvGroup ID="790" Name="Asteroid Angel Cartel Commander Cruiser" />
+	<InvGroup ID="791" Name="Asteroid Blood Raiders Commander Cruiser" />
+	<InvGroup ID="792" Name="Asteroid Blood Raiders Commander Frigate" />
+	<InvGroup ID="793" Name="Asteroid Angel Cartel Commander BattleCruiser" />
+	<InvGroup ID="794" Name="Asteroid Angel Cartel Commander Destroyer" />
+	<InvGroup ID="795" Name="Asteroid Blood Raiders Commander BattleCruiser" />
+	<InvGroup ID="796" Name="Asteroid Blood Raiders Commander Destroyer" />
+	<InvGroup ID="797" Name="Asteroid Guristas Commander BattleCruiser" />
+	<InvGroup ID="798" Name="Asteroid Guristas Commander Cruiser" />
+	<InvGroup ID="799" Name="Asteroid Guristas Commander Destroyer" />
+	<InvGroup ID="800" Name="Asteroid Guristas Commander Frigate" />
+	<InvGroup ID="801" Name="Deadspace Rogue Drone BattleCruiser" />
+	<InvGroup ID="802" Name="Deadspace Rogue Drone Battleship" />
+	<InvGroup ID="803" Name="Deadspace Rogue Drone Cruiser" />
+	<InvGroup ID="804" Name="Deadspace Rogue Drone Destroyer" />
+	<InvGroup ID="805" Name="Deadspace Rogue Drone Frigate" />
+	<InvGroup ID="806" Name="Deadspace Rogue Drone Swarm" />
+	<InvGroup ID="807" Name="Asteroid Sansha's Nation Commander BattleCruiser" />
+	<InvGroup ID="808" Name="Asteroid Sansha's Nation Commander Cruiser" />
+	<InvGroup ID="809" Name="Asteroid Sansha's Nation Commander Destroyer" />
+	<InvGroup ID="810" Name="Asteroid Sansha's Nation Commander Frigate" />
+	<InvGroup ID="811" Name="Asteroid Serpentis Commander BattleCruiser" />
+	<InvGroup ID="812" Name="Asteroid Serpentis Commander Cruiser" />
+	<InvGroup ID="813" Name="Asteroid Serpentis Commander Destroyer" />
+	<InvGroup ID="814" Name="Asteroid Serpentis Commander Frigate" />
+	<InvGroup ID="815" Name="Clone Vat Bay" />
+	<InvGroup ID="816" Name="Mission Generic Battleships" />
+	<InvGroup ID="817" Name="Mission Generic Cruisers" />
+	<InvGroup ID="818" Name="Mission Generic Frigates" />
+	<InvGroup ID="819" Name="Deadspace Overseer Frigate" />
+	<InvGroup ID="820" Name="Deadspace Overseer Cruiser" />
+	<InvGroup ID="821" Name="Deadspace Overseer Battleship" />
+	<InvGroup ID="822" Name="Mission Thukker Battlecruiser" />
+	<InvGroup ID="823" Name="Mission Thukker Battleship" />
+	<InvGroup ID="824" Name="Mission Thukker Cruiser" />
+	<InvGroup ID="825" Name="Mission Thukker Destroyer" />
+	<InvGroup ID="826" Name="Mission Thukker Frigate" />
+	<InvGroup ID="827" Name="Mission Thukker Other" />
+	<InvGroup ID="828" Name="Mission Generic Battle Cruisers" />
+	<InvGroup ID="829" Name="Mission Generic Destroyers" />
+	<InvGroup ID="830" Name="Covert Ops" />
+	<InvGroup ID="831" Name="Interceptor" />
+	<InvGroup ID="832" Name="Logistics" />
+	<InvGroup ID="833" Name="Force Recon Ship" />
+	<InvGroup ID="834" Name="Stealth Bomber" />
+	<InvGroup ID="835" Name="Station Upgrade Platform" />
+	<InvGroup ID="836" Name="Station Improvement Platform" />
+	<InvGroup ID="837" Name="Energy Neutralizing Battery" />
+	<InvGroup ID="838" Name="Cynosural Generator Array" />
+	<InvGroup ID="839" Name="Cynosural System Jammer" />
+	<InvGroup ID="840" Name="Structure Repair Array" />
+	<InvGroup ID="841" Name="Structures - Control Tower Blueprints" />
+	<InvGroup ID="842" Name="Remote ECM Burst" />
+	<InvGroup ID="843" Name="Asteroid Rogue Drone Commander BattleCruiser" />
+	<InvGroup ID="844" Name="Asteroid Rogue Drone Commander Battleship" />
+	<InvGroup ID="845" Name="Asteroid Rogue Drone Commander Cruiser" />
+	<InvGroup ID="846" Name="Asteroid Rogue Drone Commander Destroyer" />
+	<InvGroup ID="847" Name="Asteroid Rogue Drone Commander Frigate" />
+	<InvGroup ID="848" Name="Asteroid Angel Cartel Commander Battleship" />
+	<InvGroup ID="849" Name="Asteroid Blood Raiders Commander Battleship" />
+	<InvGroup ID="850" Name="Asteroid Guristas Commander Battleship" />
+	<InvGroup ID="851" Name="Asteroid Sansha's Nation Commander Battleship" />
+	<InvGroup ID="852" Name="Asteroid Serpentis Commander Battleship" />
+	<InvGroup ID="853" Name="Structures - Laser Battery Blueprints" />
+	<InvGroup ID="854" Name="Structures - Projectile Battery Blueprints" />
+	<InvGroup ID="855" Name="Structures - Hybrid Battery Blueprints" />
+	<InvGroup ID="856" Name="Structures - ECM Jamming Array Blueprints" />
+	<InvGroup ID="857" Name="Structures - Warp Scrambling Battery Blueprints" />
+	<InvGroup ID="858" Name="Structures - Stasis Webification Battery Blueprints" />
+	<InvGroup ID="859" Name="Structures - Sensor Dampening Array Blueprints" />
+	<InvGroup ID="860" Name="Structures - Energy Neutralizing Battery Blueprints" />
+	<InvGroup ID="861" Name="Mission Fighter Drone" />
+	<InvGroup ID="862" Name="Missile Launcher Bomb" />
+	<InvGroup ID="863" Name="Bomb ECM" />
+	<InvGroup ID="864" Name="Bomb Energy" />
+	<InvGroup ID="865" Name="Mission Amarr Empire Carrier" />
+	<InvGroup ID="866" Name="Mission Caldari State Carrier" />
+	<InvGroup ID="867" Name="Mission Gallente Federation Carrier" />
+	<InvGroup ID="868" Name="Mission Minmatar Republic Carrier" />
+	<InvGroup ID="870" Name="Remote Hull Repairer Blueprint" />
+	<InvGroup ID="871" Name="Structures - Missile Battery Blueprints" />
+	<InvGroup ID="872" Name="Outpost Improvements" />
+	<InvGroup ID="873" Name="Capital Construction Components" />
+	<InvGroup ID="874" Name="Disruptable Station Services" />
+	<InvGroup ID="875" Name="Mission Faction Transports" />
+	<InvGroup ID="876" Name="Outpost Upgrades" />
+	<InvGroup ID="877" Name="Target Painting Battery" />
+	<InvGroup ID="878" Name="Cloak Enhancements" />
+	<InvGroup ID="879" Name="Slave Reception" />
+	<InvGroup ID="880" Name="Sleeper Components" />
+	<InvGroup ID="881" Name="Freedom Programs" />
+	<InvGroup ID="882" Name="Enslavement Programs" />
+	<InvGroup ID="883" Name="Capital Industrial Ship" />
+	<InvGroup ID="884" Name="Test Compressed Ore" />
+	<InvGroup ID="885" Name="Cosmic Anomaly" />
+	<InvGroup ID="886" Name="Rogue Drone Components" />
+	<InvGroup ID="888" Name="Ore Compression Blueprints" />
+	<InvGroup ID="889" Name="Ore Enhancement Blueprints" />
+	<InvGroup ID="890" Name="Ice Compression Blueprints" />
+	<InvGroup ID="891" Name="Structures - Mobile Laboratory Blueprints" />
+	<InvGroup ID="892" Name="Planet Satellites" />
+	<InvGroup ID="893" Name="Electronic Attack Ship" />
+	<InvGroup ID="894" Name="Heavy Interdiction Cruiser" />
+	<InvGroup ID="896" Name="Rig Security Transponder" />
+	<InvGroup ID="897" Name="Covert Beacon" />
+	<InvGroup ID="898" Name="Black Ops" />
+	<InvGroup ID="899" Name="Warp Disrupt Field Generator" />
+	<InvGroup ID="900" Name="Marauder" />
+	<InvGroup ID="901" Name="Mining Enhancer" />
+	<InvGroup ID="902" Name="Jump Freighter" />
+	<InvGroup ID="903" Name="Ancient Compressed Ice" />
+	<InvGroup ID="904" Name="Rig Mining" />
+	<InvGroup ID="905" Name="Covert Cynosural Field Generator" />
+	<InvGroup ID="906" Name="Combat Recon Ship" />
+	<InvGroup ID="907" Name="Tracking Script" />
+	<InvGroup ID="908" Name="Warp Disruption Script" />
+	<InvGroup ID="909" Name="Tracking Disruption Script" />
+	<InvGroup ID="910" Name="Sensor Booster Script" />
+	<InvGroup ID="911" Name="Sensor Dampener Script" />
+	<InvGroup ID="912" Name="Script Blueprint" />
+	<InvGroup ID="913" Name="Advanced Capital Construction Components" />
+	<InvGroup ID="914" Name="Advanced Capital Construction Component Blueprints" />
+	<InvGroup ID="915" Name="Capital Construction Blueprints" />
+	<InvGroup ID="916" Name="Nanite Repair Paste" />
+	<InvGroup ID="917" Name="Data Miner Blueprint" />
+	<InvGroup ID="918" Name="Scan Probe Launcher Blueprint" />
+	<InvGroup ID="920" Name="Effect Beacon" />
+	<InvGroup ID="922" Name="Capture Point" />
+	<InvGroup ID="924" Name="Mission Faction Battleship" />
+	<InvGroup ID="925" Name="FW Infrastructure Hub" />
+	<InvGroup ID="927" Name="Mission Faction Industrials" />
+	<InvGroup ID="934" Name="Zombie Entities" />
+	<InvGroup ID="935" Name="WorldSpace" />
+	<InvGroup ID="937" Name="Decorations" />
+	<InvGroup ID="940" Name="Furniture" />
+	<InvGroup ID="941" Name="Industrial Command Ship" />
+	<InvGroup ID="943" Name="Game Time" />
+	<InvGroup ID="944" Name="Capital Industrial Ship Blueprint" />
+	<InvGroup ID="945" Name="Industrial Command Ship Blueprint" />
+	<InvGroup ID="952" Name="Mission Container" />
+	<InvGroup ID="954" Name="Defensive Systems" />
+	<InvGroup ID="955" Name="Electronic Systems" />
+	<InvGroup ID="956" Name="Offensive Systems" />
+	<InvGroup ID="957" Name="Propulsion Systems" />
+	<InvGroup ID="958" Name="Engineering Systems" />
+	<InvGroup ID="959" Name="Deadspace Sleeper Sleepless Sentinel" />
+	<InvGroup ID="960" Name="Deadspace Sleeper Awakened Sentinel" />
+	<InvGroup ID="961" Name="Deadspace Sleeper Emergent Sentinel" />
+	<InvGroup ID="963" Name="Strategic Cruiser" />
+	<InvGroup ID="964" Name="Hybrid Tech Components" />
+	<InvGroup ID="965" Name="Hybrid Component Blueprints" />
+	<InvGroup ID="966" Name="Ancient Salvage" />
+	<InvGroup ID="967" Name="Wormhole Minerals" />
+	<InvGroup ID="971" Name="Sleeper Propulsion Relics" />
+	<InvGroup ID="972" Name="Obsolete Probes" />
+	<InvGroup ID="973" Name="Subsystem Blueprints" />
+	<InvGroup ID="974" Name="Hybrid Polymers" />
+	<InvGroup ID="976" Name="Festival Charges Expired" />
+	<InvGroup ID="977" Name="Hybrid Reactions" />
+	<InvGroup ID="979" Name="Decryptors - Hybrid" />
+	<InvGroup ID="982" Name="Deadspace Sleeper Sleepless Defender" />
+	<InvGroup ID="983" Name="Deadspace Sleeper Sleepless Patroller" />
+	<InvGroup ID="984" Name="Deadspace Sleeper Awakened Defender" />
+	<InvGroup ID="985" Name="Deadspace Sleeper Awakened Patroller" />
+	<InvGroup ID="986" Name="Deadspace Sleeper Emergent Defender" />
+	<InvGroup ID="987" Name="Deadspace Sleeper Emergent Patroller" />
+	<InvGroup ID="988" Name="Wormhole" />
+	<InvGroup ID="990" Name="Sleeper Electronics Relics" />
+	<InvGroup ID="991" Name="Sleeper Offensive Relics" />
+	<InvGroup ID="992" Name="Sleeper Engineering Relics" />
+	<InvGroup ID="993" Name="Sleeper Defensive Relics" />
+	<InvGroup ID="995" Name="Secondary Sun" />
+	<InvGroup ID="996" Name="Strategic Cruiser Blueprints" />
+	<InvGroup ID="997" Name="Sleeper Hull Relics" />
+	<InvGroup ID="1003" Name="Territorial Claim Unit" />
+	<InvGroup ID="1004" Name="Defense Bunkers" />
+	<InvGroup ID="1005" Name="Sovereignty Blockade Unit" />
+	<InvGroup ID="1006" Name="Mission Faction Cruiser" />
+	<InvGroup ID="1007" Name="Mission Faction Frigate" />
+	<InvGroup ID="1010" Name="Compact Citadel Torpedo" />
+	<InvGroup ID="1012" Name="Infrastructure Hub" />
+	<InvGroup ID="1013" Name="Supercarrier Blueprints" />
+	<InvGroup ID="1016" Name="Strategic Upgrades" />
+	<InvGroup ID="1019" Name="Citadel Cruise" />
+	<InvGroup ID="1020" Name="Industrial Upgrades" />
+	<InvGroup ID="1021" Name="Military Upgrades" />
+	<InvGroup ID="1022" Name="Prototype Exploration Ship" />
+	<InvGroup ID="1023" Name="Fighter Bomber" />
+	<InvGroup ID="1025" Name="Orbital Infrastructure" />
+	<InvGroup ID="1026" Name="Extractors" />
+	<InvGroup ID="1027" Name="Command Centers" />
+	<InvGroup ID="1028" Name="Processors" />
+	<InvGroup ID="1029" Name="Storage Facilities" />
+	<InvGroup ID="1030" Name="Spaceports" />
+	<InvGroup ID="1031" Name="Planetary Resources" />
+	<InvGroup ID="1032" Name="Planet Solid" />
+	<InvGroup ID="1033" Name="Planet Liquid-Gas" />
+	<InvGroup ID="1034" Name="Refined Commodities" />
+	<InvGroup ID="1035" Name="Planet Organic" />
+	<InvGroup ID="1036" Name="Planetary Links" />
+	<InvGroup ID="1040" Name="Specialized Commodities" />
+	<InvGroup ID="1041" Name="Advanced Commodities" />
+	<InvGroup ID="1042" Name="Basic Commodities" />
+	<InvGroup ID="1045" Name="Sovereignty Structure Blueprint" />
+	<InvGroup ID="1046" Name="Nanite Repair Paste Blueprint" />
+	<InvGroup ID="1048" Name="Structure Blueprint" />
+	<InvGroup ID="1051" Name="Incursion Sansha's Nation Industrial" />
+	<InvGroup ID="1052" Name="Incursion Sansha's Nation Capital" />
+	<InvGroup ID="1053" Name="Incursion Sansha's Nation Frigate" />
+	<InvGroup ID="1054" Name="Incursion Sansha's Nation Cruiser" />
+	<InvGroup ID="1056" Name="Incursion Sansha's Nation Battleship" />
+	<InvGroup ID="1063" Name="Extractor Control Units" />
+	<InvGroup ID="1067" Name="MaterialZone" />
+	<InvGroup ID="1068" Name="DetailMesh" />
+	<InvGroup ID="1071" Name="Flashpoint" />
+	<InvGroup ID="1073" Name="Test Orbitals" />
+	<InvGroup ID="1079" Name="Generic" />
+	<InvGroup ID="1081" Name="Mercenary Bases" />
+	<InvGroup ID="1082" Name="Capsuleer Bases" />
+	<InvGroup ID="1083" Name="Eyewear" />
+	<InvGroup ID="1084" Name="Tattoos" />
+	<InvGroup ID="1085" Name="Piercings" />
+	<InvGroup ID="1086" Name="Scars" />
+	<InvGroup ID="1087" Name="Mid Layer" />
+	<InvGroup ID="1088" Name="Outer" />
+	<InvGroup ID="1089" Name="Tops" />
+	<InvGroup ID="1090" Name="Bottoms" />
+	<InvGroup ID="1091" Name="Footwear" />
+	<InvGroup ID="1092" Name="Hair Styles" />
+	<InvGroup ID="1093" Name="Makeup" />
+	<InvGroup ID="1105" Name="Lens Flares" />
+	<InvGroup ID="1106" Name="Orbital Construction Platform" />
+	<InvGroup ID="1107" Name="Particle Systems" />
+	<InvGroup ID="1108" Name="Animated Lights" />
+	<InvGroup ID="1109" Name="Audio" />
+	<InvGroup ID="1110" Name="Point Lights" />
+	<InvGroup ID="1111" Name="Box Lights" />
+	<InvGroup ID="1112" Name="Spot Lights" />
+	<InvGroup ID="1118" Name="Surface Infrastructure Prefab Units" />
+	<InvGroup ID="1121" Name="Perception Points" />
+	<InvGroup ID="1122" Name="Salvager" />
+	<InvGroup ID="1123" Name="Salvager Blueprint" />
+	<InvGroup ID="1126" Name="PhysicalPortals" />
+	<InvGroup ID="1136" Name="Fuel Block" />
+	<InvGroup ID="1137" Name="Fuel Block Blueprint" />
+	<InvGroup ID="1139" Name="Mining Laser Upgrade Blueprint" />
+	<InvGroup ID="1141" Name="Research Data" />
+	<InvGroup ID="1142" Name="Cap Drain Drone Blueprint" />
+	<InvGroup ID="1143" Name="Electronic Warfare Drone Blueprint" />
+	<InvGroup ID="1144" Name="Logistic Drone Blueprint" />
+	<InvGroup ID="1145" Name="Fighter Bomber Blueprint" />
+	<InvGroup ID="1146" Name="Fighter Drone Blueprint" />
+	<InvGroup ID="1147" Name="Stasis Webifying Drone Blueprint" />
+	<InvGroup ID="1149" Name="Mobile Jump Disruptor" />
+	<InvGroup ID="1150" Name="Armor Resistance Shift Hardener" />
+	<InvGroup ID="1151" Name="Armor Resistance Shift Hardener Blueprint" />
+	<InvGroup ID="1152" Name="Drone Damage Module Blueprint" />
+	<InvGroup ID="1153" Name="Shield Booster Script" />
+	<InvGroup ID="1154" Name="Target Breaker" />
+	<InvGroup ID="1155" Name="Target Breaker Blueprint" />
+	<InvGroup ID="1156" Name="Fueled Shield Booster" />
+	<InvGroup ID="1157" Name="Fueled Shield Booster Blueprint" />
+	<InvGroup ID="1158" Name="Heavy Defender Missile" />
+	<InvGroup ID="1159" Name="Salvage Drone" />
+	<InvGroup ID="1160" Name="Survey Probe Blueprints" />
+	<InvGroup ID="1162" Name="Container Blueprints" />
+	<InvGroup ID="1165" Name="Satellite" />
+	<InvGroup ID="1166" Name="FW Minmatar Republic Frigate" />
+	<InvGroup ID="1167" Name="FW Caldari State Frigate" />
+	<InvGroup ID="1168" Name="FW Gallente Federation Frigate" />
+	<InvGroup ID="1169" Name="FW Amarr Empire Frigate" />
+	<InvGroup ID="1174" Name="Asteroid Rogue Drone Officer" />
+	<InvGroup ID="1175" Name="FW Amarr Empire Destroyer" />
+	<InvGroup ID="1176" Name="FW Caldari State Destroyer" />
+	<InvGroup ID="1177" Name="FW Gallente Federation Destroyer" />
+	<InvGroup ID="1178" Name="FW Minmatar Republic Destroyer" />
+	<InvGroup ID="1179" Name="FW Amarr Empire Cruiser" />
+	<InvGroup ID="1180" Name="FW Caldari State Cruiser" />
+	<InvGroup ID="1181" Name="FW Gallente Federation Cruiser" />
+	<InvGroup ID="1182" Name="FW Minmatar Republic Cruiser" />
+	<InvGroup ID="1183" Name="FW Amarr Empire Battlecruiser" />
+	<InvGroup ID="1184" Name="FW Caldari State Battlecruiser" />
+	<InvGroup ID="1185" Name="FW Gallente Federation Battlecruiser" />
+	<InvGroup ID="1186" Name="FW Minmatar Republic Battlecruiser" />
+	<InvGroup ID="1189" Name="Micro Jump Drive" />
+	<InvGroup ID="1190" Name="Salvage Drone Blueprint" />
+	<InvGroup ID="1191" Name="Micro Jump Drive Blueprint" />
+	<InvGroup ID="1194" Name="Special Edition Commodities" />
+	<InvGroup ID="1195" Name="Tournament Cards: New Eden Open YC 114" />
+	<InvGroup ID="1197" Name="Special Edition Commodity Blueprints" />
+	<InvGroup ID="1198" Name="Orbital Target" />
+	<InvGroup ID="1199" Name="Fueled Armor Repairer" />
+	<InvGroup ID="1200" Name="Fueled Armor Repairer Blueprint" />
+	<InvGroup ID="1201" Name="Attack Battlecruiser" />
+	<InvGroup ID="1202" Name="Blockade Runner" />
+	<InvGroup ID="1206" Name="Security Tags" />
+	<InvGroup ID="1207" Name="Scatter Container" />
+	<InvGroup ID="1209" Name="Shields" />
+	<InvGroup ID="1210" Name="Armor" />
+	<InvGroup ID="1212" Name="Personal Hangar" />
+	<InvGroup ID="1213" Name="Targeting" />
+	<InvGroup ID="1216" Name="Engineering" />
+	<InvGroup ID="1217" Name="Scanning" />
+	<InvGroup ID="1218" Name="Resource Processing" />
+	<InvGroup ID="1220" Name="Neural Enhancement" />
+	<InvGroup ID="1222" Name="ECM Stabilizer Blueprint" />
+	<InvGroup ID="1223" Name="Scanning Upgrade" />
+	<InvGroup ID="1224" Name="Scanning Upgrade Blueprint" />
+	<InvGroup ID="1225" Name="Tournament Cards: Alliance Tournament All Stars" />
+	<InvGroup ID="1226" Name="Survey Probe Launcher" />
+	<InvGroup ID="1227" Name="Survey Probe Launcher Blueprint" />
+	<InvGroup ID="1228" Name="Cyber Targeting" />
+	<InvGroup ID="1229" Name="Cyber Resource Processing" />
+	<InvGroup ID="1230" Name="Cyber Scanning" />
+	<InvGroup ID="1231" Name="Cyber Biology" />
+	<InvGroup ID="1232" Name="Rig Resource Processing" />
+	<InvGroup ID="1233" Name="Rig Scanning" />
+	<InvGroup ID="1234" Name="Rig Targeting" />
+	<InvGroup ID="1238" Name="Scanning Upgrade Time" />
+	<InvGroup ID="1239" Name="Scanning Upgrade Time Blueprint" />
+	<InvGroup ID="1240" Name="Subsystems" />
+	<InvGroup ID="1241" Name="Planet Management" />
+	<InvGroup ID="1245" Name="Missile Launcher Rapid Heavy" />
+	<InvGroup ID="1246" Name="Mobile Depot" />
+	<InvGroup ID="1247" Name="Mobile Siphon Unit" />
+	<InvGroup ID="1248" Name="Empire Bounty Reimbursement Tags" />
+	<InvGroup ID="1249" Name="Mobile Cyno Inhibitor" />
+	<InvGroup ID="1250" Name="Mobile Tractor Unit" />
+	<InvGroup ID="1252" Name="Ghost Sites Angel Cartel Cruiser" />
+	<InvGroup ID="1255" Name="Ghost Sites Blood Raiders Cruiser" />
+	<InvGroup ID="1259" Name="Ghost Sites Guristas Cruiser" />
+	<InvGroup ID="1262" Name="Ghost Sites Serpentis Cruiser" />
+	<InvGroup ID="1265" Name="Ghost Sites Sanshas Cruiser" />
+	<InvGroup ID="1267" Name="Mobile Siphon Unit Blueprint" />
+	<InvGroup ID="1268" Name="Mobile Cynosural Inhibitor Blueprint" />
+	<InvGroup ID="1269" Name="Mobile Depot Blueprint" />
+	<InvGroup ID="1270" Name="Mobile Tractor Unit Blueprint" />
+	<InvGroup ID="1271" Name="Prosthetics" />
+	<InvGroup ID="1273" Name="Encounter Surveillance System" />
+	<InvGroup ID="1274" Name="Mobile Decoy Unit" />
+	<InvGroup ID="1275" Name="Mobile Scan Inhibitor" />
+	<InvGroup ID="1276" Name="Mobile Micro Jump Unit" />
+	<InvGroup ID="1277" Name="Encounter Surveillance System Blueprint" />
+	<InvGroup ID="1282" Name="Compression Array" />
+	<InvGroup ID="1283" Name="Expedition Frigate" />
+	<InvGroup ID="1285" Name="Asteroid Mordus Legion Commander Frigate" />
+	<InvGroup ID="1286" Name="Asteroid Mordus Legion Commander Cruiser" />
+	<InvGroup ID="1287" Name="Asteroid Mordus Legion Commander Battleship" />
+	<InvGroup ID="1288" Name="Ghost Sites Mordu's Legion" />
+	<InvGroup ID="1289" Name="Warp Accelerator" />
+	<InvGroup ID="1292" Name="Drone Tracking Enhancer" />
+	<InvGroup ID="1293" Name="Mobile Scan Inhibitor Blueprint" />
+	<InvGroup ID="1294" Name="Mobile Micro Jump Unit Blueprint" />
+	<InvGroup ID="1295" Name="Mobile Decoy Unit Blueprint" />
+	<InvGroup ID="1297" Name="Mobile Vault" />
+	<InvGroup ID="1299" Name="Jump Drive Economizer" />
+	<InvGroup ID="1301" Name="Services" />
+	<InvGroup ID="1304" Name="Generic Decryptor" />
+	<InvGroup ID="1305" Name="Tactical Destroyer" />
+	<InvGroup ID="1306" Name="Ship Modifiers" />
+	<InvGroup ID="1307" Name="Roaming Sleepers Cruiser" />
+	<InvGroup ID="1308" Name="Rig Anchor" />
+	<InvGroup ID="1309" Name="Tactical Destroyer Blueprint" />
+	<InvGroup ID="1310" Name="Drifters Battleship" />
+	<InvGroup ID="1311" Name="Super Kerr-Induced Nanocoatings" />
+	<InvGroup ID="1312" Name="Observatory Structures" />
+	<InvGroup ID="1313" Name="Entosis Link" />
+	<InvGroup ID="1314" Name="Unknown Components" />
+	<InvGroup ID="1316" Name="Entosis Command Node" />
+	<InvGroup ID="1317" Name="Infrastructure Upgrade Blueprint" />
+	<InvGroup ID="1318" Name="Entosis Link Blueprint" />
+	<InvGroup ID="1319" Name="Miscellaneous" />
+	<InvGroup ID="1320" Name="Citadel" />
+	<InvGroup ID="1395" Name="EVE/Evetypes/Groups/Names:505982" />
+	<InvGroup ID="1396" Name="EVE/Evetypes/Groups/Names:505983" />
+	<InvGroup ID="1397" Name="EVE/Evetypes/Groups/Names:505988" />
+	<InvGroup ID="350858" Name="Infantry Weapons" />
+	<InvGroup ID="351064" Name="Infantry Dropsuits" />
+	<InvGroup ID="351121" Name="Infantry Modules" />
+	<InvGroup ID="351210" Name="Infantry Vehicles" />
+	<InvGroup ID="351648" Name="Infantry Skills" />
+	<InvGroup ID="351844" Name="Infantry Equipment" />
+	<InvGroup ID="354641" Name="Infantry Skill Enhancers" />
+	<InvGroup ID="354753" Name="Infantry Installations" />
+	<InvGroup ID="364204" Name="Surface Infrastructure" />
+	<InvGroup ID="367487" Name="Services " />
+	<InvGroup ID="367580" Name="Agents" />
+	<InvGroup ID="367594" Name="Visual Customization" />
+	<InvGroup ID="367774" Name="Salvage Containers" />
+	<InvGroup ID="367776" Name="Salvage Decryptors" />
+	<InvGroup ID="368656" Name="Battle Salvage" />
+	<InvGroup ID="368666" Name="Warbarge" />
+	<InvGroup ID="368726" Name="Infantry Color Skin" />
+</InvGroups>

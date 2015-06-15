@@ -592,6 +592,118 @@
             List of all solar systems
             </summary>
         </member>
+        <member name="T:EveComFramework.Data.Dungeon">
+            <summary>
+            This class provides static information about dungeons (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Data.Dungeon.ByID(System.Int32)">
+            <summary>
+            Get dungeon by ID
+            </summary>
+            <param name="ID">ID</param>
+            <returns>Dungeon</returns>
+        </member>
+        <member name="M:EveComFramework.Data.Dungeon.ByName(System.String)">
+            <summary>
+            Get dungeons by Name
+            </summary>
+            <param name="Name">Name</param>
+            <returns>List of Dungeons</returns>
+        </member>
+        <member name="P:EveComFramework.Data.Dungeon.ID">
+            <summary>
+            The Dungeon's NameID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.Dungeon.Name">
+            <summary>
+            The Dungeons's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.Dungeon.Type">
+            <summary>
+            The Dungeon Type
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.Dungeon.All">
+            <summary>
+            List of all dungeons
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Data.InvType">
+            <summary>
+            This class provides static information about Inventory Types (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Data.InvType.ByID(System.Int32)">
+            <summary>
+            Get InvType by ID
+            </summary>
+            <param name="ID">ID</param>
+            <returns>InvType</returns>
+        </member>
+        <member name="M:EveComFramework.Data.InvType.ByName(System.String)">
+            <summary>
+            Get InvTypes by Name
+            </summary>
+            <param name="Name">Name</param>
+            <returns>List of InvTypes</returns>
+        </member>
+        <member name="P:EveComFramework.Data.InvType.ID">
+            <summary>
+            The InvType's ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.InvType.Name">
+            <summary>
+            The InvType's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.InvType.GroupID">
+            <summary>
+            The InvType's Group
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.InvType.All">
+            <summary>
+            List of all InvTypes
+            </summary>
+        </member>
+        <member name="T:EveComFramework.Data.InvGroup">
+            <summary>
+            This class provides static information about Inventory Groups (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="M:EveComFramework.Data.InvGroup.ByID(System.Int32)">
+            <summary>
+            Get InvGroup by ID
+            </summary>
+            <param name="ID">ID</param>
+            <returns>InvGroup</returns>
+        </member>
+        <member name="M:EveComFramework.Data.InvGroup.ByName(System.String)">
+            <summary>
+            Get InvGroups by Name
+            </summary>
+            <param name="Name">Name</param>
+            <returns>List of InvGroups</returns>
+        </member>
+        <member name="P:EveComFramework.Data.InvGroup.ID">
+            <summary>
+            The InvGroup's ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.InvGroup.Name">
+            <summary>
+            The InvGroup's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.InvGroup.All">
+            <summary>
+            List of all InvGroups
+            </summary>
+        </member>
         <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
             <summary>
             Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
