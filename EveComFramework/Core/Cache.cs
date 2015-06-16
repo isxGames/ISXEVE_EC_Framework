@@ -38,25 +38,7 @@ namespace EveComFramework.Core
             AvailableAgents = new List<string>();
             ShipNames = new HashSet<string>();
             QueueState(Control);
-
-            //LavishScriptAPI.LavishScript.Commands.AddCommand("failedFalconPunch", increment_pulse_because_birds_of_prey_are_douchebags);
         }
-
-        //public List<State> myStates = new List<State>();
-        //Random rnd = new Random();
-        //int increment_pulse_because_birds_of_prey_are_douchebags(string[] args)
-        //{
-        //    if (!Security.Security.Instance.Config.falconPunch) return 0;
-
-        //    foreach (State s in myStates.Where(a => a.ToString() != "Cache"))
-        //    {
-        //        if (DateTime.Now.AddMilliseconds(100) > s.NextPulse)
-        //        {
-        //            s.NextPulse = DateTime.Now.AddMilliseconds(100 + rnd.Next(-100, 100));
-        //        }
-        //    }
-        //    return 0;
-        //}
 
         #endregion
 

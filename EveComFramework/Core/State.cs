@@ -12,11 +12,6 @@ namespace EveComFramework.Core
     public class State
     {
         /// <summary>
-        /// Event raised to increment retardedfalcon
-        /// </summary>
-        public event Action Alert;
-
-        /// <summary>
         /// Class for items placed in the State queue
         /// </summary>
         public class StateQueue
@@ -80,7 +75,6 @@ namespace EveComFramework.Core
             StateLog = new Logger("State: " + this.GetType().Name);
             DefaultFrequency = 1000;
             EVEFrame.OnFrame += OnFrame;
-            //Cache.Instance.myStates.Add(this);
         }
 
         /// <summary>
@@ -279,7 +273,6 @@ namespace EveComFramework.Core
                 {
                     NextPulse = DateTime.Now.AddMilliseconds(CurState.Frequency + rnd.Next(-100, 100));
                 }
-                //if (!Security.Security.Instance.Config.falconPunch) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect failedFalconPunch");
             }
         }
     }

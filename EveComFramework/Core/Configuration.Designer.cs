@@ -125,8 +125,6 @@
             this.buttonView = new System.Windows.Forms.Button();
             this.labelUploadResult = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.checkFalconPunch = new System.Windows.Forms.CheckBox();
             this.checkAllChat = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -171,7 +169,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericDroneTargetSlots)).BeginInit();
             this.groupBox8.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
-            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -1473,28 +1470,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.checkFalconPunch);
-            this.groupBox9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox9.Location = new System.Drawing.Point(0, 1013);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(293, 35);
-            this.groupBox9.TabIndex = 9;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Falcon Punch";
-            // 
-            // checkFalconPunch
-            // 
-            this.checkFalconPunch.AutoSize = true;
-            this.checkFalconPunch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkFalconPunch.Location = new System.Drawing.Point(3, 17);
-            this.checkFalconPunch.Name = "checkFalconPunch";
-            this.checkFalconPunch.Size = new System.Drawing.Size(287, 15);
-            this.checkFalconPunch.TabIndex = 0;
-            this.checkFalconPunch.Text = "Enabled";
-            this.checkFalconPunch.UseVisualStyleBackColor = true;
-            // 
             // checkAllChat
             // 
             this.checkAllChat.AutoSize = true;
@@ -1511,7 +1486,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -1575,8 +1549,6 @@
             this.groupBox8.ResumeLayout(false);
             this.tableLayoutPanel8.ResumeLayout(false);
             this.tableLayoutPanel8.PerformLayout();
-            this.groupBox9.ResumeLayout(false);
-            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1680,8 +1652,6 @@
         private System.Windows.Forms.Button buttonOpenLogFolder;
         private System.Windows.Forms.Button buttonView;
         private System.Windows.Forms.NumericUpDown numericActiveMinThreshold;
-        private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.CheckBox checkFalconPunch;
         private System.Windows.Forms.CheckBox checkAllChat;
     }
 }

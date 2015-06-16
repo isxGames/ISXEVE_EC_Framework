@@ -171,11 +171,6 @@
             <param name="Test">A boolean function which will instantly short circuit the timeout if returns true.  ex: () => var == true</param>
             <param name="Reset">A boolean function which will instantly reset the timeout to it's max value if returns true.  ex: () => var == true</param>
         </member>
-        <member name="E:EveComFramework.Core.State.Alert">
-            <summary>
-            Event raised to increment retardedfalcon
-            </summary>
-        </member>
         <member name="P:EveComFramework.Core.State.DefaultFrequency">
             <summary>
             The default frequency to use if none is specified

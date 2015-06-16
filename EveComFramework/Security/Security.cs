@@ -81,7 +81,6 @@ namespace EveComFramework.Security
         public string SafeSubstring = "Safe:";
         public string SecureBookmark = "";
         public int FleeWait = 5;
-        public bool falconPunch = false;
     }
 
     #endregion
