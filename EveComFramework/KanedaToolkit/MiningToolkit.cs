@@ -3,7 +3,7 @@ using EveCom;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EveComFramework.MiningToolkit
+namespace EveComFramework.KanedaToolkit
 {
 
     /// <summary>
@@ -30,7 +30,6 @@ namespace EveComFramework.MiningToolkit
         }
 
         private MiningToolkit()
-            : base()
         {
 
         }
@@ -156,24 +155,4 @@ namespace EveComFramework.MiningToolkit
         #endregion
     }
     
-    #region Utility classes
-
-    static class DictionaryHelper
-    {
-        public static IDictionary<TKey, TValue> AddOrUpdate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                dictionary[key] = value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
-            }
-
-            return dictionary;
-        }
-    }
-
-    #endregion
 }

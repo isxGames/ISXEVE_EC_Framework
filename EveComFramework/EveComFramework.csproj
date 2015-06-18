@@ -127,7 +127,9 @@
     <Compile Include="SessionControl\UI\SessionControl.Designer.cs">
       <DependentUpon>SessionControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MiningToolkit\MiningToolkit.cs" />
+    <Compile Include="KanedaToolkit\BookmarkToolkit.cs" />
+    <Compile Include="KanedaToolkit\DictionaryHelper.cs" />
+    <Compile Include="KanedaToolkit\MiningToolkit.cs" />
     <Compile Include="Move\Move.cs" />
     <Compile Include="Optimizer\Optimizer.cs" />
     <Compile Include="Optimizer\UI\Optimizer.cs">

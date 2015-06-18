@@ -877,24 +877,48 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:EveComFramework.MiningToolkit.MiningToolkit">
+        <member name="T:EveComFramework.KanedaToolkit.BookmarkToolkit">
             <summary>
             Mining Toolkit
             </summary>
         </member>
-        <member name="F:EveComFramework.MiningToolkit.MiningToolkit.CrystalSwapCooldown">
+        <member name="M:EveComFramework.KanedaToolkit.BookmarkToolkit.DeleteBookmark(System.String)">
+            <summary>
+            Delete a Bookmark with a given name
+            </summary>
+            <param name="bookmarkName">Bookmark name</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.BookmarkToolkit.DeleteBookmark(EveCom.Bookmark)">
+            <summary>
+            Safely delete a bookmark
+            </summary>
+            <param name="bookmark">bookmark</param>
+            <returns></returns>
+        </member>
+        <member name="P:EveComFramework.KanedaToolkit.BookmarkToolkit.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.KanedaToolkit.MiningToolkit">
+            <summary>
+            Mining Toolkit
+            </summary>
+        </member>
+        <member name="F:EveComFramework.KanedaToolkit.MiningToolkit.CrystalSwapCooldown">
             <summary>
             Load mining crystal for a given asteroid
             </summary>
         </member>
-        <member name="M:EveComFramework.MiningToolkit.MiningToolkit.MatchingMiningCrystal(EveCom.Entity)">
+        <member name="M:EveComFramework.KanedaToolkit.MiningToolkit.MatchingMiningCrystal(EveCom.Entity)">
             <summary>
             Get compatible mining crystal types for a given asteroid
             </summary>
             <param name="Asteroid">Asteroid</param>
             <returns></returns>
         </member>
-        <member name="P:EveComFramework.MiningToolkit.MiningToolkit.Instance">
+        <member name="P:EveComFramework.KanedaToolkit.MiningToolkit.Instance">
             <summary>
             Singletoner
             </summary>
