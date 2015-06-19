@@ -7,7 +7,7 @@ namespace EveComFramework.KanedaToolkit
 {
 
     /// <summary>
-    /// Mining Toolkit
+    /// Bookmark Toolkit
     /// </summary>
     public class BookmarkToolkit
     {

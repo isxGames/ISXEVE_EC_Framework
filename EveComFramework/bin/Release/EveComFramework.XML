@@ -879,7 +879,7 @@
         </member>
         <member name="T:EveComFramework.KanedaToolkit.BookmarkToolkit">
             <summary>
-            Mining Toolkit
+            Bookmark Toolkit
             </summary>
         </member>
         <member name="M:EveComFramework.KanedaToolkit.BookmarkToolkit.DeleteBookmark(System.String)">
@@ -901,6 +901,32 @@
             Singletoner
             </summary>
         </member>
+        <member name="T:EveComFramework.KanedaToolkit.KAgentMission">
+            <summary>
+            extension methods for AgentMission
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgentMission.IsAccepted(EveCom.AgentMission)">
+            <summary>
+            Is the mission accepted?
+            </summary>
+            <param name="mission">AgentMission</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgentMission.IsCompleted(EveCom.AgentMission)">
+            <summary>
+            Is the mission completed?
+            </summary>
+            <param name="mission">AgentMission</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgentMission.MissionObjectiveState(EveCom.AgentMission)">
+            <summary>
+            Get Objective state for mission
+            </summary>
+            <param name="mission">AgentMission</param>
+            <returns></returns>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.MiningToolkit">
             <summary>
             Mining Toolkit
@@ -921,6 +947,21 @@
         <member name="P:EveComFramework.KanedaToolkit.MiningToolkit.Instance">
             <summary>
             Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.KanedaToolkit.MissionToolkit">
+            <summary>
+            Mission Toolkit
+            </summary>
+        </member>
+        <member name="P:EveComFramework.KanedaToolkit.MissionToolkit.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="T:EveComFramework.KanedaToolkit.MissionToolkit.MissionObjectiveState">
+            <summary>
+            Extended Mission Objective State
             </summary>
         </member>
         <member name="T:EveComFramework.Move.MoveSettings">
