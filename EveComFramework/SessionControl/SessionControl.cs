@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using InnerSpaceAPI;
 using EveCom;
+using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.SessionControl
 {

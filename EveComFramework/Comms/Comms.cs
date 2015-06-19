@@ -5,6 +5,7 @@ using System.Text;
 using EveComFramework.Core;
 using EveCom;
 using IrcDotNet;
+using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.Comms
 {

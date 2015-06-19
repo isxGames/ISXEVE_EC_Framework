@@ -233,11 +233,6 @@
             </summary>
             <param name="Val">True=Start</param>
         </member>
-        <member name="M:EveComFramework.AutoModule.AutoModule.Configure">
-            <summary>
-            Configure this module
-            </summary>
-        </member>
         <member name="P:EveComFramework.AutoModule.AutoModule.Instance">
             <summary>
             Singletoner
@@ -268,33 +263,6 @@
         <member name="P:EveComFramework.AutoModule.InstaWarp.Instance">
             <summary>
             Singletoner
-            </summary>
-        </member>
-        <member name="T:EveComFramework.AutoModule.UI.AutoModule">
-            <summary>
-            Automodule configuration form
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="F:EveComFramework.AutoModule.UI.AutoModule.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.AutoModule.UI.AutoModule.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:EveComFramework.Cargo.Cargo">
@@ -697,47 +665,6 @@
         <member name="P:EveComFramework.Data.InvGroup.All">
             <summary>
             List of all InvGroups
-            </summary>
-        </member>
-        <member name="M:EveComFramework.DroneControl.DroneControl.BestDrone(System.String)">
-            <summary>
-            Finds the best inactive drone to attack a specific class target, in space or in the drone bay.  Preference is given to drones in space. 
-            </summary>
-            <param name="Class">Class of ship, such as "BattleShip", "Cruiser", or "Frigate"</param>
-            <returns>Drone that is best suited to attack that class.  Drone may be in the bay</returns>
-        </member>
-        <member name="F:EveComFramework.DroneControl.UI.DroneControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.DroneControl.UI.DroneControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.DroneControl.UI.DroneControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="F:EveComFramework.FleetControl.UI.FleetControl.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.FleetControl.UI.FleetControl.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.FleetControl.UI.FleetControl.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="F:EveComFramework.GroupControl.UI.Debug.components">

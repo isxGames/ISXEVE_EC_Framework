@@ -6,6 +6,7 @@ using System.Text;
 using EveCom;
 using EveComFramework.Core;
 using LavishScriptAPI;
+using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.Targets
 {

@@ -6,6 +6,7 @@ using EveCom;
 using EveComFramework.Core;
 using EveComFramework.Targets;
 using EveComFramework.Security;
+using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.SimpleDrone
 {

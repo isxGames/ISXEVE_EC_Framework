@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EveCom;
+using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.Core
 {
@@ -216,35 +217,4 @@ namespace EveComFramework.Core
         #endregion
     }
 
-    #region Utility classes
-
-    static class DictionaryHelper
-    {
-        public static IDictionary<TKey, TValue> AddOrUpdate<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
-        {
-            if (dictionary.ContainsKey(key))
-            {
-                dictionary[key] = value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
-            }
-
-            return dictionary;
-        }
-    }
-
-    static class ForEachExtension
-    {
-        public static void ForEach<T>(this IEnumerable<T> items, Action<T> method)
-        {
-            foreach (T item in items)
-            {
-                method(item);
-            }
-        }
-    }
-
-    #endregion
 }

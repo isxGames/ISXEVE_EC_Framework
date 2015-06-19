@@ -141,15 +141,6 @@ namespace EveComFramework.AutoModule
             }
         }
 
-        /// <summary>
-        /// Configure this module
-        /// </summary>
-        public void Configure()
-        {
-            UI.AutoModule Configuration = new UI.AutoModule();
-            Configuration.Show();
-        }
-
         #endregion
 
         #region States
