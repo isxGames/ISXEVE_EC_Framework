@@ -86,6 +86,14 @@ namespace EveComFramework.Comms
         List<Pilot> PilotCache = new List<Pilot>();
         int SolarSystem = -1;
 
+        public ChatChannel LocalChat
+        {
+            get
+            {
+                return ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString()));
+            }
+        }
+
         #endregion
 
         #region Actions
@@ -179,7 +187,7 @@ namespace EveComFramework.Comms
 
             try
             {
-                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any()) LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
+                if (LocalChat.Messages.Any()) LastLocal = LocalChat.Messages.Last().Text;
             }
             catch
             {
@@ -288,14 +296,14 @@ namespace EveComFramework.Comms
                     }
                     else
                     {
-                        if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Any())
+                        if (LocalChat.Messages.Any())
                         {
-                            if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text != LastLocal)
+                            if (LocalChat.Messages.Last().Text != LastLocal)
                             {
-                                LastLocal = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().Text;
-                                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message" || Config.NPC)
+                                LastLocal = LocalChat.Messages.Last().Text;
+                                if (LocalChat.Messages.Last().SenderName != "Message" || Config.NPC)
                                 {
-                                    ChatQueue.Enqueue("[Chat] <Local> " + ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName + ": " + LastLocal);
+                                    ChatQueue.Enqueue("[Chat] <Local> " + LocalChat.Messages.Last().SenderName + ": " + LastLocal);
                                 }
                             }
                         }
@@ -349,7 +357,7 @@ namespace EveComFramework.Comms
 
             if (LocalQueue.Count > 0)
             {
-                ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Send(LocalQueue.Dequeue());
+                LocalChat.Send(LocalQueue.Dequeue());
             }
             return false;
         }
