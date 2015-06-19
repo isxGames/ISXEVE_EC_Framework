@@ -24,7 +24,7 @@ namespace EveComFramework.Optimizer
     /// <summary>
     /// This class helps reduce the Eve client's resource utilization
     /// </summary>
-    public class Optimizer : State
+    internal class Optimizer : State
     {
         [DllImport("kernel32.dll")]
         static extern bool SetProcessWorkingSetSize(IntPtr hProcess, uint dwMinimumWorkingSetSize, uint dwMaximumWorkingSetSize);
@@ -37,7 +37,7 @@ namespace EveComFramework.Optimizer
         /// <summary>
         /// Singletoner
         /// </summary>
-        public static Optimizer Instance
+        internal static Optimizer Instance
         {
             get
             {
@@ -49,31 +49,11 @@ namespace EveComFramework.Optimizer
             }
         }
 
-        /// <summary>
-        /// Destructor
-        /// </summary>
-        ~Optimizer()
-        {
-            //EVEFrameUtil.Do(() => { if (EVEFrame.Enable3DRendering != true) EVEFrame.Enable3DRendering = true; });
-        }
-
-        private Optimizer() : base()
+        private Optimizer()
         {
             QueueState(Control);
         }
 
-        #endregion
-
-        #region Actions
-
-        /// <summary>
-        /// Configure this module
-        /// </summary>
-        public void Configure()
-        {
-            UI.Optimizer Configuration = new UI.Optimizer();
-            Configuration.Show();
-        }
         #endregion
 
         #region Variables
@@ -90,13 +70,13 @@ namespace EveComFramework.Optimizer
 
         bool Control(object[] Params)
         {
-            if (!Session.Safe || (!Session.InSpace && !Session.InStation)) return false;
-
-            if (EVEFrame.Enable3DRendering != Config.Enable3D) EVEFrame.Enable3DRendering = Config.Enable3D;
-
+            if (EVEFrame.Enable3DRendering != Config.Enable3D && Session.Safe && (Session.InSpace || Session.InStation))
+            {
+                EVEFrame.Enable3DRendering = Config.Enable3D;
+            }
+            
             if (DateTime.Now > NextMemoryPulse)
             {
-                EVEFrame.Log(GetCurrentProcess().ToString() + "  " + Convert.ToUInt32(Config.MaxMemorySize * 1048576));
                 SetProcessWorkingSetSize(GetCurrentProcess(), Convert.ToUInt32(0), Convert.ToUInt32(Config.MaxMemorySize * 1048576));
                 NextMemoryPulse = DateTime.Now.AddMinutes(2);
             }

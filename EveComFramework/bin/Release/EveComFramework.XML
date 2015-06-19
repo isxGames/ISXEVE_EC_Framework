@@ -1065,16 +1065,6 @@
             This class helps reduce the Eve client's resource utilization
             </summary>
         </member>
-        <member name="M:EveComFramework.Optimizer.Optimizer.Finalize">
-            <summary>
-            Destructor
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Optimizer.Optimizer.Configure">
-            <summary>
-            Configure this module
-            </summary>
-        </member>
         <member name="F:EveComFramework.Optimizer.Optimizer.Config">
             <summary>
             Config for this module
@@ -1083,33 +1073,6 @@
         <member name="P:EveComFramework.Optimizer.Optimizer.Instance">
             <summary>
             Singletoner
-            </summary>
-        </member>
-        <member name="T:EveComFramework.Optimizer.UI.Optimizer">
-            <summary>
-            Optimizer configuration form
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Optimizer.UI.Optimizer.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="F:EveComFramework.Optimizer.UI.Optimizer.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.Optimizer.UI.Optimizer.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.Optimizer.UI.Optimizer.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:EveComFramework.Security.SecuritySettings">
