@@ -319,15 +319,4 @@ namespace EveComFramework.Cargo
 
     }
 
-
-    public static class ForEachExtension
-    {
-        public static void ForEach<T>(this IEnumerable<T> items, Action<T> method)
-        {
-            foreach (T item in items)
-            {
-                method(item);
-            }
-        }
-    }
 }

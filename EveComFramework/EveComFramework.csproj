@@ -129,10 +129,12 @@
     </Compile>
     <Compile Include="KanedaToolkit\BookmarkToolkit.cs" />
     <Compile Include="KanedaToolkit\DictionaryHelper.cs" />
+    <Compile Include="KanedaToolkit\ListRandomizer.cs" />
     <Compile Include="KanedaToolkit\ForeachExtension.cs" />
     <Compile Include="KanedaToolkit\KAgentMission.cs" />
     <Compile Include="KanedaToolkit\MiningToolkit.cs" />
     <Compile Include="KanedaToolkit\MissionToolkit.cs" />
+    <Compile Include="KanedaToolkit\VelocityComparer.cs" />
     <Compile Include="Move\Move.cs" />
     <Compile Include="Optimizer\Optimizer.cs" />
     <Compile Include="Optimizer\UI\Optimizer.cs">
