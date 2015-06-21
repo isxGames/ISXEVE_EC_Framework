@@ -1,8 +1,8 @@
-﻿using System;
+﻿#pragma warning disable 1591
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
+using EveComFramework.Core;
 
 namespace EveComFramework.AutoModule
 {
@@ -11,7 +11,7 @@ namespace EveComFramework.AutoModule
     /// <summary>
     /// Configuration settings for this AutoModule
     /// </summary>
-    public class AutoModuleSettings : EveComFramework.Core.Settings
+    public class AutoModuleSettings : Settings
     {
         public bool Enabled = false;
         public bool ActiveHardeners = true;
@@ -57,7 +57,7 @@ namespace EveComFramework.AutoModule
     /// <summary>
     /// This class manages your ships modules intelligently
     /// </summary>
-    public class AutoModule : EveComFramework.Core.State
+    public class AutoModule : State
     {
         #region Instantiation
 
@@ -78,7 +78,6 @@ namespace EveComFramework.AutoModule
         }
 
         private AutoModule()
-            : base()
         {
             DefaultFrequency = 100;
             if (Config.Enabled) QueueState(Control);
@@ -480,7 +479,7 @@ namespace EveComFramework.AutoModule
     /// <summary>
     /// Configuration settings for this Module
     /// </summary>
-    public class InstawarpSettings : EveComFramework.Core.Settings
+    public class InstawarpSettings : Settings
     {
         public bool Enabled = false;
     }
@@ -491,7 +490,7 @@ namespace EveComFramework.AutoModule
     /// This class manages one pulse of the first available propulsion module per session.
     /// A new session starts on every solar system change or undock.
     /// </summary>
-    public class InstaWarp : EveComFramework.Core.State
+    public class InstaWarp : State
     {
         #region Instantiation
 
@@ -512,7 +511,6 @@ namespace EveComFramework.AutoModule
         }
 
         private InstaWarp()
-            : base()
         {
             if (Config.Enabled) QueueState(Control);
         }

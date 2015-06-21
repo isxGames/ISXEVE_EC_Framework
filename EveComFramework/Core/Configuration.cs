@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
+﻿#pragma warning disable 1591
+using System;
 using System.Windows.Forms;
 using EveComFramework.AutoModule;
 using EveComFramework.Move;
@@ -22,19 +17,17 @@ namespace EveComFramework.Core
 
         private void Configuration_Load(object sender, EventArgs e)
         {
-            if (!this.DesignMode)
+            if (!DesignMode)
             {
                 AutoModule.AutoModule AutoModuleInstance = AutoModule.AutoModule.Instance;
-                AutoModule.AutoModuleSettings AutoModuleConfig = AutoModule.AutoModule.Instance.Config;
+                AutoModuleSettings AutoModuleConfig = AutoModule.AutoModule.Instance.Config;
                 UndockWarp UndockWarp = UndockWarp.Instance;
                 UndockWarpSettings UndockWarpConfig = UndockWarp.Instance.Config;
                 InstaWarp InstaWarp = InstaWarp.Instance;
                 MoveSettings MoveConfig = EveComFramework.Move.Move.Instance.Config;
                 OptimizerSettings OptimizerConfig = Optimizer.Optimizer.Instance.Config;
                 InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
-                Comms.Comms CommsInstance = Comms.Comms.Instance;
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
-                SimpleDrone.SimpleDrone DroneInstance = SimpleDrone.SimpleDrone.Instance;
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
 
                 #region AutoModule
@@ -290,26 +283,26 @@ namespace EveComFramework.Core
         {
             if (Diagnostics.Instance.Upload(Diagnostics.Instance.file))
             {
-                labelUploadResult.Text = "Upload Successful";
+                labelUploadResult.Text = @"Upload Successful";
             }
             {
-                labelUploadResult.Text = "Upload Failed";
+                labelUploadResult.Text = @"Upload Failed";
             }
         }
 
         private void buttonUploadPrevious_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Diagnostics.Instance.LogDirectory;
-            openFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog1.Filter = @"txt files (*.txt)|*.txt|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 if (Diagnostics.Instance.Upload(openFileDialog1.FileName))
                 {
-                    labelUploadResult.Text = "Upload Successful";
+                    labelUploadResult.Text = @"Upload Successful";
                 }
                 {
-                    labelUploadResult.Text = "Upload Failed";
+                    labelUploadResult.Text = @"Upload Failed";
                 }
             }
         }

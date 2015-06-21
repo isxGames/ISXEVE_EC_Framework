@@ -1,7 +1,7 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
@@ -33,7 +33,6 @@ namespace EveComFramework.Core
         }
 
         private LoggerHelper()
-            : base()
         {
             CurrentBackColor = BackColor1;
         }

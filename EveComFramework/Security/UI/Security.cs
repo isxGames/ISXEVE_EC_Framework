@@ -1,15 +1,11 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
-using InnerSpaceAPI;
 
 namespace EveComFramework.Security.UI
 {
@@ -18,7 +14,7 @@ namespace EveComFramework.Security.UI
 
         string ActiveTrigger;
         SecuritySettings Config = EveComFramework.Security.Security.Instance.Config;
-        SecurityAudioSettings SpeechConfig = EveComFramework.Security.SecurityAudio.Instance.Config;
+        SecurityAudioSettings SpeechConfig = SecurityAudio.Instance.Config;
         Cache Cache = Cache.Instance;
         SpeechSynthesizer Speech = new SpeechSynthesizer();
 
@@ -210,19 +206,19 @@ namespace EveComFramework.Security.UI
                     break;
                 case "Capacitor low":
                     Threshold.Value = Config.CapThreshold;
-                    ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
+                    ThresholdLabel.Text = String.Format("Flee if below {0} % Capacitor", Threshold.Value);
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
                 case "Shield low":
                     Threshold.Value = Config.ShieldThreshold;
-                    ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
+                    ThresholdLabel.Text = String.Format("Flee if below {0} % Shields", Threshold.Value);
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
                 case "Armor low":
                     Threshold.Value = Config.ArmorThreshold;
-                    ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
+                    ThresholdLabel.Text = String.Format("Flee if below {0} % Armor", Threshold.Value);
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
                     break;
@@ -238,15 +234,15 @@ namespace EveComFramework.Security.UI
                 {
                     case "Capacitor low":
                         Config.CapThreshold = Threshold.Value;
-                        ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Capacitor";
+                        ThresholdLabel.Text = String.Format("Flee if below {0} % Capacitor", Threshold.Value);
                         break;
                     case "Shield low":
                         Config.ShieldThreshold = Threshold.Value;
-                        ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Shields";
+                        ThresholdLabel.Text = String.Format("Flee if below {0} % Shields", Threshold.Value);
                         break;
                     case "Armor low":
                         Config.ArmorThreshold = Threshold.Value;
-                        ThresholdLabel.Text = "Flee if below " + Threshold.Value + " % Armor";
+                        ThresholdLabel.Text = String.Format("Flee if below {0} % Armor", Threshold.Value);
                         break;
                 }
                 Config.Save();

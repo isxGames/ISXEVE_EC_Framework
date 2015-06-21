@@ -1,9 +1,8 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using EveCom;
-using System.Windows.Forms;
 using System.Net;
 using System.IO;
 using System.Reflection;
@@ -28,7 +27,6 @@ namespace EveComFramework.Core
         }
 
         private Diagnostics()
-            : base()
         {
             RegisterCommands();
             LogDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\logs\\";
@@ -44,7 +42,7 @@ namespace EveComFramework.Core
             }
 
             StreamWriter oWriter = new StreamWriter(file, true);
-            oWriter.Write("Diagnostics log started: " + DateTime.Now.ToString() + Environment.NewLine + Environment.NewLine);
+            oWriter.Write("Diagnostics log started: {0}" + Environment.NewLine + Environment.NewLine, DateTime.Now);
             oWriter.Close();
 
         }
@@ -72,7 +70,7 @@ namespace EveComFramework.Core
                 }
                 else
                 {
-                    data.AppendLine(state.GetType().Name + " : " + state.CurState.ToString());
+                    data.AppendLine(String.Format("{0} : {1}", state.GetType().Name, state.CurState));
                 }
             }
 
@@ -81,10 +79,10 @@ namespace EveComFramework.Core
                 data.AppendLine();
                 data.AppendLine("Exception Report");
                 data.AppendLine();
-                StreamReader file = new StreamReader(exceptions.file);
-                while (!file.EndOfStream)
+                StreamReader reader = new StreamReader(exceptions.file);
+                while (!reader.EndOfStream)
                 {
-                    data.AppendLine(file.ReadLine());
+                    data.AppendLine(reader.ReadLine());
                 }
             }
             data.AppendLine();
@@ -94,7 +92,7 @@ namespace EveComFramework.Core
             parm.Add("line_numbers", "on");
             parm.Add("expire", "604800");
 
-            HttpWebRequest client = (HttpWebRequest)HttpWebRequest.Create("https://privatepaste.com/save");
+            HttpWebRequest client = (HttpWebRequest)WebRequest.Create("https://privatepaste.com/save");
             client.ContentType = "application/x-www-form-urlencoded";
             client.Method = "POST";
             Stream s = client.GetRequestStream();
@@ -130,12 +128,11 @@ namespace EveComFramework.Core
 
         public bool Upload(string uploadFile)
         {
-            Byte[] result;
-            System.Net.WebClient client = new System.Net.WebClient();
+            WebClient client = new WebClient();
             client.Headers.Add("Content-Type", "binary/octet-stream");
-            result = client.UploadFile("http://api.eve-com.com/log.php", "POST", uploadFile);
-            EVEFrame.Log(System.Text.Encoding.UTF8.GetString(result, 0, result.Length).ToString());
-            if (System.Text.Encoding.UTF8.GetString(result, 0, result.Length).ToString() == "uploaded") return true;
+            Byte[] result = client.UploadFile("http://api.eve-com.com/log.php", "POST", uploadFile);
+            EVEFrame.Log(Encoding.UTF8.GetString(result, 0, result.Length));
+            if (Encoding.UTF8.GetString(result, 0, result.Length) == "uploaded") return true;
             return false;
         }
     }

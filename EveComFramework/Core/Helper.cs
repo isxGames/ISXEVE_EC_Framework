@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#pragma warning disable 1591
 using System.Linq;
-using System.Text;
 using EveCom;
-using EveComFramework.Core;
 
 namespace EveComFramework.Core
 {
@@ -14,15 +11,20 @@ namespace EveComFramework.Core
         public bool RepairShip(Logger Console)
         {
             // If ship needs to be repaired, do so
+            Window repairShopWindow;
             if ((Cache.ArmorPercent != 1 || Cache.HullPercent != 1 || Cache.DamagedDrones) && Station.HasService(Station.Services.RepairFacilities))
             {
                 if (Window.All.Any(a => a.Name != null && a.Name == "Set Quantity"))
                 {
                     Console.Log("|oAccepting repair quantity");
-                    Window.All.FirstOrDefault(a => a.Name != null && a.Name == "Set Quantity").ClickButton(Window.Button.OK);
-                    Cache.ArmorPercent = 1;
-                    Cache.HullPercent = 1;
-                    Cache.DamagedDrones = false;
+                    Window repairQuantityWindow = Window.All.FirstOrDefault(a => a.Name != null && a.Name == "Set Quantity");
+                    if (repairQuantityWindow != null)
+                    {
+                        repairQuantityWindow.ClickButton(Window.Button.OK);
+                        Cache.ArmorPercent = 1;
+                        Cache.HullPercent = 1;
+                        Cache.DamagedDrones = false;
+                    }
                     return false;
                 }
                 if (!Window.All.Any(a => a.Name != null && a.Name == "repairshop"))
@@ -34,13 +36,18 @@ namespace EveComFramework.Core
                 else
                 {
                     Console.Log("|oClicking RepairAll");
-                    Window.All.FirstOrDefault(a => a.Name != null && a.Name == "repairshop").ClickButton(Window.Button.RepairAll);
+                    repairShopWindow = Window.All.FirstOrDefault(a => a.Name != null && a.Name == "repairshop");
+                    if (repairShopWindow != null)
+                    {
+                        repairShopWindow.ClickButton(Window.Button.RepairAll);
+                    }
                 }
                 return false;
             }
-            if (Window.All.Any(a => a.Name != null && a.Name == "repairshop"))
+            repairShopWindow = Window.All.FirstOrDefault(a => a.Name != null && a.Name == "repairshop");
+            if (repairShopWindow != null)
             {
-                Window.All.FirstOrDefault(a => a.Name != null && a.Name == "repairshop").Close();
+                repairShopWindow.Close();
                 return false;
             }
 

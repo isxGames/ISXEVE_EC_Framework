@@ -1,7 +1,7 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveComFramework.Core;
 using EveCom;
 using IrcDotNet;
@@ -52,7 +52,6 @@ namespace EveComFramework.Comms
         }
 
         private Comms()
-            : base()
         {
             DefaultFrequency = 200;
             QueueState(Init);
@@ -81,7 +80,7 @@ namespace EveComFramework.Comms
 
         IrcClient IRC = new IrcClient();
 
-        EveComFramework.Targets.Targets NonFleetPlayers = new EveComFramework.Targets.Targets();
+        Targets.Targets NonFleetPlayers = new Targets.Targets();
         List<Entity> NonFleetMemberOnGrid = new List<Entity>();
         List<Pilot> PilotCache = new List<Pilot>();
         int SolarSystem = -1;

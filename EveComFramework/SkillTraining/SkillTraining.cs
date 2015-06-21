@@ -1,11 +1,9 @@
-﻿using EveComFramework.Core;
+﻿#pragma warning disable 1591
+using EveComFramework.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using InnerSpaceAPI;
 using EveCom;
-using EveComFramework.SessionControl;
 using System.Windows.Forms;
 
 namespace EveComFramework.SkillTraining
@@ -50,7 +48,6 @@ namespace EveComFramework.SkillTraining
         }
 
         private SkillTraining()
-            : base()
         {
             QueueState(GetName);
         }
@@ -135,7 +132,7 @@ namespace EveComFramework.SkillTraining
             }
             else
             {
-                MessageBox.Show("Can't configure right now , you must be logged in");
+                MessageBox.Show(@"Can't configure right now , you must be logged in");
             }
         }
 

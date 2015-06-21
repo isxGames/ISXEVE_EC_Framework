@@ -1,7 +1,7 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
 using EveComFramework.KanedaToolkit;
 
@@ -31,7 +31,6 @@ namespace EveComFramework.Core
         }
 
         private Cache()
-            : base()
         {
             ItemVolume = new Dictionary<string, double>();
             ShipVolume = new Dictionary<string, double>();

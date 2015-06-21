@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿#pragma warning disable 1591
+using System;
 using System.Windows.Forms;
 using EveComFramework.Core;
 
@@ -39,15 +34,15 @@ namespace EveComFramework.SessionControl.UI
             numDowntimeDelta.Value = Config.DowntimeDelta;
             switch (Config.Mode)
             {
-                case "Duration":
+                case @"Duration":
                     groupDuration.Show();
                     groupPeriod.Hide();
-                    comboMode.Text = "Log in and run for a specific length of time";
+                    comboMode.Text = @"Log in and run for a specific length of time";
                     break;
-                case "Period":
+                case @"Period":
                     groupDuration.Hide();
                     groupPeriod.Show();
-                    comboMode.Text = "Log in and run during a scheduled period of the day";
+                    comboMode.Text = @"Log in and run during a scheduled period of the day";
                     break;
             }
             datePeriodStart.Value = Config.PeriodStart;
@@ -87,7 +82,7 @@ namespace EveComFramework.SessionControl.UI
 
         private void removeProfile_Click(object sender, EventArgs e)
         {
-            GlobalConfig.Profiles.Remove((string)profileListView.SelectedItems[0].Text);
+            GlobalConfig.Profiles.Remove(profileListView.SelectedItems[0].Text);
             profileListView.Items.Remove(profileListView.SelectedItems[0]);
             GlobalConfig.Save();
         }
@@ -128,15 +123,15 @@ namespace EveComFramework.SessionControl.UI
         {
             switch (comboMode.Text)
             {
-                case "Log in and run for a specific length of time":
+                case @"Log in and run for a specific length of time":
                     groupDuration.Show();
                     groupPeriod.Hide();
-                    Config.Mode = "Duration";
+                    Config.Mode = @"Duration";
                     break;
-                case "Log in and run during a scheduled period of the day":
+                case @"Log in and run during a scheduled period of the day":
                     groupDuration.Hide();
                     groupPeriod.Show();
-                    Config.Mode = "Period";
+                    Config.Mode = @"Period";
                     break;
             }
         }

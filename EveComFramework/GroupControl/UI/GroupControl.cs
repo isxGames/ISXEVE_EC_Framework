@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿#pragma warning disable 1591
+using System;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EveComFramework.GroupControl.UI
@@ -129,12 +125,12 @@ namespace EveComFramework.GroupControl.UI
             if (groupNameTBox.Text != null)
             {
                 addGroupButton.Enabled = true;
-                addGroupButton.Text = "Create New Group";
+                addGroupButton.Text = @"Create New Group";
             }
             else
             {
                 addGroupButton.Enabled = false;
-                addGroupButton.Text = "Enter Group Name First!";
+                addGroupButton.Text = @"Enter Group Name First!";
             }
         }
 

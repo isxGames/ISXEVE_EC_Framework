@@ -1,24 +1,25 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using EveCom;
-using EveComFramework.Core;
 using LavishScriptAPI;
+using EveComFramework.Core;
+using EveComFramework.Data;
 using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.Targets
 {
-    public class Targets : EveComFramework.Core.State
+    public class Targets : State
     {
 
         #region Variables
 
         public Targets()
         {
-            this.DefaultFrequency = 50;
-            this.InsertState(Update);
+            DefaultFrequency = 50;
+            InsertState(Update);
         }
 
         private List<Entity> _TargetList;
@@ -89,12 +90,12 @@ namespace EveComFramework.Targets
 
         public void AddPriorityTargets()
         {
-            AddQuery(a => EveComFramework.Data.PriorityTarget.All.Contains(a.Name));
+            AddQuery(a => PriorityTarget.All.Contains(a.Name));
         }
 
         public void AddNPCs()
         {
-            AddQuery(a => EveComFramework.Data.NPCTypes.All.Contains((long)a.GroupID));
+            AddQuery(a => NPCTypes.All.Contains((long)a.GroupID));
             //Queries = Queries.Or(a => a.IsNPC);
         }
 
@@ -164,7 +165,7 @@ namespace EveComFramework.Targets
         public double Capacitor;
     }
 
-    public class IPC : EveComFramework.Core.State
+    public class IPC : State
     {
         #region Instantiation
 
@@ -182,12 +183,11 @@ namespace EveComFramework.Targets
         }
 
         private IPC()
-            : base()
         {
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateActiveTargets");
-            LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateActiveTargets", UpdateActiveTargets);
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateIPCPilots");
-            LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateIPCPilots", UpdateIPCPilots);
+            LavishScript.Events.RegisterEvent("UpdateActiveTargets");
+            LavishScript.Events.AttachEventTarget("UpdateActiveTargets", UpdateActiveTargets);
+            LavishScript.Events.RegisterEvent("UpdateIPCPilots");
+            LavishScript.Events.AttachEventTarget("UpdateIPCPilots", UpdateIPCPilots);
             QueueState(Control);
         }
 
@@ -199,11 +199,11 @@ namespace EveComFramework.Targets
         bool Control(object[] Params)
         {
             if (!Session.InSpace || !Session.Safe) return false;
-            LavishScriptAPI.LavishScript.ExecuteCommand(string.Format("relay \"all other\" Event[UpdateIPCPilots]:Execute[{0},{1},{2},{3},{4}]", Me.CharID, MyShip.ToEntity.HullPct, MyShip.ToEntity.ArmorPct, MyShip.ToEntity.ShieldPct, MyShip.Capacitor / MyShip.MaxCapacitor));
+            LavishScript.ExecuteCommand(string.Format("relay \"all other\" Event[UpdateIPCPilots]:Execute[{0},{1},{2},{3},{4}]", Me.CharID, MyShip.ToEntity.HullPct, MyShip.ToEntity.ArmorPct, MyShip.ToEntity.ShieldPct, MyShip.Capacitor / MyShip.MaxCapacitor));
             return false;
         }
 
-        void UpdateActiveTargets(object sender, LavishScriptAPI.LSEventArgs args)
+        void UpdateActiveTargets(object sender, LSEventArgs args)
         {
             try
             {
@@ -212,7 +212,7 @@ namespace EveComFramework.Targets
             catch { }
         }
 
-        void UpdateIPCPilots(object sender, LavishScriptAPI.LSEventArgs args)
+        void UpdateIPCPilots(object sender, LSEventArgs args)
         {
             try
             {
@@ -228,7 +228,7 @@ namespace EveComFramework.Targets
 
         public void Relay(long Pilot, long ID)
         {
-            LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" Event[UpdateActiveTargets]:Execute[" + Pilot + "," + ID.ToString() + "]");
+            LavishScript.ExecuteCommand("relay \"all other\" Event[UpdateActiveTargets]:Execute[" + Pilot + "," + ID.ToString() + "]");
         }
     }
 
@@ -300,23 +300,23 @@ namespace EveComFramework.Targets
                 return 0;
 
             int orderx = 0;
-            if (Data.PriorityTarget.All.Contains(x.Name))
+            if (PriorityTarget.All.Contains(x.Name))
             {
-                orderx = Data.PriorityTarget.All.IndexOf(x.Name);
+                orderx = PriorityTarget.All.IndexOf(x.Name);
             }
-            else if (Data.NPCTypes.All.Contains((long)x.GroupID))
+            else if (NPCTypes.All.Contains((long)x.GroupID))
             {
-                orderx = Data.NPCTypes.All.IndexOf((long)x.GroupID) + Data.PriorityTarget.All.Count;
+                orderx = NPCTypes.All.IndexOf((long)x.GroupID) + PriorityTarget.All.Count;
             }
 
             int ordery = 0;
-            if (Data.PriorityTarget.All.Contains(y.Name))
+            if (PriorityTarget.All.Contains(y.Name))
             {
-                ordery = Data.PriorityTarget.All.IndexOf(y.Name);
+                ordery = PriorityTarget.All.IndexOf(y.Name);
             }
-            else if (Data.NPCTypes.All.Contains((long)y.GroupID))
+            else if (NPCTypes.All.Contains((long)y.GroupID))
             {
-                ordery = Data.NPCTypes.All.IndexOf((long)y.GroupID) + Data.PriorityTarget.All.Count;
+                ordery = NPCTypes.All.IndexOf((long)y.GroupID) + PriorityTarget.All.Count;
             }
 
             if (orderx > ordery)

@@ -1,6 +1,5 @@
 ﻿using System;
 using EveCom;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace EveComFramework.KanedaToolkit

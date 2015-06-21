@@ -1,8 +1,8 @@
-﻿using System;
+﻿#pragma warning disable 1591
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
+using EveComFramework.Core;
 
 namespace EveComFramework.Move
 {
@@ -20,11 +20,11 @@ namespace EveComFramework.Move
         internal int SolarSystem { get; set; }
         internal string ContainerName { get; set; }
 
-        internal Location(LocationType Type, Bookmark Bookmark = null, int Station = 0, int SolarSystem = 0, string ContainerName = null)
+        internal Location(LocationType Type, Bookmark Bookmark = null, int StationID = 0, int SolarSystem = 0, string ContainerName = null)
         {
             this.Type = Type;
             this.Bookmark = Bookmark;
-            this.StationID = Station;
+            this.StationID = StationID;
             this.SolarSystem = SolarSystem;
             this.ContainerName = ContainerName;
         }
@@ -39,7 +39,7 @@ namespace EveComFramework.Move
     /// <summary>
     /// Settings for the Move class
     /// </summary>
-    public class MoveSettings : EveComFramework.Core.Settings
+    public class MoveSettings : Settings
     {
         public bool WarpCollisionPrevention = true;
         public decimal WarpCollisionTrigger = 1;
@@ -55,7 +55,7 @@ namespace EveComFramework.Move
     /// <summary>
     /// This class handles navigation
     /// </summary>
-    public class Move : EveComFramework.Core.State
+    public class Move : State
     {
 
         #region Instantiation
@@ -76,7 +76,6 @@ namespace EveComFramework.Move
         }
 
         private Move()
-            : base()
         {
 
         }
@@ -88,7 +87,7 @@ namespace EveComFramework.Move
         /// <summary>
         /// The logger for this class
         /// </summary>
-        public Core.Logger Log = new Core.Logger("Move");
+        public Logger Log = new Logger("Move");
         public MoveSettings Config = new MoveSettings();
 
         #endregion
@@ -563,7 +562,7 @@ namespace EveComFramework.Move
             }
             else
             {
-                if (EveCom.MyShip.ToEntity.Velocity.Magnitude > 0)
+                if (MyShip.ToEntity.Velocity.Magnitude > 0)
                 {
                     Command.CmdStopShip.Execute();
                 }
@@ -676,7 +675,7 @@ namespace EveComFramework.Move
             return true;
         }
 
-        bool QueueAutoPilotDeactivation = false;
+        bool QueueAutoPilotDeactivation;
         public bool SunMidpoint = false;
         bool AutoPilot(object[] Params)
         {
@@ -689,7 +688,7 @@ namespace EveComFramework.Move
 
             if (Session.InSpace)
             {
-                if (UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
+                if (UndockWarp.Instance != null && !UndockWarp.Instance.Idle && UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
                 if (MyShip.ToEntity.Mode == EntityMode.Warping) return false;
                 if (!Entity.All.Any(a => a.GroupID == Group.Sun && a.Distance < 1000000000) && SunMidpoint)
                 {
@@ -852,7 +851,7 @@ namespace EveComFramework.Move
     /// <summary>
     /// Settings for the UndockWarp class
     /// </summary>
-    public class UndockWarpSettings : EveComFramework.Core.Settings
+    public class UndockWarpSettings : Settings
     {
         public string Substring = "Undock";
         public bool Enabled = false;
@@ -861,7 +860,7 @@ namespace EveComFramework.Move
     /// <summary>
     /// This class automatically performs a warp to a bookmark which contains the configured substring which is in-system and within 200km
     /// </summary>
-    public class UndockWarp : EveComFramework.Core.State
+    public class UndockWarp : State
     {
         #region Instantiation
         static UndockWarp _Instance;
@@ -881,7 +880,6 @@ namespace EveComFramework.Move
         }
 
         private UndockWarp()
-            : base()
         {
             DefaultFrequency = 200;
             if (Config.Enabled) QueueState(WaitStation);

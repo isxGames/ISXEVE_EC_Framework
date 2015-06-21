@@ -1,11 +1,12 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
 using EveComFramework.Core;
 using LavishScriptAPI;
 using System.Windows.Forms;
+using IrcDotNet.Collections;
 
 namespace EveComFramework.GroupControl
 {
@@ -29,7 +30,7 @@ namespace EveComFramework.GroupControl
         public Role Role = Role.Miner;
         public Guid CurrentGroup;
     }
-    public class GroupControlGlobalSettings : EveComFramework.Core.Settings
+    public class GroupControlGlobalSettings : Settings
     {
         public GroupControlGlobalSettings() : base("GroupControl") { }
         public List<GroupSettings> Groups = new List<GroupSettings>();
@@ -86,11 +87,10 @@ namespace EveComFramework.GroupControl
         }
 
         private GroupControl()
-            : base()
         {
             DefaultFrequency = 2000;
-            LavishScriptAPI.LavishScript.Events.RegisterEvent("UpdateGroupControl");
-            LavishScriptAPI.LavishScript.Events.AttachEventTarget("UpdateGroupControl", UpdateGroupControl);
+            LavishScript.Events.RegisterEvent("UpdateGroupControl");
+            LavishScript.Events.AttachEventTarget("UpdateGroupControl", UpdateGroupControl);
             QueueState(InitializeSelf);
         }
 
@@ -98,7 +98,7 @@ namespace EveComFramework.GroupControl
 
         #region LSCommands
 
-        void UpdateGroupControl(object sender, LavishScriptAPI.LSEventArgs args)
+        void UpdateGroupControl(object sender, LSEventArgs args)
         {
             try
             {
@@ -114,14 +114,8 @@ namespace EveComFramework.GroupControl
                                 {
                                     activeMember.Active = true;
                                 }
-                                if (activeMember.LeadershipValue != Convert.ToInt32(args.Args[2]))
-                                {
-                                    activeMember.LeadershipValue = Convert.ToInt32(args.Args[2]);
-                                }
-                                if (activeMember.Role != (Role)Enum.Parse(typeof(Role), args.Args[3]))
-                                {
-                                    activeMember.Role = (Role)Enum.Parse(typeof(Role), args.Args[3]);
-                                }
+                                activeMember.LeadershipValue = Convert.ToInt32(args.Args[2]);
+                                activeMember.Role = (Role)Enum.Parse(typeof(Role), args.Args[3]);
                             }
                         }
                         break;
@@ -131,10 +125,7 @@ namespace EveComFramework.GroupControl
                             ActiveMember availableMember = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.CharacterName == args.Args[1]);
                             if (availableMember != null)
                             {
-                                if (availableMember.Available != Convert.ToBoolean(args.Args[2]))
-                                {
-                                    availableMember.Available = Convert.ToBoolean(args.Args[2]);
-                                }
+                                availableMember.Available = Convert.ToBoolean(args.Args[2]);
                             }
                         }
                         break;
@@ -240,7 +231,7 @@ namespace EveComFramework.GroupControl
             }
             else
             {
-                MessageBox.Show("Don't have a character name yet , can't configure");
+                MessageBox.Show(@"Don't have a character name yet , can't configure");
             }
         }
 
@@ -271,7 +262,7 @@ namespace EveComFramework.GroupControl
                 }
             }
             msg = msg + "]";
-            LavishScriptAPI.LavishScript.ExecuteCommand(msg);
+            LavishScript.ExecuteCommand(msg);
         }
 
         public void LoadConfig()
@@ -323,15 +314,6 @@ namespace EveComFramework.GroupControl
         #endregion
 
         #region States
-
-        #region Utility
-
-        bool Blank(object[] Params)
-        {
-            return true;
-        }
-
-        #endregion
 
         public bool InitializeSelf(object[] Params)
         {

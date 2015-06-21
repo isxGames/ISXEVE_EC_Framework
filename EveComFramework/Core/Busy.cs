@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace EveComFramework.Core
 {
@@ -29,7 +28,6 @@ namespace EveComFramework.Core
         }
 
         private Busy()
-            : base()
         {
         }
 

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using System.Reflection;
 using System.ComponentModel;
 using System.Xml.Serialization;
 using System.IO;
-using EveCom;
-using LavishScriptAPI;
 
 namespace EveComFramework.Core
 {
@@ -50,7 +47,7 @@ namespace EveComFramework.Core
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\";
             ProfilePath = Config.Instance.DefaultProfile;
-            this.Load();
+            Load();
 
             if (!Directory.Exists(ConfigDirectory))
             {
@@ -67,7 +64,7 @@ namespace EveComFramework.Core
         {
             ConfigDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "\\configs\\global\\";
             ProfilePath = profilename;
-            this.Load();
+            Load();
 
             if (!Directory.Exists(ConfigDirectory))
             {
@@ -124,13 +121,13 @@ namespace EveComFramework.Core
                 {
                     settingsDoc = XDocument.Load(ProfilePath);
                     trueRoot = settingsDoc.Element("Settings");
-                    if (trueRoot.Element(this.GetType().Name) != null)
+                    if (trueRoot.Element(GetType().Name) != null)
                     {
-                        settingRoot = trueRoot.Element(this.GetType().Name);
+                        settingRoot = trueRoot.Element(GetType().Name);
                     }
                     else
                     {
-                        settingRoot = new XElement(this.GetType().Name);
+                        settingRoot = new XElement(GetType().Name);
                         trueRoot.Add(settingRoot);
                     }
                 }
@@ -138,15 +135,15 @@ namespace EveComFramework.Core
                 {
                     settingsDoc = new XDocument();
                     trueRoot = new XElement("Settings");
-                    settingRoot = new XElement(this.GetType().Name);
+                    settingRoot = new XElement(GetType().Name);
                     trueRoot.Add(settingRoot);
                     settingsDoc.Add(trueRoot);
                 }
 
                 TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
-                foreach (FieldInfo field in this.GetType().GetFields())
+                foreach (FieldInfo field in GetType().GetFields())
                 {
-                    XElement fieldElement = null;
+                    XElement fieldElement;
                     TypeConverter typeConverter = TypeDescriptor.GetConverter(field.FieldType);
                     if (typeConverter.CanConvertFrom(typeof(string)))
                     {
@@ -189,9 +186,9 @@ namespace EveComFramework.Core
                     {
                         XDocument settingsDoc = XDocument.Load(reader);
                         XElement trueRoot = settingsDoc.Root;
-                        XElement settingRoot = trueRoot.Element(this.GetType().Name);
+                        XElement settingRoot = trueRoot.Element(GetType().Name);
                         TypeConverter stringConverter = TypeDescriptor.GetConverter(typeof(string));
-                        foreach (FieldInfo field in this.GetType().GetFields())
+                        foreach (FieldInfo field in GetType().GetFields())
                         {
                             if (settingRoot.Element(field.Name) != null)
                             {
@@ -290,7 +287,7 @@ namespace EveComFramework.Core
             /// ReadXML
             /// </summary>
             /// <param name="reader"></param>
-            public void ReadXml(System.Xml.XmlReader reader)
+            public void ReadXml(XmlReader reader)
             {
                 XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
                 XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
@@ -301,7 +298,7 @@ namespace EveComFramework.Core
                 if (wasEmpty)
                     return;
 
-                while (reader.NodeType != System.Xml.XmlNodeType.EndElement)
+                while (reader.NodeType != XmlNodeType.EndElement)
                 {
                     reader.ReadStartElement("item");
 
@@ -313,7 +310,7 @@ namespace EveComFramework.Core
                     TValue value = (TValue)valueSerializer.Deserialize(reader);
                     reader.ReadEndElement();
 
-                    this.Add(key, value);
+                    Add(key, value);
 
                     reader.ReadEndElement();
                     reader.MoveToContent();
@@ -325,12 +322,12 @@ namespace EveComFramework.Core
             /// WriteXML
             /// </summary>
             /// <param name="writer"></param>
-            public void WriteXml(System.Xml.XmlWriter writer)
+            public void WriteXml(XmlWriter writer)
             {
                 XmlSerializer keySerializer = new XmlSerializer(typeof(TKey));
                 XmlSerializer valueSerializer = new XmlSerializer(typeof(TValue));
 
-                foreach (TKey key in this.Keys)
+                foreach (TKey key in Keys)
                 {
                     writer.WriteStartElement("item");
 

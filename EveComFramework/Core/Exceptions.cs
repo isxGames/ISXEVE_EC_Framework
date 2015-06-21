@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#pragma warning disable 1591
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -25,7 +23,6 @@ namespace EveComFramework.Core
         }
 
         private Exceptions()
-            : base()
         {
         }
 

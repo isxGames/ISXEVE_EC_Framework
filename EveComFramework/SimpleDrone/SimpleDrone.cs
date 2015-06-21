@@ -1,11 +1,10 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
 using EveComFramework.Core;
 using EveComFramework.Targets;
-using EveComFramework.Security;
 using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.SimpleDrone
@@ -30,7 +29,7 @@ namespace EveComFramework.SimpleDrone
 
     #region Settings
 
-    public class SimpleDroneSettings : EveComFramework.Core.Settings
+    public class SimpleDroneSettings : Settings
     {
         public Mode Mode = Mode.None;
         public bool PrivateTargets = true;
@@ -58,7 +57,6 @@ namespace EveComFramework.SimpleDrone
         }
 
         private SimpleDrone()
-            : base()
         {
             Rats.AddPriorityTargets();
             Rats.AddNPCs();
@@ -71,7 +69,7 @@ namespace EveComFramework.SimpleDrone
 
         #region Variables
 
-        public Core.Logger Console = new Core.Logger("SimpleDrone");
+        public Logger Console = new Logger("SimpleDrone");
         public SimpleDroneSettings Config = new SimpleDroneSettings();
         Targets.Targets Rats = new Targets.Targets();
         Security.Security SecurityCore = Security.Security.Instance;
@@ -291,7 +289,7 @@ namespace EveComFramework.SimpleDrone
                     {
                         if (Rats.LockedTargetList.Any())
                         {
-                            Rats.LockedTargetList.FirstOrDefault().UnlockTarget();
+                            Rats.LockedTargetList.First().UnlockTarget();
                         }
                         return false;
                     }
@@ -307,7 +305,7 @@ namespace EveComFramework.SimpleDrone
                     {
                         if (Rats.LockedTargetList.Any())
                         {
-                            Rats.LockedTargetList.FirstOrDefault().UnlockTarget();
+                            Rats.LockedTargetList.First().UnlockTarget();
                         }
                         return false;
                     }

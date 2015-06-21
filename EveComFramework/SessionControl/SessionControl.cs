@@ -1,9 +1,7 @@
-﻿using EveComFramework.Core;
+﻿#pragma warning disable 1591
+using EveComFramework.Core;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using InnerSpaceAPI;
 using EveCom;
 using EveComFramework.KanedaToolkit;
 
@@ -74,7 +72,6 @@ namespace EveComFramework.SessionControl
         }
 
         private SessionControl()
-            : base()
         {
             LoginDelta = random.Next(Config.LoginDelta);
             QueueState(LoginScreen);
@@ -173,12 +170,6 @@ namespace EveComFramework.SessionControl
 
         #region Utility
 
-        bool Blank(object[] Params)
-        {
-            Log.Log("Finished");
-            return true;
-        }
-
         #endregion
 
         #region LoggingIn
@@ -264,19 +255,19 @@ namespace EveComFramework.SessionControl
                 if (_curProfile != null)
                 {
                     CharSel.CharSlot character = CharSel.Slots.FirstOrDefault(a => a.CharID == _curProfile.CharacterID);
-                    Log.Log("|oActivating character");
-                    Log.Log(" |g{0}", characterName);
-                    character.Activate();
-                    InsertState(CharScreen);
-                    WaitFor(5, () => CharSel.Loading);
-                    return true;
+                    if (character != null)
+                    {
+                        Log.Log("|oActivating character");
+                        Log.Log(" |g{0}", characterName);
+                        character.Activate();
+                        InsertState(CharScreen);
+                        WaitFor(5, () => CharSel.Loading);
+                        return true;
+                    }
                 }
-                else
-                {
-                    Log.Log("|rUnable to find character, check configuration");
-                    Clear();
-                    return true;
-                }
+                Log.Log("|rUnable to find character, check configuration");
+                Clear();
+                return true;
             }
 
             return false;

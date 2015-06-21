@@ -1,7 +1,7 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
 
 namespace EveComFramework.Core
@@ -72,7 +72,7 @@ namespace EveComFramework.Core
         public State()
         {
             Diagnostics.Instance.States.Add(this);
-            StateLog = new Logger("State: " + this.GetType().Name);
+            StateLog = new Logger("State: " + GetType().Name);
             DefaultFrequency = 1000;
             EVEFrame.OnFrame += OnFrame;
         }

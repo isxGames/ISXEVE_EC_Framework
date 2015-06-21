@@ -1,11 +1,10 @@
-﻿using System;
+﻿#pragma warning disable 1591
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
-using EveComFramework.Comms;
 using LavishScriptAPI;
 
 namespace EveComFramework.Security
@@ -109,7 +108,6 @@ namespace EveComFramework.Security
         }
 
         private Security()
-            : base()
         {
             Log.Log("Security module initialized", LogType.DEBUG);
             RegisterCommands();
@@ -230,10 +228,10 @@ namespace EveComFramework.Security
 
         void RegisterCommands()
         {
-            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
-            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityAddNeuter", NeutingEntitiesUpdate);
-            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityBroadcastTrigger", BroadcastTrigger);
-            LavishScriptAPI.LavishScript.Commands.AddCommand("SecurityClearBroadcastTrigger", ClearBroadcastTrigger);
+            LavishScript.Commands.AddCommand("SecurityAddScrambler", ScramblingEntitiesUpdate);
+            LavishScript.Commands.AddCommand("SecurityAddNeuter", NeutingEntitiesUpdate);
+            LavishScript.Commands.AddCommand("SecurityBroadcastTrigger", BroadcastTrigger);
+            LavishScript.Commands.AddCommand("SecurityClearBroadcastTrigger", ClearBroadcastTrigger);
         }
 
         private bool isPanic = false;
@@ -253,7 +251,7 @@ namespace EveComFramework.Security
         {
             if (!Idle)
             {
-                this.isPanic = true;
+                isPanic = true;
                 Clear();
                 TriggerAlert();
                 QueueState(RecallDrones);
@@ -267,7 +265,7 @@ namespace EveComFramework.Security
         /// </summary>
         public void ClearPanic()
         {
-            this.isPanic = false;
+            isPanic = false;
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -428,7 +426,7 @@ namespace EveComFramework.Security
 
         public double PilotRelationship(Pilot pilot)
         {
-            double relationship = 0;
+            double relationship = 0.0;
             double[] relationships = {
 				pilot.ToCorp.FromCharDouble,
 				pilot.ToChar.FromCharDouble,
@@ -463,12 +461,6 @@ namespace EveComFramework.Security
         #endregion
 
         #region States
-
-        bool Blank(object[] Params)
-        {
-            Log.Log("Finished");
-            return true;
-        }
 
         bool RecallDrones(object[] Params)
         {
@@ -544,11 +536,11 @@ namespace EveComFramework.Security
                     return;
                 case FleeTrigger.Forced:
                     Log.Log("|rFlee trigger forced.");
-                    Comms.ChatQueue.Enqueue(string.Format("<Security> Flee trigger forced."));
+                    Comms.ChatQueue.Enqueue("<Security> Flee trigger forced.");
                     return;
                 case FleeTrigger.Panic:
                     Log.Log("|rPanicking!");
-                    Comms.ChatQueue.Enqueue(string.Format("<Security> Panicking!"));
+                    Comms.ChatQueue.Enqueue("<Security> Panicking!");
                     return;
             }
         }
@@ -560,16 +552,16 @@ namespace EveComFramework.Security
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
             if (WarpScrambling != null && WarpScrambling.GroupID != Group.EncounterSurveillanceSystem)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
+                LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
                 return false;
             }
             Entity Neuting = Entity.All.FirstOrDefault(a => a.IsEnergyNeuting || a.IsEnergyStealing && !Triggers.Contains(a.Name));
             if (Neuting != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter " + Neuting.ID);
+                LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddNeuter " + Neuting.ID);
             }
 
-            if (this.ValidScramble != null) return false;
+            if (ValidScramble != null) return false;
 
             FleeTrigger Reported = SafeTrigger();
 
@@ -581,21 +573,21 @@ namespace EveComFramework.Security
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NegativeStanding:
-                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NeutralStanding:
-                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Paranoid:
-                    if (Config.BroadcastTrigger) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
@@ -634,7 +626,7 @@ namespace EveComFramework.Security
 
         bool CheckClear(object[] Params)
         {
-            if (this.isPanic) return false;
+            if (isPanic) return false;
             FleeTrigger Trigger = (FleeTrigger)Params[0];
             int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced || Trigger == FleeTrigger.Panic) ? 0 : Config.FleeWait;
             AutoModule.AutoModule.Instance.Decloak = false;
@@ -662,7 +654,7 @@ namespace EveComFramework.Security
             if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
-                if (Config.BroadcastTrigger && (Reported == FleeTrigger.NegativeStanding || Reported == FleeTrigger.NeutralStanding || Reported == FleeTrigger.Paranoid)) LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                if (Config.BroadcastTrigger && (Reported == FleeTrigger.NegativeStanding || Reported == FleeTrigger.NeutralStanding || Reported == FleeTrigger.Paranoid)) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
                 Comms.ChatQueue.Enqueue("<Security> New flee condition, waiting for safety");
@@ -743,9 +735,12 @@ namespace EveComFramework.Security
         bool WaitFlee(object[] Params)
         {
             Entity WarpScrambling = Entity.All.FirstOrDefault(a => a.IsWarpScrambling);
-            if ((WarpScrambling != null || this.ValidScramble != null) && WarpScrambling.GroupID != Group.EncounterSurveillanceSystem)
+            if ((WarpScrambling != null && WarpScrambling.GroupID != Group.EncounterSurveillanceSystem) || ValidScramble != null)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
+                if (WarpScrambling != null)
+                {
+                    LavishScript.ExecuteCommand("relay \"all\" -noredirect SecurityAddScrambler " + WarpScrambling.ID);
+                }
                 if (AbandonAlert != null)
                 {
                     Log.Log("|rAbandoning flee due to a scramble!");
@@ -765,12 +760,6 @@ namespace EveComFramework.Security
             return true;
         }
 
-        bool LogMessage(object[] Params)
-        {
-            Log.Log((string)Params[0]);
-            return true;
-        }
-
         bool Resume(object[] Params)
         {
             AutoModule.AutoModule.Instance.Decloak = Decloak;
@@ -787,7 +776,7 @@ namespace EveComFramework.Security
             }
             if (Config.BroadcastTrigger)
             {
-                LavishScriptAPI.LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
             }
             QueueState(CheckSafe);
             return true;
@@ -835,7 +824,6 @@ namespace EveComFramework.Security
         }
 
         private SecurityAudio()
-            : base()
         {
             if (Config.Voice != "") Speech.SelectVoice(Config.Voice);
             NonFleetPlayers.AddNonFleetPlayers();
@@ -853,8 +841,8 @@ namespace EveComFramework.Security
         List<Pilot> PilotCache = new List<Pilot>();
         Security Core;
         int LocalCache;
-        bool ChatInviteSeen = false;
-        EveComFramework.Targets.Targets NonFleetPlayers = new EveComFramework.Targets.Targets();
+        bool ChatInviteSeen;
+        Targets.Targets NonFleetPlayers = new Targets.Targets();
         List<Entity> NonFleetMemberOnGrid = new List<Entity>();
 
         #endregion

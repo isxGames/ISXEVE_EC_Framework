@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EveComFramework.Core
+﻿namespace EveComFramework.Core
 {
     /// <summary>
     /// This class is used to define default information for the Settings module
@@ -29,7 +24,6 @@ namespace EveComFramework.Core
         }
 
         private Config()
-            : base()
         {
         }
 

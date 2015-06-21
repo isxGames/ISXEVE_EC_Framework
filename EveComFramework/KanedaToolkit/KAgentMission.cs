@@ -1,7 +1,4 @@
-﻿using System;
-using EveCom;
-using System.Collections.Generic;
-using System.Linq;
+﻿using EveCom;
 
 namespace EveComFramework.KanedaToolkit
 {

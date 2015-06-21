@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using EveCom;
-
+using EveComFramework.Core;
 
 namespace EveComFramework.Cargo
 {
     /// <summary>
     /// This class handles cargo operation, including navigation
     /// </summary>
-    public class Cargo : EveComFramework.Core.State
+    public class Cargo : State
     {
         private class CargoAction
         {
@@ -48,7 +47,7 @@ namespace EveComFramework.Cargo
         /// <summary>
         /// Log for Cargo module
         /// </summary>
-        public Core.Logger Log = new Core.Logger("Cargo");
+        public Logger Log = new Logger("Cargo");
 
         #endregion
 
@@ -71,7 +70,6 @@ namespace EveComFramework.Cargo
         }
 
         private Cargo()
-            : base()
         {
 
         }
