@@ -845,6 +845,7 @@ namespace EveComFramework.Security
 
         #region Variables
 
+        private ChatChannel LocalChat = Comms.Comms.Instance.LocalChat;
         SpeechSynthesizer Speech = new SpeechSynthesizer();
         Queue<string> SpeechQueue = new Queue<string>();
         public SecurityAudioSettings Config = new SecurityAudioSettings();
@@ -886,7 +887,7 @@ namespace EveComFramework.Security
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
 
-            LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
+            LocalCache = LocalChat.Messages.Count;
             return true;
         }
 
@@ -926,13 +927,13 @@ namespace EveComFramework.Security
                 }
             }
 
-            if (Config.Local && LocalCache != ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count)
+            if (Config.Local && LocalCache != LocalChat.Messages.Count)
             {
-                if (ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Last().SenderName != "Message")
+                if (LocalChat.Messages.Last().SenderName != "Message")
                 {
                     SpeechQueue.Enqueue("Local chat");
                 }
-                LocalCache = ChatChannel.All.FirstOrDefault(a => a.ID.Contains(Session.SolarSystemID.ToString())).Messages.Count;
+                LocalCache = LocalChat.Messages.Count;
             }
 
             if (Session.InSpace)
