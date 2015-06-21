@@ -422,7 +422,7 @@ namespace EveComFramework.AutoModule
 
             #region AutoTargeters
 
-            if (Config.AutoTargeters)
+            if (Config.AutoTargeters && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
                 List<Module> autoTargeters = MyShip.Modules.Where(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsOnline).ToList();
                 if (autoTargeters.Any())
