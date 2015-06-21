@@ -833,7 +833,7 @@ namespace EveComFramework.Security
 
         #region Variables
 
-        private ChatChannel LocalChat = Comms.Comms.Instance.LocalChat;
+        private ChatChannel LocalChat;
         SpeechSynthesizer Speech = new SpeechSynthesizer();
         Queue<string> SpeechQueue = new Queue<string>();
         public SecurityAudioSettings Config = new SecurityAudioSettings();
@@ -875,6 +875,7 @@ namespace EveComFramework.Security
         {
             if ((!Session.InSpace && !Session.InStation) || !Session.Safe) return false;
 
+            LocalChat = Comms.Comms.Instance.LocalChat;
             LocalCache = LocalChat.Messages.Count;
             return true;
         }
