@@ -18,10 +18,7 @@ namespace EveComFramework.Core
         public Configuration()
         {
             InitializeComponent();
-        }
 
-        private void Configuration_Load(object sender, EventArgs e)
-        {
             if (!this.DesignMode)
             {
                 AutoModule.AutoModule AutoModuleInstance = AutoModule.AutoModule.Instance;
@@ -309,7 +306,6 @@ namespace EveComFramework.Core
 
                 #endregion
             }
-
         }
 
         private void buttonUpload_Click(object sender, EventArgs e)
