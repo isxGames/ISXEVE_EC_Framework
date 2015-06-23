@@ -13,10 +13,7 @@ namespace EveComFramework.Core
         public Configuration()
         {
             InitializeComponent();
-        }
 
-        private void Configuration_Load(object sender, EventArgs e)
-        {
             if (!DesignMode)
             {
                 AutoModule.AutoModule AutoModuleInstance = AutoModule.AutoModule.Instance;
