@@ -80,6 +80,10 @@ namespace EveComFramework.Security
         public string SafeSubstring = "Safe:";
         public string SecureBookmark = "";
         public int FleeWait = 5;
+        public bool IntelToolEnabled = false;
+        public int IntelToolInterval = 5;
+        public string IntelToolURL = "http://inteltool/report/:solarSystem/";
+        public string IntelToolPostData = "local=:pilotList";
     }
 
     #endregion

@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 1591
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -8,18 +9,6 @@ using EveComFramework.Core;
 
 namespace EveComFramework.Security
 {
-    #region Settings
-
-    internal class IntelToolSettings : Settings
-    {
-        public bool Enabled = false;
-        public int Interval = 5;
-        public string URL = "http://inteltool/report/:solarSystem/";
-        public string PostData = "local=:pilotList";
-    }
-
-    #endregion
-
     public class IntelTool : State
     {
         #region Instantiation
@@ -44,11 +33,11 @@ namespace EveComFramework.Security
 
         internal void Enable(bool val)
         {
-            if (val && Config.Enabled)
+            if (val && Config.IntelToolEnabled)
             {
                 if (Idle)
                 {
-                    DefaultFrequency = Config.Interval*1000;
+                    DefaultFrequency = Config.IntelToolInterval*1000;
                     QueueState(Control);
                 }
             }
@@ -65,7 +54,7 @@ namespace EveComFramework.Security
         #endregion
 
         #region Variables
-        internal readonly IntelToolSettings Config = new IntelToolSettings();
+        internal readonly SecuritySettings Config = Security.Instance.Config;
         internal readonly Logger Log = new Logger("Intel");
         #endregion
 
@@ -83,8 +72,8 @@ namespace EveComFramework.Security
         {
             if (!Session.InSpace && !Session.InStation) return false;
 
-            String url = ApplyArgs(Config.URL);
-            string postData = ApplyArgs(Config.PostData);
+            String url = ApplyArgs(Config.IntelToolURL);
+            string postData = ApplyArgs(Config.IntelToolPostData);
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postData);
 
             try
@@ -101,6 +90,8 @@ namespace EveComFramework.Security
                 }
 
                 req.GetResponse();
+                // HttpWebResponse response = (HttpWebResponse) req.GetResponse();
+                // Log.Log(new StreamReader(response.GetResponseStream()).ReadToEnd());
             }
             catch (Exception ex)
             {

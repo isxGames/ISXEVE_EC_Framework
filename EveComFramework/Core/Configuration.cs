@@ -27,8 +27,8 @@ namespace EveComFramework.Core
                 InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
-                IntelToolSettings IntelToolConfig = IntelTool.Instance.Config;
                 LocalMonitor localMonitor = Security.LocalMonitor.Instance;
+                IntelTool intelTool = IntelTool.Instance;
 
                 #region AutoModule
 
