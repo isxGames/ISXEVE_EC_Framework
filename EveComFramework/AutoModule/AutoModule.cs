@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using EveCom;
 using EveComFramework.Core;
+using EveComFramework.KanedaToolkit;
+using EveComFramework.Move;
 
 namespace EveComFramework.AutoModule
 {
@@ -151,19 +153,21 @@ namespace EveComFramework.AutoModule
                 return false;
             }
 
-            if (Move.UndockWarp.Instance != null && !EveComFramework.Move.UndockWarp.Instance.Idle && EveComFramework.Move.UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
+            if (UndockWarp.Instance != null && !UndockWarp.Instance.Idle && UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
 
             #region Cloaks
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsOnline) > 0 &&
-                    Config.Cloaks)
+            if (Config.Cloaks)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapCloaks ||
-                    Decloak)
+                Module cloakingDevice = MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && a.IsOnline);
+                if (cloakingDevice != null)
                 {
-                    if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapCloaks || Decloak)
                     {
-                        MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                        if (cloakingDevice.IsActive && !cloakingDevice.IsDeactivating)
+                        {
+                            cloakingDevice.Deactivate();
+                        }
                     }
                 }
             }
@@ -173,19 +177,19 @@ namespace EveComFramework.AutoModule
                 return false;
             }
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsOnline) > 0 &&
-                    Config.Cloaks)
+            if (Config.Cloaks)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapCloaks &&
-                    !Decloak &&
-                    !Entity.All.Any(a => a.Distance < 2000 && a.ID != MyShip.ToEntity.ID))
+                Module cloakingDevice = MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && a.IsOnline);
+                if (cloakingDevice != null)
                 {
-                    if (MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                        MyShip.Modules.Count(a => a.GroupID == Group.CloakingDevice && a.IsActive && a.IsOnline) == 0)
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapCloaks && !Decloak && !Entity.All.Any(a => a.Distance < 2000 && a.ID != MyShip.ToEntity.ID))
                     {
                         if (!Entity.All.Any(a => a.IsTargetingMe && !a.Released && !a.Exploded))
                         {
-                            MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                            if (!cloakingDevice.IsActive && !cloakingDevice.IsActivating && !cloakingDevice.IsDeactivating)
+                            {
+                                cloakingDevice.Activate();
+                            }
                             return false;
                         }
                     }
@@ -198,20 +202,19 @@ namespace EveComFramework.AutoModule
 
             #region Shield Boosters
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.ShieldBooster && a.IsOnline) > 0 &&
-                    Config.ShieldBoosters)
+            if (Config.ShieldBoosters)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapShieldBoosters &&
-                    MyShip.ToEntity.ShieldPct <= Config.MinShieldBoosters &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ShieldBooster && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> shieldBoosters = MyShip.Modules.Where(a => a.GroupID == Group.ShieldBooster && a.IsOnline).ToList();
+                if (shieldBoosters.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ShieldBooster && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapShieldBoosters ||
-                    MyShip.ToEntity.ShieldPct > Config.MaxShieldBoosters) &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ShieldBooster && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ShieldBooster && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapShieldBoosters && MyShip.ToEntity.ShieldPct <= Config.MinShieldBoosters)
+                    {
+                        shieldBoosters.Where(a => !a.IsActive && !a.IsActivating && a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapShieldBoosters || MyShip.ToEntity.ShieldPct > Config.MaxShieldBoosters)
+                    {
+                        shieldBoosters.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -219,20 +222,19 @@ namespace EveComFramework.AutoModule
 
             #region Armor Repairers
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.ArmorRepairUnit && a.IsOnline) > 0 &&
-                Config.ArmorRepairs)
+            if (Config.ArmorRepairs)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapArmorRepairs &&
-                    MyShip.ToEntity.ArmorPct <= Config.MinArmorRepairs &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ArmorRepairUnit && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> armorRepairers = MyShip.Modules.Where(a => a.GroupID == Group.ArmorRepairUnit && a.IsOnline).ToList();
+                if (armorRepairers.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ArmorRepairUnit && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapArmorRepairs ||
-                    MyShip.ToEntity.ArmorPct > Config.MaxArmorRepairs) &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ArmorRepairUnit && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ArmorRepairUnit && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapArmorRepairs && MyShip.ToEntity.ArmorPct <= Config.MinArmorRepairs)
+                    {
+                        armorRepairers.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapArmorRepairs || MyShip.ToEntity.ArmorPct > Config.MaxArmorRepairs)
+                    {
+                        armorRepairers.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -240,46 +242,38 @@ namespace EveComFramework.AutoModule
 
             #region Active Hardeners
 
-            if (MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl) && a.IsOnline) > 0 &&
-                Config.ActiveHardeners)
+            if (Config.ActiveHardeners)
             {
-                if (MyShip.Modules.Count(a => (a.GroupID == Group.DamageControl) && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => (a.GroupID == Group.DamageControl) && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-            }
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.ShieldHardener && a.IsOnline) > 0 &&
-                    Config.ActiveHardeners)
-            {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapActiveHardeners &&
-                    MyShip.ToEntity.ShieldPct <= Config.MinActiveThreshold &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ShieldHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                if (MyShip.Modules.Any(a => (a.GroupID == Group.DamageControl) && a.IsOnline))
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ShieldHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    MyShip.Modules.Where(a => a.GroupID == Group.DamageControl && a.IsOnline && !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
                 }
-                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners ||
-                    MyShip.ToEntity.ShieldPct > Config.MinActiveThreshold) &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ShieldHardener && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ShieldHardener && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
-                }
-            }
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && a.IsOnline) > 0 &&
-                Config.ActiveHardeners)
-            {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapActiveHardeners &&
-                    MyShip.ToEntity.ArmorPct <= Config.MinActiveThreshold &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> shieldHardeners = MyShip.Modules.Where(a => a.GroupID == Group.ShieldHardener && a.IsOnline).ToList();
+                if (shieldHardeners.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapActiveHardeners && MyShip.ToEntity.ShieldPct <= Config.MinActiveThreshold)
+                    {
+                        shieldHardeners.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners || MyShip.ToEntity.ShieldPct > Config.MinActiveThreshold))
+                    {
+                        shieldHardeners.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
                 }
-                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners ||
-                    MyShip.ToEntity.ArmorPct > Config.MinActiveThreshold) &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+
+                List<Module> armorHardeners = MyShip.Modules.Where(a => (a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener) && a.IsOnline).ToList();
+                if (armorHardeners.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ArmorHardener || a.GroupID == Group.ArmorResistanceShiftHardener && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapActiveHardeners && MyShip.ToEntity.ArmorPct <= Config.MinActiveThreshold)
+                    {
+                        armorHardeners.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners || MyShip.ToEntity.ArmorPct > Config.MinActiveThreshold)
+                    {
+                        armorHardeners.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -287,18 +281,19 @@ namespace EveComFramework.AutoModule
 
             #region Gang Links
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsOnline) > 0 &&
-                Config.GangLinks)
+            if (Config.GangLinks)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapGangLinks &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> gangLinks = MyShip.Modules.Where(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsOnline).ToList();
+                if (gangLinks.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapGangLinks &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapGangLinks)
+                    {
+                        gangLinks.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapGangLinks)
+                    {
+                        gangLinks.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -306,18 +301,19 @@ namespace EveComFramework.AutoModule
 
             #region Sensor Boosters
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.SensorBooster && a.IsOnline) > 0 &&
-                Config.SensorBoosters)
+            if (Config.SensorBoosters)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapSensorBoosters &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.SensorBooster && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> sensorBoosters = MyShip.Modules.Where(a => a.GroupID == Group.SensorBooster && a.IsOnline).ToList();
+                if (sensorBoosters.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.SensorBooster && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapSensorBoosters &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.SensorBooster && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.SensorBooster && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapSensorBoosters)
+                    {
+                        sensorBoosters.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapSensorBoosters)
+                    {
+                        sensorBoosters.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -325,18 +321,19 @@ namespace EveComFramework.AutoModule
 
             #region Tracking Computers
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.TrackingComputer && a.IsOnline) > 0 &&
-                Config.TrackingComputers)
+            if (Config.TrackingComputers)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapTrackingComputers &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.TrackingComputer && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> trackingComputers = MyShip.Modules.Where(a => a.GroupID == Group.TrackingComputer && a.IsOnline).ToList();
+                if (trackingComputers.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapTrackingComputers &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.TrackingComputer && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.TrackingComputer && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapTrackingComputers)
+                    {
+                        trackingComputers.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapTrackingComputers)
+                    {
+                        trackingComputers.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -344,18 +341,19 @@ namespace EveComFramework.AutoModule
 
             #region Drone Tracking Modules
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && a.IsOnline) > 0 &&
-                Config.DroneTrackingModules)
+            if (Config.DroneTrackingModules)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneTrackingModules &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> droneTrackingModules = MyShip.Modules.Where(a => a.GroupID == Group.DroneTrackingModules && a.IsOnline).ToList();
+                if (droneTrackingModules.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneTrackingModules && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneTrackingModules &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.DroneTrackingModules && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneTrackingModules && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneTrackingModules)
+                    {
+                        droneTrackingModules.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneTrackingModules)
+                    {
+                        droneTrackingModules.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -363,17 +361,19 @@ namespace EveComFramework.AutoModule
 
             #region ECCMs
 
-            if (Config.ECCMs && MyShip.Modules.Count(a => a.GroupID == Group.ECCM && a.IsOnline) > 0)
+            if (Config.ECCMs)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECCMs &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ECCM && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> ECCM = MyShip.Modules.Where(a => a.GroupID == Group.ECCM && a.IsOnline).ToList();
+                if (ECCM.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECCM && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECCMs &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ECCM && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECCM && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECCMs)
+                    {
+                        ECCM.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECCMs)
+                    {
+                        ECCM.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -381,17 +381,19 @@ namespace EveComFramework.AutoModule
 
             #region ECMBursts
 
-            if (Config.ECMBursts && MyShip.Modules.Count(a => a.GroupID == Group.ECMBurst && a.IsOnline) > 0)
+            if (Config.ECMBursts)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECMBursts &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ECMBurst && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> ECMBursts = MyShip.Modules.Where(a => a.GroupID == Group.ECMBurst && a.IsOnline).ToList();
+                if (ECMBursts.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECMBurst && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECMBursts &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.ECMBurst && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.ECMBurst && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECMBursts)
+                    {
+                        ECMBursts.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECMBursts)
+                    {
+                        ECMBursts.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -399,18 +401,19 @@ namespace EveComFramework.AutoModule
 
             #region Drone Control Units
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.DroneControlUnit && a.IsOnline) > 0 &&
-                Config.DroneControlUnits)
+            if (Config.DroneControlUnits)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneControlUnits &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.DroneControlUnit && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> droneControlUnits = MyShip.Modules.Where(a => a.GroupID == Group.DroneControlUnit && a.IsOnline).ToList();
+                if (droneControlUnits.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneControlUnit && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneControlUnits &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.DroneControlUnit && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.DroneControlUnit && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneControlUnits)
+                    {
+                        droneControlUnits.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneControlUnits)
+                    {
+                        droneControlUnits.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
@@ -418,51 +421,47 @@ namespace EveComFramework.AutoModule
 
             #region AutoTargeters
 
-            if (MyShip.Modules.Count(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsOnline) > 0 &&
-                Config.AutoTargeters)
+            if (Config.AutoTargeters && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapAutoTargeters &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.AutomatedTargetingSystem && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                List<Module> autoTargeters = MyShip.Modules.Where(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsOnline).ToList();
+                if (autoTargeters.Any())
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.AutomatedTargetingSystem && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
-                }
-                if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapAutoTargeters &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.AutomatedTargetingSystem && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapAutoTargeters)
+                    {
+                        autoTargeters.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
+                    }
+                    if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapAutoTargeters)
+                    {
+                        autoTargeters.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
+                    }
                 }
             }
 
             #endregion
 
+            #region Propulsion Modules
+
+            List<Module> propulsionModules = MyShip.Modules.Where(a => a.GroupID == Group.PropulsionModule && a.IsOnline).ToList();
+
             if (MyShip.ToEntity.Mode == EntityMode.Warping)
             {
-                if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
-                {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
-                }
+                propulsionModules.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
                 return false;
             }
 
-            #region Propulsion Modules
-
-            if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsOnline) > 0 &&
-                Config.PropulsionModules)
+            if (Config.PropulsionModules && propulsionModules.Any())
             {
                 if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapPropulsionModules &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 &&
-                    ((Config.PropulsionModulesApproaching && MyShip.ToEntity.Mode == EntityMode.Approaching) ||
-                     (Config.PropulsionModulesOrbiting && MyShip.ToEntity.Mode == EntityMode.Orbiting) ||
-                      Config.PropulsionModulesAlwaysOn))
+                        ((Config.PropulsionModulesApproaching && MyShip.ToEntity.Mode == EntityMode.Approaching) ||
+                        (Config.PropulsionModulesOrbiting && MyShip.ToEntity.Mode == EntityMode.Orbiting) ||
+                        Config.PropulsionModulesAlwaysOn))
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    propulsionModules.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
                 }
-                if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules || MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned) &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                    !Config.PropulsionModulesAlwaysOn)
+                if ((!Config.PropulsionModulesAlwaysOn && (MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules) ||
+                   (!Config.PropulsionModulesAlwaysOn || MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned))
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    propulsionModules.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
                 }
             }
 
@@ -572,18 +571,17 @@ namespace EveComFramework.AutoModule
 
             #region Propulsion Modules
 
-            if (MyShip.Modules.Any(a => a.GroupID == Group.PropulsionModule && a.IsOnline))
+            List<Module> propulsionModules = MyShip.Modules.Where(a => a.GroupID == Group.PropulsionModule && a.IsOnline).ToList();
+            if (propulsionModules.Any())
             {
-                if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline) > 0 &&
-                    MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && (a.IsActive || a.IsDeactivating) && a.IsOnline) == 0 &&
-                    !CycleComplete)
+                if (!CycleComplete && propulsionModules.Any(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating))
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && !a.IsActive && !a.IsDeactivating && a.IsOnline).Activate();
+                    propulsionModules.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
                     return false;
                 }
-                if (MyShip.Modules.Count(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline) > 0)
+                if (propulsionModules.Any(a => a.IsActive && !a.IsDeactivating))
                 {
-                    MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.PropulsionModule && a.IsActive && !a.IsDeactivating && a.IsOnline).Deactivate();
+                    propulsionModules.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
                     CycleComplete = true;
                 }
             }
