@@ -209,7 +209,7 @@ namespace EveComFramework.AutoModule
                 {
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapShieldBoosters && MyShip.ToEntity.ShieldPct <= Config.MinShieldBoosters)
                     {
-                        shieldBoosters.Where(a => !a.IsActive && !a.IsActivating && a.IsDeactivating).ForEach(m => m.Activate());
+                        shieldBoosters.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapShieldBoosters || MyShip.ToEntity.ShieldPct > Config.MaxShieldBoosters)
                     {
