@@ -71,13 +71,20 @@ namespace EveComFramework.Security
 
         #region States
 
+        private String ApplyArgs(String s)
+        {
+            s = s.Replace(":solarSystem", Session.SolarSystemID.ToString());
+            s = s.Replace(":characterID", Me.CharID.ToString());
+            s = s.Replace(":pilotList", String.Join(",", Local.Pilots.Select(a => a.Name)));
+            return s;
+        }
+
         bool Control(object[] Params)
         {
             if (!Session.InSpace && !Session.InStation) return false;
 
-            String pilotList = String.Join(",", Local.Pilots.Select(a => a.Name));
-            String url = Config.URL.Replace(":solarSystem", Session.SolarSystemID.ToString()).Replace(":pilotList", pilotList);
-            string postData = Config.PostData.Replace(":solarSystem", Session.SolarSystemID.ToString()).Replace(":pilotList", pilotList);
+            String url = ApplyArgs(Config.URL);
+            string postData = ApplyArgs(Config.PostData);
             byte[] postDataBytes = Encoding.ASCII.GetBytes(postData);
 
             try
