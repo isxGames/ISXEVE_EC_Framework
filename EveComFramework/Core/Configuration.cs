@@ -5,6 +5,7 @@ using EveComFramework.AutoModule;
 using EveComFramework.Move;
 using EveComFramework.Optimizer;
 using EveComFramework.Comms;
+using EveComFramework.Security;
 
 namespace EveComFramework.Core
 {
@@ -26,6 +27,7 @@ namespace EveComFramework.Core
                 InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
+                IntelToolSettings IntelToolConfig = IntelTool.Instance.Config;
 
                 #region AutoModule
 
