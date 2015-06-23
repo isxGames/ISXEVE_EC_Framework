@@ -28,6 +28,7 @@ namespace EveComFramework.Core
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
                 IntelToolSettings IntelToolConfig = IntelTool.Instance.Config;
+                LocalMonitor localMonitor = Security.LocalMonitor.Instance;
 
                 #region AutoModule
 
