@@ -84,6 +84,7 @@ namespace EveComFramework.Security
         public int IntelToolInterval = 5;
         public string IntelToolURL = "http://inteltool/report/:solarSystem/";
         public string IntelToolPostData = "local=:pilotList";
+        public string ISRelayTarget = "all other";
     }
 
     #endregion
@@ -577,21 +578,21 @@ namespace EveComFramework.Security
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NegativeStanding:
-                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \""+Config.ISRelayTarget+"\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NegativeStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.NeutralStanding:
-                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.NeutralStanding);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
                     ReportTrigger(Reported);
                     return true;
                 case FleeTrigger.Paranoid:
-                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     TriggerAlert();
                     QueueState(Flee, -1, FleeTrigger.Paranoid);
                     if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
@@ -658,7 +659,7 @@ namespace EveComFramework.Security
             if (Reported != FleeTrigger.None)
             {
                 Log.Log("|oNew flee condition");
-                if (Config.BroadcastTrigger && (Reported == FleeTrigger.NegativeStanding || Reported == FleeTrigger.NeutralStanding || Reported == FleeTrigger.Paranoid)) LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                if (Config.BroadcastTrigger && (Reported == FleeTrigger.NegativeStanding || Reported == FleeTrigger.NeutralStanding || Reported == FleeTrigger.Paranoid)) { LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID); }
                 ReportTrigger(Reported);
                 Log.Log(" |-gWaiting for safety");
                 Comms.ChatQueue.Enqueue("<Security> New flee condition, waiting for safety");
@@ -780,7 +781,7 @@ namespace EveComFramework.Security
             }
             if (Config.BroadcastTrigger)
             {
-                LavishScript.ExecuteCommand("relay \"all other\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
+                LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityClearBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
             }
             QueueState(CheckSafe);
             return true;
