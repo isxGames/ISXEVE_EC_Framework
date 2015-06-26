@@ -458,8 +458,8 @@ namespace EveComFramework.AutoModule
                 {
                     propulsionModules.Where(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
                 }
-                if ((!Config.PropulsionModulesAlwaysOn && (MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules) ||
-                   (!Config.PropulsionModulesAlwaysOn || MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned))
+                if (!Config.PropulsionModulesAlwaysOn && ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules) ||
+                    MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned)
                 {
                     propulsionModules.Where(a => a.IsActive && !a.IsDeactivating).ForEach(m => m.Deactivate());
                 }
