@@ -25,12 +25,17 @@ namespace EveComFramework.Data
         /// The InvType's Group
         /// </summary>
         public int GroupID { get; set; }
+        /// <summary>
+        /// The InvType's Volume
+        /// </summary>
+        public double Volume { get; set; }
 
-        private InvType(int ID, string Name, int GroupID)
+        private InvType(int ID, string Name, int GroupID, double Volume)
         {
             this.ID = ID;
             this.Name = Name;
             this.GroupID = GroupID;
+            this.Volume = Volume;
         }
 
         private static List<InvType> _All;
@@ -47,7 +52,7 @@ namespace EveComFramework.Data
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from System in dataDoc.Descendants("InvType")
-                                select new InvType(Convert.ToInt32(System.Attribute("ID").Value), System.Attribute("Name").Value, Convert.ToInt32(System.Attribute("GroupID").Value))).ToList();
+                                select new InvType(Convert.ToInt32(System.Attribute("ID").Value), System.Attribute("Name").Value, Convert.ToInt32(System.Attribute("GroupID").Value), Double.Parse(System.Attribute("Volume").Value))).ToList();
                     }
                 }
                 return _All;

@@ -243,7 +243,7 @@ namespace EveComFramework.Cargo
                     double AvailableSpace = CurrentCargoAction.Target().MaxCapacity - CurrentCargoAction.Target().UsedCapacity;
                     foreach (Item item in CurrentCargoAction.Source().Items.Where(CurrentCargoAction.QueryString))
                     {
-                        if (item.Quantity * item.Volume < AvailableSpace)
+                        if (item.Quantity * item.Volume <= AvailableSpace)
                         {
                             EVEFrame.Log("Moving " + item.Quantity);
                             CurrentCargoAction.Target().Add(item);

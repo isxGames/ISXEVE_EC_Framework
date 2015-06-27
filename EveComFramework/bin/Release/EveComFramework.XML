@@ -628,6 +628,11 @@
             The InvType's Group
             </summary>
         </member>
+        <member name="P:EveComFramework.Data.InvType.Volume">
+            <summary>
+            The InvType's Volume
+            </summary>
+        </member>
         <member name="P:EveComFramework.Data.InvType.All">
             <summary>
             List of all InvTypes
@@ -699,6 +704,11 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:EveComFramework.KanedaToolkit.KInventoryContainer">
+            <summary>
+            extension methods for InventoryContainer
             </summary>
         </member>
         <member name="T:EveComFramework.Properties.Resources">
