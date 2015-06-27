@@ -8,9 +8,9 @@ namespace EveComFramework.KanedaToolkit
     /// </summary>
     public static class KInventoryContainer
     {
-        public static double AvailCargo(this InventoryContainer mission)
+        public static double AvailCargo(this InventoryContainer inventoryContainer)
         {
-            return 0.0;
+            return inventoryContainer.MaxCapacity - inventoryContainer.UsedCapacity;
         }
     }
 
