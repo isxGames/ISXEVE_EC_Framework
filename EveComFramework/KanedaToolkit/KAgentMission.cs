@@ -24,7 +24,7 @@ namespace EveComFramework.KanedaToolkit
         /// <returns></returns>
         public static bool IsCompleted(this AgentMission mission)
         {
-            return (mission.IsAccepted() && mission.Objective.Action == "AllObjectivesComplete");
+            return (mission.IsAccepted() && mission.MissionObjectiveState() == MissionToolkit.MissionObjectiveState.AllObjectivesComplete);
         }
 
         /// <summary>
