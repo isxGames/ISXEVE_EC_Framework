@@ -280,7 +280,7 @@ namespace EveComFramework.SessionControl
             UpdateCurrentProfile();
 
             //close downtime warning windows
-            Window dtWindow = Window.All.FirstOrDefault(a => a.Caption != null && a.Caption.ToLower().Contains("downtime"));
+            PopupWindow dtWindow = (PopupWindow) Window.All.FirstOrDefault(a => a.Name == "modal" && a.Type == Window.WindowType.PopUp && ((PopupWindow)a).Message.ToLower().Contains("downtime"));
             if (dtWindow != null)
             {
                 dtWindow.Close();
