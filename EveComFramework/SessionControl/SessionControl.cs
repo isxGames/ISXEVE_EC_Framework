@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using EveCom;
 using EveComFramework.KanedaToolkit;
+using LavishScriptAPI;
 
 namespace EveComFramework.SessionControl
 {
@@ -46,6 +47,7 @@ namespace EveComFramework.SessionControl
         public DateTime PeriodEnd = DateTime.Now.AddHours(2);
         public SerializableDictionary<long, DateTime> SessionStart = new SerializableDictionary<long, DateTime>();
         public SerializableDictionary<long, bool> Reconnect = new SerializableDictionary<long, bool>();
+        public DTWindowCleanup dtWin = DTWindowCleanup.Instance;
     }
 
     /// <summary>
@@ -77,15 +79,6 @@ namespace EveComFramework.SessionControl
             QueueState(LoginScreen);
             QueueState(CharScreen);
             QueueState(Monitor);
-        }
-
-        ~SessionControl()
-        {
-            if (_curProfile != null)
-            {
-                //_curProfile.Sessions.Last().Logout = EVEFrameUtil.Get(() => Session.Now);
-                //GlobalConfig.Save();
-            }
         }
 
         #endregion
@@ -279,14 +272,6 @@ namespace EveComFramework.SessionControl
         {
             UpdateCurrentProfile();
 
-            //close downtime warning windows
-            PopupWindow dtWindow = (PopupWindow) Window.All.FirstOrDefault(a => a.Name == "modal" && a.Type == Window.WindowType.PopUp && ((PopupWindow)a).Message.ToLower().Contains("downtime"));
-            if (dtWindow != null)
-            {
-                dtWindow.Close();
-                return false;
-            }
-
             if (Config.Mode == "Period")
             {
                 if (DateTime.Now.TimeOfDay > Config.PeriodEnd.TimeOfDay)
@@ -322,7 +307,7 @@ namespace EveComFramework.SessionControl
 
         bool Logout(object[] Params)
         {
-            LavishScriptAPI.LavishScript.ExecuteCommand("Exit");
+            LavishScript.ExecuteCommand("Exit");
             return true;
         }
 

@@ -102,6 +102,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SessionControl\SessionControl.cs" />
+    <Compile Include="SessionControl\DTWindowCleanup.cs" />
     <Compile Include="SessionControl\UI\SessionControl.cs">
       <SubType>Form</SubType>
     </Compile>
