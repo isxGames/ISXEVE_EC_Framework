@@ -5,6 +5,7 @@ using System.Linq;
 using System.Speech.Synthesis;
 using EveCom;
 using EveComFramework.Core;
+using EveComFramework.KanedaToolkit;
 using LavishScriptAPI;
 
 namespace EveComFramework.Security
@@ -427,40 +428,6 @@ namespace EveComFramework.Security
                 Exceptions.Post("Security", e);
             }
             return FleeTrigger.None;
-        }
-
-        public double PilotRelationship(Pilot pilot)
-        {
-            double relationship = 0.0;
-            double[] relationships = {
-				pilot.ToCorp.FromCharDouble,
-				pilot.ToChar.FromCharDouble,
-				pilot.ToAlliance.FromCharDouble,
-				pilot.ToChar.FromCorpDouble,
-				pilot.ToCorp.FromCorpDouble,
-				pilot.ToAlliance.FromCorpDouble,
-				pilot.ToChar.FromAllianceDouble,
-				pilot.ToCorp.FromAllianceDouble,
-				pilot.ToAlliance.FromAllianceDouble
-			};
-
-            foreach (double r in relationships)
-            {
-                if (r != 0.0 && r > relationship || relationship == 0.0)
-                {
-                    relationship = r;
-                }
-            }
-
-            return relationship;
-        }
-
-        public bool PilotHostile(Pilot pilot)
-        {
-            if (pilot.CorpID == Me.CorpID) return false;
-            if (pilot.AllianceID == Me.AllianceID) return false;
-            if (PilotRelationship(pilot) > 0.0) return false;
-            return true;
         }
 
         #endregion
@@ -967,7 +934,7 @@ namespace EveComFramework.Security
             if (pilot.CorpID == Me.CorpID) return PilotColors.Blue;
             if (pilot.AllianceID == Me.AllianceID) return PilotColors.Blue;
 
-            double relationship = Security.Instance.PilotRelationship(pilot);
+            double relationship = pilot.DerivedStanding();
 
             if (relationship > 0.0) return PilotColors.Blue;
             if (relationship < 0.0) return PilotColors.Red;
