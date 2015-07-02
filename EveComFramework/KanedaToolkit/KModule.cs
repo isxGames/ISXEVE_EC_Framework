@@ -13,7 +13,7 @@ namespace EveComFramework.KanedaToolkit
             return module.IsOnline && !module.IsActive && !module.IsActivating && !module.IsDeactivating;
         }
 
-        public static bool AllowsDectivate(this Module module)
+        public static bool AllowsDeactivate(this Module module)
         {
             return module.IsOnline && module.IsActive && !module.IsDeactivating;
         }

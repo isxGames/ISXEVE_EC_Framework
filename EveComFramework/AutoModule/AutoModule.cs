@@ -213,7 +213,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapShieldBoosters || MyShip.ToEntity.ShieldPct > Config.MaxShieldBoosters)
                     {
-                        shieldBoosters.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        shieldBoosters.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -233,7 +233,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapArmorRepairs || MyShip.ToEntity.ArmorPct > Config.MaxArmorRepairs)
                     {
-                        armorRepairers.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        armorRepairers.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -259,7 +259,7 @@ namespace EveComFramework.AutoModule
                     }
                     if (((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners || MyShip.ToEntity.ShieldPct > Config.MinActiveThreshold))
                     {
-                        shieldHardeners.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        shieldHardeners.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
 
@@ -272,7 +272,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapActiveHardeners || MyShip.ToEntity.ArmorPct > Config.MinActiveThreshold)
                     {
-                        armorHardeners.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        armorHardeners.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -292,7 +292,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapGangLinks)
                     {
-                        gangLinks.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        gangLinks.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -312,7 +312,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapSensorBoosters)
                     {
-                        sensorBoosters.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        sensorBoosters.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -332,7 +332,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapTrackingComputers)
                     {
-                        trackingComputers.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        trackingComputers.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -352,7 +352,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneTrackingModules)
                     {
-                        droneTrackingModules.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        droneTrackingModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -372,7 +372,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECCMs)
                     {
-                        ECCM.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        ECCM.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -392,7 +392,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapECMBursts)
                     {
-                        ECMBursts.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        ECMBursts.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -412,7 +412,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapDroneControlUnits)
                     {
-                        droneControlUnits.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        droneControlUnits.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -432,7 +432,7 @@ namespace EveComFramework.AutoModule
                     }
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapAutoTargeters)
                     {
-                        autoTargeters.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                        autoTargeters.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     }
                 }
             }
@@ -445,7 +445,7 @@ namespace EveComFramework.AutoModule
 
             if (MyShip.ToEntity.Mode == EntityMode.Warping)
             {
-                propulsionModules.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                propulsionModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                 return false;
             }
 
@@ -461,7 +461,7 @@ namespace EveComFramework.AutoModule
                 if (!Config.PropulsionModulesAlwaysOn && ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules) ||
                     MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned)
                 {
-                    propulsionModules.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                    propulsionModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                 }
             }
 
@@ -581,7 +581,7 @@ namespace EveComFramework.AutoModule
                 }
                 if (propulsionModules.Any(a => a.IsActive && !a.IsDeactivating))
                 {
-                    propulsionModules.Where(a => a.AllowsDectivate()).ForEach(m => m.Deactivate());
+                    propulsionModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                     CycleComplete = true;
                 }
             }
