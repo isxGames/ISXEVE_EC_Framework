@@ -132,7 +132,7 @@ namespace EveComFramework.SkillTraining
             }
             else
             {
-                MessageBox.Show(@"Can't configure right now , you must be logged in");
+                MessageBox.Show(@"Can't configure right now, you must be logged in");
             }
         }
 
@@ -168,7 +168,7 @@ namespace EveComFramework.SkillTraining
             {
                 return false;
             }
-            if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
+            if (SkillQueue.EndOfQueue < Session.Now.AddDays(IsTrial()?1:3650) && SkillQueue.Skills.Count < 50)
             {
                 if (SkillToTrain())
                 {
@@ -178,11 +178,8 @@ namespace EveComFramework.SkillTraining
                     }
                     return true;
                 }
-                else
-                {
-                    Log.Log("No skills left to train, add a longer plan");
-                    return true;
-                }
+                Log.Log("No skills left to train, add a longer plan");
+                return true;
             }
             return false;
         }
@@ -198,7 +195,7 @@ namespace EveComFramework.SkillTraining
             {
                 return false;
             }
-            if (SkillQueue.EndOfQueue < Session.Now.AddDays(1))
+            if (SkillQueue.EndOfQueue < Session.Now.AddDays(IsTrial()?1:3650) && SkillQueue.Skills.Count < 50)
             {
                 if (SkillToTrain())
                 {
@@ -207,11 +204,8 @@ namespace EveComFramework.SkillTraining
                     QueueState(Monitor);
                     return true;
                 }
-                else
-                {
-                    Log.Log("No skills left to train, add a longer plan");
-                    return true;
-                }
+                Log.Log("No skills left to train, add a longer plan");
+                return true;
             }
             return false;
         }
@@ -240,7 +234,7 @@ namespace EveComFramework.SkillTraining
                             //check if this entry is not already in the queue
                             if (!SkillQueue.Skills.Any(a => a.ToLevel == stt.Level && a.Skill.Type == stt.Type))
                             {
-                                Log.Log("Queueing new skill up , Skill {0} , Level {1}", stt.Type, stt.Level);
+                                Log.Log("Queueing new skill up, Skill {0}, Level {1}", stt.Type, stt.Level);
                                 injectedSkill.AddToQueue();
                                 SkillQueue.CommitTransaction();
                                 InsertState(Blank, 1000);
@@ -256,18 +250,15 @@ namespace EveComFramework.SkillTraining
                 Log.Log("Couldn't find any skills to train and there is a gap in the skillqueue!");
                 return true;
             }
-            else
-            {
-                Log.Log("Not in skill transaction , retrying");
-                InsertState(AddSkillToQueue);
-                InsertState(BeginSkillTransaction);
-                return true;
-            }
+            Log.Log("Not in skill transaction, retrying");
+            InsertState(AddSkillToQueue);
+            InsertState(BeginSkillTransaction);
+            return true;
         }
 
         public bool SkillToTrain()
         {
-            if (Config.SkillQueues.ContainsKey(Me.Name) && SkillQueue.EndOfQueue < Session.Now.AddDays(1))
+            if (Config.SkillQueues.ContainsKey(Me.Name) && SkillQueue.EndOfQueue < Session.Now.AddDays(IsTrial()?1:3650) && SkillQueue.Skills.Count < 50)
             {
                 foreach (SkillToTrain stt in Config.SkillQueues[Me.Name])
                 {
@@ -292,6 +283,12 @@ namespace EveComFramework.SkillTraining
 
         }
         #endregion
+
+        private bool IsTrial()
+        {
+            // @TODO Find out of the character is on a trial account
+            return false;
+        }
     }
 
 

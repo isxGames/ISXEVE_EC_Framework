@@ -32,7 +32,7 @@ namespace EveComFramework.SkillTraining.UI
                         List<SkillToTrain> NewPlan = new List<SkillToTrain>();
                         foreach (XElement skill in skillXMl.Descendants("entry"))
                         {
-                            plan_displaybox.Items.Add(String.Format("Skill : {0} , Level {1}", skill.Attribute("skill").Value, skill.Attribute("level").Value));
+                            plan_displaybox.Items.Add(String.Format("Skill: {0}, Level {1}", skill.Attribute("skill").Value, skill.Attribute("level").Value));
                             SkillToTrain newSkill = new SkillToTrain();
                             newSkill.Type = skill.Attribute("skill").Value;
                             newSkill.Level = Convert.ToInt32(skill.Attribute("level").Value);
@@ -53,7 +53,7 @@ namespace EveComFramework.SkillTraining.UI
         {
             foreach (SkillToTrain stt in SkillPlan)
             {
-                plan_displaybox.Items.Add(String.Format("Skill : {0} , Level {1}", stt.Type, stt.Level));
+                plan_displaybox.Items.Add(String.Format("Skill: {0}, Level {1}", stt.Type, stt.Level));
             }
 
         }
