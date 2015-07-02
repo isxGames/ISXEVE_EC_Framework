@@ -6,6 +6,7 @@ using EveComFramework.Move;
 using EveComFramework.Optimizer;
 using EveComFramework.Comms;
 using EveComFramework.Security;
+using EveComFramework.Stats;
 
 namespace EveComFramework.Core
 {
@@ -29,6 +30,7 @@ namespace EveComFramework.Core
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
                 LocalMonitor localMonitor = Security.LocalMonitor.Instance;
                 IntelTool intelTool = IntelTool.Instance;
+                StatsSettings StatsConfig = Stats.Stats.Instance.Config;
 
                 #region AutoModule
 

@@ -141,6 +141,7 @@
     <Compile Include="SkillTraining\UI\SkillTraining.Designer.cs">
       <DependentUpon>SkillTraining.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stats\Stats.cs" />
     <Compile Include="Targets\Targets.cs" />
   </ItemGroup>
   <ItemGroup>
