@@ -256,7 +256,7 @@ namespace EveComFramework.Core
                         {
                             CurState = States.Last();
                             States.RemoveLast();
-                            StateLog.Log("New CurState: {0}", CurState.ToString());
+                            StateLog.Log("New CurState: {0}", LogType.DEBUG, CurState.ToString());
                         }
                         else
                         {

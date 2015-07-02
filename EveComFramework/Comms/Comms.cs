@@ -229,6 +229,8 @@ namespace EveComFramework.Comms
 
         bool PostInit(object[] Params)
         {
+            if (!Config.UseIRC) return true;
+
             if (!IRC.IsConnected)
             {
                 DislodgeCurState(ConnectIRC);

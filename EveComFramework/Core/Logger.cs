@@ -69,14 +69,7 @@ namespace EveComFramework.Core
             Console.SelectionStart = Console.TextLength;
             Console.SelectionColor = DefaultForegroundColor;
             Console.SelectionBackColor = CurrentBackColor;
-            if (CurrentBackColor == BackColor1)
-            {
-                CurrentBackColor = BackColor2;
-            }
-            else
-            {
-                CurrentBackColor = BackColor1;
-            }
+            CurrentBackColor = (CurrentBackColor == BackColor1)?BackColor2:BackColor1;
             Console.AppendText(String.Format("{0} {1}", DateTime.Now.ToString("hh:mm"), Module.PadRight(12)));
             Queue<char> StringReader = new Queue<char>(Message);
             while (StringReader.Any())
@@ -208,10 +201,7 @@ namespace EveComFramework.Core
                     Event(Name, string.Format(Regex.Replace(Message, "\\|.", string.Empty), Params));
                 }
             }
-            else
-            {
-                Diagnostics.Instance.Post(string.Format(Message, Params), type);
-            }
+            Diagnostics.Instance.Post(string.Format(Message, Params), type, Name);
         }
         /// <summary>
         /// Delegate for rich log events
