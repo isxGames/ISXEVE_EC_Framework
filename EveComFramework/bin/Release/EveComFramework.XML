@@ -711,6 +711,11 @@
             extension methods for InventoryContainer
             </summary>
         </member>
+        <member name="T:EveComFramework.KanedaToolkit.KModule">
+            <summary>
+            extension methods for Module
+            </summary>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.KPilot">
             <summary>
             extension methods for Pilot

@@ -96,6 +96,7 @@
       <DependentUpon>GroupControl.cs</DependentUpon>
     </Compile>
     <Compile Include="KanedaToolkit\KInventoryContainer.cs" />
+    <Compile Include="KanedaToolkit\KModule.cs" />
     <Compile Include="KanedaToolkit\KPilot.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
