@@ -37,6 +37,44 @@ namespace EveComFramework.KanedaToolkit
 
         #endregion
 
+        #region Variables
+        public static readonly Dictionary<string, double> CrystalYield = new Dictionary<string, double> 
+        {
+            {"Arkonor Mining Crystal I", 1.625},
+            {"Bistot Mining Crystal I", 1.625},
+            {"Crokite Mining Crystal I", 1.625},
+            {"Dark Ochre Mining Crystal I", 1.625},
+            {"Gneiss Mining Crystal I", 1.625},
+            {"Hedbergite Mining Crystal I", 1.625},
+            {"Hemorphite Mining Crystal I", 1.625},
+            {"Jaspet Mining Crystal I", 1.625},
+            {"Kernite Mining Crystal I", 1.625},
+            {"Mercoxit Mining Crystal I", 1.625},
+            {"Omber Mining Crystal I", 1.625},
+            {"Plagioclase Mining Crystal I", 1.625},
+            {"Pyroxeres Mining Crystal I", 1.625},
+            {"Scordite Mining Crystal I", 1.625},
+            {"Spodumain Mining Crystal I", 1.625},
+            {"Veldspar Mining Crystal I", 1.625},
+            {"Arkonor Mining Crystal II", 1.75},
+            {"Bistot Mining Crystal II", 1.75},
+            {"Crokite Mining Crystal II", 1.75},
+            {"Dark Ochre Mining Crystal II", 1.75},
+            {"Gneiss Mining Crystal II", 1.75},
+            {"Hedbergite Mining Crystal II", 1.75},
+            {"Hemorphite Mining Crystal II", 1.75},
+            {"Jaspet Mining Crystal II", 1.75},
+            {"Kernite Mining Crystal II", 1.75},
+            {"Mercoxit Mining Crystal II", 1.75},
+            {"Omber Mining Crystal II", 1.75},
+            {"Plagioclase Mining Crystal II", 1.75},
+            {"Pyroxeres Mining Crystal II", 1.75},
+            {"Scordite Mining Crystal II", 1.75},
+            {"Spodumain Mining Crystal II", 1.75},
+            {"Veldspar Mining Crystal II", 1.75}
+        };
+        #endregion
+
         #region Helper Methods
 
         /// <summary>
