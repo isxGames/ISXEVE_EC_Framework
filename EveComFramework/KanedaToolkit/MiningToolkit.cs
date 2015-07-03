@@ -79,12 +79,27 @@ namespace EveComFramework.KanedaToolkit
 
         /// <summary>
         /// Load mining crystal for a given asteroid
+        /// Returns false once the operation is completed, returns true to notify that another call is required
         /// </summary>
         Dictionary<Module, DateTime> CrystalSwapCooldown = new Dictionary<Module, DateTime>();
         public bool LoadModule(Module mod, Entity roid)
         {
             if (mod.Capacity > 0)
             {
+                // Module is offline
+                if (!mod.IsOnline)
+                {
+                    EVEFrame.Log("LoadModule: Module offline");
+                    return false;
+                }
+
+                // Module is busy - wait
+                if (mod.IsReloading || mod.IsActive || mod.IsActivating || mod.IsDeactivating)
+                {
+                    EVEFrame.Log("LoadModule: Module is busy - wait");
+                    return true;
+                }
+
                 if (mod.Charge != null)
                 {
                     // Do we already have the correct crystal loaded
@@ -97,6 +112,12 @@ namespace EveComFramework.KanedaToolkit
                 if (CrystalSwapCooldown.ContainsKey(mod) && DateTime.Now < CrystalSwapCooldown[mod])
                 {
                     EVEFrame.Log("LoadModule: Cooldown");
+                    return true;
+                }
+
+                if (!MyShip.CargoBay.IsPrimed)
+                {
+                    MyShip.CargoBay.Prime();
                     return true;
                 }
 

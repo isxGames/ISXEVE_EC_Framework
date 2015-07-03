@@ -882,6 +882,7 @@
         <member name="F:EveComFramework.KanedaToolkit.MiningToolkit.CrystalSwapCooldown">
             <summary>
             Load mining crystal for a given asteroid
+            Returns false once the operation is completed, returns true to notify that another call is required
             </summary>
         </member>
         <member name="M:EveComFramework.KanedaToolkit.MiningToolkit.MatchingMiningCrystal(EveCom.Entity)">
