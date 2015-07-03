@@ -191,6 +191,18 @@ namespace EveComFramework.KanedaToolkit
             return null;
         }
 
+        public static double OreMined(Entity Roid, Dictionary<Module,int> CycleCounts)
+        {
+            return Roid.ActiveModules.Sum(mod =>
+            {
+                if (mod.Charge != null && CrystalYield.ContainsKey(mod.Charge.Type))
+                {
+                    return mod.MiningYield * CrystalYield[mod.Charge.Type] * (mod.Completion + CycleCounts[mod]);
+                }
+                return mod.MiningYield * (mod.Completion + CycleCounts[mod]);
+            }).Value;
+        }
+
         #endregion
     }
     
