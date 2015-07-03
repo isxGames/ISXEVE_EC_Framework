@@ -6,7 +6,6 @@ using EveCom;
 using EveComFramework.Core;
 using LavishScriptAPI;
 using System.Windows.Forms;
-using IrcDotNet.Collections;
 
 namespace EveComFramework.GroupControl
 {
@@ -170,15 +169,7 @@ namespace EveComFramework.GroupControl
         {
             get
             {
-                if (Leader != null)
-                {
-                    if (Leader.CharacterName == Self.CharacterName)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-                return true;
+                return (Leader == null || Leader.CharacterName == Self.CharacterName);
             }
         }
 
@@ -186,8 +177,7 @@ namespace EveComFramework.GroupControl
         {
             get
             {
-                if (CurrentGroup != null) return true;
-                return false;
+                return (CurrentGroup != null);
             }
         }
 
@@ -195,8 +185,8 @@ namespace EveComFramework.GroupControl
         {
             get
             {
-                if (Leader != null) return Leader.CharacterName;
-                return "";
+                if (Leader == null) return "";
+                return Leader.CharacterName;
             }
         }
 
@@ -401,13 +391,14 @@ namespace EveComFramework.GroupControl
                         if (CurrentGroup.ActiveMembers.Any(a => Window.All.OfType<PopupWindow>().Any(b => b.Message.Contains(a.CharacterName))))
                         {
                             Log.Log("|oAccepting fleet invite");
-                            Window.All.OfType<PopupWindow>().FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => a.Message.Contains(b.CharacterName))).ClickButton(Window.Button.Yes);
-                            return false;
+                            Window FleetInviteWindow = Window.All.OfType<PopupWindow>().FirstOrDefault(a => CurrentGroup.ActiveMembers.Any(b => a.Message.Contains(b.CharacterName)));
+                            if (FleetInviteWindow != null)
+                            {
+                                FleetInviteWindow.ClickButton(Window.Button.Yes);
+                                return false;
+                            }
                         }
-                        else
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                 }
                 else if (!Self.InFleet)
