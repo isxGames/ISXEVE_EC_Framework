@@ -69,7 +69,6 @@ namespace EveComFramework.Stats
             try
             {
                 WebRequest.Create("http://104.238.149.13/evecom-stats/?" + data).GetResponse();
-                Log.Log("|gStatistics submitted. Thank you!");
             }
             catch
             {

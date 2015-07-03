@@ -204,7 +204,10 @@ namespace EveComFramework.SkillTraining
                     QueueState(Monitor);
                     return true;
                 }
-                Log.Log("No skills left to train, add a longer plan");
+                if (Config.SkillQueues.ContainsKey(Me.Name) && Config.SkillQueues[Me.Name].Count > 0)
+                {
+                    Log.Log("No skills left to train, add a longer plan");
+                }
                 return true;
             }
             return false;
