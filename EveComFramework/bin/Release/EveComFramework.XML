@@ -716,6 +716,23 @@
             extension methods for Module
             </summary>
         </member>
+        <member name="M:EveComFramework.KanedaToolkit.KModule.AllowsActivate(EveCom.Module)">
+            <summary>
+            Is this module in a state where it can be activated?
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KModule.AllowsDeactivate(EveCom.Module)">
+            <summary>
+            Is this module in a state where it can be deactivated?
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KModule.ValidTarget(EveCom.Module,EveCom.Entity)">
+            <summary>
+            Is this module valid for this target?
+            </summary>
+            <param name="module"></param>
+            <param name="target">Entity to check against</param>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.KPilot">
             <summary>
             extension methods for Pilot

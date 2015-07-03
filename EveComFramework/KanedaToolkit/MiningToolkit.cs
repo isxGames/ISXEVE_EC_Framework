@@ -73,6 +73,28 @@ namespace EveComFramework.KanedaToolkit
             {"Spodumain Mining Crystal II", 1.75},
             {"Veldspar Mining Crystal II", 1.75}
         };
+
+        public static readonly List<int> IceModules = new List<int>() { 16278, 22229, 28752 };
+        public static readonly List<int> MercoxitModules = new List<int>() { 12108, 28748, 18068, 24305 };
+        public static readonly List<Group> OreGroups = new List<Group>()
+        {
+            Group.Arkonor,
+            Group.Bistot,
+            Group.Crokite,
+            Group.DarkOchre,
+            Group.Gneiss,
+            Group.Hedbergite,
+            Group.Hemorphite,
+            Group.Jaspet,
+            Group.Kernite,
+            Group.Omber,
+            Group.Omber,
+            Group.Plagioclase,
+            Group.Pyroxeres,
+            Group.Scordite,
+            Group.Spodumain,
+            Group.Veldspar
+        };
         #endregion
 
         #region Helper Methods
