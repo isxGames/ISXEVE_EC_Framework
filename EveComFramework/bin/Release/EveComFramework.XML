@@ -1081,12 +1081,6 @@
             Configure this module
             </summary>
         </member>
-        <member name="M:EveComFramework.Security.Security.IsPanic">
-            <summary>
-            Simple getter for the panic status
-            </summary>
-            <returns>Whether the panic alert is currently triggered</returns>
-        </member>
         <member name="M:EveComFramework.Security.Security.Panic">
             <summary>
             Causes Security to trigger an alert, flee and wait until manually restarted
@@ -1115,6 +1109,11 @@
         <member name="E:EveComFramework.Security.Security.AbandonAlert">
             <summary>
             Event raised to alert a bot a flee was unsuccessful (usually due to a scramble)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Security.Security.IsPanic">
+            <summary>
+            Returns true if the bot is currently in panic state
             </summary>
         </member>
         <member name="P:EveComFramework.Security.Security.ValidScramble">

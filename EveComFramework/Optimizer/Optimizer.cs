@@ -3,6 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using EveCom;
 using EveComFramework.Core;
+using LavishScriptAPI;
 
 namespace EveComFramework.Optimizer
 {
@@ -15,6 +16,10 @@ namespace EveComFramework.Optimizer
     {
         public bool Enable3D = true;
         public decimal MaxMemorySize = 200;
+
+        public bool MaxFPS = false;
+        public int FPSForeground = 60;
+        public int FPSBackground = 30;
     }
 
     #endregion
@@ -49,6 +54,10 @@ namespace EveComFramework.Optimizer
 
         private Optimizer()
         {
+            if (Config.MaxFPS)
+            {
+                QueueState(SetFPS);
+            }
             QueueState(Control);
         }
 
@@ -65,6 +74,13 @@ namespace EveComFramework.Optimizer
         #endregion
 
         #region States
+
+        bool SetFPS(object[] Params)
+        {
+            LavishScript.ExecuteCommand("maxfps -fg -calculate " + Config.FPSForeground);
+            LavishScript.ExecuteCommand("maxfps -bg -absolute " + Config.FPSBackground);
+            return true;
+        }
 
         bool Control(object[] Params)
         {

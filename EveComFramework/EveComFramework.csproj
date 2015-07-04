@@ -95,9 +95,11 @@
     <Compile Include="GroupControl\UI\GroupControl.Designer.cs">
       <DependentUpon>GroupControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="KanedaToolkit\Bot.cs" />
     <Compile Include="KanedaToolkit\KInventoryContainer.cs" />
     <Compile Include="KanedaToolkit\KModule.cs" />
     <Compile Include="KanedaToolkit\KPilot.cs" />
+    <Compile Include="KanedaToolkit\TaskbarProgress.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

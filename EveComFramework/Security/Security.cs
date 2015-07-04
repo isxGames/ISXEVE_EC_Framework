@@ -226,6 +226,7 @@ namespace EveComFramework.Security
 
         void TriggerAlert()
         {
+            _isAlert = true;
             if (Alert != null)
             {
                 Alert();
@@ -240,14 +241,19 @@ namespace EveComFramework.Security
             LavishScript.Commands.AddCommand("SecurityClearBroadcastTrigger", ClearBroadcastTrigger);
         }
 
-        private bool isPanic = false;
+        private bool _isAlert = false;
+        private bool _isPanic = false;
         /// <summary>
-        /// Simple getter for the panic status
+        /// Returns true if the bot is currently in panic state
         /// </summary>
-        /// <returns>Whether the panic alert is currently triggered</returns>
-        public bool IsPanic()
+        public bool IsPanic
         {
-            return isPanic;
+            get { return _isPanic; }
+        }
+
+        public bool IsAlert
+        {
+            get { return _isAlert; }
         }
 
         /// <summary>
@@ -257,7 +263,7 @@ namespace EveComFramework.Security
         {
             if (!Idle)
             {
-                isPanic = true;
+                _isPanic = true;
                 Clear();
                 TriggerAlert();
                 QueueState(RecallDrones);
@@ -271,7 +277,7 @@ namespace EveComFramework.Security
         /// </summary>
         public void ClearPanic()
         {
-            isPanic = false;
+            _isPanic = false;
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -598,7 +604,7 @@ namespace EveComFramework.Security
 
         bool CheckClear(object[] Params)
         {
-            if (isPanic) return false;
+            if (_isPanic) return false;
             FleeTrigger Trigger = (FleeTrigger)Params[0];
             int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced || Trigger == FleeTrigger.Panic) ? 0 : Config.FleeWait;
             AutoModule.AutoModule.Instance.Decloak = false;
@@ -734,13 +740,9 @@ namespace EveComFramework.Security
 
         bool Resume(object[] Params)
         {
+            _isAlert = false;
             AutoModule.AutoModule.Instance.Decloak = Decloak;
-            if (ClearAlert == null)
-            {
-                Log.Log("|rYou do not have an event handler subscribed to Security.ClearAlert!");
-                Log.Log("|rThis is bad!  Tell your developer they're not using Security right!");
-            }
-            else
+            if (ClearAlert != null)
             {
                 Log.Log("|oSending ClearAlert command - resume operations");
                 Comms.ChatQueue.Enqueue("<Security> Resuming operations");

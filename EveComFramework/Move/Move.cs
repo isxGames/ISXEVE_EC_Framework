@@ -191,19 +191,17 @@ namespace EveComFramework.Move
             Bookmark Bookmark = (Bookmark)Params[0];
             int Distance = (int)Params[1];
 
+            if (Bookmark == null) return true;
+
             if (Session.InStation)
             {
                 if (Session.StationID == Bookmark.ItemID)
                 {
-                    EVEFrame.Log(Session.StationID.ToString() + " == " + Bookmark.ItemID.ToString());
                     return true;
                 }
-                else
-                {
-                    QueueState(Undock);
-                    QueueState(BookmarkPrep, -1, Bookmark, Distance);
-                    return true;
-                }
+                QueueState(Undock);
+                QueueState(BookmarkPrep, -1, Bookmark, Distance);
+                return true;
             }
             if (Bookmark.LocationID != Session.SolarSystemID)
             {
@@ -264,27 +262,26 @@ namespace EveComFramework.Move
                 return true;
             }
 
-            if (Entity.All.Any(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900))
-                    && Collision == null)
+            Entity LCO = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
+            Entity LCO2 = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
+            if (LCO != null && Collision == null)
             {
-                Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
+                Collision = LCO;
                 Log.Log("|oToo close for warp, orbiting");
                 Log.Log(" |-g{0}(|w{1} km|-g)", Collision.Name, Config.WarpCollisionOrbit);
                 Collision.Orbit((int)(Config.WarpCollisionOrbit * 1000));
                 InsertState(BookmarkWarp, -1, Destination, Distance, Collision);
             }
             // Else, if we're in half trigger of a structure that isn't our current collision target, change orbit and collision target to it
-            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500)) != null
-                    && Collision != null
-                    && Collision != Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500)))
+            else if (LCO2 != null && Collision != null && Collision != LCO2)
             {
-                Collision = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
+                Collision = LCO2;
                 Log.Log("|oOrbiting");
                 Log.Log(" |-g{0}(|w{1} km|-g)", Collision.Name, Config.WarpCollisionOrbit);
                 Collision.Orbit((int)(Config.WarpCollisionOrbit * 1000));
                 InsertState(BookmarkWarp, -1, Destination, Distance, Collision);
             }
-            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900)) == null)
+            else if (LCO == null)
             {
                 if (Destination.Exists && Destination.CanWarpTo)
                 {
@@ -295,9 +292,7 @@ namespace EveComFramework.Move
                     WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
                 }
             }
-            else if (Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900)) != null
-                && Collision != null
-                && Collision == Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900)))
+            else if (Collision == LCO)
             {
                 InsertState(BookmarkWarp, -1, Destination, Distance, Collision);
             }
@@ -411,7 +406,7 @@ namespace EveComFramework.Move
 
         bool JumpThroughArray(object[] Params)
         {
-            Entity JumpPortalArray = Entity.All.Where(a => a.GroupID == Group.JumpPortalArray).FirstOrDefault();
+            Entity JumpPortalArray = Entity.All.FirstOrDefault(a => a.GroupID == Group.JumpPortalArray);
             if (JumpPortalArray == null)
             {
                 Log.Log("|yNo Jump Portal Array on grid");
@@ -526,10 +521,8 @@ namespace EveComFramework.Move
 
                 if (Config.ApproachCollisionPrevention)
                 {
-                    Entity CollisionCheck;
-
                     // Else, if we're in trigger of a structure and aren't already orbiting a structure, orbit it and set it as our collision target
-                    CollisionCheck = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.ApproachCollisionTrigger * 900));
+                    Entity CollisionCheck = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.ApproachCollisionTrigger * 900));
                     if (CollisionCheck != null && ApproachCollision == null)
                     {
                         ApproachCollision = CollisionCheck;
@@ -639,7 +632,7 @@ namespace EveComFramework.Move
 
         }
 
-        Dictionary<int, int> Bubbles = new Dictionary<int, int> {
+        readonly Dictionary<int, int> Bubbles = new Dictionary<int, int> {
                         {12200, 26500},
                         {26888, 40000},
                         {12199, 11500},
@@ -651,13 +644,9 @@ namespace EveComFramework.Move
 
         bool Bubbled()
         {
-            if (!Entity.All.Any(a => Bubbles.Keys.Contains(a.TypeID)) || !Entity.All.Any(a => a.Distance < Bubbles.Values.Max() && Bubbles.Keys.Contains(a.TypeID))) return false;
-
-            foreach (KeyValuePair<int, int> bubble in Bubbles)
-            {
-                if (Entity.All.Any(a => a.TypeID == bubble.Key && a.Distance < bubble.Value)) return true;
-            }
-            return false;
+            if (!Entity.All.Any(a => Bubbles.Keys.Contains(a.TypeID))) return false;
+            if(!Entity.All.Any(a => a.Distance < Bubbles.Values.Max() && Bubbles.Keys.Contains(a.TypeID))) return false;
+            return Bubbles.Any(bubble => Entity.All.Any(a => a.TypeID == bubble.Key && a.Distance < bubble.Value));
         }
 
         bool AutoPilotPrep(object[] Params)

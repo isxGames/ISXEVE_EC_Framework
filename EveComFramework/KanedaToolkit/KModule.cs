@@ -48,6 +48,13 @@ namespace EveComFramework.KanedaToolkit
             // Target painters don't work with control towers
             if (module.GroupID == Group.TargetPainter && target.GroupID == Group.ControlTower) return false;
             
+            // Salvager
+            if (module.GroupID == Group.Salvager && target.GroupID != Group.Wreck) return false;
+
+            // Tractor Beam
+            if (module.GroupID == Group.TractorBeam && target.GroupID != Group.Wreck &&
+                target.GroupID != Group.CargoContainer) return false;
+
             // Supercapitals are immune to ewar
             if ((module.GroupID == Group.WarpScrambler || module.GroupID == Group.TargetPainter ||
                  module.GroupID == Group.StasisWeb) &&

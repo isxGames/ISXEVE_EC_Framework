@@ -47,7 +47,6 @@ namespace EveComFramework.SessionControl
         public DateTime PeriodEnd = DateTime.Now.AddHours(2);
         public SerializableDictionary<long, DateTime> SessionStart = new SerializableDictionary<long, DateTime>();
         public SerializableDictionary<long, bool> Reconnect = new SerializableDictionary<long, bool>();
-        public DTWindowCleanup dtWin = DTWindowCleanup.Instance;
     }
 
     /// <summary>
@@ -101,6 +100,7 @@ namespace EveComFramework.SessionControl
         /// The character name to work with
         /// </summary>
         public string characterName { get; set; }
+        public DTWindowCleanup dtWin = DTWindowCleanup.Instance;
 
         DateTime Instanced = DateTime.Now;
         Random random = new Random();
