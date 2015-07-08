@@ -65,32 +65,32 @@ namespace EveComFramework.Core
                 checkCloaks.Checked = AutoModuleConfig.Cloaks;
                 checkCloaks.CheckedChanged += (s, a) => { AutoModuleConfig.Cloaks = checkCloaks.Checked; AutoModuleConfig.Save(); };
                 numericCloakCap.Value = AutoModuleConfig.CapCloaks;
-                numericCloakCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericCloakCap.Value; AutoModuleConfig.Save(); };
+                numericCloakCap.ValueChanged += (s, a) => { AutoModuleConfig.CapCloaks = (int)numericCloakCap.Value; AutoModuleConfig.Save(); };
 
                 checkGangLinks.Checked = AutoModuleConfig.GangLinks;
                 checkGangLinks.CheckedChanged += (s, a) => { AutoModuleConfig.GangLinks = checkGangLinks.Checked; AutoModuleConfig.Save(); };
                 numericGangLinkCap.Value = AutoModuleConfig.CapGangLinks;
-                numericGangLinkCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericGangLinkCap.Value; AutoModuleConfig.Save(); };
+                numericGangLinkCap.ValueChanged += (s, a) => { AutoModuleConfig.CapGangLinks = (int)numericGangLinkCap.Value; AutoModuleConfig.Save(); };
 
                 checkSensorBoosters.Checked = AutoModuleConfig.SensorBoosters;
                 checkSensorBoosters.CheckedChanged += (s, a) => { AutoModuleConfig.SensorBoosters = checkSensorBoosters.Checked; AutoModuleConfig.Save(); };
                 numericSensorBoosterCap.Value = AutoModuleConfig.CapSensorBoosters;
-                numericSensorBoosterCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericSensorBoosterCap.Value; AutoModuleConfig.Save(); };
+                numericSensorBoosterCap.ValueChanged += (s, a) => { AutoModuleConfig.CapSensorBoosters = (int)numericSensorBoosterCap.Value; AutoModuleConfig.Save(); };
 
                 checkTrackingComputers.Checked = AutoModuleConfig.TrackingComputers;
                 checkTrackingComputers.CheckedChanged += (s, a) => { AutoModuleConfig.TrackingComputers = checkTrackingComputers.Checked; AutoModuleConfig.Save(); };
                 numericTrackingComputerCap.Value = AutoModuleConfig.CapTrackingComputers;
-                numericTrackingComputerCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericTrackingComputerCap.Value; AutoModuleConfig.Save(); };
+                numericTrackingComputerCap.ValueChanged += (s, a) => { AutoModuleConfig.CapTrackingComputers = (int)numericTrackingComputerCap.Value; AutoModuleConfig.Save(); };
 
                 checkECCMs.Checked = AutoModuleConfig.ECCMs;
                 checkECCMs.CheckedChanged += (s, a) => { AutoModuleConfig.ECCMs = checkECCMs.Checked; AutoModuleConfig.Save(); };
                 numericECCMCap.Value = AutoModuleConfig.CapECCMs;
-                numericECCMCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericECCMCap.Value; AutoModuleConfig.Save(); };
+                numericECCMCap.ValueChanged += (s, a) => { AutoModuleConfig.CapECCMs = (int)numericECCMCap.Value; AutoModuleConfig.Save(); };
 
                 checkECMBursts.Checked = AutoModuleConfig.ECMBursts;
                 checkECMBursts.CheckedChanged += (s, a) => { AutoModuleConfig.ECMBursts = checkECMBursts.Checked; AutoModuleConfig.Save(); };
                 numericECMBurstCap.Value = AutoModuleConfig.CapECMBursts;
-                numericECMBurstCap.ValueChanged += (s, a) => { AutoModuleConfig.CapArmorRepairs = (int)numericECMBurstCap.Value; AutoModuleConfig.Save(); };
+                numericECMBurstCap.ValueChanged += (s, a) => { AutoModuleConfig.CapECMBursts = (int)numericECMBurstCap.Value; AutoModuleConfig.Save(); };
 
                 checkDroneTrackingModules.Checked = AutoModuleConfig.DroneTrackingModules;
                 checkDroneTrackingModules.CheckedChanged += (s, a) => { AutoModuleConfig.DroneTrackingModules = checkDroneTrackingModules.Checked; AutoModuleConfig.Save(); };
