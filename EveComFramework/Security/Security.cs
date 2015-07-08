@@ -818,7 +818,7 @@ namespace EveComFramework.Security
         bool ChatInviteSeen;
         Targets.Targets NonFleetPlayers = new Targets.Targets();
         List<Entity> NonFleetMemberOnGrid = new List<Entity>();
-
+        private DateTime? LastOfficerAlert = null;
         #endregion
 
         #region Actions
@@ -910,6 +910,14 @@ namespace EveComFramework.Security
                         NonFleetMemberOnGrid.Add(AddNonFleet);
                     }
                     NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();
+                }
+                if (Entity.All.Any(a => Data.NPCClasses.OfficerSpawns.Any(b => a.Name.Equals(b))))
+                {
+                    if (LastOfficerAlert == null || LastOfficerAlert.Value.AddMinutes(1) < DateTime.Now)
+                    {
+                        SpeechQueue.Enqueue("Officer spawn on grid");
+                        LastOfficerAlert = DateTime.Now;
+                    }
                 }
             }
 
