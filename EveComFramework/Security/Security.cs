@@ -687,11 +687,13 @@ namespace EveComFramework.Security
                         }
                         break;
                     case FleeType.SecureBookmark:
-                        if (Bookmark.All.Count(a => a.Title == Config.SecureBookmark) > 0)
+                        Bookmark FleeTo = Bookmark.All.Where(a => a.Title == Config.SecureBookmark && Route.GetPathBetween(a.LocationID).Count > 0).OrderBy(a => Route.GetPathBetween(a.LocationID).Count).First();
+                        if (FleeTo != null)
                         {
-                            Move.Bookmark(Bookmark.All.FirstOrDefault(a => a.Title == Config.SecureBookmark));
+                            Move.Bookmark(FleeTo);
                             return true;
                         }
+                        Log.Log("Warning: Bookmark not found!");
                         break;
                     case FleeType.SafeBookmarks:
                         if (SafeSpots.Count == 0)
