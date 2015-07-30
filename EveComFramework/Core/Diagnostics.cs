@@ -56,7 +56,7 @@ namespace EveComFramework.Core
         public void Post(string message, LogType logtype, string Module="")
         {
             StreamWriter oWriter = new StreamWriter(file, true);
-            oWriter.Write(String.Format("{0}\t{1}: {2}"+Environment.NewLine, logtype.ToString(), Module, message));
+            oWriter.Write("{0}\t{1}\t{2}: {3}"+Environment.NewLine, DateTime.Now.ToString("HH:mm"), logtype, Module, message);
             oWriter.Close();
         }
 
