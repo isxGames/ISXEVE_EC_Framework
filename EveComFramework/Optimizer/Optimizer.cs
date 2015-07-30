@@ -15,6 +15,7 @@ namespace EveComFramework.Optimizer
     public class OptimizerSettings : Settings
     {
         public bool Enable3D = true;
+        public bool RDPEnable3D = false;
         public decimal MaxMemorySize = 200;
 
         public bool MaxFPS = false;
@@ -84,9 +85,9 @@ namespace EveComFramework.Optimizer
 
         bool Control(object[] Params)
         {
-            if (EVEFrame.Enable3DRendering != Config.Enable3D && Session.Safe && (Session.InSpace || Session.InStation))
+            if (EVEFrame.Enable3DRendering != (System.Windows.Forms.SystemInformation.TerminalServerSession ? Config.RDPEnable3D : Config.Enable3D) && Session.Safe && (Session.InSpace || Session.InStation))
             {
-                EVEFrame.Enable3DRendering = Config.Enable3D;
+                EVEFrame.Enable3DRendering = (System.Windows.Forms.SystemInformation.TerminalServerSession ? Config.RDPEnable3D : Config.Enable3D);
             }
             
             if (DateTime.Now > NextMemoryPulse)
