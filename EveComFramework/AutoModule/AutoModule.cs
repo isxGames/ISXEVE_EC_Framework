@@ -99,6 +99,11 @@ namespace EveComFramework.AutoModule
         /// </summary>
         public bool Decloak = false;
 
+        /// <summary>
+        /// Set to true to force automodule to keep your propmod online regardless of state
+        /// </summary>
+        public bool KeepPropulsionModuleActive = false;
+
         #endregion
 
         #region Actions
@@ -443,7 +448,7 @@ namespace EveComFramework.AutoModule
 
             List<Module> propulsionModules = MyShip.Modules.Where(a => a.GroupID == Group.PropulsionModule && a.IsOnline).ToList();
 
-            if (MyShip.ToEntity.Mode == EntityMode.Warping)
+            if (MyShip.ToEntity.Mode == EntityMode.Warping && !KeepPropulsionModuleActive)
             {
                 propulsionModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
                 return false;
@@ -458,7 +463,7 @@ namespace EveComFramework.AutoModule
                 {
                     propulsionModules.Where(a => a.AllowsActivate()).ForEach(m => m.Activate());
                 }
-                if (!Config.PropulsionModulesAlwaysOn && ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules) ||
+                if (!KeepPropulsionModuleActive && !Config.PropulsionModulesAlwaysOn && ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) < Config.CapPropulsionModules) ||
                     MyShip.ToEntity.Mode == EntityMode.Stopped || MyShip.ToEntity.Mode == EntityMode.Aligned)
                 {
                     propulsionModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
@@ -546,7 +551,7 @@ namespace EveComFramework.AutoModule
         /// </summary>
         public InstawarpSettings Config = new InstawarpSettings();
 
-        bool CycleComplete = false;
+        int CycleComplete = 0;
 
         #endregion
 
@@ -556,25 +561,20 @@ namespace EveComFramework.AutoModule
         {
             if (!Session.InSpace || !Session.Safe)
             {
+                CycleComplete = 0;
                 return false;
             }
 
             if (UndockWarp.Instance != null && !UndockWarp.Instance.Idle && UndockWarp.Instance.CurState.ToString() != "WaitStation") return false;
 
-            if (MyShip.ToEntity.Mode != EntityMode.Warping)
-            {
-                CycleComplete = false;
-                return false;
-            }
-
-            if (CycleComplete) return false;
+            if (CycleComplete == Session.SolarSystemID || MyShip.ToEntity.Cloaked) return false;
 
             #region Propulsion Modules
 
             List<Module> propulsionModules = MyShip.Modules.Where(a => a.GroupID == Group.PropulsionModule && a.IsOnline).ToList();
             if (propulsionModules.Any())
             {
-                if (!CycleComplete && propulsionModules.Any(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating))
+                if (propulsionModules.Any(a => !a.IsActive && !a.IsActivating && !a.IsDeactivating))
                 {
                     propulsionModules.Where(a => a.AllowsActivate()).ForEach(m => m.Activate());
                     return false;
@@ -582,7 +582,7 @@ namespace EveComFramework.AutoModule
                 if (propulsionModules.Any(a => a.IsActive && !a.IsDeactivating))
                 {
                     propulsionModules.Where(a => a.AllowsDeactivate()).ForEach(m => m.Deactivate());
-                    CycleComplete = true;
+                    CycleComplete = Session.SolarSystemID;
                 }
             }
 

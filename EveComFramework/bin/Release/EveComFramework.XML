@@ -217,6 +217,11 @@
             Set to true to force automodule to decloak you.  Useful for handling non-covops cloaks.
             </summary>
         </member>
+        <member name="F:EveComFramework.AutoModule.AutoModule.KeepPropulsionModuleActive">
+            <summary>
+            Set to true to force automodule to keep your propmod online regardless of state
+            </summary>
+        </member>
         <member name="M:EveComFramework.AutoModule.AutoModule.Start">
             <summary>
             Start this module
