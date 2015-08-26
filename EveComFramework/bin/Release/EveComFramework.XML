@@ -677,37 +677,37 @@
             <param name="Name">Name</param>
             <returns>List of InvGroups</returns>
         </member>
-        <member name="T:EveComFramework.Data.Station">
+        <member name="T:EveComFramework.Data.StaticStation">
             <summary>
             This class provides static information about solar systems (without pulling data from Eve)
             </summary>
         </member>
-        <member name="P:EveComFramework.Data.Station.ID">
+        <member name="P:EveComFramework.Data.StaticStation.ID">
             <summary>
             The stations's ID
             </summary>
         </member>
-        <member name="P:EveComFramework.Data.Station.Name">
+        <member name="P:EveComFramework.Data.StaticStation.Name">
             <summary>
             The stations's Name
             </summary>
         </member>
-        <member name="P:EveComFramework.Data.Station.SolarSystemID">
+        <member name="P:EveComFramework.Data.StaticStation.SolarSystemID">
             <summary>
             The station's solarsystem ID security level
             </summary>
         </member>
-        <member name="P:EveComFramework.Data.Station.ConstellationID">
+        <member name="P:EveComFramework.Data.StaticStation.ConstellationID">
             <summary>
             The station's constellation ID security level
             </summary>
         </member>
-        <member name="P:EveComFramework.Data.Station.RegionID">
+        <member name="P:EveComFramework.Data.StaticStation.RegionID">
             <summary>
             The station's region ID security level
             </summary>
         </member>
-        <member name="P:EveComFramework.Data.Station.All">
+        <member name="P:EveComFramework.Data.StaticStation.All">
             <summary>
             List of all stations
             </summary>

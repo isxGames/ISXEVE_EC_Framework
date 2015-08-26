@@ -12,7 +12,7 @@ namespace EveComFramework.Data
     /// <summary>
     /// This class provides static information about solar systems (without pulling data from Eve)
     /// </summary>
-    public class Station
+    public class StaticStation
     {
         /// <summary>
         /// The stations's ID
@@ -36,7 +36,7 @@ namespace EveComFramework.Data
         public long RegionID { get; set; }
         
 
-        private Station(long ID, string Name, long SolarSystemID, long ConstellationID, long RegionID)
+        private StaticStation(long ID, string Name, long SolarSystemID, long ConstellationID, long RegionID)
         {
             this.ID = ID;
             this.Name = Name;
@@ -45,21 +45,21 @@ namespace EveComFramework.Data
             this.RegionID = RegionID;
         }
 
-        private static List<Station> _All;
+        private static List<StaticStation> _All;
         /// <summary>
         /// List of all stations
         /// </summary>
-        public static List<Station> All
+        public static List<StaticStation> All
         {
             get
             {
                 if (_All == null)
                 {
-                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.Stations.xml"))
+                    using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.StaticStations.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from System in dataDoc.Descendants("Station")
-                                select new Station(Convert.ToInt64(System.Attribute("stationID").Value), System.Attribute("stationName").Value, Convert.ToInt64(System.Attribute("solarSystemID").Value), Convert.ToInt64(System.Attribute("constellationID").Value), Convert.ToInt64(System.Attribute("regionID").Value))).ToList();
+                                select new StaticStation(Convert.ToInt64(System.Attribute("stationID").Value), System.Attribute("stationName").Value, Convert.ToInt64(System.Attribute("solarSystemID").Value), Convert.ToInt64(System.Attribute("constellationID").Value), Convert.ToInt64(System.Attribute("regionID").Value))).ToList();
                     }
                 }
                 return _All;
