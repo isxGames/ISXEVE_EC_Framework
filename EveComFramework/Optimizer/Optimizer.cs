@@ -78,8 +78,8 @@ namespace EveComFramework.Optimizer
 
         bool SetFPS(object[] Params)
         {
-            LavishScript.ExecuteCommand("maxfps -fg -calculate " + Config.FPSForeground);
-            LavishScript.ExecuteCommand("maxfps -bg -absolute " + Config.FPSBackground);
+            LavishScript.ExecuteCommand("maxfps -fg " + Config.FPSForeground);
+            LavishScript.ExecuteCommand("maxfps -bg " + Config.FPSBackground);
             return true;
         }
 
