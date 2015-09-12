@@ -10,6 +10,7 @@ namespace EveComFramework.KanedaToolkit
     {
 
         public Security.Security SecurityModule = null;
+        public SkillTraining.SkillTraining SkillTrainingModule = SkillTraining.SkillTraining.Instance;
 
         #region Status
         public enum BotStatus
@@ -41,12 +42,13 @@ namespace EveComFramework.KanedaToolkit
             if (Idle)
             {
                 QueueState(Initialize);
+                SkillTrainingModule.StartAuto();
             }
         }
 
         public void Stop()
         {
-            
+            SkillTrainingModule.Stop();
         }
 
         public void Enabled(bool val)

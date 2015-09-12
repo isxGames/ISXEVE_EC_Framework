@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Drawing;
+using EveCom;
 
 
 namespace EveComFramework.Core
@@ -70,7 +71,7 @@ namespace EveComFramework.Core
             Console.SelectionColor = DefaultForegroundColor;
             Console.SelectionBackColor = CurrentBackColor;
             CurrentBackColor = (CurrentBackColor == BackColor1)?BackColor2:BackColor1;
-            Console.AppendText(String.Format("{0} {1}", DateTime.Now.ToString("HH:mm"), Module.PadRight(12)));
+            Console.AppendText(String.Format("{0} {1}", Session.Now.ToString("HH:mm"), Module.PadRight(12)));
             Queue<char> StringReader = new Queue<char>(Message);
             while (StringReader.Any())
             {
