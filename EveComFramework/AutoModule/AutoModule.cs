@@ -328,7 +328,7 @@ namespace EveComFramework.AutoModule
 
             if (Config.TrackingComputers)
             {
-                List<Module> trackingComputers = MyShip.Modules.Where(a => a.GroupID == Group.TrackingComputer && a.IsOnline).ToList();
+                List<Module> trackingComputers = MyShip.Modules.Where(a => (a.GroupID == Group.TrackingComputer || (int)a.GroupID == 1396) && a.IsOnline).ToList();
                 if (trackingComputers.Any())
                 {
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapTrackingComputers)
