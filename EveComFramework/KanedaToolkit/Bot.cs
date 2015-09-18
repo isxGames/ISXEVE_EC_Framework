@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using EveCom;
 using EveComFramework.Core;
+using EveComFramework.GroupControl;
 
 namespace EveComFramework.KanedaToolkit
 {
@@ -11,6 +12,7 @@ namespace EveComFramework.KanedaToolkit
 
         public Security.Security SecurityModule = null;
         public SkillTraining.SkillTraining SkillTrainingModule = SkillTraining.SkillTraining.Instance;
+        public WatchForFleetInvites FleetInviteWatchModule = WatchForFleetInvites.Instance;
 
         #region Status
         public enum BotStatus

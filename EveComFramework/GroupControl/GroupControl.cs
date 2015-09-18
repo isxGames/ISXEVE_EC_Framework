@@ -34,6 +34,8 @@ namespace EveComFramework.GroupControl
         public GroupControlGlobalSettings() : base("GroupControl") { }
         public List<GroupSettings> Groups = new List<GroupSettings>();
         public SerializableDictionary<string, MemberSettings> KnownCharacters = new SerializableDictionary<string, MemberSettings>();
+        public Boolean AllowAllianceInvite = false;
+        public Boolean AllowCorpInvite = false;
     }
 
     #endregion
@@ -64,9 +66,9 @@ namespace EveComFramework.GroupControl
         public ActiveMember Self = new ActiveMember();
         public ActiveGroup CurrentGroup;
         public ActiveMember Leader;
-        string[] GenericLSkills = new string[] { "Leadership", "Wing Command", "Fleet Command", "Warfare Link Specialist" };
-        string[] CombatLSkills = new string[] { "Information Warfare", "Armored Warfare", "Siege Warfare", "Skirmish Warfare" };
-        string[] MiningLSkills = new string[] { "Mining Director", "Mining Foreman" };
+        string[] GenericLSkills = { "Leadership", "Wing Command", "Fleet Command", "Warfare Link Specialist" };
+        string[] CombatLSkills = { "Information Warfare", "Armored Warfare", "Siege Warfare", "Skirmish Warfare" };
+        string[] MiningLSkills = { "Mining Director", "Mining Foreman" };
         public bool LoadedSettings = false;
         #endregion
 
@@ -221,7 +223,7 @@ namespace EveComFramework.GroupControl
             }
             else
             {
-                MessageBox.Show(@"Don't have a character name yet , can't configure");
+                MessageBox.Show(@"Don't have a character name yet, can't configure");
             }
         }
 
@@ -357,10 +359,7 @@ namespace EveComFramework.GroupControl
                 RelayAll("active", Self.CharacterName, Self.LeadershipValue.ToString(), Self.Role.ToString());
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool Organize(object[] Params)
@@ -514,9 +513,6 @@ namespace EveComFramework.GroupControl
                         }
                     }
                 }
-                else
-                {
-                }
 
                 // Don't mark cycle finished if there are more pilots to invite
                 Pilot PendingInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
@@ -532,6 +528,50 @@ namespace EveComFramework.GroupControl
             }
         }
 
+        #endregion
+    }
+
+    public class WatchForFleetInvites : State
+    {
+        public Logger Log = new Logger("FleetInvite");
+        #region Instantiation
+
+        static WatchForFleetInvites _Instance;
+        public static WatchForFleetInvites Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new WatchForFleetInvites();
+                }
+                return _Instance;
+            }
+        }
+
+        private WatchForFleetInvites()
+        {
+            QueueState(Watch);
+        }
+        #endregion
+
+        #region States
+
+        bool Watch(object[] Params)
+        {
+            
+            if (!Session.InFleet && (GroupControl.Instance.GlobalConfig.AllowAllianceInvite || GroupControl.Instance.GlobalConfig.AllowCorpInvite))
+            {
+                Window FleetInviteWindow = Window.All.OfType<PopupWindow>().FirstOrDefault(a => Local.Pilots.Any(b => ((GroupControl.Instance.GlobalConfig.AllowAllianceInvite && b.AllianceID == Me.AllianceID) || (GroupControl.Instance.GlobalConfig.AllowCorpInvite && b.CorpID == Me.CorpID)) && a.Message.Contains(b.Name + " wants you to join their fleet")));
+                if (FleetInviteWindow != null)
+                {
+                    Log.Log("|yAccepting fleet invite from pilot in local");
+                    FleetInviteWindow.ClickButton(Window.Button.Yes);
+                    return false;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 
