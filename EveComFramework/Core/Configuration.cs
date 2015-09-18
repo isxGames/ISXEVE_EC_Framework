@@ -25,7 +25,6 @@ namespace EveComFramework.Core
                 InstaWarp InstaWarp = InstaWarp.Instance;
                 MoveSettings MoveConfig = EveComFramework.Move.Move.Instance.Config;
                 OptimizerSettings OptimizerConfig = Optimizer.Optimizer.Instance.Config;
-                InstawarpSettings InstaWarpConfig = InstaWarp.Instance.Config;
                 CommsSettings CommsConfig = Comms.Comms.Instance.Config;
                 SimpleDrone.SimpleDroneSettings DroneConfig = SimpleDrone.SimpleDrone.Instance.Config;
                 LocalMonitor localMonitor = Security.LocalMonitor.Instance;
@@ -131,8 +130,8 @@ namespace EveComFramework.Core
 
                 #region InstaWarp
 
-                checkInstaWarp.Checked = InstaWarpConfig.Enabled;
-                checkInstaWarp.CheckedChanged += (s, a) => { InstaWarpConfig.Enabled = checkInstaWarp.Checked; InstaWarp.Enabled(InstaWarpConfig.Enabled); InstaWarpConfig.Save(); };
+                checkInstaWarp.Checked = MoveConfig.InstaWarp;
+                checkInstaWarp.CheckedChanged += (s, a) => { MoveConfig.InstaWarp = checkInstaWarp.Checked; MoveConfig.Save(); };
 
                 #endregion
 

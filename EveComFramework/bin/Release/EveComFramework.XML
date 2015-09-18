@@ -243,33 +243,6 @@
             Singletoner
             </summary>
         </member>
-        <member name="T:EveComFramework.AutoModule.InstawarpSettings">
-            <summary>
-            Configuration settings for this Module
-            </summary>
-        </member>
-        <member name="T:EveComFramework.AutoModule.InstaWarp">
-            <summary>
-            This class manages one pulse of the first available propulsion module per session.
-            A new session starts on every solar system change or undock.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.AutoModule.InstaWarp.Enabled(System.Boolean)">
-            <summary>
-            Starts/stops this module
-            </summary>
-            <param name="Val">True=Start</param>
-        </member>
-        <member name="F:EveComFramework.AutoModule.InstaWarp.Config">
-            <summary>
-            The config for this class
-            </summary>
-        </member>
-        <member name="P:EveComFramework.AutoModule.InstaWarp.Instance">
-            <summary>
-            Singletoner
-            </summary>
-        </member>
         <member name="T:EveComFramework.Cargo.Cargo">
             <summary>
             This class handles cargo operation, including navigation
@@ -995,6 +968,11 @@
             <param name="Distance">What distance from the entity to stop at</param>
         </member>
         <member name="P:EveComFramework.Move.Move.Instance">
+            <summary>
+            Singletoner
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Move.InstaWarp.Instance">
             <summary>
             Singletoner
             </summary>

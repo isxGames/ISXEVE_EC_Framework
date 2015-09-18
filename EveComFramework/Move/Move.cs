@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EveCom;
 using EveComFramework.Core;
+using EveComFramework.KanedaToolkit;
 
 namespace EveComFramework.Move
 {
@@ -90,7 +91,7 @@ namespace EveComFramework.Move
         /// </summary>
         public Logger Log = new Logger("Move");
         public MoveSettings Config = new MoveSettings();
-
+        InstaWarp InstaWarpModule = InstaWarp.Instance;
         #endregion
 
         #region Actions
@@ -255,9 +256,9 @@ namespace EveComFramework.Move
             }
             if (!Config.WarpCollisionPrevention)
             {
+                DoInstaWarp();
                 Log.Log("|oWarping");
                 Log.Log(" |-g{0} (|w{1} km|-g)", Destination.Title, Distance);
-                // @TODO: InstaWarp
                 Destination.WarpTo(Distance);
                 InsertState(BookmarkWarp, -1, Destination, Distance);
                 WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
@@ -287,9 +288,9 @@ namespace EveComFramework.Move
             {
                 if (Destination.Exists && Destination.CanWarpTo)
                 {
+                    DoInstaWarp();
                     Log.Log("|oWarping");
                     Log.Log(" |-g{0} (|w{1} km|-g)", Destination.Title, Distance);
-                    // @TODO: InstaWarp
                     Destination.WarpTo(Distance);
                     InsertState(BookmarkWarp, -1, Destination, Distance);
                     WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
@@ -340,9 +341,9 @@ namespace EveComFramework.Move
             }
             if (!Config.WarpCollisionPrevention)
             {
+                DoInstaWarp();
                 Log.Log("|oWarping");
                 Log.Log(" |-g{0} (|w{1} km|-g)", Entity.Name, Distance);
-                // @TODO: InstaWarp
                 Entity.WarpTo(Distance);
                 InsertState(ObjectWarp, -1, Entity, Distance);
                 WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
@@ -372,9 +373,9 @@ namespace EveComFramework.Move
             {
                 if (Entity.Exists && Entity.Distance > 150000)
                 {
+                    DoInstaWarp();
                     Log.Log("|oWarping");
                     Log.Log(" |-g{0} (|w{1} km|-g)", Entity.Name, Distance);
-                    // @TODO: InstaWarp
                     Entity.WarpTo(Distance);
                     InsertState(ObjectWarp, -1, Entity, Distance);
                     WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
@@ -504,9 +505,9 @@ namespace EveComFramework.Move
                 {
                     if (ApproachTarget.SurfaceDistance > 150000 && (ApproachTarget.CategoryID == Category.Asteroid || ApproachTarget.CategoryID == Category.Structure || ApproachTarget.CategoryID == Category.Station))
                     {
+                        DoInstaWarp();
                         Log.Log("|oWarping");
                         Log.Log(" |-g{0}(|w{1} km|-g)", ApproachTarget.Name, ApproachDistance / 1000);
-                        // @TODO: InstaWarp
                         ApproachTarget.WarpTo(ApproachDistance);
                         DislodgeWaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
                         return false;
@@ -708,15 +709,15 @@ namespace EveComFramework.Move
                         }
                         else
                         {
+                            DoInstaWarp();
                             Log.Log("|oWarping");
                             Log.Log(" |-g{0}", Route.NextWaypoint.Name);
-                            // @TODO: Instawarp
                             Route.NextWaypoint.WarpTo();
                             return false;
                         }
                     }
+                    DoInstaWarp();
                     Log.Log("|oWarping to |-g{0} |w(|y100 km|w)", Sun.Name);
-                    // @TODO: Instawarp
                     Sun.WarpTo(100000);
                     InsertState(AutoPilot);
                     WaitFor(10, () => MyShip.ToEntity.Mode == EntityMode.Warping);
@@ -737,13 +738,14 @@ namespace EveComFramework.Move
                         }
                         else
                         {
+                            DoInstaWarp();
                             Log.Log("|oWarping");
                             Log.Log(" |-g{0}", Route.NextWaypoint.Name);
-                            // @TODO: InstaWarp
                             Route.NextWaypoint.WarpTo();
                             return false;
                         }
                     }
+                    if (!Entity.All.Any(a => a.GroupID == Group.Station && a.Distance < 150000)) DoInstaWarp();
                     Log.Log("|oJumping through to |-g{0}", Route.NextWaypoint.Name);
                     Route.NextWaypoint.Jump();
                     if (Route.Path != null && Route.Waypoints != null)
@@ -770,9 +772,9 @@ namespace EveComFramework.Move
                         }
                         else
                         {
+                            DoInstaWarp();
                             Log.Log("|oWarping");
                             Log.Log(" |-g{0}", Route.NextWaypoint.Name);
-                            // @TODO: InstaWarp
                             Route.NextWaypoint.WarpTo();
                             return false;
                         }
@@ -805,6 +807,7 @@ namespace EveComFramework.Move
             }
             if (!Config.WarpCollisionPrevention)
             {
+                if (!Entity.All.Any(a => a.GroupID == Group.Station && a.Distance < 150000)) DoInstaWarp();
                 Log.Log("|oDocking");
                 Log.Log(" |-g{0}", Target.Name);
                 Target.Dock();
@@ -835,6 +838,7 @@ namespace EveComFramework.Move
             }
             else if (LCO == null)
             {
+                if (!Entity.All.Any(a => a.GroupID == Group.Station && a.Distance < 150000)) DoInstaWarp();
                 Log.Log("|oDocking");
                 Log.Log(" |-g{0}", Target.Name);
                 Target.Dock();
@@ -851,6 +855,85 @@ namespace EveComFramework.Move
 
         #endregion
 
+        #region Helper Methods
+
+        void DoInstaWarp()
+        {
+            if (Config.InstaWarp && MyShip.ToEntity.Mode != EntityMode.Warping)
+            {
+                InstaWarpModule.Enabled(true);
+            }
+        }
+        #endregion
+
+    }
+
+    class InstaWarp : State
+    {
+        public Logger Log = new Logger("MoveInstaWarp");
+        #region Instantiation
+        static InstaWarp _Instance;
+        /// <summary>
+        /// Singletoner
+        /// </summary>
+        public static InstaWarp Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new InstaWarp();
+                }
+                return _Instance;
+            }
+        }
+
+        private InstaWarp()
+        {
+            DefaultFrequency = 200;
+        }
+        #endregion
+        #region Actions
+
+        public void Enabled(bool val)
+        {
+            if (val)
+            {
+                if (Idle)
+                {
+                    Log.Log("|yDoing InstaWarp");
+                    QueueState(Prepare);
+                    QueueState(EnablePropmod);
+                }
+            }
+            else
+            {
+                Clear();
+            }
+        }
+        #endregion
+        #region States
+        bool Prepare(object[] Params)
+        {
+            if (!Session.InSpace) return false;
+            return !MyShip.ToEntity.Cloaked;
+        }
+
+        bool EnablePropmod(object[] Params)
+        {
+            List<Module> propulsionModules = MyShip.Modules.Where(a => a.GroupID == Group.PropulsionModule && a.IsOnline).ToList();
+            if (propulsionModules.Any())
+            {
+                if (propulsionModules.Any(a => a.AllowsActivate()))
+                {
+                    Log.Log("|g  InstaWarp turned on the propmod.");
+                    propulsionModules.Where(a => a.AllowsActivate()).ForEach(m => m.Activate());
+                }
+            }
+            return true;
+        }
+
+        #endregion
     }
 
     /// <summary>
