@@ -84,6 +84,11 @@
   <Target Name="Drone Energy Neutralizer Sentry" />
   <Target Name="Drone Defense Vampire Battery" />
   <Target Name="Lookout Sentry" />
+  <Target Name="Angel Energy Neutralizer Sentry" />
+  <Target Name="Blood Energy Neutralizer Sentry" />
+  <Target Name="Guristas Energy Neutralizer Sentry" />
+  <Target Name="Sansha Energy Neutralizer Sentry" />
+  <Target Name="Serpentis Energy Neutralizer Sentry" />
   <!-- ECM -->
   <Target Name="Dread Guristas Saboteur" />
   <Target Name="Dread Guristas Despoiler" />
@@ -135,6 +140,13 @@
   <Target Name="Pith Exterminator" />
   <Target Name="Guristas Eliminator" />
   <Target Name="Guristas Exterminator" />
+  <!-- Web -->
+  <Target Name="Angel Stasis Tower" />
+  <Target Name="Blood Stasis Tower" />
+  <Target Name="Drone Stasis Tower" />
+  <Target Name="Guristas Stasis Tower" />
+  <Target Name="Sansha Stasis Towe" />
+  <Target Name="Serpentis Stasis Tower" />
   <!-- Other -->
   <Target Name="True Sansha's Slavehunter" />
   <Target Name="True Sansha's Savage" />
@@ -311,5 +323,4 @@
   <Target Name="Tower Sentry Drone II" />
   <Target Name="Drone Heavy Missiles Battery" />
   <Target Name="Drone Wall Sentry Gun" />
-  <Target Name="Lookout Tower" />
 </Targets>
