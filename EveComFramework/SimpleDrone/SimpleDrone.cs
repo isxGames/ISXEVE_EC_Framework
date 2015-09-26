@@ -223,6 +223,7 @@ namespace EveComFramework.SimpleDrone
             #region ActiveTarget selection
 
             Double MaxRange = (Config.Mode == Mode.PointDefense) ? 20000 : Me.DroneControlDistance;
+            if (Config.Mode == Mode.Fighter || Config.Mode == Mode.FighterPointDefense) MaxRange *= 3;
 
             if (WarpScrambling != null)
             {
