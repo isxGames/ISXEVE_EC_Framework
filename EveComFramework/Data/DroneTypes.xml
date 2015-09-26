@@ -79,10 +79,10 @@
 	<Drone Name="Federation Navy Garde" ID="31886" Race="8" Volume="25" Bandwidth="25" Group="Sentry Drones" />
 	<Drone Name="Republic Fleet Bouncer" ID="31894" Race="2" Volume="25" Bandwidth="25" Group="Sentry Drones" />
 	<!-- Fighter Drone -->
-	<Drone Name="Templar" ID="23055" Race="4" Volume="5000" Bandwidth="25" Group="Fighter Drone" />
-	<Drone Name="Dragonfly" ID="23057" Race="1" Volume="5000" Bandwidth="25" Group="Fighter Drone" />
-	<Drone Name="Firbolg" ID="23059" Race="8" Volume="5000" Bandwidth="25" Group="Fighter Drone" />
-	<Drone Name="Einherji" ID="23061" Race="2" Volume="5000" Bandwidth="25" Group="Fighter Drone" />
+	<Drone Name="Templar" ID="23055" Race="4" Volume="5000" Bandwidth="25" Group="Fighters" />
+	<Drone Name="Dragonfly" ID="23057" Race="1" Volume="5000" Bandwidth="25" Group="Fighters" />
+	<Drone Name="Firbolg" ID="23059" Race="8" Volume="5000" Bandwidth="25" Group="Fighters" />
+	<Drone Name="Einherji" ID="23061" Race="2" Volume="5000" Bandwidth="25" Group="Fighters" />
 	<!-- Fighter Bomber -->
 	<Drone Name="Shadow" ID="2948" Race="1" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
 	<Drone Name="Cyclops" ID="32325" Race="8" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
