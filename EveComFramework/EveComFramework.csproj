@@ -82,6 +82,7 @@
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\InvType.cs" />
     <Compile Include="Data\InvGroup.cs" />
+    <Compile Include="Data\StacticStations.cs" />
     <Compile Include="GroupControl\GroupControl.cs" />
     <Compile Include="GroupControl\UI\Debug.cs">
       <SubType>Form</SubType>
@@ -189,6 +190,9 @@
     <EmbeddedResource Include="Data\Dungeons.xml" />
     <EmbeddedResource Include="Data\InvTypes.xml" />
     <EmbeddedResource Include="Data\InvGroups.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\StaticStations.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
