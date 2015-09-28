@@ -4,34 +4,33 @@ using System.Linq;
 using System.IO;
 using System.Xml.Linq;
 using System.Reflection;
-using System.Globalization;
 
 namespace EveComFramework.Data
 {
 
     /// <summary>
-    /// This class provides static information about solar systems (without pulling data from Eve)
+    /// This class provides static information about stations (without pulling data from Eve)
     /// </summary>
     public class StaticStation
     {
         /// <summary>
-        /// The stations's ID
+        /// The station's ID
         /// </summary>
         public long ID { get; set; }
         /// <summary>
-        /// The stations's Name
+        /// The station's Name
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// The station's solarsystem ID security level
+        /// The station's solarsystem ID
         /// </summary>
         public long SolarSystemID { get; set; }
         /// <summary>
-        /// The station's constellation ID security level
+        /// The station's constellation ID
         /// </summary>
         public long ConstellationID { get; set; }
         /// <summary>
-        /// The station's region ID security level
+        /// The station's region ID
         /// </summary>
         public long RegionID { get; set; }
         

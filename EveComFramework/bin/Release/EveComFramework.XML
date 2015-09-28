@@ -650,6 +650,41 @@
             List of all InvGroups
             </summary>
         </member>
+        <member name="T:EveComFramework.Data.StaticStation">
+            <summary>
+            This class provides static information about stations (without pulling data from Eve)
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.StaticStation.ID">
+            <summary>
+            The station's ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.StaticStation.Name">
+            <summary>
+            The station's Name
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.StaticStation.SolarSystemID">
+            <summary>
+            The station's solarsystem ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.StaticStation.ConstellationID">
+            <summary>
+            The station's constellation ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.StaticStation.RegionID">
+            <summary>
+            The station's region ID
+            </summary>
+        </member>
+        <member name="P:EveComFramework.Data.StaticStation.All">
+            <summary>
+            List of all stations
+            </summary>
+        </member>
         <member name="F:EveComFramework.GroupControl.UI.Debug.components">
             <summary>
             Required designer variable.
