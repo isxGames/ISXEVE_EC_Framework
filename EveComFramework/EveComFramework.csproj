@@ -79,10 +79,10 @@
     <Compile Include="Data\NPCTypes.cs" />
     <Compile Include="Data\PriorityTargets.cs" />
     <Compile Include="Data\SolarSystem.cs" />
+    <Compile Include="Data\StaticStations.cs" />
     <Compile Include="Data\Dungeon.cs" />
     <Compile Include="Data\InvType.cs" />
     <Compile Include="Data\InvGroup.cs" />
-    <Compile Include="Data\StacticStations.cs" />
     <Compile Include="GroupControl\GroupControl.cs" />
     <Compile Include="GroupControl\UI\Debug.cs">
       <SubType>Form</SubType>
@@ -99,6 +99,7 @@
     <Compile Include="KanedaToolkit\Bot.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="KanedaToolkit\KAgent.cs" />
     <Compile Include="KanedaToolkit\KEntity.cs" />
     <Compile Include="KanedaToolkit\KInventoryContainer.cs" />
     <Compile Include="KanedaToolkit\KModule.cs" />
@@ -188,12 +189,10 @@
     <EmbeddedResource Include="Data\NPCTypes.xml" />
     <EmbeddedResource Include="Data\PriorityTargets.xml" />
     <EmbeddedResource Include="Data\SolarSystems.xml" />
+    <EmbeddedResource Include="Data\StaticStations.xml" />
     <EmbeddedResource Include="Data\Dungeons.xml" />
     <EmbeddedResource Include="Data\InvTypes.xml" />
     <EmbeddedResource Include="Data\InvGroups.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\StaticStations.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

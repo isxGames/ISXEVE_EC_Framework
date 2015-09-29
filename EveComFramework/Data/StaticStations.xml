@@ -1,4 +1,4 @@
-<?xml vesion="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Stations>
 	<Station constellationID="20000407" regionID="10000033" solarSystemID="30002780" stationID="60000004" stationName="Muvolailen X - Moon 3 - CBD Corporation Storage" hasRepair="1"/>
 	<Station constellationID="20000407" regionID="10000033" solarSystemID="30002779" stationID="60000007" stationName="Ono V - Moon 9 - CBD Corporation Storage" hasRepair="1"/>
