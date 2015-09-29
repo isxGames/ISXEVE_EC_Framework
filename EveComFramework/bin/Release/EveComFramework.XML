@@ -680,6 +680,11 @@
             The station's region ID
             </summary>
         </member>
+        <member name="P:EveComFramework.Data.StaticStation.HasRepair">
+            <summary>
+            Whether or not the station operates a repair service
+            </summary>
+        </member>
         <member name="P:EveComFramework.Data.StaticStation.All">
             <summary>
             List of all stations

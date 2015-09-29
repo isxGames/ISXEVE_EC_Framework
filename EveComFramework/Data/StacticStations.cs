@@ -33,15 +33,20 @@ namespace EveComFramework.Data
         /// The station's region ID
         /// </summary>
         public long RegionID { get; set; }
+        /// <summary>
+        /// Whether or not the station operates a repair service
+        /// </summary>
+        public bool HasRepair { get; set; }
         
 
-        private StaticStation(long ID, string Name, long SolarSystemID, long ConstellationID, long RegionID)
+        private StaticStation(long ID, string Name, long SolarSystemID, long ConstellationID, long RegionID, bool HasRepair)
         {
             this.ID = ID;
             this.Name = Name;
             this.SolarSystemID = SolarSystemID;
             this.ConstellationID = ConstellationID;
             this.RegionID = RegionID;
+            this.HasRepair = HasRepair;
         }
 
         private static List<StaticStation> _All;
@@ -57,8 +62,8 @@ namespace EveComFramework.Data
                     using (Stream data = Assembly.GetExecutingAssembly().GetManifestResourceStream("EveComFramework.Data.StaticStations.xml"))
                     {
                         XElement dataDoc = XElement.Load(data);
-                        _All = (from System in dataDoc.Descendants("Station")
-                                select new StaticStation(Convert.ToInt64(System.Attribute("stationID").Value), System.Attribute("stationName").Value, Convert.ToInt64(System.Attribute("solarSystemID").Value), Convert.ToInt64(System.Attribute("constellationID").Value), Convert.ToInt64(System.Attribute("regionID").Value))).ToList();
+                        _All = (from Station in dataDoc.Descendants("Station")
+                                select new StaticStation(Convert.ToInt64(Station.Attribute("stationID").Value), Station.Attribute("stationName").Value, Convert.ToInt64(Station.Attribute("solarSystemID").Value), Convert.ToInt64(Station.Attribute("constellationID").Value), Convert.ToInt64(Station.Attribute("regionID").Value), (Station.Attribute("hasRepair").Value=="1"))).ToList();
                     }
                 }
                 return _All;
