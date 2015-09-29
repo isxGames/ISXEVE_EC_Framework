@@ -265,8 +265,8 @@ namespace EveComFramework.Move
                 return true;
             }
 
-            Entity LCO = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
-            Entity LCO2 = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
+            Entity LCO = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
+            Entity LCO2 = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
             if (LCO != null && Collision == null)
             {
                 Collision = LCO;
@@ -350,8 +350,8 @@ namespace EveComFramework.Move
                 return true;
             }
 
-            Entity LCO = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
-            Entity LCO2 = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
+            Entity LCO = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
+            Entity LCO2 = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
             if (LCO != null && Collision == null)
             {
                 Collision = LCO;
@@ -594,8 +594,8 @@ namespace EveComFramework.Move
             }
             else
             {
-                Entity LCO = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
-                Entity LCO2 = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
+                Entity LCO = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
+                Entity LCO2 = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
                 // Else, if we're in trigger of a structure and aren't already orbiting a structure, orbit it and set it as our collision target
                 if (Config.OrbitCollisionPrevention)
                 {
@@ -816,8 +816,8 @@ namespace EveComFramework.Move
                 return true;
             }
 
-            Entity LCO = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
-            Entity LCO2 = Entity.All.FirstOrDefault(a => (a.GroupID == Group.LargeCollidableObject || a.GroupID == Group.LargeCollidableShip || a.GroupID == Group.LargeCollidableStructure || a.CategoryID == Category.Asteroid) && a.Type != "Beacon" && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
+            Entity LCO = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 900));
+            Entity LCO2 = Entity.All.FirstOrDefault(a => a.Collidable() && a.SurfaceDistance <= (double)(Config.WarpCollisionTrigger * 500));
 
             if (LCO != null && Collision == null)
             {
