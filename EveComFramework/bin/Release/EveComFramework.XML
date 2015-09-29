@@ -719,6 +719,16 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:EveComFramework.KanedaToolkit.KEntity">
+            <summary>
+            extension methods for Entity
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KEntity.Warpable(EveCom.Entity)">
+            <summary>
+            Is this entity warpable? (range, type)
+            </summary>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.KInventoryContainer">
             <summary>
             extension methods for InventoryContainer
