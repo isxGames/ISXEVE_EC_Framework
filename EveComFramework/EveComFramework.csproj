@@ -99,6 +99,7 @@
     <Compile Include="KanedaToolkit\Bot.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="KanedaToolkit\KEntity.cs" />
     <Compile Include="KanedaToolkit\KInventoryContainer.cs" />
     <Compile Include="KanedaToolkit\KModule.cs" />
     <Compile Include="KanedaToolkit\KPilot.cs" />
