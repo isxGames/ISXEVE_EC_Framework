@@ -13,40 +13,18 @@ namespace EveComFramework.KanedaToolkit
         /// </summary>
         public static bool HasStanding(this Agent agent)
         {
-            if (agent.Level > 1 && NPCStandingModified(Standing.NPCStanding(agent.FactionID)) < -2.00) return false;
-            if (agent.Level == 2 && NPCStandingModified(Standing.NPCStanding(agent.CorporationID)) > 1.00) return true;
-            if (agent.Level == 3 && NPCStandingModified(Standing.NPCStanding(agent.CorporationID)) > 3.00) return true;
-            if (agent.Level == 4 && NPCStandingModified(Standing.NPCStanding(agent.CorporationID)) > 5.00) return true;
-            if (agent.Level == 5 && NPCStandingModified(Standing.NPCStanding(agent.CorporationID)) > 7.00) return true;
+            if (!Standing.Ready)
+            {
+                Standing.LoadStandings();
+                return false;
+            }
+            if (agent.Level > 1 && Standing.NPCStanding(agent.FactionID, true) < -2.00) return false;
+            if (agent.Level == 2 && Standing.NPCStanding(agent.CorporationID, true) > 1.00) return true;
+            if (agent.Level == 3 && Standing.NPCStanding(agent.CorporationID, true) > 3.00) return true;
+            if (agent.Level == 4 && Standing.NPCStanding(agent.CorporationID, true) > 5.00) return true;
+            if (agent.Level == 5 && Standing.NPCStanding(agent.CorporationID, true) > 7.00) return true;
             return false;
         }
-
-        #region Helper Methods
-        /// <summary>
-        /// Apply social skill to standing
-        /// </summary>
-        public static double NPCStandingModified(double standing)
-        {
-            if (standing < 0)
-            {
-                Skill Diplomacy = Skill.All.FirstOrDefault(a => a.TypeID == 3357);
-                if (Diplomacy != null)
-                {
-                    standing = 10.0 - (10.0 - standing)*(1.00 - 0.04*Diplomacy.SkillLevel);
-                }
-            }
-            else if (standing > 0) /* @TODO: Once inexistent standings return something different to 0.0 we need to apply connections for 0.0 standings too */
-            {
-                Skill Connections = Skill.All.FirstOrDefault(a => a.TypeID == 3359);
-                if (Connections != null)
-                {
-                    standing = 10.0 - (10.0 - standing)*(1.00 - 0.04*Connections.SkillLevel);
-                }
-            }
-            return standing;
-        }
-
-        #endregion
 
     }
 }

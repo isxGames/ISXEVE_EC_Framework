@@ -734,11 +734,6 @@
             Check if the standing requirements for this agent are matched
             </summary>
         </member>
-        <member name="M:EveComFramework.KanedaToolkit.KAgent.NPCStandingModified(System.Double)">
-            <summary>
-            Apply social skill to standing
-            </summary>
-        </member>
         <member name="T:EveComFramework.KanedaToolkit.KEntity">
             <summary>
             extension methods for Entity
