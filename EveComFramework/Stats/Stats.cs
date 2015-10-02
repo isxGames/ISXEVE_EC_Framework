@@ -15,6 +15,7 @@ namespace EveComFramework.Stats
         public bool optIn;
         public bool optOut;
         public string guid;
+        public int configversion = 1;
     }
 
     public class Stats : State
@@ -51,6 +52,12 @@ namespace EveComFramework.Stats
 
         bool Control(Object[] Params)
         {
+            if (Config.configversion == 1)
+            {
+                Config.configversion = 2;
+                Config.Save();
+            }
+
             // no data submission allowed
             if (Config.optOut) return true;
 

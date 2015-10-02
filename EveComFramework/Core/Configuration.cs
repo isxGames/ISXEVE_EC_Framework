@@ -119,6 +119,11 @@ namespace EveComFramework.Core
 
                 #endregion
 
+                #region Status
+                checkStatsOptOut.Checked = StatsConfig.optOut;
+                checkStatsOptOut.CheckedChanged += (s, a) => { StatsConfig.optOut = checkStatsOptOut.Checked; StatsConfig.Save(); };
+                #endregion
+
                 #region UndockWarp
 
                 checkUndockWarp.Checked = UndockWarpConfig.Enabled;

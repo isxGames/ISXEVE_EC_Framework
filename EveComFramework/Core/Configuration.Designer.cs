@@ -126,6 +126,7 @@
             this.labelUploadResult = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.checkAllChat = new System.Windows.Forms.CheckBox();
+            this.checkStatsOptOut = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1378,9 +1379,20 @@
             this.checkDroneFocus.Text = "Focus";
             this.checkDroneFocus.UseVisualStyleBackColor = true;
             // 
+            // checkStatsOptOut
+            // 
+            this.checkStatsOptOut.AutoSize = true;
+            this.checkStatsOptOut.Location = new System.Drawing.Point(76, 0);
+            this.checkStatsOptOut.Name = "checkStatsOptOut";
+            this.checkStatsOptOut.Size = new System.Drawing.Size(154, 17);
+            this.checkStatsOptOut.TabIndex = 9;
+            this.checkStatsOptOut.Text = "Disable statistics collection";
+            this.checkStatsOptOut.UseVisualStyleBackColor = true;
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.tableLayoutPanel8);
+            this.groupBox8.Controls.Add(this.checkStatsOptOut);
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox8.Location = new System.Drawing.Point(0, 916);
             this.groupBox8.Name = "groupBox8";
@@ -1652,5 +1664,6 @@
         private System.Windows.Forms.Button buttonView;
         private System.Windows.Forms.NumericUpDown numericActiveMinThreshold;
         private System.Windows.Forms.CheckBox checkAllChat;
+        private System.Windows.Forms.CheckBox checkStatsOptOut;
     }
 }
