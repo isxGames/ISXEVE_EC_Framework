@@ -20,8 +20,9 @@ namespace EveComFramework.Cargo
             internal Func<InventoryContainer> Source { get; set; }
             internal string Container { get; set; }
             internal Func<InventoryContainer> Target { get; set; }
+            internal bool Compress { get; set; }
 
-            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, string Container, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target)
+            internal CargoAction(Func<object[], bool> Action, Bookmark Bookmark, Func<InventoryContainer> Source, string Container, Func<Item, bool> QueryString, int Quantity, Func<InventoryContainer> Target, bool Compress=false)
             {
                 this.Action = Action;
                 this.Bookmark = Bookmark;
@@ -30,11 +31,12 @@ namespace EveComFramework.Cargo
                 this.QueryString = QueryString;
                 this.Quantity = Quantity;
                 this.Target = Target;
+                this.Compress = Compress;
             }
 
             public CargoAction Clone()
             {
-                return new CargoAction(Action, Bookmark, Source, Container, QueryString, Quantity, Target);
+                return new CargoAction(Action, Bookmark, Source, Container, QueryString, Quantity, Target, Compress);
             }
         }
 
@@ -115,13 +117,15 @@ namespace EveComFramework.Cargo
         /// <param name="QueryString">Linq parameters for specifying the items to unload.</param>
         /// <param name="Quantity">Quantity of the item to unload (Must specify a single item type using QueryString)</param>
         /// <param name="Target">Where to unload the item(s) from - Default: Cargo Hold</param>
+        /// <param name="Compress">Compress all compressible items after unloading. Only applicable if target is a compression array - Default: false</param>
         /// <returns></returns>
-        public Cargo Unload(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null)
+        public Cargo Unload(Func<Item, bool> QueryString = null, int Quantity = 0, Func<InventoryContainer> Target = null, bool Compress=false)
         {
             BuildCargoAction.Action = Unload;
             BuildCargoAction.QueryString = QueryString ?? (item => true);
             BuildCargoAction.Quantity = Quantity;
             BuildCargoAction.Target = Target ?? (() => MyShip.CargoBay);
+            BuildCargoAction.Compress = Compress;
             CargoQueue.AddFirst(BuildCargoAction.Clone());
             if (Idle) QueueState(Process);
             return this;
@@ -148,8 +152,7 @@ namespace EveComFramework.Cargo
 
         bool Process(object[] Params)
         {
-            EVEFrame.Log("Process");
-            if (CargoQueue.Count > 0)
+            if (CargoQueue.Any())
             {
                 CurrentCargoAction = CargoQueue.Last();
                 CargoQueue.RemoveLast();
@@ -166,6 +169,11 @@ namespace EveComFramework.Cargo
             QueueState(WarpFleetMember);
             QueueState(Traveling);
             QueueState(CurrentCargoAction.Action);
+            if (CurrentCargoAction.Compress)
+            {
+                QueueState(Stack);
+                QueueState(Compress);
+            }
             QueueState(Stack);
             QueueState(Process);
 
@@ -174,7 +182,6 @@ namespace EveComFramework.Cargo
 
         bool Traveling(object[] Params)
         {
-            EVEFrame.Log("Travel");
             if (!Move.Idle)
             {
                 return false;
@@ -184,6 +191,16 @@ namespace EveComFramework.Cargo
 
         bool WarpFleetMember(object[] Params)
         {
+            return true;
+        }
+
+        bool Compress(object[] Params)
+        {
+            foreach (Item item in CurrentCargoAction.Source().Items.Where(a => a.Compressible && !a.Type.StartsWith("Compressed ") && (a.GroupID == Group.Ice || (a.CategoryID == Category.Asteroid && a.Quantity > 100))))
+            {
+                item.Compress();
+                return false;
+            }
             return true;
         }
 
@@ -245,14 +262,12 @@ namespace EveComFramework.Cargo
                     {
                         if (item.Quantity * item.Volume <= AvailableSpace)
                         {
-                            EVEFrame.Log("Moving " + item.Quantity);
                             CurrentCargoAction.Target().Add(item);
                             AvailableSpace = AvailableSpace - item.Quantity * item.Volume;
                         }
                         else
                         {
                             int nextMove = (int)Math.Floor(AvailableSpace / item.Volume);
-                            EVEFrame.Log("Moving " + nextMove);
                             CurrentCargoAction.Target().Add(item, nextMove);
                             AvailableSpace = AvailableSpace - nextMove * item.Volume;
                         }

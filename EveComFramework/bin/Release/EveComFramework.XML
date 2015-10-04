@@ -271,13 +271,14 @@
             <param name="Target">Where to load the item(s) - Default: Cargo Hold</param>
             <returns></returns>
         </member>
-        <member name="M:EveComFramework.Cargo.Cargo.Unload(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer})">
+        <member name="M:EveComFramework.Cargo.Cargo.Unload(System.Func{EveCom.Item,System.Boolean},System.Int32,System.Func{EveCom.InventoryContainer},System.Boolean)">
             <summary>
             Add an Unload operation
             </summary>
             <param name="QueryString">Linq parameters for specifying the items to unload.</param>
             <param name="Quantity">Quantity of the item to unload (Must specify a single item type using QueryString)</param>
             <param name="Target">Where to unload the item(s) from - Default: Cargo Hold</param>
+            <param name="Compress">Compress all compressible items after unloading. Only applicable if target is a compression array - Default: false</param>
             <returns></returns>
         </member>
         <member name="M:EveComFramework.Cargo.Cargo.NoOp">
