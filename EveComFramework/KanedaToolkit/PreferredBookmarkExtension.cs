@@ -11,15 +11,10 @@ namespace EveComFramework.KanedaToolkit
     {
         public static Bookmark PreferredBookmark(this IEnumerable<Bookmark> items, Func<Bookmark, bool> pred)
         {
-            Bookmark inSystem = items.Where(pred).FirstOrDefault(a => a.LocationID == Session.SolarSystemID);
-            if (inSystem != null)
-            {
-                return inSystem;
-            }
-            else
-            {
-                return items.FirstOrDefault();
-            }
+            return Bookmark.All.Where(pred)
+                .Where(a => Route.GetPathBetween(a.LocationID).Any()) // ignore unreachable bookmarks (w-space)
+                .OrderBy(a => Route.GetPathBetween(a.LocationID).Count) // nearest bookmark, prefer in system
+                .First();
         }
     }
 

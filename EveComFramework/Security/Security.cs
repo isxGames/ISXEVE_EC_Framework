@@ -680,14 +680,15 @@ namespace EveComFramework.Security
                 switch (FleeType)
                 {
                     case FleeType.NearestStation:
-                        if (Entity.All.FirstOrDefault(a => a.GroupID == Group.Station) != null)
+                        Entity Station = Entity.All.FirstOrDefault(a => a.GroupID == Group.Station);
+                        if (Station != null)
                         {
-                            Move.Object(Entity.All.FirstOrDefault(a => a.GroupID == Group.Station));
+                            Move.Object(Station);
                             return true;
                         }
                         break;
                     case FleeType.SecureBookmark:
-                        Bookmark FleeTo = Bookmark.All.Where(a => a.Title == Config.SecureBookmark && Route.GetPathBetween(a.LocationID).Count > 0).OrderBy(a => Route.GetPathBetween(a.LocationID).Count).First();
+                        Bookmark FleeTo = Bookmark.All.PreferredBookmark(a => a.Title == Config.SecureBookmark);
                         if (FleeTo != null)
                         {
                             Move.Bookmark(FleeTo);
@@ -696,11 +697,11 @@ namespace EveComFramework.Security
                         Log.Log("Warning: Bookmark not found!");
                         break;
                     case FleeType.SafeBookmarks:
-                        if (SafeSpots.Count == 0)
+                        if (!SafeSpots.Any())
                         {
                             SafeSpots = Bookmark.All.Where(a => a.Title.Contains(Config.SafeSubstring) && a.LocationID == Session.SolarSystemID).ToList();
                         }
-                        if (SafeSpots.Count > 0)
+                        if (SafeSpots.Any())
                         {
                             Move.Bookmark(SafeSpots.FirstOrDefault());
                             SafeSpots.Remove(SafeSpots.FirstOrDefault());
