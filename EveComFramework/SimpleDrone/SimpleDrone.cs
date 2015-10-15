@@ -91,6 +91,7 @@ namespace EveComFramework.SimpleDrone
             {
                 if (Idle)
                 {
+                    TryReconnect = true;
                     QueueState(Control);
                 }
             }
@@ -106,6 +107,7 @@ namespace EveComFramework.SimpleDrone
 
         #region States
 
+        bool TryReconnect = true;
         Entity ActiveTarget;
         Dictionary<Entity, DateTime> TargetCooldown = new Dictionary<Entity, DateTime>();
         bool OutOfTargets = false;
@@ -159,10 +161,11 @@ namespace EveComFramework.SimpleDrone
                 return true;
             }
 
-            if (MyShip.DronesToReconnect && MyShip.DroneBay.UsedCapacity < MyShip.DroneBay.MaxCapacity && MyShip.ToEntity.GroupID != Group.Capsule)
+            if (MyShip.DronesToReconnect && MyShip.DroneBay.UsedCapacity < MyShip.DroneBay.MaxCapacity && MyShip.ToEntity.GroupID != Group.Capsule && TryReconnect)
             {
                 MyShip.ReconnectToDrones();
                 DislodgeWaitFor(2);
+                TryReconnect = false;
                 return false;
             }
 
