@@ -16,7 +16,7 @@ namespace EveComFramework.Core
         {
             InitializeComponent();
 
-            if (!DesignMode)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Runtime)
             {
                 AutoModule.AutoModule AutoModuleInstance = AutoModule.AutoModule.Instance;
                 AutoModuleSettings AutoModuleConfig = AutoModule.AutoModule.Instance.Config;
