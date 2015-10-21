@@ -36,14 +36,14 @@ namespace EveComFramework.KanedaToolkit
             // Ice Harvester
             if (MiningToolkit.IceModules.Contains(module.TypeID) && target.GroupID != Group.Ice) return false;
 
+            // Mercoxit
+            if (target.GroupID == Group.Mercoxit) return MiningToolkit.MercoxitModules.Contains(module.TypeID);
+
             // Mining Lasers / Ore
             if (!MiningToolkit.OreGroups.Contains(target.GroupID) &&
                 (module.GroupID == Group.MiningLaser ||
                  (module.GroupID == Group.StripMiner && !MiningToolkit.IceModules.Contains(module.TypeID)) ||
                  module.GroupID == Group.FrequencyMiningLaser)) return false;
-
-            // Mercoxit
-            if (!MiningToolkit.MercoxitModules.Contains(module.TypeID) && target.GroupID == Group.Mercoxit) return false;
 
             // Target painters don't work with control towers
             if (module.GroupID == Group.TargetPainter && target.GroupID == Group.ControlTower) return false;
