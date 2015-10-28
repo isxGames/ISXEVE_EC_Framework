@@ -871,7 +871,7 @@ namespace EveComFramework.Security
 
             if (Config.Local && LocalCache != LocalChat.Messages.Count)
             {
-                if (LocalChat.Messages.Last().SenderName != "Message")
+                if (LocalChat.Messages.Last().SenderID > 1)
                 {
                     SpeechQueue.Enqueue("Local chat");
                 }

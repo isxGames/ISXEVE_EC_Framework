@@ -282,7 +282,7 @@ namespace EveComFramework.Comms
                                     if (chatMessages.FirstOrDefault(a => a.Key == channel.ID).Value != channel.Messages.Last().Text)
                                     {
                                         chatMessages.AddOrUpdate(channel.ID, channel.Messages.Last().Text);
-                                        if (!(channel.Messages.Last().SenderName == "Message" || channel.Messages.Last().SenderName == "EVE System") || Config.NPC)
+                                        if (channel.Messages.Last().SenderID > 1 || Config.NPC)
                                         {
                                             ChatQueue.Enqueue("[Chat] <" + channel.Name + "> " + channel.Messages.Last().SenderName + ": " + channel.Messages.Last().Text);
                                         }
@@ -302,7 +302,7 @@ namespace EveComFramework.Comms
                             if (LocalChat.Messages.Last().Text != LastLocal)
                             {
                                 LastLocal = LocalChat.Messages.Last().Text;
-                                if (LocalChat.Messages.Last().SenderName != "Message" || Config.NPC)
+                                if (LocalChat.Messages.Last().SenderID > 1 || Config.NPC)
                                 {
                                     ChatQueue.Enqueue("[Chat] <Local> " + LocalChat.Messages.Last().SenderName + ": " + LastLocal);
                                 }
