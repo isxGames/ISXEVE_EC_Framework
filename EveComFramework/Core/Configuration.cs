@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 1591
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using EveComFramework.AutoModule;
 using EveComFramework.Move;
