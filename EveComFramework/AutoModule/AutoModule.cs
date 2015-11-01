@@ -24,7 +24,7 @@ namespace EveComFramework.AutoModule
         public bool SensorBoosters = true;
         public bool TrackingComputers = true;
         public bool ECCMs = true;
-        public bool ECMBursts = true;
+        public bool ECMBursts = false;
         public bool DroneControlUnits = true;
         public bool DroneTrackingModules = true;
         public bool AutoTargeters = true;
@@ -286,7 +286,7 @@ namespace EveComFramework.AutoModule
 
             #region Gang Links
 
-            if (Config.GangLinks)
+            if (Config.GangLinks && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
                 List<Module> gangLinks = MyShip.Modules.Where(a => a.GroupID == Group.GangCoordinator && a.TypeID != 11014 && a.IsOnline).ToList();
                 if (gangLinks.Any())
