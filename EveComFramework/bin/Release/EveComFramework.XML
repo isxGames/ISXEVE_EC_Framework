@@ -745,6 +745,16 @@
             Is this entity warpable? (range, type)
             </summary>
         </member>
+        <member name="T:EveComFramework.KanedaToolkit.KSystemScanResult">
+            <summary>
+            extension methods for SystemScanResult
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KSystemScanResult.SiteTaken(EveCom.SystemScanResult)">
+            <summary>
+            Is this site taken?
+            </summary>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.KInventoryContainer">
             <summary>
             extension methods for InventoryContainer
