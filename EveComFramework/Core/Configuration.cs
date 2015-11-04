@@ -210,6 +210,8 @@ namespace EveComFramework.Core
                 checkDronePrivateTargets.CheckedChanged += (s, a) => { DroneConfig.PrivateTargets = checkDronePrivateTargets.Checked; DroneConfig.Save(); };
                 checkDroneFocus.Checked = DroneConfig.SharedTargets;
                 checkDroneFocus.CheckedChanged += (s, a) => { DroneConfig.SharedTargets = checkDroneFocus.Checked; DroneConfig.Save(); };
+                checkStickyDrones.Checked = DroneConfig.StayDeployedWithNoTargets;
+                checkStickyDrones.CheckedChanged += (s, a) => { DroneConfig.StayDeployedWithNoTargets = checkStickyDrones.Checked; DroneConfig.Save(); };
                 switch (DroneConfig.Mode)
                 {
                     case SimpleDrone.Mode.None:

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.numericArmorCap = new System.Windows.Forms.NumericUpDown();
@@ -127,6 +128,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.checkAllChat = new System.Windows.Forms.CheckBox();
             this.checkStatsOptOut = new System.Windows.Forms.CheckBox();
+            this.checkStickyDrones = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericArmorCap)).BeginInit();
@@ -1294,6 +1297,7 @@
             this.tableLayoutPanel7.Controls.Add(this.comboDroneMode, 1, 1);
             this.tableLayoutPanel7.Controls.Add(this.checkDronePrivateTargets, 1, 2);
             this.tableLayoutPanel7.Controls.Add(this.checkDroneFocus, 2, 2);
+            this.tableLayoutPanel7.Controls.Add(this.checkStickyDrones, 2, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -1493,6 +1497,17 @@
             this.checkAllChat.Text = "Include all other Chat";
             this.checkAllChat.UseVisualStyleBackColor = true;
             // 
+            // checkStickyDrones
+            // 
+            this.checkStickyDrones.AutoSize = true;
+            this.checkStickyDrones.Location = new System.Drawing.Point(147, 3);
+            this.checkStickyDrones.Name = "checkStickyDrones";
+            this.checkStickyDrones.Size = new System.Drawing.Size(52, 17);
+            this.checkStickyDrones.TabIndex = 6;
+            this.checkStickyDrones.Text = "Sticky";
+            this.toolTip1.SetToolTip(this.checkStickyDrones, "Leave drones out if no targets are locked instead of recalling them");
+            this.checkStickyDrones.UseVisualStyleBackColor = true;
+            // 
             // Configuration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1665,5 +1680,7 @@
         private System.Windows.Forms.NumericUpDown numericActiveMinThreshold;
         private System.Windows.Forms.CheckBox checkAllChat;
         private System.Windows.Forms.CheckBox checkStatsOptOut;
+        private System.Windows.Forms.CheckBox checkStickyDrones;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

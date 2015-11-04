@@ -34,6 +34,7 @@ namespace EveComFramework.SimpleDrone
         public Mode Mode = Mode.None;
         public bool PrivateTargets = true;
         public bool SharedTargets = false;
+        public bool StayDeployedWithNoTargets = false;
         public int TargetSlots = 2;
     }
 
@@ -187,7 +188,7 @@ namespace EveComFramework.SimpleDrone
                 return false;
             }
 
-            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)))
+            if (!Rats.TargetList.Any() && !Entity.All.Any(a => PriorityTargets.Contains(a.Name)) && !Config.StayDeployedWithNoTargets)
             {
                 List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
                 // Recall drones
