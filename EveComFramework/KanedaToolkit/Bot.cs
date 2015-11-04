@@ -20,10 +20,11 @@ namespace EveComFramework.KanedaToolkit
             StatusActive,
             StatusActiveAlert,
             StatusActivePanic,
+            StatusWait,
             StatusInactive
         }
 
-        public BotStatus Status
+        public virtual BotStatus Status
         {
             get
             {
@@ -33,6 +34,7 @@ namespace EveComFramework.KanedaToolkit
                     if (SecurityModule.IsAlert) return BotStatus.StatusActiveAlert;
                 }
                 if (Idle) return BotStatus.StatusInactive;
+                if (CurState.ToString() == "Initialize") return BotStatus.StatusWait;
                 return BotStatus.StatusActive;
             }
         }
@@ -107,6 +109,9 @@ namespace EveComFramework.KanedaToolkit
                     case Bot.BotStatus.StatusActiveAlert:
                     case Bot.BotStatus.StatusActivePanic:
                         TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Error, 100, 100);
+                        break;
+                    case Bot.BotStatus.StatusWait:
+                        TaskbarProgress.SetState(Handle, TaskbarProgress.TaskbarStates.Paused, 100, 100);
                         break;
                 }
             }
