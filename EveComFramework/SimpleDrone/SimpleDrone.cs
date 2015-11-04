@@ -98,6 +98,7 @@ namespace EveComFramework.SimpleDrone
             else
             {
                 Clear();
+                QueueState(Recall);
             }
         }
 
@@ -145,6 +146,23 @@ namespace EveComFramework.SimpleDrone
             }
 
             return false;
+        }
+
+        bool Recall(object[] Params)
+        {
+            if (Session.InStation) return true;
+            List<Drone> Recall = Drone.AllInSpace.Where(a => DroneReady(a) && a.State != EntityState.Departing).ToList();
+            // Recall drones
+            if (Recall.Any())
+            {
+                Console.Log("|oRecalling drones");
+                Recall.ReturnToDroneBay();
+                Recall.ForEach(a => NextDroneCommand.AddOrUpdate(a, DateTime.Now.AddSeconds(5)));
+                return false;
+            }
+
+            if (Drone.AllInSpace.Any()) return false;
+            return true;
         }
 
         bool Control(object[] Params)
