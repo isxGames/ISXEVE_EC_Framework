@@ -371,7 +371,7 @@ namespace EveComFramework.SimpleDrone
                 {
                     List<Drone> Recall = Drone.AllInSpace.Where(a => !DroneCooldown.Contains(a) && DroneReady(a) && a.State != EntityState.Departing).ToList();
                     // Recall drones if in point defense and no frig/destroyers in range
-                    if (Recall.Any())
+                    if (Recall.Any() && !Config.StayDeployedWithNoTargets)
                     {
                         Console.Log("|oRecalling drones");
                         Recall.ReturnToDroneBay();
