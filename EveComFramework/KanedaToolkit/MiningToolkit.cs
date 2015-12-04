@@ -74,7 +74,7 @@ namespace EveComFramework.KanedaToolkit
             {"Veldspar Mining Crystal II", 1.75}
         };
 
-        public static readonly List<int> IceModules = new List<int>() { 16278, 22229, 28752 };
+        public static readonly List<int> IceModules = new List<int>() { 16278, 22229, 28752, 37450, 37451, 37452 };
         public static readonly List<int> MercoxitModules = new List<int>() { 12108, 28748, 18068, 24305 };
         public static readonly List<Group> OreGroups = new List<Group>()
         {
