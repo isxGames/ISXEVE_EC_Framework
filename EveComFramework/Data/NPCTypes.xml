@@ -160,7 +160,7 @@
   <Type Name="Asteroid Sansha's Nation Commander Battleship">851</Type>
   <Type Name="Asteroid Serpentis Commander Battleship">852</Type>
   <Type Name="Mission Faction Battleship">924</Type>
-  <Type Name="Incursion Sansha's Nation Battleship">105</Type>
+  <Type Name="Incursion Sansha's Nation Battleship">1056</Type>
   <!-- Officer -->
   <Type Name="Asteroid Angel Cartel Officer">553</Type>
   <Type Name="Asteroid Blood Raiders Officer">559</Type>
@@ -185,4 +185,13 @@
   <Type Name="Asteroid Rogue Drone Swarm">761</Type>
   <Type Name="Deadspace Rogue Drone Swarm">806</Type>
   <Type Name="Destructible Sentry Gun">383</Type>
+  <!-- The Crimson Harvest -->
+  <Type Name="Blood Raider Event Battlecruiser">1452</Type>
+  <Type Name="Blood Raider Event Frigate">1453</Type>
+  <Type Name="Blood Raider Event Cruiser">1454</Type>
+  <Type Name="Blood Raider Event Battlecruiser">1455</Type>
+  <!-- Operation Frostline -->
+  <Type Name="Serpentis Event Frigate">1566</Type>
+  <Type Name="Serpentis Event Cruiser">1567</Type>
+  <Type Name="Serpentis Event Battlecruiser">1568</Type>
 </Targets>

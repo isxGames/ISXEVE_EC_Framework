@@ -136,4 +136,13 @@
   <Group ID="1007" Class="Frigate" Group="Mission Faction Frigate" />
   <Group ID="1053" Class="Frigate" Group="Incursion Sansha's Nation Frigate" />
   <Group ID="1054" Class="Cruiser" Group="Incursion Sansha's Nation Cruiser" />
+  <!-- The Crimson Harvest -->
+  <Group ID="1452" Class="Battleship" Group="Blood Raider Event Battlecruiser" />
+  <Group ID="1453" Class="Frigate" Group="Blood Raider Event Frigate" />
+  <Group ID="1454" Class="Cruiser" Group="Blood Raider Event Cruiser" />
+  <Group ID="1455" Class="BattleCruiser" Group="Blood Raider Event Battlecruiser" />
+  <!-- Operation Frostline -->
+  <Group ID="1566" Class="Frigate" Group="Serpentis Event Frigate" />
+  <Group ID="1567" Class="Cruiser" Group="Serpentis Event Cruiser" />
+  <Group ID="1568" Class="BattleCruiser" Group="Serpentis Event Battlecruiser" />
 </NPCClasses>

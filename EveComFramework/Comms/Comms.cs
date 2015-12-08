@@ -373,6 +373,17 @@ namespace EveComFramework.Comms
             if (val > 1000) return string.Format("{0:0.00}k isk", val / 1000);
             return string.Format("{0:0.00} isk", val);
         }
+
+        public static bool MatchMessageAnom(String message, String anom)
+        {
+            String anomShort = anom.Substring(0, 3);
+            if (message.ToUpper() == anom) return true;
+            if (message.ToUpper() == anomShort) return true;
+            if (message.ToUpper().StartsWith(anomShort + "<BR>")) return true;
+            if (message.ToUpper().Contains("<BR>" + anomShort + "<BR>")) return true;
+            if (message.ToUpper().EndsWith("<BR>" + anomShort)) return true;
+            return false;
+        }
     }
 
 }
