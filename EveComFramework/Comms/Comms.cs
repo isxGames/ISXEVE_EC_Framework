@@ -382,6 +382,7 @@ namespace EveComFramework.Comms
             if (message.ToUpper().StartsWith(anomShort + "<BR>")) return true;
             if (message.ToUpper().Contains("<BR>" + anomShort + "<BR>")) return true;
             if (message.ToUpper().EndsWith("<BR>" + anomShort)) return true;
+            if (message.ToUpper().Split(' ').Contains(anomShort)) return true;
             return false;
         }
     }
