@@ -66,9 +66,9 @@ namespace EveComFramework.GroupControl
         public ActiveMember Self = new ActiveMember();
         public ActiveGroup CurrentGroup;
         public ActiveMember Leader;
-        string[] GenericLSkills = { "Leadership", "Wing Command", "Fleet Command", "Warfare Link Specialist" };
-        string[] CombatLSkills = { "Information Warfare", "Armored Warfare", "Siege Warfare", "Skirmish Warfare" };
-        string[] MiningLSkills = { "Mining Director", "Mining Foreman" };
+        readonly string[] GenericLSkills = { "Leadership", "Wing Command", "Fleet Command", "Warfare Link Specialist" };
+        readonly string[] CombatLSkills = { "Information Warfare", "Armored Warfare", "Siege Warfare", "Skirmish Warfare" };
+        readonly string[] MiningLSkills = { "Mining Director", "Mining Foreman" };
         public bool LoadedSettings = false;
         #endregion
 
@@ -160,7 +160,10 @@ namespace EveComFramework.GroupControl
 
                 }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         #endregion
@@ -190,6 +193,45 @@ namespace EveComFramework.GroupControl
                 if (Leader == null) return "";
                 return Leader.CharacterName;
             }
+        }
+
+        public Entity LeaderEntity
+        {
+            get
+            {
+                if (Session.InSpace)
+                {
+                    return Entity.All.FirstOrDefault(a => a.Name == LeaderName);
+                }
+                return null;
+            }
+        }
+
+        public FleetMember LeaderFleetMember
+        {
+            get
+            {
+                if (Session.InFleet)
+                {
+                    return Fleet.Members.FirstOrDefault(a => a.Name == LeaderName);
+                }
+                return null;
+            }
+        }
+
+        public Pilot LeaderPilot
+        {
+            get { return Local.Pilots.FirstOrDefault(a => a.Name == LeaderName); }
+        }
+
+        public FleetMember FleetBoss
+        {
+            get { return Fleet.Members.FirstOrDefault(a => a.Boss); }
+        }
+
+        bool InFleet(String characterName)
+        {
+            return Fleet.Members.Any(a => a.Name == characterName);
         }
 
         public void Debug()
@@ -410,7 +452,7 @@ namespace EveComFramework.GroupControl
                 if (Fleet.Members.Count == 1)
                 {
                     //hand out invites!
-                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Active && b.Available));
+                    Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !InFleet(a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Active && b.Available));
                     if (ToInvite != null)
                     {
                         Log.Log("|oInviting fleet member");
@@ -433,7 +475,7 @@ namespace EveComFramework.GroupControl
                         if (newLeader.CharacterName != Self.CharacterName)
                         {
                             //it's not me check if i have to hand boss over
-                            if (Fleet.Members.FirstOrDefault(a => a.Boss).Name == Self.CharacterName)
+                            if (FleetBoss.Name == Self.CharacterName)
                             {
                                 //i'm the squad leader but no the leader!! better give boss to new leader
                                 Log.Log("|oPassing boss to new leader");
@@ -450,7 +492,7 @@ namespace EveComFramework.GroupControl
                     if (Leader.CharacterName == Self.CharacterName)
                     {
                         //am I da boss
-                        if (Fleet.Members.Any(a => a.Boss && a.Name == Me.Name))
+                        if (FleetBoss.Name == Me.Name)
                         {
                             //am i the squad leader?
                             FleetMember commander = Fleet.Wings[0].Members.FirstOrDefault(a => a.Role == FleetRole.SquadCommander);
@@ -472,7 +514,7 @@ namespace EveComFramework.GroupControl
                             }
 
                             //are there invites to do?
-                            Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
+                            Pilot ToInvite = Local.Pilots.FirstOrDefault(a => !InFleet(a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
                             if (ToInvite != null)
                             {
                                 Log.Log("|oInviting fleet member");
@@ -487,13 +529,14 @@ namespace EveComFramework.GroupControl
                             ActiveMember booster = CurrentGroup.ActiveMembers.FirstOrDefault(a => a.Role == Role.Booster);
                             if (booster != null)
                             {
-                                if (Fleet.Members.Any(a => a.Name == booster.CharacterName))
+                                FleetMember newBooster = Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName);
+                                if (newBooster != null)
                                 {
                                     if (fleetbooster == null)
                                     {
                                         Log.Log("|oSetting squad booster");
                                         Log.Log(" |-g{0}", booster.CharacterName);
-                                        Fleet.Members.FirstOrDefault(a => a.Name == booster.CharacterName).SetBooster(BoosterRole.SquadBooster);
+                                        newBooster.SetBooster(BoosterRole.SquadBooster);
                                         return false;
                                     }
                                     if (fleetbooster.Name != booster.CharacterName)
@@ -515,7 +558,7 @@ namespace EveComFramework.GroupControl
                 }
 
                 // Don't mark cycle finished if there are more pilots to invite
-                Pilot PendingInvite = Local.Pilots.FirstOrDefault(a => !Fleet.Members.Any(fleetmember => fleetmember.Name == a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
+                Pilot PendingInvite = Local.Pilots.FirstOrDefault(a => !InFleet(a.Name) && CurrentGroup.ActiveMembers.Any(b => b.CharacterName == a.Name && b.Available && b.Active));
                 if (PendingInvite != null) return false;
 
                 FinishedCycle = true;
