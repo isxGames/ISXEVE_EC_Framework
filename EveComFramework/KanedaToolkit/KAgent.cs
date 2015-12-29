@@ -27,5 +27,37 @@ namespace EveComFramework.KanedaToolkit
             return false;
         }
 
+        /// <summary>
+        /// Do we currently have a mission offer from this agent?
+        /// </summary>
+        /// <returns></returns>
+        public static bool HasMissionOffered(this Agent agent)
+        {
+            return HasMission(agent, AgentMission.MissionState.Offered);
+        }
+
+        /// <summary>
+        /// Do we currently have a mission accepted from this agent?
+        /// </summary>
+        /// <returns></returns>
+        public static bool HasMissionAccepted(this Agent agent)
+        {
+            return HasMission(agent, AgentMission.MissionState.Accepted);
+        }
+
+        private static bool HasMission(Agent agent, AgentMission.MissionState state)
+        {
+            return AgentMission.All.Any(a => a.AgentID == agent.ID && a.State == state);
+        }
+
+        /// <summary>
+        /// Get the agents current mission
+        /// </summary>
+        /// <returns></returns>
+        public static AgentMission GetMission(this Agent agent)
+        {
+            return AgentMission.All.FirstOrDefault(a => a.AgentID == agent.ID);
+        }
+
     }
 }

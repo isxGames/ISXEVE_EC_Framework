@@ -80,6 +80,15 @@ namespace EveComFramework.KanedaToolkit
             }
             return MissionToolkit.MissionObjectiveState._Unknown;
         }
+
+        /// <summary>
+        /// Get a missions agent
+        /// </summary>
+        /// <returns></returns>
+        public static Agent GetAgent(this AgentMission agentMission)
+        {
+            return Agent.Get(agentMission.AgentID);
+        }
     }
 
 }

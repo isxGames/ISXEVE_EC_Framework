@@ -735,6 +735,24 @@
             Check if the standing requirements for this agent are matched
             </summary>
         </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgent.HasMissionOffered(EveCom.Agent)">
+            <summary>
+            Do we currently have a mission offer from this agent?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgent.HasMissionAccepted(EveCom.Agent)">
+            <summary>
+            Do we currently have a mission accepted from this agent?
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgent.GetMission(EveCom.Agent)">
+            <summary>
+            Get the agents current mission
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.KEntity">
             <summary>
             extension methods for Entity
@@ -950,6 +968,12 @@
             Get Objective state for mission
             </summary>
             <param name="mission">AgentMission</param>
+            <returns></returns>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KAgentMission.GetAgent(EveCom.AgentMission)">
+            <summary>
+            Get a missions agent
+            </summary>
             <returns></returns>
         </member>
         <member name="T:EveComFramework.KanedaToolkit.MiningToolkit">
