@@ -745,6 +745,18 @@
             Is this entity warpable? (range, type)
             </summary>
         </member>
+        <member name="T:EveComFramework.KanedaToolkit.RouteToolkit">
+            <summary>
+            Route Toolkit
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.RouteToolkit.RouteSecurity(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            Get minimum security status along a route
+            </summary>
+            <param name="routeList">List of solarSystemIDs along the route</param>
+            <returns>minimum security status</returns>
+        </member>
         <member name="T:EveComFramework.KanedaToolkit.KSystemScanResult">
             <summary>
             extension methods for SystemScanResult

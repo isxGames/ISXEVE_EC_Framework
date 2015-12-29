@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="KanedaToolkit\KAgent.cs" />
     <Compile Include="KanedaToolkit\KEntity.cs" />
+    <Compile Include="KanedaToolkit\RouteToolkit.cs" />
     <Compile Include="KanedaToolkit\KSystemScanResult.cs" />
     <Compile Include="KanedaToolkit\KInventoryContainer.cs" />
     <Compile Include="KanedaToolkit\KModule.cs" />
