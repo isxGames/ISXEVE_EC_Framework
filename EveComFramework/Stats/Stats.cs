@@ -1,6 +1,11 @@
 #pragma warning disable 1591
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net;
+using System.Threading;
+using System.Windows.Forms;
 using EveCom;
 using EveComFramework.Core;
 
@@ -41,7 +46,7 @@ namespace EveComFramework.Stats
 
         #region Variables
         public StatsSettings Config = new StatsSettings();
-        Logger Log = new Logger("Stats");
+        readonly Logger Log = new Logger("Stats");
         private String StatsHost = "http://104.238.149.13/evecom-stats/";
         #endregion
 
@@ -66,6 +71,7 @@ namespace EveComFramework.Stats
             if (Config.optIn) // detailed data allowed
             {
                 data = data + String.Format(@"&solarSystemID={0}&characterID={1}&typeID={2}", Session.SolarSystemID, Me.CharID, MyShip.ToItem.TypeID);
+                QueueState(DatabaseFeeder);
             }
 
             try
@@ -77,6 +83,13 @@ namespace EveComFramework.Stats
                 Log.Log("|rNetwork connection failed");
             }
             return true;
+        }
+
+        private readonly List<long> CustomsOffices = new List<long>();
+        private readonly List<long> ReportedPOS = new List<long>();
+        private bool DatabaseFeeder(object[] Params)
+        {
+            return false;
         }
         #endregion
     }

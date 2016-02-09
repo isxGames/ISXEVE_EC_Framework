@@ -342,7 +342,7 @@ namespace EveComFramework.Comms
                 Entity AddNonFleet = NonFleetPlayers.TargetList.FirstOrDefault(a => !NonFleetMemberOnGrid.Contains(a));
                 if (AddNonFleet != null)
                 {
-                    ChatQueue.Enqueue("<Security> Non fleet member on grid: " + AddNonFleet.Name + " - http://evewho.com/pilot/" + AddNonFleet.Name.Replace(" ", "%20"));
+                    ChatQueue.Enqueue("<Security> Non fleet member on grid: " + AddNonFleet.Name + " - http://evewho.com/pilot/" + AddNonFleet.Name.Replace(" ", "%20") + " (" + AddNonFleet.Type + ")");
                     NonFleetMemberOnGrid.Add(AddNonFleet);
                 }
                 NonFleetMemberOnGrid = NonFleetPlayers.TargetList.Where(a => NonFleetMemberOnGrid.Contains(a)).ToList();

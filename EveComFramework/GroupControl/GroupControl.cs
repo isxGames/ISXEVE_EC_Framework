@@ -234,6 +234,21 @@ namespace EveComFramework.GroupControl
             return Fleet.Members.Any(a => a.Name == characterName);
         }
 
+        public bool IsGroupMember(String characterName)
+        {
+            return CurrentGroup.ActiveMembers.Any(a => a.CharacterName == characterName);
+        }
+
+        public bool IsGroupMember(long characterID)
+        {
+            Pilot localPilot = Local.Pilots.FirstOrDefault(a => a.ID == characterID);
+            if (localPilot != null)
+            {
+                return IsGroupMember(localPilot.Name);
+            }
+            return false;
+        }
+
         public void Debug()
         {
             UI.Debug debugWindow = new UI.Debug();
