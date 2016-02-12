@@ -102,6 +102,18 @@ namespace EveComFramework.Security.UI
                             i.Checked = true;
                         }
                         break;
+                    case "Cyno in system":
+                        if (Config.Triggers.Contains(FleeTrigger.CynoSystem))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
+                    case "Cyno on grid":
+                        if (Config.Triggers.Contains(FleeTrigger.CynoGrid))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
                 }
             }
 
@@ -221,6 +233,14 @@ namespace EveComFramework.Security.UI
                     ThresholdLabel.Text = String.Format("Flee if below {0} % Armor", Threshold.Value);
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
+                    break;
+                case "Cyno in system":
+                    StandingGroup.Hide();
+                    ThresholdGroup.Hide();
+                    break;
+                case "Cyno on grid":
+                    StandingGroup.Hide();
+                    ThresholdGroup.Hide();
                     break;
             }
             ActiveTrigger = Triggers.SelectedItems[0].Text;
@@ -350,8 +370,13 @@ namespace EveComFramework.Security.UI
                     case "Armor low":
                         build.Add(FleeTrigger.ArmorLow);
                         break;
+                    case "Cyno in system":
+                        build.Add(FleeTrigger.CynoSystem);
+                        break;
+                    case "Cyno on grid":
+                        build.Add(FleeTrigger.CynoGrid);
+                        break;
                 }
-                EVEFrame.Log(i.Text);
             }
             Config.Triggers = build;
             Config.Save();
