@@ -43,6 +43,12 @@ namespace EveComFramework.SessionControl
                 return false;
             }
 
+            PopupWindow droneCallgroupWindow = (PopupWindow) Window.All.FirstOrDefault(a => a.Type == Window.WindowType.PopUp && ((PopupWindow)a).Message.Contains("You are already performing a LaunchDrones call"));
+            if (droneCallgroupWindow != null)
+            {
+                droneCallgroupWindow.Close();
+                return false;
+            }
             return false;
         }
 
