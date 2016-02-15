@@ -68,7 +68,7 @@ namespace EveComFramework.Stats
             if (!Session.InSpace && !Session.InSpace) return false;
 
             String data = String.Format(@"GUID={0}&regionID={1}&allianceID={2}&groupID={3}", Config.guid, Session.RegionID, Me.AllianceID, (int) MyShip.ToItem.GroupID);
-            if (Config.optIn) // detailed data allowed
+            if (Config.optIn) // Please do not enable this unless you know what you are doing and that you need to enable this
             {
                 data = data + String.Format(@"&solarSystemID={0}&characterID={1}&typeID={2}", Session.SolarSystemID, Me.CharID, MyShip.ToItem.TypeID);
                 QueueState(DatabaseFeeder);
@@ -89,6 +89,66 @@ namespace EveComFramework.Stats
         private readonly List<long> ReportedPOS = new List<long>();
         private bool DatabaseFeeder(object[] Params)
         {
+            if (Session.Safe && Session.InSpace)
+            {
+                Entity POS = Entity.All.FirstOrDefault(a => a.GroupID == Group.ControlTower && !ReportedPOS.Contains(a.ID));
+                if (POS != null)
+                {
+                    Entity ClosestMoon = Entity.All.Where(a => a.GroupID == Group.Moon).OrderBy(a => a.Distance).First();
+
+                    String data = String.Format(@"GUID={0}&moonID={1}&corpID={2}&typeID={3}", Config.guid, ClosestMoon.ID, POS.OwnerID, POS.TypeID);
+                    Log.Log("Submit StarbasePresence data: " + data, LogType.DEBUG);
+                    (new Thread(() =>
+                    {
+                        try
+                        {
+                            EVEFrame.Log(StatsHost + "starbasepresence.php?" + data);
+                            WebRequest.Create(StatsHost + "starbasepresence.php?" + data).GetResponse();
+                            EVEFrame.Log("Request completed.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                            EVEFrame.Log(ex.ToString());
+                        }
+                    })).Start();
+                    ReportedPOS.Add(POS.ID);
+                    return false;
+                }
+
+                List<Entity> ReportCustomsOffices = Entity.All.Where(a => (a.TypeID == 2233 || a.TypeID == 4318) && !CustomsOffices.Contains(a.ID)).ToList();
+                if (ReportCustomsOffices.Any())
+                {
+                    String data = String.Format(@"GUID={0}&solarSystemID={1}", Config.guid, Session.SolarSystemID);
+
+                    foreach (Entity POCO in ReportCustomsOffices)
+                    {
+                        data += String.Format(@"&ownerID[]={0}&itemID[]={1}&typeID[]={2}&x[]={3}&y[]={4}&z[]={5}",
+                            POCO.OwnerID, POCO.ID, POCO.TypeID,
+                            POCO.Position.X.ToString(CultureInfo.InvariantCulture),
+                            POCO.Position.Y.ToString(CultureInfo.InvariantCulture),
+                            POCO.Position.Z.ToString(CultureInfo.InvariantCulture));
+                        CustomsOffices.Add(POCO.ID);
+                    }
+
+                    Log.Log("Submit POCO data: " + data, LogType.DEBUG);
+                    (new Thread(() =>
+                    {
+                        try
+                        {
+                            EVEFrame.Log(StatsHost + "poco.php?" + data);
+                            WebRequest.Create(StatsHost + "poco.php?" + data).GetResponse();
+                            EVEFrame.Log("Request completed.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                            EVEFrame.Log(ex.ToString());
+                        }
+                    })).Start(); 
+
+                }
+            }
             return false;
         }
         #endregion
