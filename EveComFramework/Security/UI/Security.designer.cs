@@ -37,6 +37,8 @@
             System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Capacitor low");
             System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Shield low");
             System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem("Cyno in system");
+            System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("Cyno on grid");
             System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
             System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
             System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
@@ -215,6 +217,8 @@
             listViewItem17.StateImageIndex = 0;
             listViewItem18.StateImageIndex = 0;
             listViewItem19.StateImageIndex = 0;
+            listViewItem23.StateImageIndex = 0;
+            listViewItem24.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem12,
             listViewItem13,
@@ -223,7 +227,9 @@
             listViewItem16,
             listViewItem17,
             listViewItem18,
-            listViewItem19});
+            listViewItem19,
+            listViewItem23,
+            listViewItem24});
             this.Triggers.Location = new System.Drawing.Point(3, 17);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";

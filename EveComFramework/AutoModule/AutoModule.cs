@@ -185,7 +185,7 @@ namespace EveComFramework.AutoModule
             if (Config.Cloaks)
             {
                 Module cloakingDevice = MyShip.Modules.FirstOrDefault(a => a.GroupID == Group.CloakingDevice && a.IsOnline);
-                if (cloakingDevice != null)
+                if (cloakingDevice != null && (cloakingDevice.TypeID == 11578 || MyShip.ToEntity.Mode != EntityMode.Warping))
                 {
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapCloaks && !Decloak && !Entity.All.Any(a => a.Distance < 2000 && a.ID != MyShip.ToEntity.ID))
                     {
@@ -366,7 +366,7 @@ namespace EveComFramework.AutoModule
 
             #region ECCMs
 
-            if (Config.ECCMs)
+            if (Config.ECCMs && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
                 List<Module> ECCM = MyShip.Modules.Where(a => a.GroupID == Group.ECCM && a.IsOnline).ToList();
                 if (ECCM.Any())
@@ -386,7 +386,7 @@ namespace EveComFramework.AutoModule
 
             #region ECMBursts
 
-            if (Config.ECMBursts)
+            if (Config.ECMBursts && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
                 List<Module> ECMBursts = MyShip.Modules.Where(a => a.GroupID == Group.ECMBurst && a.IsOnline).ToList();
                 if (ECMBursts.Any())

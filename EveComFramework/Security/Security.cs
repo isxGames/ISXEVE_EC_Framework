@@ -22,6 +22,8 @@ namespace EveComFramework.Security
         CapacitorLow,
         ShieldLow,
         ArmorLow,
+        CynoSystem,
+        CynoGrid,
         Forced,
         Panic,
         None
@@ -86,6 +88,7 @@ namespace EveComFramework.Security
         public string IntelToolURL = "http://inteltool/report/:solarSystem/";
         public string IntelToolPostData = "local=:pilotList";
         public string ISRelayTarget = "all other";
+        public int FleeDroneWait = 0;
     }
 
     #endregion
@@ -342,6 +345,12 @@ namespace EveComFramework.Security
                         case FleeTrigger.Pod:
                             if (Session.InSpace && MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
                             break;
+                        case FleeTrigger.CynoGrid:
+							if (Session.InSpace && Entity.All.Any(a => a.Distance < 8000000 && (a.TypeID == 21094 || a.TypeID == 28650))) return FleeTrigger.CynoGrid;
+                            break;
+                        case FleeTrigger.CynoSystem:
+							if (Session.InSpace && Entity.All.Any(a => a.TypeID == 21094 || a.TypeID == 28650)) return FleeTrigger.CynoSystem;
+                            break;
                         case FleeTrigger.NegativeStanding:
                             List<Pilot> NegativePilots = Local.Pilots.Where(a => a.DerivedStanding() < 0.0 && a.ID != Me.CharID).ToList();
                             if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
@@ -460,6 +469,14 @@ namespace EveComFramework.Security
                     Log.Log("|rIn a pod!");
                     Comms.ChatQueue.Enqueue("<Security> In a pod!");
                     return;
+                case FleeTrigger.CynoGrid:
+                    Log.Log("|rCyno on grid!");
+                    Comms.ChatQueue.Enqueue("<Security> Cyno on grid!");
+                    return;
+                case FleeTrigger.CynoSystem:
+                    Log.Log("|rCyno in system!");
+                    Comms.ChatQueue.Enqueue("<Security> Cyno in system!");
+                    return;
                 case FleeTrigger.NegativeStanding:
                     Log.Log("|r{0} is negative standing", Hostile.Name);
                     Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is negative standing");
@@ -521,54 +538,29 @@ namespace EveComFramework.Security
 
             switch (Reported)
             {
-                case FleeTrigger.Pod:
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.Pod);
-                    ReportTrigger(Reported);
-                    return true;
                 case FleeTrigger.NegativeStanding:
-                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \""+Config.ISRelayTarget+"\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.NegativeStanding);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    ReportTrigger(Reported);
-                    return true;
                 case FleeTrigger.NeutralStanding:
-                    if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.NeutralStanding);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    ReportTrigger(Reported);
-                    return true;
                 case FleeTrigger.Paranoid:
                     if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.Paranoid);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    ReportTrigger(Reported);
-                    return true;
+                    goto case FleeTrigger.Pod;
+                case FleeTrigger.CynoGrid:
+                case FleeTrigger.CynoSystem:
                 case FleeTrigger.Targeted:
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.Targeted);
-                    ReportTrigger(Reported);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    return true;
                 case FleeTrigger.CapacitorLow:
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.CapacitorLow);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    ReportTrigger(Reported);
-                    return true;
                 case FleeTrigger.ShieldLow:
-                    TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.ShieldLow);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
-                    ReportTrigger(Reported);
-                    return true;
                 case FleeTrigger.ArmorLow:
+                    if (Session.InSpace && Drone.AllInSpace.Any())
+                    {
+                        if (Config.FleeDroneWait > 0)
+                        {
+                            WaitFor(Config.FleeDroneWait, () => !Drone.AllInSpace.Any());
+                        }
+                        Drone.AllInSpace.ReturnToDroneBay();
+                    }
+                    goto case FleeTrigger.Pod;
+                case FleeTrigger.Pod:
                     TriggerAlert();
-                    QueueState(Flee, -1, FleeTrigger.ArmorLow);
-                    if (Session.InSpace && Drone.AllInSpace.Any()) Drone.AllInSpace.ReturnToDroneBay();
+                    QueueState(Flee, -1, Reported);
                     ReportTrigger(Reported);
                     return true;
             }
