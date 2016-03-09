@@ -100,7 +100,6 @@ namespace EveComFramework.SessionControl
         /// The character name to work with
         /// </summary>
         public string characterName { get; set; }
-        public DTWindowCleanup dtWin = DTWindowCleanup.Instance;
 
         DateTime Instanced = DateTime.Now;
         Random random = new Random();
