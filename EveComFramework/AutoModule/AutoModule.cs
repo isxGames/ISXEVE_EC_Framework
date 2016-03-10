@@ -250,11 +250,6 @@ namespace EveComFramework.AutoModule
             if (Config.ActiveHardeners)
             {
 
-                if (MyShip.Modules.Any(a => (a.GroupID == Group.DamageControl) && a.IsOnline))
-                {
-                    MyShip.Modules.Where(a => a.GroupID == Group.DamageControl && a.IsOnline && !a.IsActive && !a.IsActivating && !a.IsDeactivating).ForEach(m => m.Activate());
-                }
-
                 List<Module> shieldHardeners = MyShip.Modules.Where(a => a.GroupID == Group.ShieldHardener && a.IsOnline).ToList();
                 if (shieldHardeners.Any())
                 {
