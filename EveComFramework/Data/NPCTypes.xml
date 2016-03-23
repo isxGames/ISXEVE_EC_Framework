@@ -186,7 +186,7 @@
   <Type Name="Deadspace Rogue Drone Swarm">806</Type>
   <Type Name="Destructible Sentry Gun">383</Type>
   <!-- The Crimson Harvest -->
-  <Type Name="Blood Raider Event Battlecruiser">1452</Type>
+  <Type Name="Blood Raider Event Battleship">1452</Type>
   <Type Name="Blood Raider Event Frigate">1453</Type>
   <Type Name="Blood Raider Event Cruiser">1454</Type>
   <Type Name="Blood Raider Event Battlecruiser">1455</Type>
@@ -194,4 +194,9 @@
   <Type Name="Serpentis Event Frigate">1566</Type>
   <Type Name="Serpentis Event Cruiser">1567</Type>
   <Type Name="Serpentis Event Battlecruiser">1568</Type>
+  <!-- The Hunt -->
+  <Type Name="Guristas Event Frigate">1664</Type>
+  <Type Name="Guristas Event Cruiser">1665</Type>
+  <Type Name="Guristas Event Battlecruiser">1666</Type>
+  <Type Name="Guristas Event Battleship">1667</Type>
 </Targets>

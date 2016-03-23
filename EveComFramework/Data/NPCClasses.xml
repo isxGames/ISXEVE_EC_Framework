@@ -137,7 +137,7 @@
   <Group ID="1053" Class="Frigate" Group="Incursion Sansha's Nation Frigate" />
   <Group ID="1054" Class="Cruiser" Group="Incursion Sansha's Nation Cruiser" />
   <!-- The Crimson Harvest -->
-  <Group ID="1452" Class="Battleship" Group="Blood Raider Event Battlecruiser" />
+  <Group ID="1452" Class="BattleShip" Group="Blood Raider Event Battlecruiser" />
   <Group ID="1453" Class="Frigate" Group="Blood Raider Event Frigate" />
   <Group ID="1454" Class="Cruiser" Group="Blood Raider Event Cruiser" />
   <Group ID="1455" Class="BattleCruiser" Group="Blood Raider Event Battlecruiser" />
@@ -145,4 +145,9 @@
   <Group ID="1566" Class="Frigate" Group="Serpentis Event Frigate" />
   <Group ID="1567" Class="Cruiser" Group="Serpentis Event Cruiser" />
   <Group ID="1568" Class="BattleCruiser" Group="Serpentis Event Battlecruiser" />
+  <!-- The Hunt -->
+  <Group ID="1664" Class="Frigate" Group="Guristas Event Frigate" />
+  <Group ID="1665" Class="Cruiser" Group="Guristas Event Cruiser" />
+  <Group ID="1666" Class="BattleCruiser" Group="Guristas Event Battlecruiser" />
+  <Group ID="1667" Class="BattleShip" Group="Guristas Event Battleship" />
 </NPCClasses>
