@@ -376,13 +376,24 @@ namespace EveComFramework.Comms
 
         public static bool MatchMessageAnom(String message, String anom)
         {
+            if (message.StartsWith("^") || message.StartsWith("*"))
+            {
+                message = message.Substring(1);
+            }
+            if (message.EndsWith("^") || message.EndsWith("*"))
+            {
+                message = message.Substring(0, message.Length-1);
+            }
             String anomShort = anom.Substring(0, 3);
+            String anomDigit = anom.Substring(4, 3);
             if (message.ToUpper() == anom) return true;
             if (message.ToUpper() == anomShort) return true;
+            if (message.ToUpper() == anomDigit) return true;
             if (message.ToUpper().StartsWith(anomShort + "<BR>")) return true;
             if (message.ToUpper().Contains("<BR>" + anomShort + "<BR>")) return true;
             if (message.ToUpper().EndsWith("<BR>" + anomShort)) return true;
             if (message.ToUpper().Split(' ').All(a => a.Length == 3) && message.ToUpper().Split(' ').Contains(anomShort)) return true;
+            if (message.EndsWith(" " + anomDigit)) return true;
             return false;
         }
     }

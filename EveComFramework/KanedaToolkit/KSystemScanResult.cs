@@ -14,7 +14,11 @@ namespace EveComFramework.KanedaToolkit
         /// </summary>
         public static bool SiteTaken(this SystemScanResult systemScanResult)
         {
-            return Comms.Comms.Instance.LocalChat.Messages.Any(a => a.Time.AddHours(1) > Session.Now && Comms.Comms.MatchMessageAnom(a.Text, systemScanResult.ID) && a.SenderName != Me.Name);
+            return systemScanResult.SiteTaken(Comms.Comms.Instance.LocalChat);
+        }
+        public static bool SiteTaken(this SystemScanResult systemScanResult, ChatChannel chatChannel) 
+        {
+            return chatChannel.Messages.Any(a => a.Time.AddHours(1) > Session.Now && Comms.Comms.MatchMessageAnom(a.Text, systemScanResult.ID) && a.SenderName != Me.Name);
         }
 
     }
