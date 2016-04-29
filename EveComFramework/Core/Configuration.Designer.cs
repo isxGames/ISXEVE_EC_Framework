@@ -1349,8 +1349,6 @@
             "AFK Heavy",
             "Point Defense",
             "Sentry with Point Defense",
-            "Fighter",
-            "Fighter with Point Defense",
             "Agressive Scout",
             "Agressive Medium",
             "Agressive Heavy",
