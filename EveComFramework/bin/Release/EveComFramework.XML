@@ -805,6 +805,11 @@
             Is this module in a state where it can be deactivated?
             </summary>
         </member>
+        <member name="M:EveComFramework.KanedaToolkit.KModule.CapacitorNeed(EveCom.Module)">
+            <summary>
+            Capacitor required to enable the module
+            </summary>
+        </member>
         <member name="M:EveComFramework.KanedaToolkit.KModule.ValidTarget(EveCom.Module,EveCom.Entity)">
             <summary>
             Is this module valid for this target?

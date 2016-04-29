@@ -12,7 +12,7 @@ namespace EveComFramework.KanedaToolkit
         /// </summary>
         public static bool AllowsActivate(this Module module)
         {
-            return module.IsOnline && !module.IsActive && !module.IsActivating && !module.IsDeactivating;
+            return module.IsOnline && !module.IsActive && !module.IsActivating && !module.IsDeactivating && (module.CapacitorNeed() < MyShip.Capacitor);
         }
 
         /// <summary>
@@ -21,6 +21,14 @@ namespace EveComFramework.KanedaToolkit
         public static bool AllowsDeactivate(this Module module)
         {
             return module.IsOnline && module.IsActive && !module.IsDeactivating;
+        }
+
+        /// <summary>
+        /// Capacitor required to enable the module
+        /// </summary>
+        public static double CapacitorNeed(this Module module)
+        {
+            return (double) module["capacitorNeed"];
         }
 
         /// <summary>
@@ -54,11 +62,6 @@ namespace EveComFramework.KanedaToolkit
             // Tractor Beam
             if (module.GroupID == Group.TractorBeam && target.GroupID != Group.Wreck &&
                 target.GroupID != Group.CargoContainer) return false;
-
-            // Supercapitals are immune to ewar
-            if ((module.GroupID == Group.WarpScrambler || module.GroupID == Group.TargetPainter ||
-                 module.GroupID == Group.StasisWeb) &&
-                (target.GroupID == Group.Supercarrier || target.GroupID == Group.Titan)) return false;
 
             // return true if we don't know about module copatiblity
             return true;
