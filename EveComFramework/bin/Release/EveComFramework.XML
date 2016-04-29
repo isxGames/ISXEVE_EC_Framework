@@ -1238,58 +1238,5 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="F:EveComFramework.SkillTraining.SkillTrainingGlobalSettings.SkillQueues">
-            <summary>
-            Available skillqueues, keyed by the character name
-            </summary>
-        </member>
-        <member name="T:EveComFramework.SkillTraining.SkillTraining">
-             <summary>
-             SkillTraining will manage a skill queue for the active character, can act event based or full auto
-            
-             </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartWatch">
-            <summary>
-            State in passive event based mode, will fire an event when it thinks you should queue a skill
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.StartAuto">
-            <summary>
-            Handles everything and queues skills as it can.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.DoSkillQueue">
-            <summary>
-            Add stuff to the skill queue
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.SkillTraining.Configure">
-            <summary>
-            Opens up the configuration dialog, this is a MODAL dialog and will block the thread! Won't work when not logged in
-            </summary>
-        </member>
-        <member name="E:EveComFramework.SkillTraining.SkillTraining.SpaceInQueue">
-            <summary>
-            Fires when there is space in the skill queue
-            </summary>
-        </member>
-        <member name="F:EveComFramework.SkillTraining.UI.SkillTraining.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:EveComFramework.SkillTraining.UI.SkillTraining.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
     </members>
 </doc>

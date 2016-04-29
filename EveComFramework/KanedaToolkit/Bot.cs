@@ -11,7 +11,6 @@ namespace EveComFramework.KanedaToolkit
     {
 
         public Security.Security SecurityModule = null;
-        public SkillTraining.SkillTraining SkillTrainingModule = SkillTraining.SkillTraining.Instance;
         public WatchForFleetInvites FleetInviteWatchModule = WatchForFleetInvites.Instance;
 
         #region Status
@@ -46,13 +45,11 @@ namespace EveComFramework.KanedaToolkit
             if (Idle)
             {
                 QueueState(Initialize);
-                SkillTrainingModule.StartAuto();
             }
         }
 
         public void Stop()
         {
-            SkillTrainingModule.Stop();
         }
 
         public void Enabled(bool val)
