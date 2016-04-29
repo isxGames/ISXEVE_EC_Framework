@@ -7,6 +7,7 @@ using EveCom;
 using EveComFramework.Core;
 using EveComFramework.KanedaToolkit;
 using LavishScriptAPI;
+using EveComFramework.Data;
 
 namespace EveComFramework.Security
 {
@@ -22,6 +23,7 @@ namespace EveComFramework.Security
         CapacitorLow,
         ShieldLow,
         ArmorLow,
+        CapitalSpawn,
         CynoSystem,
         CynoGrid,
         Forced,
@@ -51,6 +53,7 @@ namespace EveComFramework.Security
             FleeTrigger.NegativeStanding,
             FleeTrigger.NeutralStanding,
             FleeTrigger.Targeted,
+            FleeTrigger.CapitalSpawn,
             FleeTrigger.CapacitorLow,
             FleeTrigger.ShieldLow,
             FleeTrigger.ArmorLow,
@@ -345,6 +348,9 @@ namespace EveComFramework.Security
                         case FleeTrigger.Pod:
                             if (Session.InSpace && MyShip.ToItem.GroupID == Group.Capsule) return FleeTrigger.Pod;
                             break;
+                        case FleeTrigger.CapitalSpawn:
+                            if (Entity.All.Any(a => NPCClasses.All.Any(b => b.Key == a.GroupID && b.Value == "Capital"))) return FleeTrigger.CapitalSpawn;
+                            break;
                         case FleeTrigger.CynoGrid:
 							if (Session.InSpace && Entity.All.Any(a => a.Distance < 8000000 && (a.TypeID == 21094 || a.TypeID == 28650))) return FleeTrigger.CynoGrid;
                             break;
@@ -469,6 +475,10 @@ namespace EveComFramework.Security
                     Log.Log("|rIn a pod!");
                     Comms.ChatQueue.Enqueue("<Security> In a pod!");
                     return;
+                case FleeTrigger.CapitalSpawn:
+                    Log.Log("|rCapital Spawn on grid!");
+                    Comms.ChatQueue.Enqueue("<Security> Capital Spawn on grid!");
+                    return;
                 case FleeTrigger.CynoGrid:
                     Log.Log("|rCyno on grid!");
                     Comms.ChatQueue.Enqueue("<Security> Cyno on grid!");
@@ -543,6 +553,7 @@ namespace EveComFramework.Security
                 case FleeTrigger.Paranoid:
                     if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     goto case FleeTrigger.Pod;
+                case FleeTrigger.CapitalSpawn:
                 case FleeTrigger.CynoGrid:
                 case FleeTrigger.CynoSystem:
                 case FleeTrigger.Targeted:

@@ -150,4 +150,17 @@
   <Group ID="1665" Class="Cruiser" Group="Guristas Event Cruiser" />
   <Group ID="1666" Class="BattleCruiser" Group="Guristas Event Battlecruiser" />
   <Group ID="1667" Class="BattleShip" Group="Guristas Event Battleship" />
+  <!-- EVE: Citadel Capital Spawns -->
+  <Group ID="1681" Class="Capital" Group="Asteroid Angel Cartel Dreadnought" />
+  <Group ID="1682" Class="Capital" Group="Asteroid Angel Cartel Titan" />
+  <Group ID="1683" Class="Capital" Group="Asteroid Blood Raider Dreadnought" />
+  <Group ID="1684" Class="Capital" Group="Asteroid Blood Raider Titan" />
+  <Group ID="1685" Class="Capital" Group="Asteroid Guristas Dreadnought" />
+  <Group ID="1686" Class="Capital" Group="Asteroid Guristas Titan" />
+  <Group ID="1687" Class="Capital" Group="Asteroid Sansha's Nation Dreadnought" />
+  <Group ID="1688" Class="Capital" Group="Asteroid Sansha's Nation Supercarrier" />
+  <Group ID="1689" Class="Capital" Group="Asteroid Serpentis Dreadnought" />
+  <Group ID="1690" Class="Capital" Group="Asteroid Serpentis Titan" />
+  <Group ID="1691" Class="Capital" Group="Asteroid Rogue Drone Carrier" />
+  <Group ID="1692" Class="Capital" Group="Asteroid Rogue Drone Supercarrier" />
 </NPCClasses>

@@ -78,17 +78,6 @@
 	<Drone Name="Caldari Navy Warden" ID="31878" Race="1" Volume="25" Bandwidth="25" Group="Sentry Drones" />
 	<Drone Name="Federation Navy Garde" ID="31886" Race="8" Volume="25" Bandwidth="25" Group="Sentry Drones" />
 	<Drone Name="Republic Fleet Bouncer" ID="31894" Race="2" Volume="25" Bandwidth="25" Group="Sentry Drones" />
-	<!-- Fighter Drone -->
-	<Drone Name="Templar" ID="23055" Race="4" Volume="5000" Bandwidth="25" Group="Fighters" />
-	<Drone Name="Dragonfly" ID="23057" Race="1" Volume="5000" Bandwidth="25" Group="Fighters" />
-	<Drone Name="Firbolg" ID="23059" Race="8" Volume="5000" Bandwidth="25" Group="Fighters" />
-	<Drone Name="Einherji" ID="23061" Race="2" Volume="5000" Bandwidth="25" Group="Fighters" />
-	<!-- Fighter Bomber -->
-	<Drone Name="Shadow" ID="2948" Race="1" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
-	<Drone Name="Cyclops" ID="32325" Race="8" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
-	<Drone Name="Malleus" ID="32340" Race="4" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
-	<Drone Name="Tyrfing" ID="32342" Race="2" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
-	<Drone Name="Mantis" ID="32344" Race="1" Volume="10000" Bandwidth="500" Group="Fighter Bomber" />
 	<!-- Mining Drones -->
 	<Drone Name="Civilian Mining Drone" ID="1202" Race="" Volume="5" Bandwidth="5" Group="Mining Drones" />
 	<Drone Name="Harvester Mining Drone" ID="3218" Race="" Volume="10" Bandwidth="10" Group="Mining Drones" />

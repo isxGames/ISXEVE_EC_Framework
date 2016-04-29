@@ -37,6 +37,7 @@
             System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Capacitor low");
             System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Shield low");
             System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Armor low");
+            System.Windows.Forms.ListViewItem listViewItem25 = new System.Windows.Forms.ListViewItem("Capital Spawn");
             System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem("Cyno in system");
             System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("Cyno on grid");
             System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
@@ -219,6 +220,7 @@
             listViewItem19.StateImageIndex = 0;
             listViewItem23.StateImageIndex = 0;
             listViewItem24.StateImageIndex = 0;
+            listViewItem25.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem12,
             listViewItem13,
@@ -229,7 +231,8 @@
             listViewItem18,
             listViewItem19,
             listViewItem23,
-            listViewItem24});
+            listViewItem24,
+            listViewItem25});
             this.Triggers.Location = new System.Drawing.Point(3, 17);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";

@@ -199,4 +199,17 @@
   <Type Name="Guristas Event Cruiser">1665</Type>
   <Type Name="Guristas Event Battlecruiser">1666</Type>
   <Type Name="Guristas Event Battleship">1667</Type>
+  <!-- EVE: Citadel Capital Spawns -->
+  <Type Name="Asteroid Angel Cartel Dreadnought">1681</Type>
+  <Type Name="Asteroid Angel Cartel Titan">1682</Type>
+  <Type Name="Asteroid Blood Raider Dreadnought">1683</Type>
+  <Type Name="Asteroid Blood Raider Titan">1684</Type>
+  <Type Name="Asteroid Guristas Dreadnought">1685</Type>
+  <Type Name="Asteroid Guristas Titan">1686</Type>
+  <Type Name="Asteroid Sansha's Nation Dreadnought">1687</Type>
+  <Type Name="Asteroid Sansha's Nation Supercarrier">1688</Type>
+  <Type Name="Asteroid Serpentis Dreadnought">1689</Type>
+  <Type Name="Asteroid Serpentis Titan">1690</Type>
+  <Type Name="Asteroid Rogue Drone Carrier">1691</Type>
+  <Type Name="Asteroid Rogue Drone Supercarrier">1692</Type>
 </Targets>

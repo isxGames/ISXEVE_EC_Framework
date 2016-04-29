@@ -102,6 +102,12 @@ namespace EveComFramework.Security.UI
                             i.Checked = true;
                         }
                         break;
+                    case "Capital Spawn":
+                        if (Config.Triggers.Contains(FleeTrigger.CapitalSpawn))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
                     case "Cyno in system":
                         if (Config.Triggers.Contains(FleeTrigger.CynoSystem))
                         {
@@ -233,6 +239,10 @@ namespace EveComFramework.Security.UI
                     ThresholdLabel.Text = String.Format("Flee if below {0} % Armor", Threshold.Value);
                     StandingGroup.Hide();
                     ThresholdGroup.Show();
+                    break;
+                case "Capital Spawn":
+                    StandingGroup.Hide();
+                    ThresholdGroup.Hide();
                     break;
                 case "Cyno in system":
                     StandingGroup.Hide();
@@ -369,6 +379,9 @@ namespace EveComFramework.Security.UI
                         break;
                     case "Armor low":
                         build.Add(FleeTrigger.ArmorLow);
+                        break;
+                    case "Capital Spawn":
+                        build.Add(FleeTrigger.CapitalSpawn);
                         break;
                     case "Cyno in system":
                         build.Add(FleeTrigger.CynoSystem);
