@@ -236,7 +236,7 @@
             this.Triggers.Location = new System.Drawing.Point(3, 17);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
-            this.Triggers.Scrollable = false;
+            this.Triggers.Scrollable = true;
             this.Triggers.Size = new System.Drawing.Size(324, 164);
             this.Triggers.TabIndex = 3;
             this.Triggers.UseCompatibleStateImageBehavior = false;
