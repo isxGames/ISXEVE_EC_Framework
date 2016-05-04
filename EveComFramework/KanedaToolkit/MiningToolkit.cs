@@ -258,6 +258,13 @@ namespace EveComFramework.KanedaToolkit
             }).Value;
         }
 
+        public static int MiningRange()
+        {
+            int MiningRange = (int)Math.Floor(MyShip.Modules.Where(mod => mod.GroupID == Group.MiningLaser || mod.GroupID == Group.StripMiner || mod.GroupID == Group.FrequencyMiningLaser || mod.GroupID == Group.SurveyScanner).Min(a => a.MaxRange));
+            if (MiningRange > MyShip.MaxTargetRange) MiningRange = (int)Math.Floor(MyShip.MaxTargetRange);
+            return MiningRange - 10;
+        }
+
         #endregion
     }
     
