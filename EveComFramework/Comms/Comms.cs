@@ -93,6 +93,21 @@ namespace EveComFramework.Comms
             }
         }
 
+        public ChatChannel FleetChat
+        {
+            get
+            {
+                return ChatChannel.All.FirstOrDefault(a => a.ID.Contains("fleetid"));
+            }
+        }
+
+        public ChatChannel ByName(String name)
+        {
+            if(name == "Local") return LocalChat;
+            if(name == "Fleet") return FleetChat;
+            return ChatChannel.All.FirstOrDefault(a => a.Name == name && a.CanSpeak);
+        }
+
         #endregion
 
         #region Actions
