@@ -1,4 +1,5 @@
 ﻿#pragma warning disable 1591
+using System.Linq;
 using EveCom;
 
 namespace EveComFramework.KanedaToolkit
@@ -14,6 +15,7 @@ namespace EveComFramework.KanedaToolkit
         public static bool Warpable(this Entity entity)
         {
             if (entity.SurfaceDistance <= 150000) return false;
+            if (Session.InFleet && entity.IsPC && Fleet.Members.Any(a => a.Name == entity.Name)) return true;
             if (entity.CategoryID == Category.Asteroid || entity.CategoryID == Category.Structure ||
                 entity.CategoryID == Category.Station || entity.GroupID == Group.CargoContainer ||
                 entity.GroupID == Group.Wreck) return true;
