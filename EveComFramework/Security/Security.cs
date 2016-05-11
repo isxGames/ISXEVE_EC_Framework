@@ -28,6 +28,7 @@ namespace EveComFramework.Security
         CynoGrid,
         Forced,
         Panic,
+        WhitelistedCharacterOnGrid,
         None
     }
 
@@ -156,6 +157,7 @@ namespace EveComFramework.Security
         Exceptions Exceptions = Exceptions.Instance;
 
         public List<string> Triggers = new List<string>();
+        public bool StopUntilManualClearance = false;
 
         #endregion
 
@@ -284,6 +286,7 @@ namespace EveComFramework.Security
         public void ClearPanic()
         {
             _isPanic = false;
+            StopUntilManualClearance = false;
         }
 
         int ScramblingEntitiesUpdate(string[] args)
@@ -356,6 +359,9 @@ namespace EveComFramework.Security
                             break;
                         case FleeTrigger.CynoSystem:
 							if (Session.InSpace && Entity.All.Any(a => a.TypeID == 21094 || a.TypeID == 28650)) return FleeTrigger.CynoSystem;
+                            break;
+                        case FleeTrigger.WhitelistedCharacterOnGrid:
+                            if (Entity.All.Any(ent => ent.IsPC && Config.WhiteList.Contains(ent.Name))) return FleeTrigger.WhitelistedCharacterOnGrid;
                             break;
                         case FleeTrigger.NegativeStanding:
                             List<Pilot> NegativePilots = Local.Pilots.Where(a => a.DerivedStanding() < 0.0 && a.ID != Me.CharID).ToList();
@@ -487,6 +493,11 @@ namespace EveComFramework.Security
                     Log.Log("|rCyno in system!");
                     Comms.ChatQueue.Enqueue("<Security> Cyno in system!");
                     return;
+                case FleeTrigger.WhitelistedCharacterOnGrid:
+                    Log.Log("|rWhitelisted character on grid!");
+                    Comms.ChatQueue.Enqueue("<Security> Whitelisted character on grid");
+                    StopUntilManualClearance = true;
+                    return;
                 case FleeTrigger.NegativeStanding:
                     Log.Log("|r{0} is negative standing", Hostile.Name);
                     Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is negative standing");
@@ -551,6 +562,7 @@ namespace EveComFramework.Security
                 case FleeTrigger.NegativeStanding:
                 case FleeTrigger.NeutralStanding:
                 case FleeTrigger.Paranoid:
+                case FleeTrigger.WhitelistedCharacterOnGrid:
                     if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     goto case FleeTrigger.Pod;
                 case FleeTrigger.CapitalSpawn:
@@ -583,7 +595,7 @@ namespace EveComFramework.Security
 
         bool CheckClear(object[] Params)
         {
-            if (_isPanic) return false;
+            if (_isPanic || StopUntilManualClearance) return false;
             FleeTrigger Trigger = (FleeTrigger)Params[0];
             int FleeWait = (Trigger == FleeTrigger.ArmorLow || Trigger == FleeTrigger.CapacitorLow || Trigger == FleeTrigger.ShieldLow || Trigger == FleeTrigger.Forced || Trigger == FleeTrigger.Panic) ? 0 : Config.FleeWait;
             AutoModule.AutoModule.Instance.Decloak = false;

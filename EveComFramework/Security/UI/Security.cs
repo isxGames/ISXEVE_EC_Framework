@@ -120,6 +120,12 @@ namespace EveComFramework.Security.UI
                             i.Checked = true;
                         }
                         break;
+                    case "Whitelisted Character On Grid":
+                        if (Config.Triggers.Contains(FleeTrigger.WhitelistedCharacterOnGrid))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
                 }
             }
 
@@ -388,6 +394,9 @@ namespace EveComFramework.Security.UI
                         break;
                     case "Cyno on grid":
                         build.Add(FleeTrigger.CynoGrid);
+                        break;
+                    case "Whitelisted Character On Grid":
+                        build.Add(FleeTrigger.WhitelistedCharacterOnGrid);
                         break;
                 }
             }

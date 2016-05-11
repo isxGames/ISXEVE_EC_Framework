@@ -53,7 +53,7 @@ namespace EveComFramework.KanedaToolkit
                     return MissionToolkit.MissionObjectiveState.MissionFetchTarget;
                 case "AllObjectivesComplete":
                     return MissionToolkit.MissionObjectiveState.AllObjectivesComplete;
-                case "TrnsportItemsPresent":
+                case "TransportItemsPresent":
                     return MissionToolkit.MissionObjectiveState.TransportItemsPresent;
                 case "TransportItemsMissing":
                     return MissionToolkit.MissionObjectiveState.TransportItemsMissing;
