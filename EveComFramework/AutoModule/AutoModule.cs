@@ -323,7 +323,7 @@ namespace EveComFramework.AutoModule
 
             if (Config.TrackingComputers)
             {
-                List<Module> trackingComputers = MyShip.Modules.Where(a => (a.GroupID == Group.TrackingComputer || (int)a.GroupID == 1396) && a.IsOnline).ToList();
+                List<Module> trackingComputers = MyShip.Modules.Where(a => (a.GroupID == Group.TrackingComputer || a.GroupID == Group.MissileGuidanceComputer) && a.IsOnline).ToList();
                 if (trackingComputers.Any())
                 {
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapTrackingComputers)
@@ -383,7 +383,7 @@ namespace EveComFramework.AutoModule
 
             if (Config.ECMBursts && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
-                List<Module> ECMBursts = MyShip.Modules.Where(a => a.GroupID == Group.ECMBurst && a.IsOnline).ToList();
+                List<Module> ECMBursts = MyShip.Modules.Where(a => a.GroupID == Group.BurstJammer && a.IsOnline).ToList();
                 if (ECMBursts.Any())
                 {
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapECMBursts)
