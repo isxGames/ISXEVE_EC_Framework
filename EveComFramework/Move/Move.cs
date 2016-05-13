@@ -215,7 +215,7 @@ namespace EveComFramework.Move
                 }
                 QueueState(AutoPilot, 2000);
             }
-            if (Bookmark.GroupID == Group.Station && Bookmark.LocationID == Session.SolarSystemID)
+            if (Bookmark.Dockable() && Bookmark.LocationID == Session.SolarSystemID)
             {
                 QueueState(Dock, -1, Entity.All.FirstOrDefault(a => a.ID == Bookmark.ItemID));
             }
@@ -309,7 +309,7 @@ namespace EveComFramework.Move
             Entity Entity = (Entity)Params[0];
             int Distance = (int)Params[1];
 
-            if (Entity.GroupID == Group.Station)
+            if (Entity.Dockable())
             {
                 QueueState(Dock, -1, Entity);
             }
