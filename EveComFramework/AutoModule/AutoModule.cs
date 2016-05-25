@@ -399,11 +399,11 @@ namespace EveComFramework.AutoModule
 
             #endregion
 
-            #region Drone Control Units
+            #region Networked Sensor Array
 
             if (Config.DroneControlUnits)
             {
-                List<Module> droneControlUnits = MyShip.Modules.Where(a => a.GroupID == Group.DroneControlUnit && a.IsOnline).ToList();
+                List<Module> droneControlUnits = MyShip.Modules.Where(a => (int) a.GroupID == 1706 && a.IsOnline).ToList();
                 if (droneControlUnits.Any())
                 {
                     if ((MyShip.Capacitor / MyShip.MaxCapacitor * 100) > Config.CapDroneControlUnits)

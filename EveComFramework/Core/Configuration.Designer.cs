@@ -556,7 +556,7 @@
             this.checkDroneControlUnits.Name = "checkDroneControlUnits";
             this.checkDroneControlUnits.Size = new System.Drawing.Size(120, 21);
             this.checkDroneControlUnits.TabIndex = 24;
-            this.checkDroneControlUnits.Text = "Drone Control Units";
+            this.checkDroneControlUnits.Text = "Networked Sensor Array";
             this.checkDroneControlUnits.UseVisualStyleBackColor = true;
             // 
             // checkPropulsionModules
