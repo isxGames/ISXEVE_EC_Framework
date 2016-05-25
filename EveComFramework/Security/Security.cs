@@ -29,6 +29,7 @@ namespace EveComFramework.Security
         Forced,
         Panic,
         WhitelistedCharacterOnGrid,
+        BubbleOnPOSGrid,
         None
     }
 
@@ -363,6 +364,9 @@ namespace EveComFramework.Security
                         case FleeTrigger.WhitelistedCharacterOnGrid:
                             if (Entity.All.Any(ent => ent.IsPC && Config.WhiteList.Contains(ent.Name))) return FleeTrigger.WhitelistedCharacterOnGrid;
                             break;
+                        case FleeTrigger.BubbleOnPOSGrid:
+                            if (Entity.All.Any(a => a.GroupID == Group.ForceField && a.SurfaceDistance < 100000) && Entity.All.Any(a => a.GroupID == Group.MobileWarpDisruptor)) return FleeTrigger.BubbleOnPOSGrid;
+                            break;
                         case FleeTrigger.NegativeStanding:
                             List<Pilot> NegativePilots = Local.Pilots.Where(a => a.DerivedStanding() < 0.0 && a.ID != Me.CharID).ToList();
                             if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
@@ -498,6 +502,11 @@ namespace EveComFramework.Security
                     Comms.ChatQueue.Enqueue("<Security> Whitelisted character on grid");
                     StopUntilManualClearance = true;
                     return;
+                case FleeTrigger.BubbleOnPOSGrid:
+                    Log.Log("|rBubble On POS Grid");
+                    Comms.ChatQueue.Enqueue("<Security> Bubble On POS Grid");
+                    StopUntilManualClearance = true;
+                    return;
                 case FleeTrigger.NegativeStanding:
                     Log.Log("|r{0} is negative standing", Hostile.Name);
                     Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is negative standing");
@@ -563,6 +572,7 @@ namespace EveComFramework.Security
                 case FleeTrigger.NeutralStanding:
                 case FleeTrigger.Paranoid:
                 case FleeTrigger.WhitelistedCharacterOnGrid:
+                case FleeTrigger.BubbleOnPOSGrid:
                     if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     goto case FleeTrigger.Pod;
                 case FleeTrigger.CapitalSpawn:

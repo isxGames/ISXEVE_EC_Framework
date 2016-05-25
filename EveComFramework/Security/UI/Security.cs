@@ -126,6 +126,12 @@ namespace EveComFramework.Security.UI
                             i.Checked = true;
                         }
                         break;
+                    case "Bubble On POS Grid":
+                        if (Config.Triggers.Contains(FleeTrigger.BubbleOnPOSGrid))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
                 }
             }
 
@@ -397,6 +403,9 @@ namespace EveComFramework.Security.UI
                         break;
                     case "Whitelisted Character On Grid":
                         build.Add(FleeTrigger.WhitelistedCharacterOnGrid);
+                        break;
+                    case "Bubble On POS Grid":
+                        build.Add(FleeTrigger.BubbleOnPOSGrid);
                         break;
                 }
             }

@@ -41,6 +41,7 @@
             System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem("Cyno in system");
             System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("Cyno on grid");
             System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem("Whitelisted Character On Grid");
+            System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem("Bubble On POS Grid");
             System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
             System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
             System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
@@ -223,6 +224,7 @@
             listViewItem24.StateImageIndex = 0;
             listViewItem25.StateImageIndex = 0;
             listViewItem26.StateImageIndex = 0;
+            listViewItem27.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem12,
             listViewItem13,
@@ -235,7 +237,8 @@
             listViewItem23,
             listViewItem24,
             listViewItem25,
-            listViewItem26});
+            listViewItem26,
+            listViewItem27});
             this.Triggers.Location = new System.Drawing.Point(3, 17);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
