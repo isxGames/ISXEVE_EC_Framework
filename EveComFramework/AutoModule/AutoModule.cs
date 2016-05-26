@@ -401,7 +401,7 @@ namespace EveComFramework.AutoModule
 
             #region Networked Sensor Array
 
-            if (Config.DroneControlUnits)
+            if (Config.DroneControlUnits && MyShip.ToEntity.Mode != EntityMode.Warping)
             {
                 List<Module> droneControlUnits = MyShip.Modules.Where(a => (int) a.GroupID == 1706 && a.IsOnline).ToList();
                 if (droneControlUnits.Any())
