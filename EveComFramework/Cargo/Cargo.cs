@@ -287,11 +287,13 @@ namespace EveComFramework.Cargo
         {
             if (!CurrentCargoAction.Target().IsPrimed)
             {
+                Log.Log("Calling Prime() on Target", LogType.DEBUG);
                 CurrentCargoAction.Target().Prime();
                 return false;
             }
             if (!CurrentCargoAction.Source().IsPrimed)
             {
+                Log.Log("Calling Prime() on Source", LogType.DEBUG);
                 CurrentCargoAction.Source().Prime();
                 return false;
             }
