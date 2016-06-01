@@ -132,6 +132,31 @@ namespace EveComFramework.Security.UI
                             i.Checked = true;
                         }
                         break;
+                    case "Criminal Pilot in system":
+                        if (Config.Triggers.Contains(FleeTrigger.CriminalLocal))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
+                    case "Criminal Pilot on grid":
+                        if (Config.Triggers.Contains(FleeTrigger.CriminalGrid))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
+                    case "Suspect Pilot in system":
+                        if (Config.Triggers.Contains(FleeTrigger.SuspectLocal))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
+                    case "Suspect Pilot on grid":
+                        if (Config.Triggers.Contains(FleeTrigger.SuspectGrid))
+                        {
+                            i.Checked = true;
+                        }
+                        break;
+
                 }
             }
 
@@ -406,6 +431,18 @@ namespace EveComFramework.Security.UI
                         break;
                     case "Bubble On POS Grid":
                         build.Add(FleeTrigger.BubbleOnPOSGrid);
+                        break;
+                    case "Criminal Pilot in system":
+                        build.Add(FleeTrigger.CriminalLocal);
+                        break;
+                    case "Criminal Pilot on grid":
+                        build.Add(FleeTrigger.CriminalGrid);
+                        break;
+                    case "Suspect Pilot in system":
+                        build.Add(FleeTrigger.SuspectLocal);
+                        break;
+                    case "Suspect Pilot on grid":
+                        build.Add(FleeTrigger.SuspectGrid);
                         break;
                 }
             }

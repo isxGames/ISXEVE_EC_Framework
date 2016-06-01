@@ -30,6 +30,10 @@ namespace EveComFramework.Security
         Panic,
         WhitelistedCharacterOnGrid,
         BubbleOnPOSGrid,
+        SuspectLocal,
+        SuspectGrid,
+        CriminalLocal,
+        CriminalGrid,
         None
     }
 
@@ -367,6 +371,18 @@ namespace EveComFramework.Security
                         case FleeTrigger.BubbleOnPOSGrid:
                             if (Entity.All.Any(a => a.GroupID == Group.ForceField && a.SurfaceDistance < 100000) && Entity.All.Any(a => a.GroupID == Group.MobileWarpDisruptor)) return FleeTrigger.BubbleOnPOSGrid;
                             break;
+                        case FleeTrigger.SuspectLocal:
+                            if (Local.Pilots.Any(a => a.IsSuspect)) return FleeTrigger.SuspectLocal;
+                            break;
+                        case FleeTrigger.SuspectGrid:
+                            if (Entity.All.Any(a => Local.Pilots.Any(b => b.IsSuspect && b.ID == a.Pilot.ID))) return FleeTrigger.SuspectGrid;
+                            break;
+                        case FleeTrigger.CriminalLocal:
+                            if (Local.Pilots.Any(a => a.IsCriminal)) return FleeTrigger.CriminalLocal;
+                            break;
+                        case FleeTrigger.CriminalGrid:
+                            if (Entity.All.Any(a => Local.Pilots.Any(b => b.IsCriminal && b.ID == a.Pilot.ID))) return FleeTrigger.CriminalGrid;
+                            break;
                         case FleeTrigger.NegativeStanding:
                             List<Pilot> NegativePilots = Local.Pilots.Where(a => a.DerivedStanding() < 0.0 && a.ID != Me.CharID).ToList();
                             if (!Config.NegativeAlliance) { NegativePilots.RemoveAll(a => a.AllianceID == Me.AllianceID); }
@@ -507,6 +523,22 @@ namespace EveComFramework.Security
                     Comms.ChatQueue.Enqueue("<Security> Bubble On POS Grid");
                     StopUntilManualClearance = true;
                     return;
+                case FleeTrigger.SuspectLocal:
+                    Log.Log("|rSuspect pilot in system");
+                    Comms.ChatQueue.Enqueue("Suspect pilot in system");
+                    return;
+                case FleeTrigger.SuspectGrid:
+                    Log.Log("|rSuspect pilot on grid");
+                    Comms.ChatQueue.Enqueue("Suspect pilot on grid");
+                    return;
+                case FleeTrigger.CriminalLocal:
+                    Log.Log("|rCriminal pilot in system");
+                    Comms.ChatQueue.Enqueue("Criminal pilot in system");
+                    return;
+                case FleeTrigger.CriminalGrid:
+                    Log.Log("|rCriminal pilot on grid");
+                    Comms.ChatQueue.Enqueue("Criminal pilot on grid");
+                    return;
                 case FleeTrigger.NegativeStanding:
                     Log.Log("|r{0} is negative standing", Hostile.Name);
                     Comms.ChatQueue.Enqueue("<Security> " + Hostile.Name + " is negative standing");
@@ -573,6 +605,10 @@ namespace EveComFramework.Security
                 case FleeTrigger.Paranoid:
                 case FleeTrigger.WhitelistedCharacterOnGrid:
                 case FleeTrigger.BubbleOnPOSGrid:
+                case FleeTrigger.CriminalLocal:
+                case FleeTrigger.CriminalGrid:
+                case FleeTrigger.SuspectLocal:
+                case FleeTrigger.SuspectGrid:
                     if (Config.BroadcastTrigger) LavishScript.ExecuteCommand("relay \"" + Config.ISRelayTarget + "\" -noredirect SecurityBroadcastTrigger " + Me.CharID + " " + Session.SolarSystemID);
                     goto case FleeTrigger.Pod;
                 case FleeTrigger.CapitalSpawn:

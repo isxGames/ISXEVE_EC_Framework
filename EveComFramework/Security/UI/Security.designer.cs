@@ -42,6 +42,10 @@
             System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem("Cyno on grid");
             System.Windows.Forms.ListViewItem listViewItem26 = new System.Windows.Forms.ListViewItem("Whitelisted Character On Grid");
             System.Windows.Forms.ListViewItem listViewItem27 = new System.Windows.Forms.ListViewItem("Bubble On POS Grid");
+            System.Windows.Forms.ListViewItem listViewItem28 = new System.Windows.Forms.ListViewItem("Criminal Pilot in system");
+            System.Windows.Forms.ListViewItem listViewItem29 = new System.Windows.Forms.ListViewItem("Criminal Pilot on grid");
+            System.Windows.Forms.ListViewItem listViewItem30 = new System.Windows.Forms.ListViewItem("Suspect Pilot in system");
+            System.Windows.Forms.ListViewItem listViewItem31 = new System.Windows.Forms.ListViewItem("Suspect Pilot on grid");
             System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Flee to closest station");
             System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem("Flee to secure bookmark");
             System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem("Cycle safe bookmarks");
@@ -225,6 +229,10 @@
             listViewItem25.StateImageIndex = 0;
             listViewItem26.StateImageIndex = 0;
             listViewItem27.StateImageIndex = 0;
+            listViewItem28.StateImageIndex = 0;
+            listViewItem29.StateImageIndex = 0;
+            listViewItem30.StateImageIndex = 0;
+            listViewItem31.StateImageIndex = 0;
             this.Triggers.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem12,
             listViewItem13,
@@ -238,7 +246,11 @@
             listViewItem24,
             listViewItem25,
             listViewItem26,
-            listViewItem27});
+            listViewItem27,
+            listViewItem28,
+            listViewItem29,
+            listViewItem30,
+            listViewItem31});
             this.Triggers.Location = new System.Drawing.Point(3, 17);
             this.Triggers.MultiSelect = false;
             this.Triggers.Name = "Triggers";
