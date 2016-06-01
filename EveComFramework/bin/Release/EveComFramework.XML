@@ -820,6 +820,16 @@
             Capacitor required to enable the module
             </summary>
         </member>
+        <member name="M:EveComFramework.KanedaToolkit.KModule.GetDogmaInt(EveCom.Module,System.String)">
+            <summary>
+            Get module attribute as integer
+            </summary>
+        </member>
+        <member name="M:EveComFramework.KanedaToolkit.KModule.GetDogmaDouble(EveCom.Module,System.String)">
+            <summary>
+            Get module attribute as double
+            </summary>
+        </member>
         <member name="M:EveComFramework.KanedaToolkit.KModule.ValidTarget(EveCom.Module,EveCom.Entity)">
             <summary>
             Is this module valid for this target?

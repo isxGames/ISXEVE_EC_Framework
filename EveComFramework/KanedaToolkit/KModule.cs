@@ -28,7 +28,23 @@ namespace EveComFramework.KanedaToolkit
         /// </summary>
         public static double CapacitorNeed(this Module module)
         {
-            return (double) module["capacitorNeed"];
+            return GetDogmaDouble(module, "capacitorNeed");
+        }
+
+        /// <summary>
+        /// Get module attribute as integer
+        /// </summary>
+        public static int GetDogmaInt(this Module module, string keyName)
+        {
+            return (int) module[keyName];
+        }
+
+        /// <summary>
+        /// Get module attribute as double
+        /// </summary>
+        public static double GetDogmaDouble(this Module module, string keyName)
+        {
+            return (double) module[keyName];
         }
 
         /// <summary>
