@@ -1,6 +1,6 @@
 ﻿#pragma warning disable 1591
 using System.Linq;
-using EveCom;
+using EVE.ISXEVE;
 
 namespace EveComFramework.Core
 {

@@ -5,14 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
-using EveCom;
+using EVE.ISXEVE;
 
 namespace EveComFramework.Data
 {
     public class NPCClasses
     {
-        private static Dictionary<Group, string> _All;
-        public static Dictionary<Group, string> All
+        private static Dictionary<Int64, string> _All;
+        public static Dictionary<Int64, string> All
         {
             get
             {
@@ -22,7 +22,7 @@ namespace EveComFramework.Data
                     {
                         XElement dataDoc = XElement.Load(data);
                         _All = (from a in dataDoc.Descendants("Group")
-                                select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = a.Attribute("Class").Value }).ToDictionary(a => (Group)a.ID, a => a.Class);
+                                select new { ID = Convert.ToInt64(a.Attribute("ID").Value), Class = a.Attribute("Class").Value }).ToDictionary(a => a.ID, a => a.Class);
                     }
                 }
                 return _All;

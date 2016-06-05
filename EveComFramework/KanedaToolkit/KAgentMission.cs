@@ -1,4 +1,4 @@
-﻿using EveCom;
+﻿using EVE.ISXEVE;
 
 namespace EveComFramework.KanedaToolkit
 {

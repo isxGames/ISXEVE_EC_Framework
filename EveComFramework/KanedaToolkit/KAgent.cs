@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using EveCom;
+using EVE.ISXEVE;
 
 namespace EveComFramework.KanedaToolkit
 {

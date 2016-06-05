@@ -1,7 +1,7 @@
 ﻿#pragma warning disable 1591
 using System;
 using System.Runtime.InteropServices;
-using EveCom;
+using EVE.ISXEVE;
 using EveComFramework.Core;
 using LavishScriptAPI;
 

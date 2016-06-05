@@ -1,5 +1,5 @@
 ﻿#pragma warning disable 1591
-using EveCom;
+using EVE.ISXEVE;
 
 namespace EveComFramework.KanedaToolkit
 {

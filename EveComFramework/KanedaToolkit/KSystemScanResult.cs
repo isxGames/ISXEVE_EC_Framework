@@ -1,7 +1,9 @@
 ﻿#pragma warning disable 1591
 using System.Linq;
-using EveCom;
+using EVE.ISXEVE;
 
+// TODO - Migrate this to ISXEVE.
+/*
 namespace EveComFramework.KanedaToolkit
 {
     /// <summary>
@@ -24,3 +26,4 @@ namespace EveComFramework.KanedaToolkit
     }
 
 }
+*/

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EveCom;
+using EVE.ISXEVE;
 using EveComFramework.Core;
 using LavishScriptAPI;
 using System.Windows.Forms;

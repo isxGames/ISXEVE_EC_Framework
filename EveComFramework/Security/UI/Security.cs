@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Speech.Synthesis;
-using EveCom;
+using EVE.ISXEVE;
 using EveComFramework.Core;
 
 namespace EveComFramework.Security.UI

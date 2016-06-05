@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
-using EveCom;
+using EVE.ISXEVE;
 using EveComFramework.Core;
 
 namespace EveComFramework.Stats
